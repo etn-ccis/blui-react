@@ -4,14 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prettier": "prettier '{docs,apps,packages}/**/*.{ts,tsx,js,jsx,json,css,scss,html}' --write"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.10.0",
   "dependencies": {
+    "@brightlayer-ui/prettier-config": "^1.0.3",
     "i18next-browser-languagedetector": "^8.1.0",
+    "prettier": "^3.5.3",
     "react-router": "^7.5.3"
   }
 }
