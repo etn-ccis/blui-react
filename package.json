@@ -10,7 +10,7 @@
     "lint": "eslint \"**/**.{tsx,ts}\"",
     "lint:fix": "eslint \"**/**.{tsx,ts}\" --fix",
     "prepare": "husky",
-    "build:all": "pnpm -r run build",
+    "build:components": "pnpm --filter @brightlayer-ui/react-components build",
     "build:theme": "pnpm --filter @brightlayer-ui/react-themes build",
     "start:ThemeShowcase":"pnpm install && pnpm --filter @brightlayer-ui/react-themes build && pnpm --filter react-showcase-demo start"
   },

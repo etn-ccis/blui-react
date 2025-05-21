@@ -3,9 +3,16 @@
     "version": "7.1.0",
     "description": "React components for Brightlayer UI applications",
     "main": "index.js",
+    "module": "./index.js",
+    "exports": {
+        ".": {
+            "import": "./index.js",
+            "require": "./index.js"
+        }
+    },
     "scripts": {
         "test": "jest src --maxWorkers=50%",
-        "build": "tsc --p tsconfig.lib.json",
+        "build": "bash ./scripts/buildComponents.sh",
         "lint": "eslint \"src/**/**.{tsx,ts}\"",
         "lint:fix": "eslint \"src/**/**.{tsx,ts}\" --fix",
         "prettier": "prettier \"src/**/**.{ts,tsx,js,jsx,json,css,scss,html}\" --write",
