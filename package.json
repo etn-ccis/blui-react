@@ -9,7 +9,8 @@
     "prettier:check": "prettier '{docs,apps,packages}/**/*.{ts,tsx,js,jsx,json,css,scss,html}' --check",
     "lint": "eslint \"**/**.{tsx,ts}\"",
     "lint:fix": "eslint \"**/**.{tsx,ts}\" --fix",
-    "prepare": "husky"
+    "prepare": "husky",
+    "build:all": "pnpm -r run build"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +27,7 @@
     "i18next-browser-languagedetector": "^8.1.0",
     "pnpm": "^10.11.0",
     "prettier": "^3.5.3",
+    "react": "^18.2.0",
     "react-router": "^7.5.3",
     "typescript-eslint": "^8.32.0"
   },

@@ -38,9 +38,12 @@ importers:
       prettier:
         specifier: ^3.5.3
         version: 3.5.3
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
       react-router:
         specifier: ^7.5.3
-        version: 7.5.3(react@19.1.0)
+        version: 7.5.3(react@18.2.0)
       typescript-eslint:
         specifier: ^8.32.0
         version: 8.32.0(eslint@9.26.0)(typescript@5.7.2)
@@ -1023,8 +1026,8 @@ packages:
       react-dom:
         optional: true
 
-  react@19.1.0:
-    resolution: {integrity: sha512-FS+XFBNvn3GTAWq26joslQgWNoFu08F4kl0J4CgdNKADkdSGXQyTCnKteIAJy96Br6YbpEU1LSzV5dYtjMkMDg==}
+  react@18.2.0:
+    resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}
     engines: {node: '>=0.10.0'}
 
   reflect.getprototypeof@1.0.10:
@@ -2446,14 +2449,16 @@ snapshots:
 
   react-is@16.13.1: {}
 
-  react-router@7.5.3(react@19.1.0):
+  react-router@7.5.3(react@18.2.0):
     dependencies:
       cookie: 1.0.2
-      react: 19.1.0
+      react: 18.2.0
       set-cookie-parser: 2.7.1
       turbo-stream: 2.4.0
 
-  react@19.1.0: {}
+  react@18.2.0:
+    dependencies:
+      loose-envify: 1.4.0
 
   reflect.getprototypeof@1.0.10:
     dependencies:
