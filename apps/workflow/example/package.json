@@ -44,7 +44,7 @@
         "@okta/okta-auth-js": "^7.8.1",
         "@okta/okta-react": "^6.9.0",
         "@types/node": "^22.10.3",
-        "@types/react": "18.3.10",
+        "@types/react": "^18.3.10",
         "@types/react-dom": "^18.3.0",
         "date-fns": "^3.6.0",
         "i18next": "^23.7.13",
