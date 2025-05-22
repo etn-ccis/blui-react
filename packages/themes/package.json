@@ -10,6 +10,10 @@
         ".": {
             "import": "./index.js",
             "require": "./index.js"
+        },
+        "./open-sans": {
+            "import": "./open-sans.ts",
+            "require": "./open-sans.ts"
         }
     },
     "scripts": {
