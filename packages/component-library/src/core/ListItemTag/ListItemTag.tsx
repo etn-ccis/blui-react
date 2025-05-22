@@ -41,11 +41,15 @@ export type ListItemTagProps = TypographyProps & {
 
 const Root = styled(Typography, {
     shouldForwardProp: (prop) => prop !== 'fontColor',
-})<Pick<ListItemTagProps, 'backgroundColor' | 'fontColor' | 'onClick' | 'variant'>>(
-    ({ backgroundColor, fontColor, onClick, theme }) => {
-        const colorScheme = useColorScheme();
+})<Pick<ListItemTagProps, 'backgroundColor' | 'fontColor' | 'onClick' | 'variant'>>(({
+    backgroundColor,
+    fontColor,
+    onClick,
+    theme,
+}) => {
+    const colorScheme = useColorScheme();
 
-        return `
+    return `
             border-radius: 0.125rem;
             padding: 0;
             /* @noflip */
@@ -75,8 +79,7 @@ const Root = styled(Typography, {
                 line-height: 1rem;
                 height: 1rem;
             },`;
-    }
-);
+});
 
 const ListItemTagRender: React.ForwardRefRenderFunction<unknown, ListItemTagProps> = (
     props: ListItemTagProps,

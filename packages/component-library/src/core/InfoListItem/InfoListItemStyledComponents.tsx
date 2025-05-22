@@ -99,56 +99,61 @@ export const Icon = styled(Avatar, {
         prop !== 'iconAlign' &&
         prop !== 'avatar' &&
         prop !== 'isInvisible',
-})<Pick<InfoListItemProps, 'statusColor' | 'iconColor' | 'avatar' | 'iconAlign'> & { isInvisible?: boolean }>(
-    ({ statusColor, iconColor, avatar, iconAlign, isInvisible, theme }) => {
-        const getIconColor = (): string => {
-            if (iconColor) return iconColor;
-            if (avatar) {
-                return statusColor ? theme.palette.getContrastText(statusColor) : Colors.white[50]; // default avatar is dark gray -> white text
-            }
-            return statusColor ? statusColor : (theme.vars || theme).palette.text.secondary;
-        };
-        const getIconAlignment = (): string => {
-            switch (iconAlign) {
-                case 'left':
-                    return 'flex-start';
-                case 'right':
-                    return 'flex-end';
-                case 'center':
-                default:
-                    return 'center';
-            }
-        };
+})<Pick<InfoListItemProps, 'statusColor' | 'iconColor' | 'avatar' | 'iconAlign'> & { isInvisible?: boolean }>(({
+    statusColor,
+    iconColor,
+    avatar,
+    iconAlign,
+    isInvisible,
+    theme,
+}) => {
+    const getIconColor = (): string => {
+        if (iconColor) return iconColor;
         if (avatar) {
-            return {
-                backgroundColor: statusColor || Colors.black[500],
-                color: getIconColor(),
-                width: `2.5rem`,
-                height: `2.5rem`,
-                padding: `.5rem`,
-                marginRight: theme.spacing(2),
-                ...theme.applyStyles('dark', {
-                    color: getIconColor(),
-                    backgroundColor: statusColor || Colors.black[500],
-                }),
-            };
+            return statusColor ? theme.palette.getContrastText(statusColor) : Colors.white[50]; // default avatar is dark gray -> white text
         }
+        return statusColor ? statusColor : (theme.vars || theme).palette.text.secondary;
+    };
+    const getIconAlignment = (): string => {
+        switch (iconAlign) {
+            case 'left':
+                return 'flex-start';
+            case 'right':
+                return 'flex-end';
+            case 'center':
+            default:
+                return 'center';
+        }
+    };
+    if (avatar) {
         return {
+            backgroundColor: statusColor || Colors.black[500],
             color: getIconColor(),
-            justifyContent: getIconAlignment(),
-            backgroundColor: 'transparent',
-            overflow: 'visible',
             width: `2.5rem`,
             height: `2.5rem`,
+            padding: `.5rem`,
             marginRight: theme.spacing(2),
-            opacity: isInvisible ? 0 : 'auto',
             ...theme.applyStyles('dark', {
                 color: getIconColor(),
-                backgroundColor: 'transparent',
+                backgroundColor: statusColor || Colors.black[500],
             }),
         };
     }
-);
+    return {
+        color: getIconColor(),
+        justifyContent: getIconAlignment(),
+        backgroundColor: 'transparent',
+        overflow: 'visible',
+        width: `2.5rem`,
+        height: `2.5rem`,
+        marginRight: theme.spacing(2),
+        opacity: isInvisible ? 0 : 'auto',
+        ...theme.applyStyles('dark', {
+            color: getIconColor(),
+            backgroundColor: 'transparent',
+        }),
+    };
+});
 
 export const InfoListItemText = styled(ListItemText, {
     shouldForwardProp: (prop) => prop !== 'leftComponent',

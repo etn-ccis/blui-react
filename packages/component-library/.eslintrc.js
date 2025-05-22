@@ -1,6 +1,6 @@
 module.exports = {
     parser: '@typescript-eslint/parser',
-    plugins: ["jest-dom", "testing-library"],
+    plugins: ['jest-dom', 'testing-library'],
     extends: ['@brightlayer-ui/eslint-config/tsx', 'plugin:react-hooks/recommended'],
     parserOptions: {
         project: './tsconfig.json',
@@ -11,7 +11,7 @@ module.exports = {
     },
     rules: {
         '@typescript-eslint/no-empty-function': 'off',
-        "@typescript-eslint/no-unused-vars": ["error", { "ignoreRestSiblings": true }],
+        '@typescript-eslint/no-unused-vars': ['error', { ignoreRestSiblings: true }],
         'no-empty-function': 'off',
         '@typescript-eslint/naming-convention': [
             'error',

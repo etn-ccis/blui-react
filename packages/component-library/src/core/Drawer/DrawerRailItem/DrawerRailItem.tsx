@@ -102,68 +102,66 @@ const Root = styled(ButtonBase, {
         DrawerRailItemProps,
         'statusColor' | 'backgroundColor' | 'onClick' | 'activeItemIconColor' | 'activeItemFontColor' | 'condensed'
     > & { condensed: boolean; hasAction: boolean; itemActive: boolean }
->(
-    ({
-        statusColor,
-        backgroundColor,
-        onClick,
-        activeItemIconColor,
-        activeItemFontColor,
-        condensed,
-        hasAction,
-        itemActive,
-        theme,
-    }) => {
-        const colorScheme = useColorScheme();
+>(({
+    statusColor,
+    backgroundColor,
+    onClick,
+    activeItemIconColor,
+    activeItemFontColor,
+    condensed,
+    hasAction,
+    itemActive,
+    theme,
+}) => {
+    const colorScheme = useColorScheme();
 
-        const lightenedPrimary = color(
-            colorScheme.mode === 'dark' ? theme.palette.primary.dark : theme.palette.primary.main
-        )
-            .lighten(0.83)
-            .desaturate(0.39)
-            .string();
-        return {
-            width: RAIL_WIDTH,
-            minHeight: RAIL_WIDTH,
-            position: 'relative',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: hasAction ? 'cursor' : 'default',
-            padding: `1rem ${statusColor ? theme.spacing(1) : theme.spacing(0.5)}px`,
-            textAlign: 'center',
+    const lightenedPrimary = color(
+        colorScheme.mode === 'dark' ? theme.palette.primary.dark : theme.palette.primary.main
+    )
+        .lighten(0.83)
+        .desaturate(0.39)
+        .string();
+    return {
+        width: RAIL_WIDTH,
+        minHeight: RAIL_WIDTH,
+        position: 'relative',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        cursor: hasAction ? 'cursor' : 'default',
+        padding: `1rem ${statusColor ? theme.spacing(1) : theme.spacing(0.5)}px`,
+        textAlign: 'center',
+        backgroundColor: backgroundColor || 'transparent',
+        '&:hover': {
+            backgroundColor: onClick ? (theme.vars || theme).palette.action.hover : undefined,
+        },
+        '& .MuiAvatar-root': {
             backgroundColor: backgroundColor || 'transparent',
-            '&:hover': {
-                backgroundColor: onClick ? (theme.vars || theme).palette.action.hover : undefined,
+        },
+        ...(itemActive && {
+            [`& .${drawerRailItemClasses.icon}`]: {
+                color: activeItemIconColor || (theme.vars || theme).palette.primary.main,
+                ...theme.applyStyles('dark', {
+                    color: activeItemIconColor || lightenedPrimary,
+                }),
             },
-            '& .MuiAvatar-root': {
-                backgroundColor: backgroundColor || 'transparent',
+            [`& .${drawerRailItemClasses.title}`]: {
+                color: activeItemFontColor || (theme.vars || theme).palette.primary.main,
+                ...theme.applyStyles('dark', {
+                    color: activeItemFontColor || lightenedPrimary,
+                }),
             },
-            ...(itemActive && {
-                [`& .${drawerRailItemClasses.icon}`]: {
-                    color: activeItemIconColor || (theme.vars || theme).palette.primary.main,
-                    ...theme.applyStyles('dark', {
-                        color: activeItemIconColor || lightenedPrimary,
-                    }),
-                },
-                [`& .${drawerRailItemClasses.title}`]: {
-                    color: activeItemFontColor || (theme.vars || theme).palette.primary.main,
-                    ...theme.applyStyles('dark', {
-                        color: activeItemFontColor || lightenedPrimary,
-                    }),
-                },
-            }),
-            ...(condensed && {
-                width: RAIL_WIDTH_CONDENSED,
-                minHeight: RAIL_WIDTH_CONDENSED,
-            }),
-            [`& .${drawerRailItemClasses.ripple}`]: {
-                backgroundColor: (theme.vars || theme).palette.primary.main,
-            },
-        };
-    }
-);
+        }),
+        ...(condensed && {
+            width: RAIL_WIDTH_CONDENSED,
+            minHeight: RAIL_WIDTH_CONDENSED,
+        }),
+        [`& .${drawerRailItemClasses.ripple}`]: {
+            backgroundColor: (theme.vars || theme).palette.primary.main,
+        },
+    };
+});
 
 const ActiveItem = styled(Box, {
     shouldForwardProp: (prop) => prop !== 'activeItemBackgroundColor',
