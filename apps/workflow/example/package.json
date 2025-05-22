@@ -36,7 +36,7 @@
         "@brightlayer-ui/icons-mui": "^3.6.0",
         "@brightlayer-ui/react-components": "7.0.0",
         "@brightlayer-ui/react-themes": "workspace:^",
-        "@brightlayer-ui/react-auth-workflow": "workspace:*",
+        "@brightlayer-ui/react-auth-workflow": "workspace:^",
         "@emotion/react": "^11.7.1",
         "@emotion/styled": "^11.10.8",
         "@mui/icons-material": "^6.1.4",
