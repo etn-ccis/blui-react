@@ -1,1 +1,3 @@
-export * from './src';
+// only for local development
+
+export * from './dist';

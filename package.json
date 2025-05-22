@@ -12,7 +12,10 @@
     "prepare": "husky",
     "build:components": "pnpm --filter @brightlayer-ui/react-components build",
     "build:theme": "pnpm --filter @brightlayer-ui/react-themes build",
-    "start:ThemeShowcase":"pnpm install && pnpm --filter @brightlayer-ui/react-themes build && pnpm --filter react-showcase-demo start"
+    "start:ThemeShowcase":"pnpm install && pnpm --filter @brightlayer-ui/react-themes build && pnpm --filter react-showcase-demo start",
+    "build:workflow": "pnpm --filter @brightlayer-ui/react-auth-workflow build",
+    "start:workflow:example":"pnpm install && pnpm --filter @brightlayer-ui/react-auth-workflow build && pnpm --filter example start",
+    "start:workflow:example-vite":"pnpm install && pnpm --filter @brightlayer-ui/react-auth-workflow build && pnpm --filter vite-example start"
   },
   "keywords": [],
   "author": "",
