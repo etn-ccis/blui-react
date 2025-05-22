@@ -15,7 +15,7 @@ import './index.css';
 import { MainRouter } from './router';
 import { store } from './redux/store';
 import { RTLThemeProvider } from './components/RTLProvider';
-// import '@brightlayer-ui/react-themes/open-sans';
+import '@brightlayer-ui/react-themes/open-sans';
 
 const container = document.getElementById('root');
 
