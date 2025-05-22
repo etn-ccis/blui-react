@@ -8,6 +8,10 @@
 /* eslint-disable */
 
 import type {} from '@mui/material/themeCssVarsAugmentation';
+import type {} from "@mui/system";
+import type {} from "@emotion/styled";
+import type {} from "react";
+import type {} from "prop-types";
 
 declare global {
     namespace React {

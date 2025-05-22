@@ -4,7 +4,7 @@ GREEN='\033[0;32m'
 GRAY='\033[1;30m'
 NC='\033[0m' # No Color
 
-echo "Building themes..."
+echo "Building components..."
 rm -rf ./dist
 tsc --p ./tsconfig.lib.json
 
@@ -16,7 +16,7 @@ cp -r LICENSES.json ./dist/LICENSES.json
 cp -r CHANGELOG.md ./dist/CHANGELOG.md
 
 echo -e "\r\n${GREEN}-----------------------------------"
-echo -e "React Theme package successfully created"
+echo -e "React Components package successfully created"
 echo -e "-----------------------------------${NC}\r\n\r\n"
 
 exit 0
