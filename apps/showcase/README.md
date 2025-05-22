@@ -2,7 +2,7 @@
 
 [![Build](https://github.com/etn-ccis/blui-react-showcase-demo/actions/workflows/blui-ci.yml/badge.svg?branch=master)](https://github.com/etn-ccis/blui-react-showcase-demo/actions/workflows/blui-ci.yml) [![codecov](https://codecov.io/gh/etn-ccis/blui-react-showcase-demo/branch/master/graph/badge.svg?token=DNI4Z1LUL3)](https://codecov.io/gh/etn-ccis/blui-react-showcase-demo)
 
-This applications is a demo applications that is used to demonstrate and test various Brightlayer UI components, resources, etc.
+This application is a demo applications that is used to demonstrate and test various Brightlayer UI components and resources, etc.
 
 It is used as a git submodule for:
 
