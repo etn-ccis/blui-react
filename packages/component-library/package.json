@@ -12,11 +12,7 @@
     },
     "scripts": {
         "test": "jest src --maxWorkers=50%",
-        "build": "bash ./scripts/buildComponents.sh",
-        "lint": "eslint \"src/**/**.{tsx,ts}\"",
-        "lint:fix": "eslint \"src/**/**.{tsx,ts}\" --fix",
-        "prettier": "prettier \"src/**/**.{ts,tsx,js,jsx,json,css,scss,html}\" --write",
-        "prettier:check": "prettier \"src/**/**.{ts,tsx,js,jsx,json,css,scss,html}\" --check"
+        "build": "bash ./scripts/buildComponents.sh"
     },
     "prettier": "@brightlayer-ui/prettier-config",
     "dependencies": {

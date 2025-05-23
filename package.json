@@ -11,6 +11,7 @@
     "lint:fix": "eslint \"**/**.{tsx,ts}\" --fix",
     "prepare": "husky",
     "build:components": "pnpm --filter @brightlayer-ui/react-components build",
+    "start:showcase":"pnpm install && pnpm build:components && cd apps/showcase && pnpm install && pnpm start",
     "build:theme": "pnpm --filter @brightlayer-ui/react-themes build",
     "start:ThemeShowcase":"pnpm install && pnpm --filter @brightlayer-ui/react-themes build && pnpm --filter react-showcase-demo start",
     "build:workflow": "pnpm --filter @brightlayer-ui/react-auth-workflow build",
