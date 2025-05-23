@@ -82,7 +82,6 @@ jobs:
 
     publish_login_workflow:
         runs-on: ubuntu-latest
-        if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev') }}
         needs: [prettier_lint, unit_tests_workflow, build_login_workflow]
         strategy:
             matrix:
