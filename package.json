@@ -10,6 +10,8 @@
     "lint": "eslint \"**/**.{tsx,ts}\"",
     "lint:fix": "eslint \"**/**.{tsx,ts}\" --fix",
     "prepare": "husky",
+    "build:components": "pnpm --filter @brightlayer-ui/react-components build",
+    "start:showcase":"pnpm install && pnpm build:components && cd apps/showcase && pnpm install && pnpm start",
     "build:theme": "pnpm --filter @brightlayer-ui/react-themes build",
     "start:ThemeShowcase":"pnpm install && pnpm --filter @brightlayer-ui/react-themes build && pnpm --filter react-showcase-demo start",
     "build:workflow": "pnpm --filter @brightlayer-ui/react-auth-workflow build",
@@ -29,7 +31,9 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "husky": "^9.1.7",
     "i18next-browser-languagedetector": "^8.1.0",
+    "pnpm": "^10.11.0",
     "prettier": "^3.5.3",
+    "react": "^18.2.0",
     "react-router": "^7.5.3",
     "typescript-eslint": "^8.32.0"
   },
