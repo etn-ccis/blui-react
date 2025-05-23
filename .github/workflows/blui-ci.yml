@@ -81,7 +81,6 @@ jobs:
                   path: packages/login-workflow/dist
 
     release_login_workflow:
-        if: github.ref == 'refs/heads/feature/feature/blui-6721-cicd-workflow'
         needs: [build_login_workflow]
         runs-on: ubuntu-latest
         steps:
