@@ -99,4 +99,4 @@ jobs:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
               working-directory: packages/login-workflow
-              run: npx semantic-release
+              run: npx semantic-release --dry-run
