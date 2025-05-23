@@ -47,7 +47,8 @@ jobs:
               uses: actions/setup-node@v4
               with:
                   node-version: ${{ matrix.node-version }}
-                  cache: 'pnpm'
+            - name: Install pnpm
+              run: npm install -g pnpm      
             - name: install dependencies
               run: pnpm install
             - name: Run tests
@@ -66,7 +67,8 @@ jobs:
               uses: actions/setup-node@v4
               with:
                   node-version: ${{ matrix.node-version }}
-                  cache: 'pnpm'
+            - name: Install pnpm
+              run: npm install -g pnpm      
             - name: install dependencies
               run: pnpm install
             - name: Build login workflow
