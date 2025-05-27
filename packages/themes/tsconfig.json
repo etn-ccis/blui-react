@@ -1,12 +1,12 @@
 {
     "compilerOptions": {
-        "target": "es5",
+        "target": "ESNext",
         "module": "ESNext",
         "declaration": true,
         "outDir": "dist",
         "strict": true,
         "lib": ["ESNext", "dom"],
-        "esModuleInterop": true,
+        // "esModuleInterop": true,
         "skipLibCheck": true,
         "moduleResolution": "node"
     },

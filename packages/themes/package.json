@@ -3,17 +3,16 @@
     "author": "Brightlayer UI <brightlayer-ui@eaton.com>",
     "license": "BSD-3-Clause",
     "version": "8.1.0",
+    "type": "module",
     "description": "React themes for Brightlayer UI applications",
     "main": "./index.js",
     "module": "./index.js",
     "exports": {
         ".": {
-            "import": "./index.js",
-            "require": "./index.js"
+            "import": "./index.js"
         },
         "./open-sans": {
-            "import": "./open-sans.ts",
-            "require": "./open-sans.ts"
+            "import": "./open-sans.ts"
         }
     },
     "scripts": {
