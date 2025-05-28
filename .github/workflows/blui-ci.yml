@@ -135,7 +135,9 @@ jobs:
                   name: dist
                   if-no-files-found: error
                   path: packages/themes/dist
-            - run: pnpm test
+            - name: Run tests
+              working-directory: packages/themes   
+              run: pnpm test
 
     publish_react_theme:
         runs-on: ubuntu-latest
