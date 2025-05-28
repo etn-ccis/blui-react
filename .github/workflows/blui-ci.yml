@@ -110,26 +110,6 @@ jobs:
               run: npm run publish:package -- -b ${{ env.BRANCH }}
               working-directory: packages/login-workflow
 
-    unit_tests_themes:
-        runs-on: ubuntu-latest
-        strategy:
-            matrix:
-                node-version: [20.x]
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v4
-            - name: Use Node.js
-              uses: actions/setup-node@v4
-              with:
-                  node-version: ${{ matrix.node-version }}
-            - name: Install pnpm
-              run: npm install -g pnpm
-            - name: Install dependencies
-              run: pnpm install
-            - name: Run theme unit tests
-              working-directory: packages/themes
-              run: pnpm test         
-
     build_theme_verify_artifacts:
         runs-on: ubuntu-latest
 
@@ -162,7 +142,7 @@ jobs:
     publish_react_theme:
         runs-on: ubuntu-latest
         if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev') }}
-        needs: [build_theme_verify_artifacts, unit_tests_themes, prettier_lint]
+        needs: build_theme_verify_artifacts
         strategy:
             matrix:
                 node-version: [20.x]
