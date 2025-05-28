@@ -126,15 +126,15 @@ jobs:
             run: npm install -g pnpm
           - name: Install dependencies
             run: pnpm install
-            working-directory: ./packages/components-library
+            working-directory: packages/components-library
           - name: Run tests with coverage
             run: pnpm test -- --coverage
-            working-directory: ./packages/components-library
+            working-directory: packages/components-library
           - name: Upload to Codecov
             uses: codecov/codecov-action@v4
             with:
               token: ${{ secrets.CODECOV_TOKEN }}
-              directory: ./packages/components-library/coverage/
+              directory: packages/components-library/coverage/
               files: clover.xml
               flags: unittests
               name: codecov-report
