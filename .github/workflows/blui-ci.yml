@@ -194,10 +194,10 @@ jobs:
             uses: actions/download-artifact@v4
             with:
               name: dist
-              path: packages/component-library/dist
+              path: packages/component-library
           - name: Pack npm
             run: npm pack
-            working-directory: packages/component-library/dist
+            working-directory: packages/component-library
           - name: Save npm pack
             uses: actions/upload-artifact@v4
             with:
