@@ -19,6 +19,7 @@ permissions:
 jobs:
   publish-components:
         runs-on: ubuntu-latest
+        needs: build_component_library
         strategy:
             matrix:
                 node-version: [20.x]
