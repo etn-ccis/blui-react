@@ -203,7 +203,7 @@ jobs:
             with:
               name: tarball
               if-no-files-found: error
-              path: packages/component-library
+              path: packages/component-library/brightlayer-ui-react-components-*.tgz
 
     build_showcase:
         runs-on: ubuntu-latest
