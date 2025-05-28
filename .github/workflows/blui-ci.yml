@@ -126,6 +126,8 @@ jobs:
             - name: Install pnpm
               run: npm install -g pnpm
             - run: pnpm install --frozen-lockfile
+            - name: Build login workflow
+              working-directory: packages/login-workflow
             - run: pnpm build
             - name: Save build
               uses: actions/upload-artifact@v4
@@ -137,7 +139,6 @@ jobs:
 
     publish_react_theme:
         runs-on: ubuntu-latest
-        if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev') }}
         needs: build_theme_verify_artifacts
         strategy:
             matrix:
@@ -160,3 +161,4 @@ jobs:
               run: npm install -g pnpm
             - run: pnpm install --frozen-lockfile
             - run: npm run publish:package -- -b ${{env.BRANCH}}
+              working-directory: packages/themes
