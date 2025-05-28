@@ -181,7 +181,8 @@ jobs:
           - name: Install pnpm
             run: npm install -g pnpm     
           - name: Run artifact tests
-            run: pnpm test:artifacts
+            run: pnpm run test:artifacts
+            working-directory: packages/component-library
 
     npm_pack:
         runs-on: ubuntu-latest
@@ -217,9 +218,6 @@ jobs:
             uses: actions/setup-node@v4
             with:
               node-version: ${{ matrix.node-version }}
-          - name: GitHub Submodule
-            run: git submodule init && git submodule update
-            working-directory: apps/demo/showcase
           - name: Install pnpm
             run: npm install -g pnpm
           - name: Install dependencies
