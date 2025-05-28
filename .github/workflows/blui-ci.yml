@@ -178,6 +178,8 @@ jobs:
             with:
               name: dist
               path: packages/component-library/dist
+          - name: Install pnpm
+            run: npm install -g pnpm     
           - name: Run artifact tests
             run: pnpm test:artifacts
 
