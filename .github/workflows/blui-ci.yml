@@ -166,4 +166,39 @@ jobs:
               name: dist
               if-no-files-found: error
               path: packages/component-library/dist
+
+    test_artifacts:
+        runs-on: ubuntu-latest
+        needs: build_component_library
+        steps:
+          - name: Checkout
+            uses: actions/checkout@v4
+          - name: Download the dist folder
+            uses: actions/download-artifact@v4
+            with:
+              name: dist
+              path: packages/component-library/dist
+          - name: Run artifact tests
+            run: pnpm test:artifacts
+
+    npm_pack:
+        runs-on: ubuntu-latest
+        needs: build_component_library
+        steps:
+          - name: Checkout
+            uses: actions/checkout@v4
+          - name: Download the dist folder
+            uses: actions/download-artifact@v4
+            with:
+              name: dist
+              path: packages/component-library/dist
+          - name: Pack npm
+            run: npm pack
+            working-directory: packages/component-library/dist
+          - name: Save npm pack
+            uses: actions/upload-artifact@v4
+            with:
+              name: tarball
+              if-no-files-found: error
+              path: packages/component-library/dist                  
                    
