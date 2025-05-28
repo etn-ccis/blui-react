@@ -141,6 +141,7 @@ jobs:
 
     publish_react_theme:
         runs-on: ubuntu-latest
+        if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev') }}
         needs: build_theme_verify_artifacts
         strategy:
             matrix:
