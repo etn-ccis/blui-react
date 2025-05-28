@@ -126,9 +126,9 @@ jobs:
             - name: Install pnpm
               run: npm install -g pnpm
             - run: pnpm install --frozen-lockfile
-            - name: Build login workflow
+            - name: Build themes
               run: pnpm build
-              working-directory: packages/login-workflow
+              working-directory: packages/themes
             - name: Save build
               uses: actions/upload-artifact@v4
               with:
