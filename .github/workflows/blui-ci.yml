@@ -238,7 +238,29 @@ jobs:
             working-directory: apps/demo/showcase
 
     publish-components:
-        uses: etn-ccis/blui-react/.github/workflows/blui-publish-components.yml@dev
-        secrets: inherit
-        needs: build_component_library                                  
-                   
+        runs-on: ubuntu-latest
+        needs: build_component_library
+        strategy:
+            matrix:
+                node-version: [20.x]
+        env:
+            NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+            BRANCH: ${{ github.ref == 'refs/heads/main' && 'main' || 'dev' }}
+        steps:
+            - uses: actions/checkout@v4
+            - name: Download dist
+              uses: actions/download-artifact@v4
+              with:
+                  name: dist
+                  path: packages/component-library/dist
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ matrix.node-version }}
+                  registry-url: 'https://registry.npmjs.org'
+            - name: Install pnpm
+              run: npm install -g pnpm
+            - name: Install dependencies
+              run: pnpm install
+            - name: Publish package
+              run: npm run publish:package -- -b ${{env.BRANCH}}
+              working-directory: packages/component-library
