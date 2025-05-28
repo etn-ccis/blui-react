@@ -222,18 +222,23 @@ jobs:
             run: npm install -g pnpm
           - name: Install dependencies
             run: pnpm install --immutable
-            working-directory: demo/showcase
+            working-directory: apps/demo/showcase
           - name: Download tarball
             uses: actions/download-artifact@v4
             with:
               name: tarball
-              path: demo/showcase/tarball
+              path: apps/demo/showcase/tarball
           - name: Add tarball package
             run: |
               PACKAGED_VERSION=$(node -p "require('../../tarball/package.json').version")
               pnpm add ../../tarball/brightlayer-ui-react-components-$PACKAGED_VERSION.tgz
-            working-directory: demo/showcase
+            working-directory: apps/demo/showcase
           - name: Build showcase
             run: pnpm build
-            working-directory: demo/showcase                            
+            working-directory: apps/demo/showcase
+
+    publish-components:
+        uses: etn-ccis/blui-react/.github/workflows/blui-publish-components.yml@dev
+        secrets: inherit
+        needs: build_component_library                                  
                    
