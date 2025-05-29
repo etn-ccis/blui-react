@@ -220,7 +220,7 @@ jobs:
           - name: Save build
             uses: actions/upload-artifact@v4
             with:
-              name: dist
+              name: dist-component-library
               if-no-files-found: error
               path: packages/component-library/dist
 
