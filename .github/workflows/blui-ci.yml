@@ -239,6 +239,7 @@ jobs:
 
     publish-components:
         runs-on: ubuntu-latest
+        if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev') }}
         needs: build_component_library
         strategy:
             matrix:
