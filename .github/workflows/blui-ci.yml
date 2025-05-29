@@ -1,4 +1,4 @@
-name: Build
+name: Build and Publish
 
 on:
     push:
@@ -17,6 +17,7 @@ permissions:
 
 jobs:
     prettier_lint:
+        name: Code Quality Check
         runs-on: ubuntu-latest
         strategy:
             matrix:
@@ -36,7 +37,9 @@ jobs:
               run: pnpm prettier:check
 
     unit_tests_workflow:
+        name: Login Workflow Unit Tests
         runs-on: ubuntu-latest
+        needs: prettier_lint
         strategy:
             matrix:
                 node-version: [20.x]
@@ -56,7 +59,9 @@ jobs:
               run: pnpm test
 
     build_login_workflow:
+        name: Build Login Workflow
         runs-on: ubuntu-latest
+        needs: [prettier_lint, unit_tests_workflow]
         strategy:
             matrix:
                 node-version: [20.x]
@@ -81,6 +86,7 @@ jobs:
                   path: packages/login-workflow/dist
 
     publish_login_workflow:
+        name: Publish Login Workflow
         runs-on: ubuntu-latest
         if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev') }}
         needs: [prettier_lint, unit_tests_workflow, build_login_workflow]
@@ -111,8 +117,9 @@ jobs:
               working-directory: packages/login-workflow
 
     build_theme_verify_artifacts:
+        name: Build and Test Themes
         runs-on: ubuntu-latest
-
+        needs: prettier_lint
         strategy:
             matrix:
                 node-version: [20.x]
@@ -140,9 +147,10 @@ jobs:
               run: pnpm test
 
     publish_react_theme:
+        name: Publish React Theme
         runs-on: ubuntu-latest
         if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev') }}
-        needs: build_theme_verify_artifacts
+        needs: [build_theme_verify_artifacts, prettier_lint]
         strategy:
             matrix:
                 node-version: [20.x]
@@ -168,7 +176,9 @@ jobs:
               working-directory: packages/themes
             
     test_component_library:
+        name: Test Component Library
         runs-on: ubuntu-latest
+        needs: prettier_lint
         strategy:
           matrix:
             node-version: [20.x]
@@ -198,7 +208,9 @@ jobs:
               verbose: true
 
     build_component_library:
+        name: Build Component Library
         runs-on: ubuntu-latest
+        needs: [prettier_lint, test_component_library]
         strategy:
           matrix:
             node-version: [20.x]
@@ -225,8 +237,9 @@ jobs:
               path: packages/component-library/dist
 
     test_artifacts:
+        name: Test Component Artifacts
         runs-on: ubuntu-latest
-        needs: build_component_library
+        needs: [build_component_library, prettier_lint]
         steps:
           - name: Checkout
             uses: actions/checkout@v4
@@ -242,8 +255,9 @@ jobs:
             working-directory: packages/component-library
 
     npm_pack:
+        name: NPM Pack Component Library
         runs-on: ubuntu-latest
-        needs: build_component_library
+        needs: [build_component_library, prettier_lint]
         steps:
           - name: Checkout
             uses: actions/checkout@v4
@@ -263,8 +277,9 @@ jobs:
               path: packages/component-library/brightlayer-ui-react-components-*.tgz
 
     build_showcase:
+        name: Build Showcase App
         runs-on: ubuntu-latest
-        needs: npm_pack
+        needs: [npm_pack, build_component_library, prettier_lint]
         strategy:
           matrix:
             node-version: [20.x]
@@ -295,9 +310,10 @@ jobs:
             working-directory: apps/showcase
 
     publish-components:
+        name: Publish Component Library
         runs-on: ubuntu-latest
         if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev') }}
-        needs: build_component_library
+        needs: [build_component_library, test_component_library, prettier_lint]
         strategy:
             matrix:
                 node-version: [20.x]
