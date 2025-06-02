@@ -108,11 +108,10 @@ import { ListItemTag } from '@brightlayer-ui/react-components';
 import Environment from '../../markdownDocs/gettingStarted/environment.mdx';
 import ReactDocs from '../../markdownDocs/gettingStarted/react.mdx';
 import ReactTesting from '../../markdownDocs/gettingStarted/reactTesting.mdx';
-import ThemesOverview from '../../markdownDocs/themes/overview.mdx'
+import ThemesOverview from '../../markdownDocs/themes/overview.mdx';
 import ThemesUsage from '../../markdownDocs/themes/usage.mdx';
 import ThemesCustomization from '../../markdownDocs/themes/customization.mdx';
 import AllComponents from '../../markdownDocs/allComponents.mdx';
-
 
 export type RouteConfig = Omit<RouteProps, 'children'> & {
     title: string;
@@ -147,9 +146,7 @@ export const pageDefinitions: RouteConfig[] = [
             {
                 title: 'Testing a BLUI Project',
                 path: 'test-a-project',
-                element: (
-                    <MarkdownPage title={'Testing Brightlayer UI Projects'} markdown={ReactTesting} />
-                ),
+                element: <MarkdownPage title={'Testing Brightlayer UI Projects'} markdown={ReactTesting} />,
             },
         ],
     },
