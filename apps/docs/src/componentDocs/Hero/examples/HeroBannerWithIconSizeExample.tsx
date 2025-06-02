@@ -31,7 +31,7 @@ export const HeroBannerWithIconSizeExample = (): JSX.Element => (
                         ChannelValueProps={{ value: iconSize, units: 'px', unitSpace: 'hide' }}
                     />
                     <Hero
-                        icon={<img src={Trex} height={iconSize} alt="A T-Rex as the avatar image" />}
+                        icon={<img src={Trex} height={iconSize} alt="A T-Rex as the avatar" />}
                         iconSize={iconSize}
                         label="PNG"
                         ChannelValueProps={{ value: iconSize, units: 'px', unitSpace: 'hide' }}

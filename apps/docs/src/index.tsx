@@ -78,6 +78,7 @@ const ThemedApp = (): JSX.Element => {
                 </MDXProvider>
             </ThemeProvider>
         ),
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         [siteTheme, siteDirection, prefersDarkMode]
     );
     return <MemoThemedApp />;

@@ -104,7 +104,15 @@ import { Box } from '@mui/material';
 import { ListItemTag } from '@brightlayer-ui/react-components';
 
 // Site markdown docs
-import * as markdownDocs from '../../markdownDocs/';
+
+import Environment from '../../markdownDocs/gettingStarted/environment.mdx';
+import ReactDocs from '../../markdownDocs/gettingStarted/react.mdx';
+import ReactTesting from '../../markdownDocs/gettingStarted/reactTesting.mdx';
+import ThemesOverview from '../../markdownDocs/themes/overview.mdx'
+import ThemesUsage from '../../markdownDocs/themes/usage.mdx';
+import ThemesCustomization from '../../markdownDocs/themes/customization.mdx';
+import AllComponents from '../../markdownDocs/allComponents.mdx';
+
 
 export type RouteConfig = Omit<RouteProps, 'children'> & {
     title: string;
@@ -129,18 +137,18 @@ export const pageDefinitions: RouteConfig[] = [
             {
                 title: 'Environment',
                 path: 'environment',
-                element: <MarkdownPage title={'Environment Setup'} markdown={markdownDocs.Environment} />,
+                element: <MarkdownPage title={'Environment Setup'} markdown={Environment} />,
             },
             {
                 title: 'Start a BLUI Project',
                 path: 'start-a-project',
-                element: <MarkdownPage title={'Start a Brightlayer UI Project'} markdown={markdownDocs.React} />,
+                element: <MarkdownPage title={'Start a Brightlayer UI Project'} markdown={ReactDocs} />,
             },
             {
                 title: 'Testing a BLUI Project',
                 path: 'test-a-project',
                 element: (
-                    <MarkdownPage title={'Testing Brightlayer UI Projects'} markdown={markdownDocs.ReactTesting} />
+                    <MarkdownPage title={'Testing Brightlayer UI Projects'} markdown={ReactTesting} />
                 ),
             },
         ],
@@ -153,7 +161,7 @@ export const pageDefinitions: RouteConfig[] = [
             {
                 title: 'All Components',
                 path: 'component-catalog',
-                element: <MarkdownPage title={'Components'} markdown={markdownDocs.AllComponents} />,
+                element: <MarkdownPage title={'Components'} markdown={AllComponents} />,
             },
             {
                 title: 'App Bar',
@@ -597,17 +605,17 @@ export const pageDefinitions: RouteConfig[] = [
             {
                 title: 'Overview',
                 path: 'overview',
-                element: <MarkdownPage title={'Theme Overview'} markdown={markdownDocs.ThemesOverview} />,
+                element: <MarkdownPage title={'Theme Overview'} markdown={ThemesOverview} />,
             },
             {
                 title: 'Usage',
                 path: 'usage',
-                element: <MarkdownPage title={'Theme Usage'} markdown={markdownDocs.ThemesUsage} />,
+                element: <MarkdownPage title={'Theme Usage'} markdown={ThemesUsage} />,
             },
             {
                 title: 'Customization',
                 path: 'customization',
-                element: <MarkdownPage title={'Theme Customization'} markdown={markdownDocs.ThemeCustomization} />,
+                element: <MarkdownPage title={'Theme Customization'} markdown={ThemesCustomization} />,
             },
         ],
     },

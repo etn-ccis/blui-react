@@ -120,7 +120,7 @@ const iterateIconProps = (iconProps?: SvgIconProps): string => {
     let str = '';
     for (const prop in iconProps) {
         if (iconProps[prop as keyof SvgIconProps]) {
-            str = `${str}` + `${prop}={'${iconProps[prop as keyof SvgIconProps] as string}'} `;
+            str = `${str}${prop}={'${iconProps[prop as keyof SvgIconProps] as string}'} `;
         }
     }
     return str;
