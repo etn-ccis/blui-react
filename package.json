@@ -1,46 +1,49 @@
 {
-  "name": "blui-react",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prettier": "prettier '{docs,apps,packages}/**/*.{ts,tsx,js,jsx,json,css,scss,html}' --write",
-    "prettier:check": "prettier '{docs,apps,packages}/**/*.{ts,tsx,js,jsx,json,css,scss,html}' --check",
-    "lint": "eslint \"**/**.{tsx,ts}\"",
-    "lint:fix": "eslint \"**/**.{tsx,ts}\" --fix",
-    "prepare": "husky",
-    "build:components": "pnpm --filter @brightlayer-ui/react-components build",
-    "start:showcase": "pnpm install && pnpm build:components && cd apps/showcase && pnpm install && pnpm start",
-    "start:docs": "pnpm install && cd apps/docs && pnpm install && pnpm start",
-    "build:theme": "pnpm --filter @brightlayer-ui/react-themes build",
-    "start:ThemeShowcase": "pnpm install && pnpm --filter @brightlayer-ui/react-themes build && pnpm --filter react-showcase-demo start",
-    "build:workflow": "pnpm --filter @brightlayer-ui/react-auth-workflow build",
-    "start:workflow:example": "pnpm install && pnpm --filter @brightlayer-ui/react-auth-workflow build && pnpm --filter example start",
-    "start:workflow:example-vite": "pnpm install && pnpm --filter @brightlayer-ui/react-auth-workflow build && pnpm --filter vite-example start"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "packageManager": "pnpm@10.10.0",
-  "dependencies": {
-    "@brightlayer-ui/eslint-config": "^4.0.0",
-    "@brightlayer-ui/prettier-config": "^1.0.3",
-    "@mui/system": "^7.1.1",
-    "eslint": "^9.26.0",
-    "eslint-config-prettier": "^10.1.3",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "husky": "^9.1.7",
-    "i18next-browser-languagedetector": "^8.1.0",
-    "pnpm": "^10.11.0",
-    "prettier": "^3.5.3",
-    "react": "^18.2.0",
-    "react-router": "^7.5.3",
-    "typescript-eslint": "^8.32.0"
-  },
-  "prettier": "@brightlayer-ui/prettier-config",
-  "devDependencies": {
-    "babel-loader": "^10.0.0"
-  }
+    "name": "blui-react",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "prettier": "prettier '{docs,apps,packages}/**/*.{ts,tsx,js,jsx,json,css,scss,html}' --write",
+        "prettier:check": "prettier '{docs,apps,packages}/**/*.{ts,tsx,js,jsx,json,css,scss,html}' --check",
+        "lint": "eslint \"**/**.{tsx,ts}\"",
+        "lint:fix": "eslint \"**/**.{tsx,ts}\" --fix",
+        "prepare": "husky",
+        "build:components": "pnpm --filter @brightlayer-ui/react-components build",
+        "start:showcase": "pnpm install && pnpm build:components && cd apps/showcase && pnpm install && pnpm start",
+        "start:docs": "pnpm install && pnpm --filter react-dev-docs start",
+        "build:theme": "pnpm --filter @brightlayer-ui/react-themes build",
+        "start:ThemeShowcase": "pnpm install && pnpm --filter @brightlayer-ui/react-themes build && pnpm --filter react-showcase-demo start",
+        "build:workflow": "pnpm --filter @brightlayer-ui/react-auth-workflow build",
+        "start:workflow:example": "pnpm install && pnpm --filter @brightlayer-ui/react-auth-workflow build && pnpm --filter example start",
+        "start:workflow:example-vite": "pnpm install && pnpm --filter @brightlayer-ui/react-auth-workflow build && pnpm --filter vite-example start"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "packageManager": "pnpm@10.10.0",
+    "dependencies": {
+        "@brightlayer-ui/eslint-config": "^4.0.0",
+        "@brightlayer-ui/prettier-config": "^1.0.3",
+        "@mui/system": "^7.1.1",
+        "eslint": "^9.26.0",
+        "eslint-config-prettier": "^10.1.3",
+        "eslint-plugin-react": "^7.37.5",
+        "eslint-plugin-react-hooks": "^5.2.0",
+        "husky": "^9.1.7",
+        "i18next-browser-languagedetector": "^8.1.0",
+        "pnpm": "^10.11.0",
+        "prettier": "^3.5.3",
+        "react": "^18.2.0",
+        "react-router": "^7.5.3",
+        "typescript-eslint": "^8.32.0"
+    },
+    "prettier": "@brightlayer-ui/prettier-config",
+    "devDependencies": {
+        "babel-loader": "^10.0.0"
+    },
+    "resolutions": {
+        "autoprefixer": "10.4.5"
+    }
 }

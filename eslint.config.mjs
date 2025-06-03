@@ -77,4 +77,12 @@ export default [
             ],
         },
     },
+    {
+        files: ['apps/docs/**/*.{ts,tsx}'],
+        rules: {
+            'react-hooks/rules-of-hooks': 'error',
+            'react-hooks/exhaustive-deps': 'warn',
+            '@typescript-eslint/no-base-to-string': 'off'
+        },
+    },
 ];

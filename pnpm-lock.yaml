@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  autoprefixer: 10.4.5
+
 importers:
 
   .:
@@ -4997,8 +5000,8 @@ packages:
     engines: {node: '>= 4.5.0'}
     hasBin: true
 
-  autoprefixer@10.4.21:
-    resolution: {integrity: sha512-O+A6LWV5LDHSJD3LjHYoNi4VLsj/Whi7k6zG12xTYaU4cQ8oxQGckXNX8cRHK5yOZ/ppVHe0ZBXGzSV9jXdVbQ==}
+  autoprefixer@10.4.5:
+    resolution: {integrity: sha512-Fvd8yCoA7lNX/OUllvS+aS1I7WRBclGXsepbvT8ZaPgrH24rgXpZzF0/6Hh3ZEkwg+0AES/Osd196VZmYoEFtw==}
     engines: {node: ^10 || ^12 || >=14}
     hasBin: true
     peerDependencies:
@@ -13359,7 +13362,7 @@ snapshots:
 
   '@craco/craco@7.1.0(@types/node@18.19.103)(postcss@8.5.3)(react-scripts@5.0.1(@babel/plugin-syntax-flow@7.27.1(@babel/core@7.27.1))(@babel/plugin-transform-react-jsx@7.27.1(@babel/core@7.27.1))(@types/babel__core@7.20.5)(eslint@8.57.1)(react@18.3.1)(ts-node@10.9.2(@types/node@18.19.103)(typescript@4.9.5))(type-fest@4.41.0)(typescript@4.9.5)(webpack-cli@4.10.0))(typescript@4.9.5)':
     dependencies:
-      autoprefixer: 10.4.21(postcss@8.5.3)
+      autoprefixer: 10.4.5(postcss@8.5.3)
       cosmiconfig: 7.1.0
       cosmiconfig-typescript-loader: 1.0.9(@types/node@18.19.103)(cosmiconfig@7.1.0)(typescript@4.9.5)
       cross-spawn: 7.0.6
@@ -16728,7 +16731,7 @@ snapshots:
 
   atob@2.1.2: {}
 
-  autoprefixer@10.4.21(postcss@8.5.3):
+  autoprefixer@10.4.5(postcss@8.5.3):
     dependencies:
       browserslist: 4.24.5
       caniuse-lite: 1.0.30001718
@@ -23159,7 +23162,7 @@ snapshots:
       '@csstools/postcss-text-decoration-shorthand': 1.0.0(postcss@8.5.3)
       '@csstools/postcss-trigonometric-functions': 1.0.2(postcss@8.5.3)
       '@csstools/postcss-unset-value': 1.0.2(postcss@8.5.3)
-      autoprefixer: 10.4.21(postcss@8.5.3)
+      autoprefixer: 10.4.5(postcss@8.5.3)
       browserslist: 4.24.5
       css-blank-pseudo: 3.0.3(postcss@8.5.3)
       css-has-pseudo: 3.0.4(postcss@8.5.3)
