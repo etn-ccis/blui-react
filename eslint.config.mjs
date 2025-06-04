@@ -44,6 +44,9 @@ export default [
                 },
             ],
         },
+        languageOptions: {
+            ecmaVersion: 2020,
+        },
     },
     {
         files: ['packages/blui-react-component-library/**/*.{ts,tsx}'],

@@ -4,9 +4,9 @@
         "react-hooks"
     ],
     "compilerOptions": {
-        "target": "es5",
+        "target": "ESNext",
         "types": ["node", "jest"],
-        "esModuleInterop": true,
+        // "esModuleInterop": true,
         "jsx": "react",
         "strict": true,
         "allowSyntheticDefaultImports": true,

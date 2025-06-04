@@ -6,8 +6,8 @@
     "description": "Re-usable workflow components for Authentication and Registration within Eaton applications.",
     "main": "dist/index.js",
     "scripts": {
-        "test": "jest --maxWorkers=50%",
-        "test:ci": "jest",
+        "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config ./babel.config.mjs --maxWorkers=50%",
+        "test:ci": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config ./babel.config.mjs",
         "build": "tsc --p tsconfig.lib.json && cp -r src/assets/. dist/assets && cp -r src/index.css dist/index.css",
         "publish:package": "set npm_config_yes=true && npx -p @brightlayer-ui/publish blui-publish",
         "tag:package": "npx -p @brightlayer-ui/tag blui-tag -s -blui-react-auth-workflow",
@@ -113,6 +113,18 @@
             "clover",
             "lcov",
             "html"
+        ],
+        "transform": {
+            "^.+\\.(js|jsx|ts|tsx)$": [
+                "babel-jest",
+                {
+                    "configFile": "./babel.config.mjs"
+                }
+            ]
+        },
+        "extensionsToTreatAsEsm": [
+            ".ts",
+            ".tsx"
         ],
         "testEnvironment": "jsdom",
         "moduleDirectories": [
