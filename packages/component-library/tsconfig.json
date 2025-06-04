@@ -1,13 +1,13 @@
 {
     "compilerOptions": {
-        "target": "es5",
+        "target": "ESNext",
         "types": ["node", "jest"],
         "module": "ESNext",
         "declaration": true,
         "outDir": "dist",
         "strict": true,
         "lib": ["ESNext", "dom"],
-        "esModuleInterop": true,
+        // "esModuleInterop": true,
         "skipLibCheck": true,
         "moduleResolution": "node",
         "jsx": "react-jsx",

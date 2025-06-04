@@ -1,13 +1,13 @@
 {
     "name": "@brightlayer-ui/react-components",
     "version": "7.1.0",
+    "type": "module",
     "description": "React components for Brightlayer UI applications",
     "main": "index.js",
     "module": "./index.js",
     "exports": {
         ".": {
-            "import": "./index.js",
-            "require": "./index.js"
+            "import": "./index.js"
         }
     },
     "scripts": {
