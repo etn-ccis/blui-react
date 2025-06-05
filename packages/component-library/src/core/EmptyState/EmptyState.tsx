@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, forwardRef } from 'react';
 import { styled } from '@mui/material/styles';
 import { cx } from '@emotion/css';
 import Typography from '@mui/material/Typography';
@@ -113,7 +113,7 @@ const EmptyStateRender: React.ForwardRefRenderFunction<unknown, EmptyStateProps>
  *
  * The `<EmptyState>` component is an element that can be used as a placeholder when no data is present (such as an empty list, or a placeholder page for future content). This is only used when no data is available, rather than during loading (see [empty states pattern](https://brightlayer-ui.github.io/patterns/empty-states)).
  */
-export const EmptyState = React.forwardRef(EmptyStateRender);
+export const EmptyState = forwardRef(EmptyStateRender);
 
 EmptyState.displayName = 'EmptyState';
 EmptyState.propTypes = {

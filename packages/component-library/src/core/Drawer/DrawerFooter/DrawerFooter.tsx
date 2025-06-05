@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {forwardRef} from 'react';
 import PropTypes from 'prop-types';
 import Divider from '@mui/material/Divider';
 import { useDrawerContext } from '../DrawerContext';
@@ -98,7 +98,7 @@ const DrawerFooterRender: React.ForwardRefRenderFunction<unknown, DrawerFooterPr
  *
  * The `<DrawerFooter>` is an optional section that renders at the bottom of the `<Drawer>`. It can be used to add any custom content (as children).
  */
-export const DrawerFooter = React.forwardRef(DrawerFooterRender);
+export const DrawerFooter = forwardRef(DrawerFooterRender);
 DrawerFooter.displayName = 'DrawerFooter';
 DrawerFooter.propTypes = {
     classes: PropTypes.shape({

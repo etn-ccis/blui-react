@@ -1,4 +1,4 @@
-import React, { ReactElement, useState, CSSProperties } from 'react';
+import React, { ReactElement, useState, CSSProperties, forwardRef } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import { DrawerProps as DrawerComponentProps } from '../Drawer/Drawer';
@@ -111,7 +111,7 @@ const DrawerLayoutRender: React.ForwardRefRenderFunction<unknown, DrawerLayoutPr
  *
  * The `<DrawerLayout>` component is used to provide the appropriate resizing behavior for your main application content when used in conjunction with a Brightlayer UI `<Drawer>`. It accepts a `<Drawer>` as a prop, and the main page content is passed in through child elements.
  */
-export const DrawerLayout = React.forwardRef(DrawerLayoutRender);
+export const DrawerLayout = forwardRef(DrawerLayoutRender);
 DrawerLayout.displayName = 'DrawerLayout';
 DrawerLayout.propTypes = {
     classes: PropTypes.shape({

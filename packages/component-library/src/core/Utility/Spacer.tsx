@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import Box, { BoxProps } from '@mui/material/Box';
 import { unstable_composeClasses as composeClasses } from '@mui/material';
@@ -63,7 +63,7 @@ const SpacerRender: React.ForwardRefRenderFunction<unknown, SpacerProps> = (prop
  *
  * An invisible utility component that acts as a spacer element in various layouts. It works with flexbox sizing or fixed sizing.
  */
-export const Spacer = React.forwardRef(SpacerRender);
+export const Spacer = forwardRef(SpacerRender);
 
 Spacer.displayName = 'Spacer';
 Spacer.propTypes = {

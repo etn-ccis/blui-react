@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from 'react';
+import React, { HTMLAttributes, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { useDrawerContext } from './DrawerContext';
 import Divider from '@mui/material/Divider';
@@ -41,7 +41,7 @@ const DrawerSubheaderRender: React.ForwardRefRenderFunction<unknown, DrawerSubhe
  *
  * The `<DrawerSubheader>` is an optional section that renders below the header and above the body of the `<Drawer>`. It can be used to support custom content (passed as children), such as filtering options or to display additional information.
  */
-export const DrawerSubheader = React.forwardRef(DrawerSubheaderRender);
+export const DrawerSubheader = forwardRef(DrawerSubheaderRender);
 
 DrawerSubheader.displayName = 'DrawerSubheader';
 DrawerSubheader.propTypes = {

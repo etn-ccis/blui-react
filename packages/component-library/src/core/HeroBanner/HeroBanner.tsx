@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import Divider from '@mui/material/Divider';
 import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
@@ -64,7 +64,7 @@ const HeroBannerRender: React.ForwardRefRenderFunction<unknown, HeroBannerProps>
  *
  * The `<HeroBanner>` component is a simple wrapper component that is used to contain `<Hero>`s. It creates the flex container and sets up the spacing rules to display them. It accepts up to four `<Hero>` components as its children.
  */
-export const HeroBanner = React.forwardRef(HeroBannerRender);
+export const HeroBanner = forwardRef(HeroBannerRender);
 
 HeroBanner.displayName = 'HeroBanner';
 HeroBanner.propTypes = {

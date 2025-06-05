@@ -1,6 +1,6 @@
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme, styled } from '@mui/material/styles';
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useState, useEffect, forwardRef } from 'react';
 import Drawer, { DrawerProps } from '@mui/material/Drawer';
 import Menu, { MenuProps as standardMenuProps } from '@mui/material/Menu';
 import { cx } from '@emotion/css';
@@ -323,7 +323,7 @@ const UserMenuRender: React.ForwardRefRenderFunction<unknown, UserMenuProps> = (
  *
  * The `<UserMenu>` is an Avatar that opens a Menu when clicked. It is typically used in the top-right corner of an application and indicates who is logged in. By default, the Menu will responsively transition to a bottom sheet for mobile views (if passing in a custom menu, you will be responsible for handling any responsiveness on your content). Setting the `useBottomSheetAt` prop to zero will disable the responsiveness.
  */
-export const UserMenu = React.forwardRef(UserMenuRender);
+export const UserMenu = forwardRef(UserMenuRender);
 
 UserMenu.displayName = 'UserMenu';
 

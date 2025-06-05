@@ -1,4 +1,4 @@
-import React, { ReactNode, useCallback } from 'react';
+import React, { ReactNode, useCallback, forwardRef } from 'react';
 import { ListItemProps } from '@mui/material/ListItem';
 import { ListItemButtonProps as MuiListItemButtonProps } from '@mui/material/ListItemButton';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
@@ -334,7 +334,7 @@ const InfoListItemRender: React.ForwardRefRenderFunction<unknown, InfoListItemPr
  *
  * The `<InfoListItem>` is intended to be used in [`<List>`](https://material-ui.com/api/list/) views. It positions a title as well as optional subtitle(s), icon, and status stripe.
  */
-export const InfoListItem = React.forwardRef(InfoListItemRender);
+export const InfoListItem = forwardRef(InfoListItemRender);
 
 InfoListItem.displayName = 'InfoListItem';
 InfoListItem.propTypes = {

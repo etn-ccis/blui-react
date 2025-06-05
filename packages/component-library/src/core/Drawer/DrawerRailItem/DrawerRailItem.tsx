@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { useDrawerContext } from '../DrawerContext';
 import Avatar from '@mui/material/Avatar';
@@ -375,7 +375,7 @@ const DrawerRailItemRender: React.ForwardRefRenderFunction<unknown, DrawerRailIt
  *
  * The `<DrawerRailItem>` is a simplified version of the `<DrawerNavItem>` that renders the `icon` and `title` only. When using the `condensed` version of the `<Drawer>`, the `title` will also be hidden. The `<DrawerRailItem>` cannot be nested.
  */
-export const DrawerRailItem = React.forwardRef(DrawerRailItemRender);
+export const DrawerRailItem = forwardRef(DrawerRailItemRender);
 DrawerRailItem.displayName = 'DrawerRailItem';
 // @ts-ignore
 DrawerRailItem.propTypes = {

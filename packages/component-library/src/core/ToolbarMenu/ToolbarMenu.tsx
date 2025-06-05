@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState, forwardRef } from 'react';
 import ArrowDropDown from '@mui/icons-material/ArrowDropDown';
 import { cx } from '@emotion/css';
 import { useTheme, styled } from '@mui/material/styles';
@@ -254,7 +254,7 @@ const ToolbarMenuRenderer: React.ForwardRefRenderFunction<unknown, ToolbarMenuPr
  *
  * The `ToolbarMenu` used to display a dropdown menu with label.
  */
-export const ToolbarMenu = React.forwardRef(ToolbarMenuRenderer);
+export const ToolbarMenu = forwardRef(ToolbarMenuRenderer);
 ToolbarMenu.displayName = 'ToolbarMenu';
 ToolbarMenu.propTypes = {
     classes: PropTypes.shape({
