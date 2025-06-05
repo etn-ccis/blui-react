@@ -1,13 +1,14 @@
 {
     "name": "@brightlayer-ui/react-auth-workflow",
     "version": "6.0.1",
+    "type": "module",
     "author": "Brightlayer UI <brightlayer-ui@eaton.com> (https://github.com/brightlayer-ui)",
     "license": "BSD-3-Clause",
     "description": "Re-usable workflow components for Authentication and Registration within Eaton applications.",
     "main": "dist/index.js",
     "scripts": {
-        "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config ./babel.config.mjs --maxWorkers=50%",
-        "test:ci": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config ./babel.config.mjs",
+        "test": "jest --maxWorkers=50%",
+        "test:ci": "jest",
         "build": "tsc --p tsconfig.lib.json && cp -r src/assets/. dist/assets && cp -r src/index.css dist/index.css",
         "publish:package": "set npm_config_yes=true && npx -p @brightlayer-ui/publish blui-publish",
         "tag:package": "npx -p @brightlayer-ui/tag blui-tag -s -blui-react-auth-workflow",
@@ -104,6 +105,7 @@
         "regenerator-runtime": "^0.13.7",
         "ts-jest": "^29.0.0-next.1",
         "@types/node": "^22.13.0",
+        "tsc-esm-fix": "^3.1.2",
         "typescript": "^5.0.3"
     },
     "jest": {
@@ -118,7 +120,7 @@
             "^.+\\.(js|jsx|ts|tsx)$": [
                 "babel-jest",
                 {
-                    "configFile": "./babel.config.mjs"
+                    "configFile": "./babel.config.js"
                 }
             ]
         },
