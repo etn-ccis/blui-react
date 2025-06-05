@@ -1,6 +1,6 @@
 import Typography, { TypographyProps } from '@mui/material/Typography';
 import { styled, useColorScheme } from '@mui/material/styles';
-import React, {forwardRef} from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { unstable_composeClasses as composeClasses } from '@mui/material';
 import listItemTagClasses, { ListItemTagClassKey, getListItemTagUtilityClass } from './ListItemTagClasses';

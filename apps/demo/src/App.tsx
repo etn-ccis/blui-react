@@ -37,10 +37,17 @@ export const App = (): JSX.Element => {
 
     return (
         <ThemeProvider theme={theme}>
-            <Box sx={{ backgroundColor: theme.vars.palette.background.paper, minHeight: '100vh', position: 'relative' }}>
+            <Box
+                sx={{ backgroundColor: theme.vars.palette.background.paper, minHeight: '100vh', position: 'relative' }}
+            >
                 <AppBar position={'fixed'}>
                     <Toolbar sx={{ px: 2 }}>
-                        <IconButton color={'inherit'} edge={'start'} style={{ marginRight: theme.spacing(3) }} size="large">
+                        <IconButton
+                            color={'inherit'}
+                            edge={'start'}
+                            style={{ marginRight: theme.spacing(3) }}
+                            size="large"
+                        >
                             <MenuIcon />
                         </IconButton>
                         <Typography variant={'h6'} color={'inherit'}>

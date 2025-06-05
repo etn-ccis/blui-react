@@ -155,32 +155,32 @@ const ChannelValueRender: React.ForwardRefRenderFunction<unknown, ChannelValuePr
 
     return (
         <ThemeProvider theme={theme}>
-        <Root
-            as="span"
-            ref={ref}
-            className={cx(generatedClasses.root, userClassName)}
-            data-testid={'blui-channel-value-root-test'}
-            fontSize={fontSize}
-            color={color}
-            {...otherProps}
-        >
-            {icon && (
-                <IconSpan className={generatedClasses.icon} data-testid={'blui-channel-value-icon'}>
-                    {changeIconDisplay(icon)}
-                </IconSpan>
-            )}
-            {prefix && getUnitElement()}
-            <Value
-                variant={'h6'}
-                color={'inherit'}
-                className={cx(generatedClasses.text, generatedClasses.value)}
-                data-testid={'blui-channel-value-value'}
-                isPrefix={applyPrefix()}
+            <Root
+                as="span"
+                ref={ref}
+                className={cx(generatedClasses.root, userClassName)}
+                data-testid={'blui-channel-value-root-test'}
+                fontSize={fontSize}
+                color={color}
+                {...otherProps}
             >
-                {value}
-            </Value>
-            {!prefix && getUnitElement()}
-        </Root>
+                {icon && (
+                    <IconSpan className={generatedClasses.icon} data-testid={'blui-channel-value-icon'}>
+                        {changeIconDisplay(icon)}
+                    </IconSpan>
+                )}
+                {prefix && getUnitElement()}
+                <Value
+                    variant={'h6'}
+                    color={'inherit'}
+                    className={cx(generatedClasses.text, generatedClasses.value)}
+                    data-testid={'blui-channel-value-value'}
+                    isPrefix={applyPrefix()}
+                >
+                    {value}
+                </Value>
+                {!prefix && getUnitElement()}
+            </Root>
         </ThemeProvider>
     );
 };

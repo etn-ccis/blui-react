@@ -12,7 +12,7 @@ describe('ToolbarMenu', () => {
     it('should render without crashing', () => {
         render(
             // <ThemeProvider theme={theme}>
-                <ToolbarMenu label={'label'} />
+            <ToolbarMenu label={'label'} />
             // </ThemeProvider>
         );
     });
@@ -20,7 +20,7 @@ describe('ToolbarMenu', () => {
     it('renders with label', () => {
         render(
             // <ThemeProvider theme={theme}>
-                <ToolbarMenu label={'Subtitle'} />
+            <ToolbarMenu label={'Subtitle'} />
             // </ThemeProvider>
         );
         expect(screen.getByText('Subtitle')).toBeTruthy();
@@ -29,7 +29,7 @@ describe('ToolbarMenu', () => {
     it('renders label with icon', () => {
         render(
             // <ThemeProvider theme={theme}>
-                <ToolbarMenu label="My Home" icon={<HomeIcon />} />
+            <ToolbarMenu label="My Home" icon={<HomeIcon />} />
             // </ThemeProvider>
         );
         expect(screen.findByRole('icon')).toBeTruthy();
@@ -38,7 +38,7 @@ describe('ToolbarMenu', () => {
     it('renders menu onclick with icon', () => {
         render(
             // <ThemeProvider theme={theme}>
-                <ToolbarMenu label="My Home" icon={<HomeIcon />} />
+            <ToolbarMenu label="My Home" icon={<HomeIcon />} />
             // </ThemeProvider>
         );
         expect(screen.findByRole('icon')).toBeTruthy();
@@ -48,14 +48,14 @@ describe('ToolbarMenu', () => {
     it('renders with menu group items', () => {
         render(
             // <ThemeProvider theme={theme}>
-                <ToolbarMenu
-                    label="My Home"
-                    menuGroups={[
-                        {
-                            items: [{ title: 'London' }, { title: 'New York' }, { title: 'New Haven' }],
-                        },
-                    ]}
-                />
+            <ToolbarMenu
+                label="My Home"
+                menuGroups={[
+                    {
+                        items: [{ title: 'London' }, { title: 'New York' }, { title: 'New Haven' }],
+                    },
+                ]}
+            />
             // </ThemeProvider>
         );
         expect(screen.findByText('London')).toBeTruthy();

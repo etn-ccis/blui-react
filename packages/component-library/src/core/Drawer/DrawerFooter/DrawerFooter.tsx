@@ -1,4 +1,4 @@
-import React, {forwardRef} from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import Divider from '@mui/material/Divider';
 import { useDrawerContext } from '../DrawerContext';
