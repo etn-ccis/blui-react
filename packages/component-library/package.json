@@ -12,7 +12,10 @@
     },
     "scripts": {
         "test": "jest src --maxWorkers=50%",
-        "build": "bash ./scripts/buildComponents.sh"
+        "build": "bash ./scripts/buildComponents.sh",
+        "coverage": "pnpm test --coverage --watchAll=false",
+        "test:artifacts": "cd scripts && bash ./buildTest.sh && cd ..",
+        "publish:package": "cd dist && rm -f *.tgz && set npm_config_yes=true && npx -p @brightlayer-ui/publish blui-publish"
     },
     "prettier": "@brightlayer-ui/prettier-config",
     "dependencies": {
