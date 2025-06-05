@@ -9,7 +9,7 @@
     "scripts": {
         "test": "jest --maxWorkers=50%",
         "test:ci": "jest",
-        "build": "tsc --p tsconfig.lib.json && cp -r src/assets/. dist/assets && cp -r src/index.css dist/index.css",
+        "build": "tsc --p tsconfig.lib.json && cp -r src/assets/. dist/assets && cp -r src/index.css dist/index.css && tsc-esm-fix dist",
         "publish:package": "set npm_config_yes=true && npx -p @brightlayer-ui/publish blui-publish",
         "tag:package": "npx -p @brightlayer-ui/tag blui-tag -s -blui-react-auth-workflow",
         "generate:licenses": "npm-license-crawler -onlyDirectDependencies -json LICENSES.json",
