@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import React, { ChangeEvent, useState, useCallback } from 'react';
-import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
+import { CheckCircleOutlined } from '@mui/icons-material';
 import { SetPasswordProps } from './types';
 import { PasswordTextField } from '../PasswordTextField';
 import { PasswordRequirements } from '../PasswordRequirements';
@@ -118,7 +118,7 @@ export const SetPassword: React.FC<React.PropsWithChildren<SetPasswordProps>> = 
                 helperText={hasConfirmPasswordError() ? passwordNotMatchError : ''}
                 icon={
                     confirmInput.length !== 0 && isValidPassword() && confirmInput === passwordInput ? (
-                        <CheckCircleOutlinedIcon data-testid="check" color="success" />
+                        <CheckCircleOutlined data-testid="check" color="success" />
                     ) : undefined
                 }
                 {...confirmPasswordTextFieldProps}

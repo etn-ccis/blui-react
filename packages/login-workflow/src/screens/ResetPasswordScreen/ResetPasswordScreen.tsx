@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import React, { useCallback, useRef, useState, useEffect } from 'react';
-import CheckCircle from '@mui/icons-material/CheckCircle';
+import {CheckCircle} from '@mui/icons-material';
 import { ResetPasswordScreenBase } from './ResetPasswordScreenBase';
 import { useAuthContext } from '../../contexts';
 import { defaultPasswordRequirements } from '../../constants';
