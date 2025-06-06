@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useRef } from 'react';
+import React, { useEffect, useState, useCallback, useRef, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import MUIDrawer, { DrawerProps as MUIDrawerProps } from '@mui/material/Drawer';
@@ -353,7 +353,7 @@ const DrawerRenderer: React.ForwardRefRenderFunction<unknown, DrawerProps> = (pr
  *
  * The Brightlayer UI Drawer includes helper components for `<DrawerHeader>`, `<DrawerSubheader>`, `<DrawerBody>`, `<DrawerNavGroup>`, `<DrawerNavItem>`, `<DrawerRailItem>`, `<DrawerFooter>`, and `<DrawerLayout>` to help organize the content.
  */
-export const Drawer = React.forwardRef(DrawerRenderer);
+export const Drawer = forwardRef(DrawerRenderer);
 Drawer.displayName = 'BLUIDrawer';
 // @ts-ignore
 Drawer.propTypes = {

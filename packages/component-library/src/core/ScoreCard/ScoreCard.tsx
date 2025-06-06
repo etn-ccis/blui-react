@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, forwardRef } from 'react';
 import { cx } from '@emotion/css';
 import Card, { CardProps } from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
@@ -338,7 +338,7 @@ const ScoreCardRender: React.ForwardRefRenderFunction<unknown, ScoreCardProps> =
  *
  * Card component that calls attention to particular values.
  */
-export const ScoreCard = React.forwardRef(ScoreCardRender);
+export const ScoreCard = forwardRef(ScoreCardRender);
 
 ScoreCard.displayName = 'ScoreCard';
 ScoreCard.propTypes = {

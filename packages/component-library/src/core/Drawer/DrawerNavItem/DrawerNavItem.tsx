@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { useDrawerContext } from '../DrawerContext';
 import { useNavGroupContext } from '../NavGroupContext';
@@ -7,8 +7,7 @@ import { Theme, useTheme, styled, SxProps, useColorScheme } from '@mui/material/
 import List from '@mui/material/List';
 import Collapse from '@mui/material/Collapse';
 import { InfoListItem, InfoListItemProps as BLUIInfoListItemProps } from '../../InfoListItem';
-import ArrowDropDown from '@mui/icons-material/ArrowDropDown';
-import ExpandMore from '@mui/icons-material/ExpandMore';
+import { ArrowDropDown, ExpandMore } from '@mui/icons-material';
 import { NavItemSharedStyleProps, NavItemSharedStylePropTypes, SharedStyleProps, SharedStylePropTypes } from '../types';
 import color from 'color';
 import { findChildByType, mergeStyleProp } from '../utilities';
@@ -560,7 +559,7 @@ const DrawerNavItemRender: React.ForwardRefRenderFunction<HTMLElement, DrawerNav
  *
  * The `<DrawerNavItem>` is an individual line item in the `<Drawer>`. These can be generated for you by using the `items` prop of the `<DrawerNavGroup>` and passing in an array of objects with the following API. You can also create these line items by directly passing them as children to the `<DrawerNavGroup>`. Each `<DrawerNavItem>` also supports the ability to nest items (using its own `items` prop or children). When using the rail variant of the `<Drawer>`, you should use `<DrawerRailItem>` instead.
  */
-export const DrawerNavItem = React.forwardRef(DrawerNavItemRender);
+export const DrawerNavItem = forwardRef(DrawerNavItemRender);
 DrawerNavItem.displayName = 'DrawerNavItem';
 DrawerNavItem.propTypes = {
     ...SharedStylePropTypes,
