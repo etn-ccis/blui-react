@@ -16,7 +16,8 @@ import { MainRouter } from './router';
 import { store } from './redux/store';
 import { RTLThemeProvider } from './components/RTLProvider';
 import '@brightlayer-ui/react-themes/open-sans';
-
+import { ThemeProvider } from '@mui/material';
+import { blueThemes as theme } from '@brightlayer-ui/react-themes';
 const container = document.getElementById('root');
 
 /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
@@ -39,10 +40,12 @@ declare global {
 root.render(
     <React.StrictMode>
         <Provider store={store}>
-            <RTLThemeProvider>
-                <CssBaseline />
-                <MainRouter />
-            </RTLThemeProvider>
+            <ThemeProvider theme={theme}>
+                <RTLThemeProvider>
+                    <CssBaseline />
+                    <MainRouter />
+                </RTLThemeProvider>
+            </ThemeProvider>
         </Provider>
     </React.StrictMode>
 );

@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, forwardRef } from 'react';
 import { cx } from '@emotion/css';
 import Box, { BoxProps } from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
@@ -116,5 +116,5 @@ const ThreeLinerRenderer: React.ForwardRefRenderFunction<unknown, ThreeLinerProp
  *
  * The `ThreeLiner` can display up to three lines of stylized text or other custom content. It is most commonly used within the context of a [`AppBar`](./AppBar.md) component where the text can grow / shrink as the App Bar is expanded and collapsed.
  */
-export const ThreeLiner = React.forwardRef(ThreeLinerRenderer);
+export const ThreeLiner = forwardRef(ThreeLinerRenderer);
 ThreeLiner.displayName = 'ThreeLiner';

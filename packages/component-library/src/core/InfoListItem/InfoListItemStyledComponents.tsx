@@ -8,7 +8,7 @@ import Box, { BoxProps } from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Avatar from '@mui/material/Avatar';
 import ListItemText from '@mui/material/ListItemText';
-import Chevron from '@mui/icons-material/ChevronRight';
+import { ChevronRight } from '@mui/icons-material';
 import Typography, { TypographyProps } from '@mui/material/Typography';
 
 export const Root = styled(ListItem, {
@@ -199,7 +199,7 @@ export const RightComponent = styled(
     alignItems: 'center',
 }));
 
-export const InfoListItemChevron = styled(Chevron, {
+export const InfoListItemChevron = styled(ChevronRight, {
     shouldForwardProp: (prop) => prop !== 'chevronColor',
 })<Pick<InfoListItemProps, 'chevronColor'>>(({ chevronColor, theme }) => ({
     color: chevronColor ? chevronColor : (theme.vars || theme).palette.text.secondary,

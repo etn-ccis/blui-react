@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, forwardRef } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
@@ -324,7 +324,7 @@ const AppBarRender: React.ForwardRefRenderFunction<unknown, AppBarProps> = (prop
  *
  * An extension of the default AppBar from Material UI that can be resized / collapsed as the page is scrolled.
  */
-export const AppBar = React.forwardRef(AppBarRender);
+export const AppBar = forwardRef(AppBarRender);
 AppBar.displayName = 'AppBar';
 
 /* Additional code from the work on the continuous scrolling app bar that worked

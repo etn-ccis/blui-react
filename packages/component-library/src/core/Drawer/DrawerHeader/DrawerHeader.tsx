@@ -1,4 +1,4 @@
-import React, { ReactNode, useCallback } from 'react';
+import React, { ReactNode, useCallback, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import Toolbar, { ToolbarProps } from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -285,7 +285,7 @@ const DrawerHeaderRender: React.ForwardRefRenderFunction<unknown, DrawerHeaderPr
  *
  * The `<DrawerHeader>` contains the content at the top of the `<Drawer>`. By default, it renders multiple lines of text in the Brightlayer UI style. If you supply a `titleContent`, you can render your own custom content in the title area.
  */
-export const DrawerHeader = React.forwardRef(DrawerHeaderRender);
+export const DrawerHeader = forwardRef(DrawerHeaderRender);
 
 DrawerHeader.displayName = 'DrawerHeader';
 DrawerHeader.defaultProps = {

@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, forwardRef } from 'react';
 import Typography, { TypographyProps } from '@mui/material/Typography';
 import { cx } from '@emotion/css';
 import PropTypes from 'prop-types';
@@ -8,8 +8,9 @@ import channelValueClasses, {
     ChannelValueClassKey,
     getChannelValueUtilityClass,
 } from './ChannelValueClasses';
-import { unstable_composeClasses as composeClasses } from '@mui/material';
+import { unstable_composeClasses as composeClasses, ThemeProvider } from '@mui/material';
 import Box, { BoxProps } from '@mui/material/Box';
+import { blueThemes as theme } from '@brightlayer-ui/react-themes';
 
 const useUtilityClasses = (ownerState: ChannelValueProps): Record<ChannelValueClassKey, string> => {
     const { classes } = ownerState;
@@ -153,32 +154,34 @@ const ChannelValueRender: React.ForwardRefRenderFunction<unknown, ChannelValuePr
     );
 
     return (
-        <Root
-            as="span"
-            ref={ref}
-            className={cx(generatedClasses.root, userClassName)}
-            data-testid={'blui-channel-value-root-test'}
-            fontSize={fontSize}
-            color={color}
-            {...otherProps}
-        >
-            {icon && (
-                <IconSpan className={generatedClasses.icon} data-testid={'blui-channel-value-icon'}>
-                    {changeIconDisplay(icon)}
-                </IconSpan>
-            )}
-            {prefix && getUnitElement()}
-            <Value
-                variant={'h6'}
-                color={'inherit'}
-                className={cx(generatedClasses.text, generatedClasses.value)}
-                data-testid={'blui-channel-value-value'}
-                isPrefix={applyPrefix()}
+        <ThemeProvider theme={theme}>
+            <Root
+                as="span"
+                ref={ref}
+                className={cx(generatedClasses.root, userClassName)}
+                data-testid={'blui-channel-value-root-test'}
+                fontSize={fontSize}
+                color={color}
+                {...otherProps}
             >
-                {value}
-            </Value>
-            {!prefix && getUnitElement()}
-        </Root>
+                {icon && (
+                    <IconSpan className={generatedClasses.icon} data-testid={'blui-channel-value-icon'}>
+                        {changeIconDisplay(icon)}
+                    </IconSpan>
+                )}
+                {prefix && getUnitElement()}
+                <Value
+                    variant={'h6'}
+                    color={'inherit'}
+                    className={cx(generatedClasses.text, generatedClasses.value)}
+                    data-testid={'blui-channel-value-value'}
+                    isPrefix={applyPrefix()}
+                >
+                    {value}
+                </Value>
+                {!prefix && getUnitElement()}
+            </Root>
+        </ThemeProvider>
     );
 };
 /**
@@ -187,7 +190,7 @@ const ChannelValueRender: React.ForwardRefRenderFunction<unknown, ChannelValuePr
  * Used to show a stylized value and its units.
  * You may also include an icon.
  */
-export const ChannelValue = React.forwardRef(ChannelValueRender);
+export const ChannelValue = forwardRef(ChannelValueRender);
 
 ChannelValue.displayName = 'ChannelValue';
 ChannelValue.propTypes = {

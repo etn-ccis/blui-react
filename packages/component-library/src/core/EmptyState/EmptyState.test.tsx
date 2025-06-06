@@ -19,7 +19,6 @@ describe('EmptyState', () => {
                     description="Test Description"
                     actions={<Button> Test </Button>}
                 />
-                ,
             </ThemeProvider>
         );
     });

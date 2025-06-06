@@ -1,4 +1,4 @@
-import React, { ReactNode, useCallback, useEffect, useState } from 'react';
+import React, { ReactNode, useCallback, useEffect, useState, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { useDrawerContext } from '../DrawerContext';
 import { NavGroupContext } from '../NavGroupContext';
@@ -366,7 +366,7 @@ const DrawerNavGroupRender: React.ForwardRefRenderFunction<unknown, DrawerNavGro
  *
  * A `<DrawerNavGroup>` is used inside of the `<DrawerBody>` to organize links/content. Each group consists of an (optional) group title and a series of navigation items. Most visual props are inherited from the `<DrawerBody>` but can be overridden at the NavGroup level if desired.
  */
-export const DrawerNavGroup = React.forwardRef(DrawerNavGroupRender);
+export const DrawerNavGroup = forwardRef(DrawerNavGroupRender);
 DrawerNavGroup.displayName = 'DrawerNavGroup';
 // @ts-ignore
 DrawerNavGroup.propTypes = {
