@@ -12,7 +12,7 @@
             "import": "./index.js"
         },
         "./open-sans": {
-            "import": "./open-sans.ts"
+            "import": "./open-sans.js"
         }
     },
     "scripts": {
