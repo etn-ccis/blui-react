@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '@mui/material/Button';
 import Add from '@mui/icons-material/Add';
 import Devices from '@mui/icons-material/Devices';
-import { EmptyState } from '@brightlayer-ui/react-components/core/EmptyState';
+import { EmptyState } from '@brightlayer-ui/react-components';
 import { ExampleShowcase } from '../../../shared';
 
 export const EmptyStateWithActionsExample = (): JSX.Element => (

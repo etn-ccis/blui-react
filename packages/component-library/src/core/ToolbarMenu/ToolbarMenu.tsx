@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState, forwardRef } from 'react';
-import ArrowDropDown from '@mui/icons-material/ArrowDropDown';
+import { ArrowDropDown } from '@mui/icons-material';
 import { cx } from '@emotion/css';
 import { useTheme, styled } from '@mui/material/styles';
 import composeRefs from '@seznam/compose-react-refs';

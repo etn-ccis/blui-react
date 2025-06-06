@@ -1,5 +1,5 @@
 import React from 'react';
-import { InfoListItem } from '@brightlayer-ui/react-components/core/InfoListItem';
+import { InfoListItem } from '@brightlayer-ui/react-components';
 import Stack from '@mui/material/Stack';
 import * as colors from '@brightlayer-ui/colors';
 import { DeviceActivating } from '@brightlayer-ui/icons-mui';

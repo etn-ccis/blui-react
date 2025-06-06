@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListItemTag } from '@brightlayer-ui/react-components/core/ListItemTag';
+import { ListItemTag } from '@brightlayer-ui/react-components';
 import { ExampleShowcase } from '../../../shared';
 
 export const ListItemTagExample = (): JSX.Element => (

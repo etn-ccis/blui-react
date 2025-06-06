@@ -1,6 +1,6 @@
 import React from 'react';
 import LocationOff from '@mui/icons-material/LocationOff';
-import { EmptyState } from '@brightlayer-ui/react-components/core/EmptyState';
+import { EmptyState } from '@brightlayer-ui/react-components';
 import { ExampleShowcase } from '../../../shared';
 
 export const EmptyStateWithDescriptionExample = (): JSX.Element => (

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListItemTag } from '@brightlayer-ui/react-components/core/ListItemTag';
+import { ListItemTag } from '@brightlayer-ui/react-components';
 import { ExampleShowcase } from '../../../shared';
 import Stack from '@mui/material/Stack';
 

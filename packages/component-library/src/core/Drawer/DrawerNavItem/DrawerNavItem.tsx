@@ -7,8 +7,7 @@ import { Theme, useTheme, styled, SxProps, useColorScheme } from '@mui/material/
 import List from '@mui/material/List';
 import Collapse from '@mui/material/Collapse';
 import { InfoListItem, InfoListItemProps as BLUIInfoListItemProps } from '../../InfoListItem';
-import ArrowDropDown from '@mui/icons-material/ArrowDropDown';
-import ExpandMore from '@mui/icons-material/ExpandMore';
+import { ArrowDropDown, ExpandMore } from '@mui/icons-material';
 import { NavItemSharedStyleProps, NavItemSharedStylePropTypes, SharedStyleProps, SharedStylePropTypes } from '../types';
 import color from 'color';
 import { findChildByType, mergeStyleProp } from '../utilities';

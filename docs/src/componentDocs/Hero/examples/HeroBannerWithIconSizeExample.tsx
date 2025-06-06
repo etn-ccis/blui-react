@@ -1,7 +1,6 @@
 import React from 'react';
 import Box from '@mui/material/Box';
-import { Hero } from '@brightlayer-ui/react-components/core/Hero';
-import { HeroBanner } from '@brightlayer-ui/react-components/core/HeroBanner';
+import { Hero, HeroBanner } from '@brightlayer-ui/react-components';
 import VoltageCircledOutline from '@brightlayer-ui/icons-mui/VoltageCircledOutline';
 import Schedule from '@mui/icons-material/Schedule';
 import Trex from '../images/trex.png';

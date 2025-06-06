@@ -1,5 +1,5 @@
 import React from 'react';
-import { Hero } from '@brightlayer-ui/react-components/core/Hero';
+import { Hero } from '@brightlayer-ui/react-components';
 import TrendingUp from '@mui/icons-material/TrendingUp';
 import Fan from '@brightlayer-ui/icons-mui/Fan';
 import { ExampleShowcase } from '../../../shared';

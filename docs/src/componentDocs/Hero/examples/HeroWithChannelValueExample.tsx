@@ -1,6 +1,5 @@
 import React from 'react';
-import { ChannelValue } from '@brightlayer-ui/react-components/core/ChannelValue';
-import { Hero } from '@brightlayer-ui/react-components/core/Hero';
+import { ChannelValue, Hero } from '@brightlayer-ui/react-components';
 import Schedule from '@mui/icons-material/Schedule';
 import { ExampleShowcase } from '../../../shared';
 

@@ -1,8 +1,7 @@
 import React from 'react';
-import { InfoListItem } from '@brightlayer-ui/react-components/core/InfoListItem';
+import { InfoListItem, ChannelValue } from '@brightlayer-ui/react-components';
 import * as colors from '@brightlayer-ui/colors';
 import { BatteryChargingFull } from '@mui/icons-material';
-import { ChannelValue } from '@brightlayer-ui/react-components';
 import { ExampleShowcase } from '../../../shared';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';

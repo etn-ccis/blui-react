@@ -1,5 +1,5 @@
 import React from 'react';
-import { InfoListItem } from '@brightlayer-ui/react-components/core/InfoListItem';
+import { InfoListItem } from '@brightlayer-ui/react-components';
 import { Alarm } from '@mui/icons-material';
 import { ExampleShowcase } from '../../../shared';
 

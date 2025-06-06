@@ -1,5 +1,5 @@
 import React from 'react';
-import { InfoListItem } from '@brightlayer-ui/react-components/core/InfoListItem';
+import { InfoListItem } from '@brightlayer-ui/react-components';
 import { ExampleShowcase } from '../../../shared';
 
 export const DenseInfoListItemExample = (): JSX.Element => (

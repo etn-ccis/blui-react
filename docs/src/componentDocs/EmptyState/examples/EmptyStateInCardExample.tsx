@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import LocationOff from '@mui/icons-material/LocationOff';
 import Typography from '@mui/material/Typography';
-import { EmptyState } from '@brightlayer-ui/react-components/core/EmptyState';
+import { EmptyState } from '@brightlayer-ui/react-components';
 import { ExampleShowcase } from '../../../shared';
 
 export const EmptyStateInCardExample = (): JSX.Element => (

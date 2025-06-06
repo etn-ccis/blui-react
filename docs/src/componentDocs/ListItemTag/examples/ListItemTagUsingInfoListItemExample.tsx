@@ -1,6 +1,5 @@
 import React from 'react';
-import { ListItemTag } from '@brightlayer-ui/react-components/core/ListItemTag';
-import { InfoListItem } from '@brightlayer-ui/react-components/core/InfoListItem';
+import { ListItemTag, InfoListItem } from '@brightlayer-ui/react-components';
 import Stack from '@mui/material/Stack';
 import BatteryChargingFull from '@mui/icons-material/BatteryChargingFull';
 import * as Colors from '@brightlayer-ui/colors';

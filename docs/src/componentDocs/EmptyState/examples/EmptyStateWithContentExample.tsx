@@ -1,6 +1,6 @@
 import React from 'react';
 import ReportIcon from '@mui/icons-material/Report';
-import { EmptyState } from '@brightlayer-ui/react-components/core/EmptyState';
+import { EmptyState } from '@brightlayer-ui/react-components';
 import { ExampleShowcase } from '../../../shared';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
