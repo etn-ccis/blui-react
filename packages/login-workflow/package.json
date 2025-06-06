@@ -117,12 +117,7 @@
             "html"
         ],
         "transform": {
-            "^.+\\.(js|jsx|ts|tsx)$": [
-                "babel-jest",
-                {
-                    "configFile": "./babel.config.js"
-                }
-            ]
+            "^.+\\.[tj]sx?$": "babel-jest"
         },
         "extensionsToTreatAsEsm": [
             ".ts",
