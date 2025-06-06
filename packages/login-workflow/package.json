@@ -1,6 +1,7 @@
 {
     "name": "@brightlayer-ui/react-auth-workflow",
     "version": "6.0.2",
+    "type": "module",
     "author": "Brightlayer UI <brightlayer-ui@eaton.com> (https://github.com/brightlayer-ui)",
     "license": "BSD-3-Clause",
     "description": "Re-usable workflow components for Authentication and Registration within Eaton applications.",
@@ -8,7 +9,7 @@
     "scripts": {
         "test": "jest --maxWorkers=50%",
         "test:ci": "jest",
-        "build": "tsc --p tsconfig.lib.json && cp -r src/assets/. dist/assets && cp -r src/index.css dist/index.css",
+        "build": "tsc --p tsconfig.lib.json && cp -r src/assets/. dist/assets && cp -r src/index.css dist/index.css && tsc-esm-fix dist",
         "publish:package": "set npm_config_yes=true && npx -p @brightlayer-ui/publish blui-publish",
         "tag:package": "npx -p @brightlayer-ui/tag blui-tag -s -blui-react-auth-workflow",
         "generate:licenses": "npm-license-crawler -onlyDirectDependencies -json LICENSES.json",
@@ -104,6 +105,7 @@
         "regenerator-runtime": "^0.13.7",
         "ts-jest": "^29.0.0-next.1",
         "@types/node": "22.13.0",
+        "tsc-esm-fix": "^3.1.2",
         "typescript": "^5.0.3"
     },
     "jest": {
@@ -113,6 +115,13 @@
             "clover",
             "lcov",
             "html"
+        ],
+        "transform": {
+            "^.+\\.[tj]sx?$": "babel-jest"
+        },
+        "extensionsToTreatAsEsm": [
+            ".ts",
+            ".tsx"
         ],
         "testEnvironment": "jsdom",
         "moduleDirectories": [

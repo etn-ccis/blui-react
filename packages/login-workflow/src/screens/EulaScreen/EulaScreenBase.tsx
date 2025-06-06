@@ -13,7 +13,7 @@ import Box from '@mui/material/Box';
 import DOMPurify from 'dompurify';
 import ErrorManager from '../../components/Error/ErrorManager';
 import { Typography } from '@mui/material';
-import ReplaySharpIcon from '@mui/icons-material/ReplaySharp';
+import { ReplaySharp } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 
 /**
@@ -83,7 +83,7 @@ export const EulaScreenBase: React.FC<EulaScreenProps> = (props) => {
                             }}
                             onClick={refreshConfig?.onRefresh}
                         >
-                            <ReplaySharpIcon color="primary" sx={{ width: 36, height: 36 }} />
+                            <ReplaySharp color="primary" sx={{ width: 36, height: 36 }} />
                             <Typography variant="subtitle2" color="primary">
                                 {refreshConfig?.refreshButtonLabel || t('bluiCommon:MESSAGES.RETRY')}
                             </Typography>

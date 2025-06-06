@@ -5,7 +5,7 @@ import { useAuthContext } from '../../contexts';
 import { ForgotPasswordScreenBase } from './ForgotPasswordScreenBase';
 import { ForgotPasswordScreenProps } from './types';
 import Typography from '@mui/material/Typography';
-import CheckCircle from '@mui/icons-material/CheckCircle';
+import { CheckCircle } from '@mui/icons-material';
 import { LinkStyles } from '../../styles';
 import { useErrorManager } from '../../contexts/ErrorContext/useErrorManager';
 

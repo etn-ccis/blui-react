@@ -4,13 +4,16 @@
         "react-hooks"
     ],
     "compilerOptions": {
-        "target": "es5",
+        "target": "ESNext",
         "types": ["node", "jest"],
-        "esModuleInterop": true,
+        "module": "ESNext",
+        "moduleResolution": "node",
+        // "esModuleInterop": true,
         "jsx": "react",
         "strict": true,
         "allowSyntheticDefaultImports": true,
-        "strictNullChecks": true
+        "strictNullChecks": true,
+        "outDir": "dist"
     },
     "include": ["src", "images.d.ts"]
 }

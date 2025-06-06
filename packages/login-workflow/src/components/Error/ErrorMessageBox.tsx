@@ -1,6 +1,6 @@
 import React from 'react';
 import Box from '@mui/material/Box';
-import Close from '@mui/icons-material/Close';
+import { Close } from '@mui/icons-material';
 import Typography from '@mui/material/Typography';
 import { ErrorMessageBoxProps } from './types';
 
