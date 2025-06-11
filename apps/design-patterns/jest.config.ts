@@ -1,10 +1,6 @@
 export default {
     preset: 'ts-jest',
-    testEnvironment: 'jsdom',
-    testEnvironmentOptions: {
-        html: '<!DOCTYPE html>',
-        userAgent: 'node.js',
-      },
+    testEnvironment: 'jest-environment-jsdom',
     transform: {
         '^.+\\.tsx?$': 'ts-jest',
         // process `*.tsx` files with `ts-jest`
