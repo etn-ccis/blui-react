@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import React, { useCallback, useRef, useState, useEffect } from 'react';
-// import { CheckCircle } from '@mui/icons-material/CheckCircle';
+import CheckCircle from '@mui/icons-material/CheckCircle';
 import { ResetPasswordScreenBase } from './ResetPasswordScreenBase';
 import { useAuthContext } from '../../contexts';
 import { defaultPasswordRequirements } from '../../constants';
@@ -8,7 +8,6 @@ import { parseQueryString } from '../../utils';
 import { ResetPasswordScreenProps } from './types';
 import { useErrorManager } from '../../contexts/ErrorContext/useErrorManager';
 import { useTranslation } from 'react-i18next';
-import CheckCircle from '@mui/icons-material/CheckCircle';
 
 /**
  * Component that renders a ResetPassword screen that allows a user to reset their password and shows a success message upon a successful password reset..

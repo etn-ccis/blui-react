@@ -4,9 +4,6 @@ import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-// import { Visibility, VisibilityOff } from '@mui/icons-material';
-// import Visibility from '@mui/icons-material/Visibility';
-// import {vi} from '@mui/icons-material/VisibilityOff';
 
 /**
  * Component that renders textfield with a visibility toggle. The toggle changes the
