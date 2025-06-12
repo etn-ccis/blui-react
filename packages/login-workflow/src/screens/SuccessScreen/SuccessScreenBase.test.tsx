@@ -2,7 +2,6 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import { render, cleanup, screen, fireEvent } from '@testing-library/react';
 import { SuccessScreenBase } from './SuccessScreenBase';
-// import { Circle } from '@mui/icons-material';
 import Circle from '@mui/icons-material/Circle';
 
 afterEach(cleanup);
