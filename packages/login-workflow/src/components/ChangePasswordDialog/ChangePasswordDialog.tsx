@@ -3,7 +3,7 @@ import { defaultPasswordRequirements } from '../../constants';
 import { useAuthContext } from '../../contexts';
 import { ChangePasswordDialogBase } from './ChangePasswordDialogBase';
 import { ChangePasswordDialogProps } from './types';
-import { CheckCircle } from '@mui/icons-material';
+import CheckCircle from '@mui/icons-material/CheckCircle';
 import { useTranslation } from 'react-i18next';
 import { useErrorManager } from '../../contexts/ErrorContext/useErrorManager';
 
