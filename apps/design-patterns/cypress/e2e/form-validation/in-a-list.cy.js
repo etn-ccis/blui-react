@@ -1,6 +1,5 @@
 /// <reference types="cypress" />
 
-
 describe('Form validation in a list', () => {
     beforeEach(() => {
         cy.visit('http://localhost:3000/in-a-list');
@@ -11,6 +10,6 @@ describe('Form validation in a list', () => {
     });
 
     it('should display ip address left aligned', () => {
-        cy.get('[data-cy=ip-address]').invoke('css', 'text-align').should('equal', 'left')
+        cy.get('[data-cy=ip-address]').invoke('css', 'text-align').should('equal', 'left');
     });
 });

@@ -96,8 +96,8 @@ export const TreeItemComponent = (props: TreeItemProps): JSX.Element => {
                     id === 0
                         ? clsx(classes.accordionRoot, classes.firstAccordion)
                         : depth > 0
-                        ? clsx(classes.accordionRoot, classes.nestedAccordionRoot)
-                        : classes.accordionRoot,
+                          ? clsx(classes.accordionRoot, classes.nestedAccordionRoot)
+                          : classes.accordionRoot,
             }}
             onClick={(event): void => {
                 event.stopPropagation();

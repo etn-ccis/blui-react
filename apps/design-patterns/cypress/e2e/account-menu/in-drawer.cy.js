@@ -1,6 +1,5 @@
 /// <reference types="cypress" />
 
-
 describe('Account menu in drawer', () => {
     beforeEach(() => {
         cy.visit('http://localhost:3000/in-a-drawer');
@@ -11,13 +10,13 @@ describe('Account menu in drawer', () => {
     });
 
     it('should display drawer when toggled', () => {
-        cy.get('[data-cy=toggle-drawer]').click()
-        cy.get('[data-cy=drawer-header]').should('be.visible')
+        cy.get('[data-cy=toggle-drawer]').click();
+        cy.get('[data-cy=drawer-header]').should('be.visible');
     });
 
     it('should dismiss drawer on click', () => {
-        cy.get('[data-cy=toggle-drawer]').click()
-        cy.get('[data-cy=drawer-header]').should('be.visible')
-        cy.get('body').click()
+        cy.get('[data-cy=toggle-drawer]').click();
+        cy.get('[data-cy=drawer-header]').should('be.visible');
+        cy.get('body').click();
     });
 });

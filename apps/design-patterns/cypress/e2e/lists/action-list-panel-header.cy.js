@@ -1,6 +1,5 @@
 /// <reference types="cypress" />
 
-
 describe('Action list with panel header', () => {
     beforeEach(() => {
         cy.visit('http://localhost:3000/in-panel-header');

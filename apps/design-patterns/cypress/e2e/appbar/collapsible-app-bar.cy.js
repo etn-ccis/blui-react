@@ -6,8 +6,7 @@ describe('Collapsible app bar', () => {
     });
 
     it('should display toolbar height', () => {
-        cy.get('[data-cy=toolbar]').should('be.visible')
-        .invoke('prop','scrollHeight').should('equal', 157);
+        cy.get('[data-cy=toolbar]').should('be.visible').invoke('prop', 'scrollHeight').should('equal', 157);
     });
 
     it('should display toolbar height 64 on scroll', () => {

@@ -1,6 +1,5 @@
 /// <reference types="cypress" />
 
-
 describe('Toolbar menu', () => {
     beforeEach(() => {
         cy.visit('http://localhost:3000/toolbar-menu');
@@ -11,7 +10,7 @@ describe('Toolbar menu', () => {
     });
 
     it('should display correct subtitle on selected', () => {
-        cy.contains('Subtitle').click()
-        cy.contains('All Locations').click()
+        cy.contains('Subtitle').click();
+        cy.contains('All Locations').click();
     });
 });

@@ -1,6 +1,5 @@
 /// <reference types="cypress" />
 
-
 describe('Action list inline', () => {
     beforeEach(() => {
         cy.visit('http://localhost:3000/inline-actions');
