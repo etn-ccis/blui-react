@@ -5,34 +5,17 @@
 
  This code is licensed under the BSD-3 license found in the LICENSE file in the root directory of this source tree and at https://opensource.org/licenses/BSD-3-Clause.
  **/
-import { createTheme, ThemeProvider, Theme, StyledEngineProvider } from '@mui/material/styles';
+ import React from 'react';
+import { ThemeProvider, Theme, StyledEngineProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-
-import * as BLUIThemes from '@brightlayer-ui/react-themes';
 import '@brightlayer-ui/react-themes/open-sans';
-import React from 'react';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { createStore } from 'redux';
 import { Reducer } from './redux/reducers';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { App } from './App';
-
-/* eslint-disable */
-declare global {
-    namespace React {
-        interface DOMAttributes<T> {
-            component?: string | undefined;
-            disabled?: string | undefined;
-            selected?: string | undefined;
-            placeholder?: string | undefined;
-            onResize?: string | undefined;
-            onResizeCapture?: string | undefined;
-            // onPointerEnterCapture?: string | undefined;
-            // onPointerLeaveCapture?: string | undefined;
-        }
-    }
-}
+import { blueThemes as theme } from '@brightlayer-ui/react-themes';
 
 declare module '@mui/styles/defaultTheme' {
     // eslint-disable-next-line
@@ -41,9 +24,12 @@ declare module '@mui/styles/defaultTheme' {
 
 const store = createStore(Reducer());
 
-render(
+const container = document.getElementById('root');
+const root = createRoot(container!);
+
+root.render(
     <StyledEngineProvider injectFirst>
-        <ThemeProvider theme={createTheme(BLUIThemes.blue)}>
+        <ThemeProvider theme={theme}>
             <BrowserRouter>
                 <Provider store={store}>
                     <CssBaseline />
@@ -51,6 +37,5 @@ render(
                 </Provider>
             </BrowserRouter>
         </ThemeProvider>
-    </StyledEngineProvider>,
-    document.getElementById('root')
+    </StyledEngineProvider>
 );

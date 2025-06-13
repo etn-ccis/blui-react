@@ -13,7 +13,7 @@ import {
 import { OpenInNew } from '@mui/icons-material';
 import CloseIcon from '@mui/icons-material/Close';
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { Main } from './router/main';
 import './style.css';
 import { PAGES, RouteMetaData, Routes } from './router/routes';
@@ -22,7 +22,7 @@ import { AppState } from './redux/reducers';
 import { TOGGLE_DRAWER } from './redux/actions';
 import { DRAWER_WIDTH } from './assets/constants';
 
-const backgroundImage = require('./assets/topology_40.png');
+import backgroundImage from './assets/topology_40.png';
 
 const useStyles = makeStyles((theme: Theme) => ({
     header: {

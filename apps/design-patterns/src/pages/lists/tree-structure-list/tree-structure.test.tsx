@@ -1,6 +1,6 @@
 import React from 'react';
 import { cleanup, render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
+import '@testing-library/jest-dom/extend-expect';
 import { TreeStructureList } from '.';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';

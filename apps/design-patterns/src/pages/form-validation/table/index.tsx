@@ -63,7 +63,7 @@ export const TableFormValidation = (): JSX.Element => {
     const smUp = useMediaQuery(theme.breakpoints.up('sm'));
 
     const getTable = (): JSX.Element => (
-        <TableContainer component={Paper as React.ElementType} className={classes.tableContainer}>
+        <TableContainer component={Paper} className={classes.tableContainer}>
             <Table>
                 <TableHead>
                     <TableRow>

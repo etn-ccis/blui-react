@@ -8,4 +8,5 @@ export default {
     moduleNameMapper: {
         '\\.(gif|ttf|eot|svg|png)$': '<rootDir>/test/__mocks__/fileMock.js',
     },
+    moduleDirectories: ['node_modules', '<rootDir>/../']
 };

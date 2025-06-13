@@ -189,8 +189,9 @@ export const ContextualAction = (): JSX.Element => {
         }
         setSelectedItems([]);
     };
+
     const getTable = (): JSX.Element => (
-        <TableContainer component={Paper as React.ElementType}>
+        <TableContainer component={Paper}>
             <Table>
                 <TableHead>
                     <TableRow>
