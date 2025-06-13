@@ -131,7 +131,9 @@
         ],
         "moduleNameMapper": {
             "\\.(jpg|ico|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
-            "\\.(css|less)$": "<rootDir>/__mocks__/fileMock.js"
+            "\\.(css|less)$": "<rootDir>/__mocks__/fileMock.js",
+            "^@brightlayer-ui/react-components$": "<rootDir>/../component-library/dist/index.js",
+            "^@brightlayer-ui/react-themes$": "<rootDir>/../themes/dist/index.js"
         },
         "transformIgnorePatterns": [
             "/!node_modules\\/lodash-es/"
