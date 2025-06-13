@@ -17,6 +17,8 @@ export default [
         },
         rules: {
             '@typescript-eslint/prefer-nullish-coalescing': 'off',
+            '@typescript-eslint/no-unnecessary-type-assertion': 'off',
+            '@typescript-eslint/no-unnecessary-type-arguments': 'off',
         },
     },
     {
