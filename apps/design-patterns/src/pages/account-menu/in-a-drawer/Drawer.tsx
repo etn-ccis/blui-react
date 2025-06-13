@@ -16,7 +16,7 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 import { Device } from '@brightlayer-ui/icons-mui';
 
-import backgroundImage  from '../../../assets/cubes_tile.png';
+import backgroundImage from '../../../assets/cubes_tile.png';
 const linearGradientOverlayImage = `linear-gradient(to right, rgba(0, 123, 193, 1) 22.4%, rgba(0, 123, 193, 0.2) 100%), url(${backgroundImage})`;
 
 const useStyles = makeStyles((theme: Theme) => ({
