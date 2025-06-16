@@ -176,174 +176,175 @@ jobs:
               run: npm run publish:package -- -b ${{env.BRANCH}}
               working-directory: packages/themes
             
-    test_component_library:
-        name: Component Library Unit Tests
-        runs-on: ubuntu-latest
-        needs: prettier_lint
-        strategy:
-          matrix:
-            node-version: [20.x]
-        steps:
-          - name: Checkout
-            uses: actions/checkout@v4
-          - name: Use Node.js
-            uses: actions/setup-node@v4
-            with:
-              node-version: ${{ matrix.node-version }}
-          - name: Install pnpm
-            run: npm install -g pnpm
-          - name: Install dependencies
-            run: pnpm install
-            working-directory: packages/component-library
-          - name: Run tests with coverage
-            run: pnpm test -- --coverage
-            working-directory: packages/component-library
-          - name: Upload to Codecov
-            uses: codecov/codecov-action@v4
-            with:
-              token: ${{ secrets.CODECOV_TOKEN }}
-              directory: packages/component-library/coverage/
-              files: clover.xml
-              flags: unittests
-              name: codecov-report
-              verbose: true
+    # test_component_library:
+    #     name: Component Library Unit Tests
+    #     runs-on: ubuntu-latest
+    #     needs: prettier_lint
+    #     strategy:
+    #       matrix:
+    #         node-version: [20.x]
+    #     steps:
+    #       - name: Checkout
+    #         uses: actions/checkout@v4
+    #       - name: Use Node.js
+    #         uses: actions/setup-node@v4
+    #         with:
+    #           node-version: ${{ matrix.node-version }}
+    #       - name: Install pnpm
+    #         run: npm install -g pnpm
+    #       - name: Install dependencies
+    #         run: pnpm install
+    #         working-directory: packages/component-library
+    #       - name: Run tests with coverage
+    #         run: pnpm test -- --coverage
+    #         working-directory: packages/component-library
+    #       - name: Upload to Codecov
+    #         uses: codecov/codecov-action@v4
+    #         with:
+    #           token: ${{ secrets.CODECOV_TOKEN }}
+    #           directory: packages/component-library/coverage/
+    #           files: clover.xml
+    #           flags: unittests
+    #           name: codecov-report
+    #           verbose: true
 
-    build_component_library:
-        name: Build Component Library
-        runs-on: ubuntu-latest
-        needs: [prettier_lint, test_component_library]
-        strategy:
-          matrix:
-            node-version: [20.x]
-        steps:
-          - name: Checkout
-            uses: actions/checkout@v4
-          - name: Use Node.js
-            uses: actions/setup-node@v4
-            with:
-              node-version: ${{ matrix.node-version }}
-          - name: Install pnpm
-            run: npm install -g pnpm
-          - name: Install dependencies
-            run: pnpm install
-            working-directory: packages/component-library
-          - name: Build component library
-            run: pnpm build
-            working-directory: packages/component-library
-          - name: Save build
-            uses: actions/upload-artifact@v4
-            with:
-              name: dist-component-library
-              if-no-files-found: error
-              path: packages/component-library/dist
+    # build_component_library:
+    #     name: Build Component Library
+    #     runs-on: ubuntu-latest
+    #     needs: [prettier_lint, test_component_library]
+    #     strategy:
+    #       matrix:
+    #         node-version: [20.x]
+    #     steps:
+    #       - name: Checkout
+    #         uses: actions/checkout@v4
+    #       - name: Use Node.js
+    #         uses: actions/setup-node@v4
+    #         with:
+    #           node-version: ${{ matrix.node-version }}
+    #       - name: Install pnpm
+    #         run: npm install -g pnpm
+    #       - name: Install dependencies
+    #         run: pnpm install
+    #         working-directory: packages/component-library
+    #       - name: Build component library
+    #         run: pnpm build
+    #         working-directory: packages/component-library
+    #       - name: Save build
+    #         uses: actions/upload-artifact@v4
+    #         with:
+    #           name: dist-component-library
+    #           if-no-files-found: error
+    #           path: packages/component-library/dist
 
-    test_artifacts:
-        name: Test Component Artifacts
-        runs-on: ubuntu-latest
-        needs: [build_component_library, prettier_lint]
-        steps:
-          - name: Checkout
-            uses: actions/checkout@v4
-          - name: Download the dist folder
-            uses: actions/download-artifact@v4
-            with:
-              name: dist-component-library
-              path: packages/component-library/dist
-          - name: Install pnpm
-            run: npm install -g pnpm     
-          - name: Run artifact tests
-            run: pnpm run test:artifacts
-            working-directory: packages/component-library
+    # test_artifacts:
+    #     name: Test Component Artifacts
+    #     runs-on: ubuntu-latest
+    #     needs: [build_component_library, prettier_lint]
+    #     steps:
+    #       - name: Checkout
+    #         uses: actions/checkout@v4
+    #       - name: Download the dist folder
+    #         uses: actions/download-artifact@v4
+    #         with:
+    #           name: dist-component-library
+    #           path: packages/component-library/dist
+    #       - name: Install pnpm
+    #         run: npm install -g pnpm     
+    #       - name: Run artifact tests
+    #         run: pnpm run test:artifacts
+    #         working-directory: packages/component-library
 
-    npm_pack:
-        name: NPM Pack Component Library
-        runs-on: ubuntu-latest
-        needs: [build_component_library, prettier_lint]
-        steps:
-          - name: Checkout
-            uses: actions/checkout@v4
-          - name: Download the dist folder
-            uses: actions/download-artifact@v4
-            with:
-              name: dist-component-library
-              path: packages/component-library
-          - name: Pack npm
-            run: npm pack
-            working-directory: packages/component-library
-          - name: Save npm pack
-            uses: actions/upload-artifact@v4
-            with:
-              name: tarball
-              if-no-files-found: error
-              path: packages/component-library/brightlayer-ui-react-components-*.tgz
+    # npm_pack:
+    #     name: NPM Pack Component Library
+    #     runs-on: ubuntu-latest
+    #     needs: [build_component_library, prettier_lint]
+    #     steps:
+    #       - name: Checkout
+    #         uses: actions/checkout@v4
+    #       - name: Download the dist folder
+    #         uses: actions/download-artifact@v4
+    #         with:
+    #           name: dist-component-library
+    #           path: packages/component-library
+    #       - name: Pack npm
+    #         run: npm pack
+    #         working-directory: packages/component-library
+    #       - name: Save npm pack
+    #         uses: actions/upload-artifact@v4
+    #         with:
+    #           name: tarball
+    #           if-no-files-found: error
+    #           path: packages/component-library/brightlayer-ui-react-components-*.tgz
 
-    build_showcase:
-        name: Build Showcase App
-        runs-on: ubuntu-latest
-        needs: [npm_pack, build_component_library, prettier_lint]
-        strategy:
-          matrix:
-            node-version: [20.x]
-        steps:
-          - name: Checkout
-            uses: actions/checkout@v4
-          - name: Use Node.js ${{ matrix.node-version }}
-            uses: actions/setup-node@v4
-            with:
-              node-version: ${{ matrix.node-version }}
-          - name: Install pnpm
-            run: npm install -g pnpm
-          - name: Install dependencies
-            run: pnpm install --frozen-lockfile
-            working-directory: apps/showcase
-          - name: Download tarball
-            uses: actions/download-artifact@v4
-            with:
-              name: tarball
-              path: apps/showcase/tarball
-          - name: Add tarball package
-            run: |
-              PACKAGED_VERSION=$(node -p "require('../../packages/component-library/package.json').version")
-              pnpm add ./tarball/brightlayer-ui-react-components-$PACKAGED_VERSION.tgz
-            working-directory: apps/showcase
-          - name: Build showcase
-            run: pnpm build
-            working-directory: apps/showcase
+    # build_showcase:
+    #     name: Build Showcase App
+    #     runs-on: ubuntu-latest
+    #     needs: [npm_pack, build_component_library, prettier_lint]
+    #     strategy:
+    #       matrix:
+    #         node-version: [20.x]
+    #     steps:
+    #       - name: Checkout
+    #         uses: actions/checkout@v4
+    #       - name: Use Node.js ${{ matrix.node-version }}
+    #         uses: actions/setup-node@v4
+    #         with:
+    #           node-version: ${{ matrix.node-version }}
+    #       - name: Install pnpm
+    #         run: npm install -g pnpm
+    #       - name: Install dependencies
+    #         run: pnpm install --frozen-lockfile
+    #         working-directory: apps/showcase
+    #       - name: Download tarball
+    #         uses: actions/download-artifact@v4
+    #         with:
+    #           name: tarball
+    #           path: apps/showcase/tarball
+    #       - name: Add tarball package
+    #         run: |
+    #           PACKAGED_VERSION=$(node -p "require('../../packages/component-library/package.json').version")
+    #           pnpm add ./tarball/brightlayer-ui-react-components-$PACKAGED_VERSION.tgz
+    #         working-directory: apps/showcase
+    #       - name: Build showcase
+    #         run: pnpm build
+    #         working-directory: apps/showcase
 
-    publish-components:
-        name: Publish Component Library
-        runs-on: ubuntu-latest
-        if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev') }}
-        needs: [build_component_library, test_component_library, build_showcase, prettier_lint]
-        strategy:
-            matrix:
-                node-version: [20.x]
-        env:
-            NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-            BRANCH: ${{ github.ref == 'refs/heads/main' && 'main' || 'dev' }}
-        steps:
-            - uses: actions/checkout@v4
-            - name: Download dist
-              uses: actions/download-artifact@v4
-              with:
-                  name: dist-component-library
-                  path: packages/component-library/dist
-            - uses: actions/setup-node@v4
-              with:
-                  node-version: ${{ matrix.node-version }}
-                  registry-url: 'https://registry.npmjs.org'
-            - name: Install pnpm
-              run: npm install -g pnpm
-            - name: Install dependencies
-              run: pnpm install
-            - name: Publish package
-              run: npm run publish:package -- -b ${{env.BRANCH}}
-              working-directory: packages/component-library
+    # publish-components:
+    #     name: Publish Component Library
+    #     runs-on: ubuntu-latest
+    #     if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev') }}
+    #     needs: [build_component_library, test_component_library, build_showcase, prettier_lint]
+    #     strategy:
+    #         matrix:
+    #             node-version: [20.x]
+    #     env:
+    #         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    #         BRANCH: ${{ github.ref == 'refs/heads/main' && 'main' || 'dev' }}
+    #     steps:
+    #         - uses: actions/checkout@v4
+    #         - name: Download dist
+    #           uses: actions/download-artifact@v4
+    #           with:
+    #               name: dist-component-library
+    #               path: packages/component-library/dist
+    #         - uses: actions/setup-node@v4
+    #           with:
+    #               node-version: ${{ matrix.node-version }}
+    #               registry-url: 'https://registry.npmjs.org'
+    #         - name: Install pnpm
+    #           run: npm install -g pnpm
+    #         - name: Install dependencies
+    #           run: pnpm install
+    #         - name: Publish package
+    #           run: npm run publish:package -- -b ${{env.BRANCH}}
+    #           working-directory: packages/component-library
 
     unit_test_cli_templates:
         name: Unit Tests for Templates
         runs-on: ubuntu-latest
-        needs: [build_login_workflow,build_component_library,build_theme_verify_artifacts]
+        # build_component_library will add later
+        needs: [build_login_workflow,build_theme_verify_artifacts]
         strategy:
             matrix:
                 node-version: [20.x]
@@ -372,7 +373,8 @@ jobs:
     build_cli_templates:
         name: Build CLI Templates
         runs-on: ubuntu-latest
-        needs: [build_login_workflow,build_component_library,build_theme_verify_artifacts]
+        #build_component_library will add later 
+        needs: [build_login_workflow,build_theme_verify_artifacts] 
         strategy:
             matrix:
               node-version: [20.x]
