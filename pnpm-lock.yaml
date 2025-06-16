@@ -61,7 +61,7 @@ importers:
         version: link:../../packages/component-library/dist
       '@brightlayer-ui/react-themes':
         specifier: workspace:^
-        version: link:../../packages/themes/dist
+        version: link:../../packages/themes
       '@emotion/css':
         specifier: ^11.13.0
         version: 11.13.5
@@ -387,7 +387,7 @@ importers:
         version: 2.1.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@brightlayer-ui/react-themes':
         specifier: workspace:^
-        version: link:../../packages/themes/dist
+        version: link:../../packages/themes
       '@date-io/date-fns':
         specifier: ^2.13.1
         version: 2.17.0(date-fns@2.30.0)
@@ -601,7 +601,7 @@ importers:
         version: link:../../../packages/component-library/dist
       '@brightlayer-ui/react-themes':
         specifier: workspace:^
-        version: link:../../../packages/themes/dist
+        version: link:../../../packages/themes
       '@emotion/react':
         specifier: ^11.7.1
         version: 11.14.0(@types/react@18.3.23)(react@18.3.1)
@@ -722,7 +722,7 @@ importers:
         version: link:../../../packages/component-library/dist
       '@brightlayer-ui/react-themes':
         specifier: workspace:^
-        version: link:../../../packages/themes/dist
+        version: link:../../../packages/themes
       '@emotion/react':
         specifier: ^11.7.1
         version: 11.14.0(@types/react@18.3.23)(react@18.3.1)
@@ -1097,7 +1097,7 @@ importers:
         version: link:dist
       '@brightlayer-ui/react-themes':
         specifier: workspace:^
-        version: link:../themes/dist
+        version: link:../themes
       '@emotion/react':
         specifier: ^11.10.5
         version: 11.14.0(@types/react@18.3.23)(react@18.3.1)
@@ -1242,7 +1242,7 @@ importers:
         version: 'link:'
       '@brightlayer-ui/react-themes':
         specifier: workspace:^
-        version: link:../../themes/dist
+        version: link:../../themes
       '@emotion/react':
         specifier: ^11.10.5
         version: 11.14.0(@types/react@18.3.23)(react@18.3.1)
@@ -1381,7 +1381,7 @@ importers:
         version: link:../component-library/dist
       '@brightlayer-ui/react-themes':
         specifier: workspace:^
-        version: link:../themes/dist
+        version: link:../themes
       '@emotion/css':
         specifier: ^11.9.0
         version: 11.13.5
@@ -1513,8 +1513,8 @@ importers:
         specifier: ^5.0.3
         version: 5.2.5
       color:
-        specifier: ^5.0.0
-        version: 5.0.0
+        specifier: ^4.0.0
+        version: 4.2.3
     devDependencies:
       '@mui/material':
         specifier: ^6.0.0
