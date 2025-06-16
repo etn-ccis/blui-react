@@ -2,7 +2,7 @@ import { createTheme } from '@mui/material/styles';
 import type {} from '@mui/material/themeCssVarsAugmentation';
 import { typography, createSimpleLightPalette as createSimplePalette, createSimpleDarkPalette } from './shared';
 import * as BLUIColors from '@brightlayer-ui/colors';
-import Color from 'color';
+import * as Color from 'color';
 import MuiAvatar from './componentStylesOverrides/MuiAvatar';
 import MuiAppBar from './componentStylesOverrides/MuiAppBar';
 import MuiBottomNavigation from './componentStylesOverrides/MuiBottomNavigation';
