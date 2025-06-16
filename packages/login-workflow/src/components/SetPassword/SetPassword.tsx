@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import React, { ChangeEvent, useState, useCallback } from 'react';
-import { CheckCircleOutlined } from '@mui/icons-material';
+import CheckCircleOutlined from '@mui/icons-material/CheckCircleOutlined';
 import { SetPasswordProps } from './types';
 import { PasswordTextField } from '../PasswordTextField';
 import { PasswordRequirements } from '../PasswordRequirements';
