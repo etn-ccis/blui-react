@@ -1,5 +1,11 @@
 # Changelog
 
+# v9.0.0 (Unreleased)
+
+### Changed
+
+- Upgraded `@mui/material` dependency to version v7.
+
 # v8.1.2 (June 16, 2025)
 
 ### Changed
