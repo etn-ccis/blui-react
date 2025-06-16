@@ -242,14 +242,13 @@ const DrawerRailItemRender: React.ForwardRefRenderFunction<unknown, DrawerRailIt
     ref: any
 ) => {
     const {
-        /* eslint-disable @typescript-eslint/no-unused-vars */
         activeItemBackgroundColor,
         activeItemFontColor,
         activeItemIconColor,
         backgroundColor,
         itemFontColor,
         itemIconColor,
-        /* eslint-enable @typescript-eslint/no-unused-vars */
+
         divider,
         ripple = true,
         className,
@@ -293,7 +292,6 @@ const DrawerRailItemRender: React.ForwardRefRenderFunction<unknown, DrawerRailIt
                 </Icon>
             );
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [icon]);
 
     const onClickAction = useCallback(

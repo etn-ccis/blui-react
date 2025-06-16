@@ -146,14 +146,12 @@ const DrawerRenderer: React.ForwardRefRenderFunction<unknown, DrawerProps> = (pr
         ripple,
         // Drawer-specific props
         activeItem,
-        classes,
         className,
         condensed,
         noLayout = false,
         open,
         openOnHover,
         openOnHoverDelay,
-        onItemSelect,
         sideBorder = false,
         variant: variantProp,
         width,
@@ -305,7 +303,6 @@ const DrawerRenderer: React.ForwardRefRenderFunction<unknown, DrawerProps> = (pr
             setPadding(variant === 'temporary' ? 0 : getDrawerWidth());
             setDrawerOpen(isDrawerOpen());
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [variant, noLayout, isDrawerOpen, getDrawerWidth]);
 
     return (

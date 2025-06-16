@@ -115,7 +115,7 @@ const DrawerRailItemPreview: PreviewComponent = ({ data }) => {
                         <DrawerNavGroup>
                             <DrawerRailItem
                                 itemID={'Custom'}
-                                icon={getIcon(icon) as JSX.Element}
+                                icon={getIcon(icon)!}
                                 onClick={(): void => {
                                     setActiveItem('Custom');
                                 }}

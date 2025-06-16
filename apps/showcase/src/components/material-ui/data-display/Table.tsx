@@ -57,7 +57,7 @@ type Order = 'asc' | 'desc';
 function getComparator<Key extends keyof any>(
     order: Order,
     orderBy: Key
-): (a: { [key in Key]: number | string }, b: { [key in Key]: number | string }) => number {
+): (a: Record<Key, number | string>, b: Record<Key, number | string>) => number {
     return order === 'desc'
         ? (a, b): number => descendingComparator(a, b, orderBy)
         : (a, b): number => -descendingComparator(a, b, orderBy);
@@ -246,7 +246,7 @@ export const TableExample: React.FC = () => {
         setSelected(newSelected);
     };
 
-    const isSelected = (name: string): boolean => selected.indexOf(name) !== -1;
+    const isSelected = (name: string): boolean => selected.includes(name);
 
     return (
         <Box

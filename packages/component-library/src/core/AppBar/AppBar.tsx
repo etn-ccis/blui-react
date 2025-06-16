@@ -207,7 +207,6 @@ const AppBarRender: React.ForwardRefRenderFunction<unknown, AppBarProps> = (prop
         else if (previousOffset > 0 && offset === 0) {
             expandToolbar();
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [offset, scrollThreshold]);
 
     // Properly update the height whenever the variant property changes
@@ -223,7 +222,6 @@ const AppBarRender: React.ForwardRefRenderFunction<unknown, AppBarProps> = (prop
                 expandToolbar();
             }
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [variant]);
 
     // Properly update the size when either height property changes
@@ -237,7 +235,6 @@ const AppBarRender: React.ForwardRefRenderFunction<unknown, AppBarProps> = (prop
         } else {
             expandToolbar();
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [collapsedHeight, expandedHeight]);
 
     // Returns the background image to apply on the app bar
@@ -269,7 +266,6 @@ const AppBarRender: React.ForwardRefRenderFunction<unknown, AppBarProps> = (prop
             setOffset(scrollTop);
             setEndScrollHandled(true);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [scrolling, offset, endScrollHandled]);
 
     // listen for animating to finish and update scroll position

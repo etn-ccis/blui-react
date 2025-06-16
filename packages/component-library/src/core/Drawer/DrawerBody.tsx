@@ -60,7 +60,6 @@ const DrawerBodyRender: React.ForwardRefRenderFunction<unknown, DrawerBodyProps>
         nestedDivider,
         ripple,
         // DrawerBody-specific props
-        classes,
         children: bodyChildren,
         // Other props
         ...otherProps

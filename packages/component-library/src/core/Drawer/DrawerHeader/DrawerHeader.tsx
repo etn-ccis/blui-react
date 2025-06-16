@@ -177,7 +177,6 @@ const DrawerHeaderRender: React.ForwardRefRenderFunction<unknown, DrawerHeaderPr
     const generatedClasses = useUtilityClasses(props);
     const {
         backgroundImage,
-        classes,
         divider,
         icon,
         onIconClick,
@@ -185,13 +184,13 @@ const DrawerHeaderRender: React.ForwardRefRenderFunction<unknown, DrawerHeaderPr
         title,
         titleContent,
         // ignore unused vars so that we can do prop transferring to the root element
-        /* eslint-disable @typescript-eslint/no-unused-vars */
+
         backgroundColor,
         backgroundOpacity,
         fontColor,
         disableGutters = true,
         sx,
-        /* eslint-enable @typescript-eslint/no-unused-vars */
+
         ...otherToolbarProps
     } = props;
 

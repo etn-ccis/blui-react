@@ -64,49 +64,73 @@ const Headline: React.FC<HeadlineType> = ({
 );
 
 export const componentsMap = {
-    h1: (props: TypographyProps): JSX.Element => (
-        <Headline
-            className={'markdownH1'}
-            style={{ marginBottom: 32, hyphens: 'auto' }}
-            hash={getHash(props.children?.toString() || 'h1')}
-            TypographyProps={{ variant: 'h4', ...props }}
-        />
-    ),
-    h2: (props: TypographyProps): JSX.Element => (
-        <Headline
-            style={{ marginTop: 64, marginBottom: 16 }}
-            hash={getHash(props.children?.toString() || 'h2')}
-            TypographyProps={{ variant: 'h6', ...props }}
-        />
-    ),
-    h3: (props: TypographyProps): JSX.Element => (
-        <Headline
-            style={{ marginTop: 32, marginBottom: 16 }}
-            hash={getHash(props.children?.toString() || 'h3')}
-            TypographyProps={{ variant: 'body1', style: { fontWeight: 600 }, ...props }}
-        />
-    ),
-    h4: (props: TypographyProps): JSX.Element => (
-        <Headline
-            style={{ marginTop: 16 }}
-            hash={getHash(props.children?.toString() || 'h4')}
-            TypographyProps={{ variant: 'subtitle1', ...props }}
-        />
-    ),
-    h5: (props: TypographyProps): JSX.Element => (
-        <Headline
-            style={{ marginTop: 8 }}
-            hash={getHash(props.children?.toString() || 'h5')}
-            TypographyProps={{ variant: 'body2', ...props }}
-        />
-    ),
-    h6: (props: TypographyProps): JSX.Element => (
-        <Headline
-            style={{ marginTop: 8, fontSize: '0.75rem' }}
-            hash={getHash(props.children?.toString() || 'h6')}
-            TypographyProps={{ variant: 'body2', ...props }}
-        />
-    ),
+    h1: (props: TypographyProps): JSX.Element => {
+        const { children } = props;
+
+        return (
+            <Headline
+                className={'markdownH1'}
+                style={{ marginBottom: 32, hyphens: 'auto' }}
+                hash={getHash(children?.toString() || 'h1')}
+                TypographyProps={{ variant: 'h4', ...props }}
+            />
+        );
+    },
+    h2: (props: TypographyProps): JSX.Element => {
+        const { children } = props;
+
+        return (
+            <Headline
+                style={{ marginTop: 64, marginBottom: 16 }}
+                hash={getHash(children?.toString() || 'h2')}
+                TypographyProps={{ variant: 'h6', ...props }}
+            />
+        );
+    },
+    h3: (props: TypographyProps): JSX.Element => {
+        const { children } = props;
+
+        return (
+            <Headline
+                style={{ marginTop: 32, marginBottom: 16 }}
+                hash={getHash(children?.toString() || 'h3')}
+                TypographyProps={{ variant: 'body1', style: { fontWeight: 600 }, ...props }}
+            />
+        );
+    },
+    h4: (props: TypographyProps): JSX.Element => {
+        const { children } = props;
+
+        return (
+            <Headline
+                style={{ marginTop: 16 }}
+                hash={getHash(children?.toString() || 'h4')}
+                TypographyProps={{ variant: 'subtitle1', ...props }}
+            />
+        );
+    },
+    h5: (props: TypographyProps): JSX.Element => {
+        const { children } = props;
+
+        return (
+            <Headline
+                style={{ marginTop: 8 }}
+                hash={getHash(children?.toString() || 'h5')}
+                TypographyProps={{ variant: 'body2', ...props }}
+            />
+        );
+    },
+    h6: (props: TypographyProps): JSX.Element => {
+        const { children } = props;
+
+        return (
+            <Headline
+                style={{ marginTop: 8, fontSize: '0.75rem' }}
+                hash={getHash(children?.toString() || 'h6')}
+                TypographyProps={{ variant: 'body2', ...props }}
+            />
+        );
+    },
     a: (props: React.LinkHTMLAttributes<HTMLLinkElement>): JSX.Element => {
         let tProps;
         if (props.href && (props.href.match(/^http/gi) || props.href.match(/^mailto/gi))) {
