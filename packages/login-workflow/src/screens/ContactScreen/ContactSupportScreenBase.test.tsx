@@ -2,7 +2,7 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import { render, cleanup, screen, fireEvent } from '@testing-library/react';
 import { ContactSupportScreenBase } from './ContactSupportScreenBase';
-import { ChatBubbleOutline } from '@mui/icons-material';
+import ChatBubbleOutline from '@mui/icons-material/ChatBubbleOutline';
 import Typography from '@mui/material/Typography';
 
 afterEach(cleanup);

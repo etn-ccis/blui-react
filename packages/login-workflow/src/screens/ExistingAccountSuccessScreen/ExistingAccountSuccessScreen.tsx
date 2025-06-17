@@ -1,5 +1,5 @@
 import React from 'react';
-import { Person } from '@mui/icons-material';
+import Person from '@mui/icons-material/Person';
 import { useRegistrationContext } from '../../contexts';
 import { SuccessScreenBase, SuccessScreenProps } from '../SuccessScreen';
 import { useTranslation } from 'react-i18next';

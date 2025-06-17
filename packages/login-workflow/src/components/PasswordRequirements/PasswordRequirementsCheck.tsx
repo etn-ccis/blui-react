@@ -1,6 +1,6 @@
 import React from 'react';
 import Typography from '@mui/material/Typography';
-import { Check } from '@mui/icons-material';
+import Check from '@mui/icons-material/Check';
 import Box from '@mui/material/Box';
 import { PasswordRequirementsCheckProps } from './types';
 

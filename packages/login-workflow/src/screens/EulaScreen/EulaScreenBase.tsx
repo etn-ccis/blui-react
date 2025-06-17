@@ -13,7 +13,7 @@ import Box from '@mui/material/Box';
 import DOMPurify from 'dompurify';
 import ErrorManager from '../../components/Error/ErrorManager';
 import { Typography } from '@mui/material';
-import { ReplaySharp } from '@mui/icons-material';
+import ReplaySharp from '@mui/icons-material/ReplaySharp';
 import { useTranslation } from 'react-i18next';
 
 /**
