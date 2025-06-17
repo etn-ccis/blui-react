@@ -108,18 +108,7 @@ const ChannelValueRender: React.ForwardRefRenderFunction<unknown, ChannelValuePr
     props: ChannelValueProps,
     ref: any
 ) => {
-    const {
-        classes,
-        className: userClassName,
-        icon,
-        prefix,
-        units,
-        unitSpace,
-        value,
-        color,
-        fontSize,
-        ...otherProps
-    } = props;
+    const { className: userClassName, icon, prefix, units, unitSpace, value, color, fontSize, ...otherProps } = props;
     const generatedClasses = useUtilityClasses(props);
 
     const applyPrefix = useCallback(

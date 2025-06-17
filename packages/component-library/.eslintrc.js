@@ -13,6 +13,10 @@ module.exports = {
         '@typescript-eslint/no-empty-function': 'off',
         '@typescript-eslint/no-unused-vars': ['error', { ignoreRestSiblings: true }],
         'no-empty-function': 'off',
+        '@typescript-eslint/ban-types': 'off',
+        '@typescript-eslint/no-empty-interface': 'off',
+        '@typescript-eslint/prefer-find': 'off',
+        '@typescript-eslint/no-base-to-string': 'off',
         '@typescript-eslint/naming-convention': [
             'error',
             {

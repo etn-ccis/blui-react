@@ -9,7 +9,7 @@
     "scripts": {
         "test": "jest --maxWorkers=50%",
         "test:ci": "jest",
-        "build": "tsc --p tsconfig.lib.json && cp -r src/assets/. dist/assets && cp -r src/index.css dist/index.css && tsc-esm-fix dist",
+        "build": "tsc --p tsconfig.lib.json && cp -r src/assets/. dist/assets && cp -r src/index.css dist/index.css && tsc-esm-fix dist && node ./scripts/fix-import.js",
         "publish:package": "set npm_config_yes=true && npx -p @brightlayer-ui/publish blui-publish",
         "tag:package": "npx -p @brightlayer-ui/tag blui-tag -s -blui-react-auth-workflow",
         "generate:licenses": "npm-license-crawler -onlyDirectDependencies -json LICENSES.json",
@@ -131,7 +131,9 @@
         ],
         "moduleNameMapper": {
             "\\.(jpg|ico|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
-            "\\.(css|less)$": "<rootDir>/__mocks__/fileMock.js"
+            "\\.(css|less)$": "<rootDir>/__mocks__/fileMock.js",
+            "^@brightlayer-ui/react-components$": "<rootDir>/../component-library/dist/index.js",
+            "^@brightlayer-ui/react-themes$": "<rootDir>/../themes/dist/index.js"
         },
         "transformIgnorePatterns": [
             "/!node_modules\\/lodash-es/"

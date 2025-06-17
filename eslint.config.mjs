@@ -19,6 +19,10 @@ export default [
             '@typescript-eslint/prefer-nullish-coalescing': 'off',
             '@typescript-eslint/no-unnecessary-type-assertion': 'off',
             '@typescript-eslint/no-unnecessary-type-arguments': 'off',
+            '@typescript-eslint/ban-types': 'off',
+            '@typescript-eslint/no-empty-interface': 'off',
+            '@typescript-eslint/no-base-to-string': 'off',
+            '@typescript-eslint/prefer-find': 'off',
         },
     },
     {
@@ -26,6 +30,7 @@ export default [
         rules: {
             '@typescript-eslint/no-empty-function': 'off',
             'no-empty-function': 'off',
+            'no-empty-object-type': 'off',
             'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
             'react-hooks/exhaustive-deps': 'warn', // Checks effect dependencies
             '@typescript-eslint/naming-convention': [

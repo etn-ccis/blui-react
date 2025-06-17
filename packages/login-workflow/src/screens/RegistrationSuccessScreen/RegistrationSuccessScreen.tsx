@@ -1,7 +1,7 @@
 import React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import Typography from '@mui/material/Typography';
-import { CheckCircle } from '@mui/icons-material';
+import CheckCircle from '@mui/icons-material/CheckCircle';
 import { SuccessScreenBase, SuccessScreenProps } from '..';
 import { useRegistrationWorkflowContext, useRegistrationContext } from '../../contexts';
 
