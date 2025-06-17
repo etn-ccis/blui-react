@@ -5,9 +5,7 @@ export default {
         '^.+\\.tsx?$': 'ts-jest',
         // process `*.tsx` files with `ts-jest`
     },
-    transformIgnorePatterns: [
-        '/node_modules/(?!@mui|@brightlayer-ui)',
-    ],
+    transformIgnorePatterns: ['/node_modules/(?!@mui|@brightlayer-ui)'],
     moduleNameMapper: {
         '\\.(gif|ttf|eot|svg|png)$': '<rootDir>/test/__mocks__/fileMock.js',
     },
