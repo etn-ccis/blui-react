@@ -36,12 +36,11 @@ const Root = styled(
 }));
 
 const HeroBannerRender: React.ForwardRefRenderFunction<unknown, HeroBannerProps> = (
-    props: HeroBannerProps,
+    { className: userClassName, divider = false, limit = 4, classes = {}, ...otherProps }: HeroBannerProps,
     ref: any
 ) => {
-    const { className: userClassName, divider, limit, ...otherProps } = props;
-    const generatedClasses = useUtilityClasses(props);
-    const isArray = Array.isArray(props.children);
+    const generatedClasses = useUtilityClasses({ ...otherProps, classes, divider, limit });
+    const isArray = Array.isArray(otherProps.children);
     return (
         <>
             <Root
@@ -50,10 +49,10 @@ const HeroBannerRender: React.ForwardRefRenderFunction<unknown, HeroBannerProps>
                 className={cx(generatedClasses.root, userClassName)}
                 {...otherProps}
             >
-                {props.children &&
+                {otherProps.children &&
                     isArray &&
-                    (props.children as React.ReactNode[]).slice(0, limit).map((child: any) => child)}
-                {props.children && !isArray && <>{props.children}</>}
+                    (otherProps.children as React.ReactNode[]).slice(0, limit).map((child: any) => child)}
+                {otherProps.children && !isArray && <>{otherProps.children}</>}
             </Root>
             {divider && <Divider />}
         </>
@@ -73,9 +72,4 @@ HeroBanner.propTypes = {
     }),
     divider: PropTypes.bool,
     limit: PropTypes.number,
-};
-HeroBanner.defaultProps = {
-    classes: {},
-    divider: false,
-    limit: 4,
 };

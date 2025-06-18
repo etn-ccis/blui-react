@@ -171,11 +171,24 @@ const NonClickableIcon = styled(
 }));
 
 const DrawerHeaderRender: React.ForwardRefRenderFunction<unknown, DrawerHeaderProps> = (
-    props: DrawerHeaderProps,
+    {
+        backgroundImage,
+        divider = false,
+        icon,
+        onIconClick,
+        subtitle,
+        title,
+        titleContent,
+        backgroundColor,
+        backgroundOpacity = 0.3,
+        fontColor,
+        disableGutters = true,
+        sx,
+        ...otherToolbarProps
+    }: DrawerHeaderProps,
     ref: any
 ) => {
-    const generatedClasses = useUtilityClasses(props);
-    const {
+    const generatedClasses = useUtilityClasses({
         backgroundImage,
         divider,
         icon,
@@ -183,16 +196,13 @@ const DrawerHeaderRender: React.ForwardRefRenderFunction<unknown, DrawerHeaderPr
         subtitle,
         title,
         titleContent,
-        // ignore unused vars so that we can do prop transferring to the root element
-
         backgroundColor,
         backgroundOpacity,
         fontColor,
-        disableGutters = true,
+        disableGutters,
         sx,
-
-        ...otherToolbarProps
-    } = props;
+        ...otherToolbarProps,
+    });
 
     const { variant = 'persistent', condensed = false } = useDrawerContext();
 
@@ -287,11 +297,7 @@ const DrawerHeaderRender: React.ForwardRefRenderFunction<unknown, DrawerHeaderPr
 export const DrawerHeader = forwardRef(DrawerHeaderRender);
 
 DrawerHeader.displayName = 'DrawerHeader';
-DrawerHeader.defaultProps = {
-    backgroundOpacity: 0.3,
-    classes: {},
-    divider: false,
-};
+
 DrawerHeader.propTypes = {
     backgroundColor: PropTypes.string,
     backgroundImage: PropTypes.string,

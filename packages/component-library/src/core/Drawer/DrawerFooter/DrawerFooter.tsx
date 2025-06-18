@@ -57,19 +57,18 @@ const DrawerFooterRender: React.ForwardRefRenderFunction<unknown, DrawerFooterPr
     props: DrawerFooterProps,
     ref: any
 ) => {
-    const generatedClasses = useUtilityClasses(props);
+    const { classes = {}, divider = true, hideContentOnCollapse = true, ...restProps } = props;
+
+    const generatedClasses = useUtilityClasses({ ...props, classes });
     const {
         className: userClassName,
         children,
-        divider = true,
         // ignore unused vars so that we can do prop transferring to the root element
 
         backgroundColor,
-
-        hideContentOnCollapse,
         sx,
         ...otherProps
-    } = props;
+    } = restProps;
     const { open: drawerOpen = true } = useDrawerContext();
     return (
         <>
@@ -107,9 +106,4 @@ DrawerFooter.propTypes = {
     backgroundColor: PropTypes.string,
     divider: PropTypes.bool,
     hideContentOnCollapse: PropTypes.bool,
-};
-DrawerFooter.defaultProps = {
-    classes: {},
-    divider: true,
-    hideContentOnCollapse: true,
 };

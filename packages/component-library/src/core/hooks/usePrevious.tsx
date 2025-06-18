@@ -2,6 +2,7 @@ import { useRef, useEffect } from 'react';
 
 /* eslint-disable @typescript-eslint/no-empty-object-type */
 export const usePrevious = <T extends {}>(value: T): T | undefined => {
+    // @ts-ignore
     const ref = useRef<T>();
 
     // Store current value in ref
