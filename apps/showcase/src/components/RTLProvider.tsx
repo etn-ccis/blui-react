@@ -30,9 +30,7 @@ export const RTLThemeProvider = (props: any): JSX.Element => {
 
     return (
         <ThemeProvider theme={{ ...blueThemes, direction: dir }} defaultMode="light">
-            <CacheProvider value={dir === 'ltr' ? cacheLtr : cacheRtl}>
-                {props.children}
-            </CacheProvider>
+            <CacheProvider value={dir === 'ltr' ? cacheLtr : cacheRtl}>{props.children}</CacheProvider>
         </ThemeProvider>
     );
 };
