@@ -1,6 +1,6 @@
 import { BLUIColors } from '@brightlayer-ui/colors';
 import { Components, CssVarsTheme, Theme } from '@mui/material/styles';
-import * as Color from 'color';
+import Color from 'color';
 
 export default {
     styleOverrides: {
