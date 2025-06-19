@@ -48,9 +48,6 @@ export default {
             }),
             '&.Mui-disabled': {
                 backgroundColor: theme.vars.palette.primary.main,
-                ...theme.applyStyles('dark', {
-                    backgroundColor: theme.vars.palette.primary.main,
-                }),
             },
         }),
         thumbColorSecondary: ({ theme }) => ({

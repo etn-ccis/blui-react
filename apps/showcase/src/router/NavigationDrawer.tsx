@@ -38,8 +38,7 @@ export const NavigationDrawer: React.FC = () => {
 
     const createNavItems = useCallback((navData: SimpleNavItem[], parentUrl: string, depth: number): NavItem[] => {
         const convertedItems: NavItem[] = [];
-        for (let i = 0; i < navData.length; i++) {
-            const item = navData[i];
+        for (const item of navData) {
             if (item.hidden) {
                 continue;
             }
