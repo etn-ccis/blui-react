@@ -353,8 +353,6 @@ jobs:
             uses: actions/setup-node@v4
             with:
               node-version: ${{ matrix.node-version }}
-          - name: Install pnpm
-            run: pnpm install -g pnpm
           - name: Install dependencies
             run: pnpm install
             working-directory: apps/design-patterns
