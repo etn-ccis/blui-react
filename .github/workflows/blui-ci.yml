@@ -338,3 +338,67 @@ jobs:
             - name: Publish package
               run: npm run publish:package -- -b ${{env.BRANCH}}
               working-directory: packages/component-library
+
+    test_design_patterns:
+        name: Design Patterns Unit Tests
+        runs-on: ubuntu-latest
+        needs: prettier_lint
+        strategy:
+            matrix:
+                node-version: [20.x]
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+            - name: Use Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ matrix.node-version }}
+            - name: Install pnpm
+              run: npm install -g pnpm
+            - name: Install dependencies
+              run: pnpm install
+              working-directory: packages/design-patterns
+            - name: Run tests with coverage
+              run: pnpm test -- --coverage
+              working-directory: packages/design-patterns
+            - name: Run tests with coverage
+              run: pnpm test -- --coverage
+              working-directory: packages/design-patterns
+            - name: Upload to Codecov
+              uses: codecov/codecov-action@v4
+              with:
+                  token: ${{ secrets.CODECOV_TOKEN }}
+                  directory: packages/design-patterns/coverage/
+                  files: clover.xml
+                  flags: unittests
+                  name: codecov-report
+                  verbose: true
+
+    build_design_patterns:
+        name: Build Design Patterns
+        runs-on: ubuntu-latest
+        needs: [prettier_lint, test_design_patterns:]
+        strategy:
+            matrix:
+                node-version: [20.x]
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+            - name: Use Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ matrix.node-version }}
+            - name: Install pnpm
+              run: npm install -g pnpm
+            - name: Install dependencies
+              run: pnpm install
+              working-directory: packages/design-patterns
+            - name: Build component library
+              run: pnpm build
+              working-directory: packages/design-patterns
+            - name: Save build
+              uses: actions/upload-artifact@v4
+              with:
+                  name: dist-design-patterns
+                  if-no-files-found: error
+                  path: packages/design-patterns/dist
