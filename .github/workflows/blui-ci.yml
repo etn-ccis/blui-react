@@ -338,7 +338,7 @@ jobs:
             - name: Publish package
               run: npm run publish:package -- -b ${{env.BRANCH}}
               working-directory: packages/component-library
-    test-design-patterns:
+
         name: Test Design Patterns
         runs-on: ubuntu-latest
         needs: prettier_lint
