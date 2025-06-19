@@ -340,31 +340,22 @@ jobs:
               working-directory: packages/component-library
 
     test_design_patterns:
-        name: Design Patterns Tests
+        name: Test Design Patterns
         runs-on: ubuntu-latest
         needs: prettier_lint
         strategy:
-          matrix:
-            node-version: [20.x]
+            matrix:
+                node-version: [20.x]
+
         steps:
-          - name: Checkout
-            uses: actions/checkout@v4
-          - name: Use Node.js
-            uses: actions/setup-node@v4
-            with:
-              node-version: ${{ matrix.node-version }}
-          - name: Install dependencies
-            run: pnpm install
-            working-directory: apps/design-patterns
-          - name: Run tests with coverage
-            run: pnpm test -- --coverage
-            working-directory: apps/design-patterns
-          - name: Upload to Codecov
-            uses: codecov/codecov-action@v4
-            with:
-              token: ${{ secrets.CODECOV_TOKEN }}
-              directory: apps/design-patterns/coverage/
-              files: clover.xml
-              flags: unittests
-              name: codecov-report
-              verbose: true
+            - uses: actions/checkout@v4
+            - name: Use Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ matrix.node-version }}
+            - name: Install pnpm
+              run: npm install -g pnpm
+            - run: pnpm install --frozen-lockfile
+            - name: Run tests
+              working-directory: apps/design-patterns
+              run: pnpm test
