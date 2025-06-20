@@ -109,10 +109,24 @@ export type ToolbarMenuProps = Omit<TypographyProps, 'onClick'> & {
 };
 
 const ToolbarMenuRenderer: React.ForwardRefRenderFunction<unknown, ToolbarMenuProps> = (
-    props: ToolbarMenuProps,
+    {
+        icon,
+        label,
+        menu,
+        menuGroups = [],
+        /* eslint-disable-next-line */
+        MenuProps = {},
+        onClose = (): void => {},
+        onOpen = (): void => {},
+        className: userClassName,
+        classes = {},
+        ...otherTypographyProps
+    }: ToolbarMenuProps,
     ref: any
 ) => {
-    const {
+    const theme = useTheme();
+    const rtl = theme.direction === 'rtl';
+    const generatedClasses = useUtilityClasses({
         icon,
         label,
         menu,
@@ -121,11 +135,9 @@ const ToolbarMenuRenderer: React.ForwardRefRenderFunction<unknown, ToolbarMenuPr
         onClose,
         onOpen,
         className: userClassName,
-        ...otherTypographyProps
-    } = props;
-    const theme = useTheme();
-    const rtl = theme.direction === 'rtl';
-    const generatedClasses = useUtilityClasses(props);
+        classes,
+        ...otherTypographyProps,
+    });
     const [anchorEl, setAnchorEl] = useState(null);
     const anchor = useRef(null);
 
@@ -287,12 +299,4 @@ ToolbarMenu.propTypes = {
     MenuProps: PropTypes.object,
     onClose: PropTypes.func,
     onOpen: PropTypes.func,
-};
-
-ToolbarMenu.defaultProps = {
-    classes: {},
-    menuGroups: [],
-    MenuProps: {},
-    onClose: (): void => {},
-    onOpen: (): void => {},
 };

@@ -122,39 +122,66 @@ export type InfoListItemProps = Omit<ListItemProps, 'title' | 'divider'> & {
     ListItemButtonProps?: Partial<MuiListItemButtonProps>;
 };
 const InfoListItemRender: React.ForwardRefRenderFunction<unknown, InfoListItemProps> = (
-    props: InfoListItemProps,
-    ref: any
-) => {
-    const generatedClasses = useUtilityClasses(props);
-    const {
-        avatar,
-        chevron,
-        className: userClassName,
-        divider,
-        hidePadding,
-        icon,
-        leftComponent,
-        rightComponent,
-        ripple,
-        subtitle,
-        subtitleSeparator,
-        info,
-        title,
-        wrapInfo,
-        wrapSubtitle,
-        wrapTitle,
+    {
+        avatar = false,
+        chevron = false,
+        dense = false,
+        hidePadding = false,
+        iconAlign = 'left',
+        ripple = false,
+        subtitleSeparator = '\u00B7',
+        wrapInfo = false,
+        wrapSubtitle = false,
+        wrapTitle = false,
+        /* eslint-disable-next-line */
+        ListItemButtonProps = {} as MuiListItemButtonProps,
         // ignore unused vars so that we can do prop transferring to the root element
-        /* eslint-disable @typescript-eslint/no-unused-vars */
         backgroundColor,
         chevronColor,
         fontColor,
-        iconAlign,
         iconColor,
         statusColor,
-        ListItemButtonProps = {} as MuiListItemButtonProps,
-        /* eslint-enable @typescript-eslint/no-unused-vars */
+        icon,
+        leftComponent,
+        rightComponent,
+        divider,
+        subtitle,
+        info,
+        title,
+        onClick,
+        className: userClassName,
         ...otherListItemProps
-    } = props;
+    }: InfoListItemProps,
+    ref: any
+) => {
+    const generatedClasses = useUtilityClasses({
+        avatar,
+        chevron,
+        dense,
+        hidePadding,
+        iconAlign,
+        ripple,
+        subtitleSeparator,
+        wrapInfo,
+        wrapSubtitle,
+        wrapTitle,
+        ListItemButtonProps,
+        backgroundColor,
+        chevronColor,
+        fontColor,
+        iconColor,
+        statusColor,
+        icon,
+        leftComponent,
+        rightComponent,
+        divider,
+        subtitle,
+        info,
+        title,
+        className: userClassName,
+        onClick,
+        ...otherListItemProps,
+    });
 
     const getIcon = useCallback((): JSX.Element | undefined => {
         if (icon) {
@@ -306,19 +333,19 @@ const InfoListItemRender: React.ForwardRefRenderFunction<unknown, InfoListItemPr
 
     return (
         <Root
-            onClick={props.onClick}
+            onClick={onClick}
             backgroundColor={backgroundColor}
             wrapSubtitle={wrapSubtitle}
             wrapTitle={wrapTitle}
             wrapInfo={wrapInfo}
-            dense={props.dense}
+            dense={dense}
             ripple={ripple}
             iconColor={iconColor}
             className={cx(generatedClasses.root, userClassName)}
             ref={ref}
             {...otherListItemProps}
         >
-            {props.onClick && ripple ? (
+            {onClick && ripple ? (
                 <InfoListItemContentContainer className={generatedClasses.listItemButtonRoot} focusRipple={ripple}>
                     {getInfoListItemContent()}
                 </InfoListItemContentContainer>
@@ -373,20 +400,4 @@ InfoListItem.propTypes = {
     wrapInfo: PropTypes.bool,
     wrapSubtitle: PropTypes.bool,
     wrapTitle: PropTypes.bool,
-};
-
-InfoListItem.defaultProps = {
-    avatar: false,
-    chevron: false,
-    classes: {},
-    dense: false,
-    hidePadding: false,
-    iconAlign: 'left',
-    ripple: false,
-    subtitleSeparator: '\u00B7',
-    wrapInfo: false,
-    wrapSubtitle: false,
-    wrapTitle: false,
-    // @ts-ignore
-    ListItemButtonProps: PropTypes.object,
 };

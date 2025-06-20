@@ -108,8 +108,11 @@ const Label = styled(
     whiteSpace: 'nowrap',
 }));
 
-const HeroRender: React.ForwardRefRenderFunction<unknown, HeroProps> = (props: HeroProps, ref: any) => {
-    const generatedClasses = useUtilityClasses(props);
+const HeroRender: React.ForwardRefRenderFunction<unknown, HeroProps> = (
+    { classes = {}, iconBackgroundColor = 'transparent', iconSize = 36, ...props }: HeroProps,
+    ref: any
+) => {
+    const generatedClasses = useUtilityClasses({ ...props, classes });
     const {
         className: userClassName,
         icon,
@@ -117,8 +120,8 @@ const HeroRender: React.ForwardRefRenderFunction<unknown, HeroProps> = (props: H
         ChannelValueProps,
         // ignore unused vars so that we can do prop transferring to the root element
 
-        iconBackgroundColor,
-        iconSize,
+        // iconBackgroundColor,
+        // iconSize,
 
         ...otherProps
     } = props;
@@ -164,9 +167,4 @@ Hero.propTypes = {
     iconBackgroundColor: PropTypes.string,
     iconSize: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     label: PropTypes.string.isRequired,
-};
-Hero.defaultProps = {
-    classes: {},
-    iconBackgroundColor: 'transparent',
-    iconSize: 36,
 };

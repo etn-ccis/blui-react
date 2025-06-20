@@ -121,16 +121,16 @@ export type UserMenuProps = BoxProps & {
 const UserMenuRender: React.ForwardRefRenderFunction<unknown, UserMenuProps> = (props: UserMenuProps, ref: any) => {
     const theme = useTheme();
     const {
+        menuGroups = [],
+        MenuProps = {},
         avatar,
         menu,
-        menuGroups,
-        MenuProps,
         menuSubtitle,
         menuTitle,
         useBottomSheetAt = theme.breakpoints.values.sm,
         BottomSheetProps,
-        onClose,
-        onOpen,
+        onClose = (): void => {},
+        onOpen = (): void => {},
         ...otherProps
     } = props;
     const generatedClasses = useUtilityClasses(props);
@@ -357,12 +357,4 @@ UserMenu.propTypes = {
     useBottomSheetAt: PropTypes.number,
     onClose: PropTypes.func,
     onOpen: PropTypes.func,
-};
-
-UserMenu.defaultProps = {
-    classes: {},
-    menuGroups: [],
-    MenuProps: {},
-    onClose: (): void => {},
-    onOpen: (): void => {},
 };

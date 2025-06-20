@@ -105,11 +105,31 @@ const prefixUnitAllowSpaceList = ['$'];
 const suffixUnitAllowSpaceList = ['%', '℉', '°F', '℃', '°C', '°'];
 
 const ChannelValueRender: React.ForwardRefRenderFunction<unknown, ChannelValueProps> = (
-    props: ChannelValueProps,
+    {
+        classes = {},
+        className: userClassName,
+        icon,
+        prefix = false,
+        units,
+        unitSpace,
+        value,
+        color = 'inherit',
+        fontSize = 'inherit',
+        ...otherProps
+    }: ChannelValueProps,
     ref: any
 ) => {
-    const { className: userClassName, icon, prefix, units, unitSpace, value, color, fontSize, ...otherProps } = props;
-    const generatedClasses = useUtilityClasses(props);
+    const generatedClasses = useUtilityClasses({
+        classes,
+        icon,
+        prefix,
+        units,
+        unitSpace,
+        value,
+        color,
+        fontSize,
+        ...otherProps,
+    });
 
     const applyPrefix = useCallback(
         (): boolean =>
@@ -199,10 +219,4 @@ ChannelValue.propTypes = {
     units: PropTypes.string,
     unitSpace: PropTypes.oneOf(['show', 'hide', 'auto']),
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-};
-ChannelValue.defaultProps = {
-    classes: {},
-    color: 'inherit',
-    fontSize: 'inherit',
-    prefix: false,
 };

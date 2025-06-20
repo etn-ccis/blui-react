@@ -82,12 +82,19 @@ const Root = styled(Typography, {
 });
 
 const ListItemTagRender: React.ForwardRefRenderFunction<unknown, ListItemTagProps> = (
-    props: ListItemTagProps,
+    {
+        classes = {},
+        label,
+        variant,
+        className: userClassName,
+        noWrap = true,
+        display = 'inline',
+        ...otherTypographyProps
+    }: ListItemTagProps,
     ref: any
 ) => {
-    const { classes: userClasses, label, variant, className: userClassName, ...otherTypographyProps } = props;
-    const generatedClasses = useUtilityClasses(props);
-    const { root: rootUserClass, ...otherUserClasses } = userClasses;
+    const generatedClasses = useUtilityClasses({ classes, label, variant, ...otherTypographyProps });
+    const { root: rootUserClass, ...otherUserClasses } = classes;
     return (
         <Root
             ref={ref}
@@ -95,6 +102,8 @@ const ListItemTagRender: React.ForwardRefRenderFunction<unknown, ListItemTagProp
             className={cx(generatedClasses.root, { [generatedClasses.noVariant]: !variant }, userClassName)}
             classes={{ root: rootUserClass, ...otherUserClasses }}
             data-testid={'blui-list-item-tag'}
+            noWrap={noWrap}
+            display={display}
             {...otherTypographyProps}
         >
             {label}
@@ -116,9 +125,5 @@ ListItemTag.propTypes = {
         root: PropTypes.string,
     }),
 };
-ListItemTag.defaultProps = {
-    noWrap: true,
-    display: 'inline',
-    classes: {},
-};
+
 ListItemTag.displayName = 'ListItemTag';

@@ -31,11 +31,12 @@ export const AppRouter: React.FC = () => {
     const app = useApp();
     const { email, rememberMe } = app.loginData;
     const navigate = useCallback((destination: -1 | string) => {
-        void navigation(destination as To);
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
+        navigation(destination as To);
     }, []);
 
     const restoreOriginalUri = (_oktaAuth: any, originalUri: any): void => {
-        navigate(toRelativeUrl(originalUri || '/', window.location.origin));
+        void navigate(toRelativeUrl(originalUri || '/', window.location.origin));
     };
 
     return (

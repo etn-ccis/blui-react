@@ -74,11 +74,18 @@ const Actions = styled(
 }));
 
 const EmptyStateRender: React.ForwardRefRenderFunction<unknown, EmptyStateProps> = (
-    props: EmptyStateProps,
+    { actions, classes = {}, className: userClassName, description, icon, title, ...otherProps }: EmptyStateProps,
     ref: any
 ) => {
-    const { actions, className: userClassName, description, icon, title, ...otherProps } = props;
-    const generatedClasses = useUtilityClasses(props);
+    const generatedClasses = useUtilityClasses({
+        actions,
+        classes,
+        className: userClassName,
+        description,
+        icon,
+        title,
+        ...otherProps,
+    });
 
     return (
         <Root
@@ -129,7 +136,4 @@ EmptyState.propTypes = {
     icon: PropTypes.node.isRequired,
     //  @ts-ignore should be node but typescript throws an error here
     title: PropTypes.node.isRequired,
-};
-EmptyState.defaultProps = {
-    classes: {},
 };

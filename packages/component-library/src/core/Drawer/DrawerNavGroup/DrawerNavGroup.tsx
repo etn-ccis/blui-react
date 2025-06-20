@@ -403,7 +403,3 @@ DrawerNavGroup.propTypes = {
     titleContent: PropTypes.element,
     titleDivider: PropTypes.bool,
 };
-DrawerNavGroup.defaultProps = {
-    classes: {},
-    items: [],
-};

@@ -187,7 +187,7 @@ const ActionItems = styled(
 
 const ScoreCardRender: React.ForwardRefRenderFunction<unknown, ScoreCardProps> = (props: ScoreCardProps, ref: any) => {
     const {
-        actionLimit,
+        actionLimit = 3,
         actionItems,
         actionRow,
         badge,
@@ -199,7 +199,7 @@ const ScoreCardRender: React.ForwardRefRenderFunction<unknown, ScoreCardProps> =
         headerSubtitle,
         headerColor,
         headerFontColor,
-        badgeOffset,
+        badgeOffset = 0,
         ...otherCardProps
     } = props;
 
@@ -366,8 +366,4 @@ ScoreCard.propTypes = {
     headerTitle: PropTypes.string.isRequired,
     headerSubtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
 };
-ScoreCard.defaultProps = {
-    actionLimit: 3,
-    badgeOffset: 0,
-    classes: {},
-};
+// Removed defaultProps assignment as it's not supported with forwardRef in TypeScript

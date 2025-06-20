@@ -39,8 +39,9 @@ const DrawerBodyRender: React.ForwardRefRenderFunction<unknown, DrawerBodyProps>
     bodyProps: DrawerBodyProps,
     ref: any
 ) => {
-    const generatedClasses = useUtilityClasses(bodyProps);
     const {
+        // DrawerBody-specific props
+        classes = {},
         // Inheritable Props
         activeItemBackgroundColor,
         activeItemBackgroundShape,
@@ -64,6 +65,7 @@ const DrawerBodyRender: React.ForwardRefRenderFunction<unknown, DrawerBodyProps>
         // Other props
         ...otherProps
     } = bodyProps;
+    const generatedClasses = useUtilityClasses({ ...bodyProps, classes });
 
     const children = React.Children.toArray(bodyChildren);
 
@@ -134,7 +136,4 @@ DrawerBody.propTypes = {
     classes: PropTypes.shape({
         root: PropTypes.string,
     }),
-};
-DrawerBody.defaultProps = {
-    classes: {},
 };
