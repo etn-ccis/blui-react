@@ -51,7 +51,7 @@ jobs:
               with:
                   node-version: ${{ matrix.node-version }}
             - name: Install pnpm
-              run: npm install -g pnpm      
+              run: npm install -g pnpm
             - name: install dependencies
               run: pnpm install
             - name: Run tests
@@ -73,7 +73,7 @@ jobs:
               with:
                   node-version: ${{ matrix.node-version }}
             - name: Install pnpm
-              run: npm install -g pnpm      
+              run: npm install -g pnpm
             - name: install dependencies
               run: pnpm install
             - name: Build login workflow
@@ -106,9 +106,9 @@ jobs:
             - uses: actions/setup-node@v4
               with:
                   node-version: ${{ matrix.node-version }}
-                  registry-url: "https://registry.npmjs.org"
+                  registry-url: 'https://registry.npmjs.org'
             - name: Install pnpm
-              run: npm install -g pnpm         
+              run: npm install -g pnpm
             - name: Install dependencies
               run: pnpm install
               working-directory: packages/login-workflow
@@ -143,7 +143,7 @@ jobs:
                   if-no-files-found: error
                   path: packages/themes/dist
             - name: Run tests
-              working-directory: packages/themes   
+              working-directory: packages/themes
               run: pnpm test
 
     publish_react_theme:
@@ -167,147 +167,147 @@ jobs:
             - uses: actions/setup-node@v4
               with:
                   node-version: ${{ matrix.node-version }}
-                  registry-url: "https://registry.npmjs.org"
+                  registry-url: 'https://registry.npmjs.org'
             - name: Install pnpm
               run: npm install -g pnpm
             - run: pnpm install --frozen-lockfile
             - name: Publish package
               run: npm run publish:package -- -b ${{env.BRANCH}}
               working-directory: packages/themes
-            
+
     test_component_library:
         name: Component Library Unit Tests
         runs-on: ubuntu-latest
         needs: prettier_lint
         strategy:
-          matrix:
-            node-version: [20.x]
+            matrix:
+                node-version: [20.x]
         steps:
-          - name: Checkout
-            uses: actions/checkout@v4
-          - name: Use Node.js
-            uses: actions/setup-node@v4
-            with:
-              node-version: ${{ matrix.node-version }}
-          - name: Install pnpm
-            run: npm install -g pnpm
-          - name: Install dependencies
-            run: pnpm install
-            working-directory: packages/component-library
-          - name: Run tests with coverage
-            run: pnpm test -- --coverage
-            working-directory: packages/component-library
-          - name: Upload to Codecov
-            uses: codecov/codecov-action@v4
-            with:
-              token: ${{ secrets.CODECOV_TOKEN }}
-              directory: packages/component-library/coverage/
-              files: clover.xml
-              flags: unittests
-              name: codecov-report
-              verbose: true
+            - name: Checkout
+              uses: actions/checkout@v4
+            - name: Use Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ matrix.node-version }}
+            - name: Install pnpm
+              run: npm install -g pnpm
+            - name: Install dependencies
+              run: pnpm install
+              working-directory: packages/component-library
+            - name: Run tests with coverage
+              run: pnpm test -- --coverage
+              working-directory: packages/component-library
+            - name: Upload to Codecov
+              uses: codecov/codecov-action@v4
+              with:
+                  token: ${{ secrets.CODECOV_TOKEN }}
+                  directory: packages/component-library/coverage/
+                  files: clover.xml
+                  flags: unittests
+                  name: codecov-report
+                  verbose: true
 
     build_component_library:
         name: Build Component Library
         runs-on: ubuntu-latest
         needs: [prettier_lint, test_component_library]
         strategy:
-          matrix:
-            node-version: [20.x]
+            matrix:
+                node-version: [20.x]
         steps:
-          - name: Checkout
-            uses: actions/checkout@v4
-          - name: Use Node.js
-            uses: actions/setup-node@v4
-            with:
-              node-version: ${{ matrix.node-version }}
-          - name: Install pnpm
-            run: npm install -g pnpm
-          - name: Install dependencies
-            run: pnpm install
-            working-directory: packages/component-library
-          - name: Build component library
-            run: pnpm build
-            working-directory: packages/component-library
-          - name: Save build
-            uses: actions/upload-artifact@v4
-            with:
-              name: dist-component-library
-              if-no-files-found: error
-              path: packages/component-library/dist
+            - name: Checkout
+              uses: actions/checkout@v4
+            - name: Use Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ matrix.node-version }}
+            - name: Install pnpm
+              run: npm install -g pnpm
+            - name: Install dependencies
+              run: pnpm install
+              working-directory: packages/component-library
+            - name: Build component library
+              run: pnpm build
+              working-directory: packages/component-library
+            - name: Save build
+              uses: actions/upload-artifact@v4
+              with:
+                  name: dist-component-library
+                  if-no-files-found: error
+                  path: packages/component-library/dist
 
     test_artifacts:
         name: Test Component Artifacts
         runs-on: ubuntu-latest
         needs: [build_component_library, prettier_lint]
         steps:
-          - name: Checkout
-            uses: actions/checkout@v4
-          - name: Download the dist folder
-            uses: actions/download-artifact@v4
-            with:
-              name: dist-component-library
-              path: packages/component-library/dist
-          - name: Install pnpm
-            run: npm install -g pnpm     
-          - name: Run artifact tests
-            run: pnpm run test:artifacts
-            working-directory: packages/component-library
+            - name: Checkout
+              uses: actions/checkout@v4
+            - name: Download the dist folder
+              uses: actions/download-artifact@v4
+              with:
+                  name: dist-component-library
+                  path: packages/component-library/dist
+            - name: Install pnpm
+              run: npm install -g pnpm
+            - name: Run artifact tests
+              run: pnpm run test:artifacts
+              working-directory: packages/component-library
 
     npm_pack:
         name: NPM Pack Component Library
         runs-on: ubuntu-latest
         needs: [build_component_library, prettier_lint]
         steps:
-          - name: Checkout
-            uses: actions/checkout@v4
-          - name: Download the dist folder
-            uses: actions/download-artifact@v4
-            with:
-              name: dist-component-library
-              path: packages/component-library
-          - name: Pack npm
-            run: npm pack
-            working-directory: packages/component-library
-          - name: Save npm pack
-            uses: actions/upload-artifact@v4
-            with:
-              name: tarball
-              if-no-files-found: error
-              path: packages/component-library/brightlayer-ui-react-components-*.tgz
+            - name: Checkout
+              uses: actions/checkout@v4
+            - name: Download the dist folder
+              uses: actions/download-artifact@v4
+              with:
+                  name: dist-component-library
+                  path: packages/component-library
+            - name: Pack npm
+              run: npm pack
+              working-directory: packages/component-library
+            - name: Save npm pack
+              uses: actions/upload-artifact@v4
+              with:
+                  name: tarball
+                  if-no-files-found: error
+                  path: packages/component-library/brightlayer-ui-react-components-*.tgz
 
     build_showcase:
         name: Build Showcase App
         runs-on: ubuntu-latest
         needs: [npm_pack, build_component_library, prettier_lint]
         strategy:
-          matrix:
-            node-version: [20.x]
+            matrix:
+                node-version: [20.x]
         steps:
-          - name: Checkout
-            uses: actions/checkout@v4
-          - name: Use Node.js ${{ matrix.node-version }}
-            uses: actions/setup-node@v4
-            with:
-              node-version: ${{ matrix.node-version }}
-          - name: Install pnpm
-            run: npm install -g pnpm
-          - name: Install dependencies
-            run: pnpm install --frozen-lockfile
-            working-directory: apps/showcase
-          - name: Download tarball
-            uses: actions/download-artifact@v4
-            with:
-              name: tarball
-              path: apps/showcase/tarball
-          - name: Add tarball package
-            run: |
-              PACKAGED_VERSION=$(node -p "require('../../packages/component-library/package.json').version")
-              pnpm add ./tarball/brightlayer-ui-react-components-$PACKAGED_VERSION.tgz
-            working-directory: apps/showcase
-          - name: Build showcase
-            run: pnpm build
-            working-directory: apps/showcase
+            - name: Checkout
+              uses: actions/checkout@v4
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ matrix.node-version }}
+            - name: Install pnpm
+              run: npm install -g pnpm
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
+              working-directory: apps/showcase
+            - name: Download tarball
+              uses: actions/download-artifact@v4
+              with:
+                  name: tarball
+                  path: apps/showcase/tarball
+            - name: Add tarball package
+              run: |
+                  PACKAGED_VERSION=$(node -p "require('../../packages/component-library/package.json').version")
+                  pnpm add ./tarball/brightlayer-ui-react-components-$PACKAGED_VERSION.tgz
+              working-directory: apps/showcase
+            - name: Build showcase
+              run: pnpm build
+              working-directory: apps/showcase
 
     publish-components:
         name: Publish Component Library
@@ -355,7 +355,38 @@ jobs:
                   node-version: ${{ matrix.node-version }}
             - name: Install pnpm
               run: npm install -g pnpm
+            - run: pnpm install
+            - run: pnpm install
+              working-directory: packages/cli-templates/templates/authentication-typescript
+            - run: pnpm build
+              working-directory: packages/cli-templates/templates/authentication-typescript
+            - run: pnpm install
+              working-directory: packages/cli-templates/templates/blank-typescript
+            - run: pnpm build
+              working-directory: packages/cli-templates/templates/blank-typescript
+            - run: pnpm install
+              working-directory: packages/cli-templates/templates/routing-typescript
+            - run: pnpm build
+              working-directory: packages/cli-templates/templates/routing-typescript
+
+    publish_cli_templates:
+        name: Publish CLI Templates
+        runs-on: ubuntu-latest
+        if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev') }}
+        needs: [prettier_lint, unit_test_cli_templates, build_cli_templates]
+        strategy:
+            matrix:
+                node-version: [20.x]
+        env:
+            NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+            BRANCH: ${{ github.ref == 'refs/heads/master' && 'master' || 'dev' }}
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ matrix.node-version }}
+                  registry-url: 'https://registry.npmjs.org'
             - run: pnpm install --frozen-lockfile
-            - name: Run tests
-              working-directory: apps/design-patterns
-              run: pnpm test
+            - name: Publish package
+              run: npm run publish:package -- -b ${{env.BRANCH}}
