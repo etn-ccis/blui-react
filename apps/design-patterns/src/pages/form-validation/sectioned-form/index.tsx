@@ -35,7 +35,7 @@ const emailRegex = new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i);
 
 const useStyles = makeStyles((theme: Theme) => ({
     containerWrapper: {
-        background: 'white',
+        background: theme.palette.background.default,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'start',
