@@ -2,7 +2,7 @@
     "name": "@brightlayer-ui/react-themes",
     "author": "Brightlayer UI <brightlayer-ui@eaton.com>",
     "license": "BSD-3-Clause",
-    "version": "8.1.1",
+    "version": "9.0.0",
     "type": "module",
     "description": "React themes for Brightlayer UI applications",
     "main": "./index.js",
@@ -42,13 +42,13 @@
         "@brightlayer-ui/colors": "^3.1.1",
         "@brightlayer-ui/types": "^2.0.0",
         "@fontsource/open-sans": "^5.0.3",
-        "color": "^5.0.0"
+        "color": "^4.2.3"
     },
     "peerDependencies": {
-        "@mui/material": "^6.0.0"
+        "@mui/material": "^7.1.1"
     },
     "devDependencies": {
-        "@mui/material": "^6.0.0",
+        "@mui/material": "^7.1.1",
         "@types/color": "^4.2.0",
         "npm-license-crawler": "^0.2.1",
         "tsc-esm-fix": "^3.1.2",
