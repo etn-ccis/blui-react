@@ -342,7 +342,6 @@ jobs:
     unit_test_cli_templates:
         name: Unit Tests for Templates
         runs-on: ubuntu-latest
-        needs: [build_theme_verify_artifacts, build_component_library, build_login_workflow]
         strategy:
             matrix:
                 node-version: [20.x]
@@ -371,7 +370,6 @@ jobs:
     build_cli_templates:
         name: Build CLI Templates
         runs-on: ubuntu-latest
-        needs: [build_theme_verify_artifacts, build_component_library , build_login_workflow]
         strategy:
             matrix:
               node-version: [20.x]
