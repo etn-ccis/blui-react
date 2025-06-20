@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 const directory = path.resolve(new URL('.', import.meta.url).pathname, '../dist');
-const muiIconsPattern = /^@mui\/(icons-material|material)/; // Updated pattern to include @mui/material
+const muiIconsPattern = /^@mui\/(icons-material|material)/;
 
 function fixImports(dir) {
     const files = fs.readdirSync(dir);
