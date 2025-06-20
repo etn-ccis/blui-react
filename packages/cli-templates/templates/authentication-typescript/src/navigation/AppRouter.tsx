@@ -31,7 +31,7 @@ export const AppRouter: React.FC = () => {
     const app = useApp();
     const { email, rememberMe } = app.loginData;
     const navigate = useCallback((destination: -1 | string) => {
-        navigation(destination as To);
+        void navigation(destination as To);
     }, []);
 
     const restoreOriginalUri = (_oktaAuth: any, originalUri: any): void => {
