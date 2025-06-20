@@ -35,7 +35,7 @@ jobs:
               run: pnpm install
             - name: Run Prettier check
               run: pnpm prettier:check
-            
+
     unit_tests_workflow:
         name: Workflow Unit Tests
         runs-on: ubuntu-latest
@@ -338,7 +338,7 @@ jobs:
             - name: Publish package
               run: npm run publish:package -- -b ${{env.BRANCH}}
               working-directory: packages/component-library
-
+              
     unit_test_cli_templates:
         name: Unit Tests for Templates
         runs-on: ubuntu-latest
