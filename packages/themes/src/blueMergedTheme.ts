@@ -1,4 +1,4 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme } from '@mui/material';
 import type {} from '@mui/material/themeCssVarsAugmentation';
 import { typography, createSimpleLightPalette as createSimplePalette, createSimpleDarkPalette } from './shared';
 import * as BLUIColors from '@brightlayer-ui/colors';

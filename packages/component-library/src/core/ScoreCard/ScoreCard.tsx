@@ -193,7 +193,6 @@ const ScoreCardRender: React.ForwardRefRenderFunction<unknown, ScoreCardProps> =
         badge,
         headerBackgroundImage,
         children,
-        classes,
         className: userClassName,
         headerInfo,
         headerTitle,

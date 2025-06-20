@@ -70,7 +70,7 @@ const DrawerLayoutRender: React.ForwardRefRenderFunction<unknown, DrawerLayoutPr
     props: DrawerLayoutProps,
     ref: any
 ) => {
-    const { children, drawer, classes, className: userClassName, ...otherProps } = props;
+    const { children, drawer, className: userClassName, ...otherProps } = props;
     const theme = useTheme();
     const [padding, setPadding] = useState<number | string>(0);
     const [drawerOpen, setDrawerOpen] = useState(false);

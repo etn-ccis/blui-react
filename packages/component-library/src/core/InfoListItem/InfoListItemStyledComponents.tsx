@@ -32,6 +32,7 @@ export const Root = styled(ListItem, {
     let isCssColor = true;
     try {
         color(backgroundColor);
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (e) {
         isCssColor = false;
     }

@@ -117,7 +117,7 @@ const AppBarPreview: PreviewComponent = ({ data }) => {
             >
                 <AppBar
                     {...removeEmptyProps(rest)}
-                    backgroundImage={getImage(backgroundImage as string)}
+                    backgroundImage={getImage(backgroundImage!)}
                     scrollContainerId={SCROLL_CONTAINER_ID}
                 >
                     <Toolbar>

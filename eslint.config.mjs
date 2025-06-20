@@ -30,6 +30,7 @@ export default [
         rules: {
             '@typescript-eslint/no-empty-function': 'off',
             'no-empty-function': 'off',
+            'no-empty-object-type': 'off',
             'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
             'react-hooks/exhaustive-deps': 'warn', // Checks effect dependencies
             '@typescript-eslint/naming-convention': [

@@ -121,7 +121,7 @@ const DrawerHeaderPreview: PreviewComponent = ({ data }) => {
                 <DrawerHeader
                     {...removeEmptyProps(rest)}
                     icon={getIcon(icon as string)}
-                    backgroundImage={getImage(backgroundImage as string)}
+                    backgroundImage={getImage(backgroundImage!)}
                 ></DrawerHeader>
                 <DrawerBody sx={{ flex: '1 1 auto' }}>
                     <DrawerNavGroup>

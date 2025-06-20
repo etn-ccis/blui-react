@@ -129,7 +129,6 @@ const InfoListItemRender: React.ForwardRefRenderFunction<unknown, InfoListItemPr
     const {
         avatar,
         chevron,
-        classes,
         className: userClassName,
         divider,
         hidePadding,
@@ -177,7 +176,7 @@ const InfoListItemRender: React.ForwardRefRenderFunction<unknown, InfoListItemPr
                 // a dummy component to maintain the padding
                 <ListItemAvatar style={{ minWidth: 'unset' }}>
                     <Icon
-                        className={generatedClasses['avatar']}
+                        className={generatedClasses.avatar}
                         statusColor={statusColor}
                         iconColor={iconColor}
                         avatar={avatar}
@@ -192,14 +191,14 @@ const InfoListItemRender: React.ForwardRefRenderFunction<unknown, InfoListItemPr
         (): JSX.Element | undefined => (
             <>
                 {rightComponent && (
-                    <RightComponent className={generatedClasses['rightComponent']}>{rightComponent}</RightComponent>
+                    <RightComponent className={generatedClasses.rightComponent}>{rightComponent}</RightComponent>
                 )}
                 {chevron && (
                     <InfoListItemChevron
                         chevronColor={chevronColor}
                         color={'inherit'}
                         role={'button'}
-                        className={generatedClasses['chevron']}
+                        className={generatedClasses.chevron}
                     />
                 )}
             </>
@@ -209,7 +208,7 @@ const InfoListItemRender: React.ForwardRefRenderFunction<unknown, InfoListItemPr
 
     const getSeparator = useCallback(
         (): JSX.Element => (
-            <SubtitleSeparator className={generatedClasses['separator']} component="span">
+            <SubtitleSeparator className={generatedClasses.separator} component="span">
                 {subtitleSeparator || '\u00B7'}
             </SubtitleSeparator>
         ),
@@ -248,10 +247,10 @@ const InfoListItemRender: React.ForwardRefRenderFunction<unknown, InfoListItemPr
         <>
             <StatusStripe
                 statusColor={statusColor}
-                className={generatedClasses['statusStripe']}
+                className={generatedClasses.statusStripe}
                 data-testid={'blui-status-stripe'}
             />
-            {divider && <InfoListItemDivider divider={divider} className={generatedClasses['divider']} />}
+            {divider && <InfoListItemDivider divider={divider} className={generatedClasses.divider} />}
             {(icon || !hidePadding) && getIcon()}
             {leftComponent}
             <InfoListItemText
@@ -293,7 +292,7 @@ const InfoListItemRender: React.ForwardRefRenderFunction<unknown, InfoListItemPr
                     lineHeight: 1.25,
                     display: 'block',
                     color: fontColor || 'inherit',
-                    className: generatedClasses['title'],
+                    className: generatedClasses.title,
                     component: 'div',
                 }}
                 secondaryTypographyProps={{

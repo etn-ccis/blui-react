@@ -122,7 +122,6 @@ const UserMenuRender: React.ForwardRefRenderFunction<unknown, UserMenuProps> = (
     const theme = useTheme();
     const {
         avatar,
-        classes,
         menu,
         menuGroups,
         MenuProps,
@@ -174,7 +173,7 @@ const UserMenuRender: React.ForwardRefRenderFunction<unknown, UserMenuProps> = (
             /* If user passed in onClick function as a prop to Avatar, keep it. */
             const onClickFn = (event: MouseEvent): void => {
                 openMenu(event);
-                if (avatar.props && avatar.props.onClick) {
+                if (avatar.props?.onClick) {
                     avatar.props.onClick(event);
                 }
             };

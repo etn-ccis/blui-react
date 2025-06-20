@@ -116,10 +116,10 @@ const HeroRender: React.ForwardRefRenderFunction<unknown, HeroProps> = (props: H
         label,
         ChannelValueProps,
         // ignore unused vars so that we can do prop transferring to the root element
-        /* eslint-disable @typescript-eslint/no-unused-vars */
+
         iconBackgroundColor,
         iconSize,
-        /* eslint-enable @typescript-eslint/no-unused-vars */
+
         ...otherProps
     } = props;
 

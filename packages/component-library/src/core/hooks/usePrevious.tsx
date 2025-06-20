@@ -1,9 +1,7 @@
 import { useRef, useEffect } from 'react';
 
-/* eslint-disable-next-line @typescript-eslint/ban-types */
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 export const usePrevious = <T extends {}>(value: T): T | undefined => {
-    // The ref object is a generic container whose current property is mutable ...
-    // ... and can hold any value, similar to an instance property on a class
     const ref = useRef<T>();
 
     // Store current value in ref

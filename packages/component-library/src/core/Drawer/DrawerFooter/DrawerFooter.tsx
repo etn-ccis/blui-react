@@ -59,14 +59,13 @@ const DrawerFooterRender: React.ForwardRefRenderFunction<unknown, DrawerFooterPr
 ) => {
     const generatedClasses = useUtilityClasses(props);
     const {
-        classes,
         className: userClassName,
         children,
         divider = true,
         // ignore unused vars so that we can do prop transferring to the root element
-        /* eslint-disable @typescript-eslint/no-unused-vars */
+
         backgroundColor,
-        /* eslint-enable @typescript-eslint/no-unused-vars */
+
         hideContentOnCollapse,
         sx,
         ...otherProps
