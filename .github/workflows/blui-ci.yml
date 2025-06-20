@@ -36,8 +36,7 @@ jobs:
             - name: Run Prettier check
               run: pnpm prettier:check
             
-
-      unit_tests_workflow:
+    unit_tests_workflow:
         name: Workflow Unit Tests
         runs-on: ubuntu-latest
         needs: prettier_lint
