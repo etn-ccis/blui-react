@@ -87,8 +87,8 @@ const findID = (item: DrawerNavItemProps | NestedDrawerNavItemProps, activeItem:
 
     // else, loop through the branches by items
     if (item.items) {
-        for (let i = 0; i < item.items.length; i++) {
-            if (findID(item.items[i], activeItem)) {
+        for (const i of item.items) {
+            if (findID(i, activeItem)) {
                 return true;
             }
         }
@@ -96,8 +96,8 @@ const findID = (item: DrawerNavItemProps | NestedDrawerNavItemProps, activeItem:
     // and by children
     if (item.children) {
         const childItems = findChildByType(item.children, ['DrawerNavItem']);
-        for (let i = 0; i < childItems.length; i++) {
-            if (findID(childItems[i].props, activeItem)) {
+        for (const childItem of childItems) {
+            if (findID(childItem.props, activeItem)) {
                 return true;
             }
         }
@@ -116,7 +116,6 @@ const DrawerNavGroupRender: React.ForwardRefRenderFunction<unknown, DrawerNavGro
     const {
         // Nav Group Props
         children,
-        classes = {},
         className: userClassName,
         items = [],
         title,

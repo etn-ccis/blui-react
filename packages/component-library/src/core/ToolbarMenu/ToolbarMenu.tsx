@@ -120,6 +120,7 @@ const ToolbarMenuRenderer: React.ForwardRefRenderFunction<unknown, ToolbarMenuPr
         onClose = (): void => {},
         onOpen = (): void => {},
         className: userClassName,
+        classes,
         ...otherTypographyProps
     } = props;
     const theme = useTheme();

@@ -14,7 +14,7 @@
         "allowSyntheticDefaultImports": true,
         "strictNullChecks": false,
         "paths": {
-            "@brigtlayer-ui/themes": ["../themes/src"],
+            "@brigtlayer-ui/themes": ["../themes/src"]
         }
     },
     "include": ["src/*", "package.json"],

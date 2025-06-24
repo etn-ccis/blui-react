@@ -183,12 +183,10 @@ const DrawerHeaderRender: React.ForwardRefRenderFunction<unknown, DrawerHeaderPr
         subtitle,
         title,
         titleContent,
-        // ignore unused vars so that we can do prop transferring to the root element
-
         backgroundColor,
         backgroundOpacity = 0.3,
         fontColor,
-        disableGutters = true,
+        disableGutters,
         sx,
 
         ...otherToolbarProps

@@ -102,6 +102,8 @@ const ListItemTagRender: React.ForwardRefRenderFunction<unknown, ListItemTagProp
             className={cx(generatedClasses.root, { [generatedClasses.noVariant]: !variant }, userClassName)}
             classes={{ root: rootUserClass, ...otherUserClasses }}
             data-testid={'blui-list-item-tag'}
+            noWrap={noWrap}
+            display={display}
             {...otherTypographyProps}
         >
             {label}

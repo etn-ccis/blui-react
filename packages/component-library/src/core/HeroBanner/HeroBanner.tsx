@@ -49,10 +49,10 @@ const HeroBannerRender: React.ForwardRefRenderFunction<unknown, HeroBannerProps>
                 className={cx(generatedClasses.root, userClassName)}
                 {...otherProps}
             >
-                {props.children &&
+                {otherProps.children &&
                     isArray &&
-                    (props.children as React.ReactNode[]).slice(0, limit).map((child: any) => child)}
-                {props.children && !isArray && <>{props.children}</>}
+                    (otherProps.children as React.ReactNode[]).slice(0, limit).map((child: any) => child)}
+                {otherProps.children && !isArray && <>{otherProps.children}</>}
             </Root>
             {divider && <Divider />}
         </>

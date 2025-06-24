@@ -338,3 +338,104 @@ jobs:
             - name: Publish package
               run: npm run publish:package -- -b ${{env.BRANCH}}
               working-directory: packages/component-library
+              
+    unit_test_cli_templates:
+        name: Unit Tests for Templates
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-version: [20.x]
+        steps:
+            - uses: actions/checkout@v4
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v4
+              with:
+                node-version: ${{ matrix.node-version }}
+            - name: Install pnpm
+              run: npm install -g pnpm
+            - run: pnpm install
+            - run: pnpm install
+              working-directory: packages/cli-templates/templates/authentication-typescript
+            - run: pnpm test
+              working-directory: packages/cli-templates/templates/authentication-typescript
+            - run: pnpm install
+              working-directory: packages/cli-templates/templates/blank-typescript
+            - run: pnpm test
+              working-directory: packages/cli-templates/templates/blank-typescript
+            - run: pnpm install
+              working-directory: packages/cli-templates/templates/routing-typescript
+            - run: pnpm test
+              working-directory: packages/cli-templates/templates/routing-typescript
+
+    build_cli_templates:
+        name: Build CLI Templates
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+              node-version: [20.x]
+
+        steps:
+            - uses: actions/checkout@v4
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ matrix.node-version }}
+            - name: Install pnpm
+              run: npm install -g pnpm      
+            - run: pnpm install
+            - run: pnpm install
+              working-directory: packages/cli-templates/templates/authentication-typescript
+            - run: pnpm build
+              working-directory: packages/cli-templates/templates/authentication-typescript
+            - run: pnpm install
+              working-directory: packages/cli-templates/templates/blank-typescript
+            - run: pnpm build
+              working-directory: packages/cli-templates/templates/blank-typescript
+            - run: pnpm install
+              working-directory: packages/cli-templates/templates/routing-typescript
+            - run: pnpm build
+              working-directory: packages/cli-templates/templates/routing-typescript
+
+    publish_cli_templates:
+        name: Publish CLI Templates
+        runs-on: ubuntu-latest
+        if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev') }}
+        needs: [prettier_lint, unit_test_cli_templates, build_cli_templates]
+        strategy:
+            matrix:
+                node-version: [20.x]
+        env:
+            NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+            BRANCH: ${{ github.ref == 'refs/heads/master' && 'master' || 'dev' }}
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ matrix.node-version }}
+                  registry-url: 'https://registry.npmjs.org'
+            - run: pnpm install --frozen-lockfile
+            - name: Publish package
+              run: npm run publish:package -- -b ${{env.BRANCH}}
+        
+    test_design_patterns:
+        name: Test Design Patterns
+        runs-on: ubuntu-latest
+        needs: prettier_lint
+        strategy:
+            matrix:
+                node-version: [20.x]
+
+        steps:
+            - uses: actions/checkout@v4
+            - name: Use Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ matrix.node-version }}
+            - name: Install pnpm
+              run: npm install -g pnpm
+            - run: pnpm install --frozen-lockfile
+            - name: Run tests
+              working-directory: apps/design-patterns
+              run: pnpm test
+

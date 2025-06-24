@@ -10,16 +10,16 @@ import { useColorScheme } from '@mui/material';
 
 const buildRoutes = (routes: SimpleNavItem[], url: string): JSX.Element[] => {
     let ret: any[] = [];
-    for (let i = 0; i < routes.length; i++) {
-        if (routes[i].component) {
+    for (const route of routes) {
+        if (route.component) {
             ret.push(
-                <Route exact path={`${url}${routes[i].url || ''}`} key={`${url}/${routes[i].url || ''}`}>
-                    {routes[i].component}
+                <Route exact path={`${url}${route.url || ''}`} key={`${url}/${route.url || ''}`}>
+                    {route.component}
                 </Route>
             );
         }
-        if (routes[i].pages) {
-            ret = ret.concat(buildRoutes(routes[i].pages || [], `${url}${routes[i].url || ''}`));
+        if (route.pages) {
+            ret = ret.concat(buildRoutes(route.pages || [], `${url}${route.url || ''}`));
         }
     }
     return ret;

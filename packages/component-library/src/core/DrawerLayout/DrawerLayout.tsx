@@ -73,7 +73,7 @@ const DrawerLayoutRender: React.ForwardRefRenderFunction<unknown, DrawerLayoutPr
     const theme = useTheme();
     const [padding, setPadding] = useState<number | string>(0);
     const [drawerOpen, setDrawerOpen] = useState(false);
-    const generatedClasses = useUtilityClasses(props);
+    const generatedClasses = useUtilityClasses({ ...props, classes });
 
     const style: CSSProperties = { paddingLeft: 0, paddingRight: 0 };
     style.paddingLeft = theme.direction === 'ltr' ? padding : 0;

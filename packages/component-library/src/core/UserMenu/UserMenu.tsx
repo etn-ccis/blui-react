@@ -121,7 +121,6 @@ const UserMenuRender: React.ForwardRefRenderFunction<unknown, UserMenuProps> = (
     const theme = useTheme();
     const {
         avatar,
-        classes = {},
         menu,
         menuGroups = [],
         MenuProps = {},

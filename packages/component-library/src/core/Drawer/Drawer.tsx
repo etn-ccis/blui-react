@@ -119,12 +119,8 @@ const Content = styled(
     width: '100%',
 }));
 
-const DrawerRenderer: React.ForwardRefRenderFunction<unknown, DrawerProps> = (props: DrawerProps, ref: any) => {
-    const hoverDelay = useRef<NodeJS.Timeout | null>(null);
-    const generatedClasses = useUtilityClasses(props);
-    const { setPadding, setDrawerOpen } = useDrawerLayout();
-    const [hover, setHover] = useState(false);
-    const {
+const DrawerRenderer: React.ForwardRefRenderFunction<unknown, DrawerProps> = (
+    {
         // Inheritable Props
         activeItemBackgroundColor,
         activeItemBackgroundShape,
@@ -145,7 +141,6 @@ const DrawerRenderer: React.ForwardRefRenderFunction<unknown, DrawerProps> = (pr
         ripple,
         // Drawer-specific props
         activeItem,
-        classes = {},
         className,
         condensed = false,
         noLayout = false,
@@ -158,7 +153,47 @@ const DrawerRenderer: React.ForwardRefRenderFunction<unknown, DrawerProps> = (pr
         width,
         // Other MUI Drawer Props
         ...drawerProps
-    } = props;
+    }: DrawerProps,
+    ref: any
+) => {
+    const hoverDelay = useRef<NodeJS.Timeout | null>(null);
+    const generatedClasses = useUtilityClasses({
+        ...{
+            // Inheritable Props
+            activeItemBackgroundColor,
+            activeItemBackgroundShape,
+            activeItemFontColor,
+            activeItemIconColor,
+            backgroundColor,
+            chevron,
+            chevronColor,
+            collapseIcon,
+            disableActiveItemParentStyles,
+            divider,
+            expandIcon,
+            hidePadding,
+            itemFontColor,
+            itemIconColor,
+            nestedBackgroundColor,
+            nestedDivider,
+            ripple,
+            // Drawer-specific props
+            activeItem,
+            className,
+            condensed,
+            noLayout,
+            open,
+            openOnHover,
+            openOnHoverDelay,
+            onItemSelect,
+            sideBorder,
+            variant: variantProp,
+            width,
+        },
+        ...drawerProps,
+    });
+    const { setPadding, setDrawerOpen } = useDrawerLayout();
+    const [hover, setHover] = useState(false);
 
     const variant = variantProp || 'persistent'; // to allow drawerLayout to override this
     const isRail = variant === 'rail';
@@ -171,23 +206,23 @@ const DrawerRenderer: React.ForwardRefRenderFunction<unknown, DrawerProps> = (pr
 
     const getHeader = useCallback(
         (): JSX.Element[] =>
-            findChildByType(props.children, ['DrawerHeader'])
+            findChildByType(drawerProps.children, ['DrawerHeader'])
                 .slice(0, 1)
                 .map((child) => React.cloneElement(child)),
-        [props.children]
+        [drawerProps.children]
     );
 
     const getSubHeader = useCallback(
         (): JSX.Element[] =>
-            findChildByType(props.children, ['DrawerSubheader'])
+            findChildByType(drawerProps.children, ['DrawerSubheader'])
                 .slice(0, 1)
                 .map((child) => React.cloneElement(child)),
-        [props.children]
+        [drawerProps.children]
     );
 
     const getBody = useCallback(
         (): JSX.Element[] =>
-            findChildByType(props.children, ['DrawerBody'])
+            findChildByType(drawerProps.children, ['DrawerBody'])
                 .slice(0, 1)
                 .map((child) =>
                     React.cloneElement(child, {
@@ -238,16 +273,16 @@ const DrawerRenderer: React.ForwardRefRenderFunction<unknown, DrawerProps> = (pr
             nestedBackgroundColor,
             nestedDivider,
             ripple,
-            props.children,
+            drawerProps.children,
         ]
     );
 
     const getFooter = useCallback(
         (): JSX.Element[] =>
-            findChildByType(props.children, ['DrawerFooter'])
+            findChildByType(drawerProps.children, ['DrawerFooter'])
                 .slice(0, 1)
                 .map((child) => React.cloneElement(child)),
-        [props.children]
+        [drawerProps.children]
     );
 
     const getDrawerContents = useCallback(

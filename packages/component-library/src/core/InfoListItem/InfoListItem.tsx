@@ -153,8 +153,7 @@ const InfoListItemRender: React.ForwardRefRenderFunction<unknown, InfoListItemPr
         iconAlign = 'left',
         iconColor,
         statusColor,
-        ListItemButtonProps = {} as MuiListItemButtonProps,
-        /* eslint-enable @typescript-eslint/no-unused-vars */
+        onClick,
         ...otherListItemProps
     } = props;
 
@@ -308,19 +307,19 @@ const InfoListItemRender: React.ForwardRefRenderFunction<unknown, InfoListItemPr
 
     return (
         <Root
-            onClick={props.onClick}
+            onClick={onClick}
             backgroundColor={backgroundColor}
             wrapSubtitle={wrapSubtitle}
             wrapTitle={wrapTitle}
             wrapInfo={wrapInfo}
-            dense={props.dense}
+            dense={dense}
             ripple={ripple}
             iconColor={iconColor}
             className={cx(generatedClasses.root, userClassName)}
             ref={ref}
             {...otherListItemProps}
         >
-            {props.onClick && ripple ? (
+            {onClick && ripple ? (
                 <InfoListItemContentContainer className={generatedClasses.listItemButtonRoot} focusRipple={ripple}>
                     {getInfoListItemContent()}
                 </InfoListItemContentContainer>

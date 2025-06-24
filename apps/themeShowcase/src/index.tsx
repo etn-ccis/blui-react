@@ -5,10 +5,8 @@
 
  This code is licensed under the BSD-3 license found in the LICENSE file in the root directory of this source tree and at https://opensource.org/licenses/BSD-3-Clause.
  **/
-/* eslint-disable */
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-// import * as {serviceWorker} from './serviceWorker';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Provider } from 'react-redux';
 import './index.css';
