@@ -4,7 +4,6 @@ import { ListItemButtonProps as MuiListItemButtonProps } from '@mui/material/Lis
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import { unstable_composeClasses as composeClasses } from '@mui/material';
 import { separate, withKeys } from '../utilities';
-import PropTypes from 'prop-types';
 import {
     Icon,
     Info,
@@ -130,7 +129,6 @@ const InfoListItemRender: React.ForwardRefRenderFunction<unknown, InfoListItemPr
         avatar = false,
         chevron = false,
         dense = false,
-        classes = {},
         className: userClassName,
         divider,
         hidePadding = false,
@@ -146,7 +144,7 @@ const InfoListItemRender: React.ForwardRefRenderFunction<unknown, InfoListItemPr
         wrapSubtitle = false,
         wrapTitle = false,
         // ignore unused vars so that we can do prop transferring to the root element
-        /* eslint-disable @typescript-eslint/no-unused-vars */
+
         backgroundColor,
         chevronColor,
         fontColor,

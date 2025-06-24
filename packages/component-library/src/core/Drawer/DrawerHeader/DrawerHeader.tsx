@@ -176,7 +176,6 @@ const DrawerHeaderRender: React.ForwardRefRenderFunction<unknown, DrawerHeaderPr
     const generatedClasses = useUtilityClasses(props);
     const {
         backgroundImage,
-        classes = {},
         divider = false,
         icon,
         onIconClick,

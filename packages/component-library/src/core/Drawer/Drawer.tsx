@@ -4,7 +4,7 @@ import MUIDrawer, { DrawerProps as MUIDrawerProps } from '@mui/material/Drawer';
 import { DrawerBodyProps } from './DrawerBody';
 import { useDrawerLayout } from '../DrawerLayout/contexts/DrawerLayoutContextProvider';
 import { DrawerContext } from './DrawerContext';
-import { NavItemSharedStyleProps, NavItemSharedStylePropTypes, SharedStyleProps, SharedStylePropTypes } from './types';
+import { NavItemSharedStyleProps, SharedStyleProps } from './types';
 import { findChildByType, mergeStyleProp } from './utilities';
 import clsx from 'clsx';
 import drawerClasses, { DrawerClasses, DrawerClassKey, getDrawerUtilityClass } from './DrawerClasses';

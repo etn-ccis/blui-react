@@ -108,7 +108,6 @@ const ChannelValueRender: React.ForwardRefRenderFunction<unknown, ChannelValuePr
     ref: any
 ) => {
     const {
-        classes = {},
         className: userClassName,
         icon,
         prefix = false,

@@ -114,7 +114,6 @@ const HeroRender: React.ForwardRefRenderFunction<unknown, HeroProps> = (props: H
         icon,
         label,
         ChannelValueProps,
-        classes = {},
         // ignore unused vars so that we can do prop transferring to the root element
 
         iconBackgroundColor = 'transparent',

@@ -6,7 +6,7 @@ import Divider from '@mui/material/Divider';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import { RAIL_WIDTH, RAIL_WIDTH_CONDENSED } from '../Drawer';
-import { SharedStyleProps, SharedStylePropTypes } from '../types';
+import { SharedStyleProps } from '../types';
 import { NavItem } from '../DrawerNavItem';
 import color from 'color';
 import { cx } from '@emotion/css';

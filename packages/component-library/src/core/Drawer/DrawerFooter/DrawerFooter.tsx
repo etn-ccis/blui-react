@@ -65,7 +65,7 @@ const DrawerFooterRender: React.ForwardRefRenderFunction<unknown, DrawerFooterPr
         // ignore unused vars so that we can do prop transferring to the root element
 
         backgroundColor,
-        /* eslint-enable @typescript-eslint/no-unused-vars */
+
         sx,
         ...otherProps
     } = restProps;

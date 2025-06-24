@@ -76,7 +76,7 @@ const EmptyStateRender: React.ForwardRefRenderFunction<unknown, EmptyStateProps>
     props: EmptyStateProps,
     ref: any
 ) => {
-    const { actions, classes = {}, className: userClassName, description, icon, title, ...otherProps } = props;
+    const { actions, className: userClassName, description, icon, title, ...otherProps } = props;
     const generatedClasses = useUtilityClasses(props);
 
     return (

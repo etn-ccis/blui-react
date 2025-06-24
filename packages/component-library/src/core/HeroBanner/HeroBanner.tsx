@@ -38,7 +38,7 @@ const HeroBannerRender: React.ForwardRefRenderFunction<unknown, HeroBannerProps>
     props: HeroBannerProps,
     ref: any
 ) => {
-    const { className: userClassName, divider = false, limit = 4, classes = {}, ...otherProps } = props;
+    const { className: userClassName, divider = false, limit = 4, ...otherProps } = props;
     const generatedClasses = useUtilityClasses(props);
     const isArray = Array.isArray(props.children);
     return (
