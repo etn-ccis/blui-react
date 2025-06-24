@@ -1,3 +1,4 @@
+import storybook from "eslint-plugin-storybook";
 import bluiRecommended from '@brightlayer-ui/eslint-config';
 import reactHooks from 'eslint-plugin-react-hooks';
 
@@ -88,4 +89,5 @@ export default [
             ],
         },
     },
+    ...storybook.configs["flat/recommended"]
 ];
