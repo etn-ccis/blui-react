@@ -1,5 +1,12 @@
 # Changelog
 
+# v8.0.0 (Unreleased)
+
+### Changed
+
+- Upgraded `@mui/material` dependency to version v7.
+- Upgraded `react` to version 19.0.0.
+
 ## v7.1.1 (June 02, 2025)
 
 ### Fixed

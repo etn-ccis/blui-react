@@ -32,7 +32,7 @@ type InfoCardProps = {
     };
 };
 
-const styles: { [key: string]: SxProps } = {
+const styles: Record<string, SxProps> = {
     image: {
         width: '100%',
         backgroundSize: 'cover',

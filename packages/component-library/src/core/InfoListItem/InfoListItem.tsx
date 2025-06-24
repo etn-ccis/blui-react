@@ -127,29 +127,30 @@ const InfoListItemRender: React.ForwardRefRenderFunction<unknown, InfoListItemPr
 ) => {
     const generatedClasses = useUtilityClasses(props);
     const {
-        avatar,
-        chevron,
-        classes,
+        avatar = false,
+        chevron = false,
+        dense = false,
+        classes = {},
         className: userClassName,
         divider,
-        hidePadding,
+        hidePadding = false,
         icon,
         leftComponent,
         rightComponent,
-        ripple,
+        ripple = false,
         subtitle,
-        subtitleSeparator,
+        subtitleSeparator = '\u00B7',
         info,
         title,
-        wrapInfo,
-        wrapSubtitle,
-        wrapTitle,
+        wrapInfo = false,
+        wrapSubtitle = false,
+        wrapTitle = false,
         // ignore unused vars so that we can do prop transferring to the root element
         /* eslint-disable @typescript-eslint/no-unused-vars */
         backgroundColor,
         chevronColor,
         fontColor,
-        iconAlign,
+        iconAlign = 'left',
         iconColor,
         statusColor,
         ListItemButtonProps = {} as MuiListItemButtonProps,
@@ -177,7 +178,7 @@ const InfoListItemRender: React.ForwardRefRenderFunction<unknown, InfoListItemPr
                 // a dummy component to maintain the padding
                 <ListItemAvatar style={{ minWidth: 'unset' }}>
                     <Icon
-                        className={generatedClasses['avatar']}
+                        className={generatedClasses.avatar}
                         statusColor={statusColor}
                         iconColor={iconColor}
                         avatar={avatar}
@@ -192,14 +193,14 @@ const InfoListItemRender: React.ForwardRefRenderFunction<unknown, InfoListItemPr
         (): JSX.Element | undefined => (
             <>
                 {rightComponent && (
-                    <RightComponent className={generatedClasses['rightComponent']}>{rightComponent}</RightComponent>
+                    <RightComponent className={generatedClasses.rightComponent}>{rightComponent}</RightComponent>
                 )}
                 {chevron && (
                     <InfoListItemChevron
                         chevronColor={chevronColor}
                         color={'inherit'}
                         role={'button'}
-                        className={generatedClasses['chevron']}
+                        className={generatedClasses.chevron}
                     />
                 )}
             </>
@@ -209,7 +210,7 @@ const InfoListItemRender: React.ForwardRefRenderFunction<unknown, InfoListItemPr
 
     const getSeparator = useCallback(
         (): JSX.Element => (
-            <SubtitleSeparator className={generatedClasses['separator']} component="span">
+            <SubtitleSeparator className={generatedClasses.separator} component="span">
                 {subtitleSeparator || '\u00B7'}
             </SubtitleSeparator>
         ),
@@ -248,10 +249,10 @@ const InfoListItemRender: React.ForwardRefRenderFunction<unknown, InfoListItemPr
         <>
             <StatusStripe
                 statusColor={statusColor}
-                className={generatedClasses['statusStripe']}
+                className={generatedClasses.statusStripe}
                 data-testid={'blui-status-stripe'}
             />
-            {divider && <InfoListItemDivider divider={divider} className={generatedClasses['divider']} />}
+            {divider && <InfoListItemDivider divider={divider} className={generatedClasses.divider} />}
             {(icon || !hidePadding) && getIcon()}
             {leftComponent}
             <InfoListItemText
@@ -293,7 +294,7 @@ const InfoListItemRender: React.ForwardRefRenderFunction<unknown, InfoListItemPr
                     lineHeight: 1.25,
                     display: 'block',
                     color: fontColor || 'inherit',
-                    className: generatedClasses['title'],
+                    className: generatedClasses.title,
                     component: 'div',
                 }}
                 secondaryTypographyProps={{
@@ -337,57 +338,3 @@ const InfoListItemRender: React.ForwardRefRenderFunction<unknown, InfoListItemPr
 export const InfoListItem = forwardRef(InfoListItemRender);
 
 InfoListItem.displayName = 'InfoListItem';
-InfoListItem.propTypes = {
-    avatar: PropTypes.bool,
-    backgroundColor: PropTypes.string,
-    chevron: PropTypes.bool,
-    classes: PropTypes.shape({
-        root: PropTypes.string,
-        avatar: PropTypes.string,
-        icon: PropTypes.string,
-        rightComponent: PropTypes.string,
-        chevron: PropTypes.string,
-        separator: PropTypes.string,
-        subtitle: PropTypes.string,
-        title: PropTypes.string,
-    }),
-    divider: PropTypes.oneOf(['full', 'partial']),
-    fontColor: PropTypes.string,
-    hidePadding: PropTypes.bool,
-    icon: PropTypes.element,
-    iconAlign: PropTypes.oneOf(['left', 'right', 'center']),
-    iconColor: PropTypes.string,
-    info: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.element])),
-    ]),
-    leftComponent: PropTypes.node,
-    rightComponent: PropTypes.node,
-    statusColor: PropTypes.string,
-    style: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
-    subtitle: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.element])),
-    ]),
-    subtitleSeparator: PropTypes.string,
-    title: PropTypes.node.isRequired,
-    wrapInfo: PropTypes.bool,
-    wrapSubtitle: PropTypes.bool,
-    wrapTitle: PropTypes.bool,
-};
-
-InfoListItem.defaultProps = {
-    avatar: false,
-    chevron: false,
-    classes: {},
-    dense: false,
-    hidePadding: false,
-    iconAlign: 'left',
-    ripple: false,
-    subtitleSeparator: '\u00B7',
-    wrapInfo: false,
-    wrapSubtitle: false,
-    wrapTitle: false,
-    // @ts-ignore
-    ListItemButtonProps: PropTypes.object,
-};

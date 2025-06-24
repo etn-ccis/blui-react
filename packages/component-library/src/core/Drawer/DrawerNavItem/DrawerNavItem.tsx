@@ -269,7 +269,6 @@ const DrawerNavItemRender: React.ForwardRefRenderFunction<HTMLElement, DrawerNav
         if (isInActiveTree && !expanded) {
             setExpanded(true);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isInActiveTree]); // Only update if the active tree changes (not after manual expand/collapse action)
 
     // If the active item changes
@@ -497,56 +496,49 @@ const DrawerNavItemRender: React.ForwardRefRenderFunction<HTMLElement, DrawerNav
                         className={generatedClasses.nestedListGroup}
                         nestedBackgroundColor={nestedBackgroundColor}
                     >
-                        {items &&
-                            items.map((subItem: DrawerNavItemProps, index: number) => (
-                                // eslint-disable-next-line @typescript-eslint/no-use-before-define
-                                <DrawerNavItem
-                                    key={`itemList_${index}`}
-                                    {...subItem}
-                                    activeItemBackgroundColor={mergeStyleProp(
-                                        activeItemBackgroundColor,
-                                        subItem.activeItemBackgroundColor
-                                    )}
-                                    activeItemBackgroundShape={mergeStyleProp(
-                                        activeItemBackgroundShape,
-                                        subItem.activeItemBackgroundShape
-                                    )}
-                                    activeItemFontColor={mergeStyleProp(
-                                        activeItemFontColor,
-                                        subItem.activeItemFontColor
-                                    )}
-                                    activeItemIconColor={mergeStyleProp(
-                                        activeItemIconColor,
-                                        subItem.activeItemIconColor
-                                    )}
-                                    backgroundColor={mergeStyleProp(backgroundColor, subItem.backgroundColor)}
-                                    chevron={mergeStyleProp(chevron, subItem.chevron)}
-                                    chevronColor={mergeStyleProp(chevronColor, subItem.chevronColor)}
-                                    // we use props. because we don't want to pass the destructured default as the value to the children
-                                    collapseIcon={mergeStyleProp(props.collapseIcon, subItem.collapseIcon)}
-                                    disableActiveItemParentStyles={mergeStyleProp(
-                                        disableActiveItemParentStyles,
-                                        subItem.disableActiveItemParentStyles
-                                    )}
-                                    divider={mergeStyleProp(divider, subItem.divider)}
-                                    // we use props. because we don't want to pass the destructured default as the value to the children
-                                    expandIcon={mergeStyleProp(props.expandIcon, subItem.expandIcon)}
-                                    hidePadding={mergeStyleProp(hidePadding, subItem.hidePadding)}
-                                    itemFontColor={mergeStyleProp(itemFontColor, subItem.itemFontColor)}
-                                    itemIconColor={mergeStyleProp(itemIconColor, subItem.itemIconColor)}
-                                    nestedBackgroundColor={mergeStyleProp(
-                                        nestedBackgroundColor,
-                                        subItem.nestedBackgroundColor
-                                    )}
-                                    nestedDivider={mergeStyleProp(nestedDivider, subItem.nestedDivider)}
-                                    ripple={mergeStyleProp(ripple, subItem.ripple)}
-                                    depth={depth + 1}
-                                    isInActiveTree={activeHierarchy.includes(subItem.itemID)}
-                                    notifyActiveParent={(ids: string[] = []): void => {
-                                        notifyActiveParent(ids.concat(itemID));
-                                    }}
-                                />
-                            ))}
+                        {items?.map((subItem: DrawerNavItemProps, index: number) => (
+                            // eslint-disable-next-line @typescript-eslint/no-use-before-define
+                            <DrawerNavItem
+                                key={`itemList_${index}`}
+                                {...subItem}
+                                activeItemBackgroundColor={mergeStyleProp(
+                                    activeItemBackgroundColor,
+                                    subItem.activeItemBackgroundColor
+                                )}
+                                activeItemBackgroundShape={mergeStyleProp(
+                                    activeItemBackgroundShape,
+                                    subItem.activeItemBackgroundShape
+                                )}
+                                activeItemFontColor={mergeStyleProp(activeItemFontColor, subItem.activeItemFontColor)}
+                                activeItemIconColor={mergeStyleProp(activeItemIconColor, subItem.activeItemIconColor)}
+                                backgroundColor={mergeStyleProp(backgroundColor, subItem.backgroundColor)}
+                                chevron={mergeStyleProp(chevron, subItem.chevron)}
+                                chevronColor={mergeStyleProp(chevronColor, subItem.chevronColor)}
+                                // we use props. because we don't want to pass the destructured default as the value to the children
+                                collapseIcon={mergeStyleProp(props.collapseIcon, subItem.collapseIcon)}
+                                disableActiveItemParentStyles={mergeStyleProp(
+                                    disableActiveItemParentStyles,
+                                    subItem.disableActiveItemParentStyles
+                                )}
+                                divider={mergeStyleProp(divider, subItem.divider)}
+                                // we use props. because we don't want to pass the destructured default as the value to the children
+                                expandIcon={mergeStyleProp(props.expandIcon, subItem.expandIcon)}
+                                hidePadding={mergeStyleProp(hidePadding, subItem.hidePadding)}
+                                itemFontColor={mergeStyleProp(itemFontColor, subItem.itemFontColor)}
+                                itemIconColor={mergeStyleProp(itemIconColor, subItem.itemIconColor)}
+                                nestedBackgroundColor={mergeStyleProp(
+                                    nestedBackgroundColor,
+                                    subItem.nestedBackgroundColor
+                                )}
+                                nestedDivider={mergeStyleProp(nestedDivider, subItem.nestedDivider)}
+                                ripple={mergeStyleProp(ripple, subItem.ripple)}
+                                depth={depth + 1}
+                                isInActiveTree={activeHierarchy.includes(subItem.itemID)}
+                                notifyActiveParent={(ids: string[] = []): void => {
+                                    notifyActiveParent(ids.concat(itemID));
+                                }}
+                            />
+                        ))}
                         {getChildren()}
                     </NestedListGroup>
                 </Collapse>

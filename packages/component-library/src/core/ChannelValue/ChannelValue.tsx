@@ -1,7 +1,6 @@
 import React, { useCallback, forwardRef } from 'react';
 import Typography, { TypographyProps } from '@mui/material/Typography';
 import { cx } from '@emotion/css';
-import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import channelValueClasses, {
     ChannelValueClasses,
@@ -109,15 +108,15 @@ const ChannelValueRender: React.ForwardRefRenderFunction<unknown, ChannelValuePr
     ref: any
 ) => {
     const {
-        classes,
+        classes = {},
         className: userClassName,
         icon,
-        prefix,
+        prefix = false,
         units,
         unitSpace,
         value,
-        color,
-        fontSize,
+        color = 'inherit',
+        fontSize = 'inherit',
         ...otherProps
     } = props;
     const generatedClasses = useUtilityClasses(props);
@@ -193,27 +192,3 @@ const ChannelValueRender: React.ForwardRefRenderFunction<unknown, ChannelValuePr
 export const ChannelValue = forwardRef(ChannelValueRender);
 
 ChannelValue.displayName = 'ChannelValue';
-ChannelValue.propTypes = {
-    classes: PropTypes.shape({
-        root: PropTypes.string,
-        icon: PropTypes.string,
-        text: PropTypes.string,
-        prefix: PropTypes.string,
-        suffix: PropTypes.string,
-        value: PropTypes.string,
-        units: PropTypes.string,
-    }),
-    color: PropTypes.string,
-    fontSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    icon: PropTypes.element,
-    prefix: PropTypes.bool,
-    units: PropTypes.string,
-    unitSpace: PropTypes.oneOf(['show', 'hide', 'auto']),
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-};
-ChannelValue.defaultProps = {
-    classes: {},
-    color: 'inherit',
-    fontSize: 'inherit',
-    prefix: false,
-};

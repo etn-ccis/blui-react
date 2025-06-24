@@ -4,7 +4,6 @@ import React, { useCallback, useState, useEffect, forwardRef } from 'react';
 import Drawer, { DrawerProps } from '@mui/material/Drawer';
 import Menu, { MenuProps as standardMenuProps } from '@mui/material/Menu';
 import { cx } from '@emotion/css';
-import PropTypes from 'prop-types';
 import { DrawerHeader, DrawerNavGroup, NavItem } from '../Drawer';
 import Box, { BoxProps } from '@mui/material/Box';
 import { unstable_composeClasses as composeClasses } from '@mui/material';
@@ -122,16 +121,16 @@ const UserMenuRender: React.ForwardRefRenderFunction<unknown, UserMenuProps> = (
     const theme = useTheme();
     const {
         avatar,
-        classes,
+        classes = {},
         menu,
-        menuGroups,
-        MenuProps,
+        menuGroups = [],
+        MenuProps = {},
         menuSubtitle,
         menuTitle,
         useBottomSheetAt = theme.breakpoints.values.sm,
         BottomSheetProps,
-        onClose,
-        onOpen,
+        onClose = (): void => {},
+        onOpen = (): void => {},
         ...otherProps
     } = props;
     const generatedClasses = useUtilityClasses(props);
@@ -174,7 +173,7 @@ const UserMenuRender: React.ForwardRefRenderFunction<unknown, UserMenuProps> = (
             /* If user passed in onClick function as a prop to Avatar, keep it. */
             const onClickFn = (event: MouseEvent): void => {
                 openMenu(event);
-                if (avatar.props && avatar.props.onClick) {
+                if (avatar.props?.onClick) {
                     avatar.props.onClick(event);
                 }
             };
@@ -326,44 +325,3 @@ const UserMenuRender: React.ForwardRefRenderFunction<unknown, UserMenuProps> = (
 export const UserMenu = forwardRef(UserMenuRender);
 
 UserMenu.displayName = 'UserMenu';
-
-UserMenu.propTypes = {
-    avatar: PropTypes.element.isRequired,
-    classes: PropTypes.shape({
-        root: PropTypes.string,
-        bottomSheet: PropTypes.string,
-    }),
-    menu: PropTypes.element,
-    menuTitle: PropTypes.string,
-    menuSubtitle: PropTypes.string,
-    // @ts-ignore
-    menuGroups: PropTypes.arrayOf(
-        PropTypes.shape({
-            title: PropTypes.string,
-            fontColor: PropTypes.string,
-            iconColor: PropTypes.string,
-            items: PropTypes.arrayOf(
-                PropTypes.shape({
-                    icon: PropTypes.element,
-                    onClick: PropTypes.func,
-                    statusColor: PropTypes.string,
-                    subtitle: PropTypes.string,
-                    title: PropTypes.string,
-                    divider: PropTypes.bool,
-                })
-            ),
-        })
-    ),
-    MenuProps: PropTypes.object,
-    useBottomSheetAt: PropTypes.number,
-    onClose: PropTypes.func,
-    onOpen: PropTypes.func,
-};
-
-UserMenu.defaultProps = {
-    classes: {},
-    menuGroups: [],
-    MenuProps: {},
-    onClose: (): void => {},
-    onOpen: (): void => {},
-};

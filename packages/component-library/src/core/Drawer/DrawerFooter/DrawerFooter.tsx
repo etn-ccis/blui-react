@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import Divider from '@mui/material/Divider';
 import { useDrawerContext } from '../DrawerContext';
 import { styled, Theme, SxProps } from '@mui/material/styles';
@@ -59,15 +58,15 @@ const DrawerFooterRender: React.ForwardRefRenderFunction<unknown, DrawerFooterPr
 ) => {
     const generatedClasses = useUtilityClasses(props);
     const {
-        classes,
+        classes = {},
         className: userClassName,
         children,
         divider = true,
         // ignore unused vars so that we can do prop transferring to the root element
-        /* eslint-disable @typescript-eslint/no-unused-vars */
+
         backgroundColor,
-        /* eslint-enable @typescript-eslint/no-unused-vars */
-        hideContentOnCollapse,
+
+        hideContentOnCollapse = true,
         sx,
         ...otherProps
     } = props;
@@ -100,17 +99,3 @@ const DrawerFooterRender: React.ForwardRefRenderFunction<unknown, DrawerFooterPr
  */
 export const DrawerFooter = forwardRef(DrawerFooterRender);
 DrawerFooter.displayName = 'DrawerFooter';
-DrawerFooter.propTypes = {
-    classes: PropTypes.shape({
-        root: PropTypes.string,
-        hidden: PropTypes.string,
-    }),
-    backgroundColor: PropTypes.string,
-    divider: PropTypes.bool,
-    hideContentOnCollapse: PropTypes.bool,
-};
-DrawerFooter.defaultProps = {
-    classes: {},
-    divider: true,
-    hideContentOnCollapse: true,
-};

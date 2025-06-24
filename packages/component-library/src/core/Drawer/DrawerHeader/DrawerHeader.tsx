@@ -1,5 +1,4 @@
 import React, { ReactNode, useCallback, forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import Toolbar, { ToolbarProps } from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
@@ -177,21 +176,21 @@ const DrawerHeaderRender: React.ForwardRefRenderFunction<unknown, DrawerHeaderPr
     const generatedClasses = useUtilityClasses(props);
     const {
         backgroundImage,
-        classes,
-        divider,
+        classes = {},
+        divider = false,
         icon,
         onIconClick,
         subtitle,
         title,
         titleContent,
         // ignore unused vars so that we can do prop transferring to the root element
-        /* eslint-disable @typescript-eslint/no-unused-vars */
+
         backgroundColor,
-        backgroundOpacity,
+        backgroundOpacity = 0.3,
         fontColor,
         disableGutters = true,
         sx,
-        /* eslint-enable @typescript-eslint/no-unused-vars */
+
         ...otherToolbarProps
     } = props;
 
@@ -288,30 +287,3 @@ const DrawerHeaderRender: React.ForwardRefRenderFunction<unknown, DrawerHeaderPr
 export const DrawerHeader = forwardRef(DrawerHeaderRender);
 
 DrawerHeader.displayName = 'DrawerHeader';
-DrawerHeader.defaultProps = {
-    backgroundOpacity: 0.3,
-    classes: {},
-    divider: false,
-};
-DrawerHeader.propTypes = {
-    backgroundColor: PropTypes.string,
-    backgroundImage: PropTypes.string,
-    backgroundOpacity: PropTypes.number,
-    classes: PropTypes.shape({
-        root: PropTypes.string,
-        background: PropTypes.string,
-        content: PropTypes.string,
-        navigation: PropTypes.string,
-        nonClickableIcon: PropTypes.string,
-        railIcon: PropTypes.string,
-        subtitle: PropTypes.string,
-        title: PropTypes.string,
-    }),
-    divider: PropTypes.bool,
-    fontColor: PropTypes.string,
-    icon: PropTypes.element,
-    onIconClick: PropTypes.func,
-    subtitle: PropTypes.string,
-    title: PropTypes.string,
-    titleContent: PropTypes.element,
-};

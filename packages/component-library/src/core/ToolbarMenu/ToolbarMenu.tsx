@@ -5,7 +5,6 @@ import { useTheme, styled } from '@mui/material/styles';
 import composeRefs from '@seznam/compose-react-refs';
 import { DrawerNavGroup, NavItem } from '../Drawer';
 import Menu, { MenuProps as standardMenuProps } from '@mui/material/Menu';
-import PropTypes from 'prop-types';
 import { Box, unstable_composeClasses as composeClasses } from '@mui/material';
 import Typography, { TypographyProps } from '@mui/material/Typography';
 import toolbarMenuClasses, {
@@ -116,10 +115,10 @@ const ToolbarMenuRenderer: React.ForwardRefRenderFunction<unknown, ToolbarMenuPr
         icon,
         label,
         menu,
-        menuGroups,
-        MenuProps,
-        onClose,
-        onOpen,
+        menuGroups = [],
+        MenuProps = {},
+        onClose = (): void => {},
+        onOpen = (): void => {},
         className: userClassName,
         ...otherTypographyProps
     } = props;
@@ -256,43 +255,3 @@ const ToolbarMenuRenderer: React.ForwardRefRenderFunction<unknown, ToolbarMenuPr
  */
 export const ToolbarMenu = forwardRef(ToolbarMenuRenderer);
 ToolbarMenu.displayName = 'ToolbarMenu';
-ToolbarMenu.propTypes = {
-    classes: PropTypes.shape({
-        root: PropTypes.string,
-        dropdownArrow: PropTypes.string,
-        icon: PropTypes.string,
-        label: PropTypes.string,
-    }),
-    menu: PropTypes.element,
-    label: PropTypes.string,
-    icon: PropTypes.element,
-    // @ts-ignore
-    menuGroups: PropTypes.arrayOf(
-        PropTypes.shape({
-            title: PropTypes.string,
-            fontColor: PropTypes.string,
-            iconColor: PropTypes.string,
-            items: PropTypes.arrayOf(
-                PropTypes.shape({
-                    icon: PropTypes.element,
-                    onClick: PropTypes.func,
-                    statusColor: PropTypes.string,
-                    subtitle: PropTypes.string,
-                    title: PropTypes.string,
-                    divider: PropTypes.bool,
-                })
-            ),
-        })
-    ),
-    MenuProps: PropTypes.object,
-    onClose: PropTypes.func,
-    onOpen: PropTypes.func,
-};
-
-ToolbarMenu.defaultProps = {
-    classes: {},
-    menuGroups: [],
-    MenuProps: {},
-    onClose: (): void => {},
-    onOpen: (): void => {},
-};

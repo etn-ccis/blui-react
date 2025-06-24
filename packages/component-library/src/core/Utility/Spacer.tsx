@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import Box, { BoxProps } from '@mui/material/Box';
 import { unstable_composeClasses as composeClasses } from '@mui/material';
 import { SpacerClasses, getSpacerUtilityClass, SpacerClassKey } from './SpacerClasses';
@@ -38,7 +37,7 @@ const Root = styled(
 }));
 
 const SpacerRender: React.ForwardRefRenderFunction<unknown, SpacerProps> = (props: SpacerProps, ref: any) => {
-    const { children, flex, height, width, ...otherProps } = props;
+    const { children, flex = 1, height, width, ...otherProps } = props;
     const ownerState = {
         ...props,
     };
@@ -66,15 +65,3 @@ const SpacerRender: React.ForwardRefRenderFunction<unknown, SpacerProps> = (prop
 export const Spacer = forwardRef(SpacerRender);
 
 Spacer.displayName = 'Spacer';
-Spacer.propTypes = {
-    flex: PropTypes.number,
-    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    classes: PropTypes.shape({
-        root: PropTypes.string,
-    }),
-};
-Spacer.defaultProps = {
-    flex: 1,
-    classes: {},
-};

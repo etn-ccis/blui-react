@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import { DrawerNavGroup, DrawerNavGroupProps } from './DrawerNavGroup';
 import { NavItemSharedStyleProps, NavItemSharedStylePropTypes, SharedStyleProps, SharedStylePropTypes } from './types';
 import { mergeStyleProp } from './utilities';
@@ -60,7 +59,7 @@ const DrawerBodyRender: React.ForwardRefRenderFunction<unknown, DrawerBodyProps>
         nestedDivider,
         ripple,
         // DrawerBody-specific props
-        classes,
+        classes = {},
         children: bodyChildren,
         // Other props
         ...otherProps
@@ -128,14 +127,3 @@ const DrawerBodyRender: React.ForwardRefRenderFunction<unknown, DrawerBodyProps>
  */
 export const DrawerBody = forwardRef(DrawerBodyRender);
 DrawerBody.displayName = 'DrawerBody';
-// @ts-ignore
-DrawerBody.propTypes = {
-    ...SharedStylePropTypes,
-    ...NavItemSharedStylePropTypes,
-    classes: PropTypes.shape({
-        root: PropTypes.string,
-    }),
-};
-DrawerBody.defaultProps = {
-    classes: {},
-};

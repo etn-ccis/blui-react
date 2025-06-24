@@ -12,7 +12,10 @@
         "moduleResolution": "node",
         "jsx": "react-jsx",
         "allowSyntheticDefaultImports": true,
-        "strictNullChecks": false
+        "strictNullChecks": false,
+        "paths": {
+            "@brigtlayer-ui/themes": ["../themes/src"],
+        }
     },
     "include": ["src/*", "package.json"],
     "exclude": ["node_modules"]

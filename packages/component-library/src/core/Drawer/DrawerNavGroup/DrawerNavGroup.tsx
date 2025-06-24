@@ -116,7 +116,7 @@ const DrawerNavGroupRender: React.ForwardRefRenderFunction<unknown, DrawerNavGro
     const {
         // Nav Group Props
         children,
-        classes,
+        classes = {},
         className: userClassName,
         items = [],
         title,
@@ -153,7 +153,6 @@ const DrawerNavGroupRender: React.ForwardRefRenderFunction<unknown, DrawerNavGro
     useEffect(() => {
         if (!findID({ items: props.items, children: props.children } as DrawerNavItemProps, activeItem))
             setActiveHierarchyItems([]);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [activeItem]);
 
     const getChildren = useCallback(
@@ -404,8 +403,4 @@ DrawerNavGroup.propTypes = {
     titleColor: PropTypes.string,
     titleContent: PropTypes.element,
     titleDivider: PropTypes.bool,
-};
-DrawerNavGroup.defaultProps = {
-    classes: {},
-    items: [],
 };

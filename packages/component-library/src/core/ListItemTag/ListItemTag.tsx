@@ -1,7 +1,6 @@
 import Typography, { TypographyProps } from '@mui/material/Typography';
 import { styled, useColorScheme } from '@mui/material/styles';
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import { unstable_composeClasses as composeClasses } from '@mui/material';
 import listItemTagClasses, { ListItemTagClassKey, getListItemTagUtilityClass } from './ListItemTagClasses';
 import { cx } from '@emotion/css';
@@ -85,7 +84,15 @@ const ListItemTagRender: React.ForwardRefRenderFunction<unknown, ListItemTagProp
     props: ListItemTagProps,
     ref: any
 ) => {
-    const { classes: userClasses, label, variant, className: userClassName, ...otherTypographyProps } = props;
+    const {
+        classes: userClasses = {},
+        display = 'inline',
+        noWrap = true,
+        label,
+        variant,
+        className: userClassName,
+        ...otherTypographyProps
+    } = props;
     const generatedClasses = useUtilityClasses(props);
     const { root: rootUserClass, ...otherUserClasses } = userClasses;
     return (
@@ -108,17 +115,4 @@ const ListItemTagRender: React.ForwardRefRenderFunction<unknown, ListItemTagProp
  */
 export const ListItemTag = forwardRef(ListItemTagRender);
 
-ListItemTag.propTypes = {
-    label: PropTypes.string.isRequired,
-    backgroundColor: PropTypes.string,
-    fontColor: PropTypes.string,
-    classes: PropTypes.shape({
-        root: PropTypes.string,
-    }),
-};
-ListItemTag.defaultProps = {
-    noWrap: true,
-    display: 'inline',
-    classes: {},
-};
 ListItemTag.displayName = 'ListItemTag';

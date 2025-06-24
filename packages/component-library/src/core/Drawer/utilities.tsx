@@ -6,7 +6,7 @@ export const mergeStyleProp = <T,>(parentValue: T, childValue: T): T | undefined
 
 export const findChildByType = (children: ReactNode, type: string[]): JSX.Element[] =>
     React.Children.map(children, (child: any) => {
-        if (child && child.type) {
+        if (child?.type) {
             const name = child.type.displayName;
             if (name && type.includes(name)) {
                 return child;

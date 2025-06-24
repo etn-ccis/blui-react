@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useCallback, useRef, forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import MUIDrawer, { DrawerProps as MUIDrawerProps } from '@mui/material/Drawer';
 import { DrawerBodyProps } from './DrawerBody';
@@ -146,16 +145,16 @@ const DrawerRenderer: React.ForwardRefRenderFunction<unknown, DrawerProps> = (pr
         ripple,
         // Drawer-specific props
         activeItem,
-        classes,
+        classes = {},
         className,
-        condensed,
+        condensed = false,
         noLayout = false,
         open,
-        openOnHover,
-        openOnHoverDelay,
+        openOnHover = true,
+        openOnHoverDelay = 500,
         onItemSelect,
         sideBorder = false,
-        variant: variantProp,
+        variant: variantProp = 'persistent',
         width,
         // Other MUI Drawer Props
         ...drawerProps
@@ -305,7 +304,6 @@ const DrawerRenderer: React.ForwardRefRenderFunction<unknown, DrawerProps> = (pr
             setPadding(variant === 'temporary' ? 0 : getDrawerWidth());
             setDrawerOpen(isDrawerOpen());
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [variant, noLayout, isDrawerOpen, getDrawerWidth]);
 
     return (
@@ -355,33 +353,3 @@ const DrawerRenderer: React.ForwardRefRenderFunction<unknown, DrawerProps> = (pr
  */
 export const Drawer = forwardRef(DrawerRenderer);
 Drawer.displayName = 'BLUIDrawer';
-// @ts-ignore
-Drawer.propTypes = {
-    ...SharedStylePropTypes,
-    ...NavItemSharedStylePropTypes,
-    activeItem: PropTypes.string,
-    classes: PropTypes.shape({
-        root: PropTypes.string,
-        content: PropTypes.string,
-        expanded: PropTypes.string,
-        paper: PropTypes.string,
-        sideBorder: PropTypes.string,
-    }),
-    condensed: PropTypes.bool,
-    noLayout: PropTypes.bool,
-    onItemSelect: PropTypes.func,
-    open: PropTypes.bool.isRequired,
-    openOnHover: PropTypes.bool,
-    openOnHoverDelay: PropTypes.number,
-    sideBorder: PropTypes.bool,
-    variant: PropTypes.oneOf(['persistent', 'permanent', 'temporary', 'rail']),
-    width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-};
-Drawer.defaultProps = {
-    classes: {},
-    openOnHover: true,
-    sideBorder: false,
-    variant: 'persistent',
-    condensed: false,
-    openOnHoverDelay: 500,
-};
