@@ -16,6 +16,7 @@
     "react-dom": "19.0.0"
   },
   "devDependencies": {
+    "@brightlayer-ui/react-components": "workspace:^",
     "@eslint/js": "^9.25.0",
     "@storybook/react-vite": "^9.0.12",
     "@types/react": "19.0.0",
