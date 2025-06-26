@@ -5,7 +5,7 @@
 ### Changed
 
 - Upgraded `@mui/material` dependency to version v7.
-- Upgraded `react` to version 19.0.0.
+- Upgraded `react` to version v19.
 
 ## v7.1.1 (June 02, 2025)
 

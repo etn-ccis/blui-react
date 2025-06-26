@@ -64,9 +64,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     checkboxIndeterminate: {
         color: theme.palette.primary.main,
     },
-    contextualTableRow: {
-        backgroundColor: colors.white[50],
-    },
+
     dataCell: {
         minWidth: '150px',
     },
@@ -216,7 +214,7 @@ export const ContextualAction = (): JSX.Element => {
                         <TableRow
                             key={index}
                             hover={false}
-                            classes={{ root: classes.contextualTableRow, selected: classes.rowSelected }}
+                            classes={{ selected: classes.rowSelected }}
                             selected={isSelected(row)}
                         >
                             <TableCell
