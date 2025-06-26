@@ -17,7 +17,8 @@
     "build:workflow": "pnpm --filter @brightlayer-ui/react-auth-workflow build",
     "start:workflow:example":"pnpm install && pnpm --filter @brightlayer-ui/react-auth-workflow build && pnpm --filter example start",
     "start:workflow:example-vite":"pnpm install && pnpm --filter @brightlayer-ui/react-auth-workflow build && pnpm --filter vite-example start",
-    "start:docs": "pnpm install && cd docs && pnpm install && pnpm start"
+    "start:docs": "pnpm install && cd docs && pnpm install && pnpm start",
+    "start:storybook": "pnpm install && pnpm build:theme && pnpm build:components && cd apps/storybook && pnpm install && pnpm start"
   },
   "keywords": [],
   "author": "",
