@@ -600,9 +600,15 @@ importers:
         specifier: 19.0.0
         version: 19.0.0(react@19.0.0)
     devDependencies:
+      '@brightlayer-ui/colors':
+        specifier: ^3.1.1
+        version: 3.1.1
       '@brightlayer-ui/react-components':
         specifier: workspace:^
         version: link:../../packages/component-library/dist
+      '@brightlayer-ui/react-themes':
+        specifier: workspace:^
+        version: link:../../packages/themes/dist
       '@eslint/js':
         specifier: ^9.25.0
         version: 9.28.0
