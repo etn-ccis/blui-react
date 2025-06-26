@@ -41,7 +41,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Basic: Story = {
+export const WithBasicUsage: Story = {
     render: ({ title, icon }) => <EmptyState title={title} icon={icon} />,
     args: {
         title: 'Location Unknown',
@@ -49,7 +49,7 @@ export const Basic: Story = {
     },
 } satisfies Story;
 
-export const Actions: Story = {
+export const WithActions: Story = {
     render: ({ title, icon, actions }) => <EmptyState title={title} icon={icon} actions={actions} />,
     args: {
         title: 'No Devices',
@@ -62,7 +62,7 @@ export const Actions: Story = {
     },
 } satisfies Story;
 
-export const Description: Story = {
+export const WithDescription: Story = {
     render: ({ title, icon, description }) => <EmptyState title={title} icon={icon} description={description} />,
     args: {
         title: 'Location Services Disabled',
@@ -104,7 +104,7 @@ const CardEmptyStateRenderer: Element = (args: EmptyStateProps) => {
     );
 };
 
-export const Card: Story = {
+export const WithinACard: Story = {
     render: ({ title, icon, actions }) => <CardEmptyStateRenderer title={title} icon={icon} actions={actions} />,
     args: {
         title: 'No Devices Found',
@@ -117,7 +117,7 @@ export const Card: Story = {
     },
 } satisfies Story;
 
-export const FullConfig: Story = {
+export const WithFullConfig: Story = {
     render: ({ title, icon, actions, description }) => (
         <EmptyState title={title} icon={icon} actions={actions} description={description} />
     ),
