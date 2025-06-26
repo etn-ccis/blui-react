@@ -1,7 +1,16 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { EmptyState, type EmptyStateProps } from '@brightlayer-ui/react-components';
-import { NotListedLocation, Close, Add, Devices, LocationOff, HelpOutline, ExpandMore, TrendingUp } from '@mui/icons-material';
+import {
+    NotListedLocation,
+    Close,
+    Add,
+    Devices,
+    LocationOff,
+    HelpOutline,
+    ExpandMore,
+    TrendingUp,
+} from '@mui/icons-material';
 import { action } from 'storybook/actions';
 import { Button, Accordion, AccordionSummary, Typography, AccordionDetails } from '@mui/material';
 import { blueThemes } from '@brightlayer-ui/react-themes';
@@ -15,12 +24,12 @@ const meta = {
             control: 'select',
             options: ['Close', 'NotListedLocation', 'Devices', 'LocationOff', 'HelpOutline', 'TrendingUp'],
             mapping: {
-                Close: <Close fontSize='inherit' />,
-                NotListedLocation: <NotListedLocation fontSize='inherit' />,
-                Devices: <Devices fontSize='inherit' />,
-                LocationOff: <LocationOff fontSize='inherit' />,
-                HelpOutline: <HelpOutline fontSize='inherit' />,
-                TrendingUp: <TrendingUp fontSize='inherit' />,
+                Close: <Close fontSize="inherit" />,
+                NotListedLocation: <NotListedLocation fontSize="inherit" />,
+                Devices: <Devices fontSize="inherit" />,
+                LocationOff: <LocationOff fontSize="inherit" />,
+                HelpOutline: <HelpOutline fontSize="inherit" />,
+                TrendingUp: <TrendingUp fontSize="inherit" />,
             },
         },
     },
@@ -109,7 +118,9 @@ export const Card = {
 } satisfies Story;
 
 export const FullConfig = {
-    render: ({ title, icon, actions, description }) => <EmptyState title={title} icon={icon} actions={actions} description={description} />,
+    render: ({ title, icon, actions, description }) => (
+        <EmptyState title={title} icon={icon} actions={actions} description={description} />
+    ),
     args: {
         title: 'Predictions Page Coming Soon',
         icon: 'TrendingUp',
