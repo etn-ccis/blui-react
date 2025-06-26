@@ -1,6 +1,5 @@
 import React, { forwardRef } from 'react';
 import Divider from '@mui/material/Divider';
-import PropTypes from 'prop-types';
 import { cx } from '@emotion/css';
 import { getHeroBannerUtilityClass, HeroBannerClasses, HeroBannerClassKey } from './HeroBannerClasses';
 import Box, { BoxProps } from '@mui/material/Box';
@@ -36,11 +35,12 @@ const Root = styled(
 }));
 
 const HeroBannerRender: React.ForwardRefRenderFunction<unknown, HeroBannerProps> = (
-    { className: userClassName, divider = false, limit = 4, classes = {}, ...otherProps }: HeroBannerProps,
+    props: HeroBannerProps,
     ref: any
 ) => {
-    const generatedClasses = useUtilityClasses({ ...otherProps, classes, divider, limit });
-    const isArray = Array.isArray(otherProps.children);
+    const { className: userClassName, divider = false, limit = 4, ...otherProps } = props;
+    const generatedClasses = useUtilityClasses(props);
+    const isArray = Array.isArray(props.children);
     return (
         <>
             <Root
@@ -66,10 +66,3 @@ const HeroBannerRender: React.ForwardRefRenderFunction<unknown, HeroBannerProps>
 export const HeroBanner = forwardRef(HeroBannerRender);
 
 HeroBanner.displayName = 'HeroBanner';
-HeroBanner.propTypes = {
-    classes: PropTypes.shape({
-        root: PropTypes.string,
-    }),
-    divider: PropTypes.bool,
-    limit: PropTypes.number,
-};

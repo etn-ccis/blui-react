@@ -4,7 +4,6 @@ import { ListItemButtonProps as MuiListItemButtonProps } from '@mui/material/Lis
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import { unstable_composeClasses as composeClasses } from '@mui/material';
 import { separate, withKeys } from '../utilities';
-import PropTypes from 'prop-types';
 import {
     Icon,
     Info,
@@ -122,66 +121,39 @@ export type InfoListItemProps = Omit<ListItemProps, 'title' | 'divider'> & {
     ListItemButtonProps?: Partial<MuiListItemButtonProps>;
 };
 const InfoListItemRender: React.ForwardRefRenderFunction<unknown, InfoListItemProps> = (
-    {
+    props: InfoListItemProps,
+    ref: any
+) => {
+    const generatedClasses = useUtilityClasses(props);
+    const {
         avatar = false,
         chevron = false,
         dense = false,
+        className: userClassName,
+        divider,
         hidePadding = false,
-        iconAlign = 'left',
+        icon,
+        leftComponent,
+        rightComponent,
         ripple = false,
+        subtitle,
         subtitleSeparator = '\u00B7',
+        info,
+        title,
         wrapInfo = false,
         wrapSubtitle = false,
         wrapTitle = false,
-        /* eslint-disable-next-line */
-        ListItemButtonProps = {} as MuiListItemButtonProps,
         // ignore unused vars so that we can do prop transferring to the root element
+
         backgroundColor,
         chevronColor,
         fontColor,
+        iconAlign = 'left',
         iconColor,
         statusColor,
-        icon,
-        leftComponent,
-        rightComponent,
-        divider,
-        subtitle,
-        info,
-        title,
         onClick,
-        className: userClassName,
         ...otherListItemProps
-    }: InfoListItemProps,
-    ref: any
-) => {
-    const generatedClasses = useUtilityClasses({
-        avatar,
-        chevron,
-        dense,
-        hidePadding,
-        iconAlign,
-        ripple,
-        subtitleSeparator,
-        wrapInfo,
-        wrapSubtitle,
-        wrapTitle,
-        ListItemButtonProps,
-        backgroundColor,
-        chevronColor,
-        fontColor,
-        iconColor,
-        statusColor,
-        icon,
-        leftComponent,
-        rightComponent,
-        divider,
-        subtitle,
-        info,
-        title,
-        className: userClassName,
-        onClick,
-        ...otherListItemProps,
-    });
+    } = props;
 
     const getIcon = useCallback((): JSX.Element | undefined => {
         if (icon) {
@@ -363,41 +335,3 @@ const InfoListItemRender: React.ForwardRefRenderFunction<unknown, InfoListItemPr
 export const InfoListItem = forwardRef(InfoListItemRender);
 
 InfoListItem.displayName = 'InfoListItem';
-InfoListItem.propTypes = {
-    avatar: PropTypes.bool,
-    backgroundColor: PropTypes.string,
-    chevron: PropTypes.bool,
-    classes: PropTypes.shape({
-        root: PropTypes.string,
-        avatar: PropTypes.string,
-        icon: PropTypes.string,
-        rightComponent: PropTypes.string,
-        chevron: PropTypes.string,
-        separator: PropTypes.string,
-        subtitle: PropTypes.string,
-        title: PropTypes.string,
-    }),
-    divider: PropTypes.oneOf(['full', 'partial']),
-    fontColor: PropTypes.string,
-    hidePadding: PropTypes.bool,
-    icon: PropTypes.element,
-    iconAlign: PropTypes.oneOf(['left', 'right', 'center']),
-    iconColor: PropTypes.string,
-    info: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.element])),
-    ]),
-    leftComponent: PropTypes.node,
-    rightComponent: PropTypes.node,
-    statusColor: PropTypes.string,
-    style: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
-    subtitle: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.element])),
-    ]),
-    subtitleSeparator: PropTypes.string,
-    title: PropTypes.node.isRequired,
-    wrapInfo: PropTypes.bool,
-    wrapSubtitle: PropTypes.bool,
-    wrapTitle: PropTypes.bool,
-};

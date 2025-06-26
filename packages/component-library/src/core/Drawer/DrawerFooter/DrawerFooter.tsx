@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import Divider from '@mui/material/Divider';
 import { useDrawerContext } from '../DrawerContext';
 import { styled, Theme, SxProps } from '@mui/material/styles';
@@ -66,6 +65,7 @@ const DrawerFooterRender: React.ForwardRefRenderFunction<unknown, DrawerFooterPr
         // ignore unused vars so that we can do prop transferring to the root element
 
         backgroundColor,
+
         sx,
         ...otherProps
     } = restProps;
@@ -98,12 +98,3 @@ const DrawerFooterRender: React.ForwardRefRenderFunction<unknown, DrawerFooterPr
  */
 export const DrawerFooter = forwardRef(DrawerFooterRender);
 DrawerFooter.displayName = 'DrawerFooter';
-DrawerFooter.propTypes = {
-    classes: PropTypes.shape({
-        root: PropTypes.string,
-        hidden: PropTypes.string,
-    }),
-    backgroundColor: PropTypes.string,
-    divider: PropTypes.bool,
-    hideContentOnCollapse: PropTypes.bool,
-};
