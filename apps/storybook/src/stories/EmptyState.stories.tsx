@@ -72,7 +72,7 @@ export const Description = {
 } satisfies Story;
 
 const CardEmptyStateRenderer = (args: EmptyStateProps) => {
-    const { title, icon, actions, description } = args;
+    const { title, icon, actions } = args;
     const [expanded, setExpanded] = React.useState(false);
     const theme = blueThemes;
 
