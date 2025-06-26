@@ -4,7 +4,6 @@ import Card, { CardProps } from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import * as Colors from '@brightlayer-ui/colors';
-import PropTypes from 'prop-types';
 import Box, { BoxProps } from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import { ScoreCardClasses, ScoreCardClassKey, getScoreCardUtilityClass } from './ScoreCardClasses';
@@ -340,30 +339,3 @@ const ScoreCardRender: React.ForwardRefRenderFunction<unknown, ScoreCardProps> =
 export const ScoreCard = forwardRef(ScoreCardRender);
 
 ScoreCard.displayName = 'ScoreCard';
-ScoreCard.propTypes = {
-    actionItems: PropTypes.arrayOf(PropTypes.element),
-    actionLimit: PropTypes.number,
-    actionRow: PropTypes.element,
-    badge: PropTypes.element,
-    badgeOffset: PropTypes.number,
-    classes: PropTypes.shape({
-        root: PropTypes.string,
-        actionItems: PropTypes.string,
-        badgeWrapper: PropTypes.string,
-        bodyWrapper: PropTypes.string,
-        content: PropTypes.string,
-        header: PropTypes.string,
-        headerBackground: PropTypes.string,
-        headerContent: PropTypes.string,
-        headerInfo: PropTypes.string,
-        headerTitle: PropTypes.string,
-        headerSubtitle: PropTypes.string,
-    }),
-    headerBackgroundImage: PropTypes.string,
-    headerColor: PropTypes.string,
-    headerFontColor: PropTypes.string,
-    headerInfo: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-    headerTitle: PropTypes.string.isRequired,
-    headerSubtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-};
-// Removed defaultProps assignment as it's not supported with forwardRef in TypeScript

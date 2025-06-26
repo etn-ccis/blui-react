@@ -1,5 +1,4 @@
 import React, { HTMLAttributes, forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import { useDrawerContext } from './DrawerContext';
 import Divider from '@mui/material/Divider';
 
@@ -44,7 +43,3 @@ const DrawerSubheaderRender: React.ForwardRefRenderFunction<unknown, DrawerSubhe
 export const DrawerSubheader = forwardRef(DrawerSubheaderRender);
 
 DrawerSubheader.displayName = 'DrawerSubheader';
-DrawerSubheader.propTypes = {
-    divider: PropTypes.bool,
-    hideContentOnCollapse: PropTypes.bool,
-};

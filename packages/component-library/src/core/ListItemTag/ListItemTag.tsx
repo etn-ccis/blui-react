@@ -1,7 +1,6 @@
 import Typography, { TypographyProps } from '@mui/material/Typography';
 import { styled, useColorScheme } from '@mui/material/styles';
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import { unstable_composeClasses as composeClasses } from '@mui/material';
 import listItemTagClasses, { ListItemTagClassKey, getListItemTagUtilityClass } from './ListItemTagClasses';
 import { cx } from '@emotion/css';
@@ -82,19 +81,20 @@ const Root = styled(Typography, {
 });
 
 const ListItemTagRender: React.ForwardRefRenderFunction<unknown, ListItemTagProps> = (
-    {
-        classes = {},
+    props: ListItemTagProps,
+    ref: any
+) => {
+    const {
+        classes: userClasses = {},
+        display = 'inline',
+        noWrap = true,
         label,
         variant,
         className: userClassName,
-        noWrap = true,
-        display = 'inline',
         ...otherTypographyProps
-    }: ListItemTagProps,
-    ref: any
-) => {
-    const generatedClasses = useUtilityClasses({ classes, label, variant, ...otherTypographyProps });
-    const { root: rootUserClass, ...otherUserClasses } = classes;
+    } = props;
+    const generatedClasses = useUtilityClasses(props);
+    const { root: rootUserClass, ...otherUserClasses } = userClasses;
     return (
         <Root
             ref={ref}
@@ -116,14 +116,5 @@ const ListItemTagRender: React.ForwardRefRenderFunction<unknown, ListItemTagProp
  * `<ListItemTag>` is a text item with a colored background and rounded corners that is used to tag lists.
  */
 export const ListItemTag = forwardRef(ListItemTagRender);
-
-ListItemTag.propTypes = {
-    label: PropTypes.string.isRequired,
-    backgroundColor: PropTypes.string,
-    fontColor: PropTypes.string,
-    classes: PropTypes.shape({
-        root: PropTypes.string,
-    }),
-};
 
 ListItemTag.displayName = 'ListItemTag';
