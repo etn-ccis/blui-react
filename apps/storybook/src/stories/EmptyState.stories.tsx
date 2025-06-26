@@ -41,7 +41,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Basic = {
+export const Basic: Story = {
     render: ({ title, icon }) => <EmptyState title={title} icon={icon} />,
     args: {
         title: 'Location Unknown',
@@ -49,7 +49,7 @@ export const Basic = {
     },
 } satisfies Story;
 
-export const Actions = {
+export const Actions: Story = {
     render: ({ title, icon, actions }) => <EmptyState title={title} icon={icon} actions={actions} />,
     args: {
         title: 'No Devices',
@@ -62,7 +62,7 @@ export const Actions = {
     },
 } satisfies Story;
 
-export const Description = {
+export const Description: Story = {
     render: ({ title, icon, description }) => <EmptyState title={title} icon={icon} description={description} />,
     args: {
         title: 'Location Services Disabled',
@@ -71,7 +71,7 @@ export const Description = {
     },
 } satisfies Story;
 
-const CardEmptyStateRenderer = (args: EmptyStateProps) => {
+const CardEmptyStateRenderer: Element = (args: EmptyStateProps) => {
     const { title, icon, actions } = args;
     const [expanded, setExpanded] = React.useState(false);
     const theme = blueThemes;
@@ -104,7 +104,7 @@ const CardEmptyStateRenderer = (args: EmptyStateProps) => {
     );
 };
 
-export const Card = {
+export const Card: Story = {
     render: ({ title, icon, actions }) => <CardEmptyStateRenderer title={title} icon={icon} actions={actions} />,
     args: {
         title: 'No Devices Found',
@@ -117,7 +117,7 @@ export const Card = {
     },
 } satisfies Story;
 
-export const FullConfig = {
+export const FullConfig: Story = {
     render: ({ title, icon, actions, description }) => (
         <EmptyState title={title} icon={icon} actions={actions} description={description} />
     ),
