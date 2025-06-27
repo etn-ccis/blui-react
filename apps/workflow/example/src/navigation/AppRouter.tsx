@@ -9,9 +9,12 @@ const oktaAuth = new OktaAuth(oktaConfig as OktaAuthOptions);
 
 export const AppRouter: React.FC = () => {
     const navigation = useNavigate();
-    const navigate = useCallback((destination: -1 | string) => {
-        navigation(destination as To);
-    }, []);
+    const navigate = useCallback(
+        (destination: -1 | string) => {
+            navigation(destination as To);
+        },
+        [navigation]
+    );
 
     const restoreOriginalUri = (_oktaAuth: any, originalUri: any): void => {
         navigate(toRelativeUrl(originalUri || '/', window.location.origin));
