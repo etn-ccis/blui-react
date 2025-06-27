@@ -43,7 +43,7 @@ export const App = (): JSX.Element => {
 
     useEffect(() => {
         setMode('light');
-    }, []);
+    }, [setMode]);
 
     // handle initialization of auth data on first load
     useEffect(() => {

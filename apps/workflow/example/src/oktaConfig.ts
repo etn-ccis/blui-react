@@ -3,7 +3,7 @@ const ISSUER = process.env.REACT_APP_OKTA_ISSUER_URL;
 const OKTA_TESTING_DISABLEHTTPSCHECK = process.env.REACT_APP_OKTA_TESTING_DISABLEHTTPSCHECK || false;
 const REDIRECT_URI = `${window.location.origin}/login/callback`;
 
-export default {
+const oktaConfig = {
     clientId: CLIENT_ID,
     issuer: ISSUER,
     redirectUri: REDIRECT_URI,
@@ -11,3 +11,5 @@ export default {
     scopes: ['openid', 'profile', 'email', 'groups'],
     disableHttpsCheck: OKTA_TESTING_DISABLEHTTPSCHECK,
 };
+
+export default oktaConfig;
