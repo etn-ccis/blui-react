@@ -2,7 +2,6 @@ import React, { ReactNode, forwardRef } from 'react';
 import { styled } from '@mui/material/styles';
 import { cx } from '@emotion/css';
 import Typography from '@mui/material/Typography';
-import PropTypes from 'prop-types';
 import Box, { BoxProps } from '@mui/material/Box';
 import { EmptyStateClasses, EmptyStateClassKey, getEmptyStateUtilityClass } from './EmptyStateClasses';
 import { unstable_composeClasses as composeClasses } from '@mui/material';
@@ -74,18 +73,11 @@ const Actions = styled(
 }));
 
 const EmptyStateRender: React.ForwardRefRenderFunction<unknown, EmptyStateProps> = (
-    { actions, classes = {}, className: userClassName, description, icon, title, ...otherProps }: EmptyStateProps,
+    props: EmptyStateProps,
     ref: any
 ) => {
-    const generatedClasses = useUtilityClasses({
-        actions,
-        classes,
-        className: userClassName,
-        description,
-        icon,
-        title,
-        ...otherProps,
-    });
+    const { actions, className: userClassName, description, icon, title, ...otherProps } = props;
+    const generatedClasses = useUtilityClasses(props);
 
     return (
         <Root
@@ -123,17 +115,3 @@ const EmptyStateRender: React.ForwardRefRenderFunction<unknown, EmptyStateProps>
 export const EmptyState = forwardRef(EmptyStateRender);
 
 EmptyState.displayName = 'EmptyState';
-EmptyState.propTypes = {
-    actions: PropTypes.node,
-    classes: PropTypes.shape({
-        root: PropTypes.string,
-        icon: PropTypes.string,
-        title: PropTypes.string,
-        description: PropTypes.string,
-        actions: PropTypes.string,
-    }),
-    description: PropTypes.node,
-    icon: PropTypes.node.isRequired,
-    //  @ts-ignore should be node but typescript throws an error here
-    title: PropTypes.node.isRequired,
-};

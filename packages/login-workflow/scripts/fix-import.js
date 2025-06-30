@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 const directory = path.resolve(new URL('.', import.meta.url).pathname, '../dist');
-const muiIconsPattern = /^@mui\/icons-material/;
+const muiIconsPattern = /^@mui\/(icons-material|material)/;
 
 function fixImports(dir) {
     const files = fs.readdirSync(dir);
@@ -14,8 +14,8 @@ function fixImports(dir) {
             let content = fs.readFileSync(fullPath, 'utf8');
             content = content.replace(/import (.*?) from ['"](.*?)['"]/g, (match, imports, modulePath) => {
                 if (muiIconsPattern.test(modulePath)) {
-                    // Remove .js extension for @mui/icons-material imports
-                    return match.replace('.js', '');
+                    // Remove .js extension and handle index.js
+                    return match.replace(/\/index\.js|\.js/g, '');
                 }
                 return match; // Leave other imports untouched
             });
