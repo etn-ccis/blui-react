@@ -1,11 +1,10 @@
 import React, { useEffect, useState, useCallback, useRef, forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import MUIDrawer, { DrawerProps as MUIDrawerProps } from '@mui/material/Drawer';
 import { DrawerBodyProps } from './DrawerBody';
 import { useDrawerLayout } from '../DrawerLayout/contexts/DrawerLayoutContextProvider';
 import { DrawerContext } from './DrawerContext';
-import { NavItemSharedStyleProps, NavItemSharedStylePropTypes, SharedStyleProps, SharedStylePropTypes } from './types';
+import { NavItemSharedStyleProps, SharedStyleProps } from './types';
 import { findChildByType, mergeStyleProp } from './utilities';
 import clsx from 'clsx';
 import drawerClasses, { DrawerClasses, DrawerClassKey, getDrawerUtilityClass } from './DrawerClasses';
@@ -389,25 +388,3 @@ const DrawerRenderer: React.ForwardRefRenderFunction<unknown, DrawerProps> = (
  */
 export const Drawer = forwardRef(DrawerRenderer);
 Drawer.displayName = 'BLUIDrawer';
-// @ts-ignore
-Drawer.propTypes = {
-    ...SharedStylePropTypes,
-    ...NavItemSharedStylePropTypes,
-    activeItem: PropTypes.string,
-    classes: PropTypes.shape({
-        root: PropTypes.string,
-        content: PropTypes.string,
-        expanded: PropTypes.string,
-        paper: PropTypes.string,
-        sideBorder: PropTypes.string,
-    }),
-    condensed: PropTypes.bool,
-    noLayout: PropTypes.bool,
-    onItemSelect: PropTypes.func,
-    open: PropTypes.bool.isRequired,
-    openOnHover: PropTypes.bool,
-    openOnHoverDelay: PropTypes.number,
-    sideBorder: PropTypes.bool,
-    variant: PropTypes.oneOf(['persistent', 'permanent', 'temporary', 'rail']),
-    width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-};

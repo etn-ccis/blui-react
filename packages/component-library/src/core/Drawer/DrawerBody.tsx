@@ -1,7 +1,6 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import { DrawerNavGroup, DrawerNavGroupProps } from './DrawerNavGroup';
-import { NavItemSharedStyleProps, NavItemSharedStylePropTypes, SharedStyleProps, SharedStylePropTypes } from './types';
+import { NavItemSharedStyleProps, SharedStyleProps } from './types';
 import { mergeStyleProp } from './utilities';
 import Box, { BoxProps } from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
@@ -129,11 +128,3 @@ const DrawerBodyRender: React.ForwardRefRenderFunction<unknown, DrawerBodyProps>
  */
 export const DrawerBody = forwardRef(DrawerBodyRender);
 DrawerBody.displayName = 'DrawerBody';
-// @ts-ignore
-DrawerBody.propTypes = {
-    ...SharedStylePropTypes,
-    ...NavItemSharedStylePropTypes,
-    classes: PropTypes.shape({
-        root: PropTypes.string,
-    }),
-};

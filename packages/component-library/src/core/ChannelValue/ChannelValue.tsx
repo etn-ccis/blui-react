@@ -1,7 +1,6 @@
 import React, { useCallback, forwardRef } from 'react';
 import Typography, { TypographyProps } from '@mui/material/Typography';
 import { cx } from '@emotion/css';
-import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import channelValueClasses, {
     ChannelValueClasses,
@@ -105,8 +104,10 @@ const prefixUnitAllowSpaceList = ['$'];
 const suffixUnitAllowSpaceList = ['%', '℉', '°F', '℃', '°C', '°'];
 
 const ChannelValueRender: React.ForwardRefRenderFunction<unknown, ChannelValueProps> = (
-    {
-        classes = {},
+    props: ChannelValueProps,
+    ref: any
+) => {
+    const {
         className: userClassName,
         icon,
         prefix = false,
@@ -116,20 +117,8 @@ const ChannelValueRender: React.ForwardRefRenderFunction<unknown, ChannelValuePr
         color = 'inherit',
         fontSize = 'inherit',
         ...otherProps
-    }: ChannelValueProps,
-    ref: any
-) => {
-    const generatedClasses = useUtilityClasses({
-        classes,
-        icon,
-        prefix,
-        units,
-        unitSpace,
-        value,
-        color,
-        fontSize,
-        ...otherProps,
-    });
+    } = props;
+    const generatedClasses = useUtilityClasses(props);
 
     const applyPrefix = useCallback(
         (): boolean =>
@@ -202,21 +191,3 @@ const ChannelValueRender: React.ForwardRefRenderFunction<unknown, ChannelValuePr
 export const ChannelValue = forwardRef(ChannelValueRender);
 
 ChannelValue.displayName = 'ChannelValue';
-ChannelValue.propTypes = {
-    classes: PropTypes.shape({
-        root: PropTypes.string,
-        icon: PropTypes.string,
-        text: PropTypes.string,
-        prefix: PropTypes.string,
-        suffix: PropTypes.string,
-        value: PropTypes.string,
-        units: PropTypes.string,
-    }),
-    color: PropTypes.string,
-    fontSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    icon: PropTypes.element,
-    prefix: PropTypes.bool,
-    units: PropTypes.string,
-    unitSpace: PropTypes.oneOf(['show', 'hide', 'auto']),
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-};

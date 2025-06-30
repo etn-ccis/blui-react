@@ -1,5 +1,4 @@
 import React, { useCallback, forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import { useDrawerContext } from '../DrawerContext';
 import Avatar from '@mui/material/Avatar';
 import ButtonBase, { ButtonBaseProps as MuiButtonBaseProps } from '@mui/material/ButtonBase';
@@ -7,7 +6,7 @@ import Divider from '@mui/material/Divider';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import { RAIL_WIDTH, RAIL_WIDTH_CONDENSED } from '../Drawer';
-import { SharedStyleProps, SharedStylePropTypes } from '../types';
+import { SharedStyleProps } from '../types';
 import { NavItem } from '../DrawerNavItem';
 import color from 'color';
 import { cx } from '@emotion/css';
@@ -375,28 +374,3 @@ const DrawerRailItemRender: React.ForwardRefRenderFunction<unknown, DrawerRailIt
  */
 export const DrawerRailItem = forwardRef(DrawerRailItemRender);
 DrawerRailItem.displayName = 'DrawerRailItem';
-// @ts-ignore
-DrawerRailItem.propTypes = {
-    ...SharedStylePropTypes,
-    condensed: PropTypes.bool,
-    classes: PropTypes.shape({
-        root: PropTypes.string,
-        active: PropTypes.string,
-        condensed: PropTypes.string,
-        divider: PropTypes.string,
-        icon: PropTypes.string,
-        statusStripe: PropTypes.string,
-        title: PropTypes.string,
-        titleActive: PropTypes.string,
-        ripple: PropTypes.string,
-    }),
-    hidden: PropTypes.bool,
-    icon: PropTypes.element.isRequired,
-    itemID: PropTypes.string.isRequired,
-    onClick: PropTypes.func,
-    statusColor: PropTypes.string,
-    title: PropTypes.string,
-    disableRailTooltip: PropTypes.bool,
-    // @ts-ignore
-    ButtonBaseProps: PropTypes.object,
-};

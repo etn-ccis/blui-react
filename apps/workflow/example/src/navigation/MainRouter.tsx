@@ -25,9 +25,12 @@ export const MainRouter: React.FC = () => {
     const navigation = useNavigate();
     const app = useApp();
     const { email, rememberMe } = app.loginData;
-    const navigate = useCallback((destination: -1 | string) => {
-        navigation(destination as To);
-    }, []);
+    const navigate = useCallback(
+        (destination: -1 | string) => {
+            navigation(destination as To);
+        },
+        [navigation]
+    );
     const { authState } = useOktaAuth();
 
     const { setIsAuthenticated } = useApp();

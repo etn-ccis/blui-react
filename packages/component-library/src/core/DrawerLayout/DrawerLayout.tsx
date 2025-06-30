@@ -1,6 +1,5 @@
 import React, { ReactElement, useState, CSSProperties, forwardRef } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
-import PropTypes from 'prop-types';
 import { DrawerProps as DrawerComponentProps } from '../Drawer/Drawer';
 import { DrawerLayoutContext } from './contexts/DrawerLayoutContextProvider';
 import { cx } from '@emotion/css';
@@ -113,11 +112,3 @@ const DrawerLayoutRender: React.ForwardRefRenderFunction<unknown, DrawerLayoutPr
  */
 export const DrawerLayout = forwardRef(DrawerLayoutRender);
 DrawerLayout.displayName = 'DrawerLayout';
-DrawerLayout.propTypes = {
-    classes: PropTypes.shape({
-        root: PropTypes.string,
-        content: PropTypes.string,
-        drawer: PropTypes.string,
-    }),
-    drawer: PropTypes.element.isRequired,
-};

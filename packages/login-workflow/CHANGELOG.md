@@ -5,13 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# v7.0.0 (Unreleased)
+
+### Changed
+
+-   Upgraded the `@mui/material` dependency to version 7.
+-   Upgraded the `react` dependency to version 19.
+
 ## v6.0.2 (June 02, 2025)
 
 ### Fixed
 
-- Update Language Support documentation for how to override in-built translations. ([#710](https://github.com/etn-ccis/blui-react-workflows/issues/710)).
-- Not able to pass function as prop to <ForgotPasswordScreen /> which should be executed on click of done button. ([#693](https://github.com/etn-ccis/blui-react-workflows/issues/693)).
-- Loader Not Present on Final Registration Screen. ([#692](https://github.com/etn-ccis/blui-react-workflows/issues/692)).
+-   Update Language Support documentation for how to override in-built translations. ([#710](https://github.com/etn-ccis/blui-react-workflows/issues/710)).
+-   Not able to pass function as prop to <ForgotPasswordScreen /> which should be executed on click of done button. ([#693](https://github.com/etn-ccis/blui-react-workflows/issues/693)).
+-   Loader Not Present on Final Registration Screen. ([#692](https://github.com/etn-ccis/blui-react-workflows/issues/692)).
 
 ## v6.0.1 (February 24, 2025)
 

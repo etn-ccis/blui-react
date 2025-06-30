@@ -1,5 +1,4 @@
 import React, { ReactNode, useCallback, forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import Toolbar, { ToolbarProps } from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
@@ -171,7 +170,11 @@ const NonClickableIcon = styled(
 }));
 
 const DrawerHeaderRender: React.ForwardRefRenderFunction<unknown, DrawerHeaderProps> = (
-    {
+    props: DrawerHeaderProps,
+    ref: any
+) => {
+    const generatedClasses = useUtilityClasses(props);
+    const {
         backgroundImage,
         divider = false,
         icon,
@@ -182,27 +185,11 @@ const DrawerHeaderRender: React.ForwardRefRenderFunction<unknown, DrawerHeaderPr
         backgroundColor,
         backgroundOpacity = 0.3,
         fontColor,
-        disableGutters = true,
-        sx,
-        ...otherToolbarProps
-    }: DrawerHeaderProps,
-    ref: any
-) => {
-    const generatedClasses = useUtilityClasses({
-        backgroundImage,
-        divider,
-        icon,
-        onIconClick,
-        subtitle,
-        title,
-        titleContent,
-        backgroundColor,
-        backgroundOpacity,
-        fontColor,
         disableGutters,
         sx,
-        ...otherToolbarProps,
-    });
+
+        ...otherToolbarProps
+    } = props;
 
     const { variant = 'persistent', condensed = false } = useDrawerContext();
 
@@ -297,26 +284,3 @@ const DrawerHeaderRender: React.ForwardRefRenderFunction<unknown, DrawerHeaderPr
 export const DrawerHeader = forwardRef(DrawerHeaderRender);
 
 DrawerHeader.displayName = 'DrawerHeader';
-
-DrawerHeader.propTypes = {
-    backgroundColor: PropTypes.string,
-    backgroundImage: PropTypes.string,
-    backgroundOpacity: PropTypes.number,
-    classes: PropTypes.shape({
-        root: PropTypes.string,
-        background: PropTypes.string,
-        content: PropTypes.string,
-        navigation: PropTypes.string,
-        nonClickableIcon: PropTypes.string,
-        railIcon: PropTypes.string,
-        subtitle: PropTypes.string,
-        title: PropTypes.string,
-    }),
-    divider: PropTypes.bool,
-    fontColor: PropTypes.string,
-    icon: PropTypes.element,
-    onIconClick: PropTypes.func,
-    subtitle: PropTypes.string,
-    title: PropTypes.string,
-    titleContent: PropTypes.element,
-};

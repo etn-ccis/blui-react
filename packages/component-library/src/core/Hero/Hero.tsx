@@ -2,7 +2,6 @@ import React, { ReactNode, forwardRef } from 'react';
 import Typography from '@mui/material/Typography';
 import { ChannelValue, ChannelValueProps as ChannelValuePropsType } from '../ChannelValue';
 import { cx } from '@emotion/css';
-import PropTypes from 'prop-types';
 import Box, { BoxProps } from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import { unstable_composeClasses as composeClasses } from '@mui/material';
@@ -108,11 +107,8 @@ const Label = styled(
     whiteSpace: 'nowrap',
 }));
 
-const HeroRender: React.ForwardRefRenderFunction<unknown, HeroProps> = (
-    { classes = {}, iconBackgroundColor = 'transparent', iconSize = 36, ...props }: HeroProps,
-    ref: any
-) => {
-    const generatedClasses = useUtilityClasses({ ...props, classes });
+const HeroRender: React.ForwardRefRenderFunction<unknown, HeroProps> = (props: HeroProps, ref: any) => {
+    const generatedClasses = useUtilityClasses(props);
     const {
         className: userClassName,
         icon,
@@ -120,8 +116,8 @@ const HeroRender: React.ForwardRefRenderFunction<unknown, HeroProps> = (
         ChannelValueProps,
         // ignore unused vars so that we can do prop transferring to the root element
 
-        // iconBackgroundColor,
-        // iconSize,
+        iconBackgroundColor = 'transparent',
+        iconSize = 36,
 
         ...otherProps
     } = props;
@@ -156,15 +152,3 @@ const HeroRender: React.ForwardRefRenderFunction<unknown, HeroProps> = (
 export const Hero = forwardRef(HeroRender);
 
 Hero.displayName = 'Hero';
-Hero.propTypes = {
-    classes: PropTypes.shape({
-        root: PropTypes.string,
-        values: PropTypes.string,
-        icon: PropTypes.string,
-        labels: PropTypes.string,
-    }),
-    icon: PropTypes.node.isRequired,
-    iconBackgroundColor: PropTypes.string,
-    iconSize: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    label: PropTypes.string.isRequired,
-};
