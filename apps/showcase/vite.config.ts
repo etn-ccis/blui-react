@@ -16,4 +16,21 @@ export default defineConfig({
     optimizeDeps: {
         exclude: ['@brightlayer-ui/react-themes', '@brightlayer-ui/react-components'],
     },
+    resolve: {
+        alias: {
+            '@brightlayer-ui/react-components': '../../packages/component-library/src/core',
+        },
+    },
+    build: {
+        rollupOptions: {
+            plugins: [
+                {
+                    name: 'debug-alias',
+                    buildStart() {
+                        console.log('Alias @brightlayer-ui/react-components:', '../../packages/component-library/src/core');
+                    },
+                },
+            ],
+        },
+    },
 });

@@ -64,7 +64,7 @@ const Root = styled(Box)<Pick<ChannelValueProps, 'fontSize' | 'color'>>(({ fontS
     alignItems: 'center',
     lineHeight: 1.2,
     fontSize: fontSize,
-    color: color,
+    color: 'red',
     [`& .${channelValueClasses.text}`]: { fontSize: 'inherit', lineHeight: 'inherit', letterSpacing: 0 },
 }));
 

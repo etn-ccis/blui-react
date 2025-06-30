@@ -4,7 +4,10 @@
         "skipLibCheck": true,
         "module": "ESNext",
         "moduleResolution": "bundler",
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+        "paths": {
+            "@brightlayer-ui/react-components": ["../../packages/component-library/src"],
+        }
     },
     "include": ["vite.config.ts"]
 }

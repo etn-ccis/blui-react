@@ -86,7 +86,7 @@ const EmptyStateRender: React.ForwardRefRenderFunction<unknown, EmptyStateProps>
             data-testid={'blui-empty-state-root'}
             {...otherProps}
         >
-            {icon && <Icon className={generatedClasses.icon}>{icon}</Icon>}
+            {/* {icon && <Icon className={generatedClasses.icon}>{icon}</Icon>} */}
             {title &&
                 (typeof title === 'string' ? (
                     <Typography variant="h6" color="inherit" className={generatedClasses.title}>

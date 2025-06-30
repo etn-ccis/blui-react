@@ -15,7 +15,9 @@
         "noEmit": true,
         "jsx": "react-jsx",
         "noFallthroughCasesInSwitch": true,
-        "paths": {}
+        "paths": {
+            "@brightlayer-ui/react-components": ["../../packages/component-library/src/core"],
+        }
     },
     "include": ["src"],
     "references": [{ "path": "./tsconfig.node.json" }]
