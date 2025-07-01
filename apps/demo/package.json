@@ -12,8 +12,8 @@
         "@emotion/styled": "^11.13.0",
         "@mui/icons-material": "^6.1.4",
         "@mui/material": "^6.1.4",
-        "react": "^19.1.0",
-        "react-dom": "^19.1.0",
+        "react": "19.0.0",
+        "react-dom": "19.0.0",
         "vite-tsconfig-paths": "^5.0.1"
     },
     "scripts": {
