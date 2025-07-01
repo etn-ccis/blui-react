@@ -52,10 +52,10 @@ export type NavItemSharedStyleProps = {
      *
      * Default: expandIcon rotated 180 degrees
      */
-    collapseIcon?: JSX.Element;
+    collapseIcon?: React.JSX.Element;
 
     /** Icon used to expand nav group */
-    expandIcon?: JSX.Element;
+    expandIcon?: React.JSX.Element;
 
     /** Whether to hide the paddings reserved for menu item icons */
     hidePadding?: boolean;

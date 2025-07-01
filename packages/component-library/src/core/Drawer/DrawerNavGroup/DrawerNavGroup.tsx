@@ -155,7 +155,7 @@ const DrawerNavGroupRender: React.ForwardRefRenderFunction<unknown, DrawerNavGro
     }, [activeItem]);
 
     const getChildren = useCallback(
-        (): JSX.Element[] =>
+        (): React.JSX.Element[] =>
             findChildByType(children, ['DrawerNavItem', 'DrawerRailItem'])
                 // .slice(0, 1)
                 .map((child) =>

@@ -62,7 +62,7 @@ export type DrawerNavItemProps = SharedStyleProps &
          */
         hidePadding?: boolean;
         /** A component to render for the left icon */
-        icon?: JSX.Element;
+        icon?: React.JSX.Element;
         /** Sets whether the item is a parent of the currently active item
          *
          * This is managed automatically when using the `<DrawerNavItem>` inside of a `<DrawerNavGroup>`
@@ -80,7 +80,7 @@ export type DrawerNavItemProps = SharedStyleProps &
         /** A function to execute when clicked */
         onClick?: (e: React.MouseEvent<HTMLElement>) => void;
         /** An icon/component to display to the right */
-        rightComponent?: JSX.Element;
+        rightComponent?: React.JSX.Element;
         /** Status stripe and icon color */
         statusColor?: string;
         /** The text to show on the second line */
@@ -306,7 +306,7 @@ const DrawerNavItemRender: React.ForwardRefRenderFunction<HTMLElement, DrawerNav
         [onItemSelect, onClick, itemID, items, expanded, setExpanded, children]
     );
 
-    const getActionComponent = useCallback((): JSX.Element => {
+    const getActionComponent = useCallback((): React.JSX.Element => {
         if (!items && !children) {
             return null;
         }
@@ -329,7 +329,7 @@ const DrawerNavItemRender: React.ForwardRefRenderFunction<HTMLElement, DrawerNav
     const actionComponent = getActionComponent();
 
     const getChildren = useCallback(
-        (): JSX.Element[] =>
+        (): React.JSX.Element[] =>
             findChildByType(children, ['DrawerNavItem', 'DrawerRailItem'])
                 // .slice(0, 1)
                 .map((child) =>

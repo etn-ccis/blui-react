@@ -32,19 +32,19 @@ const useUtilityClasses = (ownerState: ScoreCardProps): Record<ScoreCardClassKey
 export type ScoreCardProps = CardProps &
     BoxProps & {
         /** Icons to show to the right of the text */
-        actionItems?: JSX.Element[];
+        actionItems?: React.JSX.Element[];
         /** Max number of actionItems in the header
          *
          * Default: 3
          */
         actionLimit?: number;
         /** Component to render for the footer */
-        actionRow?: JSX.Element;
+        actionRow?: React.JSX.Element;
         /** Component to render in the call-out area on the right side of the card body.
          *
          * This is usually a single `Hero` or `HeroBanner`containing multiple Heroes.
          */
-        badge?: JSX.Element;
+        badge?: React.JSX.Element;
         /** Vertical offset for the badge component
          *
          * Default: 0
@@ -65,11 +65,11 @@ export type ScoreCardProps = CardProps &
          */
         headerFontColor?: string;
         /** Tertiary text */
-        headerInfo?: string | JSX.Element;
+        headerInfo?: string | React.JSX.Element;
         /** The primary text */
         headerTitle: string;
         /** The secondary text */
-        headerSubtitle?: string | JSX.Element;
+        headerSubtitle?: string | React.JSX.Element;
     };
 
 const fontColor = (headerFontColor: string): string => headerFontColor || Colors.white[50];
@@ -204,7 +204,7 @@ const ScoreCardRender: React.ForwardRefRenderFunction<unknown, ScoreCardProps> =
 
     const generatedClasses = useUtilityClasses(props);
 
-    const getBackgroundImage = useCallback((): JSX.Element | undefined => {
+    const getBackgroundImage = useCallback((): React.JSX.Element | undefined => {
         if (headerBackgroundImage) {
             return (
                 <HeaderBackground
@@ -215,7 +215,7 @@ const ScoreCardRender: React.ForwardRefRenderFunction<unknown, ScoreCardProps> =
         }
     }, [headerBackgroundImage, generatedClasses]);
 
-    const getHeaderInfo = useCallback((): JSX.Element | undefined => {
+    const getHeaderInfo = useCallback((): React.JSX.Element | undefined => {
         if (!headerInfo) return;
         if (typeof headerInfo === 'string') {
             return (
@@ -232,7 +232,7 @@ const ScoreCardRender: React.ForwardRefRenderFunction<unknown, ScoreCardProps> =
         return headerInfo;
     }, [headerFontColor, headerInfo, generatedClasses]);
 
-    const getHeaderSubtitle = useCallback((): JSX.Element | undefined => {
+    const getHeaderSubtitle = useCallback((): React.JSX.Element | undefined => {
         if (!headerSubtitle) return;
         if (typeof headerSubtitle === 'string') {
             return (
@@ -250,7 +250,7 @@ const ScoreCardRender: React.ForwardRefRenderFunction<unknown, ScoreCardProps> =
     }, [headerFontColor, headerSubtitle, generatedClasses]);
 
     const getHeaderText = useCallback(
-        (): JSX.Element => (
+        (): React.JSX.Element => (
             <FlexColumn>
                 <HeaderTitle
                     headerFontColor={headerFontColor}
@@ -267,7 +267,7 @@ const ScoreCardRender: React.ForwardRefRenderFunction<unknown, ScoreCardProps> =
         [generatedClasses, headerFontColor, headerTitle, getHeaderSubtitle, getHeaderInfo]
     );
 
-    const getActionItems = useCallback((): JSX.Element[] | undefined => {
+    const getActionItems = useCallback((): React.JSX.Element[] | undefined => {
         if (actionItems) {
             return actionItems.slice(0, actionLimit).map((actionItem, index) => (
                 <ActionItems key={`${index}`} className={generatedClasses.actionItems} data-testid={'blui-action-item'}>
@@ -277,7 +277,7 @@ const ScoreCardRender: React.ForwardRefRenderFunction<unknown, ScoreCardProps> =
         }
     }, [actionItems, actionLimit, generatedClasses]);
 
-    const getHeroes = useCallback((): JSX.Element | undefined => {
+    const getHeroes = useCallback((): React.JSX.Element | undefined => {
         if (badge) {
             return (
                 <BadgeWrapper
@@ -291,7 +291,7 @@ const ScoreCardRender: React.ForwardRefRenderFunction<unknown, ScoreCardProps> =
         }
     }, [badge, badgeOffset, generatedClasses]);
 
-    const getFooter = useCallback((): JSX.Element | undefined => {
+    const getFooter = useCallback((): React.JSX.Element | undefined => {
         if (actionRow) {
             return (
                 <>

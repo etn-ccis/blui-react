@@ -39,7 +39,7 @@ export type ChannelValueProps = Omit<BoxProps, 'prefix'> & {
      */
     fontSize?: number | string;
     /** A component to render for the icon */
-    icon?: JSX.Element;
+    icon?: React.JSX.Element;
     /** Whether to show the units before the value (e.g., for currency)
      *
      *  Default: false
@@ -95,7 +95,7 @@ const Value = styled(Typography, {
     }),
 }));
 
-const changeIconDisplay = (newIcon: JSX.Element): JSX.Element =>
+const changeIconDisplay = (newIcon: React.JSX.Element): React.JSX.Element =>
     React.cloneElement(newIcon, {
         style: Object.assign({}, newIcon.props.style, { display: 'block', fontSize: 'inherit' }),
     });
@@ -133,7 +133,7 @@ const ChannelValueRender: React.ForwardRefRenderFunction<unknown, ChannelValuePr
     );
 
     const getUnitElement = useCallback(
-        (): JSX.Element => (
+        (): React.JSX.Element => (
             <>
                 {units && (
                     <Unit
