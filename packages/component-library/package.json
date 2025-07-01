@@ -7,12 +7,14 @@
     "module": "./index.js",
     "exports": {
         ".": {
-            "import": "./index.js"
+            "import": "./index.js",
+            "source": "./src/index.ts"
         }
     },
     "scripts": {
         "test": "jest src --maxWorkers=50%",
         "build": "bash ./scripts/buildComponents.sh && node ./scripts/fix-import.js",
+        "dev": "bash ./scripts/buildComponents.sh --watch && node ./scripts/fix-import.js --watch",
         "coverage": "pnpm test --coverage --watchAll=false",
         "test:artifacts": "cd scripts && bash ./buildTest.sh && cd ..",
         "publish:package": "cd dist && rm -f *.tgz && set npm_config_yes=true && npx -p @brightlayer-ui/publish blui-publish"

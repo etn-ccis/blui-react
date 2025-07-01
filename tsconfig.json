@@ -1,16 +1,19 @@
 {
-  "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "declaration": true,
-    "esModuleInterop": true,
-    "jsx": "react",
-    "lib": ["es6"],
-    "module": "ESNext",
-    "moduleResolution": "node",
-    "noEmit": false,
-    "strict": true,
-    "skipLibCheck": true,
-    "target": "esnext"
-  },
-  "include": ["**/*.tsx", "**/*.ts"]
+    "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
+        "declaration": true,
+        "esModuleInterop": true,
+        "jsx": "react",
+        "lib": ["es6"],
+        "module": "ESNext",
+        "moduleResolution": "node",
+        "noEmit": false,
+        "strict": true,
+        "skipLibCheck": true,
+        "target": "esnext",
+        "paths": {
+            "@brightlayer-ui/react-components": ["../../packages/component-library/src/*"]
+        }
+    },
+    "include": ["**/*.tsx", "**/*.ts"]
 }
