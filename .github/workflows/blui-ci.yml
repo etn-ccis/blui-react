@@ -439,3 +439,20 @@ jobs:
               working-directory: apps/design-patterns
               run: pnpm test
 
+    chromatic-deployment:
+        name: Chromatic Deployment
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                   node-version: 20
+            - name: Install dependencies
+              run: pnpm install 
+
+            - name: Publish to Chromatic
+              run: npx chromatic --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }}          
+
