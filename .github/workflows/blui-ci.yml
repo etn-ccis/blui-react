@@ -457,5 +457,6 @@ jobs:
               run: pnpm install 
 
             - name: Publish to Chromatic
+              working-directory: apps/storybook
               run: npx chromatic --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }}          
 
