@@ -440,7 +440,7 @@ jobs:
               run: pnpm test
 
     chromatic-deployment:
-        name: Chromatic Deployment
+        name: Chromatic Visual Testing
         runs-on: ubuntu-latest
         steps:
             - name: Checkout code
@@ -450,6 +450,9 @@ jobs:
               uses: actions/setup-node@v4
               with:
                    node-version: 20
+            - name: Install pnpm
+              run: npm install -g pnpm
+
             - name: Install dependencies
               run: pnpm install 
 
