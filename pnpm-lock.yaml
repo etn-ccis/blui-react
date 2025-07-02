@@ -596,9 +596,6 @@ importers:
 
   apps/storybook:
     dependencies:
-      cross-env:
-        specifier: ^7.0.3
-        version: 7.0.3
       react:
         specifier: 19.0.0
         version: 19.0.0
