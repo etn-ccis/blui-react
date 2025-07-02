@@ -238,7 +238,7 @@ const AppBarRender: React.ForwardRefRenderFunction<unknown, AppBarProps> = (prop
     }, [collapsedHeight, expandedHeight]);
 
     // Returns the background image to apply on the app bar
-    const getBackgroundImage = useCallback((): JSX.Element | undefined => {
+    const getBackgroundImage = useCallback((): React.JSX.Element | undefined => {
         if (backgroundImage) {
             return (
                 <div

@@ -60,7 +60,7 @@ export type DrawerRailItemProps = SharedStyleProps &
         hidden?: boolean;
 
         /** A component to render for the left icon */
-        icon: JSX.Element;
+        icon: React.JSX.Element;
 
         /** An unique identifier of the NavItem. Item will have 'active' style when this matches activeItem
          *
@@ -283,7 +283,7 @@ const DrawerRailItemRender: React.ForwardRefRenderFunction<unknown, DrawerRailIt
               }
             : {};
 
-    const getIcon = useCallback((): JSX.Element | undefined => {
+    const getIcon = useCallback((): React.JSX.Element | undefined => {
         if (icon) {
             return (
                 <Icon className={generatedClasses.icon} itemIconColor={itemIconColor}>

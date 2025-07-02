@@ -72,7 +72,7 @@ export type InfoListItemProps = Omit<ListItemProps, 'title' | 'divider'> & {
      */
     hidePadding?: boolean;
     /** A component to render for the icon */
-    icon?: JSX.Element;
+    icon?: React.JSX.Element;
     /** Color override for the row icon */
     iconColor?: string;
     /** Icon alignment when `avatar` is set to false
@@ -81,7 +81,7 @@ export type InfoListItemProps = Omit<ListItemProps, 'title' | 'divider'> & {
      */
     iconAlign?: 'left' | 'center' | 'right';
     /** The text to show on the third line */
-    info?: string | Array<string | JSX.Element>;
+    info?: string | Array<string | React.JSX.Element>;
     /** Component to render on the left side */
     leftComponent?: ReactNode;
     /** Component to render on the right side */
@@ -94,7 +94,7 @@ export type InfoListItemProps = Omit<ListItemProps, 'title' | 'divider'> & {
     /** Status stripe and icon color */
     statusColor?: string;
     /** The text to show on the second line */
-    subtitle?: string | Array<string | JSX.Element>;
+    subtitle?: string | Array<string | React.JSX.Element>;
     /** Separator character for subtitle and info
      *
      * Default: '·' ('\u00B7')
@@ -155,7 +155,7 @@ const InfoListItemRender: React.ForwardRefRenderFunction<unknown, InfoListItemPr
         ...otherListItemProps
     } = props;
 
-    const getIcon = useCallback((): JSX.Element | undefined => {
+    const getIcon = useCallback((): React.JSX.Element | undefined => {
         if (icon) {
             return (
                 <ListItemAvatar style={{ minWidth: 'unset' }}>
@@ -187,7 +187,7 @@ const InfoListItemRender: React.ForwardRefRenderFunction<unknown, InfoListItemPr
     }, [avatar, icon, iconAlign, iconColor, statusColor, hidePadding, generatedClasses]);
 
     const getRightComponent = useCallback(
-        (): JSX.Element | undefined => (
+        (): React.JSX.Element | undefined => (
             <>
                 {rightComponent && (
                     <RightComponent className={generatedClasses.rightComponent}>{rightComponent}</RightComponent>
@@ -206,7 +206,7 @@ const InfoListItemRender: React.ForwardRefRenderFunction<unknown, InfoListItemPr
     );
 
     const getSeparator = useCallback(
-        (): JSX.Element => (
+        (): React.JSX.Element => (
             <SubtitleSeparator className={generatedClasses.separator} component="span">
                 {subtitleSeparator || '\u00B7'}
             </SubtitleSeparator>
@@ -242,7 +242,7 @@ const InfoListItemRender: React.ForwardRefRenderFunction<unknown, InfoListItemPr
         return withKeys(separate(renderableInfoParts, () => getSeparator()));
     }, [info, getSeparator]);
 
-    const getInfoListItemContent = (): JSX.Element => (
+    const getInfoListItemContent = (): React.JSX.Element => (
         <>
             <StatusStripe
                 statusColor={statusColor}

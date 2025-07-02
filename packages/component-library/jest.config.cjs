@@ -12,8 +12,7 @@ module.exports = {
         },
     },
     moduleNameMapper: {
-        moduleNameMapper: {
             '\\.(gif|ttf|eot|svg|png)$': '<rootDir>/test/__mocks__/fileMock.js',
-        },
+              '^@brightlayer-ui/react-themes$': '<rootDir>/../themes/src',
     },
 };

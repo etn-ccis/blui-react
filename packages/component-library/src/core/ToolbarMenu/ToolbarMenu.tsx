@@ -90,11 +90,11 @@ const ToolbarMenuNavGroups = styled(
 
 export type ToolbarMenuProps = Omit<TypographyProps, 'onClick'> & {
     /** A component to render for the icon */
-    icon?: JSX.Element;
+    icon?: React.JSX.Element;
     /** Label Content */
     label: string;
     /** Custom content to be displayed in the menu */
-    menu?: JSX.Element;
+    menu?: React.JSX.Element;
     /** Groups of menu items to display */
     menuGroups?: ToolbarMenuCompGroup[];
     /** Property overrides for the MUI Menu */
