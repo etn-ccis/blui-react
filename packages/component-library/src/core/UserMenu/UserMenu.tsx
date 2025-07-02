@@ -92,11 +92,11 @@ const DrawerBottomSheet = styled(
 
 export type UserMenuProps = BoxProps & {
     /** MUI Avatar component to display as the menu trigger */
-    avatar: JSX.Element;
+    avatar: React.JSX.Element;
     /** Custom classes for default style overrides */
     classes?: UserMenuClasses;
     /** Custom MUI Menu displayed when Avatar is clicked */
-    menu?: JSX.Element;
+    menu?: React.JSX.Element;
     /** Groups of menu items that display */
     menuGroups?: UserMenuGroup[];
     /** Property overrides for the MUI Menu */
@@ -168,7 +168,7 @@ const UserMenuRender: React.ForwardRefRenderFunction<unknown, UserMenuProps> = (
 
     /* Clones Avatar that user provides UserMenu & appends a click event so it opens the menu. */
     const formatAvatar = useCallback(
-        (preserveOnClick: boolean): JSX.Element => {
+        (preserveOnClick: boolean): React.JSX.Element => {
             /* If user passed in onClick function as a prop to Avatar, keep it. */
             const onClickFn = (event: MouseEvent): void => {
                 openMenu(event);
@@ -196,7 +196,7 @@ const UserMenuRender: React.ForwardRefRenderFunction<unknown, UserMenuProps> = (
     );
 
     /* DrawerHeader needs wrapped with key div to avoid ref warning on FC. */
-    const printHeader = useCallback((): JSX.Element | undefined => {
+    const printHeader = useCallback((): React.JSX.Element | undefined => {
         if (menuTitle) {
             const nonClickableAvatar = formatAvatar(false);
             return (
@@ -229,7 +229,7 @@ const UserMenuRender: React.ForwardRefRenderFunction<unknown, UserMenuProps> = (
 
     /* DrawerNavGroup needs wrapped with key div to avoid ref warning on FC. */
     const printMenuItems = useCallback(
-        (): JSX.Element[] =>
+        (): React.JSX.Element[] =>
             menuGroups.map((group: UserMenuGroup, index: number) => (
                 <UserMenuNavGroups className={generatedClasses.navGroups} key={index}>
                     <DrawerNavGroup
@@ -258,11 +258,11 @@ const UserMenuRender: React.ForwardRefRenderFunction<unknown, UserMenuProps> = (
     );
 
     const printMenu = useCallback(
-        (): JSX.Element[] => [printHeader()].concat(printMenuItems()),
+        (): React.JSX.Element[] => [printHeader()].concat(printMenuItems()),
         [printHeader, printMenuItems]
     );
 
-    const formatMenu = useCallback((): JSX.Element => {
+    const formatMenu = useCallback((): React.JSX.Element => {
         /* If the user provides a menu, provide default props. */
         if (menu) {
             return React.cloneElement(menu, {

@@ -222,7 +222,7 @@ const DrawerHeaderRender: React.ForwardRefRenderFunction<unknown, DrawerHeaderPr
     );
 
     const getBackgroundImage = useCallback(
-        (): JSX.Element | null =>
+        (): React.JSX.Element | null =>
             backgroundImage ? (
                 <Background
                     className={generatedClasses.background}
