@@ -21,15 +21,11 @@ See the [developer documentation](https://brightlayer-ui-components.github.io/re
 
 > For use with MUI 6+, you must be using version 7 of @brightlayer-ui/react-components and version 8 of @brightlayer-ui/react-themes.
 
-## Migration from v6 to v7
+## Migration from v7 to v8
 
-With the release of version 7, Brightlayer UI React Components have been updated to use Material UI v6. The usage of the BLUI components remains the same, but there may be some updates required in your project to migrate to MUI v6.
+With the release of version 7, Brightlayer UI React Components have been updated to use Material UI v7. The usage of the BLUI components remains the same, but there may be some updates required in your project to migrate to MUI v7.
 
-You can refer to the official [MUI Migration Documentation](https://mui.com/material-ui/migration/upgrade-to-v6/) for details on the steps to upgrade. This will include:
-
-- updating dependency versions
-- updating any custom themes (BLUI themes have already been updated for you)
-- component API changes / deprecations
+You can refer to the official [MUI Migration Documentation](https://mui.com/material-ui/migration/upgrade-to-v7/) for details on the steps to upgrade.
 
 ## Browser Support
 

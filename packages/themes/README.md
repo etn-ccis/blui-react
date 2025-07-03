@@ -78,6 +78,14 @@ For more information on toggling modes, refer to the [MUI docs](https://mui.com/
 
 For more detailed information about the BLUI themes, refer to our [developer documentation](https://brightlayer-ui-components.github.io/react/themes/overview) site.
 
+## Migration from v8 to v9
+
+In version 9, the theme now follows the standard from MUI v7. In order to use the new version, you will need to:
+
+### Update Material UI
+
+Ensure you have updated your Material UI dependencies to version 7 (this includes @mui/material, @mui/icons-material, etc.). Refer to the official MUI [migration docs](https://mui.com/material-ui/migration/upgrade-to-v7/) for more details.
+
 ## Migration from v7 to v8
 
 In version 8, the theme now follows the standard from MUI v6, which combines light and dark theme into a single theme object. In order to use the new version, you will need to:
