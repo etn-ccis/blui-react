@@ -442,3 +442,39 @@ jobs:
               working-directory: apps/design-patterns
               run: pnpm test
 
+    chromatic-deployment:
+        name: Chromatic Visual Testing
+        runs-on: ubuntu-latest
+        needs: [build_theme_verify_artifacts, build_component_library]
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+              with:
+                   fetch-depth: 0
+            
+            - name: Download built themes
+              uses: actions/download-artifact@v4
+              with:
+                  name: theme-dist
+                  path: packages/themes/dist
+
+            - name: Download built component library
+              uses: actions/download-artifact@v4
+              with:
+                  name: dist-component-library
+                  path: packages/component-library/dist       
+                   
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                   node-version: ${{ matrix.node-version }}
+            - name: Install pnpm
+              run: npm install -g pnpm
+
+            - name: Install dependencies
+              run: pnpm install 
+
+            - name: Publish to Chromatic
+              working-directory: apps/storybook
+              run: npx chromatic --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }}          
+

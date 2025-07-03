@@ -5,6 +5,7 @@
 ### Changed
 
 - Upgraded `@mui/material` dependency to version v7.
+- Migrated package module format from CommonJS to ESM for modern compatibility and better tree-shaking support.
 
 # v8.1.2 (June 16, 2025)
 
