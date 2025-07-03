@@ -23,4 +23,7 @@ const appBarClasses: AppBarClasses = generateUtilityClasses('BluiAppBar', [
     'expandedBackground',
 ]);
 
+// Add this named export
+export { appBarClasses as AppBarClasses };
+
 export default appBarClasses;
