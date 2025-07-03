@@ -2,7 +2,7 @@
     "name": "@brightlayer-ui/react-themes",
     "author": "Brightlayer UI <brightlayer-ui@eaton.com>",
     "license": "BSD-3-Clause",
-    "version": "9.0.0",
+    "version": "9.0.0-alpha.0",
     "type": "module",
     "description": "React themes for Brightlayer UI applications",
     "main": "./index.js",
@@ -26,12 +26,12 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/etn-ccis/blui-react.git"
+        "url": "https://github.com/etn-ccis/blui-react/tree/dev/packages/themes"
     },
     "bugs": {
-        "url": "https://github.com/etn-ccis/blui-react/issues"
+        "url": "https://github.com/etn-ccis/blui-react/issues?q=is%3Aissue%20state%3Aopen%20label%3Athemes"
     },
-    "homepage": "https://github.com/etn-ccis/blui-react/tree/master/packages/themes",
+    "homepage": "https://github.com/etn-ccis/blui-react/blob/dev/packages/themes/README.md",
     "keywords": [
         "Brightlayer UI",
         "themes",
