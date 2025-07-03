@@ -7,7 +7,7 @@
         "outDir": "dist",
         "strict": true,
         "lib": ["ESNext", "dom"],
-        // "esModuleInterop": true,
+        "esModuleInterop": true,
         "skipLibCheck": true,
         "moduleResolution": "node",
         "jsx": "react-jsx",

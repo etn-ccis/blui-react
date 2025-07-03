@@ -4,7 +4,7 @@ import React, { ReactNode } from 'react';
 export const mergeStyleProp = <T,>(parentValue: T, childValue: T): T | undefined =>
     childValue !== undefined ? childValue : parentValue;
 
-export const findChildByType = (children: ReactNode, type: string[]): JSX.Element[] =>
+export const findChildByType = (children: ReactNode, type: string[]): React.JSX.Element[] =>
     React.Children.map(children, (child: any) => {
         if (child?.type) {
             const name = child.type.displayName;

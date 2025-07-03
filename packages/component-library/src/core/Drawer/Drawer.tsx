@@ -205,7 +205,7 @@ const DrawerRenderer: React.ForwardRefRenderFunction<unknown, DrawerProps> = (
     }, [variant, hover, open]);
 
     const getHeader = useCallback(
-        (): JSX.Element[] =>
+        (): React.JSX.Element[] =>
             findChildByType(drawerProps.children, ['DrawerHeader'])
                 .slice(0, 1)
                 .map((child) => React.cloneElement(child)),
@@ -213,7 +213,7 @@ const DrawerRenderer: React.ForwardRefRenderFunction<unknown, DrawerProps> = (
     );
 
     const getSubHeader = useCallback(
-        (): JSX.Element[] =>
+        (): React.JSX.Element[] =>
             findChildByType(drawerProps.children, ['DrawerSubheader'])
                 .slice(0, 1)
                 .map((child) => React.cloneElement(child)),
@@ -221,7 +221,7 @@ const DrawerRenderer: React.ForwardRefRenderFunction<unknown, DrawerProps> = (
     );
 
     const getBody = useCallback(
-        (): JSX.Element[] =>
+        (): React.JSX.Element[] =>
             findChildByType(drawerProps.children, ['DrawerBody'])
                 .slice(0, 1)
                 .map((child) =>
@@ -278,7 +278,7 @@ const DrawerRenderer: React.ForwardRefRenderFunction<unknown, DrawerProps> = (
     );
 
     const getFooter = useCallback(
-        (): JSX.Element[] =>
+        (): React.JSX.Element[] =>
             findChildByType(drawerProps.children, ['DrawerFooter'])
                 .slice(0, 1)
                 .map((child) => React.cloneElement(child)),
@@ -286,7 +286,7 @@ const DrawerRenderer: React.ForwardRefRenderFunction<unknown, DrawerProps> = (
     );
 
     const getDrawerContents = useCallback(
-        (): JSX.Element => (
+        (): React.JSX.Element => (
             <>
                 {getHeader()}
                 <div
