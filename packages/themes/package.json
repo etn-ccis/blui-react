@@ -26,12 +26,12 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/etn-ccis/blui-react.git"
+        "url": "https://github.com/etn-ccis/blui-react/tree/dev/packages/themes"
     },
     "bugs": {
-        "url": "https://github.com/etn-ccis/blui-react/issues"
+        "url": "https://github.com/etn-ccis/blui-react/issues?q=is%3Aissue%20state%3Aopen%20label%3Athemes"
     },
-    "homepage": "https://github.com/etn-ccis/blui-react/tree/master/packages/themes",
+    "homepage": "https://github.com/etn-ccis/blui-react/blob/dev/packages/themes/README.md",
     "keywords": [
         "Brightlayer UI",
         "themes",

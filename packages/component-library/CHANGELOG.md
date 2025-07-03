@@ -1,6 +1,6 @@
 # Changelog
 
-# v8.0.0 (Unreleased)
+# v8.0.0
 
 ### Changed
 
