@@ -457,6 +457,12 @@ jobs:
               with:
                   name: theme-dist
                   path: packages/themes/dist
+            
+            - name: Download built component library
+              uses: actions/download-artifact@v4
+              with:
+                  name: dist-component-library
+                  path: packages/component-library/dist
 
             - name: Setup Node.js
               uses: actions/setup-node@v4
