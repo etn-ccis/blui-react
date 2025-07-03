@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Upgraded the `@mui/material` dependency to version 7.
 -   Upgraded the `react` dependency to version 19.
+-   Migrated package module format from CommonJS to ESM for modern compatibility and better tree-shaking support.
 
 ## v6.0.2 (June 02, 2025)
 

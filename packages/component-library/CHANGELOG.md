@@ -1,11 +1,12 @@
 # Changelog
 
-# v8.0.0
+# v8.0.0 (Unreleased)
 
 ### Changed
 
 - Upgraded `@mui/material` dependency to version v7.
 - Upgraded `react` to version v19.
+- Migrated package module format from CommonJS to ESM for modern compatibility and better tree-shaking support.
 
 ## v7.1.1 (June 02, 2025)
 
