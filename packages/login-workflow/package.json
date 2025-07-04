@@ -5,7 +5,12 @@
     "author": "Brightlayer UI <brightlayer-ui@eaton.com> (https://github.com/brightlayer-ui)",
     "license": "BSD-3-Clause",
     "description": "Re-usable workflow components for Authentication and Registration within Eaton applications.",
-    "main": "dist/index.js",
+    "module": "./index.js",
+    "exports": {
+        ".": {
+            "import": "./index.js"
+        }
+    },
     "scripts": {
         "test": "jest --maxWorkers=50%",
         "test:ci": "jest",
