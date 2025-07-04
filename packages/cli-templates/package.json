@@ -21,7 +21,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/etn-ccis/blui-react-cli-templates.git",
+        "url": "https://github.com/etn-ccis/blui-react/tree/dev/packages/cli-templates",
         "directory": "blank-typescript"
     },
     "license": "BSD-3-Clause",
@@ -40,7 +40,7 @@
     },
     "prettier": "@brightlayer-ui/prettier-config",
     "bugs": {
-        "url": "https://github.com/etn-ccis/blui-react-cli-templates/issues"
+        "url": "https://github.com/etn-ccis/blui-react/issues?q=is%3Aissue%20state%3Aopen%20label%3Acli-templates"
     },
     "devDependencies": {
         "@brightlayer-ui/eslint-config": "^4.0.0",

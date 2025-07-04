@@ -66,6 +66,15 @@ In short, you will need to:
 -   [Components & APIs](https://github.com/etn-ccis/blui-react-workflows/tree/master/login-workflow/docs/components/README.md)
 -   [Screens](https://github.com/etn-ccis/blui-react-workflows/tree/master/login-workflow/docs/screens/README.md)
 
+# Migrating from v6 => v7
+
+The migration to v7 from v6 should be very straightforward — all usage remains the same if you are using the custom login flow. However, version 7 has introduced new MUI v7. And two new peer dependencies that you will need to install:
+
+```
+"@mui/icons-material": "^7.1.1",
+"@mui/material": "^7.1.1",
+```
+
 # Migrating from v5 => v6
 
 The migration to v6 from v5 should be very straightforward — all usage remains the same if you are using the custom login flow. However, version 6 has introduced new MUI v6. And two new peer dependencies that you will need to install:
