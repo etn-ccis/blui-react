@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme: Theme) =>
             },
         },
         sortButtonMobile: {
-            color: theme.palette.common.white,
+            color: theme.palette.background.default,
             marginRight: theme.spacing(-1),
         },
         sortButtonContainer: {
@@ -72,12 +72,9 @@ const useStyles = makeStyles((theme: Theme) =>
                 marginLeft: 4,
             },
         },
-        infoListItem: {
-            backgroundColor: theme.palette.common.white,
-        },
+        infoListItem: {},
         sortableInfoListItem: {
             paddingLeft: 0,
-            backgroundColor: theme.palette.common.white,
         },
         listItemText: {
             marginLeft: theme.spacing(2),

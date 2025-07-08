@@ -11,8 +11,8 @@
         "build-storybook": "storybook build"
     },
     "dependencies": {
-        "react": "19.0.0",
-        "react-dom": "19.0.0"
+        "react": "^19.1.0",
+        "react-dom": "^19.1.0"
     },
     "devDependencies": {
         "@brightlayer-ui/colors": "^3.1.1",
@@ -22,8 +22,8 @@
         "@mui/icons-material": "^7.0.0",
         "@mui/material": "^7.0.0",
         "@storybook/react-vite": "^9.0.12",
-        "@types/react": "19.0.0",
-        "@types/react-dom": "19.0.0",
+        "@types/react": "^19.1.0",
+        "@types/react-dom": "^19.1.0",
         "@typescript-eslint/parser": "^6.0.0",
         "@vitejs/plugin-react": "^4.4.1",
         "chromatic": "^13.0.1",
