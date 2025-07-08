@@ -5,9 +5,11 @@
     "description": "React components for Brightlayer UI applications",
     "main": "index.js",
     "module": "./index.js",
+    "types": "./index.d.ts",
     "exports": {
         ".": {
-            "import": "./index.js"
+            "import": "./index.js",
+            "types": "./index.d.ts"
         }
     },
     "scripts": {

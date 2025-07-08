@@ -95,7 +95,7 @@ export const OktaRedirectLoginScreenBase: React.FC<OktaRedirectLoginScreenProps>
                     className={defaultClasses.projectImageWrapper}
                     data-testid={defaultClasses.projectImageWrapper}
                 >
-                    {projectImage}
+                    {projectImage as any}
                 </Box>
 
                 <Box

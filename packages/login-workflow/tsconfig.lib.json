@@ -5,7 +5,11 @@
         "types": ["node"],
         "declaration": true,
         "module": "ESNext",
-        "moduleResolution": "Node"
+        "moduleResolution": "Node",
+        "paths": {
+            "@brightlayer-ui/react-components": ["../component-library/dist/index.d.ts"],
+            "@brightlayer-ui/react-themes": ["../themes/dist/index.d.ts"]
+        }
     },
     "exclude": ["src/**/*.test.tsx", "src/testUtils/*"]
 }

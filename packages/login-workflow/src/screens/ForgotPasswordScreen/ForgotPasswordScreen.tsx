@@ -82,7 +82,7 @@ export const ForgotPasswordScreen: React.FC<ForgotPasswordScreenProps> = (props)
 
     const workflowCardInstructionProps = {
         instructions: description ? (
-            <Box sx={{ px: { md: 3, xs: 2 }, pt: 2 }}> {description(responseTime)} </Box>
+            <Box sx={{ px: { md: 3, xs: 2 }, pt: 2 }}> {description(responseTime) as any} </Box>
         ) : (
             <Typography sx={{ px: { md: 3, xs: 2 }, pt: 2 }}>
                 <Trans

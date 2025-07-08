@@ -13,7 +13,8 @@
         "strict": true,
         "allowSyntheticDefaultImports": true,
         "strictNullChecks": true,
-        "outDir": "dist"
+        "outDir": "dist",
+        "skipLibCheck": true
     },
     "include": ["src", "images.d.ts"]
 }

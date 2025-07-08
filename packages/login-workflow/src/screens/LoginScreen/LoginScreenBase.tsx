@@ -171,7 +171,7 @@ export const LoginScreenBase: React.FC<React.PropsWithChildren<LoginScreenProps>
                     className={defaultClasses.projectImageWrapper}
                     data-testid={defaultClasses.projectImageWrapper}
                 >
-                    {projectImage}
+                    {projectImage as any}
                 </Box>
 
                 <ErrorManager {...errorDisplayConfig}>

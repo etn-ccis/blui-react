@@ -3,6 +3,9 @@
     "compilerOptions": {
         "outDir": "./dist",
         "types": ["node"],
-        "declaration": true
+        "declaration": true,
+        "paths": {
+            "@brightlayer-ui/themes": ["../themes/dist"]
+        }
     }
 }

@@ -7,12 +7,15 @@
     "description": "React themes for Brightlayer UI applications",
     "main": "./index.js",
     "module": "./index.js",
+    "types": "./index.d.ts",
     "exports": {
         ".": {
-            "import": "./index.js"
+            "import": "./index.js",
+            "types": "./index.d.ts"
         },
         "./open-sans": {
-            "import": "./open-sans.js"
+            "import": "./open-sans.js",
+            "types": "./open-sans.d.ts"
         }
     },
     "scripts": {
