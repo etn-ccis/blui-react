@@ -1,6 +1,7 @@
 import { TextFieldProps } from '@mui/material';
 import { WorkflowCardBaseProps } from '../../components/WorkflowCard/WorkflowCard.types';
 import { ErrorManagerProps } from '../../components/Error/types';
+import { JSX } from 'react';
 
 export type LoginScreenProps = WorkflowCardBaseProps & {
     // configure fields

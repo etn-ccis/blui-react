@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, JSX } from 'react';
 import { BasicDialog } from '../Dialog/BasicDialog';
 import ErrorMessageBox from './ErrorMessageBox';
 import { ErrorManagerProps } from './types';

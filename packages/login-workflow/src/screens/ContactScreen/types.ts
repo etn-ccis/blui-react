@@ -1,4 +1,5 @@
 import { WorkflowCardProps } from '../../components/WorkflowCard/WorkflowCard.types';
+import { JSX } from 'react';
 
 export type ContactSupportScreenProps = WorkflowCardProps & {
     icon?: JSX.Element;

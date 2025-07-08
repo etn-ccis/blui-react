@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { JSX } from 'react';
 import Box from '@mui/material/Box';
 import Close from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';

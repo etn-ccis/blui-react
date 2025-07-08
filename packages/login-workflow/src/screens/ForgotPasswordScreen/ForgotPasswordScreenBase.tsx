@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/naming-convention */
 
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, JSX } from 'react';
 import TextField from '@mui/material/TextField';
 import {
     WorkflowCard,

@@ -1,4 +1,5 @@
 import { WorkflowCardBaseProps } from '../../components/WorkflowCard/WorkflowCard.types';
+import { JSX } from 'react';
 
 export type OktaRedirectLoginScreenProps = WorkflowCardBaseProps & {
     /**

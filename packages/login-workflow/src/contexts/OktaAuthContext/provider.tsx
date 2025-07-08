@@ -3,7 +3,7 @@
  * @module OktaAuthContextProvider
  */
 
-import React, { useEffect } from 'react';
+import React, { useEffect, JSX } from 'react';
 import { OktaAuthContextProviderProps } from './types';
 import { OktaAuthContext } from './context';
 import { I18nextProvider, useTranslation } from 'react-i18next';

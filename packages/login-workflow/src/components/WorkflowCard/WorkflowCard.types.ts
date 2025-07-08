@@ -1,5 +1,6 @@
 import { CardActionsProps, CardHeaderProps, TypographyProps } from '@mui/material';
 import { BoxProps } from '@mui/material/Box';
+import { JSX } from 'react';
 
 export type ErrorStateProps = TypographyProps & {
     /**
