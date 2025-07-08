@@ -55,13 +55,13 @@ export const SliderExample: React.FC = () => {
                         Active
                     </Typography>
                     <Grid container spacing={2}>
-                        <Grid item>
+                        <Grid>
                             <VolumeDown />
                         </Grid>
-                        <Grid item xs>
+                        <Grid sx={{ xs: 12 }}>
                             <Slider value={defaultValue} onChange={handleDefaultChange} />
                         </Grid>
-                        <Grid item>
+                        <Grid>
                             <VolumeUp />
                         </Grid>
                     </Grid>
@@ -71,13 +71,13 @@ export const SliderExample: React.FC = () => {
                         Disabled
                     </Typography>
                     <Grid container spacing={2}>
-                        <Grid item>
+                        <Grid>
                             <VolumeDown />
                         </Grid>
-                        <Grid item xs>
+                        <Grid sx={{ xs: 12 }}>
                             <Slider disabled defaultValue={30} />
                         </Grid>
-                        <Grid item>
+                        <Grid>
                             <VolumeUp />
                         </Grid>
                     </Grid>
@@ -92,10 +92,10 @@ export const SliderExample: React.FC = () => {
                         Active
                     </Typography>
                     <Grid container spacing={2}>
-                        <Grid item>
+                        <Grid>
                             <VolumeDown />
                         </Grid>
-                        <Grid item xs>
+                        <Grid sx={{ xs: 12 }}>
                             <Slider
                                 value={primaryValue}
                                 onChange={handlePrimaryChange}
@@ -106,7 +106,7 @@ export const SliderExample: React.FC = () => {
                                 max={100}
                             />
                         </Grid>
-                        <Grid item>
+                        <Grid>
                             <VolumeUp />
                         </Grid>
                     </Grid>
@@ -116,13 +116,13 @@ export const SliderExample: React.FC = () => {
                         Disabled
                     </Typography>
                     <Grid container spacing={2}>
-                        <Grid item>
+                        <Grid>
                             <VolumeDown />
                         </Grid>
-                        <Grid item xs>
+                        <Grid sx={{ xs: 12 }}>
                             <Slider disabled defaultValue={30} color="primary" step={10} marks min={10} max={100} />
                         </Grid>
-                        <Grid item>
+                        <Grid>
                             <VolumeUp />
                         </Grid>
                     </Grid>
@@ -137,10 +137,10 @@ export const SliderExample: React.FC = () => {
                         Active
                     </Typography>
                     <Grid container spacing={2}>
-                        <Grid item>
+                        <Grid>
                             <VolumeDown />
                         </Grid>
-                        <Grid item xs>
+                        <Grid sx={{ xs: 12 }}>
                             <Slider
                                 value={secondaryValue}
                                 onChange={handleSecondaryChange}
@@ -151,7 +151,7 @@ export const SliderExample: React.FC = () => {
                                 max={100}
                             />
                         </Grid>
-                        <Grid item>
+                        <Grid>
                             <VolumeUp />
                         </Grid>
                     </Grid>
@@ -161,10 +161,10 @@ export const SliderExample: React.FC = () => {
                         Disabled
                     </Typography>
                     <Grid container spacing={2}>
-                        <Grid item>
+                        <Grid>
                             <VolumeDown />
                         </Grid>
-                        <Grid item xs>
+                        <Grid sx={{ xs: 12 }}>
                             <Slider
                                 disabled
                                 defaultValue={30}
@@ -175,7 +175,7 @@ export const SliderExample: React.FC = () => {
                                 max={100}
                             />
                         </Grid>
-                        <Grid item>
+                        <Grid>
                             <VolumeUp />
                         </Grid>
                     </Grid>
@@ -187,13 +187,13 @@ export const SliderExample: React.FC = () => {
                 </Typography>
                 <Box sx={{ ...sliderContainerStyles, mt: 7 }}>
                     <Grid container spacing={2}>
-                        <Grid item>
+                        <Grid>
                             <VolumeDown />
                         </Grid>
-                        <Grid item xs>
+                        <Grid sx={{ xs: 12 }}>
                             <Slider value={default2Value} onChange={handleDefault2Change} valueLabelDisplay="on" />
                         </Grid>
-                        <Grid item>
+                        <Grid>
                             <VolumeUp />
                         </Grid>
                     </Grid>

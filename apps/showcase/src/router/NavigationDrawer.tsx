@@ -70,6 +70,7 @@ export const NavigationDrawer: React.FC = () => {
             open={open}
             width={332}
             ModalProps={{
+                //@ts-ignore
                 onBackdropClick: (): void => {
                     dispatch({ type: CLOSE_DRAWER });
                 },
