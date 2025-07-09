@@ -2,6 +2,7 @@ import { TextFieldProps } from '@mui/material';
 import { ErrorManagerProps } from '../../components/Error/types';
 import { WorkflowCardProps } from '../../components/WorkflowCard/WorkflowCard.types';
 import { SuccessScreenProps } from '../SuccessScreen';
+import { JSX } from 'react';
 
 export type ForgotPasswordScreenProps = WorkflowCardProps & {
     /**

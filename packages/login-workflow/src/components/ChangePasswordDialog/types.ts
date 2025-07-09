@@ -2,7 +2,7 @@ import { DialogProps, TextFieldProps } from '@mui/material';
 import { SuccessScreenProps } from '../../screens';
 import { SetPasswordProps } from '../SetPassword';
 import { ErrorManagerProps } from '../Error/types';
-
+import { JSX } from 'react';
 /**
  * Props of ChangePasswordDialogSlots
  */

@@ -1139,7 +1139,7 @@ importers:
         version: 3.6.1(@mui/icons-material@6.1.4(@mui/material@6.4.12(@emotion/react@11.14.0(@types/react@19.1.8)(react@19.1.0))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.8)(react@19.1.0))(@types/react@19.1.8)(react@19.1.0))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@types/react@19.1.8)(react@19.1.0))(@mui/material@6.4.12(@emotion/react@11.14.0(@types/react@19.1.8)(react@19.1.0))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.8)(react@19.1.0))(@types/react@19.1.8)(react@19.1.0))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
       '@brightlayer-ui/react-auth-workflow':
         specifier: ^6.0.1
-        version: 6.0.2(5dbb6a097b8233b1b799222a8e319b71)
+        version: 6.0.2(b2d44269a8272ad3ba4e47d31f398689)
       '@brightlayer-ui/react-components':
         specifier: workspace:^
         version: link:../packages/component-library
@@ -1640,8 +1640,8 @@ importers:
         specifier: ^13.6.0
         version: 13.35.1(encoding@0.1.13)
       i18next:
-        specifier: ^23.2.6
-        version: 23.16.8
+        specifier: ^25.3.1
+        version: 25.3.1(typescript@5.8.3)
       identity-obj-proxy:
         specifier: ^3.0.0
         version: 3.0.0
@@ -1664,8 +1664,8 @@ importers:
         specifier: ^19.1.0
         version: 19.1.0(react@19.1.0)
       react-i18next:
-        specifier: ^13.2.2
-        version: 13.5.0(i18next@23.16.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        specifier: ^15.6.0
+        version: 15.6.0(i18next@25.3.1(typescript@5.8.3))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3)
       regenerator-runtime:
         specifier: ^0.13.7
         version: 0.13.11
@@ -8221,6 +8221,14 @@ packages:
       typescript:
         optional: true
 
+  i18next@25.3.1:
+    resolution: {integrity: sha512-S4CPAx8LfMOnURnnJa8jFWvur+UX/LWcl6+61p9VV7SK2m0445JeBJ6tLD0D5SR0H29G4PYfWkEhivKG5p4RDg==}
+    peerDependencies:
+      typescript: ^5
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
   iconv-lite@0.4.24:
     resolution: {integrity: sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==}
     engines: {node: '>=0.10.0'}
@@ -11167,6 +11175,22 @@ packages:
 
   react-i18next@15.5.3:
     resolution: {integrity: sha512-ypYmOKOnjqPEJZO4m1BI0kS8kWqkBNsKYyhVUfij0gvjy9xJNoG/VcGkxq5dRlVwzmrmY1BQMAmpbbUBLwC4Kw==}
+    peerDependencies:
+      i18next: '>= 23.2.3'
+      react: '>= 16.8.0'
+      react-dom: '*'
+      react-native: '*'
+      typescript: ^5
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+      typescript:
+        optional: true
+
+  react-i18next@15.6.0:
+    resolution: {integrity: sha512-W135dB0rDfiFmbMipC17nOhGdttO5mzH8BivY+2ybsQBbXvxWIwl3cmeH3T9d+YPBSJu/ouyJKFJTtkK7rJofw==}
     peerDependencies:
       i18next: '>= 23.2.3'
       react: '>= 16.8.0'
@@ -14558,7 +14582,7 @@ snapshots:
     dependencies:
       prettier: 3.6.2
 
-  '@brightlayer-ui/react-auth-workflow@6.0.2(5dbb6a097b8233b1b799222a8e319b71)':
+  '@brightlayer-ui/react-auth-workflow@6.0.2(b2d44269a8272ad3ba4e47d31f398689)':
     dependencies:
       '@brightlayer-ui/react-components': link:packages/component-library
       '@emotion/react': 11.14.0(@types/react@19.1.8)(react@19.1.0)
@@ -14569,11 +14593,11 @@ snapshots:
       '@okta/okta-react': 6.10.0(@okta/okta-auth-js@7.12.1(encoding@0.1.13))(react-dom@19.1.0(react@19.1.0))(react-router-dom@6.30.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)
       date-fns: 3.6.0
       dompurify: 3.2.6
-      i18next: 25.3.0(typescript@4.9.5)
+      i18next: 25.3.1(typescript@4.9.5)
       i18next-browser-languagedetector: 8.2.0
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
-      react-i18next: 15.5.3(i18next@25.3.0(typescript@4.9.5))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@4.9.5)
+      react-i18next: 15.6.0(i18next@25.3.1(typescript@4.9.5))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@4.9.5)
     optionalDependencies:
       react-router-dom: 6.30.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
 
@@ -21990,13 +22014,19 @@ snapshots:
     dependencies:
       '@babel/runtime': 7.27.6
 
-  i18next@25.3.0(typescript@4.9.5):
+  i18next@25.3.0(typescript@5.8.3):
+    dependencies:
+      '@babel/runtime': 7.27.6
+    optionalDependencies:
+      typescript: 5.8.3
+
+  i18next@25.3.1(typescript@4.9.5):
     dependencies:
       '@babel/runtime': 7.27.6
     optionalDependencies:
       typescript: 4.9.5
 
-  i18next@25.3.0(typescript@5.8.3):
+  i18next@25.3.1(typescript@5.8.3):
     dependencies:
       '@babel/runtime': 7.27.6
     optionalDependencies:
@@ -26110,21 +26140,31 @@ snapshots:
     optionalDependencies:
       react-dom: 19.1.0(react@19.1.0)
 
-  react-i18next@15.5.3(i18next@25.3.0(typescript@4.9.5))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@4.9.5):
-    dependencies:
-      '@babel/runtime': 7.27.6
-      html-parse-stringify: 3.0.1
-      i18next: 25.3.0(typescript@4.9.5)
-      react: 19.1.0
-    optionalDependencies:
-      react-dom: 19.1.0(react@19.1.0)
-      typescript: 4.9.5
-
   react-i18next@15.5.3(i18next@25.3.0(typescript@5.8.3))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3):
     dependencies:
       '@babel/runtime': 7.27.6
       html-parse-stringify: 3.0.1
       i18next: 25.3.0(typescript@5.8.3)
+      react: 19.1.0
+    optionalDependencies:
+      react-dom: 19.1.0(react@19.1.0)
+      typescript: 5.8.3
+
+  react-i18next@15.6.0(i18next@25.3.1(typescript@4.9.5))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@4.9.5):
+    dependencies:
+      '@babel/runtime': 7.27.6
+      html-parse-stringify: 3.0.1
+      i18next: 25.3.1(typescript@4.9.5)
+      react: 19.1.0
+    optionalDependencies:
+      react-dom: 19.1.0(react@19.1.0)
+      typescript: 4.9.5
+
+  react-i18next@15.6.0(i18next@25.3.1(typescript@5.8.3))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3):
+    dependencies:
+      '@babel/runtime': 7.27.6
+      html-parse-stringify: 3.0.1
+      i18next: 25.3.1(typescript@5.8.3)
       react: 19.1.0
     optionalDependencies:
       react-dom: 19.1.0(react@19.1.0)

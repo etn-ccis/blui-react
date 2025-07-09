@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, JSX } from 'react';
 import { EulaScreenProps } from './types';
 import { EulaScreenBase } from './EulaScreenBase';
 import { useRegistrationContext, useRegistrationWorkflowContext } from '../../contexts';

@@ -1,4 +1,5 @@
 import { ErrorManagerProps } from '../Error/types';
+import { JSX } from 'react';
 
 export type RegistrationWorkflowProps = {
     /**

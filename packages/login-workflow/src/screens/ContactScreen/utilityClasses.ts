@@ -1,4 +1,5 @@
 import generateUtilityClass from '@mui/material/generateUtilityClass';
+import { JSX } from 'react';
 
 export type ContactScreenClasses = {
     root?: string;

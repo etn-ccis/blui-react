@@ -3,7 +3,7 @@
  * @module AuthContextProvider
  */
 
-import React, { useEffect } from 'react';
+import React, { useEffect, JSX } from 'react';
 import { AuthContextProviderProps } from './types';
 import { AuthContext } from './context';
 import { I18nextProvider, useTranslation } from 'react-i18next';
