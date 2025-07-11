@@ -28,7 +28,7 @@ const emptyStateContainerStyles = {
     justifyContent: 'center',
 };
 
-export const App = (): JSX.Element => {
+export const App = (): React.JSX.Element => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [language, setLanguage] = useState(window.localStorage.getItem('app-i18nextLng')?.toString() ?? 'en');
     const [loginData, setLoginData] = useState<AppContextType['loginData']>({

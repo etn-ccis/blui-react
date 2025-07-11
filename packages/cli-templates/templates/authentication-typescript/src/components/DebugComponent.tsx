@@ -9,7 +9,7 @@ const LinksWrapperStyles = {
     pb: 4,
 };
 
-export const DebugComponent = (): JSX.Element => {
+export const DebugComponent = (): React.JSX.Element => {
     const [debugMode, setDebugMode] = useState(false);
 
     return (
