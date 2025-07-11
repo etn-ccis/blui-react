@@ -228,8 +228,6 @@ jobs:
             run: npm install -g pnpm
           - name: Install dependencies
             run: pnpm install
-          - name: Add TypeScript types for React
-            run: pnpm add @types/react@19.1.0
             working-directory: packages/component-library
           - name: Build component library
             run: pnpm build
