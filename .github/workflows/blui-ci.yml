@@ -388,6 +388,9 @@ jobs:
             - run: pnpm install
             - run: pnpm install
               working-directory: packages/cli-templates/templates/authentication-typescript
+            - name: Add TypeScript types for React
+              run: pnpm add @types/react@19.1.0
+              working-directory: packages/cli-templates/templates/authentication-typescript  
             - run: pnpm build
               working-directory: packages/cli-templates/templates/authentication-typescript
             - run: pnpm install
