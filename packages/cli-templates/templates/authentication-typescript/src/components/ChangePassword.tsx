@@ -4,7 +4,7 @@ import { useApp } from '../contexts/AppContextProvider';
 import { LocalStorage } from '../store/local-storage';
 import { useNavigate } from 'react-router-dom';
 
-export const ChangePassword = (): JSX.Element => {
+export const ChangePassword = (): React.JSX.Element => {
     const app = useApp();
     const navigate = useNavigate();
     const logOut = (): void => {
