@@ -1,6 +1,5 @@
 import React from 'react';
-import { cleanup, render, screen, fireEvent } from '@testing-library/react';
-// import userEvent from '@testing-library/user-event';
+import { cleanup, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { SortableList } from '.';
 import { createStore } from 'redux';
