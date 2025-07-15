@@ -39,9 +39,7 @@ describe('I18N', () => {
         expect(screen.getByTestId('deselect-all-button')).toBeTruthy();
         fireEvent.click(screen.getByTestId('deselect-all-button'));
 
-        expect(screen.getAllByTestId('infoListItem')).toHaveLength(
-            Object.keys(english.translations.FRUITS).length
-        );
+        expect(screen.getAllByTestId('infoListItem')).toHaveLength(Object.keys(english.translations.FRUITS).length);
         expect(firstCheckbox).not.toBeFalsy();
     });
 });

@@ -39,4 +39,3 @@ describe('Sortable List', () => {
         expect(screen.queryByText('Done')).toBeNull();
     });
 });
-

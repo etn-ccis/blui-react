@@ -23,7 +23,7 @@ describe('Action list', () => {
         );
     });
 
-     it('renders 10 items by default', () => {
+    it('renders 10 items by default', () => {
         render(
             <ThemeProvider theme={theme}>
                 <Provider store={store}>
