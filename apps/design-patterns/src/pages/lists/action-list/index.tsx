@@ -120,6 +120,7 @@ export const ActionList = (): JSX.Element => {
                     <Tooltip title={'Remove all items'}>
                         <IconButton
                             id={'remove-all-button'}
+                            data-testid={'remove-all-button'}
                             data-cy={'toolbar-delete'}
                             color={'inherit'}
                             aria-label={'Delete'}
@@ -132,6 +133,7 @@ export const ActionList = (): JSX.Element => {
                     <Tooltip title={'Add a new item'}>
                         <IconButton
                             id={'add-item-button'}
+                            data-testid={'add-item-button'}
                             data-cy={'toolbar-add'}
                             color={'inherit'}
                             aria-label={'add'}
@@ -152,6 +154,7 @@ export const ActionList = (): JSX.Element => {
                             key={i}
                             hidePadding
                             ripple
+                            data-testid={'infoListItem'}
                             title={item.name}
                             subtitle={item.details}
                             onClick={(): void => {

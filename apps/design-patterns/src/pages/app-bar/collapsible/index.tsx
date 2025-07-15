@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import { TOGGLE_DRAWER } from '../../../redux/actions';
 import { getBodyFiller } from '../utils/utils';
 
+// @ts-ignore
 import backgroundImage from '../../../assets/collapsible_app_bar_demo.jpg';
 const linearGradientOverlayImage = `linear-gradient(to bottom, rgba(0, 123, 193, 1) 22.4%, rgba(0, 123, 193, 0.2) 100%), url(${backgroundImage})`;
 

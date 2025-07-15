@@ -24,8 +24,8 @@ describe('Action list with panel header', () => {
     afterEach(cleanup);
     it('should render', () => {
         createRenderer();
-        expect(screen.getByText('Global Action List')).toBeInTheDocument();
-        expect(screen.getByText('In Panel Header')).toBeInTheDocument();
+        expect(screen.getByText('Global Action List')).toBeTruthy();
+        expect(screen.getByText('In Panel Header')).toBeTruthy();
     });
 
     it('should render 3 items by default', () => {
@@ -35,11 +35,11 @@ describe('Action list with panel header', () => {
 
     it('should render filtered items, when the range is selected', () => {
         createRenderer();
-        expect(screen.getByText('30 Days')).toBeInTheDocument();
-        expect(screen.queryByText('15 Days')).not.toBeInTheDocument();
+        expect(screen.getByText('30 Days')).toBeTruthy();
+        expect(screen.queryByText('15 Days')).not.toBeTruthy();
         fireEvent.mouseDown(screen.getByText('30 Days'));
 
-        expect(screen.getByText('15 Days')).toBeInTheDocument();
+        expect(screen.getByText('15 Days')).toBeTruthy();
         fireEvent.click(screen.getByText('15 Days'));
         expect(screen.getAllByTestId('infoListItem').length).toBe(2);
     });

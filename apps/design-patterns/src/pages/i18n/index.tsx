@@ -195,6 +195,7 @@ export const I18N = (): JSX.Element => {
                 {fruits.map((fruit, index) => (
                     <InfoListItem
                         data-cy={'list-item-row'}
+                        data-testid='infoListItem'
                         key={index}
                         onClick={(): void => selectFruit(fruit.name)}
                         ripple={true}
@@ -229,6 +230,7 @@ export const I18N = (): JSX.Element => {
                                         setSelectedItems(new Set());
                                     }}
                                     color={'inherit'}
+                                    data-testid={'deselect-all-button'}
                                     id={'deselect-all-button'}
                                     data-cy={'snackbar-deselect-all'}
                                     size="large"

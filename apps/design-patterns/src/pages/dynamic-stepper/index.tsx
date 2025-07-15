@@ -135,6 +135,7 @@ export const DynamicStepper = (): JSX.Element => {
                             color={'inherit'}
                             edge={'end'}
                             onClick={(): void => setSteps([])}
+                            data-testid={'remove-all'}
                             id={'remove-all'}
                             size="large"
                         >
@@ -177,6 +178,7 @@ export const DynamicStepper = (): JSX.Element => {
                                         onClick={(): void => {
                                             setActiveStep(index === activeStep ? -1 : index);
                                         }}
+                                        data-testid="step-button"
                                     >
                                         <div style={{ display: 'flex', alignItems: 'center' }}>
                                             <Typography variant={'body1'}>
