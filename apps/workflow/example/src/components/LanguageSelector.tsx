@@ -3,7 +3,7 @@ import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, SelectPro
 import i18n from '../translations/i18n';
 import { useApp } from '../contexts/AppContextProvider';
 
-export const LanguageSelector = (props: SelectProps): JSX.Element => {
+export const LanguageSelector = (props: SelectProps): React.JSX.Element => {
     const supportedLanguages = ['en', 'fr', 'es', 'zh', 'pt'];
 
     const { language, setLanguage } = useApp();

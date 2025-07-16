@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import { App } from './App';
 import CssBaseline from '@mui/material/CssBaseline';
 import { blueThemes } from '@brightlayer-ui/react-themes';
-import '@brightlayer-ui/react-themes/open-sans';
+// import '@brightlayer-ui/react-themes/open-sans';
 import './index.css';
 import { createRoot } from 'react-dom/client';
 import type {} from '@mui/material/themeCssVarsAugmentation';
