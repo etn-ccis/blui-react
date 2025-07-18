@@ -97,7 +97,7 @@ const EmptyStateRender: React.ForwardRefRenderFunction<unknown, EmptyStateProps>
                 ))}
             {description &&
                 (typeof description === 'string' ? (
-                    <Description variant="subtitle2" color={'textSecondary'} className={generatedClasses.description}>
+                    <Description variant="body1" color={'textSecondary'} className={generatedClasses.description}>
                         {description}
                     </Description>
                 ) : (
