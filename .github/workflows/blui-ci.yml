@@ -111,10 +111,10 @@ jobs:
               run: npm install -g pnpm         
             - name: Install dependencies
               run: pnpm install
-              working-directory: packages/login-workflow
+              working-directory: packages/login-workflow/dist
             - name: Publish package
               run: npm run publish:package -- -b ${{ env.BRANCH }}
-              working-directory: packages/login-workflow
+              working-directory: packages/login-workflow/dist
 
     build_theme_verify_artifacts:
         name: Build and Test Themes
@@ -417,7 +417,7 @@ jobs:
               with:
                   node-version: ${{ matrix.node-version }}
                   registry-url: 'https://registry.npmjs.org'
-            - run: pnpm install --frozen-lockfile
+            - run: pnpm install
             - name: Publish package
               run: npm run publish:package -- -b ${{env.BRANCH}}
         
