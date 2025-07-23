@@ -16,7 +16,7 @@ export const NavigationDrawer: React.FC = () => {
 
     const handleNavigate = useCallback(
         (id: string): void => {
-            navigate(id);
+            void navigate(id);
             setSelected(id);
         },
         [navigate, setSelected]

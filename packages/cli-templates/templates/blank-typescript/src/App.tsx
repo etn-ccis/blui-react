@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, JSX } from 'react';
 import {
     AppBar,
     Button,
@@ -78,12 +78,12 @@ export const App = (): JSX.Element => {
                         <>
                             <Divider sx={{ my: 3 }} />
                             <Grid container spacing={2}>
-                                <Grid item xs={12} sm={6}>
+                                <Grid sx={{ xs: 12, sm: 6 }}>
                                     <Button target={'_blank'} href={'https://brightlayer-ui.github.io/'}>
                                         Brightlayer UI Documentation
                                     </Button>
                                 </Grid>
-                                <Grid item xs={12} sm={6}>
+                                <Grid sx={{ xs: 12, sm: 6 }}>
                                     <Button
                                         target={'_blank'}
                                         href={'https://brightlayer-ui.github.io/development/frameworks-web/react'}
@@ -91,12 +91,12 @@ export const App = (): JSX.Element => {
                                         React Getting Started Guide
                                     </Button>
                                 </Grid>
-                                <Grid item xs={12} sm={6}>
+                                <Grid sx={{ xs: 12, sm: 6 }}>
                                     <Button target={'_blank'} href={'https://brightlayer-ui.github.io/patterns'}>
                                         Design Pattern Descriptions
                                     </Button>
                                 </Grid>
-                                <Grid item xs={12} sm={6}>
+                                <Grid sx={{ xs: 12, sm: 6 }}>
                                     <Button
                                         target={'_blank'}
                                         href={'https://brightlayer-ui-components.github.io/react/'}
@@ -104,7 +104,7 @@ export const App = (): JSX.Element => {
                                         Brightlayer UI React Component Library
                                     </Button>
                                 </Grid>
-                                <Grid item xs={12} sm={6}>
+                                <Grid sx={{ xs: 12, sm: 6 }}>
                                     <Button
                                         target={'_blank'}
                                         href={'https://github.com/etn-ccis?q=blui&type=all&language=&sort='}
@@ -112,7 +112,7 @@ export const App = (): JSX.Element => {
                                         Visit Us on GitHub
                                     </Button>
                                 </Grid>
-                                <Grid item xs={12} sm={6}>
+                                <Grid sx={{ xs: 12, sm: 6 }}>
                                     <Button
                                         target={'_blank'}
                                         href={'https://github.com/etn-ccis/blui-react-design-patterns'}
@@ -120,12 +120,12 @@ export const App = (): JSX.Element => {
                                         Design Pattern Source on GitHub
                                     </Button>
                                 </Grid>
-                                <Grid item xs={12} sm={6}>
+                                <Grid sx={{ xs: 12, sm: 6 }}>
                                     <Button target={'_blank'} href={'https://brightlayer-ui.github.io/roadmap'}>
                                         Release Roadmap
                                     </Button>
                                 </Grid>
-                                <Grid item xs={12} sm={6}>
+                                <Grid sx={{ xs: 12, sm: 6 }}>
                                     <Button
                                         target={'_blank'}
                                         href={'https://brightlayer-ui.github.io/community/contactus'}
