@@ -16,7 +16,7 @@ export const NavigationDrawer: React.FC = () => {
 
     const handleNavigate = useCallback(
         (id: string): void => {
-            navigate(id);
+            void navigate(id);
             setSelected(id);
         },
         [navigate, setSelected]
@@ -26,6 +26,7 @@ export const NavigationDrawer: React.FC = () => {
         <Drawer
             open={drawerOpen}
             ModalProps={{
+                //@ts-ignore
                 onBackdropClick: (): void => {
                     setDrawerOpen(false);
                 },

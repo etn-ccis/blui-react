@@ -73,6 +73,7 @@ export const App = (): React.JSX.Element => {
             <AppContext.Provider
                 value={{
                     isAuthenticated,
+                    setIsAuthenticated,
                     onUserAuthenticated: (userData): void => {
                         setIsAuthenticated(true);
                         setLoginData(userData);

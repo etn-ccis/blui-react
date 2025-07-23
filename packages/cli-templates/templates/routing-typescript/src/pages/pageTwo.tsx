@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { JSX } from 'react';
 import { AppBar, IconButton, Toolbar, Typography, Box, useTheme, useMediaQuery } from '@mui/material';
 import { EmptyState } from '@brightlayer-ui/react-components';
 import Menu from '@mui/icons-material/Menu';

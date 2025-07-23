@@ -8,7 +8,6 @@ import {
     DrawerNavGroup,
     DrawerNavItem,
     DrawerHeader,
-    Spacer,
     UserMenu,
     EmptyState,
 } from '@brightlayer-ui/react-components';
@@ -16,7 +15,8 @@ import Box from '@mui/material/Box';
 import Event from '@mui/icons-material/Event';
 import Dashboard from '@mui/icons-material/Dashboard';
 import Notifications from '@mui/icons-material/Notifications';
-import { Menu, AccountBox } from '@mui/icons-material';
+import Menu from '@mui/icons-material/Menu';
+import AccountBox from '@mui/icons-material/AccountBox';
 import ExitToApp from '@mui/icons-material/ExitToApp';
 import Avatar from '@mui/material/Avatar';
 import AppBar from '@mui/material/AppBar';
@@ -30,6 +30,7 @@ import * as Colors from '@brightlayer-ui/colors';
 import FormControl from '@mui/material/FormControl';
 import { MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import i18n from '../translations/i18n';
+import { useOktaAuth } from '@okta/okta-react';
 
 export const ExampleHome: React.FC<React.PropsWithChildren> = () => {
     const app = useApp();
@@ -38,6 +39,7 @@ export const ExampleHome: React.FC<React.PropsWithChildren> = () => {
     const [open, setOpen] = useState(false);
     const navigate = useNavigate();
     const theme = useTheme();
+    const { oktaAuth } = useOktaAuth();
 
     const containerStyles = {
         width: '100%',
@@ -63,9 +65,12 @@ export const ExampleHome: React.FC<React.PropsWithChildren> = () => {
         justifyContent: 'center',
     };
 
-    const logOut = (): void => {
+    const logOut = async (): Promise<void> => {
+        await oktaAuth.signOut();
         LocalStorage.clearAuthCredentials();
         app.onUserNotAuthenticated();
+        app.setIsAuthenticated(false);
+
         navigate('/login');
     };
 
@@ -104,17 +109,15 @@ export const ExampleHome: React.FC<React.PropsWithChildren> = () => {
             >
                 <Box>
                     <AppBar position={'sticky'} color="primary">
-                        <Toolbar sx={{ px: 2 }}>
+                        <Toolbar sx={{ px: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                             <Typography variant="h6">{`${t('TOOLBAR_MENU.HOME_PAGE')}`}</Typography>
-                            <Spacer />
-                            <Box>
-                                <FormControl fullWidth>
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                                <FormControl>
                                     <Select
                                         value={supportedLanguages.includes(app.language) ? app.language : 'en'}
                                         onChange={changeAppLanguage}
                                         variant={'standard'}
                                         sx={{
-                                            mr: 2,
                                             backgroundColor: 'transparent',
                                             color: Colors.white[50],
                                             '& .MuiSelect-icon': {
@@ -129,35 +132,38 @@ export const ExampleHome: React.FC<React.PropsWithChildren> = () => {
                                         <MenuItem value={'pt'}>Portuguese</MenuItem>
                                     </Select>
                                 </FormControl>
+                                <UserMenu
+                                    MenuProps={{ MenuListProps: {} }}
+                                    avatar={<Avatar>AV</Avatar>}
+                                    onOpen={(): void => {}}
+                                    onClose={(): void => {}}
+                                    menuGroups={[
+                                        {
+                                            items: [
+                                                {
+                                                    icon: <AccountBox />,
+                                                    title: `${t('USER_MENU.MY_ACCOUNT')}`,
+                                                    onClick: (): void => {},
+                                                },
+                                                {
+                                                    icon: <LockIcon />,
+                                                    title: `${t('USER_MENU.CHANGE_PASSWORD')}`,
+                                                    onClick: (): any => {
+                                                        app.setShowChangePasswordDialog(true);
+                                                    },
+                                                },
+                                                {
+                                                    icon: <ExitToApp />,
+                                                    title: `${t('USER_MENU.LOG_OUT')}`,
+                                                    onClick: (): void => {
+                                                        void logOut();
+                                                    },
+                                                },
+                                            ],
+                                        },
+                                    ]}
+                                />
                             </Box>
-                            <UserMenu
-                                avatar={<Avatar>AV</Avatar>}
-                                menuGroups={[
-                                    {
-                                        items: [
-                                            {
-                                                icon: <AccountBox />,
-                                                title: `${t('USER_MENU.MY_ACCOUNT')}`,
-                                                onClick: (): void => {},
-                                            },
-                                            {
-                                                icon: <LockIcon />,
-                                                title: `${t('USER_MENU.CHANGE_PASSWORD')}`,
-                                                onClick: (): any => {
-                                                    app.setShowChangePasswordDialog(true);
-                                                },
-                                            },
-                                            {
-                                                icon: <ExitToApp />,
-                                                title: `${t('USER_MENU.LOG_OUT')}`,
-                                                onClick: (): void => {
-                                                    logOut();
-                                                },
-                                            },
-                                        ],
-                                    },
-                                ]}
-                            />
                         </Toolbar>
                     </AppBar>
                 </Box>
