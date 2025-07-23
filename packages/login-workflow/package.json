@@ -1,6 +1,6 @@
 {
     "name": "@brightlayer-ui/react-auth-workflow",
-    "version": "7.0.0-alpha.3",
+    "version": "7.0.0-alpha.4",
     "type": "module",
     "author": "Brightlayer UI <brightlayer-ui@eaton.com> (https://github.com/brightlayer-ui)",
     "license": "BSD-3-Clause",
@@ -55,13 +55,6 @@
         "authentication",
         "login",
         "registration"
-    ],
-    "files": [
-        "dist",
-        "CHANGELOG.md",
-        "LICENSES.json",
-        "LICENSE.md",
-        "package.json"
     ],
     "devDependencies": {
         "@babel/core": "^7.14.6",
