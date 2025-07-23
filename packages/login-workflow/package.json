@@ -1,6 +1,6 @@
 {
     "name": "@brightlayer-ui/react-auth-workflow",
-    "version": "7.0.0-alpha.2",
+    "version": "7.0.0-alpha.3",
     "type": "module",
     "author": "Brightlayer UI <brightlayer-ui@eaton.com> (https://github.com/brightlayer-ui)",
     "license": "BSD-3-Clause",
@@ -14,7 +14,7 @@
     "scripts": {
         "test": "jest --maxWorkers=50%",
         "test:ci": "jest",
-        "build": "tsc --p tsconfig.lib.json && cp -r src/assets/. dist/assets && cp -r src/index.css dist/index.css && tsc-esm-fix dist && node ./scripts/fix-import.js",
+        "build": "bash ./scripts/buildWorkflow.sh",
         "publish:package": "set npm_config_yes=true && npx -p @brightlayer-ui/publish blui-publish",
         "tag:package": "npx -p @brightlayer-ui/tag blui-tag -s -blui-react-auth-workflow",
         "generate:licenses": "npm-license-crawler -onlyDirectDependencies -json LICENSES.json",
