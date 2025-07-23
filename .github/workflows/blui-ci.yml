@@ -114,7 +114,7 @@ jobs:
               working-directory: packages/login-workflow
             - name: Publish package
               run: npm run publish:package -- -b ${{ env.BRANCH }}
-              working-directory: packages/login-workflow/dist
+              working-directory: packages/login-workflow
 
     build_theme_verify_artifacts:
         name: Build and Test Themes
