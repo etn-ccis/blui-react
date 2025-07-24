@@ -422,6 +422,7 @@ jobs:
             - run: pnpm install
             - name: Publish package
               run: npm run publish:package -- -b ${{env.BRANCH}}
+              working-directory: packages/cli-templates
         
     test_design_patterns:
         name: Test Design Patterns
