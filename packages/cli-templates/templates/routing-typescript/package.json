@@ -1,0 +1,62 @@
+{
+    "name": "blui-routing",
+    "version": "1.0.0",
+    "private": true,
+    "dependencies": {
+        "@brightlayer-ui/colors": "^4.0.0",
+        "@brightlayer-ui/icons-mui": "^4.0.0",
+        "@brightlayer-ui/react-components": "^8.0.0-alpha.2",
+        "@brightlayer-ui/react-themes": "^8.0.0-alpha.1",
+        "@emotion/css": "^11.13.0",
+        "@emotion/react": "^11.14.0",
+        "@emotion/styled": "^11.13.0",
+        "@mui/base": "^5.0.0-beta.62",
+        "@mui/icons-material": "^7.2.0",
+        "@mui/material": "^7.2.0",
+        "@vitejs/plugin-react": "^4.3.1",
+        "react": "^19.1.0",
+        "react-dom": "^19.1.0",
+        "react-router": "^7.7.0",
+        "react-router-dom": "^7.7.0",
+        "vite-tsconfig-paths": "^5.1.4"
+    },
+    "scripts": {
+        "start": "vite",
+        "build": "tsc && vite build",
+        "test": "vitest",
+        "preview": "vite preview",
+        "lint": "eslint \"src/**/**.{ts,tsx}\"",
+        "lint:fix": "eslint \"src/**/**.{ts,tsx}\" --fix",
+        "prettier": "prettier \"src/**/**.{ts,tsx,js,jsx,json,css,scss,html}\" --write",
+        "prettier:check": "prettier \"src/**/**.{ts,tsx,js,jsx,json,css,scss,html}\" --check"
+    },
+    "eslintConfig": {
+        "extends": []
+    },
+    "devDependencies": {
+        "@brightlayer-ui/eslint-config": "^4.0.0",
+        "@brightlayer-ui/prettier-config": "^1.0.3",
+        "@testing-library/dom": "^10.4.0",
+        "@testing-library/jest-dom": "^6.5.0",
+        "@testing-library/react": "^16.2.0",
+        "@testing-library/user-event": "^14.5.2",
+        "@types/node": "^22.13.17",
+        "@types/react": "^19.1.8",
+        "@types/react-dom": "^19.1.6",
+        "@types/react-router-dom": "^5.3.3",
+        "@typescript-eslint/eslint-plugin": "^5.62.0",
+        "@typescript-eslint/parser": "^5.49.0",
+        "eslint": "^9.15.0",
+        "eslint-config-prettier": "^10.1.8",
+        "eslint-plugin-react": "^7.37.3",
+        "identity-obj-proxy": "^3.0.0",
+        "jsdom": "^25.0.1",
+        "prettier": "^3.3.3",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.8.3",
+        "vite": "^7.0.5",
+        "vite-plugin-dts": "^4.3.0",
+        "vitest": "^3.2.4"
+    },
+    "prettier": "@brightlayer-ui/prettier-config"
+}

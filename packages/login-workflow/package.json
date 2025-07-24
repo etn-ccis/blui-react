@@ -1,0 +1,140 @@
+{
+    "name": "@brightlayer-ui/react-auth-workflow",
+    "version": "7.0.0",
+    "type": "module",
+    "author": "Brightlayer UI <brightlayer-ui@eaton.com> (https://github.com/brightlayer-ui)",
+    "license": "BSD-3-Clause",
+    "description": "Re-usable workflow components for Authentication and Registration within Eaton applications.",
+    "module": "./index.js",
+    "exports": {
+        ".": {
+            "import": "./index.js"
+        }
+    },
+    "scripts": {
+        "test": "jest --maxWorkers=50%",
+        "test:ci": "jest",
+        "build": "bash ./scripts/buildWorkflow.sh",
+        "publish:package": "set npm_config_yes=true && npx -p @brightlayer-ui/publish blui-publish",
+        "tag:package": "npx -p @brightlayer-ui/tag blui-tag -s -blui-react-auth-workflow",
+        "generate:licenses": "npm-license-crawler -onlyDirectDependencies -json LICENSES.json",
+        "coverage": "yarn test --coverage --watchAll=false --no-cache"
+    },
+    "prettier": "@brightlayer-ui/prettier-config",
+    "dependencies": {
+        "@okta/okta-auth-js": "^7.7.0",
+        "@okta/okta-react": "^6.9.0",
+        "dompurify": "^3.2.4",
+        "i18next-browser-languagedetector": "^8.0.0"
+    },
+    "peerDependencies": {
+        "@brightlayer-ui/react-components": "workspace:^",
+        "@emotion/react": "^11.7.1",
+        "@emotion/styled": "^11.6.0",
+        "@mui/icons-material": "^6.1.4",
+        "@mui/material": "^6.1.4",
+        "@okta/okta-auth-js": "^7.7.0",
+        "@okta/okta-react": "^6.9.0",
+        "date-fns": "^3.0.6",
+        "i18next": "^23.0.1",
+        "react": "^19.1.0",
+        "react-dom": "^19.1.0",
+        "react-i18next": "^13.0.0"
+    },
+    "optionalDependencies": {
+        "react-router-dom": "^6.8.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/etn-ccis/blui-react/tree/dev/packages/login-workflow"
+    },
+    "keywords": [
+        "brightlayer-ui",
+        "react",
+        "workflows",
+        "authentication",
+        "login",
+        "registration"
+    ],
+    "devDependencies": {
+        "@babel/core": "^7.14.6",
+        "@babel/plugin-transform-runtime": "^7.17.0",
+        "@babel/preset-env": "^7.14.5",
+        "@babel/preset-react": "^7.14.5",
+        "@babel/preset-typescript": "^7.14.5",
+        "@brightlayer-ui/eslint-config": "^3.0.0",
+        "@brightlayer-ui/prettier-config": "^1.0.3",
+        "@brightlayer-ui/react-components": "workspace:^",
+        "@brightlayer-ui/react-themes": "workspace:^",
+        "@emotion/css": "^11.9.0",
+        "@emotion/react": "^11.7.1",
+        "@emotion/styled": "^11.6.0",
+        "@mui/icons-material": "^7.1.1",
+        "@mui/material": "^7.1.1",
+        "@testing-library/jest-dom": "^6.4.2",
+        "@testing-library/react": "^13.3.0",
+        "@testing-library/user-event": "^14.4.3",
+        "@types/color": "^3.0.1",
+        "@types/dompurify": "^2.2.2",
+        "@types/jest": "^27.4.1",
+        "@types/react": "^19.1.8",
+        "@types/react-dom": "^19.1.6",
+        "@types/react-router-dom": "^5.1.7",
+        "@typescript-eslint/eslint-plugin": "^6.7.3",
+        "@typescript-eslint/parser": "^6.7.3",
+        "babel-jest": "^29.7.0",
+        "clsx": "^2.1.1",
+        "date-fns": "^3.0.6",
+        "eslint": "^8.50.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-react": "^7.29.4",
+        "eslint-plugin-react-hooks": "^4.4.0",
+        "firebase-tools": "^13.6.0",
+        "i18next": "^25.3.1",
+        "identity-obj-proxy": "^3.0.0",
+        "jest": "^29.3.1",
+        "jest-environment-jsdom": "^29.3.1",
+        "npm-license-crawler": "^0.2.1",
+        "prettier": "^2.3.1",
+        "react": "^19.1.0",
+        "react-dom": "^19.1.0",
+        "react-i18next": "^15.6.0",
+        "react-router-dom": "^6.8.0",
+        "regenerator-runtime": "^0.13.7",
+        "ts-jest": "^29.0.0-next.1",
+        "@types/node": "22.13.0",
+        "tsc-esm-fix": "^3.1.2",
+        "typescript": "^5.0.3"
+    },
+    "jest": {
+        "coverageDirectory": "./coverage/",
+        "collectCoverage": true,
+        "coverageReporters": [
+            "clover",
+            "lcov",
+            "html"
+        ],
+        "transform": {
+            "^.+\\.[tj]sx?$": "babel-jest"
+        },
+        "extensionsToTreatAsEsm": [
+            ".ts",
+            ".tsx"
+        ],
+        "testEnvironment": "jsdom",
+        "moduleDirectories": [
+            "node_modules",
+            "src",
+            "assets"
+        ],
+        "moduleNameMapper": {
+            "\\.(jpg|ico|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+            "\\.(css|less)$": "<rootDir>/__mocks__/fileMock.js",
+            "^@brightlayer-ui/react-components$": "<rootDir>/../component-library/src/index.ts",
+            "^@brightlayer-ui/react-themes$": "<rootDir>/../themes/src/index.ts"
+        },
+        "transformIgnorePatterns": [
+            "/!node_modules\\/lodash-es/"
+        ]
+    }
+}

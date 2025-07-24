@@ -1,0 +1,57 @@
+{
+    "name": "@brightlayer-ui/react-themes",
+    "author": "Brightlayer UI <brightlayer-ui@eaton.com>",
+    "license": "BSD-3-Clause",
+    "version": "9.0.0",
+    "type": "module",
+    "description": "React themes for Brightlayer UI applications",
+    "main": "./index.js",
+    "module": "./index.js",
+    "exports": {
+        ".": {
+            "import": "./index.js"
+        },
+        "./open-sans": {
+            "import": "./open-sans.js"
+        }
+    },
+    "scripts": {
+        "initialize": "bash scripts/initializeSubmodule.sh",
+        "build": "bash ./scripts/build.sh",
+        "test": "bash ./scripts/buildTest.sh",
+        "publish:package": "cd dist && set npm_config_yes=true && npx -p @brightlayer-ui/publish blui-publish",
+        "tag:package": "npx -p @brightlayer-ui/tag blui-tag -s -blui-react-themes",
+        "update:submodule": "git submodule update --remote",
+        "generate:licenses": "npm-license-crawler -onlyDirectDependencies -json LICENSES.json"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/etn-ccis/blui-react/tree/dev/packages/themes"
+    },
+    "bugs": {
+        "url": "https://github.com/etn-ccis/blui-react/issues?q=is%3Aissue%20state%3Aopen%20label%3Athemes"
+    },
+    "homepage": "https://github.com/etn-ccis/blui-react/blob/dev/packages/themes/README.md",
+    "keywords": [
+        "Brightlayer UI",
+        "themes",
+        "Eaton",
+        "React"
+    ],
+    "dependencies": {
+        "@brightlayer-ui/colors": "^3.1.1",
+        "@brightlayer-ui/types": "^2.0.0",
+        "@fontsource/open-sans": "^5.0.3",
+        "color": "^4.2.3"
+    },
+    "peerDependencies": {
+        "@mui/material": "^7.1.1"
+    },
+    "devDependencies": {
+        "@mui/material": "^7.1.1",
+        "@types/color": "^4.2.0",
+        "npm-license-crawler": "^0.2.1",
+        "tsc-esm-fix": "^3.1.2",
+        "typescript": "^5.0.3"
+    }
+}

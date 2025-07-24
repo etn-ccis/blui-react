@@ -1,0 +1,25 @@
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
+import { blueThemes } from '@brightlayer-ui/react-themes';
+import { ComponentPreviewPage } from './pages/componentPreviewPage';
+import { DrawerContext } from './contexts/drawerContextProvider';
+
+test('renders welcome text', () => {
+    render(
+        <StyledEngineProvider injectFirst>
+            <ThemeProvider theme={blueThemes}>
+                <DrawerContext.Provider
+                    value={{
+                        drawerOpen: true,
+                        setDrawerOpen: jest.fn(),
+                    }}
+                >
+                    <ComponentPreviewPage title="App Bar" />
+                </DrawerContext.Provider>
+            </ThemeProvider>
+        </StyledEngineProvider>
+    );
+    const bluiText = screen.getByText(/App Bar/i);
+    expect(bluiText).toBeInTheDocument();
+});

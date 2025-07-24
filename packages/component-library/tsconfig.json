@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "types": ["node", "jest"],
+        "module": "ESNext",
+        "declaration": true,
+        "outDir": "dist",
+        "strict": true,
+        "lib": ["ESNext", "dom"],
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "moduleResolution": "node",
+        "jsx": "react-jsx",
+        "allowSyntheticDefaultImports": true,
+        "strictNullChecks": false,
+        "paths": {
+            "@brigtlayer-ui/themes": ["../themes/src"]
+        }
+    },
+    "include": ["src/*", "package.json"],
+    "exclude": ["node_modules"]
+}
