@@ -513,7 +513,7 @@ jobs:
             - run: pnpm install
               working-directory: docs
             - run: |
-                  PACKAGED_VERSION=$(node -p "require('./packages/component-library/package.json').version")
+                  PACKAGED_VERSION=$(node -p "require('../packages/component-library/package.json').version")
                   pnpm add ./tarball/brightlayer-ui-react-components-$PACKAGED_VERSION.tgz
               working-directory: docs
             - run: pnpm
