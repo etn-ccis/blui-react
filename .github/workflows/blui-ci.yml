@@ -500,7 +500,10 @@ jobs:
               uses: actions/setup-node@v4
               with:
                   node-version: ${{ matrix.node-version }}
-            - run: pnpm install
+            - name: Install pnpm
+              run: npm install -g pnpm
+            - name: Install dependencies
+              run: pnpm install
               working-directory: docs
             - name: Download tarball
               uses: actions/download-artifact@v4
