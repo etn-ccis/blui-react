@@ -503,20 +503,17 @@ jobs:
             - name: Install pnpm
               run: npm install -g pnpm
             - name: Install dependencies
-              run: pnpm install
+              run: pnpm install --frozen-lockfile
               working-directory: docs
             - name: Download tarball
               uses: actions/download-artifact@v4
               with:
                   name: tarball
-                  path: tarball
-            - run: pnpm install
-              working-directory: docs
-            - run: |
+                  path: docs/tarball
+            - name: Add tarball package
+              run: |
                   PACKAGED_VERSION=$(node -p "require('../packages/component-library/package.json').version")
-                  pnpm add ../tarball/brightlayer-ui-react-components-$PACKAGED_VERSION.tgz
-              working-directory: docs
-            - run: pnpm install
+                  pnpm add ./tarball/brightlayer-ui-react-components-$PACKAGED_VERSION.tgz
               working-directory: docs
             - run: pnpm build
               working-directory: docs
