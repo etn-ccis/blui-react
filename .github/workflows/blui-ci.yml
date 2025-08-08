@@ -481,7 +481,7 @@ jobs:
               working-directory: apps/storybook
               run: npx chromatic --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }}    
               
-    Build-Docs:
+    Build-Dev-Docs:
         runs-on: ubuntu-latest
         needs: npm_pack
 
@@ -528,7 +528,7 @@ jobs:
         name: Deploy react docs on dev
         runs-on: ubuntu-latest
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/dev' }}
-        needs: build_reactdev
+        needs: Build-Dev-Docs
         env:
             DEV_DEPLOY_TOKEN: ${{secrets.DEV_DEPLOY_TOKEN}}
         steps:
@@ -554,7 +554,7 @@ jobs:
         name: Deploy react docs on master
         runs-on: ubuntu-latest
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
-        needs: build_reactdev
+        needs: Build-Dev-Docs
         env:
             DEV_DEPLOY_TOKEN: ${{secrets.DEV_DEPLOY_TOKEN}}
         steps:
