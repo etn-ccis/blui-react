@@ -36,7 +36,6 @@ export default defineConfig({
         open: true,
     },
     build: {
-        outDir: 'build',
         emptyOutDir: true,
         reportCompressedSize: true,
         commonjsOptions: {

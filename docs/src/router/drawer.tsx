@@ -140,7 +140,9 @@ export const NavigationDrawer: React.FC = () => {
                         </Stack>
                     </Stack>
                 }
-                onClick={(): void => navigate('/')}
+                onClick={(): void => {
+                    void navigate('/');
+                }}
             />
             <DrawerBody hidePadding sx={styles.denseDrawerItem}>
                 {pageDefinitions.map(
