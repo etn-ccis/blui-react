@@ -19,7 +19,7 @@ const CONTENT_WIDTH = 800;
 const styles = {
     pageRoot: {
         background: (theme: Theme): string =>
-            `url('${CirclesImage}') no-repeat center/200%, ${theme.vars.palette.primary.main}`,
+            `url("${CirclesImage.toString()}") no-repeat center/200%, ${theme.vars.palette.primary.main}`,
         minHeight: '100%',
         color: 'primary.contrastText',
     },
@@ -56,7 +56,7 @@ const styles = {
     },
 };
 
-export const HomePage = (): JSX.Element => {
+export const HomePage = (): React.JSX.Element => {
     const lgUp = useMediaQuery((theme: Theme) => theme.breakpoints.up('lg'));
     const [totalDownloadCount, setTotalDownloadCount] = React.useState(0);
 
@@ -110,7 +110,7 @@ export const HomePage = (): JSX.Element => {
                 </Stack>
                 <Stack direction={'row'} gap={2} flexWrap={'wrap'}>
                     <Button
-                        href={`${process.env.PUBLIC_URL ? process.env.PUBLIC_URL : ''}/getting-started/environment`}
+                        href={`${import.meta.env.VITE_PUBLIC_URL ? import.meta.env.VITE_PUBLIC_URL : ''}/getting-started/environment`}
                         variant={'contained'}
                         disableElevation
                         sx={styles.buttons.contained}

@@ -14,7 +14,7 @@ const codeSnippet = `<Drawer open width={250} variant="permanent">
     </DrawerBody>
 </Drawer>`;
 
-export const PermanentDrawer = (): JSX.Element => (
+export const PermanentDrawer = (): React.JSX.Element => (
     <Box>
         <PermanentDrawerExample />
         <CodeBlock code={codeSnippet} language="jsx" dataLine={'1'} />

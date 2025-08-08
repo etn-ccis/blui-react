@@ -3,7 +3,7 @@ import LocationOff from '@mui/icons-material/LocationOff';
 import { EmptyState } from '@brightlayer-ui/react-components';
 import { ExampleShowcase } from '../../../shared';
 
-export const EmptyStateWithDescriptionExample = (): JSX.Element => (
+export const EmptyStateWithDescriptionExample = (): React.JSX.Element => (
     <ExampleShowcase>
         <EmptyState
             icon={<LocationOff fontSize="inherit" />}

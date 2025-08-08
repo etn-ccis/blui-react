@@ -5,7 +5,6 @@
 
  This code is licensed under the BSD-3 license found in the LICENSE file in the root directory of this source tree and at https://opensource.org/licenses/BSD-3-Clause.
  **/
-import 'react-app-polyfill/stable';
 import React from 'react';
 import ReactDOMClient from 'react-dom/client';
 import { Provider } from 'react-redux';
@@ -35,8 +34,8 @@ import 'prismjs/plugins/line-highlight/prism-line-highlight.js';
 // google analytics
 import ReactGA from 'react-ga4';
 import { ScrollToTop } from './router/ScrollToTop';
-if (process.env.REACT_APP_GAID) {
-    ReactGA.initialize(process.env.REACT_APP_GAID, {
+if (import.meta.env.VITE_REACT_APP_GAID) {
+    ReactGA.initialize(import.meta.env.VITE_REACT_APP_GAID, {
         gaOptions: { cookieDomain: 'auto', cookieFlags: 'SameSite=None; Secure' },
     });
 }
@@ -54,15 +53,15 @@ declare global {
 }
 /* eslint-enable */
 // Brightlayer UI Icon font
-require('@brightlayer-ui/icons/BrightlayerUIIcons.css');
+import '@brightlayer-ui/icons/BrightlayerUIIcons.css';
 const container = document.getElementById('root');
 
 if (!container) throw new Error('Root Element was not found in the DOM');
 
 const root = ReactDOMClient.createRoot(container);
-const basename = process.env.PUBLIC_URL || '/';
+const basename = import.meta.env.VITE_PUBLIC_URL || '/';
 
-const ThemedApp = (): JSX.Element => {
+const ThemedApp = (): React.JSX.Element => {
     const siteTheme = useAppSelector((state: RootState) => state.appState.siteTheme);
     const siteDirection = useAppSelector((state: RootState) => state.appState.siteDirection);
     const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');

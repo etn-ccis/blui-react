@@ -11,7 +11,7 @@ export type MarkdownPageProps = HTMLAttributes<HTMLDivElement> & {
     sidebar?: boolean;
 };
 
-export const MarkdownPage: React.FC<MarkdownPageProps> = (props): JSX.Element => {
+export const MarkdownPage: React.FC<MarkdownPageProps> = (props): React.JSX.Element => {
     const { markdown: Markdown, noPadding, wideLayout, title, ...divProps } = props;
 
     return (

@@ -82,7 +82,7 @@ const inputConfig: InputConfig = [
         id: 'valueIcon',
         label: 'icon',
         type: 'select',
-        typeLabel: 'JSX.Element',
+        typeLabel: 'React.JSX.Element',
         description: 'The inline icon to display',
         required: false,
         initialValue: '<TrendingUp />',
@@ -166,7 +166,7 @@ const generateSnippet: CodeSnippetFunction = (data) =>
         .replace(/^\s*$(?:\r\n?|\n)/gm, '')
         .replace(/(?:^|)( {4}|\t)/gm, '    ');
 
-export const HeroPlaygroundComponent = (): JSX.Element => (
+export const HeroPlaygroundComponent = (): React.JSX.Element => (
     <Box
         sx={{
             width: '100%',

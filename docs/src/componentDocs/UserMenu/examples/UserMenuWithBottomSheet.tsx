@@ -26,7 +26,7 @@ const codeSnippet = `<UserMenu
     useBottomSheetAt={100000}
 />`;
 
-export const UserMenuWithBottomSheet = (): JSX.Element => (
+export const UserMenuWithBottomSheet = (): React.JSX.Element => (
     <Box>
         <UserMenuWithBottomSheetExample />
         <CodeBlock code={codeSnippet} language="jsx" dataLine="21" />

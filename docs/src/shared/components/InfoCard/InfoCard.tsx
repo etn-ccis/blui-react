@@ -18,7 +18,7 @@ const getTopPaddingForAspectRatio = (ratio: AspectRatio | undefined): string => 
 };
 type AspectRatio = '16x9' | '4x3' | '3x2' | '2x1' | '1x1';
 type InfoCardProps = {
-    source: string | JSX.Element;
+    source: string | React.JSX.Element;
     onClick?: (event: MouseEvent) => void;
     aspectRatio?: AspectRatio;
     title: string;
@@ -49,8 +49,9 @@ const styles: Record<string, SxProps> = {
     },
 };
 
-export const InfoCard: React.FC<InfoCardProps> = (props): JSX.Element => {
-    const { background = {} } = props;
+export const InfoCard: React.FC<InfoCardProps> = (props): React.JSX.Element => {
+    // eslint-disable-next-line
+    const { background = {}, aspectRatio = '2x1' } = props;
 
     return (
         <Box
@@ -107,6 +108,3 @@ export const InfoCard: React.FC<InfoCardProps> = (props): JSX.Element => {
     );
 };
 InfoCard.displayName = 'InfoCard';
-InfoCard.defaultProps = {
-    aspectRatio: '2x1',
-};

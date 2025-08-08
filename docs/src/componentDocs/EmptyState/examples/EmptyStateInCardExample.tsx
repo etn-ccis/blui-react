@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import { EmptyState } from '@brightlayer-ui/react-components';
 import { ExampleShowcase } from '../../../shared';
 
-export const EmptyStateInCardExample = (): JSX.Element => (
+export const EmptyStateInCardExample = (): React.JSX.Element => (
     <ExampleShowcase>
         <Box
             sx={{

@@ -36,7 +36,7 @@ const codeSnippet = `<Drawer open={true} activeItem={selected}>
     </DrawerBody>
 </Drawer>
 `;
-export const DrawerNavItemSelectedItems = (): JSX.Element => (
+export const DrawerNavItemSelectedItems = (): React.JSX.Element => (
     <Box>
         <DrawerNavItemSelectedItemsExample />
         <CodeBlock code={codeSnippet} language="jsx" dataLine="4-29" />

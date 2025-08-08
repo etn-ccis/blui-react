@@ -18,7 +18,7 @@ import Select from '@mui/material/Select';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 
-export const ComplexDrawerSubheaderExample = (): JSX.Element => {
+export const ComplexDrawerSubheaderExample = (): React.JSX.Element => {
     const [selected, setSelected] = useState('blui');
     return (
         <ExampleShowcase>

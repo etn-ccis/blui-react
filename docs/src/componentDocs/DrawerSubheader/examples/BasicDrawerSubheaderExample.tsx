@@ -10,7 +10,7 @@ import {
 } from '@brightlayer-ui/react-components';
 import { ExampleShowcase } from '../../../shared';
 
-export const BasicDrawerSubheaderExample = (): JSX.Element => (
+export const BasicDrawerSubheaderExample = (): React.JSX.Element => (
     <ExampleShowcase>
         <Drawer open width={250} sx={{ mx: 'auto' }} noLayout>
             <DrawerHeader title="Title" />

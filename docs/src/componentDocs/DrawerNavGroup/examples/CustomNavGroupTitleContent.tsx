@@ -20,7 +20,7 @@ const codeSnippet = `<Drawer open width={250}>
 </Drawer>
 `;
 
-export const CustomNavGroupTitleContent = (): JSX.Element => (
+export const CustomNavGroupTitleContent = (): React.JSX.Element => (
     <Box>
         <CustomNavGroupTitleContentExample />
         <CodeBlock code={codeSnippet} language="jsx" dataLine="4-9" />

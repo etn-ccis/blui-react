@@ -10,7 +10,7 @@ const codeSnippet = `<HeroBanner>
         ChannelValueProps={{ value: '98', units: '%' }}
     />
 </HeroBanner>`;
-export const HeroBanner = (): JSX.Element => (
+export const HeroBanner = (): React.JSX.Element => (
     <Box>
         <HeroBannerExample />
         <CodeBlock code={codeSnippet} language="jsx" />

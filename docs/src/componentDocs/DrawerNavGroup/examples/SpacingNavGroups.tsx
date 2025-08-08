@@ -18,7 +18,7 @@ const codeSnippet = `<Drawer open width={250}>
     </DrawerBody>
 </Drawer>
 `;
-export const SpacingNavGroups = (): JSX.Element => (
+export const SpacingNavGroups = (): React.JSX.Element => (
     <Box>
         <SpacingNavGroupsExample />
         <CodeBlock code={codeSnippet} language="jsx" dataLine="7" />

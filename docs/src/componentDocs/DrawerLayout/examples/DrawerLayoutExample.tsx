@@ -14,7 +14,7 @@ import Gavel from '@mui/icons-material/Gavel';
 import Menu from '@mui/icons-material/Menu';
 import { ExampleShowcase } from '../../../shared';
 
-export const DrawerLayoutExample = (): JSX.Element => {
+export const DrawerLayoutExample = (): React.JSX.Element => {
     const [open, setOpen] = useState(true);
     return (
         <ExampleShowcase>

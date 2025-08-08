@@ -32,7 +32,7 @@ const codeSnippet = `{[36, 48, 72].map((iconSize, index) => (
     </HeroBanner>
 ))}`;
 
-export const HeroBannerWithIconSize = (): JSX.Element => (
+export const HeroBannerWithIconSize = (): React.JSX.Element => (
     <Box>
         <HeroBannerWithIconSizeExample />
         <CodeBlock code={codeSnippet} language="jsx" dataLine={'4, 10, 16, 22'} />

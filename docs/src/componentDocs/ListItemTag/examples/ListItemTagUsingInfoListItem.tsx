@@ -20,7 +20,7 @@ const codeSnippet = `<InfoListItem
     }
 />`;
 
-export const ListItemTagUsingInfoListItem = (): JSX.Element => (
+export const ListItemTagUsingInfoListItem = (): React.JSX.Element => (
     <Box>
         <ListItemTagUsingInfoListItemExample />
         <CodeBlock code={codeSnippet} language="jsx" dataLine="9-14" />

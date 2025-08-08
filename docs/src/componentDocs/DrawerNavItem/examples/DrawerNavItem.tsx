@@ -12,7 +12,7 @@ const codeSnippet = `<DrawerBody>
 </DrawerBody>
 `;
 
-export const DrawerNavItem = (): JSX.Element => (
+export const DrawerNavItem = (): React.JSX.Element => (
     <Box>
         <DrawerNavItemExample />
         <CodeBlock code={codeSnippet} language="jsx" dataLine="3-5" />

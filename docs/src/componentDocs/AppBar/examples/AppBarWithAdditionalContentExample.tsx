@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Toolbar from '@mui/material/Toolbar';
 
-export const AppBarWithAdditionalContentExample = (): JSX.Element => (
+export const AppBarWithAdditionalContentExample = (): React.JSX.Element => (
     <ExampleShowcase sx={{ overflow: 'hidden' }}>
         <Box sx={{ mb: 2, overflow: 'hidden', height: 400 }}>
             <AppBar

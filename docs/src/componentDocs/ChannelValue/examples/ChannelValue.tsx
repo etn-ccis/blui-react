@@ -5,7 +5,7 @@ import { ChannelValueExample } from './ChannelValueExample';
 
 const codeSnippet = `<ChannelValue value="123" units="hz" />`;
 
-export const ChannelValue = (): JSX.Element => (
+export const ChannelValue = (): React.JSX.Element => (
     <Box>
         <ChannelValueExample />
         <CodeBlock code={codeSnippet} language="jsx" />

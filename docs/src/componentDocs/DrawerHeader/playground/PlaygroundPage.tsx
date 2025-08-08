@@ -82,7 +82,7 @@ const inputConfig: InputConfig = [
     {
         id: 'icon',
         type: 'select',
-        typeLabel: 'JSX.Element',
+        typeLabel: 'React.JSX.Element',
         description: 'A component to render for the icon',
         initialValue: '<Menu />',
         options: ['undefined', '<Menu />', '<ArrowBack />'],
@@ -121,7 +121,7 @@ const DrawerHeaderPreview: PreviewComponent = ({ data }) => {
                 <DrawerHeader
                     {...removeEmptyProps(rest)}
                     icon={getIcon(icon as string)}
-                    backgroundImage={getImage(backgroundImage!)}
+                    backgroundImage={backgroundImage ? getImage(backgroundImage) : undefined}
                 ></DrawerHeader>
                 <DrawerBody sx={{ flex: '1 1 auto' }}>
                     <DrawerNavGroup>
@@ -149,7 +149,7 @@ const generateSnippet: CodeSnippetFunction = (data) =>
         .replace(/^\s*$(?:\r\n?|\n)/gm, '')
         .replace(/(?:^|)( {4}|\t)/gm, '    ');
 
-export const DrawerHeaderPlaygroundComponent = (): JSX.Element => (
+export const DrawerHeaderPlaygroundComponent = (): React.JSX.Element => (
     <Box
         sx={{
             width: '100%',

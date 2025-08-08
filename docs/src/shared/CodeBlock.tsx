@@ -10,7 +10,7 @@ export type CodeBlockProps = BoxProps & {
     smallFont?: boolean;
 };
 
-export const CodeBlock: React.FC<CodeBlockProps> = (props): JSX.Element => {
+export const CodeBlock: React.FC<CodeBlockProps> = (props): React.JSX.Element => {
     const { code, language, dataLine, sx, smallFont = false, ...boxProps } = props;
     useEffect(() => {
         Prism.highlightAll();

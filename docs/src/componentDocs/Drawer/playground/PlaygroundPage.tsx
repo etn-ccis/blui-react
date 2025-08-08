@@ -315,7 +315,7 @@ const generateSnippet: CodeSnippetFunction = (data) =>
         .replace(/^\s*$(?:\r\n?|\n)/gm, '')
         .replace(/(?:^|)( {4}|\t)/gm, '    ');
 
-export const DrawerPlaygroundComponent = (): JSX.Element => (
+export const DrawerPlaygroundComponent = (): React.JSX.Element => (
     <Box
         sx={{
             width: '100%',

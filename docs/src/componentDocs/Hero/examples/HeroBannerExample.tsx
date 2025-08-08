@@ -3,7 +3,7 @@ import { Hero, HeroBanner } from '@brightlayer-ui/react-components';
 import GradeA from '@brightlayer-ui/icons-mui/GradeA';
 import { ExampleShowcase } from '../../../shared';
 
-export const HeroBannerExample = (): JSX.Element => (
+export const HeroBannerExample = (): React.JSX.Element => (
     <ExampleShowcase>
         <HeroBanner>
             <Hero

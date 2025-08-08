@@ -117,7 +117,7 @@ const AppBarPreview: PreviewComponent = ({ data }) => {
             >
                 <AppBar
                     {...removeEmptyProps(rest)}
-                    backgroundImage={getImage(backgroundImage!)}
+                    backgroundImage={backgroundImage ? getImage(backgroundImage) : undefined}
                     scrollContainerId={SCROLL_CONTAINER_ID}
                 >
                     <Toolbar>
@@ -152,7 +152,7 @@ const generateSnippet: CodeSnippetFunction = (data) =>
         .replace(/(?:^|)( {4}|\t)/gm, '    ')
         .replace(/^<AppBar(\s)+\n>/, '<AppBar>');
 
-export const AppBarPlaygroundComponent = (): JSX.Element => (
+export const AppBarPlaygroundComponent = (): React.JSX.Element => (
     <Box
         sx={{
             width: '100%',

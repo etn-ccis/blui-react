@@ -5,9 +5,9 @@ import { Drawer, DrawerHeader, ListItemTag } from '@brightlayer-ui/react-compone
 import Menu from '@mui/icons-material/Menu';
 import { ExampleShowcase } from '../../../shared';
 import * as colors from '@brightlayer-ui/colors';
-const backgroundImage = require('../../../shared/images/topology_40.png');
+import backgroundImage from '../../../shared/images/topology_40.png';
 
-export const DrawerHeaderWithTitleContentExample = (): JSX.Element => (
+export const DrawerHeaderWithTitleContentExample = (): React.JSX.Element => (
     <ExampleShowcase>
         <Drawer open width={250} sx={{ mx: 'auto' }} noLayout>
             <DrawerHeader

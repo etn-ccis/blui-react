@@ -5,7 +5,7 @@ import { BasicThreeLinerExample } from './BasicThreeLinerExample';
 
 const codeSnippet = `<ThreeLiner title="title" subtitle="subtitle" info="info" />`;
 
-export const BasicThreeLiner = (): JSX.Element => (
+export const BasicThreeLiner = (): React.JSX.Element => (
     <Box>
         <BasicThreeLinerExample />
         <CodeBlock code={codeSnippet} language="jsx" />

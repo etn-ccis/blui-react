@@ -6,7 +6,7 @@ import { ComponentPreviewTabs } from '../shared';
 export type ComponentPreviewPageProps = HTMLAttributes<HTMLDivElement> & {
     title: string;
 };
-export const ComponentPreviewPage: React.FC<ComponentPreviewPageProps> = (props): JSX.Element => {
+export const ComponentPreviewPage: React.FC<ComponentPreviewPageProps> = (props): React.JSX.Element => {
     const { title } = props;
 
     return (

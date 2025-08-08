@@ -2,7 +2,7 @@ import React from 'react';
 import { Navigate, Route } from 'react-router-dom';
 import { pageDefinitions, RouteConfig } from '../__configuration__/navigationMenu/navigation';
 
-const buildRoutes = (routes: RouteConfig[]): JSX.Element[] =>
+const buildRoutes = (routes: RouteConfig[]): React.JSX.Element[] =>
     routes.map((route) => {
         const subPages = [...(route.pages || []), ...(route.children || [])];
         return (
