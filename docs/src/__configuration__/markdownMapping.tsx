@@ -132,11 +132,12 @@ export const componentsMap = {
         );
     },
     a: (props: React.LinkHTMLAttributes<HTMLLinkElement>): React.JSX.Element => {
+        let tProps;
         if (props.href && (props.href.match(/^http/gi) || props.href.match(/^mailto/gi))) {
-            const tProps = props as unknown as TypographyProps<'a'>;
+            tProps = props as TypographyProps<'a'>;
             return <ExternalLink {...tProps} />;
         }
-        const tProps = props as unknown as LinkProps;
+        tProps = props as LinkProps;
         //@ts-ignore
         return <InternalLink to={props.href} {...tProps} />;
     },
