@@ -7,9 +7,8 @@ import { Reducer } from '../../../redux/reducers';
 import { ComplexBottomSheet, sortedEvents, filteredEvents, TYPES } from '.';
 import { Event } from './alarmData';
 
-import { createTheme, ThemeProvider } from '@mui/material';
-import * as BLUIThemes from '@brightlayer-ui/react-themes';
-const theme = createTheme(BLUIThemes.blue);
+import { ThemeProvider } from '@mui/material';
+import { blueThemes as theme } from '@brightlayer-ui/react-themes';
 
 const store = createStore(Reducer());
 

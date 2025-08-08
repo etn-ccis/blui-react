@@ -6,7 +6,7 @@ import { ExampleShowcase } from '../../../shared';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
-export const InfoListItemWithRightComponentExample = (): JSX.Element => (
+export const InfoListItemWithRightComponentExample = (): React.JSX.Element => (
     <ExampleShowcase>
         <InfoListItem
             sx={{ maxWidth: 700, m: 'auto', backgroundColor: 'background.paper' }}

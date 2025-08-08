@@ -5,7 +5,7 @@ import { ExampleShowcase } from '../../../shared';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 
-export const EmptyStateWithContentExample = (): JSX.Element => (
+export const EmptyStateWithContentExample = (): React.JSX.Element => (
     <ExampleShowcase>
         <EmptyState
             icon={<ReportIcon fontSize="inherit" />}

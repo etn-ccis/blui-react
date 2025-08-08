@@ -4,7 +4,7 @@ import { ToolbarMenu } from '@brightlayer-ui/react-components';
 import { Home } from '@mui/icons-material';
 import { ExampleShowcase } from '../../../shared';
 
-export const ToolbarMenuWithIconExample = (): JSX.Element => (
+export const ToolbarMenuWithIconExample = (): React.JSX.Element => (
     <ExampleShowcase sx={{ display: 'flex', justifyContent: 'center' }}>
         <Box>
             <ToolbarMenu

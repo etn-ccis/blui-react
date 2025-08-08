@@ -10,7 +10,7 @@ export type PageContentProps = HTMLAttributes<HTMLDivElement> & {
     wideLayout?: boolean;
 };
 
-export const PageContent: React.FC<PageContentProps> = (props): JSX.Element => {
+export const PageContent: React.FC<PageContentProps> = (props): React.JSX.Element => {
     const theme = useTheme();
     const { noPadding, children, wideLayout, ...other } = props;
     const pageBodyWidth = useMemo((): number => {

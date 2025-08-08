@@ -23,7 +23,7 @@ const codeSnippet = `<AppBar position="relative" color="primary">
     </Toolbar>
 </AppBar>`;
 
-export const UserMenu = (): JSX.Element => (
+export const UserMenu = (): React.JSX.Element => (
     <Box>
         <UserMenuExample />
         <CodeBlock code={codeSnippet} language="jsx" dataLine="5-17" />

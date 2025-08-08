@@ -4,9 +4,9 @@ import Avatar from '@mui/material/Avatar';
 import { UserMenu } from '@brightlayer-ui/react-components';
 import { Pets, Settings } from '@mui/icons-material';
 import { ExampleShowcase } from '../../../shared';
-const tRex = require('../images/trex.png');
+import tRex from '../images/trex.png';
 
-export const UserMenuAlternativeAvatarFormatsExample = (): JSX.Element => (
+export const UserMenuAlternativeAvatarFormatsExample = (): React.JSX.Element => (
     <ExampleShowcase sx={{ display: 'flex', justifyContent: 'center' }}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', width: 150 }}>
             <UserMenu

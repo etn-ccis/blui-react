@@ -17,7 +17,7 @@ const codeSnippet = `<Box>
 </Box>
 `;
 
-export const AppBar = (): JSX.Element => (
+export const AppBar = (): React.JSX.Element => (
     <Box>
         <AppBarExample />
         <CodeBlock code={codeSnippet} language="jsx" dataLine="2-8" />

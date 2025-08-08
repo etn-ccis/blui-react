@@ -53,7 +53,7 @@ const styles = {
     },
 };
 
-export const SharedAppBar: React.FC<SharedAppBarProps> = (props): JSX.Element => {
+export const SharedAppBar: React.FC<SharedAppBarProps> = (props): React.JSX.Element => {
     const { title } = props;
     const theme = useTheme();
     const lgUp = useMediaQuery(theme.breakpoints.up('lg'));
@@ -62,7 +62,7 @@ export const SharedAppBar: React.FC<SharedAppBarProps> = (props): JSX.Element =>
     const siteTheme = useAppSelector((state: RootState) => state.appState.siteTheme);
     // See hidden RTL site comment below
     // const siteDirection = useAppSelector((state: RootState) => state.appState.siteDirection);
-    const linkToThemesOverview = `${process.env.PUBLIC_URL ? process.env.PUBLIC_URL : ''}/themes/overview`;
+    const linkToThemesOverview = `${import.meta.env.VITE_PUBLIC_URL ? import.meta.env.VITE_PUBLIC_URL : ''}/themes/overview`;
 
     const { setMode } = useColorScheme();
 

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-expressions */
 import React, { useCallback, useEffect } from 'react';
 import { CreateAccountScreenProps } from './types';
 import { WorkflowCard } from '../../components/WorkflowCard';
@@ -75,8 +74,7 @@ export const CreateAccountScreenBase: React.FC<
                         helperText={shouldValidateEmail && emailError}
                         {...emailTextFieldProps}
                         onChange={(e): void => {
-                            // eslint-disable-next-line no-unused-expressions
-                            emailTextFieldProps?.onChange && emailTextFieldProps.onChange(e);
+                            emailTextFieldProps?.onChange?.(e);
                             handleEmailInputChange(e.target.value);
                         }}
                         onKeyUp={(e): void => {
@@ -87,8 +85,7 @@ export const CreateAccountScreenBase: React.FC<
                                 actionsProps?.onNext?.();
                         }}
                         onBlur={(e): void => {
-                            // eslint-disable-next-line no-unused-expressions
-                            emailTextFieldProps?.onBlur && emailTextFieldProps.onBlur(e);
+                            emailTextFieldProps?.onBlur?.(e);
                             setShouldValidateEmail(true);
                         }}
                     />

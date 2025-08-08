@@ -9,7 +9,7 @@ const codeSnippet = `<EmptyState
     description={<Typography variant={'body2'}>You must <Link>contact your system admin</Link> to view this content.</Typography>}
 />`;
 
-export const EmptyStateWithContent = (): JSX.Element => (
+export const EmptyStateWithContent = (): React.JSX.Element => (
     <Box>
         <EmptyStateWithContentExample />
         <CodeBlock code={codeSnippet} language="jsx" dataLine="3-4" />

@@ -108,7 +108,7 @@ import * as markdownDocs from '../../markdownDocs/';
 
 export type RouteConfig = Omit<RouteProps, 'children'> & {
     title: string;
-    icon?: JSX.Element;
+    icon?: React.JSX.Element;
     pages?: RouteConfig[];
     children?: RouteConfig[];
     hidden?: boolean;

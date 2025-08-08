@@ -7,7 +7,7 @@ export type ExampleShowcaseProps = BoxProps & {
     sx?: SxProps<Theme>;
 };
 
-export const ExampleShowcase = React.forwardRef((props: ExampleShowcaseProps, ref): JSX.Element => {
+export const ExampleShowcase = React.forwardRef((props: ExampleShowcaseProps, ref): React.JSX.Element => {
     const theme = useTheme();
     return (
         <Box

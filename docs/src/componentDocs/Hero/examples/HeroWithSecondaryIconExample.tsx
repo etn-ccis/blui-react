@@ -4,7 +4,7 @@ import TrendingUp from '@mui/icons-material/TrendingUp';
 import Fan from '@brightlayer-ui/icons-mui/Fan';
 import { ExampleShowcase } from '../../../shared';
 
-export const HeroWithSecondaryIconExample = (): JSX.Element => (
+export const HeroWithSecondaryIconExample = (): React.JSX.Element => (
     <ExampleShowcase>
         <Hero
             label="Velocity"

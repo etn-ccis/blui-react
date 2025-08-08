@@ -11,7 +11,7 @@ const codeSnippet = `<Drawer open width={300}>
     </DrawerBody>
 </Drawer>`;
 
-export const ComplexDrawer = (): JSX.Element => (
+export const ComplexDrawer = (): React.JSX.Element => (
     <Box>
         <ComplexDrawerExample />
         <CodeBlock code={codeSnippet} language="jsx" />

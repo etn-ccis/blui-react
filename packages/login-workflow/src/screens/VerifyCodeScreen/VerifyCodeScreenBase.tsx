@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-expressions */
 import React, { useCallback, useEffect } from 'react';
 import { VerifyCodeScreenProps } from './types';
 import { WorkflowCard } from '../../components/WorkflowCard';
@@ -86,13 +85,11 @@ export const VerifyCodeScreenBase: React.FC<React.PropsWithChildren<VerifyCodeSc
                         helperText={shouldValidateCode && codeError}
                         {...verifyCodeTextFieldProps}
                         onBlur={(e): void => {
-                            // eslint-disable-next-line no-unused-expressions
-                            verifyCodeTextFieldProps?.onBlur && verifyCodeTextFieldProps.onBlur(e);
+                            verifyCodeTextFieldProps?.onBlur?.(e);
                             setShouldValidateCode(true);
                         }}
                         onChange={(evt): void => {
-                            // eslint-disable-next-line no-unused-expressions
-                            verifyCodeTextFieldProps?.onChange && verifyCodeTextFieldProps.onChange(evt);
+                            verifyCodeTextFieldProps?.onChange?.(evt);
                             handleVerifyCodeInputChange(evt.target.value);
                         }}
                         onKeyUp={(e): void => {

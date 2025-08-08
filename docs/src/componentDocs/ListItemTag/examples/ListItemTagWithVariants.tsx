@@ -7,7 +7,7 @@ const codeSnippet = `<ListItemTag variant="overline" label="overline" />
 <ListItemTag variant="button" label="button" />
 <ListItemTag variant="h6" label="h6" />`;
 
-export const ListItemTagWithVariants = (): JSX.Element => (
+export const ListItemTagWithVariants = (): React.JSX.Element => (
     <Box>
         <ListItemTagWithVariantsExample />
         <CodeBlock code={codeSnippet} language="jsx" />

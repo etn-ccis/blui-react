@@ -9,7 +9,7 @@ const codeSnippet = `<InfoListItem
     icon={<Alarm />} 
 />`;
 
-export const InfoListItemWithIcon = (): JSX.Element => (
+export const InfoListItemWithIcon = (): React.JSX.Element => (
     <Box>
         <InfoListItemWithIconExample />
         <CodeBlock code={codeSnippet} language="jsx" />

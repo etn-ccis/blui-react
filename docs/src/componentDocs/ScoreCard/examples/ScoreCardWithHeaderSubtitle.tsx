@@ -16,7 +16,7 @@ const codeSnippet = `<ScoreCard
     </List>
 </ScoreCard>`;
 
-export const ScoreCardWithHeaderSubtitle = (): JSX.Element => (
+export const ScoreCardWithHeaderSubtitle = (): React.JSX.Element => (
     <Box>
         <ScoreCardWithHeaderSubtitleExample />
         <CodeBlock code={codeSnippet} language="jsx" />

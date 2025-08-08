@@ -9,7 +9,7 @@ import * as colors from '@brightlayer-ui/colors';
 import Typography from '@mui/material/Typography';
 import { ExampleShowcase } from '../../../shared';
 
-export const ToolbarMenuWithinToolbarExample = (): JSX.Element => (
+export const ToolbarMenuWithinToolbarExample = (): React.JSX.Element => (
     <ExampleShowcase sx={{ display: 'flex', justifyContent: 'center' }}>
         <Box>
             <AppBar

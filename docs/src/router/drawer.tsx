@@ -14,8 +14,8 @@ import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { RootState } from '../redux/store';
 import { closeDrawer, toggleDrawer } from '../redux/appState';
 
-const backgroundImage = require('../assets/cubes_tile.png');
-const linearGradientOverlayImage = `linear-gradient(to right, rgba(0, 123, 193, 1) 22.4%, rgba(0, 123, 193, 0.2) 100%), url(${backgroundImage})`;
+import cubesImage from '../assets/cubes_tile.png';
+const linearGradientOverlayImage = `linear-gradient(to right, rgba(0, 123, 193, 1) 22.4%, rgba(0, 123, 193, 0.2) 100%), url(${cubesImage})`;
 
 const tabs = ['examples', 'api-docs', 'playground'];
 
@@ -78,7 +78,9 @@ export const NavigationDrawer: React.FC = () => {
                 : tabs.includes(pathArray[3])
                   ? pathArray[3]
                   : '';
-            navigate(`${id}${id.includes('/component-catalog') || !id.includes('/components/') ? '' : tabName || ''}`);
+            void navigate(
+                `${id}${id.includes('/component-catalog') || !id.includes('/components/') ? '' : tabName || ''}`
+            );
             dispatch(toggleDrawer());
         },
         [location.pathname, dispatch, navigate]
@@ -99,7 +101,7 @@ export const NavigationDrawer: React.FC = () => {
             }}
         >
             <DrawerHeader
-                backgroundImage={backgroundImage}
+                backgroundImage={cubesImage}
                 sx={{
                     '& .BluiDrawerHeader-background': {
                         backgroundImage: `${linearGradientOverlayImage}`,

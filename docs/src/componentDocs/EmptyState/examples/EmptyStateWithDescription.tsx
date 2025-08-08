@@ -9,7 +9,7 @@ const codeSnippet = `<EmptyState
     description={'Enable Location Services via Settings to receive GPS information'}
 />`;
 
-export const EmptyStateWithDescription = (): JSX.Element => (
+export const EmptyStateWithDescription = (): React.JSX.Element => (
     <Box>
         <EmptyStateWithDescriptionExample />
         <CodeBlock code={codeSnippet} language="jsx" dataLine="4" />

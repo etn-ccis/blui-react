@@ -23,7 +23,7 @@ const codeSnippet = `<Drawer open width={250}>
 </Drawer>
 `;
 
-export const DrawerHeaderWithTitleContent = (): JSX.Element => (
+export const DrawerHeaderWithTitleContent = (): React.JSX.Element => (
     <Box>
         <DrawerHeaderWithTitleContentExample />
         <CodeBlock code={codeSnippet} language="jsx" dataLine="5-16" />

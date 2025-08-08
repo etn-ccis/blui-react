@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-expressions */
 import React, { ChangeEvent, useState, useCallback } from 'react';
 import CheckCircleOutlined from '@mui/icons-material/CheckCircleOutlined';
 import { SetPasswordProps } from './types';
@@ -85,8 +84,7 @@ export const SetPassword: React.FC<React.PropsWithChildren<SetPasswordProps>> = 
                 }}
                 {...passwordTextFieldProps}
                 onChange={(evt: ChangeEvent<HTMLInputElement>): void => {
-                    // eslint-disable-next-line no-unused-expressions
-                    passwordTextFieldProps?.onChange && passwordTextFieldProps.onChange(evt);
+                    passwordTextFieldProps?.onChange?.(evt);
                     onPassChange(evt.target.value);
                 }}
                 onKeyUp={(e): void => {
@@ -95,8 +93,7 @@ export const SetPassword: React.FC<React.PropsWithChildren<SetPasswordProps>> = 
                     }
                 }}
                 onBlur={(e): void => {
-                    // eslint-disable-next-line no-unused-expressions
-                    passwordTextFieldProps?.onBlur && passwordTextFieldProps.onBlur(e);
+                    passwordTextFieldProps?.onBlur?.(e);
                     setShouldValidatePassword(true);
                 }}
             />
@@ -123,16 +120,14 @@ export const SetPassword: React.FC<React.PropsWithChildren<SetPasswordProps>> = 
                 }
                 {...confirmPasswordTextFieldProps}
                 onChange={(evt: ChangeEvent<HTMLInputElement>): void => {
-                    // eslint-disable-next-line no-unused-expressions
-                    confirmPasswordTextFieldProps?.onChange && confirmPasswordTextFieldProps.onChange(evt);
+                    confirmPasswordTextFieldProps?.onChange?.(evt);
                     onConfirmChange(evt.target.value);
                 }}
                 onKeyUp={(e): void => {
                     if (e.key === 'Enter' && onSubmit) onSubmit();
                 }}
                 onBlur={(e): void => {
-                    // eslint-disable-next-line no-unused-expressions
-                    confirmPasswordTextFieldProps?.onBlur && confirmPasswordTextFieldProps.onBlur(e);
+                    confirmPasswordTextFieldProps?.onBlur?.(e);
                     setShouldValidateConfirmPassword(true);
                 }}
             />
