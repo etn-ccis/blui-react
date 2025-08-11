@@ -10,7 +10,7 @@ import remarkGfm from 'remark-gfm';
 import prism from 'vite-plugin-prismjs';
 
 export default defineConfig({
-    base: '/',
+    base: process.env.VITE_PUBLIC_URL || '/',
     plugins: [
         react(),
         viteTsconfigPaths(),
