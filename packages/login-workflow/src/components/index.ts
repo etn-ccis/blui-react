@@ -7,3 +7,4 @@ export * from './ChangePasswordDialog';
 export * from './Guards';
 export * from './PasswordRequirements';
 export * from './Spinner';
+export * from './Error';
