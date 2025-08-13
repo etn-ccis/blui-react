@@ -19,7 +19,8 @@ jobs:
           - apps/showcase
           - apps/storybook
           - apps/themeShowcase
-          - apps/workflow
+          - apps/workflow/example-vite
+          - apps/workflow/example
           - packages/cli-templates
           - packages/component-library
           - packages/login-workflow
