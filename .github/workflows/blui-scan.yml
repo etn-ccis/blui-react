@@ -1,0 +1,50 @@
+
+name: CI-BlackDuck-SCA-Basic
+
+on:
+  push:
+    branches: [main, master, dev,feature/*]
+  pull_request:
+    branches: [main, master, dev]
+  workflow_dispatch:
+
+jobs:
+  blackduck-scan:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        app:
+          - apps/demo
+          - apps/design-patterns
+          - apps/showcase
+          - apps/storybook
+          - apps/themeShowcase
+          - apps/workflow
+          - packages/cli-templates
+          - packages/component-library
+          - packages/login-workflow
+          - packages/themes
+
+    defaults:
+      run:
+        working-directory: ${{ matrix.app }}
+
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v4
+
+      - name: Read Version from package.json
+        id: get_version
+        run: |
+          VERSION=$(jq -r .version package.json)
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Black Duck Scan
+        uses: blackduck-inc/black-duck-security-scan@v2.1.0
+        env:
+          DETECT_PROJECT_NAME: ${{ vars.PROJECT_NAME }}-${{ matrix.app }}
+          DETECT_PROJECT_VERSION_NAME: ${{ env.VERSION }}
+        with:
+          blackducksca_url: ${{ vars.BLACKDUCKSCA_URL }}
+          blackducksca_token: ${{ secrets.BLACKDUCKSCA_TOKEN }}
+          blackducksca_scan_failure_severities: 'BLOCKER,CRITICAL'
