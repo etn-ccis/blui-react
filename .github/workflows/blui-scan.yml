@@ -41,7 +41,7 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Black Duck Scan
-        uses: blackduck-inc/black-duck-security-scan@v2.1.0
+        uses: blackduck-inc/black-duck-security-scan@v2.3.0
         env:
           DETECT_PROJECT_NAME: ${{ vars.PROJECT_NAME }}
           DETECT_PROJECT_VERSION_NAME: ${{ matrix.app }}-${{ env.VERSION }}
