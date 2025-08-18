@@ -14,8 +14,8 @@ jobs:
     strategy:
       matrix:
         app:
-          - apps/demo
-          #- apps/design-patterns
+          - apps/design-patterns
+          #- apps/demo
           #- apps/showcase
           #- apps/storybook
           #- apps/themeShowcase
