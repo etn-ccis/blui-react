@@ -44,7 +44,7 @@ jobs:
         uses: blackduck-inc/black-duck-security-scan@v2.3.0
         env:
           DETECT_PROJECT_NAME: ${{ vars.PROJECT_NAME }}
-          DETECT_PROJECT_VERSION_NAME: ${{ matrix.app }}-${{ env.VERSION }}
+          DETECT_PROJECT_VERSION_NAME: ${{ env.VERSION }}
         with:
           blackducksca_url: ${{ vars.BLACKDUCKSCA_URL }}
           blackducksca_token: ${{ secrets.BLACKDUCKSCA_TOKEN }}
