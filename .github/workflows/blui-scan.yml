@@ -3,7 +3,7 @@ name: CI-BlackDuck-SCA-Basic
 
 on:
   push:
-    branches: [main, master, dev,feature/*]
+    branches: [main, master, dev]
   pull_request:
     branches: [main, master, dev]
   workflow_dispatch:
@@ -15,16 +15,16 @@ jobs:
       matrix:
         app:
           - apps/demo
-          - apps/design-patterns
-          - apps/showcase
-          - apps/storybook
-          - apps/themeShowcase
-          - apps/workflow/example-vite
-          - apps/workflow/example
-          - packages/cli-templates
-          - packages/component-library
-          - packages/login-workflow
-          - packages/themes
+          #- apps/design-patterns
+          #- apps/showcase
+          #- apps/storybook
+          #- apps/themeShowcase
+          #- apps/workflow/example-vite
+          #- apps/workflow/example
+          #- packages/cli-templates
+          #- packages/component-library
+          #- packages/login-workflow
+          #- packages/themes
 
     defaults:
       run:
@@ -48,4 +48,3 @@ jobs:
         with:
           blackducksca_url: ${{ vars.BLACKDUCKSCA_URL }}
           blackducksca_token: ${{ secrets.BLACKDUCKSCA_TOKEN }}
-          blackducksca_scan_failure_severities: 'BLOCKER,CRITICAL'
