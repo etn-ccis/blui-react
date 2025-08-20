@@ -3,8 +3,7 @@ import Typography from '@mui/material/Typography';
 import { ChannelValue } from '@brightlayer-ui/react-components';
 import TrendingUp from '@mui/icons-material/TrendingUp';
 import * as colors from '@brightlayer-ui/colors';
-import { useSelector } from 'react-redux';
-import { AppStore } from '../../../__types__';
+import { useAppSelector } from '../../../redux/hooks';
 import Box from '@mui/material/Box';
 
 const componentContainerStyles = {
@@ -19,7 +18,7 @@ const sectionTitleStyles = {
 };
 
 export const ChannelValueExample: React.FC = () => {
-    const direction = useSelector((store: AppStore) => store.app.direction);
+    const direction = useAppSelector((store) => store.app.direction);
     const rtl = direction === 'rtl';
 
     return (
