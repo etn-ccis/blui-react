@@ -4,7 +4,7 @@ import { ChannelValue } from '@brightlayer-ui/react-components';
 import TrendingUp from '@mui/icons-material/TrendingUp';
 import * as colors from '@brightlayer-ui/colors';
 import { useAppSelector } from '../../../redux/hooks';
-import Box from '@mui/material/Box';
+import { Box } from '@mui/material';
 
 const componentContainerStyles = {
     display: 'flex',
@@ -16,7 +16,6 @@ const componentContainerStyles = {
 const sectionTitleStyles = {
     mb: 2,
 };
-
 export const ChannelValueExample: React.FC = () => {
     const direction = useAppSelector((store) => store.app.direction);
     const rtl = direction === 'rtl';
