@@ -1,7 +1,6 @@
 import React from 'react';
 import { Badge, IconButton, Toolbar, useMediaQuery } from '@mui/material';
-import { Theme, useTheme } from '@mui/material/styles';
-import makeStyles from '@mui/styles/makeStyles';
+import { useTheme, styled } from '@mui/material/styles';
 import HelpIcon from '@mui/icons-material/Help';
 import MenuIcon from '@mui/icons-material/Menu';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -15,70 +14,77 @@ import { getBodyFiller } from '../utils/utils';
 import backgroundImage from '../../../assets/collapsible_app_bar_demo.jpg';
 const linearGradientOverlayImage = `linear-gradient(to bottom, rgba(0, 123, 193, 1) 22.4%, rgba(0, 123, 193, 0.2) 100%), url(${backgroundImage})`;
 
-const useStyles = makeStyles((theme: Theme) => ({
-    title: {},
-    subtitle: {},
-    info: {},
-    liner: {
-        top: 0,
-        position: 'absolute',
-        flexGrow: 1,
-        marginLeft: 0,
-        [theme.breakpoints.down('md')]: {
-            marginLeft: 56,
-        },
-    },
-    expanded: {
-        '& $liner': {
-            top: 80,
-        },
-    },
-    collapsed: {
-        '& $title': {
-            fontSize: '1.25rem',
-            fontWeight: 600,
-        },
-        '& $subtitle': {
-            fontSize: 0,
-        },
-        '& $info': {
-            fontSize: '1rem',
-            marginTop: '-0.25rem',
-            fontWeight: 400,
-        },
-        '& $backgroundGradient': {
-            backgroundImage: 'none',
-        },
-    },
-    toolbarGutters: {
-        paddingLeft: 16,
-        paddingRight: 4,
-    },
-    backgroundGradient: {
+const PREFIX = 'CollapsibleAppBar';
+
+const classes = {
+    title: `${PREFIX}-title`,
+    subtitle: `${PREFIX}-subtitle`,
+    info: `${PREFIX}-info`,
+    liner: `${PREFIX}-liner`,
+    expanded: `${PREFIX}-expanded`,
+    collapsed: `${PREFIX}-collapsed`,
+    toolbarGutters: `${PREFIX}-toolbarGutters`,
+    backgroundGradient: `${PREFIX}-backgroundGradient`,
+    bodyContent: `${PREFIX}-bodyContent`,
+    toolbarRightContent: `${PREFIX}-toolbarRightContent`,
+};
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const StyledAppBar = styled(AppBar)(({ theme }) => ({
+    [`& .${classes.backgroundGradient}`]: {
         backgroundImage: `${linearGradientOverlayImage}`,
         backgroundPosition: 'center',
     },
-    bodyContent: {
-        maxWidth: '900px',
-        margin: '0 auto',
-        padding: `0 ${theme.spacing(2)}`,
+    [`&.${classes.collapsed} .${classes.title}`]: {
+        fontSize: '1.25rem',
+        fontWeight: 600,
     },
-    toolbarRightContent: {
-        display: 'flex',
-        flexDirection: 'row',
+    [`&.${classes.collapsed} .${classes.subtitle}`]: {
+        fontSize: 0,
     },
+    [`&.${classes.collapsed} .${classes.info}`]: {
+        fontSize: '1rem',
+        marginTop: '-0.25rem',
+        fontWeight: 400,
+    },
+    [`&.${classes.collapsed} .${classes.backgroundGradient}`]: {
+        backgroundImage: 'none',
+    },
+    [`&.${classes.expanded} .${classes.liner}`]: {
+        top: 80,
+    },
+}));
+
+const Liner = styled('div')(({ theme }) => ({
+    top: 0,
+    position: 'absolute',
+    flexGrow: 1,
+    marginLeft: 0,
+    [theme.breakpoints.down('md')]: {
+        marginLeft: 56,
+    },
+}));
+
+const ToolbarRightContent = styled('div')({
+    display: 'flex',
+    flexDirection: 'row',
+});
+
+const BodyContent = styled('div')(({ theme }) => ({
+    maxWidth: '900px',
+    margin: '0 auto',
+    padding: `0 ${theme.spacing(2)}`,
 }));
 
 export const Collapsible = (): JSX.Element => {
     const dispatch = useDispatch();
     const theme = useTheme();
-    const classes = useStyles();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
     const md = useMediaQuery(theme.breakpoints.up('md'));
 
     return (
         <div style={{ minHeight: '100vh' }}>
-            <AppBar
+            <StyledAppBar
                 expandedHeight={200}
                 collapsedHeight={isMobile ? 56 : 64}
                 scrollThreshold={136}
@@ -91,7 +97,13 @@ export const Collapsible = (): JSX.Element => {
                     background: classes.backgroundGradient,
                 }}
             >
-                <Toolbar data-cy={'toolbar'} classes={{ gutters: classes.toolbarGutters }}>
+                <Toolbar
+                    data-cy={'toolbar'}
+                    sx={{
+                        paddingLeft: '16px',
+                        paddingRight: '4px',
+                    }}
+                >
                     {md ? null : (
                         <IconButton
                             data-cy="toolbar-menu"
@@ -107,14 +119,19 @@ export const Collapsible = (): JSX.Element => {
                     )}
                     <Spacer />
                     <ThreeLiner
-                        classes={{ title: classes.title, subtitle: classes.subtitle, info: classes.info }}
+                        classes={{
+                            title: classes.title,
+                            subtitle: classes.subtitle,
+                            info: classes.info,
+                        }}
                         className={classes.liner}
+                        component={Liner}
                         title={'Timeline'}
                         subtitle={'Online'}
                         info={'Gary Steel Works'}
                         animationDuration={300}
                     />
-                    <div className={classes.toolbarRightContent}>
+                    <ToolbarRightContent className={classes.toolbarRightContent}>
                         <IconButton color={'inherit'} size="large">
                             <HelpIcon />
                         </IconButton>
@@ -126,12 +143,10 @@ export const Collapsible = (): JSX.Element => {
                         <IconButton color={'inherit'} size="large">
                             <MoreVertIcon />
                         </IconButton>
-                    </div>
+                    </ToolbarRightContent>
                 </Toolbar>
-            </AppBar>
-            <div className={classes.bodyContent} id={'page-body'}>
-                {getBodyFiller()}
-            </div>
+            </StyledAppBar>
+            <BodyContent id={'page-body'}>{getBodyFiller()}</BodyContent>
         </div>
     );
 };

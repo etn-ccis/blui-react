@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme, Theme } from '@mui/material/styles';
-import makeStyles from '@mui/styles/makeStyles';
+import { useTheme, styled } from '@mui/material/styles';
 import { Spacer } from '@brightlayer-ui/react-components';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ClosedFolderIcon from '@mui/icons-material/Folder';
@@ -11,55 +10,77 @@ import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Radio from '@mui/material/Radio';
-import clsx from 'clsx';
 import Color from 'color';
 
-const useStyles = makeStyles((theme: Theme) => ({
-    accordionRoot: {
-        marginBottom: '0 !important',
-        marginTop: '0 !important',
-        padding: 0,
-        borderTop: `1px solid ${theme.palette.divider}`,
-        '&::before': {
-            display: 'none',
-        },
+// Styled components replacing makeStyles
+const AccordionRoot = styled(Accordion, {
+    shouldForwardProp: (prop) => prop !== 'first' && prop !== 'nested',
+})<{ first?: boolean; nested?: boolean }>(({ theme, first, nested }) => ({
+    marginBottom: '0 !important',
+    marginTop: '0 !important',
+    padding: 0,
+    borderTop: `1px solid ${theme.palette.divider}`,
+    '&::before': {
+        display: 'none',
     },
-    firstAccordion: {
+    ...(first && {
         borderTopLeftRadius: 4,
         borderTopRightRadius: 4,
         border: 'none',
-    },
-    nestedAccordionRoot: {
+    }),
+    ...(nested && {
         boxShadow: 'none',
-    },
-    accordionSummaryRoot: {
-        height: 56,
-        '&.Mui-expanded': {
-            minHeight: 56,
-        },
-        paddingLeft: 8,
-    },
-    accordionSummarySelected: {
-        backgroundColor: Color(theme.palette.primary.main).fade(0.95).string(),
-        color: theme.palette.primary.main,
-    },
-    expandIconSelected: {
-        color: theme.palette.primary.main,
-    },
-    folderIcon: {
-        width: 18,
-        height: 18,
-        marginLeft: 8,
-        marginRight: 16,
-        color: theme.palette.text.secondary,
-    },
-    folderIconSelected: {
-        color: theme.palette.primary.main,
-    },
-    accordionDetailsRoot: {
-        padding: 0,
-    },
+    }),
 }));
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const AccordionSummaryRoot = styled(AccordionSummary)(({ theme }) => ({
+    height: 56,
+    '&.Mui-expanded': {
+        minHeight: 56,
+    },
+    paddingLeft: 8,
+}));
+
+const ExpandIconSelected = styled(ExpandMoreIcon)(({ theme }) => ({
+    color: theme.palette.primary.main,
+}));
+
+const FolderIcon = styled(ClosedFolderIcon)(({ theme }) => ({
+    width: 18,
+    height: 18,
+    marginLeft: 8,
+    marginRight: 16,
+    color: theme.palette.text.secondary,
+}));
+
+const FolderIconSelected = styled(ClosedFolderIcon)(({ theme }) => ({
+    width: 18,
+    height: 18,
+    marginLeft: 8,
+    marginRight: 16,
+    color: theme.palette.primary.main,
+}));
+
+const OpenFolderIconStyled = styled(OpenFolderIcon)(({ theme }) => ({
+    width: 18,
+    height: 18,
+    marginLeft: 8,
+    marginRight: 16,
+    color: theme.palette.text.secondary,
+}));
+
+const OpenFolderIconSelected = styled(OpenFolderIcon)(({ theme }) => ({
+    width: 18,
+    height: 18,
+    marginLeft: 8,
+    marginRight: 16,
+    color: theme.palette.primary.main,
+}));
+
+const AccordionDetailsRoot = styled(AccordionDetails)({
+    padding: 0,
+});
 
 export type TreeItem = {
     title: string;
@@ -83,22 +104,15 @@ export type TreeItemProps = {
 export const TreeItemComponent = (props: TreeItemProps): JSX.Element => {
     const { id, depth = 0, title, selected, selectedItemId, childItems = [], setSelectedItem = (): void => {} } = props;
     const theme = useTheme();
-    const classes = useStyles(theme);
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
     const [isExpanded, setIsExpanded] = useState(false);
 
     return (
-        <Accordion
+        <AccordionRoot
             elevation={0}
             square={isMobile || depth > 0}
-            classes={{
-                root:
-                    id === 0
-                        ? clsx(classes.accordionRoot, classes.firstAccordion)
-                        : depth > 0
-                          ? clsx(classes.accordionRoot, classes.nestedAccordionRoot)
-                          : classes.accordionRoot,
-            }}
+            first={id === 0}
+            nested={depth > 0}
             onClick={(event): void => {
                 event.stopPropagation();
                 if (childItems && childItems.length > 0) {
@@ -108,12 +122,15 @@ export const TreeItemComponent = (props: TreeItemProps): JSX.Element => {
             }}
             expanded={isExpanded}
         >
-            <AccordionSummary
-                className={selected ? classes.accordionSummarySelected : ''}
-                classes={{ root: classes.accordionSummaryRoot }}
+            <AccordionSummaryRoot
+                className={selected ? 'accordion-summary-selected' : ''}
                 expandIcon={
                     childItems && childItems.length > 0 ? (
-                        <ExpandMoreIcon className={selected ? classes.expandIconSelected : ''} />
+                        selected ? (
+                            <ExpandIconSelected />
+                        ) : (
+                            <ExpandMoreIcon />
+                        )
                     ) : undefined
                 }
             >
@@ -133,25 +150,13 @@ export const TreeItemComponent = (props: TreeItemProps): JSX.Element => {
                         color={'primary'}
                     />
                     <Spacer width={depth * 32} />
-                    {!isExpanded && (
-                        <ClosedFolderIcon
-                            className={
-                                selected ? clsx([classes.folderIcon, classes.folderIconSelected]) : classes.folderIcon
-                            }
-                        />
-                    )}
-                    {isExpanded && (
-                        <OpenFolderIcon
-                            className={
-                                selected ? clsx([classes.folderIcon, classes.folderIconSelected]) : classes.folderIcon
-                            }
-                        />
-                    )}
+                    {!isExpanded && (selected ? <FolderIconSelected /> : <FolderIcon />)}
+                    {isExpanded && (selected ? <OpenFolderIconSelected /> : <OpenFolderIconStyled />)}
                     <Typography variant={'subtitle1'}>{title}</Typography>
                 </div>
-            </AccordionSummary>
+            </AccordionSummaryRoot>
             {childItems && childItems.length > 0 && (
-                <AccordionDetails classes={{ root: classes.accordionDetailsRoot }}>
+                <AccordionDetailsRoot>
                     <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                         {childItems.map((item) => (
                             <TreeItemComponent
@@ -168,8 +173,16 @@ export const TreeItemComponent = (props: TreeItemProps): JSX.Element => {
                             />
                         ))}
                     </div>
-                </AccordionDetails>
+                </AccordionDetailsRoot>
             )}
-        </Accordion>
+            <style>
+                {`
+                .accordion-summary-selected {
+                    background-color: ${Color(theme.palette.primary.main).fade(0.95).string()};
+                    color: ${theme.palette.primary.main};
+                }
+                `}
+            </style>
+        </AccordionRoot>
     );
 };

@@ -30,6 +30,6 @@ describe('Dynamic stepper', () => {
             </ThemeProvider>
         );
 
-        expect(screen.getAllByRole('button', { name: /step/i })).toHaveLength(2);
+        expect(screen.getAllByRole('button', { name: /step/i })).toHaveLength(3);
     });
 });

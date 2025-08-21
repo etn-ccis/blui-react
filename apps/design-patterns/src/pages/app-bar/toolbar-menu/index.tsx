@@ -8,41 +8,33 @@ import {
     useTheme,
     Drawer,
     List,
-    ListItem,
+    ListItemButton,
 } from '@mui/material';
-import { Theme } from '@mui/material/styles';
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useDispatch } from 'react-redux';
 import { TOGGLE_DRAWER } from '../../../redux/actions';
 import * as Colors from '@brightlayer-ui/colors';
 import ListItemText from '@mui/material/ListItemText';
 import { ToolbarMenu } from '@brightlayer-ui/react-components';
-const useStyles = makeStyles((theme: Theme) => ({
-    textContent: {
-        overflow: 'hidden',
-        whiteSpace: 'nowrap',
-        // set margins to default to avoid the height of the app bar exceeding 56px on mobile
-        '&.MuiListItemText-multiline': {
-            marginTop: '0.25rem',
-            marginBottom: '0.25rem',
-        },
+
+// Styled components replacing makeStyles
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const TextContent = styled(ListItemText)(({ theme }) => ({
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    '&.MuiListItemText-multiline': {
+        marginTop: '0.25rem',
+        marginBottom: '0.25rem',
     },
-    root: {
-        marginTop: '-0.25rem',
-        color: Colors.white[50],
-    },
-    paper: {
-        marginTop: `${theme.spacing(1)}`,
-    },
-    toolbarGutters: {
-        padding: `0px ${theme.spacing(2)}`,
-    },
+}));
+
+const ToolbarGutters = styled(Toolbar)(({ theme }) => ({
+    padding: `0px ${theme.spacing(2)}`,
 }));
 
 export const BluiToolbarMenu = (): JSX.Element => {
     const dispatch = useDispatch();
-    const classes = useStyles();
     const theme = useTheme();
     const md = useMediaQuery(theme.breakpoints.up('md'));
     const [showMenu, setShowMenu] = useState<boolean>(false);
@@ -86,7 +78,7 @@ export const BluiToolbarMenu = (): JSX.Element => {
         <div style={{ minHeight: '100vh' }}>
             <AppBar data-cy="blui-toolbar" position={'sticky'}>
                 {!md ? null : (
-                    <Toolbar classes={{ gutters: classes.toolbarGutters }}>
+                    <ToolbarGutters>
                         {md ? null : (
                             <IconButton
                                 data-cy="toolbar-menu"
@@ -101,14 +93,14 @@ export const BluiToolbarMenu = (): JSX.Element => {
                                 <MenuIcon />
                             </IconButton>
                         )}
-                        <ListItemText
-                            className={classes.textContent}
+                        <TextContent
+                            className="textContent"
                             primary={<Typography variant="h6">Title</Typography>}
                             secondary={
                                 <ToolbarMenu
-                                    classes={{ root: classes.root }}
                                     label={subtitle}
                                     menuGroups={menuGroups}
+                                    sx={{ color: Colors.white[50], marginTop: '-0.25rem' }}
                                     onOpen={(): void => {
                                         setShowMenu(true);
                                     }}
@@ -119,10 +111,10 @@ export const BluiToolbarMenu = (): JSX.Element => {
                             }
                         />
                         <div />
-                    </Toolbar>
+                    </ToolbarGutters>
                 )}
                 {md ? null : (
-                    <Toolbar classes={{ gutters: classes.toolbarGutters }}>
+                    <ToolbarGutters>
                         {md ? null : (
                             <IconButton
                                 data-cy="toolbar-menu"
@@ -137,12 +129,12 @@ export const BluiToolbarMenu = (): JSX.Element => {
                                 <MenuIcon />
                             </IconButton>
                         )}
-                        <ListItemText
-                            className={classes.textContent}
+                        <TextContent
+                            className="textContent"
                             primary={<Typography variant="h6">Title</Typography>}
                             secondary={
                                 <ToolbarMenu
-                                    classes={{ root: classes.root }}
+                                    sx={{ color: Colors.white[50], marginTop: '-0.25rem' }}
                                     label={subtitle}
                                     menu={
                                         <React.Fragment key={'bottom'}>
@@ -152,17 +144,20 @@ export const BluiToolbarMenu = (): JSX.Element => {
                                                 transitionDuration={250}
                                                 open={showMenu}
                                                 onClose={(): void => setShowMenu(false)}
-                                                classes={{ paper: classes.paper }}
+                                                PaperProps={{
+                                                    sx: {
+                                                        marginTop: theme.spacing(1),
+                                                    },
+                                                }}
                                             >
                                                 <List>
                                                     {menuGroups[0].items.map((text) => (
-                                                        <ListItem
-                                                            button
+                                                        <ListItemButton
                                                             key={text.title}
                                                             onClick={(): void => updateToolbar(text.title, true)}
                                                         >
                                                             <ListItemText primary={text.title} />
-                                                        </ListItem>
+                                                        </ListItemButton>
                                                     ))}
                                                 </List>
                                             </Drawer>
@@ -178,7 +173,7 @@ export const BluiToolbarMenu = (): JSX.Element => {
                             }
                         />
                         <div />
-                    </Toolbar>
+                    </ToolbarGutters>
                 )}
             </AppBar>
         </div>

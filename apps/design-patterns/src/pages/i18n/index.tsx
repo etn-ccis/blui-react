@@ -16,12 +16,10 @@ import {
     Typography,
     useMediaQuery,
 } from '@mui/material';
-import { Theme, useTheme } from '@mui/material/styles';
-import makeStyles from '@mui/styles/makeStyles';
+import { styled, useTheme } from '@mui/material/styles';
 import { useDispatch } from 'react-redux';
 import { TOGGLE_DRAWER } from '../../redux/actions';
 import { InfoListItem, Spacer } from '@brightlayer-ui/react-components';
-import clsx from 'clsx';
 
 import MenuIcon from '@mui/icons-material/Menu';
 import CartIcon from '@mui/icons-material/AddShoppingCart';
@@ -36,45 +34,33 @@ import './translations/i18n';
 import '@fontsource/noto-sans/400.css';
 import '@fontsource/noto-sans/700.css';
 
-const useStyles = makeStyles((theme: Theme) => ({
-    snackbar: {
-        [theme.breakpoints.up('md')]: {
-            left: `calc((100vw - ${DRAWER_WIDTH}px)/2 + ${DRAWER_WIDTH}px);`,
-        },
-    },
-    snackbarAction: {
-        margin: 'auto',
-        marginLeft: theme.spacing(-1),
-        paddingRight: theme.spacing(2),
-        paddingLeft: 0,
-    },
-    icon: {
-        fontSize: 16,
-        margin: 4,
-    },
-    RTL: { transform: 'scaleX(-1)' },
-    RTLButtonStartIcon: {
-        marginRight: theme.spacing(-0.5),
-        marginLeft: theme.spacing(1),
-    },
-    rightComponent: {
-        marginLeft: 0,
-        marginRight: theme.spacing(2),
-    },
-    appbarRoot: {
-        padding: 0,
-    },
-    toolbarGutters: {
-        padding: '0 16px',
-    },
-    listItemButtonRoot: {
-        textAlign: 'right',
+const SnackbarRoot = styled('div')(({ theme }) => ({
+    [theme.breakpoints.up('md')]: {
+        left: `calc((100vw - ${DRAWER_WIDTH}px)/2 + ${DRAWER_WIDTH}px)`,
     },
 }));
 
+const SnackbarAction = styled('div')(({ theme }) => ({
+    margin: 'auto',
+    marginLeft: theme.spacing(-1),
+    paddingRight: theme.spacing(2),
+    paddingLeft: 0,
+}));
+
+const AppbarRoot = styled('div')({
+    padding: 0,
+});
+
+const ToolbarGutters = styled('div')({
+    padding: '0 16px',
+});
+
+const ListItemButtonRoot = styled('div')({
+    textAlign: 'right',
+});
+
 export const I18N = (): JSX.Element => {
     const theme = useTheme();
-    const classes = useStyles(theme);
     const { t, i18n } = useTranslation();
     const [fruits] = useState(
         Object.keys(english.translations.FRUITS).map((fruit) => ({
@@ -118,49 +104,53 @@ export const I18N = (): JSX.Element => {
 
     return (
         <div dir={getDirection()} style={{ backgroundColor: theme.palette.background.paper, minHeight: '100vh' }}>
-            <AppBar position={'sticky'} classes={{ root: classes.appbarRoot }}>
-                <Drawer
-                    open={drawerOpen}
-                    R2L={isRTL()}
-                    lang={lang}
-                    drawerToggler={(): void => {
-                        setDrawerOpen(!drawerOpen);
-                    }}
-                    translator={t}
-                />
-                <Toolbar classes={{ gutters: classes.toolbarGutters }}>
-                    {md ? null : (
-                        <IconButton
-                            data-cy={'toolbar-menu'}
-                            color={'inherit'}
-                            onClick={(): void => {
-                                dispatch({ type: TOGGLE_DRAWER, payload: true });
-                            }}
-                            edge={isRTL() ? 'end' : 'start'}
-                            style={{ marginRight: isRTL() ? '' : 20, marginLeft: isRTL() ? 20 : '' }}
-                            size="large"
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                    )}
-                    <Typography data-cy={'toolbar-title'} variant={'h6'} color={'inherit'}>
-                        {t('I18N')}
-                    </Typography>
-                    <Spacer />
-                    <Tooltip title={t('VIEW_I18N_SIDE_NAV') || ''}>
-                        <IconButton
-                            data-cy={'R2L-menu'}
-                            color={'inherit'}
-                            onClick={(): void => setDrawerOpen(!drawerOpen)}
-                            edge={isRTL() ? 'start' : 'end'}
-                            className={clsx(isRTL() && classes.RTL)}
-                            size="large"
-                        >
-                            <MenuOpenIcon />
-                        </IconButton>
-                    </Tooltip>
-                </Toolbar>
-            </AppBar>
+            <AppbarRoot>
+                <AppBar position={'sticky'} sx={{ padding: 0 }}>
+                    <Drawer
+                        open={drawerOpen}
+                        R2L={isRTL()}
+                        lang={lang}
+                        drawerToggler={(): void => {
+                            setDrawerOpen(!drawerOpen);
+                        }}
+                        translator={t}
+                    />
+                    <ToolbarGutters>
+                        <Toolbar sx={{ padding: '0 16px' }}>
+                            {md ? null : (
+                                <IconButton
+                                    data-cy={'toolbar-menu'}
+                                    color={'inherit'}
+                                    onClick={(): void => {
+                                        dispatch({ type: TOGGLE_DRAWER, payload: true });
+                                    }}
+                                    edge={isRTL() ? 'end' : 'start'}
+                                    style={{ marginRight: isRTL() ? '' : 20, marginLeft: isRTL() ? 20 : '' }}
+                                    size="large"
+                                >
+                                    <MenuIcon />
+                                </IconButton>
+                            )}
+                            <Typography data-cy={'toolbar-title'} variant={'h6'} color={'inherit'}>
+                                {t('I18N')}
+                            </Typography>
+                            <Spacer />
+                            <Tooltip title={t('VIEW_I18N_SIDE_NAV') || ''}>
+                                <IconButton
+                                    data-cy={'R2L-menu'}
+                                    color={'inherit'}
+                                    onClick={(): void => setDrawerOpen(!drawerOpen)}
+                                    edge={isRTL() ? 'start' : 'end'}
+                                    sx={isRTL() ? { transform: 'scaleX(-1)' } : undefined}
+                                    size="large"
+                                >
+                                    <MenuOpenIcon />
+                                </IconButton>
+                            </Tooltip>
+                        </Toolbar>
+                    </ToolbarGutters>
+                </AppBar>
+            </AppbarRoot>
 
             <Toolbar>
                 <Select
@@ -182,8 +172,25 @@ export const I18N = (): JSX.Element => {
                     variant={'contained'}
                     color={'primary'}
                     style={{ margin: theme.spacing(2) }}
-                    classes={isRTL() ? { startIcon: classes.RTLButtonStartIcon } : undefined}
-                    startIcon={<CartIcon className={clsx(classes.icon, isRTL() && classes.RTL)} />}
+                    startIcon={
+                        <CartIcon
+                            sx={{
+                                fontSize: 16,
+                                margin: 0.5,
+                                ...(isRTL() && { transform: 'scaleX(-1)' }),
+                            }}
+                        />
+                    }
+                    sx={
+                        isRTL()
+                            ? {
+                                  '& .MuiButton-startIcon': {
+                                      marginRight: theme.spacing(-0.5),
+                                      marginLeft: theme.spacing(1),
+                                  },
+                              }
+                            : undefined
+                    }
                 >
                     <Typography noWrap color={'inherit'}>
                         {t('ADD_TO_CART')}
@@ -193,57 +200,77 @@ export const I18N = (): JSX.Element => {
 
             <List id={'item-list'}>
                 {fruits.map((fruit, index) => (
-                    <InfoListItem
-                        data-cy={'list-item-row'}
-                        data-testid="infoListItem"
-                        key={index}
-                        onClick={(): void => selectFruit(fruit.name)}
-                        ripple={true}
-                        style={{ textAlign: isRTL() ? 'right' : 'left' }}
-                        title={t(`FRUITS.${fruit.name}`)}
-                        subtitle={t('CURRENCY', { price: fruit.price })}
-                        icon={
-                            <Checkbox
-                                checked={selectedItems.has(fruit.name)}
-                                onChange={(): void => selectFruit(fruit.name)}
-                            />
-                        }
-                        classes={{
-                            rightComponent: isRTL() ? classes.rightComponent : undefined,
-                            listItemButtonRoot: isRTL() ? classes.listItemButtonRoot : undefined,
-                        }}
-                    />
+                    <ListItemButtonRoot key={`list-item-root-${index}`}>
+                        <InfoListItem
+                            data-cy={'list-item-row'}
+                            data-testid="infoListItem"
+                            key={index}
+                            onClick={(): void => selectFruit(fruit.name)}
+                            ripple={true}
+                            style={{ textAlign: isRTL() ? 'right' : 'left' }}
+                            title={t(`FRUITS.${fruit.name}`)}
+                            subtitle={t('CURRENCY', { price: fruit.price })}
+                            icon={
+                                <Checkbox
+                                    checked={selectedItems.has(fruit.name)}
+                                    onChange={(): void => selectFruit(fruit.name)}
+                                />
+                            }
+                            classes={{
+                                rightComponent: isRTL() ? undefined : undefined,
+                                listItemButtonRoot: isRTL() ? undefined : undefined,
+                            }}
+                            sx={{
+                                ...(isRTL() && {
+                                    '& .MuiListItemButton-root': { textAlign: 'right' },
+                                    '& .MuiListItemSecondaryAction-root': {
+                                        marginLeft: 0,
+                                        marginRight: theme.spacing(2),
+                                    },
+                                }),
+                            }}
+                        />
+                    </ListItemButtonRoot>
                 ))}
             </List>
 
-            <Snackbar
-                open={selectedItems.size > 0}
-                classes={{ root: classes.snackbar }}
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-            >
-                <SnackbarContent
-                    action={
-                        <>
-                            <Tooltip title={t('DESELECT_ALL') || ''}>
-                                <IconButton
-                                    onClick={(): void => {
-                                        setSelectedItems(new Set());
-                                    }}
-                                    color={'inherit'}
-                                    data-testid={'deselect-all-button'}
-                                    id={'deselect-all-button'}
-                                    data-cy={'snackbar-deselect-all'}
-                                    size="large"
-                                >
-                                    <CancelIcon />
-                                </IconButton>
-                            </Tooltip>
-                        </>
-                    }
-                    message={`${selectedItems.size} ${t('ITEMS')}`}
-                    classes={{ action: clsx(isRTL() && classes.snackbarAction) }}
-                />
-            </Snackbar>
+            <SnackbarRoot>
+                <Snackbar open={selectedItems.size > 0} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
+                    <SnackbarContent
+                        action={
+                            <SnackbarAction>
+                                <Tooltip title={t('DESELECT_ALL') || ''}>
+                                    <IconButton
+                                        onClick={(): void => {
+                                            setSelectedItems(new Set());
+                                        }}
+                                        color={'inherit'}
+                                        data-testid={'deselect-all-button'}
+                                        id={'deselect-all-button'}
+                                        data-cy={'snackbar-deselect-all'}
+                                        size="large"
+                                    >
+                                        <CancelIcon />
+                                    </IconButton>
+                                </Tooltip>
+                            </SnackbarAction>
+                        }
+                        message={`${selectedItems.size} ${t('ITEMS')}`}
+                        sx={
+                            isRTL()
+                                ? {
+                                      '& .MuiSnackbarContent-action': {
+                                          margin: 'auto',
+                                          marginLeft: theme.spacing(-1),
+                                          paddingRight: theme.spacing(2),
+                                          paddingLeft: 0,
+                                      },
+                                  }
+                                : undefined
+                        }
+                    />
+                </Snackbar>
+            </SnackbarRoot>
         </div>
     );
 };

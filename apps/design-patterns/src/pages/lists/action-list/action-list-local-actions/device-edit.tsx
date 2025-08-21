@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -5,10 +6,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { Theme } from '@mui/material';
-
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/material/styles';
 
 type DialogProps = {
     open: boolean;
@@ -17,30 +15,29 @@ type DialogProps = {
     updateSubTitle: (tempSubTitle: string) => void;
 };
 
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        dialogPaper: {
-            width: 450,
-            height: 600,
-        },
-        dialogTitle: {
-            padding: `${theme.spacing(4)} ${theme.spacing(3)}`,
-        },
-        dialogActions: {
-            padding: theme.spacing(3),
-            borderTop: `1px solid ${theme.palette.divider}`,
-        },
-        dialogButton: {
-            width: '100%',
-        },
-        textField: {
-            marginTop: theme.spacing(4),
-        },
-    })
-);
+const DialogPaper = styled('div')(({ theme }) => ({
+    width: 450,
+    height: 600,
+}));
+
+const DialogTitleStyled = styled(DialogTitle)(({ theme }) => ({
+    padding: `${theme.spacing(4)} ${theme.spacing(3)}`,
+}));
+
+const DialogActionsStyled = styled(DialogActions)(({ theme }) => ({
+    padding: theme.spacing(3),
+    borderTop: `1px solid ${theme.palette.divider}`,
+}));
+
+const DialogButton = styled(Button)(({ theme }) => ({
+    width: '100%',
+}));
+
+const TextFieldStyled = styled(TextField)(({ theme }) => ({
+    marginTop: theme.spacing(4),
+}));
 
 export const DeviceEdit = (props: DialogProps): JSX.Element => {
-    const classes = useStyles();
     const { open, handleClose, subTitle = '', updateSubTitle } = props;
     const [tempSubTitle, setTempSubTitle] = useState(subTitle);
     const onSubmit = (): void => {
@@ -61,33 +58,26 @@ export const DeviceEdit = (props: DialogProps): JSX.Element => {
         <Dialog
             open={open}
             onClose={onClose}
-            classes={{
-                paper: classes.dialogPaper,
+            PaperProps={{
+                component: DialogPaper,
             }}
         >
-            <DialogTitle className={classes.dialogTitle}>Device</DialogTitle>
+            <DialogTitleStyled>Device</DialogTitleStyled>
             <DialogContent>
-                <TextField
+                <TextFieldStyled
                     onChange={(event): void => setTempSubTitle(event?.target.value)}
                     value={tempSubTitle}
-                    className={classes.textField}
                     variant="filled"
                     label="Type"
                     type="text"
                     fullWidth
                 />
             </DialogContent>
-            <DialogActions className={classes.dialogActions}>
-                <Button
-                    className={classes.dialogButton}
-                    onClick={onSubmit}
-                    color={'primary'}
-                    variant={'contained'}
-                    disableElevation={true}
-                >
+            <DialogActionsStyled>
+                <DialogButton onClick={onSubmit} color={'primary'} variant={'contained'} disableElevation={true}>
                     DONE
-                </Button>
-            </DialogActions>
+                </DialogButton>
+            </DialogActionsStyled>
         </Dialog>
     );
 };

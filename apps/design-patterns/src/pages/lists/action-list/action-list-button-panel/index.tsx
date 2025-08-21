@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useCallback, useState } from 'react';
 import IconButton from '@mui/material/IconButton';
 import AppBar from '@mui/material/AppBar';
@@ -8,8 +9,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useTheme, Theme } from '@mui/material/styles';
-import makeStyles from '@mui/styles/makeStyles';
+import { styled, useTheme } from '@mui/material/styles';
 import { EmptyState, InfoListItem, Spacer } from '@brightlayer-ui/react-components';
 import { useDispatch } from 'react-redux';
 import { TOGGLE_DRAWER } from '../../../../redux/actions';
@@ -28,63 +28,72 @@ type Item = {
     name: string;
 };
 
-const useStyles = makeStyles((theme: Theme) => ({
-    container: {
-        minHeight: '100vh',
-    },
-    appbarRoot: {
+// Styled components to replace makeStyles
+const Container = styled('div')(({ theme }) => ({
+    minHeight: '100vh',
+}));
+
+const AppBarRoot = styled(AppBar)(({ theme }) => ({
+    padding: 0,
+}));
+
+const ToolbarGutters = styled(Toolbar)(({ theme }) => ({
+    padding: `0 ${theme.spacing(2)}`,
+}));
+
+const ToolbarTextContainer = styled('div')({
+    display: 'flex',
+    flexDirection: 'column',
+});
+
+const ToolBarSubtitle = styled(Typography)(({ theme }) => ({
+    marginTop: theme.spacing(-1),
+}));
+
+const ContentContainer = styled('div')(({ theme }) => ({
+    maxWidth: 800,
+    padding: theme.spacing(3),
+    margin: '0 auto',
+    [theme.breakpoints.down('md')]: {
+        maxWidth: '100%',
         padding: 0,
+        margin: 0,
     },
-    toolbarGutters: {
-        padding: `0 ${theme.spacing(2)}`,
+}));
+
+const ButtonRow = styled('div')({
+    display: 'flex',
+    flexDirection: 'row',
+    marginTop: -8,
+    marginBottom: 16,
+});
+
+const CardRoot = styled(Card)(({ theme }) => ({
+    borderRadius: 4,
+    [theme.breakpoints.down('md')]: {
+        marginTop: 0,
+        boxShadow: 'none',
+        borderRadius: 0,
     },
-    toolbarTextContainer: {
-        display: 'flex',
-        flexDirection: 'column',
+}));
+
+const CardContentRoot = styled(CardContent)({
+    padding: 0,
+    '&:last-child': {
+        paddingBottom: 0,
     },
-    toolBarSubtitle: {
-        marginTop: theme.spacing(-1),
-    },
-    contentContainer: {
-        maxWidth: 800,
-        padding: theme.spacing(3),
-        margin: '0 auto',
-        [theme.breakpoints.down('md')]: {
-            maxWidth: '100%',
-            padding: 0,
-            margin: 0,
-        },
-    },
-    buttonRow: {
-        display: 'flex',
-        flexDirection: 'row',
-        marginTop: -8,
-        marginBottom: 16,
-    },
-    card: {
-        borderRadius: 4,
-        [theme.breakpoints.down('md')]: {
-            marginTop: 0,
-            boxShadow: 'none',
-            borderRadius: 0,
-        },
-    },
-    cardContent: {
-        padding: 0,
-        '&:last-child': {
-            paddingBottom: 0,
-        },
-    },
-    rightComponentChevron: {
-        color: theme.palette.text.secondary,
-    },
-    emptyStateContainer: {
-        display: 'flex',
-        flexDirection: 'column',
-        height: `calc(100vh - ${theme.spacing(8)})`,
-        alignItems: 'center',
-        backgroundColor: theme.palette.background.paper,
-    },
+});
+
+const RightComponentChevron = styled('div')(({ theme }) => ({
+    color: theme.palette.text.secondary,
+}));
+
+const EmptyStateContainer = styled('div')(({ theme }) => ({
+    display: 'flex',
+    flexDirection: 'column',
+    height: `calc(100vh - ${theme.spacing(8)})`,
+    alignItems: 'center',
+    backgroundColor: theme.palette.background.paper,
 }));
 
 const itemList: Item[] = [
@@ -110,7 +119,6 @@ const createItem = (index: number): Item => ({
 export const ActionListButtonPanel = (): JSX.Element => {
     const dispatch = useDispatch();
     const theme = useTheme();
-    const classes = useStyles(theme);
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
     const md = useMediaQuery(theme.breakpoints.up('md'));
 
@@ -142,9 +150,9 @@ export const ActionListButtonPanel = (): JSX.Element => {
     }, []);
 
     return (
-        <div className={classes.container}>
-            <AppBar data-cy={'blui-toolbar'} position={'sticky'} classes={{ root: classes.appbarRoot }}>
-                <Toolbar classes={{ gutters: classes.toolbarGutters }}>
+        <Container>
+            <AppBarRoot data-cy={'blui-toolbar'} position={'sticky'}>
+                <ToolbarGutters>
                     {md ? null : (
                         <IconButton
                             data-cy="toolbar-menu"
@@ -159,14 +167,14 @@ export const ActionListButtonPanel = (): JSX.Element => {
                             <MenuIcon />
                         </IconButton>
                     )}
-                    <div className={classes.toolbarTextContainer}>
+                    <ToolbarTextContainer>
                         <Typography variant={'h6'} color={'inherit'}>
                             Global Action List
                         </Typography>
-                        <Typography classes={{ root: classes.toolBarSubtitle }} variant={'body1'} color={'inherit'}>
+                        <ToolBarSubtitle variant={'body1'} color={'inherit'}>
                             In Button Panel
-                        </Typography>
-                    </div>
+                        </ToolBarSubtitle>
+                    </ToolbarTextContainer>
                     <Spacer />
                     {isMobile && (
                         <div style={{ display: 'flex' }}>
@@ -195,12 +203,12 @@ export const ActionListButtonPanel = (): JSX.Element => {
                             </IconButton>
                         </div>
                     )}
-                </Toolbar>
-            </AppBar>
+                </ToolbarGutters>
+            </AppBarRoot>
             {list.length ? (
-                <div className={classes.contentContainer}>
+                <ContentContainer>
                     {!isMobile && (
-                        <div className={classes.buttonRow}>
+                        <ButtonRow>
                             <Button
                                 data-cy="desktop-add"
                                 data-testid="addItemButton"
@@ -228,17 +236,17 @@ export const ActionListButtonPanel = (): JSX.Element => {
                             >
                                 Delete
                             </Button>
-                        </div>
+                        </ButtonRow>
                     )}
-                    <Card classes={{ root: classes.card }}>
-                        <CardContent classes={{ root: classes.cardContent }}>
+                    <CardRoot>
+                        <CardContentRoot>
                             {list.map(
                                 (item, i): JSX.Element => (
                                     <InfoListItem
                                         key={i}
                                         data-testid="infoListItem"
                                         classes={{
-                                            rightComponent: classes.rightComponentChevron,
+                                            rightComponent: RightComponentChevron,
                                         }}
                                         hidePadding
                                         ripple
@@ -248,11 +256,11 @@ export const ActionListButtonPanel = (): JSX.Element => {
                                     />
                                 )
                             )}
-                        </CardContent>
-                    </Card>
-                </div>
+                        </CardContentRoot>
+                    </CardRoot>
+                </ContentContainer>
             ) : (
-                <div className={classes.emptyStateContainer}>
+                <EmptyStateContainer>
                     <EmptyState
                         style={{ maxWidth: 365 }}
                         icon={<WarningAmberIcon style={{ fontSize: 'inherit' }} />}
@@ -271,7 +279,7 @@ export const ActionListButtonPanel = (): JSX.Element => {
                             </Button>
                         }
                     />
-                </div>
+                </EmptyStateContainer>
             )}
             <Dialog open={open} onClose={(): void => handleClose()}>
                 <DialogTitle>{'Delete all items?'}</DialogTitle>
@@ -291,6 +299,6 @@ export const ActionListButtonPanel = (): JSX.Element => {
                     </Button>
                 </DialogActions>
             </Dialog>
-        </div>
+        </Container>
     );
 };

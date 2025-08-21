@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useCallback, useState } from 'react';
 import IconButton from '@mui/material/IconButton';
 import AppBar from '@mui/material/AppBar';
@@ -14,8 +15,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import ArchiveIcon from '@mui/icons-material/Archive';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { useTheme, Theme } from '@mui/material/styles';
-import makeStyles from '@mui/styles/makeStyles';
+import { useTheme, styled } from '@mui/material/styles';
 import { InfoListItem, ListItemTag } from '@brightlayer-ui/react-components';
 import { useDispatch } from 'react-redux';
 import { TOGGLE_DRAWER } from '../../../../redux/actions';
@@ -26,82 +26,6 @@ type Item = {
     title: string;
     hasTag?: boolean;
 };
-
-const useStyles = makeStyles((theme: Theme) => ({
-    actionList: {
-        minHeight: '100vh',
-    },
-    appbarRoot: {
-        padding: 0,
-    },
-    toolbarGutters: {
-        padding: `0 ${theme.spacing(2)}`,
-    },
-    toolbarTextContainer: {
-        display: 'flex',
-        flexDirection: 'column',
-    },
-    toolBarSubtitle: {
-        marginTop: theme.spacing(-1),
-    },
-    hoveredInfoListItem: {
-        backgroundColor: theme.palette.background.default,
-    },
-    container: {
-        maxWidth: 818,
-        padding: theme.spacing(3),
-        margin: '0 auto',
-        [theme.breakpoints.down('md')]: {
-            maxWidth: '100%',
-            padding: 0,
-            margin: 0,
-        },
-    },
-    card: {
-        borderRadius: 4,
-        [theme.breakpoints.down('md')]: {
-            marginTop: 0,
-            boxShadow: 'none',
-            borderRadius: 0,
-        },
-    },
-    cardContent: {
-        padding: 0,
-        '&:last-child': {
-            paddingBottom: 0,
-        },
-    },
-    rightComponentChevron: {
-        color: theme.palette.text.secondary,
-    },
-    iconButton: {
-        '&:hover': {
-            color: theme.palette.primary.main,
-            backgroundColor: theme.palette.primary.light,
-        },
-    },
-    noListItem: {
-        height: theme.spacing(7),
-        padding: 0,
-    },
-    noListItemText: {
-        [theme.breakpoints.down('md')]: {
-            marginLeft: theme.spacing(2),
-        },
-    },
-    resetTableLink: {
-        textDecoration: 'underline',
-        color: theme.palette.primary.main,
-        cursor: 'pointer',
-        fontWeight: 500,
-    },
-    menuItem: {
-        minHeight: theme.spacing(6),
-    },
-    versionNote: {
-        marginTop: theme.spacing(15),
-    },
-}));
 
 const itemList: Item[] = [
     {
@@ -121,10 +45,98 @@ const itemList: Item[] = [
 
 const getTitle = (title: string): React.ReactNode => <Typography variant="subtitle1">{title}</Typography>;
 
+const ActionListRoot = styled('div')(({ theme }) => ({
+    minHeight: '100vh',
+}));
+
+const AppBarRoot = styled(AppBar)(({ theme }) => ({
+    padding: 0,
+}));
+
+const ToolbarGutters = styled(Toolbar)(({ theme }) => ({
+    padding: `0 ${theme.spacing(2)}`,
+}));
+
+const ToolbarTextContainer = styled('div')({
+    display: 'flex',
+    flexDirection: 'column',
+});
+
+const ToolBarSubtitle = styled(Typography)(({ theme }) => ({
+    marginTop: theme.spacing(-1),
+}));
+
+const HoveredInfoListItem = styled('div')(({ theme }) => ({
+    backgroundColor: theme.palette.background.default,
+}));
+
+const Container = styled('div')(({ theme }) => ({
+    maxWidth: 818,
+    padding: theme.spacing(3),
+    margin: '0 auto',
+    [theme.breakpoints.down('md')]: {
+        maxWidth: '100%',
+        padding: 0,
+        margin: 0,
+    },
+}));
+
+const CardRoot = styled(Card)(({ theme }) => ({
+    borderRadius: 4,
+    [theme.breakpoints.down('md')]: {
+        marginTop: 0,
+        boxShadow: 'none',
+        borderRadius: 0,
+    },
+}));
+
+const CardContentRoot = styled(CardContent)(({ theme }) => ({
+    padding: 0,
+    '&:last-child': {
+        paddingBottom: 0,
+    },
+}));
+
+const RightComponentChevron = styled('div')(({ theme }) => ({
+    color: theme.palette.text.secondary,
+}));
+
+const StyledIconButton = styled(IconButton)(({ theme }) => ({
+    '&:hover': {
+        color: theme.palette.primary.main,
+        backgroundColor: theme.palette.primary.light,
+    },
+}));
+
+const NoListItem = styled('div')(({ theme }) => ({
+    height: theme.spacing(7),
+    padding: 0,
+}));
+
+const NoListItemText = styled('div')(({ theme }) => ({
+    [theme.breakpoints.down('md')]: {
+        marginLeft: theme.spacing(2),
+    },
+}));
+
+const ResetTableLink = styled('span')(({ theme }) => ({
+    textDecoration: 'underline',
+    color: theme.palette.primary.main,
+    cursor: 'pointer',
+    fontWeight: 500,
+}));
+
+const MenuItemRoot = styled(MenuItem)(({ theme }) => ({
+    minHeight: theme.spacing(6),
+}));
+
+const VersionNote = styled(Typography)(({ theme }) => ({
+    marginTop: theme.spacing(15),
+}));
+
 export const ActionListInline = (): JSX.Element => {
     const dispatch = useDispatch();
     const theme = useTheme();
-    const classes = useStyles(theme);
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
     const [list, setList] = useState(itemList.slice());
     const [hoveredItem, setHoveredItem] = useState(0);
@@ -163,9 +175,9 @@ export const ActionListInline = (): JSX.Element => {
     }, []);
 
     return (
-        <div className={classes.actionList}>
-            <AppBar data-cy={'blui-toolbar'} position={'sticky'} classes={{ root: classes.appbarRoot }}>
-                <Toolbar classes={{ gutters: classes.toolbarGutters }}>
+        <ActionListRoot>
+            <AppBarRoot data-cy={'blui-toolbar'} position={'sticky'}>
+                <ToolbarGutters>
                     {md ? null : (
                         <IconButton
                             data-cy="toolbar-menu"
@@ -180,19 +192,19 @@ export const ActionListInline = (): JSX.Element => {
                             <MenuIcon />
                         </IconButton>
                     )}
-                    <div className={classes.toolbarTextContainer}>
+                    <ToolbarTextContainer>
                         <Typography variant={'h6'} color={'inherit'}>
                             Local Item Actions
                         </Typography>
-                        <Typography classes={{ root: classes.toolBarSubtitle }} variant={'body1'} color={'inherit'}>
+                        <ToolBarSubtitle variant={'body1'} color={'inherit'}>
                             Inline Actions
-                        </Typography>
-                    </div>
-                </Toolbar>
-            </AppBar>
-            <div className={classes.container}>
-                <Card classes={{ root: classes.card }}>
-                    <CardContent classes={{ root: classes.cardContent }}>
+                        </ToolBarSubtitle>
+                    </ToolbarTextContainer>
+                </ToolbarGutters>
+            </AppBarRoot>
+            <Container>
+                <CardRoot>
+                    <CardContentRoot>
                         {list.length ? (
                             list.map(
                                 (item, i): JSX.Element => (
@@ -200,10 +212,14 @@ export const ActionListInline = (): JSX.Element => {
                                         key={i}
                                         data-testid="infoListItem"
                                         classes={{
-                                            root:
-                                                hoveredItem === item.id && !isMobile ? classes.hoveredInfoListItem : '',
-                                            rightComponent: classes.rightComponentChevron,
+                                            root: hoveredItem === item.id && !isMobile ? undefined : undefined,
+                                            rightComponent: undefined,
                                         }}
+                                        sx={
+                                            hoveredItem === item.id && !isMobile
+                                                ? { backgroundColor: theme.palette.background.default }
+                                                : undefined
+                                        }
                                         hidePadding
                                         ripple
                                         title={getTitle(item.title)}
@@ -224,38 +240,23 @@ export const ActionListInline = (): JSX.Element => {
                                                 hoveredItem === item.id ? (
                                                     <div>
                                                         <Tooltip title={'Delete'}>
-                                                            <IconButton
-                                                                classes={{
-                                                                    root: classes.iconButton,
-                                                                }}
+                                                            <StyledIconButton
                                                                 data-testid="deleteIcon"
                                                                 onClick={(): void => onDeleteItem('Delete', i)}
                                                                 size="large"
                                                             >
                                                                 <DeleteIcon />
-                                                            </IconButton>
+                                                            </StyledIconButton>
                                                         </Tooltip>
                                                         <Tooltip title={'Save'}>
-                                                            <IconButton
-                                                                classes={{
-                                                                    root: classes.iconButton,
-                                                                }}
-                                                                data-testid="saveIcon"
-                                                                size="large"
-                                                            >
+                                                            <StyledIconButton data-testid="saveIcon" size="large">
                                                                 <BookmarkIcon />
-                                                            </IconButton>
+                                                            </StyledIconButton>
                                                         </Tooltip>
                                                         <Tooltip title={'Archive'}>
-                                                            <IconButton
-                                                                classes={{
-                                                                    root: classes.iconButton,
-                                                                }}
-                                                                data-testid="archiveIcon"
-                                                                size="large"
-                                                            >
+                                                            <StyledIconButton data-testid="archiveIcon" size="large">
                                                                 <ArchiveIcon />
-                                                            </IconButton>
+                                                            </StyledIconButton>
                                                         </Tooltip>
                                                     </div>
                                                 ) : item.hasTag ? (
@@ -292,13 +293,12 @@ export const ActionListInline = (): JSX.Element => {
                                                         }}
                                                     >
                                                         {options.map((option) => (
-                                                            <MenuItem
+                                                            <MenuItemRoot
                                                                 key={option}
                                                                 onClick={(): void => onDeleteItem(option, activeIndex)}
-                                                                classes={{ root: classes.menuItem }}
                                                             >
                                                                 {option}
-                                                            </MenuItem>
+                                                            </MenuItemRoot>
                                                         ))}
                                                     </Menu>
                                                 </>
@@ -313,8 +313,17 @@ export const ActionListInline = (): JSX.Element => {
                             <InfoListItem
                                 data-testid="infoListItem"
                                 classes={{
-                                    root: classes.noListItem,
-                                    listItemText: classes.noListItemText,
+                                    root: undefined,
+                                    listItemText: undefined,
+                                }}
+                                sx={{
+                                    height: theme.spacing(7),
+                                    padding: 0,
+                                    '& .MuiListItemText-root': {
+                                        [theme.breakpoints.down('md')]: {
+                                            marginLeft: theme.spacing(2),
+                                        },
+                                    },
                                 }}
                                 hidePadding
                                 ripple
@@ -322,23 +331,21 @@ export const ActionListInline = (): JSX.Element => {
                                     <div>
                                         <Typography variant="body2" align={isMobile ? 'left' : 'center'}>
                                             No items found.{' '}
-                                            <span className={classes.resetTableLink} onClick={onResetData}>
-                                                Reset data
-                                            </span>
+                                            <ResetTableLink onClick={onResetData}>Reset data</ResetTableLink>
                                         </Typography>
                                     </div>
                                 }
                                 divider={isMobile ? 'full' : undefined}
                             />
                         )}
-                    </CardContent>
-                </Card>
+                    </CardContentRoot>
+                </CardRoot>
                 {!isMobile && (
-                    <Typography classes={{ root: classes.versionNote }} variant="body1" align="center">
+                    <VersionNote variant="body1" align="center">
                         This behaviour is exclusive to desktop version.
-                    </Typography>
+                    </VersionNote>
                 )}
-            </div>
-        </div>
+            </Container>
+        </ActionListRoot>
     );
 };

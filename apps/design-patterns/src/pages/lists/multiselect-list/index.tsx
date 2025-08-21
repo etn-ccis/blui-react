@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useCallback, useState } from 'react';
 import {
     AppBar,
@@ -12,8 +14,7 @@ import {
     useMediaQuery,
     useTheme,
 } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
-import createStyles from '@mui/styles/createStyles';
+import { styled } from '@mui/material/styles';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MenuIcon from '@mui/icons-material/Menu';
 import { TOGGLE_DRAWER } from '../../../redux/actions';
@@ -55,93 +56,104 @@ const categorizeList = (list: ListItemType[]): any =>
         return r;
     }, Object.create(null));
 
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        appbarRoot: {
-            padding: 0,
-        },
-        listItemRoot: {
-            backgroundColor: 'rgba(0, 123, 193, 0.05)',
-        },
-        card: {
-            marginBottom: theme.spacing(3),
-            [theme.breakpoints.down('md')]: {
-                boxShadow: 'none',
-                borderRadius: 0,
-                marginBottom: theme.spacing(2),
-            },
-        },
-        cardContent: {
-            padding: 0,
-            '&:last-child': {
-                paddingBottom: 0,
-            },
-        },
-        checkboxIndeterminate: {
-            color: theme.palette.primary.main,
-        },
-        deleteBtn: {
-            backgroundColor: theme.palette.error.main,
-            color: colors.white[50],
-            height: '36px',
-            '&:hover': {
-                backgroundColor: colors.red[300],
-            },
-        },
-        deleteRow: {
-            display: 'flex',
-            justifyContent: 'flex-end',
-            alignItems: 'center',
-            marginBottom: theme.spacing(3),
-        },
-        exampleContainer: {
-            padding: theme.spacing(3),
-            margin: '0 auto',
-            maxWidth: '816px',
-            [theme.breakpoints.down('md')]: {
-                padding: 0,
-                boxShadow: 'none',
-                borderRadius: 0,
-                maxWidth: 'unset',
-            },
-        },
-        listItemIcon: {
-            marginLeft: theme.spacing(-1),
-        },
-        noResultListItem: {
-            marginLeft: theme.spacing(0.5),
-        },
-        panelHeaderRoot1: {
-            paddingLeft: theme.spacing(1),
-            '& h6': {
-                marginLeft: theme.spacing(1),
-            },
-        },
-        panelHeaderRoot2: {
-            paddingLeft: theme.spacing(2),
-            '& h6': {
-                marginLeft: theme.spacing(1),
-            },
-        },
-        listItemTitle: {
-            marginLeft: theme.spacing(1),
-        },
-        resetDataLink: {
-            textDecoration: 'underline',
-            color: theme.palette.primary.main,
-            cursor: 'pointer',
-        },
-        resetListItem: {
-            paddingLeft: theme.spacing(2.5),
-        },
-        toolbarGutters: {
-            padding: `0 ${theme.spacing(2)}`,
-        },
-    })
-);
+// Styled components to replace makeStyles
+const StyledAppBar = styled(AppBar)(({ theme }) => ({
+    padding: 0,
+}));
+
+const StyledCard = styled(Card)(({ theme }) => ({
+    marginBottom: theme.spacing(3),
+    [theme.breakpoints.down('md')]: {
+        boxShadow: 'none',
+        borderRadius: 0,
+        marginBottom: theme.spacing(2),
+    },
+}));
+
+const StyledCardContent = styled(CardContent)(({ theme }) => ({
+    padding: 0,
+    '&:last-child': {
+        paddingBottom: 0,
+    },
+}));
+
+const StyledDeleteBtn = styled(Button)(({ theme }) => ({
+    backgroundColor: theme.palette.error.main,
+    color: colors.white[50],
+    height: '36px',
+    '&:hover': {
+        backgroundColor: colors.red[300],
+    },
+}));
+
+const DeleteRow = styled('div')(({ theme }) => ({
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    marginBottom: theme.spacing(3),
+}));
+
+const ExampleContainer = styled('div')(({ theme }) => ({
+    padding: theme.spacing(3),
+    margin: '0 auto',
+    maxWidth: '816px',
+    [theme.breakpoints.down('md')]: {
+        padding: 0,
+        boxShadow: 'none',
+        borderRadius: 0,
+        maxWidth: 'unset',
+    },
+}));
+
+const ListItemIconSx = (theme: Theme) => ({
+    marginLeft: theme.spacing(-1),
+});
+
+const ListItemTitleSx = (theme: Theme) => ({
+    marginLeft: theme.spacing(1),
+});
+
+const ListItemRootSx = (theme: Theme) => ({
+    backgroundColor: 'rgba(0, 123, 193, 0.05)',
+});
+
+const NoResultListItemSx = (theme: Theme) => ({
+    marginLeft: theme.spacing(0.5),
+});
+
+const PanelHeaderRoot1Sx = (theme: Theme) => ({
+    paddingLeft: theme.spacing(1),
+    '& h6': {
+        marginLeft: theme.spacing(1),
+    },
+});
+
+const PanelHeaderRoot2Sx = (theme: Theme) => ({
+    paddingLeft: theme.spacing(2),
+    '& h6': {
+        marginLeft: theme.spacing(1),
+    },
+});
+
+const ResetDataLinkSx = (theme: Theme) => ({
+    textDecoration: 'underline',
+    color: theme.palette.primary.main,
+    cursor: 'pointer',
+});
+
+const ResetListItemSx = (theme: Theme) => ({
+    paddingLeft: theme.spacing(2.5),
+});
+
+const ToolbarGuttersSx = (theme: Theme) => ({
+    padding: `0 ${theme.spacing(2)}`,
+});
+
+const CheckboxIndeterminateSx = (theme: Theme) => ({
+    color: theme.palette.primary.main,
+});
 
 export const MultiselectList = (): JSX.Element => {
-    const classes = useStyles();
     const dispatch = useDispatch();
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
@@ -251,13 +263,11 @@ export const MultiselectList = (): JSX.Element => {
     };
     const emptyCard = (day: string): JSX.Element => (
         <div>
-            <Card classes={{ root: classes.card }}>
-                <CardContent classes={{ root: classes.cardContent }}>
+            <StyledCard>
+                <StyledCardContent>
                     <div className="panel-header">
                         <InfoListItem
-                            classes={{
-                                root: isMobile ? classes.resetListItem : '',
-                            }}
+                            sx={isMobile ? ResetListItemSx(theme) : undefined}
                             title={
                                 <Typography color={'primary'} variant={'subtitle2'}>
                                     {day}
@@ -273,14 +283,12 @@ export const MultiselectList = (): JSX.Element => {
                             data-cy="no-result"
                             hidePadding
                             divider={isMobile ? 'full' : undefined}
-                            classes={{
-                                root: isMobile ? classes.resetListItem : '',
-                            }}
+                            sx={isMobile ? ResetListItemSx(theme) : undefined}
                             title={
                                 <Typography data-cy={'empty-table'}>
                                     No results.{' '}
                                     <span
-                                        className={classes.resetDataLink}
+                                        style={ResetDataLinkSx(theme)}
                                         onClick={(): void => resetData(day)}
                                         data-cy={'reset'}
                                     >
@@ -290,15 +298,15 @@ export const MultiselectList = (): JSX.Element => {
                             }
                         />
                     </div>
-                </CardContent>
-            </Card>
+                </StyledCardContent>
+            </StyledCard>
         </div>
     );
     const getCardContent = (day: string): JSX.Element => (
         <div>
             {filteredResult[day] ? (
-                <Card classes={{ root: classes.card }}>
-                    <CardContent classes={{ root: classes.cardContent }}>
+                <StyledCard>
+                    <StyledCardContent>
                         {filteredResult[day].map((resultItem: ListItemType, index: number) => (
                             <div key={`result-item-${index}`}>
                                 <div>
@@ -306,16 +314,15 @@ export const MultiselectList = (): JSX.Element => {
                                         <div className="panel-header">
                                             <InfoListItem
                                                 key={`list-header`}
-                                                classes={{
-                                                    root:
-                                                        filteredResult[day].length !== 0
-                                                            ? classes.panelHeaderRoot1
-                                                            : classes.panelHeaderRoot2,
-                                                }}
+                                                sx={
+                                                    filteredResult[day].length !== 0
+                                                        ? PanelHeaderRoot1Sx(theme)
+                                                        : PanelHeaderRoot2Sx(theme)
+                                                }
                                                 icon={
                                                     filteredResult[day].length !== 0 ? (
                                                         <Checkbox
-                                                            classes={{ indeterminate: classes.checkboxIndeterminate }}
+                                                            sx={CheckboxIndeterminateSx(theme)}
                                                             indeterminate={
                                                                 isToday(day)
                                                                     ? selectedItems1.length > 0 &&
@@ -387,10 +394,10 @@ export const MultiselectList = (): JSX.Element => {
                                             size="medium"
                                         />
                                     }
-                                    classes={{
-                                        icon: classes.listItemIcon,
-                                        title: classes.listItemTitle,
-                                        root: isSelected(resultItem) ? classes.listItemRoot : '',
+                                    sx={{
+                                        ...(isSelected(resultItem) ? ListItemRootSx(theme) : {}),
+                                        '& .MuiListItemIcon-root': ListItemIconSx(theme),
+                                        '& .MuiListItemText-primary': ListItemTitleSx(theme),
                                     }}
                                     hidePadding
                                     title={resultItem.name}
@@ -398,8 +405,8 @@ export const MultiselectList = (): JSX.Element => {
                                 />
                             </div>
                         ))}
-                    </CardContent>
-                </Card>
+                    </StyledCardContent>
+                </StyledCard>
             ) : (
                 emptyCard(day)
             )}
@@ -408,8 +415,8 @@ export const MultiselectList = (): JSX.Element => {
 
     return (
         <div>
-            <AppBar position={'sticky'} classes={{ root: classes.appbarRoot }}>
-                <Toolbar classes={{ gutters: classes.toolbarGutters }}>
+            <StyledAppBar position={'sticky'}>
+                <Toolbar sx={ToolbarGuttersSx(theme)}>
                     {md ? null : (
                         <IconButton
                             data-cy="toolbar-menu"
@@ -436,28 +443,27 @@ export const MultiselectList = (): JSX.Element => {
                         ''
                     )}
                 </Toolbar>
-            </AppBar>
-            <div className={classes.exampleContainer}>
+            </StyledAppBar>
+            <ExampleContainer>
                 {isMobile ? null : (
-                    <div className={classes.deleteRow}>
-                        <Button
+                    <DeleteRow>
+                        <StyledDeleteBtn
                             data-testid="deleteButton"
                             data-cy="delete-btn"
                             variant={'contained'}
                             color={'inherit'}
-                            className={classes.deleteBtn}
                             startIcon={<DeleteIcon />}
                             disabled={selectedItems1.length === 0 && selectedItems2.length === 0}
                             onClick={onDelete}
                         >
                             DELETE
-                        </Button>
-                    </div>
+                        </StyledDeleteBtn>
+                    </DeleteRow>
                 )}
                 {days.map((day, index) => (
                     <div key={`item-${index}`}>{getCardContent(day)}</div>
                 ))}
-            </div>
+            </ExampleContainer>
         </div>
     );
 };

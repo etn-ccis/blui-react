@@ -6,7 +6,7 @@ import List from '@mui/material/List';
 import TextField from '@mui/material/TextField';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { useMediaQuery } from '@mui/material';
+import { useMediaQuery, styled } from '@mui/material';
 
 // Material Icons
 import Close from '@mui/icons-material/Close';
@@ -18,9 +18,7 @@ import { TOGGLE_DRAWER } from '../../../redux/actions';
 import { useDispatch } from 'react-redux';
 
 // Other
-import { Theme, useTheme } from '@mui/material/styles';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
+import { useTheme } from '@mui/material/styles';
 import { InfoListItem, Spacer } from '@brightlayer-ui/react-components';
 import { DRAWER_WIDTH } from '../../../assets/constants';
 import clsx from 'clsx';
@@ -28,45 +26,37 @@ import { ArrowBack } from '@mui/icons-material';
 
 const list = ['Apple', 'Grape', 'Orange', 'Pineapple', 'Watermelon'];
 
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        appbar: {
-            transition: theme.transitions.create('all', { duration: theme.transitions.duration.short }),
-        },
-        appbarRoot: {
-            padding: 0,
-        },
-        toolbarGutters: {
-            padding: '0 16px',
-        },
-        regularBar: {
-            opacity: 1,
-            '&$searchActive': {
-                opacity: 0,
-            },
-        },
-        searchbar: {
-            background: theme.palette.background.paper,
-            right: 0,
-            width: 0,
-            '& ::-ms-clear': {
-                width: 0,
-                height: 0,
-            },
-            '&$searchActive': {
-                width: `calc(100% - ${DRAWER_WIDTH}px)`,
-                [theme.breakpoints.down('md')]: {
-                    width: '100%',
-                },
-            },
-        },
-        searchActive: {},
-        searchField: {
-            flex: 1,
-            marginLeft: theme.spacing(2),
-        },
-    })
-);
+// Styled components to replace makeStyles
+const AppBarRoot = styled(AppBar)(({ theme }) => ({
+    padding: 0,
+    transition: theme.transitions.create('all', { duration: theme.transitions.duration.short }),
+}));
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const ToolbarGutters = styled(Toolbar)(({ theme }) => ({
+    padding: '0 16px',
+}));
+
+const SearchBarAppBar = styled(AppBar, {
+    shouldForwardProp: (prop) => prop !== 'searchActive',
+})<{ searchActive?: boolean }>(({ theme, searchActive }) => ({
+    background: theme.palette.background.paper,
+    right: 0,
+    width: searchActive ? `calc(100% - ${DRAWER_WIDTH}px)` : 0,
+    [theme.breakpoints.down('md')]: {
+        width: searchActive ? '100%' : 0,
+    },
+    '& ::-ms-clear': {
+        width: 0,
+        height: 0,
+    },
+    transition: theme.transitions.create('all', { duration: theme.transitions.duration.short }),
+}));
+
+const SearchField = styled(TextField)(({ theme }) => ({
+    flex: 1,
+    marginLeft: theme.spacing(2),
+}));
 
 export const searchResults = (searchString: string): string[] => {
     const q = searchString.toLowerCase().trim();
@@ -83,7 +73,6 @@ export const searchResults = (searchString: string): string[] => {
 
 export const SearchBar = (): JSX.Element => {
     const theme = useTheme();
-    const classes = useStyles(theme);
     const dispatch = useDispatch();
 
     const [filteredList, setFilteredList] = useState(list);
@@ -111,13 +100,13 @@ export const SearchBar = (): JSX.Element => {
     return (
         <div style={{ minHeight: '100vh' }}>
             {/* The Regular App Bar */}
-            <AppBar
+            <AppBarRoot
                 data-cy="blui-toolbar"
                 position={'sticky'}
-                classes={{ root: classes.appbarRoot }}
-                className={clsx(classes.appbar, classes.regularBar, searchActive && classes.searchActive)}
+                className={clsx(searchActive && 'searchActive')}
+                sx={{ opacity: searchActive ? 0 : 1 }}
             >
-                <Toolbar classes={{ gutters: classes.toolbarGutters }}>
+                <ToolbarGutters>
                     {md ? null : (
                         <IconButton
                             data-cy="toolbar-menu"
@@ -145,16 +134,12 @@ export const SearchBar = (): JSX.Element => {
                     >
                         <Search />
                     </IconButton>
-                </Toolbar>
-            </AppBar>
+                </ToolbarGutters>
+            </AppBarRoot>
 
             {/* Search Bar */}
-            <AppBar
-                className={clsx(classes.appbar, classes.searchbar, searchActive && classes.searchActive)}
-                position={'fixed'}
-                color={'default'}
-            >
-                <Toolbar classes={{ gutters: classes.toolbarGutters }}>
+            <SearchBarAppBar position={'fixed'} color={'default'} searchActive={searchActive} elevation={0}>
+                <ToolbarGutters>
                     <IconButton
                         color={'inherit'}
                         edge={'start'}
@@ -164,9 +149,8 @@ export const SearchBar = (): JSX.Element => {
                     >
                         <ArrowBack />
                     </IconButton>
-                    {searchActive && ( // this is to enable auto focus on mounting
-                        <TextField
-                            className={classes.searchField}
+                    {searchActive && (
+                        <SearchField
                             value={query}
                             placeholder={'Search'}
                             onChange={(evt): void => setQuery(evt.target.value)}
@@ -189,8 +173,8 @@ export const SearchBar = (): JSX.Element => {
                             <Close />
                         </IconButton>
                     )}
-                </Toolbar>
-            </AppBar>
+                </ToolbarGutters>
+            </SearchBarAppBar>
 
             {/* List */}
             <List data-cy="list-view" style={{ backgroundColor: theme.palette.background.paper, padding: 0 }}>

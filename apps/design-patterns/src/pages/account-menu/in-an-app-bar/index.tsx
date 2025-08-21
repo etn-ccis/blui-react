@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from 'react';
-import { AppBar, Avatar, Badge, Toolbar, IconButton, Typography, useTheme, useMediaQuery } from '@mui/material';
-import { Theme } from '@mui/material/styles';
-import makeStyles from '@mui/styles/makeStyles';
+import { AppBar, Avatar, Badge, Toolbar, IconButton, Typography, useTheme, useMediaQuery, Box } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import InfoIcon from '@mui/icons-material/Info';
 import { AccountCircle, Apps, ExitToApp, LockOpen, Settings, VpnKey } from '@mui/icons-material';
@@ -14,6 +13,52 @@ import { TOGGLE_DRAWER } from '../../../redux/actions';
 import * as colors from '@brightlayer-ui/colors';
 
 import avatarImage from '../../../assets/avatar_40.png';
+
+const StyledToolbar = styled(Toolbar)(({ theme }) => ({
+    '&.MuiToolbar-gutters': {
+        padding: `0 ${theme.spacing(2)}`,
+    },
+}));
+
+const AppBarContainer = styled(Box)(({ theme }) => ({
+    maxWidth: 960,
+    margin: '0 auto',
+    padding: `0 ${theme.spacing(2)}`,
+}));
+
+const StyledAppBar = styled(AppBar)(({ theme }) => ({
+    marginBottom: theme.spacing(3),
+    '&:last-child': {
+        marginBottom: 0,
+    },
+}));
+
+const AppBarHeader = styled(Box)(({ theme }) => ({
+    maxWidth: 600,
+    margin: `${theme.spacing(5)} auto ${theme.spacing(3)}`,
+    [theme.breakpoints.down('lg')]: {
+        padding: `0 ${theme.spacing(2)}`,
+    },
+}));
+
+const StyledBadge = styled(Badge)(({ theme }) => ({
+    '& .MuiBadge-dot': {
+        backgroundColor: colors.green[500],
+        color: colors.green[500],
+        boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+    },
+}));
+
+const TextContainer = styled(Box)(({ theme }) => ({
+    marginLeft: theme.spacing(2.5),
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+}));
+
+const SubtitleTypography = styled(Typography)(({ theme }) => ({
+    marginTop: theme.spacing(-0.5),
+}));
+
 const menuGroupItems = [
     {
         items: [
@@ -38,49 +83,8 @@ const menuGroupItems = [
 const avatarTitle = 'Chima Thabani';
 const avatarSubtitile = 'CThabani@example.com';
 
-const useStyles = makeStyles((theme: Theme) => ({
-    toolbarGutters: {
-        padding: `0 ${theme.spacing(2)}`,
-    },
-    appBarContainer: {
-        maxWidth: 960,
-        margin: '0 auto',
-        padding: `0 ${theme.spacing(2)}`,
-    },
-    appBar: {
-        marginBottom: theme.spacing(3),
-        '&:last-child': {
-            marginBottom: 0,
-        },
-    },
-    appBarHeader: {
-        maxWidth: 600,
-        margin: `${theme.spacing(5)} auto ${theme.spacing(3)}`,
-        [theme.breakpoints.down('lg')]: {
-            padding: `0 ${theme.spacing(2)}`,
-        },
-    },
-    badge: {
-        backgroundColor: colors.green[500],
-        color: colors.green[500],
-        boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
-    },
-    paper: {
-        marginTop: theme.spacing(1),
-    },
-    subtitle: {
-        marginTop: theme.spacing(-0.5),
-    },
-    textContainer: {
-        marginLeft: theme.spacing(2.5),
-        overflow: 'hidden',
-        whiteSpace: 'nowrap',
-    },
-}));
-
 export const InAnAppBar = (): JSX.Element => {
     const dispatch = useDispatch();
-    const classes = useStyles();
     const [chipToggled, setChipToggled] = useState(false);
     const theme = useTheme();
     const md = useMediaQuery(theme.breakpoints.up('md'));
@@ -92,7 +96,7 @@ export const InAnAppBar = (): JSX.Element => {
     return (
         <div style={{ minHeight: '100vh' }}>
             <AppBar data-cy="toolbar" position={'sticky'}>
-                <Toolbar classes={{ gutters: classes.toolbarGutters }}>
+                <StyledToolbar>
                     {md ? null : (
                         <IconButton
                             data-cy="toolbar-menu"
@@ -111,30 +115,30 @@ export const InAnAppBar = (): JSX.Element => {
                         In an App Bar
                     </Typography>
                     <div />
-                </Toolbar>
+                </StyledToolbar>
             </AppBar>
             <div>
-                <div className={classes.appBarHeader}>
+                <AppBarHeader>
                     <Typography variant={'body1'}>
                         Click on each avatar to see the account menu. Resize the screen to view the account menu / user
                         menu rendered responsively.
                     </Typography>
-                </div>
-                <div className={classes.appBarContainer}>
+                </AppBarHeader>
+                <AppBarContainer>
                     {/* Generic Icon Avatar Example */}
-                    <AppBar position="static" color="inherit" className={classes.appBar}>
-                        <Toolbar classes={{ gutters: classes.toolbarGutters }}>
+                    <StyledAppBar position="static" color="inherit">
+                        <StyledToolbar>
                             <IconButton edge={'start'} size="large">
                                 <MenuIcon />
                             </IconButton>
-                            <div className={classes.textContainer}>
+                            <TextContainer>
                                 <Typography variant={'h6'} noWrap>
                                     Generic Icon Avatar
                                 </Typography>
-                                <Typography variant={'body1'} className={classes.subtitle} noWrap>
+                                <SubtitleTypography variant={'body1'} noWrap>
                                     Shared / Anonymous Account / Unauthenticated
-                                </Typography>
-                            </div>
+                                </SubtitleTypography>
+                            </TextContainer>
                             <Spacer />
                             <UserMenu
                                 avatar={<Avatar />}
@@ -169,27 +173,31 @@ export const InAnAppBar = (): JSX.Element => {
                                         vertical: 'top',
                                         horizontal: 'right',
                                     },
-                                    classes: { paper: classes.paper },
+                                    sx: {
+                                        '& .MuiPaper-root': {
+                                            marginTop: theme.spacing(1),
+                                        },
+                                    },
                                 }}
                                 onOpen={(): void => {}}
                                 onClose={(): void => {}}
                             />
-                        </Toolbar>
-                    </AppBar>
+                        </StyledToolbar>
+                    </StyledAppBar>
                     {/* Basic Letter Avatar Example */}
-                    <AppBar position="static" color="inherit" className={classes.appBar}>
-                        <Toolbar classes={{ gutters: classes.toolbarGutters }}>
+                    <StyledAppBar position="static" color="inherit">
+                        <StyledToolbar>
                             <IconButton edge={'start'} size="large">
                                 <MenuIcon />
                             </IconButton>
-                            <div className={classes.textContainer}>
+                            <TextContainer>
                                 <Typography variant={'h6'} noWrap>
                                     Basic Letter Avatar
                                 </Typography>
-                                <Typography variant={'body1'} className={classes.subtitle} noWrap>
-                                    Showing User’s Initials
-                                </Typography>
-                            </div>
+                                <SubtitleTypography variant={'body1'} noWrap>
+                                    Showing User's Initials
+                                </SubtitleTypography>
+                            </TextContainer>
                             <Spacer />
                             <UserMenu
                                 avatar={<Avatar>CT</Avatar>}
@@ -205,27 +213,31 @@ export const InAnAppBar = (): JSX.Element => {
                                         vertical: 'top',
                                         horizontal: 'right',
                                     },
-                                    classes: { paper: classes.paper },
+                                    sx: {
+                                        '& .MuiPaper-root': {
+                                            marginTop: theme.spacing(1),
+                                        },
+                                    },
                                 }}
                                 onOpen={(): void => {}}
                                 onClose={(): void => {}}
                             />
-                        </Toolbar>
-                    </AppBar>
+                        </StyledToolbar>
+                    </StyledAppBar>
                     {/* Image Avatar Example */}
-                    <AppBar position="static" color="inherit" className={classes.appBar}>
-                        <Toolbar classes={{ gutters: classes.toolbarGutters }}>
+                    <StyledAppBar position="static" color="inherit">
+                        <StyledToolbar>
                             <IconButton edge={'start'} size="large">
                                 <MenuIcon />
                             </IconButton>
-                            <div className={classes.textContainer}>
+                            <TextContainer>
                                 <Typography variant={'h6'} noWrap>
                                     Image Avatar
                                 </Typography>
-                                <Typography variant={'body1'} className={classes.subtitle} noWrap>
+                                <SubtitleTypography variant={'body1'} noWrap>
                                     Showing A Custom Profile Picture
-                                </Typography>
-                            </div>
+                                </SubtitleTypography>
+                            </TextContainer>
                             <Spacer />
                             <UserMenu
                                 avatar={<Avatar alt="Chima Thabani" src={avatarImage} />}
@@ -241,41 +253,44 @@ export const InAnAppBar = (): JSX.Element => {
                                         vertical: 'top',
                                         horizontal: 'right',
                                     },
-                                    classes: { paper: classes.paper },
+                                    sx: {
+                                        '& .MuiPaper-root': {
+                                            marginTop: theme.spacing(1),
+                                        },
+                                    },
                                 }}
                                 onOpen={(): void => {}}
                                 onClose={(): void => {}}
                             />
-                        </Toolbar>
-                    </AppBar>
+                        </StyledToolbar>
+                    </StyledAppBar>
                     {/* Status Avatar Example */}
-                    <AppBar position="static" color="inherit" className={classes.appBar}>
-                        <Toolbar classes={{ gutters: classes.toolbarGutters }}>
+                    <StyledAppBar position="static" color="inherit">
+                        <StyledToolbar>
                             <IconButton edge={'start'} size="large">
                                 <MenuIcon />
                             </IconButton>
-                            <div className={classes.textContainer}>
+                            <TextContainer>
                                 <Typography variant={'h6'} noWrap>
                                     Status Avatar
                                 </Typography>
-                                <Typography variant={'body1'} className={classes.subtitle} noWrap>
+                                <SubtitleTypography variant={'body1'} noWrap>
                                     Avatar with Status Indicator
-                                </Typography>
-                            </div>
+                                </SubtitleTypography>
+                            </TextContainer>
                             <Spacer />
                             <UserMenu
                                 avatar={
-                                    <Badge
+                                    <StyledBadge
                                         overlap="circular"
                                         anchorOrigin={{
                                             vertical: 'bottom',
                                             horizontal: 'right',
                                         }}
                                         variant="dot"
-                                        classes={{ dot: classes.badge }}
                                     >
                                         {<Avatar alt="Chima Thabani" src={avatarImage} />}
-                                    </Badge>
+                                    </StyledBadge>
                                 }
                                 menuGroups={menuGroupItems}
                                 menuTitle={avatarTitle}
@@ -289,27 +304,31 @@ export const InAnAppBar = (): JSX.Element => {
                                         vertical: 'top',
                                         horizontal: 'right',
                                     },
-                                    classes: { paper: classes.paper },
+                                    sx: {
+                                        '& .MuiPaper-root': {
+                                            marginTop: theme.spacing(1),
+                                        },
+                                    },
                                 }}
                                 onOpen={(): void => {}}
                                 onClose={(): void => {}}
                             />
-                        </Toolbar>
-                    </AppBar>
+                        </StyledToolbar>
+                    </StyledAppBar>
                     {/* Text Menu Example */}
-                    <AppBar position="static" color="inherit" className={classes.appBar}>
-                        <Toolbar classes={{ gutters: classes.toolbarGutters }}>
+                    <StyledAppBar position="static" color="inherit">
+                        <StyledToolbar>
                             <IconButton color={'inherit'} edge={'start'} size="large">
                                 <MenuIcon />
                             </IconButton>
-                            <div className={classes.textContainer}>
+                            <TextContainer>
                                 <Typography variant={'h6'} noWrap>
                                     Text Menu
                                 </Typography>
-                                <Typography variant={'body1'} className={classes.subtitle} noWrap>
+                                <SubtitleTypography variant={'body1'} noWrap>
                                     Calling Out the User Name
-                                </Typography>
-                            </div>
+                                </SubtitleTypography>
+                            </TextContainer>
                             <Spacer />
                             <UserMenu
                                 onClick={toggleChip}
@@ -338,14 +357,18 @@ export const InAnAppBar = (): JSX.Element => {
                                         vertical: 'top',
                                         horizontal: 'right',
                                     },
-                                    classes: { paper: classes.paper },
+                                    sx: {
+                                        '& .MuiPaper-root': {
+                                            marginTop: theme.spacing(1),
+                                        },
+                                    },
                                 }}
                                 onOpen={(): void => {}}
                                 onClose={(): void => {}}
                             />
-                        </Toolbar>
-                    </AppBar>
-                </div>
+                        </StyledToolbar>
+                    </StyledAppBar>
+                </AppBarContainer>
             </div>
         </div>
     );

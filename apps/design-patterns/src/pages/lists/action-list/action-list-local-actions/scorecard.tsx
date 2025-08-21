@@ -3,54 +3,38 @@ import * as Colors from '@brightlayer-ui/colors';
 import { Hero, HeroBanner, ScoreCard } from '@brightlayer-ui/react-components';
 import { GradeA, Temp, Moisture as Humidity } from '@brightlayer-ui/icons-mui';
 import Button from '@mui/material/Button';
-import { Theme, useTheme } from '@mui/material';
+import { Theme, useTheme, styled } from '@mui/material';
 
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
-
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        scorecardRoot: {
-            width: 350,
-            height: 250,
-            marginTop: 16,
-            marginLeft: 16,
-        },
-        scorecardHeader: {
-            display: 'flex',
-            height: 48,
-            borderBottom: `1px solid ${theme.palette.divider}`,
-        },
-        headerTitle: {
-            fontSize: '0.875rem',
-        },
-        scorecardHeaderContent: {
-            padding: '0 16px',
-            alignItems: 'center',
-        },
-        bodyWrapper: {
-            flex: 0,
-        },
-        badgeWrapper: {
-            flex: 1,
-        },
-    })
-);
+const StyledScoreCard = styled(ScoreCard)(({ theme }: { theme: Theme }) => ({
+    width: 350,
+    height: 250,
+    marginTop: theme.spacing(2),
+    marginLeft: theme.spacing(2),
+    '& .ScoreCard-header': {
+        display: 'flex',
+        height: 48,
+        borderBottom: `1px solid ${theme.palette.divider}`,
+    },
+    '& .ScoreCard-headerTitle': {
+        fontSize: '0.875rem',
+    },
+    '& .ScoreCard-headerContent': {
+        padding: '0 16px',
+        alignItems: 'center',
+    },
+    '& .ScoreCard-bodyWrapper': {
+        flex: 0,
+    },
+    '& .ScoreCard-badgeWrapper': {
+        flex: 1,
+    },
+}));
 
 export const LocalActionsScoreCard = (): JSX.Element => {
     const theme = useTheme();
-    const classes = useStyles(theme);
 
     return (
-        <ScoreCard
-            classes={{
-                root: classes.scorecardRoot,
-                header: classes.scorecardHeader,
-                headerContent: classes.scorecardHeaderContent,
-                bodyWrapper: classes.bodyWrapper,
-                badgeWrapper: classes.badgeWrapper,
-                headerTitle: classes.headerTitle,
-            }}
+        <StyledScoreCard
             headerTitle={'Overview'}
             headerColor={Colors.white[50]}
             headerFontColor={Colors.blue[500]}
@@ -87,6 +71,6 @@ export const LocalActionsScoreCard = (): JSX.Element => {
                     Run Diagnostics
                 </Button>
             }
-        ></ScoreCard>
+        />
     );
 };

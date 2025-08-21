@@ -10,27 +10,16 @@ import { TOGGLE_DRAWER } from '../../../redux/actions';
 import { InfoListItem, ChannelValue } from '@brightlayer-ui/react-components';
 import { presidentsList } from './list';
 import { EmptyState } from './EmptyState';
-import makeStyles from '@mui/styles/makeStyles';
-
-const useStyles = makeStyles(() => ({
-    appbarRoot: {
-        padding: 0,
-    },
-    toolbarGutters: {
-        padding: '0 16px',
-    },
-}));
 
 export const DataList = (): JSX.Element => {
     const dispatch = useDispatch();
     const theme = useTheme();
-    const classes = useStyles();
     const md = useMediaQuery(theme.breakpoints.up('md'));
 
     return (
         <div style={{ backgroundColor: theme.palette.background.paper, minHeight: '100vh' }}>
-            <AppBar data-cy="blui-toolbar" position={'sticky'} classes={{ root: classes.appbarRoot }}>
-                <Toolbar classes={{ gutters: classes.toolbarGutters }}>
+            <AppBar data-cy="blui-toolbar" position={'sticky'} sx={{ padding: 0 }}>
+                <Toolbar sx={{ paddingLeft: '16px', paddingRight: '16px' }}>
                     {md ? null : (
                         <IconButton
                             data-cy="toolbar-menu"
@@ -39,7 +28,7 @@ export const DataList = (): JSX.Element => {
                                 dispatch({ type: TOGGLE_DRAWER, payload: true });
                             }}
                             edge={'start'}
-                            style={{ marginRight: 20 }}
+                            sx={{ marginRight: 2.5 }}
                             size="large"
                         >
                             <MenuIcon />

@@ -1,5 +1,4 @@
-import { Divider, IconButton, useMediaQuery, useTheme, Theme, Typography } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
+import { Divider, IconButton, useMediaQuery, useTheme, Typography, styled } from '@mui/material';
 import {
     Drawer,
     DrawerBody,
@@ -24,29 +23,28 @@ import { DRAWER_WIDTH } from './assets/constants';
 
 import backgroundImage from './assets/topology_40.png';
 
-const useStyles = makeStyles((theme: Theme) => ({
-    header: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        zIndex: 1,
-        padding: `0 ${theme.spacing(2)}`,
-        alignItems: 'center',
-        width: '100%',
-        height: '100%',
-        [theme.breakpoints.down('md')]: {
-            padding: `0 ${theme.spacing(2)} 0 0`,
-        },
-    },
-    headerDetails: {
-        flex: 1,
-    },
-    subtitle: {
-        marginTop: theme.spacing(-1),
+const HeaderContainer = styled('div')(({ theme }) => ({
+    display: 'flex',
+    justifyContent: 'space-between',
+    zIndex: 1,
+    padding: `0 ${theme.spacing(2)}`,
+    alignItems: 'center',
+    width: '100%',
+    height: '100%',
+    [theme.breakpoints.down('md')]: {
+        padding: `0 ${theme.spacing(2)} 0 0`,
     },
 }));
 
+const HeaderDetails = styled('div')({
+    flex: 1,
+});
+
+const SubtitleTypography = styled(Typography)(({ theme }) => ({
+    marginTop: theme.spacing(-1),
+}));
+
 export const App: React.FC = () => {
-    const classes = useStyles();
     const navigation = useNavigate();
     const open = useSelector((state: AppState) => state.app.drawerOpen);
     const theme = useTheme();
@@ -56,6 +54,7 @@ export const App: React.FC = () => {
     const [selected, setSelected] = useState('');
 
     const navigate = (id: string): void => {
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         navigation(id);
         setSelected(id);
     };
@@ -126,20 +125,17 @@ export const App: React.FC = () => {
                     ) : undefined
                 }
                 titleContent={
-                    <div className={classes.header}>
-                        <div
-                            className={classes.headerDetails}
+                    <HeaderContainer>
+                        <HeaderDetails
                             onClick={(): void => {
                                 navigate('/');
                                 dispatch({ type: TOGGLE_DRAWER, payload: false });
                             }}
                         >
                             <Typography variant="h6">Brightlayer UI</Typography>
-                            <Typography variant="body1" className={classes.subtitle}>
-                                React Design Patterns
-                            </Typography>
-                        </div>
-                    </div>
+                            <SubtitleTypography variant="body1">React Design Patterns</SubtitleTypography>
+                        </HeaderDetails>
+                    </HeaderContainer>
                 }
                 style={{ cursor: 'pointer' }}
             />

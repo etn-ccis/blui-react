@@ -1,18 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react';
-import {
-    AppBar,
-    Toolbar,
-    IconButton,
-    Typography,
-    List,
-    Drawer,
-    useMediaQuery,
-    Avatar,
-    useTheme,
-    Theme,
-} from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
-import createStyles from '@mui/styles/createStyles';
+import { AppBar, Toolbar, IconButton, Typography, List, Drawer, useMediaQuery, Avatar, useTheme } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import { MoreVert, NotificationsActive, Notifications, Done, GetApp, Close } from '@mui/icons-material';
 import MenuIcon from '@mui/icons-material/Menu';
 import * as colors from '@brightlayer-ui/colors';
@@ -21,44 +10,45 @@ import { InfoListItem, Spacer } from '@brightlayer-ui/react-components';
 import { useDispatch } from 'react-redux';
 import { TOGGLE_DRAWER } from '../../../redux/actions';
 
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        appbarRoot: {
-            padding: 0,
-        },
-        toolbarGutters: {
-            padding: '0 16px',
-        },
-        paper: {
-            width: '100%',
-            maxWidth: 600,
-            margin: 'auto',
-            userSelect: 'none',
-            cursor: 'pointer',
-        },
-        active: {},
-        avatar: {
-            color: theme.palette.text.primary,
-            background: 'transparent',
-            '&$active': {
-                color: colors.white[50],
-                background: theme.palette.error.main,
-            },
-        },
-    })
-);
+const AppBarRoot = styled(AppBar)(({ theme }) => ({
+    padding: 0,
+}));
+
+const ToolbarGutters = styled(Toolbar)(({ theme }) => ({
+    padding: '0 16px',
+}));
+
+const PaperDrawer = styled(Drawer)(({ theme }) => ({
+    '& .MuiPaper-root': {
+        width: '100%',
+        maxWidth: 600,
+        margin: 'auto',
+        userSelect: 'none',
+        cursor: 'pointer',
+    },
+}));
+
+const AvatarStyled = styled(Avatar, {
+    shouldForwardProp: (prop) => prop !== 'active',
+})<{ active?: boolean }>(({ theme, active }) => ({
+    color: theme.palette.text.primary,
+    background: 'transparent',
+    ...(active && {
+        color: colors.white[50],
+        background: theme.palette.error.main,
+    }),
+}));
 
 export const BasicBottomSheet = (): JSX.Element => {
     const dispatch = useDispatch();
     const theme = useTheme();
-    const classes = useStyles();
     const [showMenu, setShowMenu] = useState<boolean>(false);
     const md = useMediaQuery(theme.breakpoints.up('md'));
 
     return (
         <div style={{ backgroundColor: theme.palette.background.paper, minHeight: '100vh' }}>
-            <AppBar data-cy="blui-toolbar" position={'sticky'} classes={{ root: classes.appbarRoot }}>
-                <Toolbar classes={{ gutters: classes.toolbarGutters }}>
+            <AppBarRoot data-cy="blui-toolbar" position={'sticky'}>
+                <ToolbarGutters>
                     {md ? null : (
                         <IconButton
                             data-cy="toolbar-menu"
@@ -86,8 +76,8 @@ export const BasicBottomSheet = (): JSX.Element => {
                     >
                         <MoreVert />
                     </IconButton>
-                </Toolbar>
-            </AppBar>
+                </ToolbarGutters>
+            </AppBarRoot>
             <List disablePadding>
                 {alarms.map((alarm: Alarm, i: number) => (
                     <InfoListItem
@@ -96,20 +86,19 @@ export const BasicBottomSheet = (): JSX.Element => {
                         title={`${alarm.active ? 'ACTIVE: ' : ''}${alarm.details}`}
                         subtitle={formatDate(alarm.date)}
                         icon={
-                            <Avatar className={`${classes.avatar} ${alarm.active ? classes.active : ''}`}>
+                            <AvatarStyled active={alarm.active}>
                                 {alarm.active ? <NotificationsActive /> : <Notifications />}
-                            </Avatar>
+                            </AvatarStyled>
                         }
                     />
                 ))}
             </List>
-            <Drawer
+            <PaperDrawer
                 data-cy="bottom-sheet"
                 anchor={'bottom'}
                 transitionDuration={250}
                 open={showMenu}
                 onClose={(): void => setShowMenu(false)}
-                classes={{ paper: classes.paper }}
             >
                 <List disablePadding>
                     <InfoListItem
@@ -134,7 +123,7 @@ export const BasicBottomSheet = (): JSX.Element => {
                         title={'Cancel'}
                     />
                 </List>
-            </Drawer>
+            </PaperDrawer>
         </div>
     );
 };

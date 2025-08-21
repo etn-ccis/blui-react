@@ -15,8 +15,7 @@ import {
     Typography,
     useMediaQuery,
 } from '@mui/material';
-import { Theme, useTheme } from '@mui/material/styles';
-import makeStyles from '@mui/styles/makeStyles';
+import { useTheme, styled } from '@mui/material/styles';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -24,7 +23,6 @@ import { Spacer } from '@brightlayer-ui/react-components';
 import { useDispatch } from 'react-redux';
 import { TOGGLE_DRAWER } from '../../../redux/actions';
 import * as colors from '@brightlayer-ui/colors';
-import clsx from 'clsx';
 
 export type ListItemType = {
     id: number;
@@ -33,95 +31,94 @@ export type ListItemType = {
     checked: boolean;
 };
 
-const useStyles = makeStyles((theme: Theme) => ({
-    appbar: {
-        transition: theme.transitions.create('opacity', { duration: theme.transitions.duration.shorter }),
-    },
-    appbarRoot: {
-        padding: 0,
-    },
-    contextualAppBar: {
-        backgroundColor: colors.black[500],
-        color: colors.white[50],
-        right: 0,
-        width: 0,
-        opacity: 0,
-        '&$contextualBarActive': {
-            [theme.breakpoints.down('md')]: {
-                width: '100%',
-                opacity: 1,
-            },
-        },
-    },
-    contextualBarActive: {},
-    checkboxCell: {
-        padding: `0 0 0 ${theme.spacing(1)}`,
-        minWidth: '56px',
-        [theme.breakpoints.down('md')]: {
-            padding: `0 0 0 ${theme.spacing(1)}`,
-        },
-    },
-    checkboxIndeterminate: {
-        color: theme.palette.primary.main,
-    },
+const AppBarRoot = styled(AppBar)(({ theme }) => ({
+    padding: 0,
+    transition: theme.transitions.create('opacity', { duration: theme.transitions.duration.shorter }),
+}));
 
-    dataCell: {
-        minWidth: '150px',
-    },
-    deleteBtn: {
-        color: theme.palette.error.main,
-        border: `1px solid ${theme.palette.error.main}`,
-    },
-    deleteRow: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: theme.spacing(2),
-    },
-    noResult: {
-        padding: theme.spacing(2),
-        textAlign: 'center',
-        backgroundColor: theme.palette.background.paper,
-    },
-    noteText: {
-        color: theme.palette.text.secondary,
-        marginTop: theme.spacing(3),
-    },
-    resetTableLink: {
-        textDecoration: 'underline',
-        color: theme.palette.primary.main,
-        cursor: 'pointer',
-    },
-    rowSelected: {
-        backgroundColor: `rgba(${theme.palette.primary.main}, 0.05)`,
-    },
-    sticky: {
-        position: 'sticky',
-        left: 0,
-    },
-    secondaryToolbar: {
-        padding: `0 ${theme.spacing(2)}`,
-    },
-    tableBody: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    tableContainer: {
-        overflow: 'auto',
-        maxWidth: '800px',
-        width: '100%',
-        padding: theme.spacing(2),
+const ContextualAppBar = styled(AppBar, {
+    shouldForwardProp: (prop) => prop !== 'active',
+})<{ active?: boolean }>(({ theme, active }) => ({
+    backgroundColor: colors.black[500],
+    color: colors.white[50],
+    right: 0,
+    width: 0,
+    opacity: 0,
+    ...(active && {
         [theme.breakpoints.down('md')]: {
-            maxWidth: 'unset',
-            padding: 0,
+            width: '100%',
+            opacity: 1,
         },
-    },
-    toolbarGutters: {
-        paddingLeft: 16,
-        paddingRight: 4,
+    }),
+}));
+
+const CheckboxCell = styled(TableCell)(({ theme }) => ({
+    padding: `0 0 0 ${theme.spacing(1)}`,
+    minWidth: '56px',
+    [theme.breakpoints.down('md')]: {
+        padding: `0 0 0 ${theme.spacing(1)}`,
     },
 }));
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const DataCell = styled(TableCell)(({ theme }) => ({
+    minWidth: '150px',
+}));
+
+const DeleteBtn = styled(Button)(({ theme }) => ({
+    color: theme.palette.error.main,
+    border: `1px solid ${theme.palette.error.main}`,
+}));
+
+const DeleteRow = styled('div')(({ theme }) => ({
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: theme.spacing(2),
+}));
+
+const NoResult = styled(Typography)(({ theme }) => ({
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    backgroundColor: theme.palette.background.paper,
+}));
+
+const NoteText = styled(Typography)(({ theme }) => ({
+    color: theme.palette.text.secondary,
+    marginTop: theme.spacing(3),
+}));
+
+const ResetTableLink = styled('span')(({ theme }) => ({
+    textDecoration: 'underline',
+    color: theme.palette.primary.main,
+    cursor: 'pointer',
+}));
+
+const SecondaryToolbar = styled(Toolbar)(({ theme }) => ({
+    padding: `0 ${theme.spacing(2)}`,
+}));
+
+const TableBodyDiv = styled('div')({
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+});
+
+const TableContainerDiv = styled('div')(({ theme }) => ({
+    overflow: 'auto',
+    maxWidth: '800px',
+    width: '100%',
+    padding: theme.spacing(2),
+    [theme.breakpoints.down('md')]: {
+        maxWidth: 'unset',
+        padding: 0,
+    },
+}));
+
+const ToolbarGutters = styled(Toolbar)({
+    paddingLeft: 16,
+    paddingRight: 4,
+});
 
 const createItem = (index: number, ip: string): ListItemType => ({
     id: index,
@@ -139,7 +136,6 @@ for (let i = 1; i < 5; i++) {
 export const ContextualAction = (): JSX.Element => {
     const dispatch = useDispatch();
     const theme = useTheme();
-    const classes = useStyles();
     const [list, setList] = useState<ListItemType[]>(generatedList);
     const [selectedItems, setSelectedItems] = useState<ListItemType[]>([]);
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
@@ -193,9 +189,14 @@ export const ContextualAction = (): JSX.Element => {
             <Table>
                 <TableHead>
                     <TableRow>
-                        <TableCell padding="checkbox" className={clsx(classes.checkboxCell, classes.sticky)}>
+                        <CheckboxCell padding="checkbox">
                             <Checkbox
-                                classes={{ indeterminate: classes.checkboxIndeterminate }}
+                                sx={{
+                                    color: theme.palette.primary.main,
+                                    '&.Mui-checked': {
+                                        color: theme.palette.primary.main,
+                                    },
+                                }}
                                 indeterminate={selectedItems.length > 0 && selectedItems.length < list.length}
                                 checked={list.length > 0 && selectedItems.length === list.length}
                                 onChange={selectAll}
@@ -204,9 +205,9 @@ export const ContextualAction = (): JSX.Element => {
                                 size="medium"
                                 data-cy={'table-header-checkbox'}
                             />
-                        </TableCell>
-                        <TableCell className={classes.dataCell}>Name</TableCell>
-                        <TableCell className={classes.dataCell}>IP Address</TableCell>
+                        </CheckboxCell>
+                        <DataCell>Name</DataCell>
+                        <DataCell>IP Address</DataCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -214,15 +215,16 @@ export const ContextualAction = (): JSX.Element => {
                         <TableRow
                             key={index}
                             hover={false}
-                            classes={{ selected: classes.rowSelected }}
                             selected={isSelected(row)}
+                            sx={
+                                isSelected(row)
+                                    ? {
+                                          backgroundColor: `rgba(${theme.palette.primary.main}, 0.05)`,
+                                      }
+                                    : undefined
+                            }
                         >
-                            <TableCell
-                                component="th"
-                                scope="row"
-                                className={clsx(classes.checkboxCell, classes.sticky)}
-                                data-cy={'table-cell-checkbox'}
-                            >
+                            <CheckboxCell component="th" scope="row" data-cy={'table-cell-checkbox'}>
                                 <Checkbox
                                     value={row.name}
                                     onChange={(): void => onSelect(row)}
@@ -231,9 +233,9 @@ export const ContextualAction = (): JSX.Element => {
                                     color="primary"
                                     size="medium"
                                 />
-                            </TableCell>
-                            <TableCell className={classes.dataCell}>{row.name}</TableCell>
-                            <TableCell className={classes.dataCell}>{row.ip}</TableCell>
+                            </CheckboxCell>
+                            <DataCell>{row.name}</DataCell>
+                            <DataCell>{row.ip}</DataCell>
                         </TableRow>
                     ))}
                 </TableBody>
@@ -243,13 +245,8 @@ export const ContextualAction = (): JSX.Element => {
 
     return (
         <div style={{ backgroundColor: theme.palette.background.default, minHeight: '100vh' }}>
-            <AppBar
-                data-cy="app-bar"
-                position={'sticky'}
-                classes={{ root: classes.appbarRoot }}
-                className={clsx(classes.appbar, selectedItems.length !== 0 && isMobile && classes.contextualBarActive)}
-            >
-                <Toolbar classes={{ gutters: classes.toolbarGutters }}>
+            <AppBarRoot data-cy="app-bar" position={'sticky'}>
+                <ToolbarGutters>
                     {md ? null : (
                         <IconButton
                             data-cy="toolbar-menu"
@@ -267,18 +264,10 @@ export const ContextualAction = (): JSX.Element => {
                     <Typography variant={'h6'} color={'inherit'}>
                         Contextual App Bar
                     </Typography>
-                </Toolbar>
-            </AppBar>
-            <AppBar
-                className={clsx(
-                    classes.appbar,
-                    classes.contextualAppBar,
-                    selectedItems.length !== 0 && isMobile && classes.contextualBarActive
-                )}
-                position={'fixed'}
-                color={'default'}
-            >
-                <Toolbar classes={{ gutters: classes.secondaryToolbar }}>
+                </ToolbarGutters>
+            </AppBarRoot>
+            <ContextualAppBar active={selectedItems.length !== 0 && isMobile} position={'fixed'} color={'default'}>
+                <SecondaryToolbar>
                     <IconButton
                         color={'inherit'}
                         edge={'start'}
@@ -295,45 +284,42 @@ export const ContextualAction = (): JSX.Element => {
                     <IconButton color={'inherit'} edge={'end'} onClick={onDelete} size="large">
                         <DeleteIcon />
                     </IconButton>
-                </Toolbar>
-            </AppBar>
+                </SecondaryToolbar>
+            </ContextualAppBar>
             <div>
-                <div className={classes.tableBody}>
-                    <div className={classes.tableContainer}>
+                <TableBodyDiv>
+                    <TableContainerDiv>
                         {isMobile ? null : (
-                            <div className={classes.deleteRow}>
+                            <DeleteRow>
                                 <Typography variant={'caption'} color={'inherit'}>
                                     {selectedItems.length} selected item(s)
                                 </Typography>
-                                <Button
+                                <DeleteBtn
                                     data-cy={'delete-btn'}
                                     variant={'outlined'}
-                                    className={classes.deleteBtn}
                                     startIcon={<DeleteIcon />}
                                     disabled={selectedItems.length === 0}
                                     onClick={onDelete}
                                 >
                                     Delete selected items
-                                </Button>
-                            </div>
+                                </DeleteBtn>
+                            </DeleteRow>
                         )}
                         <div>{getTable()}</div>
                         {list.length === 0 ? (
-                            <Typography className={classes.noResult} data-cy={'empty-table'}>
+                            <NoResult data-cy={'empty-table'}>
                                 No items found.{' '}
-                                <span className={classes.resetTableLink} onClick={resetTable} data-cy={'reset'}>
+                                <ResetTableLink onClick={resetTable} data-cy={'reset'}>
                                     Reset table
-                                </span>
-                            </Typography>
+                                </ResetTableLink>
+                            </NoResult>
                         ) : undefined}
 
                         {isMobile ? null : (
-                            <Typography variant="body2" className={classes.noteText}>
-                                The contextual app bar is for mobile only.
-                            </Typography>
+                            <NoteText variant="body2">The contextual app bar is for mobile only.</NoteText>
                         )}
-                    </div>
-                </div>
+                    </TableContainerDiv>
+                </TableBodyDiv>
             </div>
         </div>
     );

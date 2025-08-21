@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useCallback, useState } from 'react';
 import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
 import AppBar from '@mui/material/AppBar';
@@ -7,9 +8,7 @@ import List from '@mui/material/List';
 import Toolbar from '@mui/material/Toolbar';
 import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
-import { Theme, useTheme } from '@mui/material/styles';
-import makeStyles from '@mui/styles/makeStyles';
-import createStyles from '@mui/styles/createStyles';
+import { Theme, useTheme, styled } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { InfoListItem, Spacer } from '@brightlayer-ui/react-components';
 import { TOGGLE_DRAWER } from '../../../redux/actions';
@@ -23,93 +22,88 @@ import { OnSortEndProps, SortableListEditProps, SortableListItemProps } from './
 
 const itemsList: string[] = ['Item 01', 'Item 02', 'Item 03'];
 
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        sortableList: {
-            backgroundColor: theme.palette.background.default,
-            minHeight: '100vh',
-        },
-        dragging: {
-            boxShadow: theme.shadows[4],
-        },
-        appbarRoot: {
-            padding: 0,
-        },
-        toolbarGutters: {
-            padding: `0 ${theme.spacing(2)}`,
-        },
-        container: {
-            maxWidth: 818,
-            padding: theme.spacing(3),
-            margin: '0 auto',
-            [theme.breakpoints.down('md')]: {
-                maxWidth: '100%',
-                padding: 0,
-                margin: 0,
-            },
-        },
-        card: {
-            marginTop: theme.spacing(3),
-            boxShadow: theme.shadows[1],
-            borderRadius: 4,
-            [theme.breakpoints.down('md')]: {
-                marginTop: 0,
-                boxShadow: 'none',
-                borderRadius: 0,
-            },
-        },
-        sortButtonMobile: {
-            color: theme.palette.background.default,
-            marginRight: theme.spacing(-1),
-        },
-        sortButtonContainer: {
-            display: 'flex',
-            justifyContent: 'flex-end',
-        },
-        dragHandleIconButton: {
-            backgroundColor: 'transparent',
-            [theme.breakpoints.down('md')]: {
-                marginLeft: 4,
-            },
-        },
-        infoListItem: {},
-        sortableInfoListItem: {
-            paddingLeft: 0,
-        },
-        listItemText: {
-            marginLeft: theme.spacing(2),
-        },
-    })
-);
+const SortableListRoot = styled('div')(({ theme }) => ({
+    backgroundColor: theme.palette.background.default,
+    minHeight: '100vh',
+}));
+
+const AppBarRoot = styled(AppBar)(({ theme }) => ({
+    padding: 0,
+}));
+
+const ToolbarGutters = styled(Toolbar)(({ theme }) => ({
+    padding: `0 ${theme.spacing(2)}`,
+}));
+
+const Container = styled('div')(({ theme }) => ({
+    maxWidth: 818,
+    padding: theme.spacing(3),
+    margin: '0 auto',
+    [theme.breakpoints.down('md')]: {
+        maxWidth: '100%',
+        padding: 0,
+        margin: 0,
+    },
+}));
+
+const CardRoot = styled(Card)(({ theme }) => ({
+    marginTop: theme.spacing(3),
+    boxShadow: theme.shadows[1],
+    borderRadius: 4,
+    [theme.breakpoints.down('md')]: {
+        marginTop: 0,
+        boxShadow: 'none',
+        borderRadius: 0,
+    },
+}));
+
+const SortButtonMobile = styled(IconButton)(({ theme }) => ({
+    color: theme.palette.background.default,
+    marginRight: theme.spacing(-1),
+}));
+
+const SortButtonContainer = styled('div')({
+    display: 'flex',
+    justifyContent: 'flex-end',
+});
+
+const DragHandleIconButton = styled(IconButton)(({ theme }) => ({
+    backgroundColor: 'transparent',
+    [theme.breakpoints.down('md')]: {
+        marginLeft: 4,
+    },
+}));
 
 const DragHandle = SortableHandle(() => <DragHandleIcon />);
 
-const SortableListItem = SortableElement(({ listItem, classes, ...other }: SortableListItemProps) => (
+const SortableListItem = SortableElement(({ listItem, ...other }: SortableListItemProps) => (
     <InfoListItem
         {...other}
-        classes={{ root: classes.sortableInfoListItem, listItemText: classes.listItemText }}
+        sx={{
+            pl: 0,
+            '& .MuiListItemText-root': { ml: (theme) => theme.spacing(2) },
+        }}
         icon={
-            <IconButton disableRipple classes={{ root: classes.dragHandleIconButton }} size="large">
+            <DragHandleIconButton disableRipple size="large">
                 <DragHandle />
-            </IconButton>
+            </DragHandleIconButton>
         }
         title={listItem}
     />
 ));
 
-export const SortableListEdit = SortableContainer(({ list, isSorting, classes, isMobile }: SortableListEditProps) => (
+export const SortableListEdit = SortableContainer(({ list, isSorting, isMobile }: SortableListEditProps) => (
     <List
         dense
         disablePadding
         component={'nav'}
         data-testid="sortableListEdit"
-        style={{ cursor: isSorting ? 'grabbing' : 'default' }}
+        sx={{ cursor: isSorting ? 'grabbing' : 'default' }}
     >
         {list.map((listItem: string, i: number) => (
             <SortableListItem
                 key={`item-${i}`}
                 data-cy={`sortable-row-${i}`}
-                classes={classes}
                 index={i}
                 listItem={listItem}
                 divider={list.length - 1 !== i || isMobile ? 'full' : undefined}
@@ -121,7 +115,6 @@ export const SortableListEdit = SortableContainer(({ list, isSorting, classes, i
 export const SortableList = (): JSX.Element => {
     const dispatch = useDispatch();
     const theme = useTheme();
-    const classes = useStyles(theme);
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
     const [list, setList] = useState<string[]>(itemsList);
     const [sortable, setSortable] = useState<boolean>(false);
@@ -144,9 +137,9 @@ export const SortableList = (): JSX.Element => {
     );
 
     return (
-        <div className={classes.sortableList}>
-            <AppBar data-cy="blui-toolbar" position={'sticky'} classes={{ root: classes.appbarRoot }}>
-                <Toolbar classes={{ gutters: classes.toolbarGutters }}>
+        <SortableListRoot>
+            <AppBarRoot data-cy="blui-toolbar" position={'sticky'}>
+                <ToolbarGutters>
                     {md ? null : (
                         <IconButton
                             data-cy="toolbar-menu"
@@ -155,7 +148,7 @@ export const SortableList = (): JSX.Element => {
                                 dispatch({ type: TOGGLE_DRAWER, payload: true });
                             }}
                             edge={'start'}
-                            style={{ marginRight: 20 }}
+                            sx={{ mr: 2.5 }}
                             size="large"
                         >
                             <MenuIcon />
@@ -166,20 +159,15 @@ export const SortableList = (): JSX.Element => {
                     </Typography>
                     <Spacer />
                     {isMobile && (
-                        <IconButton
-                            data-cy="sort-done"
-                            classes={{ root: classes.sortButtonMobile }}
-                            onClick={(): void => setSortable(!sortable)}
-                            size="large"
-                        >
+                        <SortButtonMobile data-cy="sort-done" onClick={(): void => setSortable(!sortable)} size="large">
                             {sortable ? <CheckIcon /> : <SortIcon />}
-                        </IconButton>
+                        </SortButtonMobile>
                     )}
-                </Toolbar>
-            </AppBar>
-            <div className={classes.container}>
+                </ToolbarGutters>
+            </AppBarRoot>
+            <Container>
                 {!isMobile && (
-                    <div className={classes.sortButtonContainer}>
+                    <SortButtonContainer>
                         <Button
                             variant={'contained'}
                             color={'primary'}
@@ -192,9 +180,9 @@ export const SortableList = (): JSX.Element => {
                                 {sortable ? 'Done' : 'Sort'}
                             </Typography>
                         </Button>
-                    </div>
+                    </SortButtonContainer>
                 )}
-                <Card classes={{ root: classes.card }}>
+                <CardRoot>
                     {sortable && (
                         <SortableListEdit
                             list={list}
@@ -202,8 +190,7 @@ export const SortableList = (): JSX.Element => {
                             useDragHandle={true}
                             isSorting={isSorting}
                             onSortStart={(): void => setIsSorting(true)}
-                            helperClass={classes.dragging}
-                            classes={classes}
+                            helperClass=""
                             isMobile={isMobile}
                         />
                     )}
@@ -212,7 +199,7 @@ export const SortableList = (): JSX.Element => {
                             {list.map((listItem: string, i: number) => (
                                 <InfoListItem
                                     data-testid="infoListItem"
-                                    classes={{ root: classes.infoListItem }}
+                                    sx={{}}
                                     hidePadding
                                     key={`item-${i}`}
                                     title={listItem}
@@ -222,8 +209,8 @@ export const SortableList = (): JSX.Element => {
                             ))}
                         </List>
                     )}
-                </Card>
-            </div>
-        </div>
+                </CardRoot>
+            </Container>
+        </SortableListRoot>
     );
 };

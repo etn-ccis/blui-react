@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react';
 
 import AppBar from '@mui/material/AppBar';
@@ -24,9 +25,7 @@ import Update from '@mui/icons-material/Update';
 
 import { useDispatch } from 'react-redux';
 import { TOGGLE_DRAWER } from '../../../redux/actions';
-import { Theme, useTheme } from '@mui/material/styles';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
+import { styled, useTheme } from '@mui/material/styles';
 import getEvents, { Event, formatDate } from './alarmData';
 import { EmptyState } from './EmptyState';
 import { useMediaQuery } from '@mui/material';
@@ -44,62 +43,45 @@ export const FILTERS = {
 
 const eventList = getEvents(20);
 
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        appbarRoot: {
-            padding: 0,
-        },
-        toolbarGutters: {
-            padding: '0 16px',
-        },
-        alarmRow: {
-            borderLeft: `${theme.spacing(0.5)} solid transparent`,
-        },
-        avatar: {
-            color: theme.palette.text.primary,
-            background: 'transparent',
-        },
-        heroBanner: {
-            width: '100%',
-            height: 100,
-            display: 'flex',
-            justifyContent: 'center',
-        },
-        hero: {
-            cursor: 'pointer',
-            flex: 'unset',
-            minWidth: 100,
-        },
-        activeIcon: {
-            color: Colors.blue[500],
-        },
-        alarmText: {
-            fontWeight: 600,
-        },
-        paper: {
-            width: '100%',
-            maxWidth: 600,
-            margin: 'auto',
-            userSelect: 'none',
-        },
-        sheetListItem: {
-            width: '100%',
-            flexDirection: 'column',
-        },
-        row: {
-            cursor: 'pointer',
-            width: '100%',
-            '&:hover': {
-                backgroundColor: theme.palette.background.default,
-            },
-        },
-        emptyStateContainer: {
-            display: 'flex',
-            height: `calc(100vh - ${theme.spacing(8)})`,
-            justifyContent: 'center',
-        },
-    })
-);
+const AppBarRoot = styled(AppBar)(({ theme }) => ({
+    padding: 0,
+}));
+
+const ToolbarGutters = styled(Toolbar)(({ theme }) => ({
+    padding: '0 16px',
+}));
+
+const PaperDrawer = styled(Drawer)(({ theme }) => ({
+    '& .MuiPaper-root': {
+        width: '100%',
+        maxWidth: 600,
+        margin: 'auto',
+        userSelect: 'none',
+    },
+}));
+
+const HeroBannerStyled = styled(HeroBanner)(({ theme }) => ({
+    width: '100%',
+    height: 100,
+    display: 'flex',
+    justifyContent: 'center',
+}));
+
+const HeroStyled = styled(Hero)(({ theme }) => ({
+    cursor: 'pointer',
+    flex: 'unset',
+    minWidth: 100,
+}));
+
+const ActiveIcon = styled('span')(({ theme }) => ({
+    color: Colors.blue[500],
+}));
+
+const EmptyStateContainer = styled('div')(({ theme }) => ({
+    display: 'flex',
+    height: `calc(100vh - ${theme.spacing(8)})`,
+    justifyContent: 'center',
+}));
 
 export const sortedEvents = (events: Event[], sortby: string): Event[] => {
     switch (sortby) {
@@ -150,7 +132,6 @@ export const filteredEvents = (events: Event[], config: any): Event[] => {
 export const ComplexBottomSheet = (): JSX.Element => {
     const dispatch = useDispatch();
     const theme = useTheme();
-    const classes = useStyles(theme);
 
     const [showMenu, setShowMenu] = useState(false);
     const [list, setList] = useState(eventList);
@@ -175,8 +156,8 @@ export const ComplexBottomSheet = (): JSX.Element => {
 
     return (
         <div style={{ backgroundColor: theme.palette.background.paper, minHeight: '100vh' }}>
-            <AppBar data-cy="blui-toolbar" position={'sticky'} classes={{ root: classes.appbarRoot }}>
-                <Toolbar classes={{ gutters: classes.toolbarGutters }}>
+            <AppBarRoot data-cy="blui-toolbar" position={'sticky'}>
+                <ToolbarGutters>
                     {md ? null : (
                         <IconButton
                             data-cy="toolbar-menu"
@@ -204,8 +185,8 @@ export const ComplexBottomSheet = (): JSX.Element => {
                     >
                         <MoreVert />
                     </IconButton>
-                </Toolbar>
-            </AppBar>
+                </ToolbarGutters>
+            </AppBarRoot>
 
             {list.length > 0 && (
                 <List disablePadding data-cy={'list-content'}>
@@ -231,103 +212,88 @@ export const ComplexBottomSheet = (): JSX.Element => {
                 </List>
             )}
 
-            {list.length === 0 && <EmptyState />}
+            {list.length === 0 && (
+                <EmptyStateContainer>
+                    <EmptyState />
+                </EmptyStateContainer>
+            )}
 
             {/* Custom/Complex Bottom Sheet Definition */}
-            <Drawer
+            <PaperDrawer
                 anchor={'bottom'}
                 transitionDuration={250}
                 open={showMenu}
                 onClose={(): void => setShowMenu(false)}
-                classes={{ paper: classes.paper }}
             >
                 <List disablePadding>
-                    <ListItem data-cy={'btm-sheet-sort'} className={classes.sheetListItem}>
+                    <ListItem data-cy={'btm-sheet-sort'} sx={{ width: '100%', flexDirection: 'column' }}>
                         <Typography variant={'overline'} style={{ width: '100%' }} gutterBottom>
                             Sort By:
                         </Typography>
 
-                        <HeroBanner className={classes.heroBanner}>
-                            <Hero
+                        <HeroBannerStyled>
+                            <HeroStyled
                                 icon={<AccessTime />}
                                 label={'Time'}
                                 classes={
-                                    currentSort === TYPES.TIME
-                                        ? { root: classes.hero, label: classes.activeIcon, icon: classes.activeIcon }
-                                        : { root: classes.hero }
+                                    currentSort === TYPES.TIME ? { label: 'Mui-active', icon: 'Mui-active' } : undefined
                                 }
+                                sx={currentSort === TYPES.TIME ? { color: Colors.blue[500] } : undefined}
                                 onClick={(): void => setCurrentSort(TYPES.TIME)}
                             />
-                            <Hero
+                            <HeroStyled
                                 icon={<Info />}
                                 label={'Type'}
                                 classes={
-                                    currentSort === TYPES.TYPE
-                                        ? { root: classes.hero, label: classes.activeIcon, icon: classes.activeIcon }
-                                        : { root: classes.hero }
+                                    currentSort === TYPES.TYPE ? { label: 'Mui-active', icon: 'Mui-active' } : undefined
                                 }
+                                sx={currentSort === TYPES.TYPE ? { color: Colors.blue[500] } : undefined}
                                 onClick={(): void => setCurrentSort(TYPES.TYPE)}
                             />
-                        </HeroBanner>
+                        </HeroBannerStyled>
                     </ListItem>
                     <Divider />
-                    <ListItem data-cy={'btm-sheet-show'} className={classes.sheetListItem}>
+                    <ListItem data-cy={'btm-sheet-show'} sx={{ width: '100%', flexDirection: 'column' }}>
                         <Typography variant="overline" style={{ width: '100%' }} gutterBottom>
                             Show:
                         </Typography>
 
-                        <HeroBanner className={classes.heroBanner}>
-                            <Hero
+                        <HeroBannerStyled>
+                            <HeroStyled
                                 icon={<NotificationsActive />}
                                 label={'Active Alarms'}
                                 data-cy={'active-alarms'}
-                                classes={
-                                    showActiveAlarms
-                                        ? { root: classes.hero, label: classes.activeIcon, icon: classes.activeIcon }
-                                        : { root: classes.hero }
-                                }
+                                sx={showActiveAlarms ? { color: Colors.blue[500] } : undefined}
                                 onClick={(): void => setShowActiveAlarms(!showActiveAlarms)}
                             />
-                            <Hero
+                            <HeroStyled
                                 icon={<Notifications />}
                                 label={'Alarms'}
                                 data-cy={'alarms'}
-                                classes={
-                                    showAlarms
-                                        ? { root: classes.hero, label: classes.activeIcon, icon: classes.activeIcon }
-                                        : { root: classes.hero }
-                                }
+                                sx={showAlarms ? { color: Colors.blue[500] } : undefined}
                                 onClick={(): void => setShowAlarms(!showAlarms)}
                             />
-                            <Hero
+                            <HeroStyled
                                 icon={<Settings />}
                                 label={'Settings'}
                                 data-cy={'settings'}
-                                classes={
-                                    showSettings
-                                        ? { root: classes.hero, label: classes.activeIcon, icon: classes.activeIcon }
-                                        : { root: classes.hero }
-                                }
+                                sx={showSettings ? { color: Colors.blue[500] } : undefined}
                                 onClick={(): void => setShowSettings(!showSettings)}
                             />
-                            <Hero
+                            <HeroStyled
                                 icon={<Update />}
                                 label={'Sessions'}
                                 data-cy={'sessions'}
-                                classes={
-                                    showSessions
-                                        ? { root: classes.hero, label: classes.activeIcon, icon: classes.activeIcon }
-                                        : { root: classes.hero }
-                                }
+                                sx={showSessions ? { color: Colors.blue[500] } : undefined}
                                 onClick={(): void => setShowSessions(!showSessions)}
                             />
-                        </HeroBanner>
+                        </HeroBannerStyled>
                     </ListItem>
 
                     {!isMobile && <Divider />}
                     <Box
                         boxShadow={isMobile ? 8 : 0}
-                        style={{ position: 'sticky', bottom: 0, background: Colors.white[50] }}
+                        sx={{ position: 'sticky', bottom: 0, background: Colors.white[50] }}
                     >
                         <InfoListItem
                             data-cy="btm-sheet-cancel"
@@ -338,7 +304,7 @@ export const ComplexBottomSheet = (): JSX.Element => {
                         />
                     </Box>
                 </List>
-            </Drawer>
+            </PaperDrawer>
         </div>
     );
 };

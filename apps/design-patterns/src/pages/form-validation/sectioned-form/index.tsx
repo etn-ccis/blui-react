@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useCallback, useState, useRef } from 'react';
 import {
     AppBar,
@@ -19,12 +20,10 @@ import {
     useMediaQuery,
 } from '@mui/material';
 import { ContactMail, HelpOutline, LocationOn, Menu } from '@mui/icons-material';
-import { Theme, useTheme } from '@mui/material/styles';
-import makeStyles from '@mui/styles/makeStyles';
+import { useTheme, styled } from '@mui/material/styles';
 import { useDispatch } from 'react-redux';
 import { TOGGLE_DRAWER } from '../../../redux/actions';
 import { Factory } from '@brightlayer-ui/icons-mui';
-import clsx from 'clsx';
 
 const mobileInputMarginSpacing = 4;
 type OnChangeHandler = InputProps['onChange'];
@@ -33,112 +32,125 @@ const bluiProtection = 'Brightlayer Protection';
 const bluiProtectionDescription = 'Brightlayer Protection provides a three-year Brightlayer warranty.';
 const emailRegex = new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i);
 
-const useStyles = makeStyles((theme: Theme) => ({
-    containerWrapper: {
-        background: theme.palette.background.default,
-        display: 'flex',
+// Styled components to replace makeStyles classes
+const ContainerWrapper = styled('div')(({ theme }) => ({
+    background: theme.palette.background.default,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'start',
+    flex: '1 1 0',
+    minHeight: 'calc(100vh - 64px)',
+    [theme.breakpoints.down('sm')]: {
+        minHeight: 'calc(100vh - 56px)',
+    },
+}));
+
+const Container = styled('div')(({ theme }) => ({
+    maxWidth: 480,
+    width: '100%',
+    paddingTop: theme.spacing(5),
+    paddingBottom: theme.spacing(5),
+    [theme.breakpoints.down('sm')]: {
+        maxWidth: '100%',
+        padding: theme.spacing(2),
+    },
+}));
+
+const AppBarRoot = styled(AppBar)(({ theme }) => ({
+    padding: 0,
+}));
+
+const ToolbarGutters = styled(Toolbar)(({ theme }) => ({
+    padding: '0 16px',
+}));
+
+const StyledDivider = styled(Divider)(({ theme }) => ({
+    marginTop: theme.spacing(5),
+    marginBottom: theme.spacing(5),
+    marginLeft: theme.spacing(-2),
+    marginRight: theme.spacing(-2),
+}));
+
+const Icon = styled('span')(({ theme }) => ({
+    marginRight: theme.spacing(2),
+    color: theme.palette.text.secondary,
+    display: 'flex',
+    alignItems: 'center',
+    [theme.breakpoints.down('sm')]: {
+        marginRight: theme.spacing(4),
+    },
+}));
+
+const FormLine = styled('div')(({ theme }) => ({
+    marginTop: theme.spacing(4),
+    display: 'flex',
+    alignItems: 'center',
+    [theme.breakpoints.down('sm')]: {
+        flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'start',
-        flex: '1 1 0',
-        minHeight: 'calc(100vh - 64px)',
-        [theme.breakpoints.down('sm')]: {
-            minHeight: 'calc(100vh - 56px)',
-        },
-    },
-    container: {
-        maxWidth: 480,
         width: '100%',
-        paddingTop: theme.spacing(5),
-        paddingBottom: theme.spacing(5),
-        [theme.breakpoints.down('sm')]: {
-            maxWidth: '100%',
-            padding: theme.spacing(2),
-        },
+        marginTop: theme.spacing(mobileInputMarginSpacing),
     },
-    appbarRoot: {
-        padding: 0,
+}));
+
+const SelectLevelForm = styled(FormControl)(({ theme }) => ({
+    marginRight: theme.spacing(3),
+    width: 200,
+    [theme.breakpoints.down('sm')]: {
+        width: '100%',
+        marginRight: 0,
     },
-    toolbarGutters: {
-        padding: '0 16px',
-    },
-    divider: {
-        marginTop: theme.spacing(5),
-        marginBottom: theme.spacing(5),
-        marginLeft: theme.spacing(-2),
-        marginRight: theme.spacing(-2),
-    },
-    icon: {
-        marginRight: theme.spacing(2),
-        color: theme.palette.text.secondary,
-        [theme.breakpoints.down('sm')]: {
-            marginRight: theme.spacing(4),
-        },
-    },
-    formLine: {
-        marginTop: theme.spacing(4),
-        display: 'flex',
-        alignItems: 'center',
-        [theme.breakpoints.down('sm')]: {
-            flexDirection: 'column',
-            justifyContent: 'center',
-            width: '100%',
-            marginTop: theme.spacing(mobileInputMarginSpacing),
-        },
-    },
-    selectLevelForm: {
-        marginRight: theme.spacing(3),
-        width: 200,
-        [theme.breakpoints.down('sm')]: {
-            width: '100%',
-            marginRight: 0,
-        },
-    },
-    firstNameFormField: {
-        width: '50%',
-        marginRight: theme.spacing(1),
-        [theme.breakpoints.down('sm')]: {
-            marginRight: 0,
-            width: '100%',
-        },
-    },
-    lastNameFormField: {
-        width: '50%',
-        marginLeft: theme.spacing(1),
-        [theme.breakpoints.down('sm')]: {
-            width: '100%',
-            marginLeft: 0,
-            marginTop: theme.spacing(mobileInputMarginSpacing),
-        },
-    },
-    submitButtonContainer: {
-        marginTop: theme.spacing(5),
-        display: 'flex',
-        justifyContent: 'flex-end',
-        [theme.breakpoints.down('sm')]: {
-            width: '100%',
-        },
-    },
-    submitButton: {
-        [theme.breakpoints.down('sm')]: {
-            width: '100%',
-        },
-    },
-    zipInput: {
-        marginRight: theme.spacing(2),
-        marginLeft: theme.spacing(2),
-        [theme.breakpoints.down('sm')]: {
-            margin: `${theme.spacing(mobileInputMarginSpacing)} 0 ${theme.spacing(mobileInputMarginSpacing)} 0`,
-        },
-    },
-    textField: {
-        height: 72,
+}));
+
+const FirstNameFormField = styled(TextField)(({ theme }) => ({
+    width: '50%',
+    marginRight: theme.spacing(1),
+    [theme.breakpoints.down('sm')]: {
+        marginRight: 0,
         width: '100%',
     },
 }));
 
+const LastNameFormField = styled(TextField)(({ theme }) => ({
+    width: '50%',
+    marginLeft: theme.spacing(1),
+    [theme.breakpoints.down('sm')]: {
+        width: '100%',
+        marginLeft: 0,
+        marginTop: theme.spacing(mobileInputMarginSpacing),
+    },
+}));
+
+const SubmitButtonContainer = styled('div')(({ theme }) => ({
+    marginTop: theme.spacing(5),
+    display: 'flex',
+    justifyContent: 'flex-end',
+    [theme.breakpoints.down('sm')]: {
+        width: '100%',
+    },
+}));
+
+const SubmitButton = styled(Button)(({ theme }) => ({
+    [theme.breakpoints.down('sm')]: {
+        width: '100%',
+    },
+}));
+
+const ZipInput = styled(TextField)(({ theme }) => ({
+    marginRight: theme.spacing(2),
+    marginLeft: theme.spacing(2),
+    [theme.breakpoints.down('sm')]: {
+        margin: `${theme.spacing(mobileInputMarginSpacing)} 0 ${theme.spacing(mobileInputMarginSpacing)} 0`,
+    },
+}));
+
+const StyledTextField = styled(TextField)(({ theme }) => ({
+    height: 72,
+    width: '100%',
+}));
+
 export const SectionedFormValidation = (): JSX.Element => {
     const theme = useTheme();
-    const classes = useStyles(theme);
     const dispatch = useDispatch();
     const [name, setName] = useState('');
     const [level, setLevel] = useState('level II');
@@ -251,8 +263,8 @@ export const SectionedFormValidation = (): JSX.Element => {
 
     return (
         <>
-            <AppBar data-cy={'blui-toolbar'} position={'sticky'} classes={{ root: classes.appbarRoot }}>
-                <Toolbar classes={{ gutters: classes.toolbarGutters }}>
+            <AppBarRoot data-cy={'blui-toolbar'} position={'sticky'}>
+                <ToolbarGutters>
                     {md ? null : (
                         <IconButton
                             data-cy={'toolbar-menu'}
@@ -270,19 +282,20 @@ export const SectionedFormValidation = (): JSX.Element => {
                     <Typography variant={'h6'} color={'inherit'}>
                         Sectioned Form
                     </Typography>
-                </Toolbar>
-            </AppBar>
+                </ToolbarGutters>
+            </AppBarRoot>
 
-            <div className={classes.containerWrapper}>
-                <div className={classes.container}>
+            <ContainerWrapper>
+                <Container>
                     <div style={{ display: 'flex', alignItems: 'center', marginBottom: theme.spacing(3) }}>
-                        <Factory className={classes.icon} />
+                        <Icon>
+                            <Factory />
+                        </Icon>
                         <Typography variant={'h6'}>Factory</Typography>
                     </div>
                     <div>
-                        <TextField
+                        <StyledTextField
                             required
-                            className={classes.textField}
                             value={name}
                             label={'Name'}
                             variant={'filled'}
@@ -296,8 +309,8 @@ export const SectionedFormValidation = (): JSX.Element => {
                         />
                     </div>
 
-                    <div className={classes.formLine}>
-                        <FormControl className={classes.selectLevelForm} variant={'filled'}>
+                    <FormLine>
+                        <SelectLevelForm variant={'filled'}>
                             <InputLabel htmlFor={'select-level'}>Level</InputLabel>
                             <Select
                                 fullWidth
@@ -313,7 +326,7 @@ export const SectionedFormValidation = (): JSX.Element => {
                                 <MenuItem value={'level II'}>Level II (Regional)</MenuItem>
                                 <MenuItem value={'level III'}>Level III (Regional)</MenuItem>
                             </Select>
-                        </FormControl>
+                        </SelectLevelForm>
                         {smDown ? null : (
                             <>
                                 <FormControlLabel control={<Checkbox name={'checkedC'} />} label={bluiProtection} />
@@ -344,12 +357,14 @@ export const SectionedFormValidation = (): JSX.Element => {
                                 </div>
                             </div>
                         )}
-                    </div>
+                    </FormLine>
 
-                    <Divider className={classes.divider} />
+                    <StyledDivider />
 
                     <div style={{ display: 'flex', alignItems: 'center', marginBottom: theme.spacing(3) }}>
-                        <LocationOn className={classes.icon} />
+                        <Icon>
+                            <LocationOn />
+                        </Icon>
                         <Typography variant={'h6'}>Address</Typography>
                     </div>
 
@@ -360,11 +375,10 @@ export const SectionedFormValidation = (): JSX.Element => {
                         </Typography>
                     </div>
 
-                    <div className={classes.formLine}>
-                        <TextField
+                    <FormLine>
+                        <StyledTextField
                             required
                             inputRef={addressRef}
-                            className={classes.textField}
                             value={address}
                             label={'Address'}
                             variant={'filled'}
@@ -374,21 +388,19 @@ export const SectionedFormValidation = (): JSX.Element => {
                             InputLabelProps={{ required: false }}
                             id={'address-field'}
                         />
-                    </div>
-                    <div className={classes.formLine}>
-                        <TextField
-                            className={classes.textField}
+                    </FormLine>
+                    <FormLine>
+                        <StyledTextField
                             value={addressLine2}
                             label={'Address Line 2 (Optional)'}
                             variant={'filled'}
                             onChange={(e): void => setAddressLine2(e.target.value)}
                         />
-                    </div>
-                    <div className={classes.formLine}>
-                        <TextField
+                    </FormLine>
+                    <FormLine>
+                        <StyledTextField
                             required
                             inputRef={cityRef}
-                            className={classes.textField}
                             value={city}
                             label={'City'}
                             variant={'filled'}
@@ -398,16 +410,9 @@ export const SectionedFormValidation = (): JSX.Element => {
                             onChange={(e): void => setCity(e.target.value)}
                             id={'city-field'}
                         />
-                    </div>
-                    <div className={classes.formLine}>
-                        <FormControl
-                            variant={'filled'}
-                            required
-                            fullWidth
-                            className={classes.textField}
-                            id={'state-field'}
-                            error={showRequiredError && !state}
-                        >
+                    </FormLine>
+                    <FormLine>
+                        <FormControl variant={'filled'} required fullWidth error={showRequiredError && !state}>
                             <InputLabel id={'select-state'} required={false}>
                                 State
                             </InputLabel>
@@ -424,10 +429,9 @@ export const SectionedFormValidation = (): JSX.Element => {
                             {showRequiredError && !state && <FormHelperText error={true}>Required</FormHelperText>}
                         </FormControl>
 
-                        <TextField
+                        <ZipInput
                             required
                             inputRef={zipRef}
-                            className={clsx(classes.zipInput, classes.textField)}
                             value={zip}
                             label={'Zip'}
                             variant={'filled'}
@@ -442,27 +446,27 @@ export const SectionedFormValidation = (): JSX.Element => {
                             id={'zip-field'}
                         />
 
-                        <TextField
+                        <StyledTextField
                             disabled
                             style={{ minWidth: 170 }}
-                            className={classes.textField}
                             value={'United States'}
                             label={'Country'}
                             variant={'filled'}
                         />
-                    </div>
+                    </FormLine>
 
-                    <Divider className={classes.divider} />
+                    <StyledDivider />
 
                     <div style={{ display: 'flex', alignItems: 'center', marginBottom: theme.spacing(3) }}>
-                        <ContactMail className={classes.icon} />
+                        <Icon>
+                            <ContactMail />
+                        </Icon>
                         <Typography variant={'h6'}>Key Contact</Typography>
                     </div>
 
-                    <div className={classes.formLine}>
-                        <TextField
+                    <FormLine>
+                        <FirstNameFormField
                             inputRef={firstNameRef}
-                            className={clsx(classes.firstNameFormField, classes.textField)}
                             value={firstName}
                             label={'First Name'}
                             variant={'filled'}
@@ -472,20 +476,18 @@ export const SectionedFormValidation = (): JSX.Element => {
                             InputLabelProps={{ required: false }}
                             id={'first-name-field'}
                         />
-                        <TextField
-                            className={clsx(classes.lastNameFormField, classes.textField)}
+                        <LastNameFormField
                             value={lastName}
                             label={'Last Name (Optional)'}
                             variant={'filled'}
                             onChange={(e): void => setLastName(e.target.value)}
                         />
-                    </div>
+                    </FormLine>
 
-                    <div className={classes.formLine}>
-                        <TextField
+                    <FormLine>
+                        <StyledTextField
                             required
                             inputRef={emailRef}
-                            className={classes.textField}
                             value={email}
                             label={'Email'}
                             variant={'filled'}
@@ -496,28 +498,19 @@ export const SectionedFormValidation = (): JSX.Element => {
                             onBlur={onEmailBlur}
                             id={'email-field'}
                         />
-                    </div>
+                    </FormLine>
 
                     {smUp ? null : (
-                        <Divider
-                            className={classes.divider}
-                            style={{ marginBottom: theme.spacing(-3), marginTop: theme.spacing(4) }}
-                        />
+                        <StyledDivider style={{ marginBottom: theme.spacing(-3), marginTop: theme.spacing(4) }} />
                     )}
 
-                    <div className={classes.submitButtonContainer}>
-                        <Button
-                            className={classes.submitButton}
-                            color={'primary'}
-                            variant={'contained'}
-                            onClick={onSubmit}
-                            id={'submit-button'}
-                        >
+                    <SubmitButtonContainer>
+                        <SubmitButton color={'primary'} variant={'contained'} onClick={onSubmit} id={'submit-button'}>
                             Submit
-                        </Button>
-                    </div>
-                </div>
-            </div>
+                        </SubmitButton>
+                    </SubmitButtonContainer>
+                </Container>
+            </ContainerWrapper>
         </>
     );
 };
