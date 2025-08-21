@@ -3,8 +3,6 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import viteTsconfigPaths from 'vite-tsconfig-paths';
 // import { config } from 'dotenv';
-import dts from 'vite-plugin-dts';
-import * as path from 'path';
 
 // // Load okta environment variables from .env.test file when running tests that require okta auth
 // if (process.env.NODE_ENV === 'test') {
@@ -15,14 +13,7 @@ import * as path from 'path';
 
 export default defineConfig({
     base: '/',
-    plugins: [
-        react(),
-        viteTsconfigPaths(),
-        dts({
-            entryRoot: 'src',
-            tsconfigPath: path.join(__dirname, 'tsconfig.json'),
-        }),
-    ],
+    plugins: [react(), viteTsconfigPaths()],
     define: {
         'process.env': process.env,
     },
