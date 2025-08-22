@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useCallback } from 'react';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
@@ -13,9 +14,8 @@ import { Spacer, InfoListItem } from '@brightlayer-ui/react-components';
 import { useDispatch } from 'react-redux';
 import { TOGGLE_DRAWER } from '../../../redux/actions';
 import { Menu as MenuIcon } from '@mui/icons-material';
-import { useTheme, Tooltip, useMediaQuery } from '@mui/material';
+import { styled, useTheme, Tooltip, useMediaQuery } from '@mui/material';
 import { EmptyState } from './EmptyState';
-import makeStyles from '@mui/styles/makeStyles';
 
 type Option = 'Delete' | 'View Details';
 type Item = {
@@ -24,13 +24,12 @@ type Item = {
     details: string;
 };
 
-const useStyles = makeStyles(() => ({
-    appbarRoot: {
-        padding: 0,
-    },
-    toolbarGutters: {
-        padding: '0 16px',
-    },
+const StyledAppBar = styled(AppBar)(({ theme }) => ({
+    padding: 0,
+}));
+
+const StyledToolbar = styled(Toolbar)(({ theme }) => ({
+    padding: '0 16px',
 }));
 
 const createItem = (index: number): Item => ({
@@ -55,7 +54,6 @@ const options: Option[] = ['Delete', 'View Details'];
 export const ActionList = (): JSX.Element => {
     const dispatch = useDispatch();
     const theme = useTheme();
-    const classes = useStyles();
 
     const [list, setList] = useState<Item[]>(generatedList);
     const [menuPosition, setMenuPosition] = useState<null | HTMLElement>(null);
@@ -97,8 +95,8 @@ export const ActionList = (): JSX.Element => {
 
     return (
         <div style={{ backgroundColor: theme.palette.background.paper, minHeight: '100vh' }}>
-            <AppBar position={'sticky'} classes={{ root: classes.appbarRoot }}>
-                <Toolbar data-cy={'blui-toolbar'} classes={{ gutters: classes.toolbarGutters }}>
+            <StyledAppBar position={'sticky'}>
+                <StyledToolbar data-cy={'blui-toolbar'}>
                     {md ? null : (
                         <IconButton
                             data-cy="toolbar-menu"
@@ -144,8 +142,8 @@ export const ActionList = (): JSX.Element => {
                             <AddIcon />
                         </IconButton>
                     </Tooltip>
-                </Toolbar>
-            </AppBar>
+                </StyledToolbar>
+            </StyledAppBar>
             {list.length < 1 && <EmptyState onAddItem={onAddItem} />}
             <List data-cy={'list-content'} disablePadding component="nav" className={'list'}>
                 {list.map(

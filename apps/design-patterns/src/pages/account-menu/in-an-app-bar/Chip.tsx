@@ -1,31 +1,38 @@
 import React from 'react';
-import { Chip as MuiChip, ChipProps as MuiChipProps, Typography, Theme, useTheme } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
+import { Chip as MuiChip, ChipProps as MuiChipProps, Typography, styled } from '@mui/material';
 import * as colors from '@brightlayer-ui/colors';
 
-const useStyles = makeStyles((theme: Theme) => ({
-    userMenuChip: {
-        height: theme.spacing(4),
-        cursor: 'pointer',
-    },
-    chipIcon: {
-        height: theme.spacing(3),
-        width: theme.spacing(3),
-    },
-    chipLabelContainer: {
-        display: 'flex',
-        alignItems: 'center',
-        marginRight: theme.spacing(-1),
-    },
-    chipLabelText: {
-        marginRight: theme.spacing(1),
-    },
-    enableHighlight: {
-        backgroundColor: colors.white[500],
-    },
-    disableHighlight: {
-        backgroundColor: colors.white[50],
-    },
+const UserMenuChip = styled(MuiChip, {
+    shouldForwardProp: (prop) => prop !== 'highlight',
+})<{ highlight: boolean }>(({ theme, highlight }) => ({
+    height: theme.spacing(4),
+    cursor: 'pointer',
+    ...(highlight
+        ? {
+              '&.MuiChip-outlined': {
+                  backgroundColor: colors.white[500],
+              },
+          }
+        : {
+              '&.MuiChip-outlined': {
+                  backgroundColor: colors.white[50],
+              },
+          }),
+}));
+
+const ChipIcon = styled('span')(({ theme }) => ({
+    height: theme.spacing(3),
+    width: theme.spacing(3),
+}));
+
+const ChipLabelContainer = styled('div')(({ theme }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    marginRight: theme.spacing(-1),
+}));
+
+const ChipLabelText = styled(Typography)(({ theme }) => ({
+    marginRight: theme.spacing(1),
 }));
 
 type ChipProps = MuiChipProps & {
@@ -35,27 +42,21 @@ type ChipProps = MuiChipProps & {
 };
 
 export const Chip = (props: ChipProps): JSX.Element => {
-    const { label, rightIcon, highlight, ...chipProps } = props;
-    const theme = useTheme();
-    const classes = useStyles(theme);
+    const { label, rightIcon, highlight, icon, ...chipProps } = props;
 
     return (
-        <MuiChip
+        <UserMenuChip
             {...chipProps}
-            classes={{
-                root: classes.userMenuChip,
-                icon: classes.chipIcon,
-                outlined: highlight ? classes.enableHighlight : classes.disableHighlight,
-            }}
+            highlight={highlight}
+            icon={icon ? <ChipIcon>{icon}</ChipIcon> : undefined}
             label={
-                <div className={classes.chipLabelContainer}>
-                    <Typography variant={'body2'} className={classes.chipLabelText}>
-                        {label}
-                    </Typography>
+                <ChipLabelContainer>
+                    <ChipLabelText variant={'body2'}>{label}</ChipLabelText>
                     {rightIcon}
-                </div>
+                </ChipLabelContainer>
             }
             clickable={true}
+            variant="outlined"
         />
     );
 };

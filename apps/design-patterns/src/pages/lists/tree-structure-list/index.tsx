@@ -6,42 +6,45 @@ import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useTheme, Theme } from '@mui/material/styles';
-import makeStyles from '@mui/styles/makeStyles';
+import { useTheme, styled } from '@mui/material/styles';
 import { useDispatch } from 'react-redux';
 import { TOGGLE_DRAWER } from '../../../redux/actions';
 import { TreeItem, TreeItemComponent } from './tree-item-component';
 
-const useStyles = makeStyles((theme: Theme) => ({
-    container: {
-        minHeight: '100vh',
-        [theme.breakpoints.down('md')]: {
-            display: 'flex',
-            flexDirection: 'column',
-        },
-    },
-    appbarRoot: {
-        padding: 0,
-    },
-    toolbarGutters: {
-        padding: `0 ${theme.spacing(2)}`,
-    },
-    toolbarTextContainer: {
+const Container = styled('div')(({ theme }) => ({
+    minHeight: '100vh',
+    [theme.breakpoints.down('md')]: {
         display: 'flex',
         flexDirection: 'column',
     },
-    toolBarSubtitle: {
-        marginTop: theme.spacing(-1),
-    },
-    contentContainer: {
-        maxWidth: 768,
-        padding: theme.spacing(3),
-        margin: '0 auto',
-        [theme.breakpoints.down('md')]: {
-            maxWidth: '100%',
-            padding: 0,
-            margin: 0,
-        },
+}));
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const AppBarRoot = styled(AppBar)(({ theme }) => ({
+    padding: 0,
+}));
+
+const ToolbarGutters = styled(Toolbar)(({ theme }) => ({
+    padding: `0 ${theme.spacing(2)}`,
+}));
+
+const ToolbarTextContainer = styled('div')({
+    display: 'flex',
+    flexDirection: 'column',
+});
+
+const ToolBarSubtitle = styled(Typography)(({ theme }) => ({
+    marginTop: theme.spacing(-1),
+}));
+
+const ContentContainer = styled('div')(({ theme }) => ({
+    maxWidth: 768,
+    padding: theme.spacing(3),
+    margin: '0 auto',
+    [theme.breakpoints.down('md')]: {
+        maxWidth: '100%',
+        padding: 0,
+        margin: 0,
     },
 }));
 
@@ -92,7 +95,6 @@ const treeItems: TreeItem[] = [
 export const TreeStructureList = (): JSX.Element => {
     const dispatch = useDispatch();
     const theme = useTheme();
-    const classes = useStyles(theme);
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
     const [selectedItem, setSelectedItem] = useState<number | null>(null);
     const md = useMediaQuery(theme.breakpoints.up('md'));
@@ -120,9 +122,9 @@ export const TreeStructureList = (): JSX.Element => {
     );
 
     return (
-        <div className={classes.container}>
-            <AppBar data-cy={'blui-toolbar'} position={'sticky'} classes={{ root: classes.appbarRoot }}>
-                <Toolbar classes={{ gutters: classes.toolbarGutters }}>
+        <Container>
+            <AppBarRoot data-cy={'blui-toolbar'} position={'sticky'}>
+                <ToolbarGutters>
                     {md ? null : (
                         <IconButton
                             data-cy="toolbar-menu"
@@ -137,19 +139,19 @@ export const TreeStructureList = (): JSX.Element => {
                             <MenuIcon />
                         </IconButton>
                     )}
-                    <div className={classes.toolbarTextContainer}>
+                    <ToolbarTextContainer>
                         <Typography variant={'h6'} color={'inherit'}>
                             Tree Structure
                         </Typography>
-                        <Typography classes={{ root: classes.toolBarSubtitle }} variant={'body1'} color={'inherit'}>
+                        <ToolBarSubtitle variant={'body1'} color={'inherit'}>
                             Folder Structure
-                        </Typography>
-                    </div>
-                </Toolbar>
-            </AppBar>
-            <div className={classes.contentContainer}>
+                        </ToolBarSubtitle>
+                    </ToolbarTextContainer>
+                </ToolbarGutters>
+            </AppBarRoot>
+            <ContentContainer>
                 <Card style={{ borderRadius: isMobile ? 0 : 4 }}>{renderTreeList()}</Card>
-            </div>
-        </div>
+            </ContentContainer>
+        </Container>
     );
 };

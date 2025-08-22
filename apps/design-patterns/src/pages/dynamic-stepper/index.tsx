@@ -1,8 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { useTheme, Theme } from '@mui/material/styles';
-
-import makeStyles from '@mui/styles/makeStyles';
-import createStyles from '@mui/styles/createStyles';
+import { useTheme, styled } from '@mui/material/styles';
 
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
@@ -34,45 +31,44 @@ import { TOGGLE_DRAWER } from '../../redux/actions';
 
 export const stepOptions: string[] = ['Buy Groceries', 'Cook Dinner', 'Go To Sleep', 'Go To Work', 'Wake Up'];
 
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        addButton: {
-            color: theme.palette.primary.main,
-            transformOrigin: 'center',
-            transform: 'scale(1.2)',
-            '&.disabled': {
-                color: theme.palette.text.disabled,
-            },
-        },
-        appbarRoot: {
-            padding: 0,
-        },
-        toolbarGutters: {
-            padding: '0 16px',
-        },
-        deleteButton: {
-            marginLeft: theme.spacing(1),
-            color: theme.palette.text.primary,
-            fontSize: 24,
-        },
-        stepIconText: {
-            color: theme.palette.background.paper,
-        },
-        bottomButton: {
-            marginTop: theme.spacing(3),
-        },
-        paddedContainer: {
-            padding: theme.spacing(3),
-        },
-    })
-);
+const AddButtonIcon = styled(Add)(({ theme }) => ({
+    color: theme.palette.primary.main,
+    transformOrigin: 'center',
+    transform: 'scale(1.2)',
+    '&.disabled': {
+        color: theme.palette.text.disabled,
+    },
+}));
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const AppBarRoot = styled(AppBar)(({ theme }) => ({
+    padding: 0,
+}));
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const ToolbarGutters = styled(Toolbar)(({ theme }) => ({
+    padding: '0 16px',
+}));
+
+const DeleteButtonIcon = styled(Delete)(({ theme }) => ({
+    marginLeft: theme.spacing(1),
+    color: theme.palette.text.primary,
+    fontSize: 24,
+}));
+
+const PaddedContainer = styled('div')(({ theme }) => ({
+    padding: theme.spacing(3),
+}));
+
+const BottomButton = styled(Button)(({ theme }) => ({
+    marginTop: theme.spacing(3),
+}));
 
 export const DynamicStepper = (): JSX.Element => {
     const dispatch = useDispatch();
     const theme = useTheme();
-    const classes = useStyles();
 
-    const [steps, setSteps] = useState([-1]); // -1 = 'waiting for user input', other = 'the user choice'
+    const [steps, setSteps] = useState([-1]);
     const [activeStep, setActiveStep] = useState(0);
     const [finished, setFinished] = useState(false);
     const md = useMediaQuery(theme.breakpoints.up('md'));
@@ -109,8 +105,8 @@ export const DynamicStepper = (): JSX.Element => {
 
     return (
         <div style={{ backgroundColor: theme.palette.background.paper, minHeight: '100vh' }}>
-            <AppBar data-cy="blui-toolbar" position={'sticky'} classes={{ root: classes.appbarRoot }}>
-                <Toolbar classes={{ gutters: classes.toolbarGutters }}>
+            <AppBarRoot data-cy="blui-toolbar" position={'sticky'}>
+                <ToolbarGutters>
                     {md ? null : (
                         <IconButton
                             data-cy="toolbar-menu"
@@ -142,29 +138,23 @@ export const DynamicStepper = (): JSX.Element => {
                             <DeleteSweep />
                         </IconButton>
                     </Tooltip>
-                </Toolbar>
-            </AppBar>
+                </ToolbarGutters>
+            </AppBarRoot>
             <div data-cy={'reset-page'}>
                 {finished && (
-                    <div className={classes.paddedContainer}>
+                    <PaddedContainer>
                         <Typography data-cy="success msg" variant={'body1'} color={'textPrimary'}>
                             Procedure created successfully.
                         </Typography>
-                        <Button
-                            variant={'contained'}
-                            data-cy={'reset'}
-                            color={'primary'}
-                            className={classes.bottomButton}
-                            onClick={reset}
-                        >
+                        <BottomButton variant={'contained'} data-cy={'reset'} color={'primary'} onClick={reset}>
                             Reset
-                        </Button>
-                    </div>
+                        </BottomButton>
+                    </PaddedContainer>
                 )}
                 {!finished && (
                     <>
                         <Stepper
-                            classes={{ root: classes.paddedContainer }}
+                            sx={{ padding: theme.spacing(3) }}
                             nonLinear
                             activeStep={activeStep}
                             orientation={'vertical'}
@@ -190,7 +180,9 @@ export const DynamicStepper = (): JSX.Element => {
                                                     data-cy={'remove-step'}
                                                     placement={'right'}
                                                 >
-                                                    <Delete className={classes.deleteButton} onClick={removeStep} />
+                                                    <span>
+                                                        <DeleteButtonIcon onClick={removeStep} />
+                                                    </span>
                                                 </Tooltip>
                                             )}
                                         </div>
@@ -226,10 +218,9 @@ export const DynamicStepper = (): JSX.Element => {
                             >
                                 <StepButton
                                     icon={
-                                        <Add
+                                        <AddButtonIcon
                                             className={
-                                                classes.addButton +
-                                                (steps.length > 0 && steps[steps.length - 1] === -1 ? ' disabled' : '')
+                                                steps.length > 0 && steps[steps.length - 1] === -1 ? 'disabled' : ''
                                             }
                                         />
                                     }
@@ -237,9 +228,7 @@ export const DynamicStepper = (): JSX.Element => {
                                 >
                                     <Typography
                                         variant={'body1'}
-                                        className={
-                                            steps.length > 0 && steps[steps.length - 1] === -1 ? ' disabled' : ''
-                                        }
+                                        className={steps.length > 0 && steps[steps.length - 1] === -1 ? 'disabled' : ''}
                                     >
                                         Add a Step
                                     </Typography>
@@ -250,7 +239,7 @@ export const DynamicStepper = (): JSX.Element => {
                             variant={'contained'}
                             data-cy={'done'}
                             color={'primary'}
-                            style={{ marginLeft: theme.spacing(3) }}
+                            sx={{ marginLeft: theme.spacing(3) }}
                             onClick={(): void => setFinished(true)}
                         >
                             Done

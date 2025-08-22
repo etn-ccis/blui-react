@@ -1,6 +1,6 @@
 import React from 'react';
-import { Avatar, IconButton, Typography, Theme, useTheme } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
+import { Avatar, IconButton, Typography, Box } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import { Dashboard, Notifications, ExitToApp, Settings, VpnKey } from '@mui/icons-material';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -19,41 +19,6 @@ import { Device } from '@brightlayer-ui/icons-mui';
 import backgroundImage from '../../../assets/cubes_tile.png';
 const linearGradientOverlayImage = `linear-gradient(to right, rgba(0, 123, 193, 1) 22.4%, rgba(0, 123, 193, 0.2) 100%), url(${backgroundImage})`;
 
-const useStyles = makeStyles((theme: Theme) => ({
-    avatarSize: {
-        height: '48px',
-        width: '48px',
-    },
-    backgroundGradient: {
-        backgroundImage: `${linearGradientOverlayImage}`,
-        backgroundSize: 'contain',
-        backgroundPosition: 'right',
-    },
-    closeIcon: {
-        marginRight: theme.spacing(-2),
-        marginTop: theme.spacing(-4),
-    },
-    extendedHeader: {
-        width: '100%',
-        padding: `${theme.spacing(2)} ${theme.spacing(2)} ${theme.spacing(0.5)}`,
-    },
-    header: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        zIndex: 1,
-        alignItems: 'center',
-        width: '100%',
-        height: '100%',
-    },
-    headerDetails: {
-        paddingTop: theme.spacing(2),
-        position: 'relative',
-    },
-    subtitle: {
-        marginTop: theme.spacing(-0.5),
-    },
-}));
-
 type DrawerProps = {
     open: boolean;
     toggleDrawer: () => void;
@@ -61,10 +26,41 @@ type DrawerProps = {
 
 import avatarImage from '../../../assets/avatar_40.png';
 
+const AvatarSize = styled(Avatar)({
+    height: '48px',
+    width: '48px',
+});
+
+const CloseIconButton = styled(IconButton)(({ theme }) => ({
+    marginRight: theme.spacing(-2),
+    marginTop: theme.spacing(-4),
+}));
+
+const ExtendedHeader = styled(Box)(({ theme }) => ({
+    width: '100%',
+    padding: `${theme.spacing(2)} ${theme.spacing(2)} ${theme.spacing(0.5)}`,
+}));
+
+const Header = styled(Box)({
+    display: 'flex',
+    justifyContent: 'space-between',
+    zIndex: 1,
+    alignItems: 'center',
+    width: '100%',
+    height: '100%',
+});
+
+const HeaderDetails = styled(Box)(({ theme }) => ({
+    paddingTop: theme.spacing(2),
+    position: 'relative',
+}));
+
+const Subtitle = styled(Typography)(({ theme }) => ({
+    marginTop: theme.spacing(-0.5),
+}));
+
 export const BluiDrawer = (props: DrawerProps): JSX.Element => {
     const { open, toggleDrawer } = props;
-    const theme = useTheme();
-    const classes = useStyles(theme);
     const variant = 'temporary';
     const selected = '1';
 
@@ -123,27 +119,24 @@ export const BluiDrawer = (props: DrawerProps): JSX.Element => {
     ];
 
     const DrawerHeaderContent = (): JSX.Element => (
-        <div className={classes.extendedHeader}>
-            <div className={classes.header}>
-                <Avatar alt="Chima Thabani" src={avatarImage} classes={{ root: classes.avatarSize }} />
-                <IconButton
+        <ExtendedHeader>
+            <Header>
+                <AvatarSize alt="Chima Thabani" src={avatarImage} />
+                <CloseIconButton
                     data-cy="toolbar-menu"
                     color={'inherit'}
                     edge={'end'}
-                    classes={{ edgeEnd: classes.closeIcon }}
                     onClick={toggleDrawer}
                     size="large"
                 >
                     <CloseIcon />
-                </IconButton>
-            </div>
-            <div className={classes.headerDetails}>
+                </CloseIconButton>
+            </Header>
+            <HeaderDetails>
                 <Typography variant={'h6'}>Chima Thabani</Typography>
-                <Typography variant={'body1'} className={classes.subtitle}>
-                    CThabani@example.com
-                </Typography>
-            </div>
-        </div>
+                <Subtitle variant={'body1'}>CThabani@example.com</Subtitle>
+            </HeaderDetails>
+        </ExtendedHeader>
     );
     return (
         <DrawerLayout
@@ -153,15 +146,16 @@ export const BluiDrawer = (props: DrawerProps): JSX.Element => {
                     width={292}
                     variant={variant}
                     condensed={false}
-                    ModalProps={{
-                        onBackdropClick: toggleDrawer,
-                    }}
+                    onClose={toggleDrawer}
                     activeItem={selected}
                     activeItemBackgroundShape={'round'}
                 >
                     <DrawerHeader
-                        backgroundImage={backgroundImage}
-                        classes={{ background: classes.backgroundGradient }}
+                        sx={{
+                            backgroundImage: `${linearGradientOverlayImage}`,
+                            backgroundSize: 'contain',
+                            backgroundPosition: 'right',
+                        }}
                         backgroundOpacity={0.5}
                         titleContent={<DrawerHeaderContent />}
                         data-cy={'drawer-header'}

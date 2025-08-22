@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useCallback, useEffect, useState, useRef } from 'react';
 import {
     AppBar,
@@ -12,8 +13,7 @@ import {
     useMediaQuery,
 } from '@mui/material';
 import { Add, CheckCircle, Menu, Search } from '@mui/icons-material';
-import { Theme, useTheme } from '@mui/material/styles';
-import makeStyles from '@mui/styles/makeStyles';
+import { useTheme, styled } from '@mui/material/styles';
 import { useDispatch } from 'react-redux';
 import { TOGGLE_DRAWER } from '../../../redux/actions';
 import { EmptyState } from '@brightlayer-ui/react-components';
@@ -21,58 +21,61 @@ import { EmptyState } from '@brightlayer-ui/react-components';
 type OnChangeHandler = InputProps['onChange'];
 const slideAnimationDurationMs = 250;
 
-const useStyles = makeStyles((theme: Theme) => ({
-    appbarRoot: {
-        padding: 0,
-    },
-    toolbarGutters: {
-        padding: '0 16px',
-    },
-    containerWrapper: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'start',
-        flex: '1 1 0',
-        backgroundColor: theme.palette.background.default,
-        height: 'calc(100vh - 64px)',
-        overflow: 'hidden',
-        [theme.breakpoints.down('sm')]: {
-            height: 'calc(100vh - 56px)',
-        },
-    },
-    container: {
-        height: '100%',
-        width: '100%',
-        maxWidth: 480,
-        padding: theme.spacing(4),
-        [theme.breakpoints.down('sm')]: {
-            padding: theme.spacing(2),
-            maxWidth: '100%',
-        },
-    },
-    submitButton: {
-        height: 36,
-        marginTop: theme.spacing(4),
-        width: 152,
-        [theme.breakpoints.down('sm')]: {
-            width: '100%',
-        },
-    },
-    buttonContainer: {
-        display: 'flex',
-        justifyContent: 'flex-end',
-    },
-    deviceAdded: {
-        display: 'flex',
-        alignItems: 'center',
-        height: '100%',
-        justifyContent: 'center',
+const AppBarRoot = styled(AppBar)(({ theme }) => ({
+    padding: 0,
+}));
+
+const ToolbarGutters = styled(Toolbar)(({ theme }) => ({
+    padding: '0 16px',
+}));
+
+const ContainerWrapper = styled('div')(({ theme }) => ({
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'start',
+    flex: '1 1 0',
+    backgroundColor: theme.palette.background.default,
+    height: 'calc(100vh - 64px)',
+    overflow: 'hidden',
+    [theme.breakpoints.down('sm')]: {
+        height: 'calc(100vh - 56px)',
     },
 }));
 
+const Container = styled('div')(({ theme }) => ({
+    height: '100%',
+    width: '100%',
+    maxWidth: 480,
+    padding: theme.spacing(4),
+    [theme.breakpoints.down('sm')]: {
+        padding: theme.spacing(2),
+        maxWidth: '100%',
+    },
+}));
+
+const SubmitButton = styled(Button)(({ theme }) => ({
+    height: 36,
+    marginTop: theme.spacing(4),
+    width: 152,
+    [theme.breakpoints.down('sm')]: {
+        width: '100%',
+    },
+}));
+
+const ButtonContainer = styled('div')({
+    display: 'flex',
+    justifyContent: 'flex-end',
+});
+
+const DeviceAdded = styled('div')({
+    display: 'flex',
+    alignItems: 'center',
+    height: '100%',
+    justifyContent: 'center',
+});
+
 export const VerifyOnSubmitValidation = (): JSX.Element => {
     const theme = useTheme();
-    const classes = useStyles(theme);
     const dispatch = useDispatch();
     const [serialNumber, setSerialNumber] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
@@ -116,8 +119,8 @@ export const VerifyOnSubmitValidation = (): JSX.Element => {
 
     return (
         <>
-            <AppBar data-cy={'blui-toolbar'} position={'sticky'} classes={{ root: classes.appbarRoot }}>
-                <Toolbar classes={{ gutters: classes.toolbarGutters }}>
+            <AppBarRoot data-cy={'blui-toolbar'} position={'sticky'}>
+                <ToolbarGutters>
                     {md ? null : (
                         <IconButton
                             data-cy={'toolbar-menu'}
@@ -135,11 +138,11 @@ export const VerifyOnSubmitValidation = (): JSX.Element => {
                     <Typography variant={'h6'} color={'inherit'}>
                         Verify on Submit
                     </Typography>
-                </Toolbar>
-            </AppBar>
+                </ToolbarGutters>
+            </AppBarRoot>
 
-            <div className={classes.containerWrapper}>
-                <div className={classes.container}>
+            <ContainerWrapper>
+                <Container>
                     <Slide
                         direction={'right'}
                         in={showAddDeviceScreen}
@@ -174,9 +177,8 @@ export const VerifyOnSubmitValidation = (): JSX.Element => {
                                 id={'serial-number'}
                             />
 
-                            <div className={classes.buttonContainer}>
-                                <Button
-                                    className={classes.submitButton}
+                            <ButtonContainer>
+                                <SubmitButton
                                     color={'primary'}
                                     variant={'contained'}
                                     startIcon={<>{!loading && <Search />}</>}
@@ -197,8 +199,8 @@ export const VerifyOnSubmitValidation = (): JSX.Element => {
                                             }}
                                         />
                                     )}
-                                </Button>
-                            </div>
+                                </SubmitButton>
+                            </ButtonContainer>
                         </div>
                     </Slide>
 
@@ -209,7 +211,7 @@ export const VerifyOnSubmitValidation = (): JSX.Element => {
                         unmountOnExit
                         timeout={slideAnimationDurationMs}
                     >
-                        <div className={classes.deviceAdded}>
+                        <DeviceAdded>
                             <EmptyState
                                 title={'Success'}
                                 description={`Device "${serialNumber}" has been added to your repository.`}
@@ -232,10 +234,10 @@ export const VerifyOnSubmitValidation = (): JSX.Element => {
                                     </Button>
                                 }
                             />
-                        </div>
+                        </DeviceAdded>
                     </Slide>
-                </div>
-            </div>
+                </Container>
+            </ContainerWrapper>
         </>
     );
 };

@@ -10,8 +10,7 @@ import {
     Typography,
     useMediaQuery,
 } from '@mui/material';
-import { Theme, useTheme } from '@mui/material/styles';
-import makeStyles from '@mui/styles/makeStyles';
+import { useTheme, styled } from '@mui/material/styles';
 import HelpIcon from '@mui/icons-material/Help';
 import MenuIcon from '@mui/icons-material/Menu';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -23,64 +22,72 @@ import { Close, Search } from '@mui/icons-material';
 
 type OnChangeHandler = InputProps['onChange'];
 
-const useStyles = makeStyles((theme: Theme) => ({
-    toolbarGutters: {
-        paddingLeft: theme.spacing(2),
-        paddingRight: theme.spacing(0.5),
+const ToolbarGutters = styled('div')(({ theme }) => ({
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(0.5),
+}));
+
+const BodyContent = styled('div')(({ theme }) => ({
+    maxWidth: '900px',
+    margin: '0 auto',
+    padding: `0 ${theme.spacing(2)}`,
+    [theme.breakpoints.down('sm')]: {
+        padding: 0,
     },
-    bodyContent: {
-        maxWidth: '900px',
-        margin: '0 auto',
-        padding: `0 ${theme.spacing(2)}`,
-        [theme.breakpoints.down('sm')]: {
-            padding: 0,
-        },
+}));
+
+const ToolbarRightContent = styled('div')({
+    display: 'flex',
+    flexDirection: 'row',
+});
+
+const AppBarRoot = styled('div')(({ theme }) => ({
+    zIndex: theme.zIndex.appBar + 1,
+}));
+
+const MobileAppbar = styled('div')(({ theme }) => ({
+    height: theme.spacing(7),
+    backgroundColor: theme.palette.background.paper,
+}));
+
+const MobileSearchToolbar = styled('div')(({ theme }) => ({
+    backgroundColor: theme.palette.background.paper,
+    height: theme.spacing(7),
+    overflowX: 'auto',
+}));
+
+const DesktopSearchContainer = styled('div')(({ theme }) => ({
+    display: 'flex',
+    marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(4),
+    marginRight: theme.spacing(4),
+}));
+
+const ResultsCard = styled(Card)(({ theme }) => ({
+    margin: `0 ${theme.spacing(4)}`,
+    [theme.breakpoints.down('sm')]: {
+        margin: 0,
+        borderRadius: 0,
     },
-    toolbarRightContent: {
-        display: 'flex',
-        flexDirection: 'row',
-    },
-    appBar: {
-        zIndex: theme.zIndex.appBar + 1,
-    },
-    mobileAppbar: {
-        height: theme.spacing(7),
-        backgroundColor: theme.palette.background.paper,
-    },
-    mobileSearchToolbar: {
-        backgroundColor: theme.palette.background.paper,
-        height: theme.spacing(7),
-        overflowX: 'auto',
-    },
-    desktopSearchContainer: {
-        display: 'flex',
+}));
+
+const NoResults = styled(Typography)(({ theme }) => ({
+    margin: `0 ${theme.spacing(4)}`,
+    [theme.breakpoints.down('sm')]: {
         marginTop: theme.spacing(4),
-        marginBottom: theme.spacing(4),
-        marginRight: theme.spacing(4),
     },
-    resultsCard: {
-        margin: `0 ${theme.spacing(4)}`,
-        [theme.breakpoints.down('sm')]: {
-            margin: 0,
-            borderRadius: 0,
+}));
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const OutlinedTextField = styled(TextField)(({ theme }) => ({
+    '& .MuiOutlinedInput-root': {
+        '& fieldset': {
+            borderRadius: '20px',
+            borderColor: 'red',
         },
-    },
-    noResults: {
-        margin: `0 ${theme.spacing(4)}`,
-        [theme.breakpoints.down('sm')]: {
-            marginTop: theme.spacing(4),
-        },
-    },
-    outlined: {
-        '& .MuiOutlinedInput-root': {
-            '& fieldset': {
-                borderRadius: '20px',
-                borderColor: 'red',
-            },
-            '&.Mui-focused fieldset': {
-                borderColor: '#C52328',
-                borderWidth: '2px',
-            },
+        '&.Mui-focused fieldset': {
+            borderColor: '#C52328',
+            borderWidth: '2px',
         },
     },
 }));
@@ -90,7 +97,6 @@ const data = ['Apple', 'Grape', 'Orange', 'Pineapple', 'Watermelon'];
 export const PageWideSearch = (): JSX.Element => {
     const dispatch = useDispatch();
     const theme = useTheme();
-    const classes = useStyles(theme);
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
     const md = useMediaQuery(theme.breakpoints.up('md'));
     const [searchTerm, setSearchTerm] = useState('');
@@ -124,82 +130,89 @@ export const PageWideSearch = (): JSX.Element => {
 
     return (
         <div style={{ minHeight: '100vh' }}>
-            <AppBar classes={{ root: classes.appBar }} variant={'collapsed'} position={'sticky'}>
-                <Toolbar data-cy={'toolbar'} classes={{ gutters: classes.toolbarGutters }}>
-                    {md ? null : (
-                        <IconButton
-                            data-cy="toolbar-menu"
-                            onClick={(): void => {
-                                dispatch({ type: TOGGLE_DRAWER, payload: true });
-                            }}
-                            color={'inherit'}
-                            edge={'start'}
-                            style={{ marginRight: 20 }}
-                            size="large"
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                    )}
-                    <Typography variant={'h6'} color={'inherit'}>
-                        {isMobile ? 'Page Search' : 'Page Wide Search'}
-                    </Typography>
-                    <Spacer />
-                    <div className={classes.toolbarRightContent}>
-                        <IconButton color={'inherit'} size="large">
-                            <HelpIcon />
-                        </IconButton>
-                        <IconButton color={'inherit'} size="large">
-                            <Badge color="error" badgeContent={88}>
-                                <NotificationsIcon />
-                            </Badge>
-                        </IconButton>
-                        <IconButton color={'inherit'} size="large">
-                            <MoreVertIcon />
-                        </IconButton>
-                    </div>
-                </Toolbar>
+            <AppBar variant={'collapsed'} position={'sticky'}>
+                <AppBarRoot>
+                    <Toolbar data-cy={'toolbar'}>
+                        <ToolbarGutters>
+                            {md ? null : (
+                                <IconButton
+                                    data-cy="toolbar-menu"
+                                    onClick={(): void => {
+                                        dispatch({ type: TOGGLE_DRAWER, payload: true });
+                                    }}
+                                    color={'inherit'}
+                                    edge={'start'}
+                                    style={{ marginRight: 20 }}
+                                    size="large"
+                                >
+                                    <MenuIcon />
+                                </IconButton>
+                            )}
+                        </ToolbarGutters>
+                        <Typography variant={'h6'} color={'inherit'}>
+                            {isMobile ? 'Page Search' : 'Page Wide Search'}
+                        </Typography>
+                        <Spacer />
+                        <ToolbarRightContent>
+                            <IconButton color={'inherit'} size="large">
+                                <HelpIcon />
+                            </IconButton>
+                            <IconButton color={'inherit'} size="large">
+                                <Badge color="error" badgeContent={88}>
+                                    <NotificationsIcon />
+                                </Badge>
+                            </IconButton>
+                            <IconButton color={'inherit'} size="large">
+                                <MoreVertIcon />
+                            </IconButton>
+                        </ToolbarRightContent>
+                    </Toolbar>
+                </AppBarRoot>
             </AppBar>
             {isMobile && (
-                <AppBar variant={'collapsed'} classes={{ root: classes.mobileAppbar }} elevation={0}>
-                    <Toolbar className={classes.mobileSearchToolbar} data-cy={'search-field'}>
-                        <TextField
-                            className={classes.outlined}
-                            placeholder="Search"
-                            variant="outlined"
-                            value={searchTerm}
-                            onChange={onSearchTermChange}
-                            InputProps={{
-                                startAdornment: (
-                                    <Search
-                                        style={{
-                                            marginRight: theme.spacing(4),
-                                            color: theme.palette.text.secondary,
-                                        }}
-                                    />
-                                ),
-                                endAdornment: searchTerm.length > 0 && (
-                                    <Close
-                                        onClick={(): void => {
-                                            setSearchTerm('');
-                                            search('');
-                                        }}
-                                        style={{
-                                            cursor: 'pointer',
-                                            color: theme.palette.text.secondary,
-                                            marginLeft: theme.spacing(1),
-                                        }}
-                                    />
-                                ),
-                            }}
-                            style={{ width: '100%' }}
-                        />
-                    </Toolbar>
+                <AppBar variant={'collapsed'} elevation={0}>
+                    <MobileAppbar>
+                        <MobileSearchToolbar>
+                            <Toolbar data-cy={'search-field'}>
+                                <OutlinedTextField
+                                    placeholder="Search"
+                                    variant="outlined"
+                                    value={searchTerm}
+                                    onChange={onSearchTermChange}
+                                    InputProps={{
+                                        startAdornment: (
+                                            <Search
+                                                style={{
+                                                    marginRight: theme.spacing(4),
+                                                    color: theme.palette.text.secondary,
+                                                }}
+                                            />
+                                        ),
+                                        endAdornment: searchTerm.length > 0 && (
+                                            <Close
+                                                onClick={(): void => {
+                                                    setSearchTerm('');
+                                                    search('');
+                                                }}
+                                                style={{
+                                                    cursor: 'pointer',
+                                                    color: theme.palette.text.secondary,
+                                                    marginLeft: theme.spacing(1),
+                                                }}
+                                            />
+                                        ),
+                                    }}
+                                    style={{ width: '100%' }}
+                                />
+                            </Toolbar>
+                        </MobileSearchToolbar>
+                    </MobileAppbar>
                 </AppBar>
             )}
             <Divider />
-            <div className={classes.bodyContent}>
+            <BodyContent>
                 {!isMobile && (
-                    <div className={classes.desktopSearchContainer}>
+                    <DesktopSearchContainer>
                         <Spacer />
                         <TextField
                             data-cy={'search-field'}
@@ -218,11 +231,11 @@ export const PageWideSearch = (): JSX.Element => {
                                 ),
                             }}
                         />
-                    </div>
+                    </DesktopSearchContainer>
                 )}
 
                 {searchResults.length > 0 && (
-                    <Card className={classes.resultsCard} elevation={isMobile ? 0 : undefined}>
+                    <ResultsCard elevation={isMobile ? 0 : undefined}>
                         {searchResults.map((item, index) => (
                             <InfoListItem
                                 data-cy={'list-items'}
@@ -235,15 +248,11 @@ export const PageWideSearch = (): JSX.Element => {
                                 divider={isMobile || index !== searchResults.length - 1 ? 'full' : undefined}
                             />
                         ))}
-                    </Card>
+                    </ResultsCard>
                 )}
 
-                {searchResults.length === 0 && (
-                    <Typography className={classes.noResults} variant={'body1'}>
-                        No results.
-                    </Typography>
-                )}
-            </div>
+                {searchResults.length === 0 && <NoResults variant={'body1'}>No results.</NoResults>}
+            </BodyContent>
         </div>
     );
 };

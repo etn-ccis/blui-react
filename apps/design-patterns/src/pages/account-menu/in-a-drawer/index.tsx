@@ -1,54 +1,43 @@
 import React, { useState } from 'react';
 import { AppBar, Button, Toolbar, Typography, IconButton, useMediaQuery } from '@mui/material';
-import { Theme, useTheme } from '@mui/material/styles';
-import makeStyles from '@mui/styles/makeStyles';
+import { useTheme, styled } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import { useDispatch } from 'react-redux';
 import { TOGGLE_DRAWER } from '../../../redux/actions';
 import { BluiDrawer } from './Drawer';
 
-const useStyles = makeStyles((theme: Theme) => ({
-    container: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        height: `calc(100vh - ${theme.spacing(8)})`,
-        [theme.breakpoints.down('sm')]: {
-            height: `calc(100vh - ${theme.spacing(7)})`,
-        },
+const StyledToolbar = styled(Toolbar)(({ theme }) => ({
+    padding: `0px ${theme.spacing(2)}`,
+}));
+
+const ButtonContainer = styled('div')(({ theme }) => ({
+    width: '100%',
+    height: `calc(100vh - ${theme.spacing(8)})`,
+    display: 'flex',
+    padding: 0,
+    overflow: 'auto',
+    position: 'relative',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    [theme.breakpoints.down('sm')]: {
+        height: `calc(100vh - ${theme.spacing(7)})`,
     },
-    toolbarGutters: {
-        padding: `0px ${theme.spacing(2)}`,
-    },
-    buttonContainer: {
-        width: '100%',
-        height: `calc(100vh - ${theme.spacing(8)})`,
-        display: 'flex',
-        padding: 0,
-        overflow: 'auto',
-        position: 'relative',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        [theme.breakpoints.down('sm')]: {
-            height: `calc(100vh - ${theme.spacing(7)})`,
-        },
-    },
-    centerButton: {
-        margin: 'auto',
-        display: 'flex',
-        zIndex: 4,
-        position: 'absolute',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
+}));
+
+const CenterButton = styled(Button)(() => ({
+    margin: 'auto',
+    display: 'flex',
+    zIndex: 4,
+    position: 'absolute',
+    alignItems: 'center',
+    justifyContent: 'center',
 }));
 
 export const InADrawer = (): JSX.Element => {
     const dispatch = useDispatch();
     const theme = useTheme();
-    const classes = useStyles();
     const [drawerOpen, setDrawerOpen] = useState(false);
     const md = useMediaQuery(theme.breakpoints.up('md'));
 
@@ -61,7 +50,7 @@ export const InADrawer = (): JSX.Element => {
                         setDrawerOpen(!drawerOpen);
                     }}
                 />
-                <Toolbar classes={{ gutters: classes.toolbarGutters }}>
+                <StyledToolbar>
                     {md ? null : (
                         <IconButton
                             data-cy="toolbar-menu"
@@ -80,22 +69,21 @@ export const InADrawer = (): JSX.Element => {
                         In a Drawer
                     </Typography>
                     <div />
-                </Toolbar>
+                </StyledToolbar>
             </AppBar>
-            <div className={classes.buttonContainer}>
-                <Button
+            <ButtonContainer>
+                <CenterButton
                     variant={'contained'}
                     color={'primary'}
                     startIcon={<MenuOpenIcon />}
-                    className={classes.centerButton}
                     onClick={(): void => setDrawerOpen(!drawerOpen)}
                     data-cy={'toggle-drawer'}
                 >
                     <Typography noWrap color={'inherit'}>
                         Open Drawer
                     </Typography>
-                </Button>
-            </div>
+                </CenterButton>
+            </ButtonContainer>
         </div>
     );
 };

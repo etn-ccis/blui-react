@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useCallback, useEffect } from 'react';
 import {
     AppBar,
@@ -16,8 +17,7 @@ import {
     useMediaQuery,
     useTheme,
 } from '@mui/material';
-import { Theme, createTheme, ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
-import makeStyles from '@mui/styles/makeStyles';
+import { Theme, createTheme, ThemeProvider, StyledEngineProvider, styled } from '@mui/material/styles';
 import * as BLUIThemes from '@brightlayer-ui/react-themes';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Folder, Description, Publish } from '@mui/icons-material';
@@ -44,72 +44,82 @@ const foldersList = [
 ];
 const uploadFileList: FolderItem[] = [];
 
-const useStyles = makeStyles((theme: Theme) => ({
-    container: {
-        padding: `${theme.spacing(2)} ${theme.spacing(2)}`,
-        maxWidth: 600,
-        margin: '0 auto',
-    },
-    cardContent: {
-        padding: 0,
-        '&:last-child': {
-            paddingBottom: 0,
-        },
-    },
-    uploadButtonContainer: {
-        textAlign: 'right',
-        paddingBottom: theme.spacing(2),
-    },
-    formControl: {
-        width: '100%',
-    },
-    radioLabel: {
-        display: 'flex',
-    },
-    icon: {
-        fill: Colors.black[200],
-        marginLeft: theme.spacing(0.5),
-    },
-    iconContainer: {
-        marginRight: theme.spacing(2),
-        maxWidth: '40px',
-        minWidth: '40px',
-        width: '40px',
-        marginTop: theme.spacing(1),
-    },
-    formLabel: {
-        margin: 0,
-        width: '100%',
-        padding: theme.spacing(1),
-        borderBottom: `1px solid ${theme.palette.divider}`,
-        '&:last-child': {
-            borderBottom: 'none',
-        },
-    },
-    toolbarGutters: {
-        padding: `0 ${theme.spacing(2)}`,
-    },
-    placementOfList: {
-        position: 'absolute',
-        bottom: theme.spacing(3),
-        right: theme.spacing(3),
-        [theme.breakpoints.down('sm')]: {
-            bottom: 0,
-            right: 0,
-            width: '100%',
-        },
-    },
-    fileUploadItem: {
-        marginBottom: theme.spacing(2),
-        '&:last-child': {
-            marginBottom: 0,
-        },
-    },
-    snackbarRoot: {
-        position: 'inherit',
-        transform: 'none',
+const Container = styled('div')(({ theme }) => ({
+    padding: `${theme.spacing(2)} ${theme.spacing(2)}`,
+    maxWidth: 600,
+    margin: '0 auto',
+}));
+
+const CardContentStyled = styled(CardContent)(({ theme }) => ({
+    padding: 0,
+    '&:last-child': {
+        paddingBottom: 0,
     },
 }));
+
+const UploadButtonContainer = styled('div')(({ theme }) => ({
+    textAlign: 'right',
+    paddingBottom: theme.spacing(2),
+}));
+
+const FormControlStyled = styled(FormControl)(({ theme }) => ({
+    width: '100%',
+}));
+
+const RadioLabel = styled('div')({
+    display: 'flex',
+});
+
+const IconStyled = styled(Folder)(({ theme }) => ({
+    fill: Colors.black[200],
+    marginLeft: theme.spacing(0.5),
+}));
+
+const IconContainer = styled('div')(({ theme }) => ({
+    marginRight: theme.spacing(2),
+    maxWidth: '40px',
+    minWidth: '40px',
+    width: '40px',
+    marginTop: theme.spacing(1),
+}));
+
+const FormLabelStyled = styled(FormControlLabel)(({ theme }) => ({
+    margin: 0,
+    width: '100%',
+    padding: theme.spacing(1),
+    borderBottom: `1px solid ${theme.palette.divider}`,
+    '&:last-child': {
+        borderBottom: 'none',
+    },
+}));
+
+const ToolbarGutters = styled(Toolbar)(({ theme }) => ({
+    padding: `0 ${theme.spacing(2)}`,
+}));
+
+const PlacementOfList = styled(List)(({ theme }) => ({
+    position: 'absolute',
+    bottom: theme.spacing(3),
+    right: theme.spacing(3),
+    [theme.breakpoints.down('sm')]: {
+        bottom: 0,
+        right: 0,
+        width: '100%',
+    },
+}));
+
+const FileUploadItem = styled('div')(({ theme }) => ({
+    marginBottom: theme.spacing(2),
+    '&:last-child': {
+        marginBottom: 0,
+    },
+}));
+
+const SnackbarRoot = styled('div')({
+    position: 'inherit',
+    transform: 'none',
+});
+
 const createFileItem = (increment: number): FolderItem => ({
     id: increment,
     name: 'Brightlayer UI is Awesome.pdf',
@@ -122,7 +132,6 @@ let nextFileIndex = 0;
 
 export const ProgressBar = (): JSX.Element => {
     const dispatch = useDispatch();
-    const classes = useStyles();
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
     const md = useMediaQuery(theme.breakpoints.up('md'));
@@ -184,7 +193,7 @@ export const ProgressBar = (): JSX.Element => {
     return (
         <div style={{ minHeight: '100vh' }}>
             <AppBar data-cy="blui-toolbar" position={'sticky'}>
-                <Toolbar classes={{ gutters: classes.toolbarGutters }}>
+                <ToolbarGutters>
                     {md ? null : (
                         <IconButton
                             data-cy="toolbar-menu"
@@ -203,10 +212,10 @@ export const ProgressBar = (): JSX.Element => {
                         Progress Bars
                     </Typography>
                     <div />
-                </Toolbar>
+                </ToolbarGutters>
             </AppBar>
-            <div className={classes.container}>
-                <div className={classes.uploadButtonContainer}>
+            <Container>
+                <UploadButtonContainer>
                     <Button
                         data-cy={'upload-btn'}
                         variant={'contained'}
@@ -216,10 +225,10 @@ export const ProgressBar = (): JSX.Element => {
                     >
                         UPLOAD NEW FILE
                     </Button>
-                </div>
+                </UploadButtonContainer>
                 <Card>
-                    <CardContent className={classes.cardContent}>
-                        <FormControl className={classes.formControl} component="fieldset">
+                    <CardContentStyled>
+                        <FormControlStyled component="fieldset">
                             <RadioGroup
                                 aria-label="folder"
                                 name="folder"
@@ -227,30 +236,31 @@ export const ProgressBar = (): JSX.Element => {
                                 onChange={changeRadioGroup}
                             >
                                 {foldersList.map((option, i) => (
-                                    <FormControlLabel
-                                        className={classes.formLabel}
+                                    <FormLabelStyled
                                         key={i}
                                         value={option.value}
                                         control={<Radio />}
                                         label={
-                                            <div className={classes.radioLabel}>
-                                                <Folder className={classes.icon} />
+                                            <RadioLabel>
+                                                <IconStyled />
                                                 <Typography style={{ marginLeft: '16px' }}> {option.label} </Typography>
-                                            </div>
+                                            </RadioLabel>
                                         }
                                     />
                                 ))}
                             </RadioGroup>
-                        </FormControl>
-                    </CardContent>
+                        </FormControlStyled>
+                    </CardContentStyled>
                 </Card>
-                <List data-cy={'list-content'} disablePadding component="nav" className={classes.placementOfList}>
+                <PlacementOfList data-cy={'list-content'} disablePadding component="nav">
                     {fileUploadList.map(
                         (item): JSX.Element => (
-                            <div key={item.id} className={classes.fileUploadItem}>
+                            <FileUploadItem key={item.id}>
                                 <Snackbar
-                                    classes={{
-                                        root: classes.snackbarRoot,
+                                    slotProps={{
+                                        root: {
+                                            component: SnackbarRoot,
+                                        },
                                     }}
                                     open={item.open}
                                     autoHideDuration={item.progress === 100 ? 3000 : null}
@@ -293,11 +303,11 @@ export const ProgressBar = (): JSX.Element => {
                                         </StyledEngineProvider>
                                     </div>
                                 </Snackbar>
-                            </div>
+                            </FileUploadItem>
                         )
                     )}
-                </List>
-            </div>
+                </PlacementOfList>
+            </Container>
         </div>
     );
 };

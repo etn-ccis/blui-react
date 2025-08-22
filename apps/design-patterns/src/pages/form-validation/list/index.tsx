@@ -2,55 +2,59 @@ import React from 'react';
 import { AppBar, Card, IconButton, Switch, TextField, Toolbar, Typography, useMediaQuery } from '@mui/material';
 import { Dns, Menu, Timeline } from '@mui/icons-material';
 import List from '@mui/material/List';
-import { Theme, useTheme } from '@mui/material/styles';
-import makeStyles from '@mui/styles/makeStyles';
+import { useTheme, styled } from '@mui/material/styles';
 import { useDispatch } from 'react-redux';
 import { TOGGLE_DRAWER } from '../../../redux/actions';
 import { InfoListItem } from '@brightlayer-ui/react-components';
 
-const useStyles = makeStyles((theme: Theme) => ({
-    containerWrapper: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'start',
-        flex: '1 1 0',
-    },
-    container: {
-        maxWidth: 600,
-        margin: theme.spacing(3),
-        width: '100%',
-        [theme.breakpoints.down('sm')]: {
-            margin: 0,
-            borderRadius: 0,
-            boxShadow: 'none',
-        },
-    },
-    appbarRoot: {
-        padding: 0,
-    },
-    toolbarGutters: {
-        padding: '0 16px',
-    },
-    textFieldRoot: {
-        [theme.breakpoints.down('sm')]: {
-            width: 138,
-        },
-    },
-    skinnyInput: {
-        paddingTop: 11,
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const ContainerWrapper = styled('div')(({ theme }) => ({
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'start',
+    flex: '1 1 0',
+}));
+
+const Container = styled(Card)(({ theme }) => ({
+    maxWidth: 600,
+    margin: theme.spacing(3),
+    width: '100%',
+    [theme.breakpoints.down('sm')]: {
+        margin: 0,
+        borderRadius: 0,
+        boxShadow: 'none',
     },
 }));
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const AppBarRoot = styled(AppBar)(({ theme }) => ({
+    padding: 0,
+}));
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const ToolbarGutters = styled(Toolbar)(({ theme }) => ({
+    padding: '0 16px',
+}));
+
+const TextFieldRoot = styled(TextField)(({ theme }) => ({
+    [theme.breakpoints.down('sm')]: {
+        width: 138,
+    },
+}));
+
+const SkinnyInputStyle = {
+    paddingTop: 11,
+};
+
 export const ListFormValidation = (): JSX.Element => {
     const theme = useTheme();
-    const classes = useStyles(theme);
     const dispatch = useDispatch();
     const md = useMediaQuery(theme.breakpoints.up('md'));
 
     return (
         <>
-            <AppBar data-cy={'blui-toolbar'} position={'sticky'} classes={{ root: classes.appbarRoot }}>
-                <Toolbar classes={{ gutters: classes.toolbarGutters }}>
+            <AppBarRoot data-cy={'blui-toolbar'} position={'sticky'}>
+                <ToolbarGutters>
                     {md ? null : (
                         <IconButton
                             data-cy={'toolbar-menu'}
@@ -68,29 +72,24 @@ export const ListFormValidation = (): JSX.Element => {
                     <Typography variant={'h6'} color={'inherit'}>
                         In a List
                     </Typography>
-                </Toolbar>
-            </AppBar>
+                </ToolbarGutters>
+            </AppBarRoot>
 
-            <div className={classes.containerWrapper}>
-                <Card className={classes.container}>
+            <ContainerWrapper>
+                <Container>
                     <List disablePadding style={{ width: '100%' }}>
                         <InfoListItem
                             icon={<Dns />}
                             divider={'partial'}
                             title={'IP Address'}
                             rightComponent={
-                                <TextField
+                                <TextFieldRoot
                                     data-cy={'ip-address'}
-                                    classes={{
-                                        root: classes.textFieldRoot,
-                                    }}
                                     defaultValue={'10.0.0.1'}
-                                    InputProps={{
-                                        classes: {
-                                            input: classes.skinnyInput,
-                                        },
-                                    }}
                                     variant={'filled'}
+                                    inputProps={{
+                                        style: SkinnyInputStyle,
+                                    }}
                                 />
                             }
                         ></InfoListItem>
@@ -104,8 +103,8 @@ export const ListFormValidation = (): JSX.Element => {
                             data-cy={'switch'}
                         ></InfoListItem>
                     </List>
-                </Card>
-            </div>
+                </Container>
+            </ContainerWrapper>
         </>
     );
 };

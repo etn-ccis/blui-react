@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useCallback, useState } from 'react';
 import {
     AppBar,
@@ -13,8 +14,7 @@ import {
     useMediaQuery,
 } from '@mui/material';
 import { Menu } from '@mui/icons-material';
-import { Theme, useTheme } from '@mui/material/styles';
-import makeStyles from '@mui/styles/makeStyles';
+import { useTheme, styled } from '@mui/material/styles';
 import { useDispatch } from 'react-redux';
 import { TOGGLE_DRAWER } from '../../../redux/actions';
 import { checkPhoneNumber, transformUserInput } from './phone-number-utils';
@@ -29,30 +29,31 @@ type CountryDetails = {
     errorCode: string;
 };
 
-const useStyles = makeStyles((theme: Theme) => ({
-    appbarRoot: {
-        padding: 0,
-    },
-    toolbarGutters: {
-        padding: '0 16px',
-    },
-    containerWrapper: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'start',
-        flex: '1 1 0',
-        backgroundColor: theme.palette.background.default,
-        height: 'calc(100vh - 64px)',
-    },
-    container: {
-        display: 'flex',
-        width: '100%',
-        maxWidth: 480,
-        margin: theme.spacing(4),
-        [theme.breakpoints.down('sm')]: {
-            margin: theme.spacing(2),
-            maxWidth: '100%',
-        },
+const AppBarRoot = styled(AppBar)(({ theme }) => ({
+    padding: 0,
+}));
+
+const ToolbarGutters = styled(Toolbar)(({ theme }) => ({
+    padding: '0 16px',
+}));
+
+const ContainerWrapper = styled('div')(({ theme }) => ({
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'start',
+    flex: '1 1 0',
+    backgroundColor: theme.palette.background.default,
+    height: 'calc(100vh - 64px)',
+}));
+
+const Container = styled('div')(({ theme }) => ({
+    display: 'flex',
+    width: '100%',
+    maxWidth: 480,
+    margin: theme.spacing(4),
+    [theme.breakpoints.down('sm')]: {
+        margin: theme.spacing(2),
+        maxWidth: '100%',
     },
 }));
 
@@ -66,7 +67,6 @@ const countries: CountryDetails[] = [
 
 export const PhoneNumberFormatValidation = (): JSX.Element => {
     const theme = useTheme();
-    const classes = useStyles(theme);
     const dispatch = useDispatch();
     const [phoneNumber, setPhoneNumber] = useState('');
     const [countryCode, setCountryCode] = useState('US');
@@ -125,8 +125,8 @@ export const PhoneNumberFormatValidation = (): JSX.Element => {
 
     return (
         <>
-            <AppBar data-cy={'blui-toolbar'} position={'sticky'} classes={{ root: classes.appbarRoot }}>
-                <Toolbar classes={{ gutters: classes.toolbarGutters }}>
+            <AppBarRoot data-cy={'blui-toolbar'} position={'sticky'}>
+                <ToolbarGutters>
                     {md ? null : (
                         <IconButton
                             data-cy={'toolbar-menu'}
@@ -144,11 +144,11 @@ export const PhoneNumberFormatValidation = (): JSX.Element => {
                     <Typography variant={'h6'} color={'inherit'}>
                         Phone Number Format
                     </Typography>
-                </Toolbar>
-            </AppBar>
+                </ToolbarGutters>
+            </AppBarRoot>
 
-            <div className={classes.containerWrapper}>
-                <div className={classes.container}>
+            <ContainerWrapper>
+                <Container>
                     <FormControl variant={'filled'} style={{ width: 200, marginRight: theme.spacing(2) }}>
                         <InputLabel htmlFor={'country-code-label'}>Country Code</InputLabel>
                         <Select
@@ -192,8 +192,8 @@ export const PhoneNumberFormatValidation = (): JSX.Element => {
                         error={showErrorText()}
                         helperText={getErrorText()}
                     />
-                </div>
-            </div>
+                </Container>
+            </ContainerWrapper>
         </>
     );
 };

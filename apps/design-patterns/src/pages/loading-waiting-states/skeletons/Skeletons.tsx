@@ -1,6 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react';
-import { useTheme, Theme } from '@mui/material/styles';
-import makeStyles from '@mui/styles/makeStyles';
+import { useTheme, styled } from '@mui/material/styles';
 import { AppBar, Toolbar, IconButton, Typography, Button, ButtonGroup, Card, List, useMediaQuery } from '@mui/material';
 import { TOGGLE_DRAWER } from '../../../redux/actions';
 import { useDispatch } from 'react-redux';
@@ -14,52 +14,59 @@ import { CurrentCircled, GradeA, Temp, Device, Moisture } from '@brightlayer-ui/
 
 import backgroundImage from '../../../assets/collapsible_app_bar_demo.jpg';
 
-const useStyles = makeStyles((theme: Theme) => ({
-    root: {
-        backgroundColor: theme.palette.background.paper,
-        minHeight: '100vh',
-    },
-    appbarRoot: {
-        padding: 0,
-    },
-    toolbarGutters: {
-        padding: `0 ${theme.spacing(2)}`,
-    },
-    exampleContainer: {
-        margin: `${theme.spacing(3)} ${theme.spacing(2)}`,
-    },
-    buttonRow: {
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: theme.spacing(2),
-    },
-    label: {
-        marginRight: theme.spacing(2),
-    },
-    selected: {
-        backgroundColor: theme.palette.primary.light,
-        color: theme.palette.primary.main,
-    },
-    title: {
-        marginTop: theme.spacing(5),
-        marginBottom: theme.spacing(3),
-        color: theme.palette.primary.main,
-    },
-    heroBannerCard: {
-        width: 384,
-        height: 132,
-    },
-    leftComponent: {},
-    abbreviation: {
-        fontWeight: 600,
-        marginLeft: 2,
-    },
+const Root = styled('div')(({ theme }) => ({
+    backgroundColor: theme.palette.background.paper,
+    minHeight: '100vh',
 }));
+
+const AppBarRoot = styled(AppBar)(({ theme }) => ({
+    padding: 0,
+}));
+
+const ToolbarGutters = styled(Toolbar)(({ theme }) => ({
+    padding: `0 ${theme.spacing(2)}`,
+}));
+
+const ExampleContainer = styled('div')(({ theme }) => ({
+    margin: `${theme.spacing(3)} ${theme.spacing(2)}`,
+}));
+
+const ButtonRow = styled('div')(({ theme }) => ({
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: theme.spacing(2),
+}));
+
+const Label = styled(Typography)(({ theme }) => ({
+    marginRight: theme.spacing(2),
+}));
+
+const SelectedButton = styled(Button)(({ theme }) => ({
+    backgroundColor: theme.palette.primary.light,
+    color: theme.palette.primary.main,
+}));
+
+const Title = styled(Typography)(({ theme }) => ({
+    marginTop: theme.spacing(5),
+    marginBottom: theme.spacing(3),
+    color: theme.palette.primary.main,
+}));
+
+const HeroBannerCard = styled(Card)(({ theme }) => ({
+    width: 384,
+    height: 132,
+}));
+
+const LeftComponent = styled('div')({});
+
+const Abbreviation = styled('span')({
+    fontWeight: 600,
+    marginLeft: 2,
+});
 
 export const Skeletons = (): JSX.Element => {
     const theme = useTheme();
-    const classes = useStyles(theme);
     const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState(true);
     const [animationStyle, setAnimationStyle] = useState<'pulse' | 'wave'>('pulse');
@@ -88,8 +95,8 @@ export const Skeletons = (): JSX.Element => {
 
     return (
         <>
-            <AppBar data-cy="blui-toolbar" position={'sticky'} classes={{ root: classes.appbarRoot }}>
-                <Toolbar classes={{ gutters: classes.toolbarGutters }}>
+            <AppBarRoot data-cy="blui-toolbar" position={'sticky'}>
+                <ToolbarGutters>
                     {md ? null : (
                         <IconButton
                             data-cy="toolbar-menu"
@@ -108,31 +115,25 @@ export const Skeletons = (): JSX.Element => {
                         Skeletons
                     </Typography>
                     <Spacer />
-                </Toolbar>
-            </AppBar>
-            <div className={classes.exampleContainer}>
-                <div className={classes.buttonRow}>
-                    <Typography variant={'subtitle1'} className={classes.label}>
-                        Animation Style
-                    </Typography>
+                </ToolbarGutters>
+            </AppBarRoot>
+            <ExampleContainer>
+                <ButtonRow>
+                    <Label variant={'subtitle1'}>Animation Style</Label>
                     <ButtonGroup color="primary">
-                        <Button
-                            onClick={(): void => setAnimationStyle('pulse')}
-                            className={animationStyle === 'pulse' ? classes.selected : ''}
-                        >
-                            Pulse
-                        </Button>
-                        <Button
-                            onClick={(): void => setAnimationStyle('wave')}
-                            className={animationStyle === 'wave' ? classes.selected : ''}
-                        >
-                            Wave
-                        </Button>
+                        {animationStyle === 'pulse' ? (
+                            <SelectedButton onClick={(): void => setAnimationStyle('pulse')}>Pulse</SelectedButton>
+                        ) : (
+                            <Button onClick={(): void => setAnimationStyle('pulse')}>Pulse</Button>
+                        )}
+                        {animationStyle === 'wave' ? (
+                            <SelectedButton onClick={(): void => setAnimationStyle('wave')}>Wave</SelectedButton>
+                        ) : (
+                            <Button onClick={(): void => setAnimationStyle('wave')}>Wave</Button>
+                        )}
                     </ButtonGroup>
-                </div>
-                <Typography variant={'h6'} className={classes.title}>
-                    Scorecard
-                </Typography>
+                </ButtonRow>
+                <Title variant={'h6'}>Scorecard</Title>
                 {isLoading && (
                     <div>
                         <ScorecardPlaceholder animation={animationStyle} />
@@ -197,9 +198,7 @@ export const Skeletons = (): JSX.Element => {
                     </ScoreCard>
                 )}
 
-                <Typography variant={'h6'} className={classes.title}>
-                    List Items
-                </Typography>
+                <Title variant={'h6'}>List Items</Title>
                 {isLoading && (
                     <>
                         <Card style={{ marginBottom: theme.spacing(2) }}>
@@ -252,12 +251,12 @@ export const Skeletons = (): JSX.Element => {
                                 title={'Input Voltage'}
                                 divider={'partial'}
                                 leftComponent={
-                                    <div className={classes.leftComponent}>
+                                    <LeftComponent>
                                         <div>
-                                            8:05<span className={classes.abbreviation}>AM</span>
+                                            8:05<Abbreviation>AM</Abbreviation>
                                         </div>
                                         <div>01/24/21</div>
-                                    </div>
+                                    </LeftComponent>
                                 }
                                 dense
                                 subtitle={['Phase A', 'Phase B', 'Phase C']}
@@ -274,12 +273,12 @@ export const Skeletons = (): JSX.Element => {
                                 rightComponent={<KeyboardArrowRight />}
                                 iconAlign={'center'}
                                 leftComponent={
-                                    <div className={classes.leftComponent}>
+                                    <LeftComponent>
                                         <div>
-                                            10:43<span className={classes.abbreviation}>AM</span>
+                                            10:43<Abbreviation>AM</Abbreviation>
                                         </div>
                                         <div>01/24/21</div>
-                                    </div>
+                                    </LeftComponent>
                                 }
                             />
                             <InfoListItem
@@ -290,28 +289,26 @@ export const Skeletons = (): JSX.Element => {
                                 rightComponent={<KeyboardArrowRight />}
                                 iconAlign={'center'}
                                 leftComponent={
-                                    <div className={classes.leftComponent}>
+                                    <LeftComponent>
                                         <div>
-                                            1:21<span className={classes.abbreviation}>PM</span>
+                                            1:21<Abbreviation>PM</Abbreviation>
                                         </div>
                                         <div>01/24/21</div>
-                                    </div>
+                                    </LeftComponent>
                                 }
                             />
                         </Card>
                     </>
                 )}
 
-                <Typography variant={'h6'} className={classes.title}>
-                    Hero Banner
-                </Typography>
+                <Title variant={'h6'}>Hero Banner</Title>
                 {isLoading && (
-                    <Card className={classes.heroBannerCard}>
+                    <HeroBannerCard>
                         <HeroBannerPlaceholder animation={animationStyle} />
-                    </Card>
+                    </HeroBannerCard>
                 )}
                 {!isLoading && (
-                    <Card className={classes.heroBannerCard}>
+                    <HeroBannerCard>
                         <HeroBanner>
                             <Hero
                                 key={'hero1'}
@@ -332,9 +329,9 @@ export const Skeletons = (): JSX.Element => {
                                 ChannelValueProps={{ value: 55, units: 'C' }}
                             />
                         </HeroBanner>
-                    </Card>
+                    </HeroBannerCard>
                 )}
-            </div>
+            </ExampleContainer>
         </>
     );
 };

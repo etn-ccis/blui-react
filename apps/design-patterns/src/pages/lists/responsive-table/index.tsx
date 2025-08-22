@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 
 import AppBar from '@mui/material/AppBar';
@@ -10,7 +11,7 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { useTheme } from '@mui/material/styles';
+import { useTheme, styled } from '@mui/material/styles';
 import { useMediaQuery } from '@mui/material';
 
 import { Menu as MenuIcon } from '@mui/icons-material';
@@ -20,7 +21,6 @@ import { TOGGLE_DRAWER } from '../../../redux/actions';
 import { InfoListItem } from '@brightlayer-ui/react-components';
 
 import './index.css';
-import makeStyles from '@mui/styles/makeStyles';
 
 export type Item = {
     id: number;
@@ -28,13 +28,12 @@ export type Item = {
     description: string;
 };
 
-const useStyles = makeStyles(() => ({
-    appbarRoot: {
-        padding: 0,
-    },
-    toolbarGutters: {
-        padding: '0 16px',
-    },
+const StyledAppBar = styled(AppBar)(({ theme }) => ({
+    padding: 0,
+}));
+
+const StyledToolbar = styled(Toolbar)(({ theme }) => ({
+    padding: '0 16px',
 }));
 
 const generateRandomItem = (): Item[] => {
@@ -55,7 +54,6 @@ const list = generateRandomItem();
 export const ResponsiveTable = (): JSX.Element => {
     const theme = useTheme();
     const dispatch = useDispatch();
-    const classes = useStyles();
     const md = useMediaQuery(theme.breakpoints.up('md'));
     const sm = useMediaQuery(theme.breakpoints.up('sm'));
     const smDown = useMediaQuery(theme.breakpoints.down('sm'));
@@ -67,8 +65,8 @@ export const ResponsiveTable = (): JSX.Element => {
                 minHeight: '100vh',
             }}
         >
-            <AppBar data-cy="blui-toolbar" position="sticky" classes={{ root: classes.appbarRoot }}>
-                <Toolbar classes={{ gutters: classes.toolbarGutters }}>
+            <StyledAppBar data-cy="blui-toolbar" position="sticky">
+                <StyledToolbar>
                     {md ? null : (
                         <IconButton
                             data-cy="toolbar-menu"
@@ -77,7 +75,7 @@ export const ResponsiveTable = (): JSX.Element => {
                                 dispatch({ type: TOGGLE_DRAWER, payload: true });
                             }}
                             edge={'start'}
-                            style={{ marginRight: 20 }}
+                            sx={{ marginRight: 2.5 }}
                             size="large"
                         >
                             <MenuIcon />
@@ -86,8 +84,8 @@ export const ResponsiveTable = (): JSX.Element => {
                     <Typography variant="h6" color="inherit">
                         Responsive Table
                     </Typography>
-                </Toolbar>
-            </AppBar>
+                </StyledToolbar>
+            </StyledAppBar>
             <Typography variant="body1" color="inherit" style={{ textAlign: 'center', padding: '1.5rem 0 0.5rem' }}>
                 Resize your browser to view responsiveness
             </Typography>
