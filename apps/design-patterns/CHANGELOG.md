@@ -1,5 +1,9 @@
 # Changelog
 
+## v3.0.0
+
+- Update MUI and Redux to latest version
+
 ## v2.0.0
 
 ### Changed

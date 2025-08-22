@@ -41,6 +41,7 @@
         "@mui/system": "^7.3.1",
         "@mui/types": "^7.2.18",
         "@mui/x-date-pickers": "^7.22.1",
+        "@reduxjs/toolkit": "^2.8.2",
         "@types/enzyme-adapter-react-16": "^1.0.6",
         "@types/jest": "^30.0.0",
         "@types/node": "24.3.0",
