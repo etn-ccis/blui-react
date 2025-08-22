@@ -2,7 +2,7 @@
 
 ## v3.0.0
 
-- Update MUI and Redux to latest version
+- All outdated dependencies are updated to their latest compatible versions.
 
 ## v2.0.0
 
