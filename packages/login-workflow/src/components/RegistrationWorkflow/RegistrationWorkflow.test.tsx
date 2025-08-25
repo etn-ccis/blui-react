@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { act } from 'react';
 import '@testing-library/jest-dom';
-import { cleanup, fireEvent, render, screen, renderHook, act, RenderResult } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen, renderHook, RenderResult } from '@testing-library/react';
 import { RegistrationWorkflow } from './RegistrationWorkflow';
 import { RegistrationWorkflowProps } from './types';
 import Typography from '@mui/material/Typography';
@@ -62,12 +62,12 @@ describe('RegistrationWorkflow', () => {
                 </RegistrationWorkflow>
             </RegistrationContextProvider>
         );
-        fireEvent.click(getByText('Next'));
+        act(() => fireEvent.click(getByText('Next')));
         expect(nextScreen).toHaveBeenCalledWith({ screenId: 'Eula', values: { accepted: true } });
     });
 
-    it('should set screen data for default registration workflow in the context', async () => {
-        const wrapper = ({ children }: any): JSX.Element => (
+    it('should set screen data for default registration workflow in the context', () => {
+        const wrapper = ({ children }: any): React.JSX.Element => (
             <RegistrationContextProvider {...registrationContextProviderProps}>
                 <RegistrationWorkflow {...defaultProps}>
                     <Box>{children}</Box>
@@ -81,8 +81,8 @@ describe('RegistrationWorkflow', () => {
         expect(result.current.screenData.Eula.accepted).toBeFalsy();
         expect(result.current.screenData.CreateAccount.emailAddress).toBe('');
 
-        await act(async () => {
-            await result.current.nextScreen({ screenId: 'Eula', values: { accepted: true } });
+        act(() => {
+            result.current.nextScreen({ screenId: 'Eula', values: { accepted: true } });
         });
         act(() => {
             result.current.previousScreen({
@@ -95,8 +95,8 @@ describe('RegistrationWorkflow', () => {
         expect(result.current.screenData.CreateAccount.emailAddress).toBe('emailAddress@emailAddress.com');
     });
 
-    it('should set screen data for custom registration workflow in the context', async () => {
-        const wrapper = ({ children }: any): JSX.Element => (
+    it('should set screen data for custom registration workflow in the context', () => {
+        const wrapper = ({ children }: any): React.JSX.Element => (
             <RegistrationContextProvider {...registrationContextProviderProps}>
                 <RegistrationWorkflow {...defaultProps}>
                     <Box>{children}</Box>
@@ -110,8 +110,8 @@ describe('RegistrationWorkflow', () => {
         expect(result.current.screenData.Eula.accepted).toBeFalsy();
         expect(result.current.screenData.CreateAccount.emailAddress).toBe('');
 
-        await act(async () => {
-            await result.current.nextScreen({ screenId: 'Screen1', values: { test: 'test' } });
+        act(() => {
+            result.current.nextScreen({ screenId: 'Screen1', values: { test: 'test' } });
         });
         act(() => {
             result.current.previousScreen({
@@ -133,7 +133,7 @@ describe('RegistrationWorkflow', () => {
         expect(screen.getByText('Screen 2')).toBeInTheDocument();
     });
 
-    it('should render custom success screen', async () => {
+    it('should render custom success screen', () => {
         const props = defaultProps;
         defaultProps.successScreen = <Box>Success</Box>;
         const { getByLabelText, getByText } = render(
@@ -144,12 +144,11 @@ describe('RegistrationWorkflow', () => {
             </RegistrationContextProvider>
         );
         const verifyEmailInput = getByLabelText('Email Address');
-        fireEvent.change(verifyEmailInput, { target: { value: 'test@test.net' } });
-        fireEvent.blur(verifyEmailInput);
+        act(() => fireEvent.change(verifyEmailInput, { target: { value: 'test@test.net' } }));
+        act(() => fireEvent.blur(verifyEmailInput));
         const nextButton = getByText('Next');
         expect(screen.getByText(/Next/i)).toBeEnabled();
-        await act(async () => {
-            expect(await screen.findByText('Next')).toBeEnabled();
+        act(() => {
             fireEvent.click(nextButton);
         });
 

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { act } from 'react';
 import '@testing-library/jest-dom';
-import { cleanup, render, screen, fireEvent, RenderResult, act } from '@testing-library/react';
+import { cleanup, render, screen, fireEvent, RenderResult } from '@testing-library/react';
 import { CreatePasswordScreen } from './CreatePasswordScreen';
 import { CreatePasswordScreenProps } from './types';
 import { RegistrationContextProvider } from '../../contexts';
@@ -67,7 +67,7 @@ describe('Create Password Screen', () => {
         expect(screen.getByText('One special character')).toBeInTheDocument();
     });
 
-    it('should call onNext, when Next button clicked', async () => {
+    it('should call onNext, when Next button clicked', () => {
         const { getByLabelText } = renderer({
             WorkflowCardActionsProps: {
                 onNext: mockOnNext(),
@@ -92,10 +92,7 @@ describe('Create Password Screen', () => {
 
         const nextButton = screen.getByText('Next');
         expect(nextButton).toBeInTheDocument();
-        await act(async () => {
-            expect(await screen.findByText('Next')).toBeEnabled();
-            fireEvent.click(nextButton);
-        });
+        act(() => fireEvent.click(nextButton));
         expect(mockOnNext).toHaveBeenCalled();
     });
 

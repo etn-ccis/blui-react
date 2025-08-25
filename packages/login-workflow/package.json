@@ -122,6 +122,14 @@
             ".tsx"
         ],
         "testEnvironment": "jsdom",
+        "coverageThreshold": {
+            "global": {
+                "lines": 85,
+                "statements": 85,
+                "branches": 70,
+                "functions": 80
+            }
+        },
         "moduleDirectories": [
             "node_modules",
             "src",
