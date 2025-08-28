@@ -105,9 +105,11 @@ describe('InfoListItem', () => {
             </ThemeProvider>
         );
         expect(screen.getByText('Test')).toBeTruthy();
-        expect(screen.getAllByText((content, element) => {
-            return element?.textContent === 'First·Second·Third';
-        })[0]).toBeTruthy();
+        expect(
+            screen.getAllByText((content, element) => {
+                return element?.textContent === 'First·Second·Third';
+            })[0]
+        ).toBeTruthy();
     });
 
     it('renders with subtitle as JSX element', () => {
@@ -137,9 +139,11 @@ describe('InfoListItem', () => {
             </ThemeProvider>
         );
         expect(screen.getByText('Test')).toBeTruthy();
-        expect(screen.getAllByText((content, element) => {
-            return element?.textContent === 'Info1·Info2·Info3';
-        })[0]).toBeTruthy();
+        expect(
+            screen.getAllByText((content, element) => {
+                return element?.textContent === 'Info1·Info2·Info3';
+            })[0]
+        ).toBeTruthy();
     });
 
     it('renders with info as JSX element', () => {
@@ -159,9 +163,11 @@ describe('InfoListItem', () => {
             </ThemeProvider>
         );
         expect(screen.getByText('Test')).toBeTruthy();
-        expect(screen.getAllByText((content, element) => {
-            return element?.textContent === 'First | Second';
-        })[0]).toBeTruthy();
+        expect(
+            screen.getAllByText((content, element) => {
+                return element?.textContent === 'First | Second';
+            })[0]
+        ).toBeTruthy();
     });
 
     it('renders with dense prop', () => {
@@ -264,9 +270,11 @@ describe('InfoListItem', () => {
             </ThemeProvider>
         );
         expect(screen.getByText('Test')).toBeTruthy();
-        expect(screen.getAllByText((content, element) => {
-            return element?.textContent === '1·2·3·4·5·6';
-        })[0]).toBeTruthy();
+        expect(
+            screen.getAllByText((content, element) => {
+                return element?.textContent === '1·2·3·4·5·6';
+            })[0]
+        ).toBeTruthy();
         // Should not render elements beyond index 5 (6 elements max)
         expect(screen.queryByText('7')).not.toBeInTheDocument();
         expect(screen.queryByText('8')).not.toBeInTheDocument();
@@ -280,9 +288,11 @@ describe('InfoListItem', () => {
             </ThemeProvider>
         );
         expect(screen.getByText('Test')).toBeTruthy();
-        expect(screen.getAllByText((content, element) => {
-            return element?.textContent === 'Info1·Info2·Info3·Info4·Info5·Info6';
-        })[0]).toBeTruthy();
+        expect(
+            screen.getAllByText((content, element) => {
+                return element?.textContent === 'Info1·Info2·Info3·Info4·Info5·Info6';
+            })[0]
+        ).toBeTruthy();
         // Should not render elements beyond index 5 (6 elements max)
         expect(screen.queryByText('Info7')).not.toBeInTheDocument();
         expect(screen.queryByText('Info8')).not.toBeInTheDocument();

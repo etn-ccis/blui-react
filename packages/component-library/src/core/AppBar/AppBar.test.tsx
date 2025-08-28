@@ -146,7 +146,7 @@ describe('AppBar', () => {
                 <AppBar variant="expanded" />
             </ThemeProvider>
         );
-        
+
         let appBar = screen.getByTestId('blui-appbar-root');
         expect(appBar).toHaveClass('BluiAppBar-root');
         expect(appBar).toHaveClass('Mui-expanded');
@@ -156,7 +156,7 @@ describe('AppBar', () => {
                 <AppBar variant="collapsed" />
             </ThemeProvider>
         );
-        
+
         appBar = screen.getByTestId('blui-appbar-root');
         expect(appBar).toHaveClass('BluiAppBar-root');
         expect(appBar).toHaveClass('BluiAppBar-collapsed');
@@ -164,7 +164,7 @@ describe('AppBar', () => {
 
     it('should handle scroll events when variant is snap', async () => {
         jest.useFakeTimers();
-        
+
         render(
             <ThemeProvider theme={theme}>
                 <AppBar variant="snap" scrollThreshold={100} />
@@ -191,7 +191,7 @@ describe('AppBar', () => {
 
     it('should handle variant change from snap to collapsed', async () => {
         jest.useFakeTimers();
-        
+
         const { rerender } = render(
             <ThemeProvider theme={theme}>
                 <AppBar variant="snap" />
@@ -214,7 +214,7 @@ describe('AppBar', () => {
 
     it('should handle variant change from snap to expanded', async () => {
         jest.useFakeTimers();
-        
+
         const { rerender } = render(
             <ThemeProvider theme={theme}>
                 <AppBar variant="snap" />
@@ -237,7 +237,7 @@ describe('AppBar', () => {
 
     it('should handle height changes when expanded', async () => {
         jest.useFakeTimers();
-        
+
         const { rerender } = render(
             <ThemeProvider theme={theme}>
                 <AppBar variant="expanded" expandedHeight={200} />
@@ -260,7 +260,7 @@ describe('AppBar', () => {
 
     it('should handle height changes when collapsed', async () => {
         jest.useFakeTimers();
-        
+
         const { rerender } = render(
             <ThemeProvider theme={theme}>
                 <AppBar variant="collapsed" collapsedHeight="64px" />
@@ -302,7 +302,7 @@ describe('AppBar', () => {
 
     it('should handle scroll container events', async () => {
         jest.useFakeTimers();
-        
+
         // Create a mock element
         const mockElement = document.createElement('div');
         mockElement.id = 'custom-scroll-container';
@@ -336,7 +336,7 @@ describe('AppBar', () => {
                 <AppBar variant="expanded" backgroundImage="test-bg.jpg" />
             </ThemeProvider>
         );
-        
+
         const appBar = screen.getByTestId('blui-appbar-root');
         const backgroundDiv = appBar.querySelector('.BluiAppBar-background');
         expect(backgroundDiv).toBeInTheDocument();
@@ -349,7 +349,7 @@ describe('AppBar', () => {
                 <AppBar variant="expanded" />
             </ThemeProvider>
         );
-        
+
         const appBar = screen.getByTestId('blui-appbar-root');
         const backgroundDiv = appBar.querySelector('.BluiAppBar-background');
         expect(backgroundDiv).not.toBeInTheDocument();
@@ -357,7 +357,7 @@ describe('AppBar', () => {
 
     it('should forward ref correctly', () => {
         const ref = React.createRef<HTMLElement>();
-        
+
         render(
             <ThemeProvider theme={theme}>
                 <AppBar ref={ref} />
@@ -369,7 +369,7 @@ describe('AppBar', () => {
 
     it('should handle scroll to top when at scroll position 0', async () => {
         jest.useFakeTimers();
-        
+
         render(
             <ThemeProvider theme={theme}>
                 <AppBar variant="snap" scrollThreshold={100} />
