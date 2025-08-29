@@ -55,13 +55,6 @@ jobs:
             - name: install dependencies
               run: pnpm install
 
-            - name: Enable Corepack
-              run: corepack enable
-
-            - name: Run tests
-              working-directory: packages/login-workflow
-              run: pnpm test
-
             - name: Run tests with coverage
               run: pnpm coverage
               working-directory: packages/login-workflow
