@@ -207,7 +207,7 @@ describe('ExistingAccountSuccessScreen', () => {
 
     it('renders with canDismiss as a function returning true', () => {
         const canDismissFunction = jest.fn().mockReturnValue(true);
-        
+
         render(
             <RegistrationContextProvider {...registrationContextProviderProps}>
                 <ExistingAccountSuccessScreen canDismiss={canDismissFunction} />
@@ -220,7 +220,7 @@ describe('ExistingAccountSuccessScreen', () => {
 
     // it('renders with canDismiss as a function returning false', () => {
     //     const canDismissFunction = jest.fn().mockReturnValue(false);
-        
+
     //     render(
     //         <RegistrationContextProvider {...registrationContextProviderProps}>
     //             <ExistingAccountSuccessScreen canDismiss={canDismissFunction} />

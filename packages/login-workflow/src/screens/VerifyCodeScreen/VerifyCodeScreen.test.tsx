@@ -177,10 +177,7 @@ describe('Verify Code Screen', () => {
         render(
             <RegistrationContextProvider {...registrationContextProviderProps}>
                 <RegistrationWorkflow initialScreenIndex={0}>
-                    <VerifyCodeScreen
-                        onResend={mockOnResend}
-                        WorkflowCardActionsProps={{ showNext: false }}
-                    />
+                    <VerifyCodeScreen onResend={mockOnResend} WorkflowCardActionsProps={{ showNext: false }} />
                 </RegistrationWorkflow>
             </RegistrationContextProvider>
         );
@@ -199,7 +196,7 @@ describe('Verify Code Screen', () => {
                         WorkflowCardActionsProps={{
                             showPrevious: true,
                             onPrevious: mockOnPrevious,
-                            previousLabel: 'Back'
+                            previousLabel: 'Back',
                         }}
                     />
                 </RegistrationWorkflow>
@@ -208,15 +205,15 @@ describe('Verify Code Screen', () => {
 
         const backButton = screen.getByText('Back');
         fireEvent.click(backButton);
-        
+
         expect(mockOnPrevious).toHaveBeenCalled();
     });
 
     it('handles loading state during resend operation', async () => {
-        const mockRequestRegistrationCode = jest.fn().mockImplementation(() => 
-            new Promise(resolve => setTimeout(resolve, 100))
-        );
-        
+        const mockRequestRegistrationCode = jest
+            .fn()
+            .mockImplementation(() => new Promise((resolve) => setTimeout(resolve, 100)));
+
         const mockActions = {
             ...registrationContextProviderProps.actions,
             requestRegistrationCode: mockRequestRegistrationCode,
@@ -232,13 +229,13 @@ describe('Verify Code Screen', () => {
 
         const resendButton = screen.getByText('Send Again');
         fireEvent.click(resendButton);
-        
+
         expect(mockRequestRegistrationCode).toHaveBeenCalled();
     });
 
     it('handles error during resend operation', () => {
         const mockRequestRegistrationCode = jest.fn().mockRejectedValue(new Error('Network error'));
-        
+
         const mockActions = {
             ...registrationContextProviderProps.actions,
             requestRegistrationCode: mockRequestRegistrationCode,
@@ -256,19 +253,21 @@ describe('Verify Code Screen', () => {
         act(() => {
             fireEvent.click(resendButton);
         });
-        
+
         expect(mockRequestRegistrationCode).toHaveBeenCalled();
     });
 
-     it('uses custom verifyCodeTextFieldProps', () => {
+    it('uses custom verifyCodeTextFieldProps', () => {
         const { getByLabelText } = render(
             <RegistrationContextProvider {...registrationContextProviderProps}>
                 <RegistrationWorkflow initialScreenIndex={0}>
                     <VerifyCodeScreen
                         verifyCodeInputLabel="Verify Code"
-                        verifyCodeTextFieldProps={{
-                            placeholder: 'Enter verification code',
-                        } as any}
+                        verifyCodeTextFieldProps={
+                            {
+                                placeholder: 'Enter verification code',
+                            } as any
+                        }
                     />
                 </RegistrationWorkflow>
             </RegistrationContextProvider>
@@ -299,7 +298,7 @@ describe('Verify Code Screen', () => {
         const verifyCodeInput = getByLabelText('Verify Code');
         fireEvent.change(verifyCodeInput, { target: { value: '123' } });
         fireEvent.blur(verifyCodeInput);
-        
+
         expect(mockOnChange).toHaveBeenCalled();
         expect(mockOnBlur).toHaveBeenCalled();
     });
@@ -332,14 +331,14 @@ describe('Verify Code Screen', () => {
         // act(() => {
         //     fireEvent.click(nextButton);
         // });
-        
+
         // Should not crash when action is undefined
         expect(nextButton).toBeInTheDocument();
     });
 
     it('handles null email address safely', async () => {
         const mockRequestRegistrationCode = jest.fn().mockResolvedValue(undefined);
-        
+
         const mockActions = {
             ...registrationContextProviderProps.actions,
             requestRegistrationCode: mockRequestRegistrationCode,
@@ -357,7 +356,7 @@ describe('Verify Code Screen', () => {
         act(() => {
             fireEvent.click(resendButton);
         });
-        
+
         expect(mockRequestRegistrationCode).toHaveBeenCalled();
     });
 

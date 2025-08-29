@@ -225,7 +225,7 @@ describe('Change Password Dialog tests', () => {
         fireEvent.change(currentPasswordInput, { target: { value: 'Abc@1234' } });
         const newPasswordInput = getByLabelText('New Password');
         const confirmPasswordInput = getByLabelText('Confirm New Password');
-        
+
         // Test with weak password
         fireEvent.change(newPasswordInput, { target: { value: 'weak' } });
         fireEvent.change(confirmPasswordInput, { target: { value: 'weak' } });
@@ -287,7 +287,7 @@ describe('Change Password Dialog tests', () => {
 
         const newPasswordInput = getByLabelText('New Password');
         fireEvent.change(newPasswordInput, { target: { value: 'Abc@1234' } });
-        
+
         expect(onPasswordChange).toHaveBeenCalled();
     });
 

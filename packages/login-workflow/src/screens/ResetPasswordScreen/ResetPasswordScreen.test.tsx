@@ -188,13 +188,13 @@ describe('Reset Password Screen', () => {
 
     //     const newPasswordInput = getByLabelText('New Password');
     //     const confirmPasswordInput = getByLabelText('Confirm New Password');
-        
+
     //     fireEvent.change(newPasswordInput, { target: { value: 'ValidPass123!' } });
     //     fireEvent.change(confirmPasswordInput, { target: { value: 'ValidPass123!' } });
-        
+
     //     // Trigger submit by pressing Enter
     //     fireEvent.keyDown(confirmPasswordInput, { key: 'Enter', code: 'Enter' });
-        
+
     //     await waitFor(() => expect(mockOnSubmit).toHaveBeenCalled());
     // });
 
@@ -227,10 +227,10 @@ describe('Reset Password Screen', () => {
 
     //     const newPasswordInput = getByLabelText('New Password');
     //     const confirmPasswordInput = getByLabelText('Confirm New Password');
-        
+
     //     fireEvent.change(newPasswordInput, { target: { value: 'any' } });
     //     fireEvent.change(confirmPasswordInput, { target: { value: 'any' } });
-        
+
     //     await waitFor(() => expect(screen.getByText('Next')).toBeEnabled());
     // });
 
@@ -244,10 +244,10 @@ describe('Reset Password Screen', () => {
 
     //     const newPasswordInput = getByLabelText('New Password');
     //     const confirmPasswordInput = getByLabelText('Confirm New Password');
-        
+
     //     fireEvent.change(newPasswordInput, { target: { value: 'Password123!' } });
     //     fireEvent.change(confirmPasswordInput, { target: { value: 'DifferentPass123!' } });
-        
+
     //     await waitFor(() => expect(screen.getByText('Next')).toBeDisabled());
     // });
 
@@ -263,7 +263,7 @@ describe('Reset Password Screen', () => {
 
     //     const newPasswordInput = getByLabelText('New Password') as HTMLInputElement;
     //     const confirmPasswordInput = getByLabelText('Confirm New Password') as HTMLInputElement;
-        
+
     //     await waitFor(() => {
     //         expect(newPasswordInput.value).toBe('InitialPass123!');
     //         expect(confirmPasswordInput.value).toBe('InitialPass123!');
@@ -297,7 +297,7 @@ describe('Reset Password Screen', () => {
 
     //     const newPasswordInput = getByLabelText('New Password');
     //     const confirmPasswordInput = getByLabelText('Confirm New Password');
-        
+
     //     fireEvent.change(newPasswordInput, { target: { value: 'ValidPass123!' } });
     //     fireEvent.change(confirmPasswordInput, { target: { value: 'ValidPass123!' } });
     //     fireEvent.click(screen.getByText('Next'));
@@ -310,7 +310,7 @@ describe('Reset Password Screen', () => {
 
     // it('should render with custom slots and slotProps', async () => {
     //     const CustomSuccessScreen = () => <div>Custom Success Component</div>;
-        
+
     //     renderer({
     //         slots: {
     //             SuccessScreen: CustomSuccessScreen,
@@ -330,7 +330,7 @@ describe('Reset Password Screen', () => {
 
     // it('should handle error display config with custom onClose', async () => {
     //     const mockOnClose = jest.fn();
-        
+
     //     renderer({
     //         errorDisplayConfig: {
     //             onClose: mockOnClose,
@@ -376,7 +376,7 @@ describe('Reset Password Screen', () => {
 
     //     const backButton = await screen.findByText('Back');
     //     fireEvent.click(backButton);
-        
+
     //     // The component should navigate to login (tested via auth context mock)
     //     expect(backButton).toBeInTheDocument();
     // });

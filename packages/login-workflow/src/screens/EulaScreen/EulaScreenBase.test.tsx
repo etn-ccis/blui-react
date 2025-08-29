@@ -56,12 +56,7 @@ describe('Eula Screen Base', () => {
 
         it('renders with JSX content', () => {
             const jsxContent = <div data-testid="jsx-content">JSX EULA Content</div>;
-            render(
-                <EulaScreenBase
-                    eulaContent={jsxContent}
-                    checkboxLabel="Accept terms"
-                />
-            );
+            render(<EulaScreenBase eulaContent={jsxContent} checkboxLabel="Accept terms" />);
             expect(screen.getByTestId('jsx-content')).toBeInTheDocument();
             expect(screen.getByText('JSX EULA Content')).toBeInTheDocument();
         });
@@ -69,8 +64,8 @@ describe('Eula Screen Base', () => {
         it('renders with instructions', () => {
             render(
                 <EulaScreenBase
-                    WorkflowCardInstructionProps={{ 
-                        instructions: 'Please read the following agreement carefully' 
+                    WorkflowCardInstructionProps={{
+                        instructions: 'Please read the following agreement carefully',
                     }}
                     eulaContent={SAMPLE_EULA}
                     checkboxLabel="I accept"
@@ -80,12 +75,7 @@ describe('Eula Screen Base', () => {
         });
 
         it('does not render instructions when not provided', () => {
-            render(
-                <EulaScreenBase
-                    eulaContent={SAMPLE_EULA}
-                    checkboxLabel="I accept"
-                />
-            );
+            render(<EulaScreenBase eulaContent={SAMPLE_EULA} checkboxLabel="I accept" />);
             // Instructions should not be present
             expect(screen.queryByText('Please read the following agreement carefully')).not.toBeInTheDocument();
         });
@@ -188,10 +178,7 @@ describe('Eula Screen Base', () => {
 
         it('checkbox starts unchecked when initialCheckboxValue is not provided', () => {
             const { getByLabelText } = render(
-                <EulaScreenBase
-                    eulaContent={SAMPLE_EULA}
-                    checkboxLabel={'I accept the terms'}
-                />
+                <EulaScreenBase eulaContent={SAMPLE_EULA} checkboxLabel={'I accept the terms'} />
             );
 
             const checkbox = getByLabelText('I accept the terms') as HTMLInputElement;
@@ -208,7 +195,7 @@ describe('Eula Screen Base', () => {
                     checkboxLabel={'I accept the terms'}
                     initialCheckboxValue={true}
                     WorkflowCardActionsProps={{
-                        onNext: mockOnNext
+                        onNext: mockOnNext,
                     }}
                 />
             );
@@ -227,7 +214,7 @@ describe('Eula Screen Base', () => {
                     checkboxLabel={'I accept the terms'}
                     initialCheckboxValue={false}
                     WorkflowCardActionsProps={{
-                        onNext: mockOnNext
+                        onNext: mockOnNext,
                     }}
                 />
             );
@@ -246,7 +233,7 @@ describe('Eula Screen Base', () => {
                     checkboxLabel={'I accept the terms'}
                     initialCheckboxValue={true}
                     WorkflowCardActionsProps={{
-                        onNext: mockOnNext
+                        onNext: mockOnNext,
                     }}
                 />
             );
@@ -261,53 +248,30 @@ describe('Eula Screen Base', () => {
     describe('HTML content rendering', () => {
         it('renders HTML content when html prop is true', () => {
             const htmlContent = '<div data-testid="html-content"><b>Bold EULA</b></div>';
-            render(
-                <EulaScreenBase
-                    eulaContent={htmlContent}
-                    html={true}
-                    checkboxLabel="I accept"
-                />
-            );
-            
+            render(<EulaScreenBase eulaContent={htmlContent} html={true} checkboxLabel="I accept" />);
+
             expect(screen.getByTestId('html-content')).toBeInTheDocument();
             expect(screen.getByText('Bold EULA')).toBeInTheDocument();
         });
 
         it('renders plain text when html prop is false', () => {
             const plainContent = 'Plain text EULA content';
-            render(
-                <EulaScreenBase
-                    eulaContent={plainContent}
-                    html={false}
-                    checkboxLabel="I accept"
-                />
-            );
-            
+            render(<EulaScreenBase eulaContent={plainContent} html={false} checkboxLabel="I accept" />);
+
             expect(screen.getByText('Plain text EULA content')).toBeInTheDocument();
         });
 
         it('renders plain text when html prop is not provided', () => {
             const plainContent = 'Plain text EULA content';
-            render(
-                <EulaScreenBase
-                    eulaContent={plainContent}
-                    checkboxLabel="I accept"
-                />
-            );
-            
+            render(<EulaScreenBase eulaContent={plainContent} checkboxLabel="I accept" />);
+
             expect(screen.getByText('Plain text EULA content')).toBeInTheDocument();
         });
 
         it('sanitizes HTML content when html prop is true', () => {
             const maliciousHtml = '<script>alert("xss")</script><div data-testid="safe-content">Safe content</div>';
-            render(
-                <EulaScreenBase
-                    eulaContent={maliciousHtml}
-                    html={true}
-                    checkboxLabel="I accept"
-                />
-            );
-            
+            render(<EulaScreenBase eulaContent={maliciousHtml} html={true} checkboxLabel="I accept" />);
+
             // Script should be sanitized out, but safe content should remain
             expect(screen.getByTestId('safe-content')).toBeInTheDocument();
             expect(screen.getByText('Safe content')).toBeInTheDocument();
@@ -323,11 +287,11 @@ describe('Eula Screen Base', () => {
                     checkboxLabel="I accept"
                     refreshConfig={{
                         showRefreshButton: true,
-                        onRefresh: jest.fn()
+                        onRefresh: jest.fn(),
                     }}
                 />
             );
-            
+
             // Check for the refresh icon instead of text
             expect(screen.getByTestId('ReplaySharpIcon')).toBeInTheDocument();
         });
@@ -340,11 +304,11 @@ describe('Eula Screen Base', () => {
                     refreshConfig={{
                         showRefreshButton: true,
                         refreshButtonLabel: 'Reload Content',
-                        onRefresh: jest.fn()
+                        onRefresh: jest.fn(),
                     }}
                 />
             );
-            
+
             expect(screen.getByText('Reload Content')).toBeInTheDocument();
         });
 
@@ -357,14 +321,14 @@ describe('Eula Screen Base', () => {
                     refreshConfig={{
                         showRefreshButton: true,
                         refreshButtonLabel: 'Refresh Button',
-                        onRefresh: mockOnRefresh
+                        onRefresh: mockOnRefresh,
                     }}
                 />
             );
-            
+
             const refreshArea = screen.getByTestId('ReplaySharpIcon').closest('div');
             fireEvent.click(refreshArea!);
-            
+
             expect(mockOnRefresh).toHaveBeenCalled();
         });
 
@@ -375,23 +339,18 @@ describe('Eula Screen Base', () => {
                     checkboxLabel="I accept"
                     refreshConfig={{
                         showRefreshButton: false,
-                        onRefresh: jest.fn()
+                        onRefresh: jest.fn(),
                     }}
                 />
             );
-            
+
             expect(screen.queryByTestId('ReplaySharpIcon')).not.toBeInTheDocument();
             expect(screen.getByText('Simple EULA text')).toBeInTheDocument();
         });
 
         it('displays EULA content when refresh config is not provided', () => {
-            render(
-                <EulaScreenBase
-                    eulaContent="Simple EULA text"
-                    checkboxLabel="I accept"
-                />
-            );
-            
+            render(<EulaScreenBase eulaContent="Simple EULA text" checkboxLabel="I accept" />);
+
             expect(screen.getByText('Simple EULA text')).toBeInTheDocument();
             expect(screen.queryByTestId('ReplaySharpIcon')).not.toBeInTheDocument();
         });
@@ -405,11 +364,11 @@ describe('Eula Screen Base', () => {
                     checkboxLabel="I accept"
                     errorDisplayConfig={{
                         mode: 'dialog',
-                        title: 'Error occurred'
+                        title: 'Error occurred',
                     }}
                 />
             );
-            
+
             // Component should render without errors even with error config
             expect(screen.getByText('Simple EULA text')).toBeInTheDocument();
         });
@@ -434,7 +393,7 @@ describe('Eula Screen Base', () => {
                         onNext: mockOnNext,
                         showNext: true,
                         nextLabel: 'Continue',
-                        canGoNext: true
+                        canGoNext: true,
                     }}
                 />
             );
@@ -455,7 +414,7 @@ describe('Eula Screen Base', () => {
                     WorkflowCardActionsProps={{
                         showNext: true,
                         nextLabel: 'Continue',
-                        canGoNext: true
+                        canGoNext: true,
                     }}
                 />
             );
@@ -463,7 +422,7 @@ describe('Eula Screen Base', () => {
             // This should not throw an error
             const checkboxLabel = getByLabelText('I accept the terms');
             fireEvent.keyUp(checkboxLabel, { key: 'Enter' });
-            
+
             // No error should be thrown
         });
 
@@ -476,7 +435,7 @@ describe('Eula Screen Base', () => {
                     WorkflowCardActionsProps={{
                         showNext: true,
                         nextLabel: 'Continue',
-                        canGoNext: true
+                        canGoNext: true,
                     }}
                 />
             );
@@ -494,7 +453,7 @@ describe('Eula Screen Base', () => {
                     WorkflowCardActionsProps={{
                         showNext: true,
                         nextLabel: 'Continue',
-                        canGoNext: true
+                        canGoNext: true,
                     }}
                 />
             );
@@ -512,7 +471,7 @@ describe('Eula Screen Base', () => {
                     WorkflowCardActionsProps={{
                         showNext: true,
                         nextLabel: 'Continue',
-                        canGoNext: false
+                        canGoNext: false,
                     }}
                 />
             );
@@ -535,7 +494,7 @@ describe('Eula Screen Base', () => {
             // This should not throw an error
             const checkbox = getByLabelText('I accept the terms');
             fireEvent.click(checkbox);
-            
+
             // Checkbox state should still change
             expect((checkbox as HTMLInputElement).checked).toBe(true);
         });
@@ -552,15 +511,15 @@ describe('Eula Screen Base', () => {
             );
 
             const checkbox = getByLabelText('I accept the terms');
-            
+
             // First click - check
             fireEvent.click(checkbox);
             expect(mockOnEulaAcceptedChange).toHaveBeenNthCalledWith(1, true);
-            
+
             // Second click - uncheck
             fireEvent.click(checkbox);
             expect(mockOnEulaAcceptedChange).toHaveBeenNthCalledWith(2, false);
-            
+
             expect(mockOnEulaAcceptedChange).toHaveBeenCalledTimes(2);
         });
     });

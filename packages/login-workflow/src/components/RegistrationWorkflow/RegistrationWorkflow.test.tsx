@@ -160,8 +160,8 @@ describe('RegistrationWorkflow', () => {
         const customExistingAccountSuccessScreen = <Box>Existing Account Success</Box>;
         render(
             <RegistrationContextProvider {...registrationContextProviderProps}>
-                <RegistrationWorkflow 
-                    {...defaultProps} 
+                <RegistrationWorkflow
+                    {...defaultProps}
                     existingAccountSuccessScreen={customExistingAccountSuccessScreen}
                 >
                     <CreateAccountScreen />
@@ -171,7 +171,10 @@ describe('RegistrationWorkflow', () => {
         const { result } = renderHook(() => useRegistrationWorkflowContext(), {
             wrapper: ({ children }: any) => (
                 <RegistrationContextProvider {...registrationContextProviderProps}>
-                    <RegistrationWorkflow {...defaultProps} existingAccountSuccessScreen={customExistingAccountSuccessScreen}>
+                    <RegistrationWorkflow
+                        {...defaultProps}
+                        existingAccountSuccessScreen={customExistingAccountSuccessScreen}
+                    >
                         <Box>{children}</Box>
                     </RegistrationWorkflow>
                 </RegistrationContextProvider>
@@ -378,7 +381,7 @@ describe('RegistrationWorkflow', () => {
         const mockCompleteRegistration = jest.fn().mockImplementation(() => {
             throw new Error('Unexpected error');
         });
-        
+
         const contextProps = {
             ...registrationContextProviderProps,
             actions: {
@@ -449,10 +452,7 @@ describe('RegistrationWorkflow', () => {
 
         render(
             <RegistrationContextProvider {...registrationContextProviderProps}>
-                <RegistrationWorkflow 
-                    {...defaultProps} 
-                    errorDisplayConfig={customErrorDisplayConfig}
-                >
+                <RegistrationWorkflow {...defaultProps} errorDisplayConfig={customErrorDisplayConfig}>
                     <Typography>Test Screen</Typography>
                 </RegistrationWorkflow>
             </RegistrationContextProvider>
