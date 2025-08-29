@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, cleanup, fireEvent, waitFor, act } from '@testing-library/react';
+import { render, screen, cleanup, fireEvent, act } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { AppBar } from './AppBar';
 import { ThemeProvider } from '@mui/material/styles';
@@ -162,7 +162,7 @@ describe('AppBar', () => {
         expect(appBar).toHaveClass('BluiAppBar-collapsed');
     });
 
-    it('should handle scroll events when variant is snap', async () => {
+    it('should handle scroll events when variant is snap', () => {
         jest.useFakeTimers();
 
         render(
@@ -189,7 +189,7 @@ describe('AppBar', () => {
         jest.useRealTimers();
     });
 
-    it('should handle variant change from snap to collapsed', async () => {
+    it('should handle variant change from snap to collapsed', () => {
         jest.useFakeTimers();
 
         const { rerender } = render(
@@ -212,7 +212,7 @@ describe('AppBar', () => {
         jest.useRealTimers();
     });
 
-    it('should handle variant change from snap to expanded', async () => {
+    it('should handle variant change from snap to expanded', () => {
         jest.useFakeTimers();
 
         const { rerender } = render(
@@ -235,7 +235,7 @@ describe('AppBar', () => {
         jest.useRealTimers();
     });
 
-    it('should handle height changes when expanded', async () => {
+    it('should handle height changes when expanded', () => {
         jest.useFakeTimers();
 
         const { rerender } = render(
@@ -258,7 +258,7 @@ describe('AppBar', () => {
         jest.useRealTimers();
     });
 
-    it('should handle height changes when collapsed', async () => {
+    it('should handle height changes when collapsed', () => {
         jest.useFakeTimers();
 
         const { rerender } = render(
@@ -300,7 +300,7 @@ describe('AppBar', () => {
         document.body.removeChild(mockElement);
     });
 
-    it('should handle scroll container events', async () => {
+    it('should handle scroll container events', () => {
         jest.useFakeTimers();
 
         // Create a mock element
@@ -367,7 +367,7 @@ describe('AppBar', () => {
         expect(ref.current).toBeInstanceOf(HTMLElement);
     });
 
-    it('should handle scroll to top when at scroll position 0', async () => {
+    it('should handle scroll to top when at scroll position 0', () => {
         jest.useFakeTimers();
 
         render(

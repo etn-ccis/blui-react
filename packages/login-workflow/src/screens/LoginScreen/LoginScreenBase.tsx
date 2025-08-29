@@ -298,6 +298,7 @@ export const LoginScreenBase: React.FC<React.PropsWithChildren<LoginScreenProps>
                         >
                             <Checkbox
                                 color="primary"
+                                role="checkbox"
                                 checked={rememberMe}
                                 onChange={(e: any): void => handleRememberMeChanged(e.target.checked)}
                                 className={defaultClasses.rememberMeCheckbox}
