@@ -210,7 +210,7 @@ describe('LoginScreen', () => {
         );
 
         const checkboxWrapper = screen.getByTestId('BluiLogin-rememberMeCheckbox');
-        const checkbox = checkboxWrapper.querySelector('input[type="checkbox"]') as HTMLInputElement;
+        const checkbox = checkboxWrapper.querySelector('input[type="checkbox"]')!;
         expect(checkbox).toBeChecked();
     });
 

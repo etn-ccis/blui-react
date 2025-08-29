@@ -1,4 +1,4 @@
-import React, { JSX } from 'react';
+import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { ReactRouterGuestGuard } from './ReactRouterGuestGuard';
@@ -9,7 +9,7 @@ import { BrowserRouter, MemoryRouter } from 'react-router-dom';
 const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
     ...jest.requireActual('react-router-dom'),
-    Navigate: ({ to, replace }: { to: string; replace?: boolean }) => {
+    Navigate: ({ to, replace }: { to: string; replace?: boolean }): React.JSX.Element => {
         mockNavigate(to, { replace });
         return <div data-testid="navigate-mock">{`Navigating to: ${to}`}</div>;
     },

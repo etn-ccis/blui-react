@@ -7,7 +7,7 @@ describe('utilities', () => {
     describe('interleave', () => {
         it('should interleave array elements with separator', () => {
             const array = ['A', 'B', 'C'];
-            const separator = () => <span>|</span>;
+            const separator = (): React.JSX.Element => <span>|</span>;
 
             const result = interleave(array, separator);
 
@@ -19,7 +19,7 @@ describe('utilities', () => {
 
         it('should handle empty array', () => {
             const array: any[] = [];
-            const separator = () => <span>|</span>;
+            const separator = (): React.JSX.Element => <span>|</span>;
 
             const result = interleave(array, separator);
 
@@ -28,7 +28,7 @@ describe('utilities', () => {
 
         it('should handle single element array', () => {
             const array = ['A'];
-            const separator = () => <span>|</span>;
+            const separator = (): React.JSX.Element => <span>|</span>;
 
             const result = interleave(array, separator);
 
@@ -49,7 +49,7 @@ describe('utilities', () => {
     describe('separate', () => {
         it('should separate array elements with interpunct', () => {
             const array = ['A', 'B', 'C'];
-            const interpunct = () => <span>•</span>;
+            const interpunct = (): React.JSX.Element => <span>•</span>;
 
             const result = separate(array, interpunct);
 
@@ -58,7 +58,7 @@ describe('utilities', () => {
 
         it('should handle empty array', () => {
             const array: any[] = [];
-            const interpunct = () => <span>•</span>;
+            const interpunct = (): React.JSX.Element => <span>•</span>;
 
             const result = separate(array, interpunct);
 

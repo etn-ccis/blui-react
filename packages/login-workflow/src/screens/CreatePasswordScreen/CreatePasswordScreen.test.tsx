@@ -92,7 +92,7 @@ describe('Create Password Screen', () => {
 
         const nextButton = screen.getByText('Next');
         expect(nextButton).toBeInTheDocument();
-        act(() => fireEvent.click(nextButton));
+        void act(() => fireEvent.click(nextButton));
         expect(mockOnNext).toHaveBeenCalled();
     });
 

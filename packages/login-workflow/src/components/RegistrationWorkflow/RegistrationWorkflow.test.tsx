@@ -6,7 +6,6 @@ import { RegistrationWorkflowProps } from './types';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { RegistrationContextProvider, useRegistrationWorkflowContext } from '../../contexts';
-import { useRegistrationWorkflowContext as useWorkflowContext } from '../../contexts/RegistrationWorkflowContext';
 import Box from '@mui/material/Box';
 import { CreateAccountScreen } from '../../screens';
 import { registrationContextProviderProps } from '../../testUtils';
@@ -63,8 +62,8 @@ describe('RegistrationWorkflow', () => {
                 </RegistrationWorkflow>
             </RegistrationContextProvider>
         );
-        act(() => fireEvent.click(getByText('Next')));
-        expect(nextScreen).toHaveBeenCalledWith({ screenId: 'Eula', values: { accepted: true } });
+        void act(() => fireEvent.click(getByText('Next')));
+        void expect(nextScreen).toHaveBeenCalledWith({ screenId: 'Eula', values: { accepted: true } });
     });
 
     it('should set screen data for default registration workflow in the context', () => {
@@ -83,10 +82,10 @@ describe('RegistrationWorkflow', () => {
         expect(result.current.screenData.CreateAccount.emailAddress).toBe('');
 
         act(() => {
-            result.current.nextScreen({ screenId: 'Eula', values: { accepted: true } });
+            void result.current.nextScreen({ screenId: 'Eula', values: { accepted: true } });
         });
         act(() => {
-            result.current.previousScreen({
+            void result.current.previousScreen({
                 screenId: 'CreateAccount',
                 values: { emailAddress: 'emailAddress@emailAddress.com' },
             });
@@ -112,10 +111,10 @@ describe('RegistrationWorkflow', () => {
         expect(result.current.screenData.CreateAccount.emailAddress).toBe('');
 
         act(() => {
-            result.current.nextScreen({ screenId: 'Screen1', values: { test: 'test' } });
+            void result.current.nextScreen({ screenId: 'Screen1', values: { test: 'test' } });
         });
         act(() => {
-            result.current.previousScreen({
+            void result.current.previousScreen({
                 screenId: 'Screen2',
                 values: { test2: 'test2' },
             });
@@ -145,11 +144,11 @@ describe('RegistrationWorkflow', () => {
             </RegistrationContextProvider>
         );
         const verifyEmailInput = getByLabelText('Email Address');
-        act(() => fireEvent.change(verifyEmailInput, { target: { value: 'test@test.net' } }));
-        act(() => fireEvent.blur(verifyEmailInput));
+        void act(() => fireEvent.change(verifyEmailInput, { target: { value: 'test@test.net' } }));
+        void act(() => fireEvent.blur(verifyEmailInput));
         const nextButton = getByText('Next');
         expect(screen.getByText(/Next/i)).toBeEnabled();
-        act(() => {
+        void act(() => {
             fireEvent.click(nextButton);
         });
 
@@ -182,7 +181,7 @@ describe('RegistrationWorkflow', () => {
         });
 
         act(() => {
-            result.current.nextScreen({
+            void result.current.nextScreen({
                 screenId: 'CreateAccount',
                 values: { emailAddress: 'test@test.com' },
                 isAccountExist: true,
@@ -243,13 +242,13 @@ describe('RegistrationWorkflow', () => {
         act(() => {
             // This should trigger the catch block in nextScreen
             try {
-                result.current.nextScreen({
+                void result.current.nextScreen({
                     screenId: 'TestScreen',
                     values: { test: 'value' },
                 });
                 throw mockError;
             } catch (error) {
-                // Expected to catch the error
+                console.error(error);
             }
         });
 
@@ -425,7 +424,7 @@ describe('RegistrationWorkflow', () => {
 
         // First add a screen to Other category
         act(() => {
-            result.current.nextScreen({
+            void result.current.nextScreen({
                 screenId: 'CustomScreen',
                 values: { initialData: 'test' },
             });
@@ -433,7 +432,7 @@ describe('RegistrationWorkflow', () => {
 
         // Then update the same screen
         act(() => {
-            result.current.nextScreen({
+            void result.current.nextScreen({
                 screenId: 'CustomScreen',
                 values: { additionalData: 'update' },
             });

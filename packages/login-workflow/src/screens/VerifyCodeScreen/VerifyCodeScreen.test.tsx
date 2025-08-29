@@ -209,7 +209,7 @@ describe('Verify Code Screen', () => {
         expect(mockOnPrevious).toHaveBeenCalled();
     });
 
-    it('handles loading state during resend operation', async () => {
+    it('handles loading state during resend operation', () => {
         const mockRequestRegistrationCode = jest
             .fn()
             .mockImplementation(() => new Promise((resolve) => setTimeout(resolve, 100)));
@@ -309,7 +309,7 @@ describe('Verify Code Screen', () => {
             validateUserRegistrationRequest: undefined as any,
         };
 
-        const { getByLabelText } = render(
+        render(
             <RegistrationContextProvider {...registrationContextProviderProps} actions={mockActions}>
                 <RegistrationWorkflow initialScreenIndex={0}>
                     <VerifyCodeScreen
@@ -336,7 +336,7 @@ describe('Verify Code Screen', () => {
         expect(nextButton).toBeInTheDocument();
     });
 
-    it('handles null email address safely', async () => {
+    it('handles null email address safely', () => {
         const mockRequestRegistrationCode = jest.fn().mockResolvedValue(undefined);
 
         const mockActions = {
@@ -361,7 +361,6 @@ describe('Verify Code Screen', () => {
     });
 
     it('handles custom errorDisplayConfig with onClose callback', () => {
-        const mockOnClose = jest.fn();
         const mockErrorOnClose = jest.fn();
 
         render(
