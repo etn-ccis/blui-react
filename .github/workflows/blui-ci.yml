@@ -55,7 +55,7 @@ jobs:
               run: corepack enable
 
             - name: Install pnpm
-              run: npm install -g pnpm
+              run: npm install -g pnpm --force
 
             - name: install dependencies
               run: pnpm install
