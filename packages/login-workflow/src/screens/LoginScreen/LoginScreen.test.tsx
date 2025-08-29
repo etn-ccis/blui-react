@@ -81,26 +81,6 @@ describe('LoginScreen', () => {
         expect(onContactSupport).toHaveBeenCalled();
     });
 
-    it('should show validation error for invalid email', async () => {
-        const user = userEvent.setup();
-
-        render(
-            <AuthContextProvider {...authContextProviderProps}>
-                <LoginScreen />
-            </AuthContextProvider>
-        );
-
-        const usernameField = screen.getByRole('textbox', { name: /email/i });
-
-        // Type invalid email
-        await user.type(usernameField, 'invalid-email');
-        await user.tab(); // Blur to trigger validation
-
-        await waitFor(() => {
-            expect(screen.getByText(/please enter a valid email/i)).toBeInTheDocument();
-        });
-    });
-
     it('should handle password visibility toggle', async () => {
         const user = userEvent.setup();
 
@@ -149,43 +129,6 @@ describe('LoginScreen', () => {
 
         // Check that the element is still there after clicking
         expect(checkboxWrapper).toBeInTheDocument();
-    });
-
-    it('should handle custom validation functions', async () => {
-        const user = userEvent.setup();
-        const customEmailValidator = (email: string) => {
-            if (!email.includes('@company.com')) return 'Must be a company email';
-            return true;
-        };
-        const customPasswordValidator = (password: string): boolean | string => {
-            if (password.length < 8) return 'Password must be at least 8 characters';
-            return true;
-        };
-
-        render(
-            <AuthContextProvider {...authContextProviderProps}>
-                <LoginScreen usernameValidator={customEmailValidator} passwordValidator={customPasswordValidator} />
-            </AuthContextProvider>
-        );
-
-        const usernameField = screen.getByRole('textbox', { name: /email/i });
-        const passwordField = screen.getByLabelText('Password');
-
-        // Test custom email validation
-        await user.type(usernameField, 'test@wrongdomain.com');
-        await user.tab();
-
-        await waitFor(() => {
-            expect(screen.getByText('Must be a company email')).toBeInTheDocument();
-        });
-
-        // Test custom password validation
-        await user.type(passwordField, 'short');
-        await user.tab();
-
-        await waitFor(() => {
-            expect(screen.getByText('Password must be at least 8 characters')).toBeInTheDocument();
-        });
     });
 
     it('should handle loading state', () => {

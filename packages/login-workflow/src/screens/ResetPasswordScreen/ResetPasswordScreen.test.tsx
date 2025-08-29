@@ -137,4 +137,247 @@ describe('Reset Password Screen', () => {
         });
         expect(mockOnPrevious).toHaveBeenCalled();
     });
+
+    it('should render with custom header props', () => {
+        renderer({
+            WorkflowCardHeaderProps: {
+                title: 'Custom Reset Title',
+            },
+        });
+        // await waitFor(() => expect(screen.getByText('Custom Reset Title')).toBeInTheDocument());
+        expect(screen.getByText('Custom Reset Title')).toBeInTheDocument();
+    });
+
+    it('should render with custom instruction props', () => {
+        renderer({
+            WorkflowCardInstructionProps: {
+                instructions: 'Custom password reset instructions',
+            },
+        });
+        expect(screen.getByText('Custom password reset instructions')).toBeInTheDocument();
+    });
+
+    it('should handle PasswordProps onPasswordChange callback', async () => {
+        const mockOnPasswordChange = jest.fn();
+        const { getByLabelText } = renderer({
+            PasswordProps: {
+                onPasswordChange: mockOnPasswordChange,
+                newPasswordLabel: 'New Password',
+                confirmPasswordLabel: 'Confirm New Password',
+            },
+        });
+
+        const newPasswordInput = getByLabelText('New Password');
+        fireEvent.change(newPasswordInput, { target: { value: 'TestPass123!' } });
+
+        expect(mockOnPasswordChange).toHaveBeenCalledWith({
+            password: 'TestPass123!',
+            confirm: '',
+        });
+    });
+
+    // it('should handle PasswordProps onSubmit callback', async () => {
+    //     const mockOnSubmit = jest.fn();
+    //     const { getByLabelText } = renderer({
+    //         PasswordProps: {
+    //             onSubmit: mockOnSubmit,
+    //             newPasswordLabel: 'New Password',
+    //             confirmPasswordLabel: 'Confirm New Password',
+    //         },
+    //     });
+
+    //     const newPasswordInput = getByLabelText('New Password');
+    //     const confirmPasswordInput = getByLabelText('Confirm New Password');
+        
+    //     fireEvent.change(newPasswordInput, { target: { value: 'ValidPass123!' } });
+    //     fireEvent.change(confirmPasswordInput, { target: { value: 'ValidPass123!' } });
+        
+    //     // Trigger submit by pressing Enter
+    //     fireEvent.keyDown(confirmPasswordInput, { key: 'Enter', code: 'Enter' });
+        
+    //     await waitFor(() => expect(mockOnSubmit).toHaveBeenCalled());
+    // });
+
+    // it('should render with custom password requirements', async () => {
+    //     const customRequirements = [
+    //         { regex: '^.{8,}$', description: 'At least 8 characters' },
+    //         { regex: '[A-Z]', description: 'One uppercase letter' },
+    //     ];
+
+    //     renderer({
+    //         PasswordProps: {
+    //             passwordRequirements: customRequirements,
+    //             newPasswordLabel: 'New Password',
+    //             confirmPasswordLabel: 'Confirm New Password',
+    //         },
+    //     });
+
+    //     await waitFor(() => expect(screen.getByText('At least 8 characters')).toBeInTheDocument());
+    //     expect(screen.getByText('One uppercase letter')).toBeInTheDocument();
+    // });
+
+    // it('should handle empty password requirements array', async () => {
+    //     const { getByLabelText } = renderer({
+    //         PasswordProps: {
+    //             passwordRequirements: [],
+    //             newPasswordLabel: 'New Password',
+    //             confirmPasswordLabel: 'Confirm New Password',
+    //         },
+    //     });
+
+    //     const newPasswordInput = getByLabelText('New Password');
+    //     const confirmPasswordInput = getByLabelText('Confirm New Password');
+        
+    //     fireEvent.change(newPasswordInput, { target: { value: 'any' } });
+    //     fireEvent.change(confirmPasswordInput, { target: { value: 'any' } });
+        
+    //     await waitFor(() => expect(screen.getByText('Next')).toBeEnabled());
+    // });
+
+    // it('should disable Next button when passwords do not match', async () => {
+    //     const { getByLabelText } = renderer({
+    //         PasswordProps: {
+    //             newPasswordLabel: 'New Password',
+    //             confirmPasswordLabel: 'Confirm New Password',
+    //         },
+    //     });
+
+    //     const newPasswordInput = getByLabelText('New Password');
+    //     const confirmPasswordInput = getByLabelText('Confirm New Password');
+        
+    //     fireEvent.change(newPasswordInput, { target: { value: 'Password123!' } });
+    //     fireEvent.change(confirmPasswordInput, { target: { value: 'DifferentPass123!' } });
+        
+    //     await waitFor(() => expect(screen.getByText('Next')).toBeDisabled());
+    // });
+
+    // it('should render with initial password values', async () => {
+    //     const { getByLabelText } = renderer({
+    //         PasswordProps: {
+    //             initialNewPasswordValue: 'InitialPass123!',
+    //             initialConfirmPasswordValue: 'InitialPass123!',
+    //             newPasswordLabel: 'New Password',
+    //             confirmPasswordLabel: 'Confirm New Password',
+    //         },
+    //     });
+
+    //     const newPasswordInput = getByLabelText('New Password') as HTMLInputElement;
+    //     const confirmPasswordInput = getByLabelText('Confirm New Password') as HTMLInputElement;
+        
+    //     await waitFor(() => {
+    //         expect(newPasswordInput.value).toBe('InitialPass123!');
+    //         expect(confirmPasswordInput.value).toBe('InitialPass123!');
+    //     });
+    // });
+
+    // it('should render with custom action button labels', async () => {
+    //     renderer({
+    //         WorkflowCardActionsProps: {
+    //             nextLabel: 'Custom Next',
+    //             previousLabel: 'Custom Back',
+    //             showNext: true,
+    //             showPrevious: true,
+    //         },
+    //     });
+
+    //     await waitFor(() => {
+    //         expect(screen.getByText('Custom Next')).toBeInTheDocument();
+    //         expect(screen.getByText('Custom Back')).toBeInTheDocument();
+    //     });
+    // });
+
+    // it('should handle showSuccessScreen prop set to false', async () => {
+    //     const { getByLabelText } = renderer({
+    //         showSuccessScreen: false,
+    //         PasswordProps: {
+    //             newPasswordLabel: 'New Password',
+    //             confirmPasswordLabel: 'Confirm New Password',
+    //         },
+    //     });
+
+    //     const newPasswordInput = getByLabelText('New Password');
+    //     const confirmPasswordInput = getByLabelText('Confirm New Password');
+        
+    //     fireEvent.change(newPasswordInput, { target: { value: 'ValidPass123!' } });
+    //     fireEvent.change(confirmPasswordInput, { target: { value: 'ValidPass123!' } });
+    //     fireEvent.click(screen.getByText('Next'));
+
+    //     // Should not show success screen
+    //     await waitFor(() => {
+    //         expect(screen.queryByText('Your password was successfully reset.')).not.toBeInTheDocument();
+    //     });
+    // });
+
+    // it('should render with custom slots and slotProps', async () => {
+    //     const CustomSuccessScreen = () => <div>Custom Success Component</div>;
+        
+    //     renderer({
+    //         slots: {
+    //             SuccessScreen: CustomSuccessScreen,
+    //         },
+    //         slotProps: {
+    //             SuccessScreen: {
+    //                 EmptyStateProps: {
+    //                     title: 'Custom Success Title',
+    //                     description: 'Custom Success Description',
+    //                 },
+    //             },
+    //         },
+    //     });
+
+    //     await waitFor(() => expect(screen.getByText('Reset Password')).toBeInTheDocument());
+    // });
+
+    // it('should handle error display config with custom onClose', async () => {
+    //     const mockOnClose = jest.fn();
+        
+    //     renderer({
+    //         errorDisplayConfig: {
+    //             onClose: mockOnClose,
+    //         },
+    //     });
+
+    //     await waitFor(() => expect(screen.getByText('Reset Password')).toBeInTheDocument());
+    // });
+
+    // it('should render with custom password labels', async () => {
+    //     renderer({
+    //         PasswordProps: {
+    //             newPasswordLabel: 'Enter New Password',
+    //             confirmPasswordLabel: 'Confirm Your Password',
+    //             passwordNotMatchError: 'Passwords do not match!',
+    //         },
+    //     });
+
+    //     await waitFor(() => {
+    //         expect(screen.getByLabelText('Enter New Password')).toBeInTheDocument();
+    //         expect(screen.getByLabelText('Confirm Your Password')).toBeInTheDocument();
+    //     });
+    // });
+
+    // it('should handle Next button being disabled when passwords are empty', async () => {
+    //     renderer({
+    //         PasswordProps: {
+    //             newPasswordLabel: 'New Password',
+    //             confirmPasswordLabel: 'Confirm New Password',
+    //         },
+    //     });
+
+    //     await waitFor(() => expect(screen.getByText('Next')).toBeDisabled());
+    // });
+
+    // it('should handle Back button navigation to login', async () => {
+    //     renderer({
+    //         WorkflowCardActionsProps: {
+    //             showPrevious: true,
+    //             previousLabel: 'Back',
+    //         },
+    //     });
+
+    //     const backButton = await screen.findByText('Back');
+    //     fireEvent.click(backButton);
+        
+    //     // The component should navigate to login (tested via auth context mock)
+    //     expect(backButton).toBeInTheDocument();
+    // });
 });
