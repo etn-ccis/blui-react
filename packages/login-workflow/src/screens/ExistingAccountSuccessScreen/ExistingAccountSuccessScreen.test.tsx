@@ -28,20 +28,6 @@ describe('ExistingAccountSuccessScreen', () => {
         );
     });
 
-    // it('renders with default props and content', () => {
-    //     render(
-    //         <RegistrationContextProvider {...registrationContextProviderProps}>
-    //             <ExistingAccountSuccessScreen />
-    //         </RegistrationContextProvider>
-    //     );
-
-    //     // Check for default title and description
-    //     expect(screen.getByText('Registration Complete')).toBeInTheDocument();
-    //     expect(screen.getByText('Welcome!')).toBeInTheDocument();
-    //     expect(screen.getByText('Your account already exists.')).toBeInTheDocument();
-    //     expect(screen.getByText('Continue')).toBeInTheDocument();
-    // });
-
     it('calls default onDismiss (navigate to login) when continue button is clicked', () => {
         const mockContext = {
             ...registrationContextProviderProps,
@@ -139,17 +125,6 @@ describe('ExistingAccountSuccessScreen', () => {
         expect(screen.getByText('Custom Icon')).toBeInTheDocument();
     });
 
-    // it('disables continue button when canDismiss is false', () => {
-    //     render(
-    //         <RegistrationContextProvider {...registrationContextProviderProps}>
-    //             <ExistingAccountSuccessScreen canDismiss={false} />
-    //         </RegistrationContextProvider>
-    //     );
-
-    //     const continueButton = screen.getByText('Continue');
-    //     expect(continueButton).toBeDisabled();
-    // });
-
     it('enables continue button when canDismiss is true', () => {
         render(
             <RegistrationContextProvider {...registrationContextProviderProps}>
@@ -176,35 +151,6 @@ describe('ExistingAccountSuccessScreen', () => {
         expect(screen.getByRole('progressbar')).toBeInTheDocument();
     });
 
-    // it('passes through other props to SuccessScreenBase', () => {
-    //     render(
-    //         <RegistrationContextProvider {...registrationContextProviderProps}>
-    //             <ExistingAccountSuccessScreen
-    //                 WorkflowCardBaseProps={{
-    //                     sx: { backgroundColor: 'red' },
-    //                 }}
-    //             />
-    //         </RegistrationContextProvider>
-    //     );
-
-    //     // Check that the component renders without crashing with custom sx props
-    //     expect(screen.getByText('Welcome!')).toBeInTheDocument();
-    // });
-
-    // it('renders with custom background image', () => {
-    //     render(
-    //         <RegistrationContextProvider {...registrationContextProviderProps}>
-    //             <ExistingAccountSuccessScreen
-    //                 WorkflowCardBaseProps={{
-    //                     backgroundImage: 'url(test-image.jpg)',
-    //                 }}
-    //             />
-    //         </RegistrationContextProvider>
-    //     );
-
-    //     expect(screen.getByText('Welcome!')).toBeInTheDocument();
-    // });
-
     it('renders with canDismiss as a function returning true', () => {
         const canDismissFunction = jest.fn().mockReturnValue(true);
 
@@ -217,19 +163,6 @@ describe('ExistingAccountSuccessScreen', () => {
         const continueButton = screen.getByText('Continue');
         expect(continueButton).toBeEnabled();
     });
-
-    // it('renders with canDismiss as a function returning false', () => {
-    //     const canDismissFunction = jest.fn().mockReturnValue(false);
-
-    //     render(
-    //         <RegistrationContextProvider {...registrationContextProviderProps}>
-    //             <ExistingAccountSuccessScreen canDismiss={canDismissFunction} />
-    //         </RegistrationContextProvider>
-    //     );
-
-    //     const continueButton = screen.getByText('Continue');
-    //     expect(continueButton).toBeDisabled();
-    // });
 
     it('renders with custom dismissButtonLabel', () => {
         render(
