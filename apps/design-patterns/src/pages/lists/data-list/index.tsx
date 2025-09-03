@@ -19,7 +19,7 @@ export const DataList = (): JSX.Element => {
     return (
         <div style={{ backgroundColor: theme.palette.background.paper, minHeight: '100vh' }}>
             <AppBar data-cy="blui-toolbar" position={'sticky'} sx={{ padding: 0 }}>
-                <Toolbar sx={{ paddingLeft: '16px', paddingRight: '16px' }}>
+                <Toolbar disableGutters sx={{ paddingLeft: '16px', paddingRight: '16px' }}>
                     {md ? null : (
                         <IconButton
                             data-cy="toolbar-menu"

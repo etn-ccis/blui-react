@@ -15,11 +15,11 @@ export default {
         }),
         iconSizeMedium: ({ theme }) => ({
             '& > *:nth-of-type(1)': {
-                fontSize: '1.125rem',
+                fontSize: '1.25rem',
             },
             ...theme.applyStyles('dark', {
                 '& > *:nth-of-type(1)': {
-                    fontSize: '1.125rem',
+                    fontSize: '1.25rem',
                 },
             }),
         }),

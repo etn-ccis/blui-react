@@ -287,7 +287,7 @@ export const PasswordFormValidation = (): JSX.Element => {
     return (
         <Root>
             <AppbarRoot data-cy={'blui-toolbar'} position={'sticky'}>
-                <ToolbarGutters>
+                <ToolbarGutters disableGutters>
                     {md ? null : (
                         <IconButton
                             data-cy={'toolbar-menu'}

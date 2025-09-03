@@ -34,7 +34,7 @@ const emailRegex = new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i);
 
 // Styled components to replace makeStyles classes
 const ContainerWrapper = styled('div')(({ theme }) => ({
-    background: theme.palette.background.default,
+    background: theme.palette.background.paper,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'start',
@@ -264,7 +264,7 @@ export const SectionedFormValidation = (): JSX.Element => {
     return (
         <>
             <AppBarRoot data-cy={'blui-toolbar'} position={'sticky'}>
-                <ToolbarGutters>
+                <ToolbarGutters disableGutters>
                     {md ? null : (
                         <IconButton
                             data-cy={'toolbar-menu'}

@@ -152,7 +152,7 @@ export const ActionListButtonPanel = (): JSX.Element => {
     return (
         <Container>
             <AppBarRoot data-cy={'blui-toolbar'} position={'sticky'}>
-                <ToolbarGutters>
+                <ToolbarGutters disableGutters>
                     {md ? null : (
                         <IconButton
                             data-cy="toolbar-menu"

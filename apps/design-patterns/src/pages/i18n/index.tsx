@@ -116,7 +116,7 @@ export const I18N = (): JSX.Element => {
                         translator={t}
                     />
                     <ToolbarGutters>
-                        <Toolbar sx={{ padding: '0 16px' }}>
+                        <Toolbar disableGutters>
                             {md ? null : (
                                 <IconButton
                                     data-cy={'toolbar-menu'}

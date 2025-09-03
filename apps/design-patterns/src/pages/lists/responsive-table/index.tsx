@@ -66,7 +66,7 @@ export const ResponsiveTable = (): JSX.Element => {
             }}
         >
             <StyledAppBar data-cy="blui-toolbar" position="sticky">
-                <StyledToolbar>
+                <StyledToolbar disableGutters>
                     {md ? null : (
                         <IconButton
                             data-cy="toolbar-menu"

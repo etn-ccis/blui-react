@@ -96,7 +96,7 @@ export const ActionList = (): JSX.Element => {
     return (
         <div style={{ backgroundColor: theme.palette.background.paper, minHeight: '100vh' }}>
             <StyledAppBar position={'sticky'}>
-                <StyledToolbar data-cy={'blui-toolbar'}>
+                <StyledToolbar data-cy={'blui-toolbar'} disableGutters>
                     {md ? null : (
                         <IconButton
                             data-cy="toolbar-menu"

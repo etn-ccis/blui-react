@@ -125,7 +125,7 @@ export const ContextualSpinner = (): JSX.Element => {
     return (
         <div>
             <StyledAppBar data-cy="blui-toolbar" position={'sticky'}>
-                <StyledToolbar>
+                <StyledToolbar disableGutters>
                     {md ? null : (
                         <IconButton
                             data-cy="toolbar-menu"
