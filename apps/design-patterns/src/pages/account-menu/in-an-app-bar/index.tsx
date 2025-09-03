@@ -334,8 +334,9 @@ export const InAnAppBar = (): JSX.Element => {
                                 onClick={toggleChip}
                                 avatar={
                                     <Chip
+                                        sx={{ minWidth: 112.5, maxHeight: 32 }}
                                         variant="outlined"
-                                        icon={<AccountCircle style={{ color: colors.gray[500], marginLeft: '4px' }} />}
+                                        icon={<AccountCircle style={{ color: colors.gray[500] }} />}
                                         label="Admin"
                                         rightIcon={
                                             chipToggled ? (
