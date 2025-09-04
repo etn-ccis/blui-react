@@ -38,7 +38,7 @@ type ChipProps = MuiChipProps & {
     label: string;
     rightIcon: React.ReactElement;
     highlight: boolean;
-    icon?: React.ReactElement;
+    icon: React.ReactElement;
 };
 
 export const Chip = (props: ChipProps): JSX.Element => {
@@ -50,6 +50,7 @@ export const Chip = (props: ChipProps): JSX.Element => {
             highlight={highlight}
             icon={icon}
             clickable={true}
+            variant="outlined"
             label={
                 <ChipLabelContainer>
                     <ChipLabelText variant={'body2'}>{label}</ChipLabelText>
