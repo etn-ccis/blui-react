@@ -124,10 +124,10 @@
         "testEnvironment": "jsdom",
         "coverageThreshold": {
             "global": {
-                "lines": 85,
-                "statements": 85,
-                "branches": 70,
-                "functions": 80
+                "lines": 100,
+                "statements": 100,
+                "branches": 100,
+                "functions": 100
             }
         },
         "moduleDirectories": [
