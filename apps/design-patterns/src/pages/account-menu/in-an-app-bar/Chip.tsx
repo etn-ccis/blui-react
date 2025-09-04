@@ -7,22 +7,21 @@ const UserMenuChip = styled(MuiChip, {
 })<{ highlight: boolean }>(({ theme, highlight }) => ({
     height: theme.spacing(4),
     cursor: 'pointer',
-    ...(highlight
-        ? {
-              '&.MuiChip-outlined': {
-                  backgroundColor: colors.white[500],
-              },
-          }
-        : {
-              '&.MuiChip-outlined': {
-                  backgroundColor: colors.white[50],
-              },
-          }),
-}));
 
-const ChipIcon = styled('span')(({ theme }) => ({
-    height: theme.spacing(3),
-    width: theme.spacing(3),
+    '& .MuiChip-icon': {
+        height: theme.spacing(3),
+        width: theme.spacing(3),
+        marginLeft: 0,
+        marginRight: 0,
+    },
+
+    '& .MuiChip-label': {
+        padding: theme.spacing(1),
+    },
+
+    '&.MuiChip-outlined': {
+        backgroundColor: highlight ? colors.white[500] : colors.white[50],
+    },
 }));
 
 const ChipLabelContainer = styled('div')(({ theme }) => ({
@@ -39,6 +38,7 @@ type ChipProps = MuiChipProps & {
     label: string;
     rightIcon: React.ReactElement;
     highlight: boolean;
+    icon: React.ReactElement;
 };
 
 export const Chip = (props: ChipProps): JSX.Element => {
@@ -48,15 +48,15 @@ export const Chip = (props: ChipProps): JSX.Element => {
         <UserMenuChip
             {...chipProps}
             highlight={highlight}
-            icon={icon ? <ChipIcon>{icon}</ChipIcon> : undefined}
+            icon={icon}
+            clickable={true}
+            variant="outlined"
             label={
                 <ChipLabelContainer>
                     <ChipLabelText variant={'body2'}>{label}</ChipLabelText>
                     {rightIcon}
                 </ChipLabelContainer>
             }
-            clickable={true}
-            variant="outlined"
         />
     );
 };

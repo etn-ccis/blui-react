@@ -416,7 +416,7 @@ export const MultiselectList = (): JSX.Element => {
     return (
         <div>
             <StyledAppBar position={'sticky'}>
-                <Toolbar sx={ToolbarGuttersSx(theme)}>
+                <Toolbar disableGutters sx={ToolbarGuttersSx(theme)}>
                     {md ? null : (
                         <IconButton
                             data-cy="toolbar-menu"

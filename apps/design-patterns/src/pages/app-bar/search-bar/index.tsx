@@ -106,7 +106,7 @@ export const SearchBar = (): JSX.Element => {
                 className={clsx(searchActive && 'searchActive')}
                 sx={{ opacity: searchActive ? 0 : 1 }}
             >
-                <ToolbarGutters>
+                <ToolbarGutters disableGutters>
                     {md ? null : (
                         <IconButton
                             data-cy="toolbar-menu"

@@ -207,7 +207,7 @@ export const ActionListPanelHeader = (): JSX.Element => {
     return (
         <ActionListRoot>
             <StyledAppBar data-cy={'blui-toolbar'} position={'sticky'}>
-                <StyledToolbar>
+                <StyledToolbar disableGutters>
                     {md ? null : (
                         <IconButton
                             data-cy="toolbar-menu"

@@ -78,7 +78,7 @@ export const BluiToolbarMenu = (): JSX.Element => {
         <div style={{ minHeight: '100vh' }}>
             <AppBar data-cy="blui-toolbar" position={'sticky'}>
                 {!md ? null : (
-                    <ToolbarGutters>
+                    <ToolbarGutters disableGutters>
                         {md ? null : (
                             <IconButton
                                 data-cy="toolbar-menu"
@@ -114,7 +114,7 @@ export const BluiToolbarMenu = (): JSX.Element => {
                     </ToolbarGutters>
                 )}
                 {md ? null : (
-                    <ToolbarGutters>
+                    <ToolbarGutters disableGutters>
                         {md ? null : (
                             <IconButton
                                 data-cy="toolbar-menu"

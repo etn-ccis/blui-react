@@ -130,7 +130,7 @@ export const FixedLengthPasscodeValidation = (): JSX.Element => {
     return (
         <>
             <AppBarRoot data-cy={'blui-toolbar'} position={'sticky'}>
-                <ToolbarGutters>
+                <ToolbarGutters disableGutters>
                     {md ? null : (
                         <IconButton
                             data-cy={'toolbar-menu'}

@@ -50,7 +50,7 @@ export const InADrawer = (): JSX.Element => {
                         setDrawerOpen(!drawerOpen);
                     }}
                 />
-                <StyledToolbar>
+                <StyledToolbar disableGutters>
                     {md ? null : (
                         <IconButton
                             data-cy="toolbar-menu"

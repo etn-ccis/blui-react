@@ -132,7 +132,7 @@ export const PageWideSearch = (): JSX.Element => {
         <div style={{ minHeight: '100vh' }}>
             <AppBar variant={'collapsed'} position={'sticky'}>
                 <AppBarRoot>
-                    <Toolbar data-cy={'toolbar'}>
+                    <Toolbar data-cy={'toolbar'} disableGutters>
                         <ToolbarGutters>
                             {md ? null : (
                                 <IconButton

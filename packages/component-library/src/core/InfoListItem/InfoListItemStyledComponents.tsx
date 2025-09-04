@@ -27,7 +27,7 @@ export const Root = styled(ListItem, {
     >
 >(({ onClick, backgroundColor, wrapSubtitle, wrapTitle, wrapInfo, dense, ripple, theme }) => {
     const isWrapEnabled = (): boolean => wrapSubtitle || wrapTitle || wrapInfo;
-    const getHeight = (): string => (dense ? `3.5rem` : `4.5rem`);
+    const getHeight = (): string => (dense ? `3.25rem` : `4.25rem`);
 
     let isCssColor = true;
     try {

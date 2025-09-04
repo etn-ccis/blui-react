@@ -246,7 +246,7 @@ export const ContextualAction = (): JSX.Element => {
     return (
         <div style={{ backgroundColor: theme.palette.background.default, minHeight: '100vh' }}>
             <AppBarRoot data-cy="app-bar" position={'sticky'}>
-                <ToolbarGutters>
+                <ToolbarGutters disableGutters>
                     {md ? null : (
                         <IconButton
                             data-cy="toolbar-menu"

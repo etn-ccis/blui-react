@@ -42,7 +42,7 @@ const ContainerWrapper = styled('div')(({ theme }) => ({
     justifyContent: 'center',
     alignItems: 'start',
     flex: '1 1 0',
-    backgroundColor: theme.palette.background.default,
+    backgroundColor: theme.palette.background.paper,
     height: 'calc(100vh - 64px)',
 }));
 
@@ -126,7 +126,7 @@ export const PhoneNumberFormatValidation = (): JSX.Element => {
     return (
         <>
             <AppBarRoot data-cy={'blui-toolbar'} position={'sticky'}>
-                <ToolbarGutters>
+                <ToolbarGutters disableGutters>
                     {md ? null : (
                         <IconButton
                             data-cy={'toolbar-menu'}

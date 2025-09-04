@@ -38,7 +38,7 @@ export const ProgressBarIndeterminate = (): JSX.Element => {
     return (
         <div style={{ backgroundColor: theme.palette.background.paper, minHeight: '100vh' }}>
             <AppBar data-cy="blui-toolbar" position={'sticky'}>
-                <ToolbarGutters>
+                <ToolbarGutters disableGutters>
                     {md ? null : (
                         <IconButton
                             data-cy="toolbar-menu"
