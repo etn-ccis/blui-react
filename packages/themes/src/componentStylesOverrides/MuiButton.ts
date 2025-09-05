@@ -13,13 +13,15 @@ export default {
                 },
             }),
         }),
-        iconSizeMedium: ({ theme }) => ({
-            '& > *:nth-of-type(1)': {
-                fontSize: '1.25rem',
+        icon: ({ theme }) => ({
+            '&.MuiButton-sizeMedium': {
+                '& > *:nth-of-type(1)': {
+                    fontSize: '1.125rem',
+                },
             },
             ...theme.applyStyles('dark', {
                 '& > *:nth-of-type(1)': {
-                    fontSize: '1.25rem',
+                    fontSize: '1.125rem',
                 },
             }),
         }),
