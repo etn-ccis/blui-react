@@ -191,12 +191,12 @@ export const LoginScreenBase: React.FC<React.PropsWithChildren<LoginScreenProps>
                                 mb:
                                     username.length > 0 && !isUsernameValid && shouldValidateUsername
                                         ? 4
-                                        : `${(parseInt(theme.spacing(4)) + HELPER_TEXT_HEIGHT).toString()}px`,
+                                        : `${(32 + HELPER_TEXT_HEIGHT).toString()}px`,
                                 [theme.breakpoints.down('sm')]: {
                                     mb:
                                         username.length > 0 && !isUsernameValid && shouldValidateUsername
                                             ? 3
-                                            : `${(parseInt(theme.spacing(3)) + HELPER_TEXT_HEIGHT).toString()}px`,
+                                            : `${(24 + HELPER_TEXT_HEIGHT).toString()}px`,
                                 },
                             }}
                         >
