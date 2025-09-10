@@ -8,13 +8,13 @@ import Typography from '@mui/material/Typography';
 import cyberSecurityBadge from '../../assets/images/cybersecurity_certified.png';
 import { PasswordTextField } from '../../components';
 import Button from '@mui/material/Button';
-import { useTheme } from '@mui/material/styles';
 import Checkbox from '@mui/material/Checkbox';
 import { HELPER_TEXT_HEIGHT } from '../../utils/constants';
 import { LoginScreenClassKey, getLoginScreenUtilityClass } from './utilityClasses';
 import { unstable_composeClasses as composeClasses } from '@mui/material';
 import ErrorManager from '../../components/Error/ErrorManager';
 import { LinkStyles } from '../../styles';
+import { theme } from '@brightlayer-ui/react-themes';
 
 const useUtilityClasses = (ownerState: LoginScreenProps): Record<LoginScreenClassKey, string> => {
     const { classes } = ownerState;
@@ -86,7 +86,6 @@ export const LoginScreenBase: React.FC<React.PropsWithChildren<LoginScreenProps>
         ...otherProps
     } = props;
 
-    const theme = useTheme();
     const defaultClasses = useUtilityClasses(props);
 
     const [username, setUsername] = React.useState<string>(initialUsernameValue || '');
@@ -191,12 +190,12 @@ export const LoginScreenBase: React.FC<React.PropsWithChildren<LoginScreenProps>
                                 mb:
                                     username.length > 0 && !isUsernameValid && shouldValidateUsername
                                         ? 4
-                                        : `${(32 + HELPER_TEXT_HEIGHT).toString()}px`,
+                                        : parseInt(`4 + ${HELPER_TEXT_HEIGHT}px`),
                                 [theme.breakpoints.down('sm')]: {
                                     mb:
                                         username.length > 0 && !isUsernameValid && shouldValidateUsername
                                             ? 3
-                                            : `${(24 + HELPER_TEXT_HEIGHT).toString()}px`,
+                                            : parseInt(`3 + ${HELPER_TEXT_HEIGHT}px`),
                                 },
                             }}
                         >
@@ -235,7 +234,7 @@ export const LoginScreenBase: React.FC<React.PropsWithChildren<LoginScreenProps>
                                 mb:
                                     username.length > 0 && !isPasswordValid && shouldValidatePassword
                                         ? 2
-                                        : `${(parseInt(theme.spacing(2)) + HELPER_TEXT_HEIGHT).toString()}px`,
+                                        : `${(parseFloat(theme.spacing(2)) || 16) + HELPER_TEXT_HEIGHT}px`,
                             }}
                         >
                             <PasswordTextField
