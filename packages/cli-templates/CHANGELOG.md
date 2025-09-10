@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.0.1 (September 10, 2025)
+
+### Fixed
+
+- Project generated with BLUI CLI with Routing template not building locally. ([#100](https://github.com/etn-ccis/blui-react/issues/100))
+
 ## v2.0.0 (July 28, 2025)
 
 ### Changed
