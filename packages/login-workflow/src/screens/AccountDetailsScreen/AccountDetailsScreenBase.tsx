@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-expressions */
 import React, { useCallback, useEffect, useRef } from 'react';
 import TextField from '@mui/material/TextField';
 import {
@@ -106,8 +105,7 @@ export const AccountDetailsScreenBase: React.FC<AccountDetailsScreenProps> = (pr
                         }}
                         {...firstNameTextFieldProps}
                         onChange={(e): void => {
-                            // eslint-disable-next-line no-unused-expressions
-                            firstNameTextFieldProps?.onChange && firstNameTextFieldProps.onChange(e);
+                            firstNameTextFieldProps?.onChange?.(e);
                             handleFirstNameInputChange(e.target.value);
                         }}
                         onKeyUp={(e): void => {
@@ -129,8 +127,7 @@ export const AccountDetailsScreenBase: React.FC<AccountDetailsScreenProps> = (pr
                         helperText={shouldValidateLastName && lastNameError}
                         {...lastNameTextFieldProps}
                         onChange={(e): void => {
-                            // eslint-disable-next-line no-unused-expressions
-                            lastNameTextFieldProps?.onChange && lastNameTextFieldProps.onChange(e);
+                            lastNameTextFieldProps?.onChange?.(e);
                             handleLastNameInputChange(e.target.value);
                         }}
                         onKeyUp={(e): void => {

@@ -137,4 +137,42 @@ describe('Reset Password Screen', () => {
         });
         expect(mockOnPrevious).toHaveBeenCalled();
     });
+
+    it('should render with custom header props', () => {
+        renderer({
+            WorkflowCardHeaderProps: {
+                title: 'Custom Reset Title',
+            },
+        });
+        // await waitFor(() => expect(screen.getByText('Custom Reset Title')).toBeInTheDocument());
+        expect(screen.getByText('Custom Reset Title')).toBeInTheDocument();
+    });
+
+    it('should render with custom instruction props', () => {
+        renderer({
+            WorkflowCardInstructionProps: {
+                instructions: 'Custom password reset instructions',
+            },
+        });
+        expect(screen.getByText('Custom password reset instructions')).toBeInTheDocument();
+    });
+
+    it('should handle PasswordProps onPasswordChange callback', () => {
+        const mockOnPasswordChange = jest.fn();
+        const { getByLabelText } = renderer({
+            PasswordProps: {
+                onPasswordChange: mockOnPasswordChange,
+                newPasswordLabel: 'New Password',
+                confirmPasswordLabel: 'Confirm New Password',
+            },
+        });
+
+        const newPasswordInput = getByLabelText('New Password');
+        fireEvent.change(newPasswordInput, { target: { value: 'TestPass123!' } });
+
+        expect(mockOnPasswordChange).toHaveBeenCalledWith({
+            password: 'TestPass123!',
+            confirm: '',
+        });
+    });
 });

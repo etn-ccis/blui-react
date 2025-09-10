@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/naming-convention */
 
 import React, { useCallback, useState, JSX } from 'react';
@@ -91,13 +90,11 @@ export const ForgotPasswordScreenBase: React.FC<React.PropsWithChildren<ForgotPa
                                 helperText={shouldValidateEmail && emailError}
                                 {...emailTextFieldProps}
                                 onBlur={(e): void => {
-                                    // eslint-disable-next-line no-unused-expressions
-                                    emailTextFieldProps?.onBlur && emailTextFieldProps.onBlur(e);
+                                    emailTextFieldProps?.onBlur?.(e);
                                     setShouldValidateEmail(true);
                                 }}
                                 onChange={(evt): void => {
-                                    // eslint-disable-next-line no-unused-expressions
-                                    emailTextFieldProps?.onChange && emailTextFieldProps.onChange(evt);
+                                    emailTextFieldProps?.onChange?.(evt);
                                     handleEmailInputChange(evt.target.value);
                                 }}
                                 onKeyUp={(e): void => {

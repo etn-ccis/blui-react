@@ -21,3 +21,5 @@ export const useErrorContext = (): ErrorContextProviderProps => {
 export type { ErrorContextProviderProps };
 
 export { ErrorContext, ErrorContextProvider };
+
+export * from './useErrorManager';

@@ -1,20 +1,11 @@
 /// <reference types="vitest/config" />
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import viteTsconfigPaths from 'vite-tsconfig-paths'
-import dts from 'vite-plugin-dts';
-import * as path from 'path';
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import viteTsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
     base: '/',
-    plugins: [
-        react(),
-        viteTsconfigPaths(),
-        dts({
-            entryRoot: 'src',
-            tsconfigPath: path.join(__dirname, 'tsconfig.json'),
-        }),
-    ],
+    plugins: [react(), viteTsconfigPaths()],
     server: {
         port: 4200,
         host: 'localhost',
