@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/naming-convention */
 import React, { useEffect, useState, JSX } from 'react';
 import {
@@ -163,9 +162,7 @@ export const ChangePasswordDialogBase: React.FC<ChangePasswordDialogProps> = (pr
                                     value={currentPassword}
                                     {...currentPasswordTextFieldProps}
                                     onChange={(e): void => {
-                                        // eslint-disable-next-line no-unused-expressions
-                                        currentPasswordTextFieldProps?.onChange &&
-                                            currentPasswordTextFieldProps.onChange(e);
+                                        currentPasswordTextFieldProps?.onChange?.(e);
                                         handleChange(e);
                                     }}
                                     onKeyUp={(e): void => {

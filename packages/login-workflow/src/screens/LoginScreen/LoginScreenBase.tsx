@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-expressions */
 import React, { useCallback, useRef, useState } from 'react';
 import { LoginScreenProps } from './types';
 import { WorkflowCard } from '../../components/WorkflowCard';
@@ -214,18 +213,15 @@ export const LoginScreenBase: React.FC<React.PropsWithChildren<LoginScreenProps>
                                 helperText={shouldValidateUsername && !isUsernameValid ? usernameError : ''}
                                 {...usernameTextFieldProps}
                                 onChange={(e): void => {
-                                    // eslint-disable-next-line no-unused-expressions
-                                    usernameTextFieldProps?.onChange && usernameTextFieldProps.onChange(e);
+                                    usernameTextFieldProps?.onChange?.(e);
                                     handleUsernameInputChange(e.target.value);
                                 }}
                                 onSubmit={(e: any): void => {
-                                    // eslint-disable-next-line no-unused-expressions
-                                    usernameTextFieldProps?.onSubmit && usernameTextFieldProps.onSubmit(e);
+                                    usernameTextFieldProps?.onSubmit?.(e);
                                     if (e.key === 'Enter' && passwordField.current) passwordField.current.focus();
                                 }}
                                 onBlur={(e): void => {
-                                    // eslint-disable-next-line no-unused-expressions
-                                    usernameTextFieldProps?.onBlur && usernameTextFieldProps.onBlur(e);
+                                    usernameTextFieldProps?.onBlur?.(e);
                                     setShouldValidateUsername(true);
                                 }}
                                 onKeyUp={(e): void => {
@@ -256,23 +252,19 @@ export const LoginScreenBase: React.FC<React.PropsWithChildren<LoginScreenProps>
                                 helperText={shouldValidatePassword && !isPasswordValid ? passwordError : ''}
                                 {...passwordTextFieldProps}
                                 onChange={(e: any): void => {
-                                    // eslint-disable-next-line no-unused-expressions
-                                    passwordTextFieldProps?.onChange && passwordTextFieldProps.onChange(e);
+                                    passwordTextFieldProps?.onChange?.(e);
                                     handlePasswordInputChange(e.target.value);
                                 }}
                                 onSubmit={(e: any): void => {
-                                    // eslint-disable-next-line no-unused-expressions
-                                    passwordTextFieldProps?.onSubmit && passwordTextFieldProps.onSubmit(e);
+                                    passwordTextFieldProps?.onSubmit?.(e);
                                     handleLoginSubmit(e);
                                 }}
                                 onBlur={(e): void => {
-                                    // eslint-disable-next-line no-unused-expressions
-                                    passwordTextFieldProps?.onBlur && passwordTextFieldProps.onBlur(e);
+                                    passwordTextFieldProps?.onBlur?.(e);
                                     setShouldValidatePassword(true);
                                 }}
                                 onKeyUp={(e): void => {
-                                    // eslint-disable-next-line no-unused-expressions
-                                    passwordTextFieldProps?.onSubmit && passwordTextFieldProps.onSubmit(e);
+                                    passwordTextFieldProps?.onSubmit?.(e);
                                     handleLoginSubmit(e);
                                 }}
                             />
@@ -306,6 +298,7 @@ export const LoginScreenBase: React.FC<React.PropsWithChildren<LoginScreenProps>
                         >
                             <Checkbox
                                 color="primary"
+                                role="checkbox"
                                 checked={rememberMe}
                                 onChange={(e: any): void => handleRememberMeChanged(e.target.checked)}
                                 className={defaultClasses.rememberMeCheckbox}
