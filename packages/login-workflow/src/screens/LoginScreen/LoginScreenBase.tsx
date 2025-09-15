@@ -8,13 +8,13 @@ import Typography from '@mui/material/Typography';
 import cyberSecurityBadge from '../../assets/images/cybersecurity_certified.png';
 import { PasswordTextField } from '../../components';
 import Button from '@mui/material/Button';
+import { useTheme } from '@mui/material/styles';
 import Checkbox from '@mui/material/Checkbox';
 import { HELPER_TEXT_HEIGHT } from '../../utils/constants';
 import { LoginScreenClassKey, getLoginScreenUtilityClass } from './utilityClasses';
 import { unstable_composeClasses as composeClasses } from '@mui/material';
 import ErrorManager from '../../components/Error/ErrorManager';
 import { LinkStyles } from '../../styles';
-import { theme } from '@brightlayer-ui/react-themes';
 
 const useUtilityClasses = (ownerState: LoginScreenProps): Record<LoginScreenClassKey, string> => {
     const { classes } = ownerState;
@@ -86,6 +86,7 @@ export const LoginScreenBase: React.FC<React.PropsWithChildren<LoginScreenProps>
         ...otherProps
     } = props;
 
+    const theme = useTheme();
     const defaultClasses = useUtilityClasses(props);
 
     const [username, setUsername] = React.useState<string>(initialUsernameValue || '');
