@@ -26,7 +26,7 @@ export const PageContent: React.FC<PageContentProps> = (props): React.JSX.Elemen
                 display: 'flex',
                 justifyContent: 'center',
                 backgroundColor: theme.vars.palette.background.paper,
-                height: '100vh',
+                minHeight: '100vh',
             }}
         >
             <Box
