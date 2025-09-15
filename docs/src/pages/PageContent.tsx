@@ -21,7 +21,14 @@ export const PageContent: React.FC<PageContentProps> = (props): React.JSX.Elemen
     }, [wideLayout]);
 
     return (
-        <Box sx={{ display: 'flex', justifyContent: 'center', backgroundColor: theme.vars.palette.background.paper }}>
+        <Box
+            sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                backgroundColor: theme.vars.palette.background.paper,
+                minHeight: '100vh',
+            }}
+        >
             <Box
                 sx={{
                     width: '100%',
