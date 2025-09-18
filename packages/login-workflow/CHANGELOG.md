@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 -   Spacing issue between `email` and `password` fields in Login screen ([#35](https://github.com/etn-ccis/blui-react/issues/35)).
+-   Upgraded the peer dependency `@mui/material` and `@mui/icons-material` to version 7 ([#113](https://github.com/etn-ccis/blui-react/issues/113)).
 
 ## v7.0.1 (September 11, 2025)
 
