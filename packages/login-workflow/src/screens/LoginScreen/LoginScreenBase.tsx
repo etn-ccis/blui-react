@@ -188,15 +188,9 @@ export const LoginScreenBase: React.FC<React.PropsWithChildren<LoginScreenProps>
                         <Box
                             sx={{
                                 width: '100%',
-                                mb:
-                                    username.length > 0 && !isUsernameValid && shouldValidateUsername
-                                        ? 4
-                                        : parseInt(`4 + ${HELPER_TEXT_HEIGHT}px`),
+                                mb: 4,
                                 [theme.breakpoints.down('sm')]: {
-                                    mb:
-                                        username.length > 0 && !isUsernameValid && shouldValidateUsername
-                                            ? 3
-                                            : parseInt(`3 + ${HELPER_TEXT_HEIGHT}px`),
+                                    mb: 3,
                                 },
                             }}
                         >
