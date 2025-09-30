@@ -152,6 +152,7 @@ const InfoListItemRender: React.ForwardRefRenderFunction<unknown, InfoListItemPr
         iconColor,
         statusColor,
         onClick,
+        ListItemButtonProps,
         ...otherListItemProps
     } = props;
 
@@ -318,7 +319,11 @@ const InfoListItemRender: React.ForwardRefRenderFunction<unknown, InfoListItemPr
             {...otherListItemProps}
         >
             {onClick && ripple ? (
-                <InfoListItemContentContainer className={generatedClasses.listItemButtonRoot} focusRipple={ripple}>
+                <InfoListItemContentContainer
+                    className={generatedClasses.listItemButtonRoot}
+                    focusRipple={ripple}
+                    {...ListItemButtonProps}
+                >
                     {getInfoListItemContent()}
                 </InfoListItemContentContainer>
             ) : (
