@@ -1,8 +1,10 @@
-import React, { HTMLAttributes, forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 import { useDrawerContext } from './DrawerContext';
 import Divider from '@mui/material/Divider';
+import { styled } from '@mui/material/styles';
+import { Box, BoxProps } from '@mui/material';
 
-export type DrawerSubheaderProps = HTMLAttributes<HTMLDivElement> & {
+export type DrawerSubheaderProps = BoxProps & {
     /** Optional divider which appears below the Subheader
      *
      * Default: true
@@ -15,22 +17,33 @@ export type DrawerSubheaderProps = HTMLAttributes<HTMLDivElement> & {
     hideContentOnCollapse?: boolean;
 };
 
+const Root = styled(Box, {
+    shouldForwardProp: (prop) => prop !== 'drawerOpen' && prop !== 'hideContentOnCollapse',
+})<{
+    drawerOpen: boolean;
+    hideContentOnCollapse: boolean;
+}>(({ drawerOpen, hideContentOnCollapse }) => ({
+    visibility: drawerOpen || !hideContentOnCollapse ? 'inherit' : 'hidden',
+}));
+
 const DrawerSubheaderRender: React.ForwardRefRenderFunction<unknown, DrawerSubheaderProps> = (
     props: DrawerSubheaderProps,
     ref: any
 ) => {
-    const { children, divider = true, hideContentOnCollapse = true, ...otherDivProps } = props;
+    const { children, divider = true, hideContentOnCollapse = true, ...otherProps } = props;
     const { open: drawerOpen = true } = useDrawerContext();
+
     return (
         <>
-            <div
+            <Root
                 ref={ref}
                 data-testid={'blui-drawer-sub-header'}
-                style={{ visibility: drawerOpen || !hideContentOnCollapse ? 'inherit' : 'hidden' }}
-                {...otherDivProps}
+                drawerOpen={drawerOpen}
+                hideContentOnCollapse={hideContentOnCollapse}
+                {...otherProps}
             >
                 {children}
-            </div>
+            </Root>
             {divider && <Divider />}
         </>
     );
