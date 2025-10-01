@@ -153,6 +153,7 @@ const InfoListItemRender: React.ForwardRefRenderFunction<unknown, InfoListItemPr
         iconColor,
         statusColor,
         onClick,
+        ListItemButtonProps,
         ...otherListItemProps
     } = props;
 
