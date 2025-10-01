@@ -191,12 +191,12 @@ export const LoginScreenBase: React.FC<React.PropsWithChildren<LoginScreenProps>
                                 mb:
                                     username.length > 0 && !isUsernameValid && shouldValidateUsername
                                         ? 4
-                                        : `${(parseInt(theme.spacing(4)) + HELPER_TEXT_HEIGHT).toString()}px`,
+                                        : parseInt(`4 + ${HELPER_TEXT_HEIGHT}px`),
                                 [theme.breakpoints.down('sm')]: {
                                     mb:
                                         username.length > 0 && !isUsernameValid && shouldValidateUsername
                                             ? 3
-                                            : `${(parseInt(theme.spacing(3)) + HELPER_TEXT_HEIGHT).toString()}px`,
+                                            : parseInt(`3 + ${HELPER_TEXT_HEIGHT}px`),
                                 },
                             }}
                         >
@@ -235,7 +235,7 @@ export const LoginScreenBase: React.FC<React.PropsWithChildren<LoginScreenProps>
                                 mb:
                                     username.length > 0 && !isPasswordValid && shouldValidatePassword
                                         ? 2
-                                        : `${(parseInt(theme.spacing(2)) + HELPER_TEXT_HEIGHT).toString()}px`,
+                                        : `${(parseFloat(theme.spacing(2)) || 16) + HELPER_TEXT_HEIGHT}px`,
                             }}
                         >
                             <PasswordTextField
