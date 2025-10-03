@@ -92,22 +92,22 @@ export type DrawerProps = Omit<MUIDrawerProps, 'translate' | 'variant'> &
 export type DrawerComponentProps = DrawerProps; // alias
 
 const Root = styled(MUIDrawer, {
-    shouldForwardProp: (prop) => prop !== 'backgroundColor' && prop !== 'sideBorder',
-})<Pick<DrawerProps, 'backgroundColor' | 'sideBorder' | 'open'>>(({ backgroundColor, sideBorder, open, theme }) => ({
-    minHeight: '100%',
-    backgroundColor: backgroundColor || 'transparent',
-    transition: open
-        ? theme.transitions.create('width', {
-              duration: theme.transitions.duration.enteringScreen,
-          })
-        : theme.transitions.create('width', { duration: theme.transitions.duration.leavingScreen }),
-    [`& .${drawerClasses.paper}`]: {
-        overflow: 'hidden',
-        position: 'inherit',
-        boxShadow: sideBorder ? 'none' : theme.shadows[4],
-        borderWidth: sideBorder ? 1 : 0,
-    },
-}));
+    shouldForwardProp: (prop) => prop !== 'backgroundColor' && prop !== 'sideBorder' && prop !== 'isExpanded',
+})<Pick<DrawerProps, 'backgroundColor' | 'sideBorder'> & { isExpanded?: boolean }>(
+    ({ backgroundColor, sideBorder, isExpanded, theme }) => ({
+        minHeight: '100%',
+        backgroundColor: backgroundColor || 'transparent',
+        transition: theme.transitions.create('width', {
+            duration: isExpanded ? theme.transitions.duration.enteringScreen : theme.transitions.duration.leavingScreen,
+        }),
+        [`& .${drawerClasses.paper}`]: {
+            overflow: 'hidden',
+            position: 'inherit',
+            boxShadow: sideBorder ? 'none' : theme.shadows[4],
+            borderWidth: sideBorder ? 1 : 0,
+        },
+    })
+);
 
 const Content = styled(
     Box,
@@ -339,7 +339,7 @@ const DrawerRenderer: React.ForwardRefRenderFunction<unknown, DrawerProps> = (
             setPadding(variant === 'temporary' ? 0 : getDrawerWidth());
             setDrawerOpen(isDrawerOpen());
         }
-    }, [variant, noLayout, isDrawerOpen, getDrawerWidth]);
+    }, [variant, noLayout, isDrawerOpen, getDrawerWidth, setPadding, setDrawerOpen]);
 
     return (
         <Root
@@ -347,6 +347,7 @@ const DrawerRenderer: React.ForwardRefRenderFunction<unknown, DrawerProps> = (
             {...drawerProps}
             variant={variant === 'temporary' ? variant : 'permanent'}
             open={isDrawerOpen()}
+            isExpanded={isDrawerOpen()}
             classes={{
                 root: clsx(generatedClasses.root, className, {
                     [generatedClasses.expanded]: isDrawerOpen(),
