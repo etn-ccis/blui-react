@@ -72,20 +72,12 @@ jobs:
               echo "changes=false" >> $GITHUB_OUTPUT
             fi
           fi
-
-      - name: Read Version from package.json
-        if: steps.check_changes.outputs.changes == 'true'
-        id: get_version
-        run: |
-          VERSION=$(jq -r .version package.json)
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
-
       - name: Black Duck Scan
         if: steps.check_changes.outputs.changes == 'true'
         uses: blackduck-inc/black-duck-security-scan@v2.3.0
         env:
           DETECT_PROJECT_NAME: ${{ vars.PROJECT_NAME }}
-          DETECT_PROJECT_VERSION_NAME: react-${{ matrix.app }}-${{ env.VERSION }}
+          DETECT_PROJECT_VERSION_NAME: react-${{ matrix.app }}
         with:
           blackducksca_url: ${{ vars.BLACKDUCKSCA_URL }}
           blackducksca_token: ${{ secrets.BLACKDUCKSCA_TOKEN }}
