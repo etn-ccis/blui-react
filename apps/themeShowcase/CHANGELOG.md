@@ -21,5 +21,3 @@
 ### Changed
 
 -   Converted to TypeScript example
-
-TESTING SHOWCEASE THEME
