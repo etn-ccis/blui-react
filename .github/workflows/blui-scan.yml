@@ -14,17 +14,17 @@ jobs:
     strategy:
       matrix:
         app:
-          - react/apps/design-patterns
-          #- react/apps/demo
-          #- react/apps/showcase
-          #- react/apps/storybook
-          #- react/apps/themeShowcase
-          #- react/apps/workflow/example-vite
-          #- react/apps/workflow/example
-          #- react/packages/cli-templates
-          #- react/packages/component-library
-          #- react/packages/login-workflow
-          #- react/packages/themes
+          - apps/design-patterns
+          #- apps/demo
+          #- apps/showcase
+          #- apps/storybook
+          #- apps/themeShowcase
+          #- apps/workflow/example-vite
+          #- apps/workflow/example
+          #- packages/cli-templates
+          #- packages/component-library
+          #- packages/login-workflow
+          #- packages/themes
 
     defaults:
       run:
@@ -44,7 +44,7 @@ jobs:
         uses: blackduck-inc/black-duck-security-scan@v2.3.0
         env:
           DETECT_PROJECT_NAME: ${{ vars.PROJECT_NAME }}
-          DETECT_PROJECT_VERSION_NAME: ${{ env.VERSION }}
+          DETECT_PROJECT_VERSION_NAME: react-${{ matrix.app }}-${{ env.VERSION }}
         with:
           blackducksca_url: ${{ vars.BLACKDUCKSCA_URL }}
           blackducksca_token: ${{ secrets.BLACKDUCKSCA_TOKEN }}
