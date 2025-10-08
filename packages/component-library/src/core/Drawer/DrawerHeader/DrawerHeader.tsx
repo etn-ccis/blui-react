@@ -185,7 +185,7 @@ const DrawerHeaderRender: React.ForwardRefRenderFunction<unknown, DrawerHeaderPr
         backgroundColor,
         backgroundOpacity = 0.3,
         fontColor,
-        disableGutters = true,
+        disableGutters,
         sx,
 
         ...otherToolbarProps

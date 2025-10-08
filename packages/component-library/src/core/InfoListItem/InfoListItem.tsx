@@ -143,7 +143,6 @@ const InfoListItemRender: React.ForwardRefRenderFunction<unknown, InfoListItemPr
         wrapInfo = false,
         wrapSubtitle = false,
         wrapTitle = false,
-        ListItemButtonProps,
         // ignore unused vars so that we can do prop transferring to the root element
 
         backgroundColor,
@@ -319,11 +318,7 @@ const InfoListItemRender: React.ForwardRefRenderFunction<unknown, InfoListItemPr
             {...otherListItemProps}
         >
             {onClick && ripple ? (
-                <InfoListItemContentContainer
-                    className={generatedClasses.listItemButtonRoot}
-                    focusRipple={ripple}
-                    {...ListItemButtonProps}
-                >
+                <InfoListItemContentContainer className={generatedClasses.listItemButtonRoot} focusRipple={ripple}>
                     {getInfoListItemContent()}
                 </InfoListItemContentContainer>
             ) : (
