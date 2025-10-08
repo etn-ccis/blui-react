@@ -1,5 +1,11 @@
 # Changelog
 
+# v8.0.1 (Unreleased)
+
+### Fixed
+
+- Theme related style issues. ([#112](https://github.com/etn-ccis/blui-react/issues/112)).
+
 # v8.0.0 (July 28, 2025)
 
 ### Changed
