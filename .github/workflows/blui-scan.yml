@@ -15,7 +15,7 @@ jobs:
       matrix:
         app:
           - apps/design-patterns
-          #- apps/demo
+          - apps/demo
           #- apps/showcase
           #- apps/storybook
           #- apps/themeShowcase
