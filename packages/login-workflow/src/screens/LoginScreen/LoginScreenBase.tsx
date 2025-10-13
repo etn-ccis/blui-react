@@ -188,7 +188,7 @@ export const LoginScreenBase: React.FC<React.PropsWithChildren<LoginScreenProps>
                         <Box
                             sx={{
                                 width: '100%',
-                                height: theme.spacing(9.5),
+                                height: theme.spacing(10),
                                 mb: 3,
                             }}
                         >
