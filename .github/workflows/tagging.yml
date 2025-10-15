@@ -5,20 +5,23 @@ env:
     CURRENT_BRANCH: ${{ github.ref_name }}
 
 on:
+    # For testing: trigger directly on push to feature branch
+    push:
+        branches: [master, dev, feature/7006-testing-tag-releases-in-monorepo]
+    # Also keep workflow_run for production use
     workflow_run:
         workflows: ["Build"]
         types:
             - completed
-        branches: [dev, feature/7006-testing-tag-releases-in-monorepo]
+        branches: [dev, master]
 
 jobs:
     tag-packages:
         runs-on: ubuntu-latest
-        if: ${{ github.event.workflow_run.conclusion == 'success' }}
+        # Run if: direct push trigger OR successful workflow_run
+        if: ${{ github.event_name == 'push' || github.event.workflow_run.conclusion == 'success' }}
         steps:
             - uses: actions/checkout@v4
-              with:
-                  ref: ${{ github.event.workflow_run.head_branch }}
             - name: Install pnpm
               run: npm install -g pnpm
             - run: pnpm install --frozen-lockfile
