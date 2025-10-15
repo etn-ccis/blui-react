@@ -1,5 +1,11 @@
 # Changelog
 
+# v9.0.2 (October 15, 2025)
+
+### Added
+
+- Testing tagging workflow for monorepo packages.
+
 # v9.0.1 (Unrelased)
 
 ### Fixed
