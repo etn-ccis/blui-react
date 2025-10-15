@@ -1,0 +1,123 @@
+name: Tagging
+
+env:
+    GH_TOKEN: ${{ github.token }}
+    CURRENT_BRANCH: ${{ github.ref_name }}
+
+on:
+    workflow_run:
+        workflows: ["Build"]
+        types:
+            - completed
+        branches: [dev]
+
+jobs:
+    tag-packages:
+        runs-on: ubuntu-latest
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  ref: ${{ github.event.workflow_run.head_branch }}
+            - name: Install pnpm
+              run: npm install -g pnpm
+            - run: pnpm install --frozen-lockfile
+            
+            # Smart detection: check which packages have new versions that need tagging
+            - name: Detect packages to tag
+              id: detect_packages
+              run: |
+                # Function to check if a package needs tagging
+                check_package_needs_tag() {
+                    local package_dir=$1
+                    local package_name=$2
+                    
+                    if [ ! -f "$package_dir/package.json" ]; then
+                        echo "false"
+                        return
+                    fi
+                    
+                    # Get current version from package.json
+                    local current_version=$(node -p "require('./$package_dir/package.json').version")
+                    
+                    # For dev branch, check for alpha/beta versions or allow re-tagging for testing
+                    if [ "${CURRENT_BRANCH}" = "dev" ]; then
+                        # On dev branch, always tag alpha versions or if no alpha tag exists
+                        if [[ "$current_version" == *"alpha"* ]] || [[ "$current_version" == *"beta"* ]]; then
+                            echo "true"
+                            return
+                        fi
+                        # For dev testing, also check if any tag exists for this version
+                        local tag_exists=$(git tag -l "*$current_version*" | grep -q . && echo "true" || echo "false")
+                        if [ "$tag_exists" = "false" ]; then
+                            echo "true"
+                        else
+                            # For testing on dev, we can re-tag by checking if it's been more than 1 hour
+                            echo "true"  # Allow re-tagging for testing purposes
+                        fi
+                    else
+                        # On master branch, use normal logic
+                        local tag_exists=$(git tag -l "*$current_version*" | grep -q . && echo "true" || echo "false")
+                        if [ "$tag_exists" = "false" ]; then
+                            echo "true"
+                        else
+                            echo "false"
+                        fi
+                    fi
+                }
+                
+                # Check each package
+                login_workflow_needs_tag=$(check_package_needs_tag "packages/login-workflow" "login-workflow")
+                themes_needs_tag=$(check_package_needs_tag "packages/themes" "themes")
+                component_library_needs_tag=$(check_package_needs_tag "packages/component-library" "component-library")
+                cli_templates_needs_tag=$(check_package_needs_tag "packages/cli-templates" "cli-templates")
+                
+                echo "login_workflow_needs_tag=$login_workflow_needs_tag" >> $GITHUB_OUTPUT
+                echo "themes_needs_tag=$themes_needs_tag" >> $GITHUB_OUTPUT
+                echo "component_library_needs_tag=$component_library_needs_tag" >> $GITHUB_OUTPUT
+                echo "cli_templates_needs_tag=$cli_templates_needs_tag" >> $GITHUB_OUTPUT
+                
+                echo "Tagging analysis for branch: ${CURRENT_BRANCH}"
+                echo "- Login Workflow: $login_workflow_needs_tag"
+                echo "- Themes: $themes_needs_tag" 
+                echo "- Component Library: $component_library_needs_tag"
+                echo "- CLI Templates: $cli_templates_needs_tag"
+            
+            # Build only packages that need tagging
+            - name: Build themes
+              if: steps.detect_packages.outputs.themes_needs_tag == 'true'
+              run: pnpm build
+              working-directory: packages/themes
+              continue-on-error: true
+            - name: Build component library  
+              if: steps.detect_packages.outputs.component_library_needs_tag == 'true'
+              run: pnpm build
+              working-directory: packages/component-library
+              continue-on-error: true
+            - name: Build login workflow
+              if: steps.detect_packages.outputs.login_workflow_needs_tag == 'true'
+              run: pnpm build
+              working-directory: packages/login-workflow
+              continue-on-error: true
+            
+            # Tag only packages that need tagging
+            - name: Tag login workflow
+              if: steps.detect_packages.outputs.login_workflow_needs_tag == 'true'
+              run: pnpm tag:package -b ${CURRENT_BRANCH}
+              working-directory: packages/login-workflow
+              continue-on-error: true
+            - name: Tag themes
+              if: steps.detect_packages.outputs.themes_needs_tag == 'true'
+              run: pnpm tag:package -b ${CURRENT_BRANCH}
+              working-directory: packages/themes  
+              continue-on-error: true
+            - name: Tag component library
+              if: steps.detect_packages.outputs.component_library_needs_tag == 'true'
+              run: pnpm tag:package -b ${CURRENT_BRANCH}
+              working-directory: packages/component-library
+              continue-on-error: true
+            - name: Tag CLI templates
+              if: steps.detect_packages.outputs.cli_templates_needs_tag == 'true'
+              run: pnpm tag:package -b ${CURRENT_BRANCH}
+              working-directory: packages/cli-templates
+              continue-on-error: true

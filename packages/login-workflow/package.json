@@ -1,6 +1,6 @@
 {
     "name": "@brightlayer-ui/react-auth-workflow",
-    "version": "7.0.2",
+    "version": "7.0.3-alpha.1",
     "type": "module",
     "author": "Brightlayer UI <brightlayer-ui@eaton.com> (https://github.com/brightlayer-ui)",
     "license": "BSD-3-Clause",
