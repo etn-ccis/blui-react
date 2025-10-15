@@ -9,7 +9,7 @@ on:
         workflows: ["Build"]
         types:
             - completed
-        branches: [dev]
+        branches: [dev, feature/7006-testing-tag-releases-in-monorepo]
 
 jobs:
     tag-packages:
