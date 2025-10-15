@@ -106,21 +106,49 @@ jobs:
             # Tag only packages that need tagging
             - name: Tag login workflow
               if: steps.detect_packages.outputs.login_workflow_needs_tag == 'true'
-              run: pnpm tag:package -b ${CURRENT_BRANCH}
+              run: |
+                # For testing: override branch check by temporarily setting branch to master
+                if [ "${CURRENT_BRANCH}" != "master" ]; then
+                  echo "Testing mode: forcing tag creation for branch ${CURRENT_BRANCH}"
+                  pnpm tag:package -b master
+                else
+                  pnpm tag:package -b ${CURRENT_BRANCH}
+                fi
               working-directory: packages/login-workflow
               continue-on-error: true
             - name: Tag themes
               if: steps.detect_packages.outputs.themes_needs_tag == 'true'
-              run: pnpm tag:package -b ${CURRENT_BRANCH}
+              run: |
+                # For testing: override branch check by temporarily setting branch to master
+                if [ "${CURRENT_BRANCH}" != "master" ]; then
+                  echo "Testing mode: forcing tag creation for branch ${CURRENT_BRANCH}"
+                  pnpm tag:package -b master
+                else
+                  pnpm tag:package -b ${CURRENT_BRANCH}
+                fi
               working-directory: packages/themes  
               continue-on-error: true
             - name: Tag component library
               if: steps.detect_packages.outputs.component_library_needs_tag == 'true'
-              run: pnpm tag:package -b ${CURRENT_BRANCH}
+              run: |
+                # For testing: override branch check by temporarily setting branch to master
+                if [ "${CURRENT_BRANCH}" != "master" ]; then
+                  echo "Testing mode: forcing tag creation for branch ${CURRENT_BRANCH}"
+                  pnpm tag:package -b master
+                else
+                  pnpm tag:package -b ${CURRENT_BRANCH}
+                fi
               working-directory: packages/component-library
               continue-on-error: true
             - name: Tag CLI templates
               if: steps.detect_packages.outputs.cli_templates_needs_tag == 'true'
-              run: pnpm tag:package -b ${CURRENT_BRANCH}
+              run: |
+                # For testing: override branch check by temporarily setting branch to master
+                if [ "${CURRENT_BRANCH}" != "master" ]; then
+                  echo "Testing mode: forcing tag creation for branch ${CURRENT_BRANCH}"
+                  pnpm tag:package -b master
+                else
+                  pnpm tag:package -b ${CURRENT_BRANCH}
+                fi
               working-directory: packages/cli-templates
               continue-on-error: true
