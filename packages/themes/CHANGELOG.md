@@ -1,6 +1,6 @@
 # Changelog
 
-# v9.0.1 (Unrelased)
+# v9.0.1 (October 16, 2025)
 
 ### Fixed
 

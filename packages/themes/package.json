@@ -2,7 +2,7 @@
     "name": "@brightlayer-ui/react-themes",
     "author": "Brightlayer UI <brightlayer-ui@eaton.com>",
     "license": "BSD-3-Clause",
-    "version": "9.0.1-alpha.0",
+    "version": "9.0.1",
     "type": "module",
     "description": "React themes for Brightlayer UI applications",
     "main": "./index.js",
