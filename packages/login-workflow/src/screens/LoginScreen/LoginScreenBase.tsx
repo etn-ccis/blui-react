@@ -189,7 +189,10 @@ export const LoginScreenBase: React.FC<React.PropsWithChildren<LoginScreenProps>
                             sx={{
                                 width: '100%',
                                 height: theme.spacing(10),
-                                mb: 3,
+                                mb: 4,
+                                [theme.breakpoints.down('sm')]: {
+                                    mb: 3,
+                                },
                             }}
                         >
                             <TextField
