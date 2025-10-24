@@ -1476,14 +1476,14 @@ importers:
         specifier: ^4.0.0
         version: 4.0.0(@mui/icons-material@7.3.1(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
       '@brightlayer-ui/react-auth-workflow':
-        specifier: ^7.0.0-alpha.6
-        version: 7.0.0(9ce1c143833fa9106fd84efe146e524b)
+        specifier: ^7.0.2
+        version: 7.0.2(b46791e662aadad739b8aa229675f51e)
       '@brightlayer-ui/react-components':
-        specifier: ^8.0.0-alpha.2
-        version: 8.0.0(@brightlayer-ui/colors@3.1.1)(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@mui/icons-material@7.3.1(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        specifier: ^8.0.1
+        version: 8.0.1(@brightlayer-ui/colors@3.1.1)(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@mui/icons-material@7.3.1(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@brightlayer-ui/react-themes':
-        specifier: ^8.0.0-alpha.1
-        version: 8.1.2(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
+        specifier: ^9.0.1
+        version: 9.0.1(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
       '@emotion/react':
         specifier: ^11.7.1
         version: 11.14.0(@types/react@19.1.9)(react@19.1.1)
@@ -1612,11 +1612,11 @@ importers:
         specifier: ^4.0.0
         version: 4.0.0(@mui/icons-material@7.3.1(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
       '@brightlayer-ui/react-components':
-        specifier: ^8.0.0-alpha.2
-        version: 8.0.0(@brightlayer-ui/colors@4.0.0)(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@mui/icons-material@7.3.1(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        specifier: ^8.0.1
+        version: 8.0.1(@brightlayer-ui/colors@4.0.0)(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@mui/icons-material@7.3.1(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@brightlayer-ui/react-themes':
-        specifier: ^8.0.0-alpha.1
-        version: 8.1.2(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
+        specifier: ^9.0.1
+        version: 9.0.1(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
       '@emotion/css':
         specifier: ^11.13.0
         version: 11.13.5
@@ -1718,11 +1718,11 @@ importers:
         specifier: ^4.0.0
         version: 4.0.0(@mui/icons-material@7.3.1(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
       '@brightlayer-ui/react-components':
-        specifier: ^8.0.0-alpha.2
-        version: 8.0.0(@brightlayer-ui/colors@4.0.0)(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@mui/icons-material@7.3.1(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        specifier: ^8.0.1
+        version: 8.0.1(@brightlayer-ui/colors@4.0.0)(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@mui/icons-material@7.3.1(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@brightlayer-ui/react-themes':
-        specifier: ^8.0.0-alpha.1
-        version: 8.1.2(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
+        specifier: ^9.0.1
+        version: 9.0.1(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))
       '@emotion/css':
         specifier: ^11.13.0
         version: 11.13.5
@@ -2992,14 +2992,14 @@ packages:
     peerDependencies:
       prettier: '>= 1.0.0'
 
-  '@brightlayer-ui/react-auth-workflow@7.0.0':
-    resolution: {integrity: sha512-i3GF6iuU5lmBOV5GIizrMzDo2NWdOBTU6oLOP1P2cR7ulQwWmwrJR2nXlaFZ+anaar/21fJ+ScgOd2rG5G8t9w==}
+  '@brightlayer-ui/react-auth-workflow@7.0.2':
+    resolution: {integrity: sha512-pNaGZOSCw5DVXuZRvQIYsLmwm3K2ECG8ZCv5l0N6oUTZ4PA/0e1ahQA8TIxK40Fon5Au0g/Fhg21WgRMI6cOWA==}
     peerDependencies:
-      '@brightlayer-ui/react-components': workspace:^
+      '@brightlayer-ui/react-components': ^8.0.0
       '@emotion/react': ^11.7.1
       '@emotion/styled': ^11.6.0
-      '@mui/icons-material': ^6.1.4
-      '@mui/material': ^6.1.4
+      '@mui/icons-material': ^7.1.1
+      '@mui/material': ^7.1.1
       '@okta/okta-auth-js': ^7.7.0
       '@okta/okta-react': ^6.9.0
       date-fns: ^3.0.6
@@ -3008,8 +3008,8 @@ packages:
       react-dom: ^19.1.0
       react-i18next: ^13.0.0
 
-  '@brightlayer-ui/react-components@8.0.0':
-    resolution: {integrity: sha512-tilwvwhRVSLdVfPWSRGAzUJwOYXVQgn3JBq2UhRJSzTBmCtyq6YPxC8OSdbBLzu+j8HoQ7xHHsevoGloUGCorg==}
+  '@brightlayer-ui/react-components@8.0.1':
+    resolution: {integrity: sha512-ZI0pLT0luyHVjcN4sAtDA5wcrZj4dZNoUsRFkQiT0wDBg7jakJ6F2OLQ5WCaGL4OLPLQxkLuAWiX81+gL0WSdw==}
     peerDependencies:
       '@brightlayer-ui/colors': ^3.1.0
       '@emotion/react': ^11.7.1
@@ -3036,10 +3036,10 @@ packages:
       react: '>=16.6.3'
       react-dom: '>=16.8.6'
 
-  '@brightlayer-ui/react-themes@8.1.2':
-    resolution: {integrity: sha512-D4DFJvBcYETvWbdJlNCPnQEwgRbHuReTqjzXOKNylenNLA9Syc/0qM8nfx3VRHAPubjzkkpLRkqjuDnwStPjqw==}
+  '@brightlayer-ui/react-themes@9.0.1':
+    resolution: {integrity: sha512-Z2P/W1APm++xGtcfRbzNq5/ViMV4ntCyBF86Co/jtfXL+8sGlcMYcfuQ4w1S1/k/pCXz1LYFuUzWF6ytcQ2R2g==}
     peerDependencies:
-      '@mui/material': ^6.0.0
+      '@mui/material': ^7.1.1
 
   '@brightlayer-ui/types@2.0.0':
     resolution: {integrity: sha512-DTCVwND6YC9qrkQl7pkFlN6QxDReJHtjuAiFU9HkXJN368vlw+fzHQ5/j4sB1sZl2eNwOgccv5ecl2XrlolOCw==}
@@ -15482,9 +15482,9 @@ snapshots:
     dependencies:
       prettier: 3.6.2
 
-  '@brightlayer-ui/react-auth-workflow@7.0.0(9ce1c143833fa9106fd84efe146e524b)':
+  '@brightlayer-ui/react-auth-workflow@7.0.2(b46791e662aadad739b8aa229675f51e)':
     dependencies:
-      '@brightlayer-ui/react-components': 8.0.0(@brightlayer-ui/colors@3.1.1)(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@mui/icons-material@7.3.1(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@brightlayer-ui/react-components': 8.0.1(@brightlayer-ui/colors@3.1.1)(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@mui/icons-material@7.3.1(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@emotion/react': 11.14.0(@types/react@19.1.9)(react@19.1.1)
       '@emotion/styled': 11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1)
       '@mui/icons-material': 7.3.1(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@types/react@19.1.9)(react@19.1.1)
@@ -15501,7 +15501,7 @@ snapshots:
     optionalDependencies:
       react-router-dom: 6.30.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
 
-  '@brightlayer-ui/react-components@8.0.0(@brightlayer-ui/colors@3.1.1)(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@mui/icons-material@7.3.1(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+  '@brightlayer-ui/react-components@8.0.1(@brightlayer-ui/colors@3.1.1)(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@mui/icons-material@7.3.1(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@brightlayer-ui/colors': 3.1.1
       '@emotion/css': 11.13.5
@@ -15520,7 +15520,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@brightlayer-ui/react-components@8.0.0(@brightlayer-ui/colors@4.0.0)(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@mui/icons-material@7.3.1(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+  '@brightlayer-ui/react-components@8.0.1(@brightlayer-ui/colors@4.0.0)(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@mui/icons-material@7.3.1(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@brightlayer-ui/colors': 4.0.0
       '@emotion/css': 11.13.5
@@ -15560,9 +15560,10 @@ snapshots:
       react-dom: 19.1.1(react@19.1.1)
       react-jss: 10.10.0(react@19.1.1)
 
-  '@brightlayer-ui/react-themes@8.1.2(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))':
+  '@brightlayer-ui/react-themes@9.0.1(@mui/material@7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))':
     dependencies:
       '@brightlayer-ui/colors': 3.1.1
+      '@brightlayer-ui/types': 2.0.0
       '@fontsource/open-sans': 5.2.6
       '@mui/material': 7.3.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react@19.1.1))(@types/react@19.1.9)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       color: 4.2.3
