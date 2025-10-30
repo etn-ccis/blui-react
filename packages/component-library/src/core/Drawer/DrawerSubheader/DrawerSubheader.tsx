@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { useDrawerContext } from './DrawerContext';
+import { useDrawerContext } from '../DrawerContext';
 import Divider from '@mui/material/Divider';
 import { styled } from '@mui/material/styles';
 import { Box, BoxProps } from '@mui/material';

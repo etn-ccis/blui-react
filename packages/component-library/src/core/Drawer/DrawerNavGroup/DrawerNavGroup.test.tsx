@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, cleanup, fireEvent } from '@testing-library/react';
+import { render, screen, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { DrawerNavGroup } from './DrawerNavGroup';
 import { DrawerNavItem } from '../DrawerNavItem';
@@ -14,7 +14,7 @@ import Box from '@mui/material/Box';
 afterEach(cleanup);
 
 // Mock DrawerContext Provider for testing
-const MockDrawerContext = ({ children, variant = 'persistent', open = true, activeItem = '' }: any) => (
+const MockDrawerContext = ({ children, variant = 'persistent', open = true, activeItem = '' }: any): any => (
     <DrawerContext.Provider value={{ variant, open, activeItem, condensed: false }}>{children}</DrawerContext.Provider>
 );
 

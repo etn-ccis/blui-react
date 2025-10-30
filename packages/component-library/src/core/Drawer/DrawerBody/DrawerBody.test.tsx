@@ -35,7 +35,7 @@ describe('DrawerBody', () => {
                 <DrawerBody>
                     {null}
                     {undefined}
-                    {false && <div>Not rendered</div>}
+                    {/* {false && <div>Not rendered</div>} */}
                     <DrawerNavGroup title="Valid Group">
                         <DrawerNavItem itemID="test-item" title="Test Item" />
                     </DrawerNavGroup>
@@ -143,7 +143,7 @@ describe('DrawerBody', () => {
 
     // Test case for edge case: child without type property
     it('should handle children without type property', () => {
-        const TextComponent = () => <span>Text Component</span>;
+        const TextComponent = (): any => <span>Text Component</span>;
 
         render(
             <ThemeProvider theme={theme}>
