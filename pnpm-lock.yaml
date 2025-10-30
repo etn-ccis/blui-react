@@ -900,7 +900,7 @@ importers:
         version: 7.13.1(encoding@0.1.13)
       '@okta/okta-react':
         specifier: ^6.9.0
-        version: 6.10.0(@okta/okta-auth-js@7.13.1(encoding@0.1.13))(react-dom@19.1.1(react@19.1.1))(react-router-dom@6.30.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react@19.1.1)
+        version: 6.10.0(@okta/okta-auth-js@7.13.1(encoding@0.1.13))(react-dom@19.1.1(react@19.1.1))(react-router-dom@7.9.5(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react@19.1.1)
       '@pmmmwh/react-refresh-webpack-plugin':
         specifier: ^0.5.3
         version: 0.5.17(react-refresh@0.11.0)(type-fest@4.41.0)(webpack-dev-server@4.15.2(webpack@5.101.0))(webpack@5.101.0)
@@ -1028,8 +1028,8 @@ importers:
         specifier: ^0.11.0
         version: 0.11.0
       react-router-dom:
-        specifier: ^6.8.0
-        version: 6.30.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        specifier: ^7.9.5
+        version: 7.9.5(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       resolve:
         specifier: ^1.20.0
         version: 1.22.10
@@ -1164,8 +1164,8 @@ importers:
         specifier: ^13.0.3
         version: 13.5.0(i18next@23.16.8)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react-router-dom:
-        specifier: ^6.8.0
-        version: 6.30.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        specifier: ^7.9.5
+        version: 7.9.5(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react-scripts:
         specifier: ^5.0.0
         version: 5.0.1(eslint@8.57.1)(react@19.1.1)(type-fest@4.41.0)(typescript@5.9.2)
@@ -12101,6 +12101,13 @@ packages:
       react: '>=18'
       react-dom: '>=18'
 
+  react-router-dom@7.9.5:
+    resolution: {integrity: sha512-mkEmq/K8tKN63Ae2M7Xgz3c9l9YNbY+NHH6NNeUmLA3kDkhKXRsNb/ZpxaEunvGo2/3YXdk5EJU3Hxp3ocaBPw==}
+    engines: {node: '>=20.0.0'}
+    peerDependencies:
+      react: '>=18'
+      react-dom: '>=18'
+
   react-router@5.3.4:
     resolution: {integrity: sha512-Ys9K+ppnJah3QuaRiLxk+jDWOR1MekYQrlytiXxC1RyfbdsZkS5pvKAzCCr031xHixZwpnsYNT5xysdFHQaYsA==}
     peerDependencies:
@@ -12114,6 +12121,16 @@ packages:
 
   react-router@7.8.1:
     resolution: {integrity: sha512-5cy/M8DHcG51/KUIka1nfZ2QeylS4PJRs6TT8I4PF5axVsI5JUxp0hC0NZ/AEEj8Vw7xsEoD7L/6FY+zoYaOGA==}
+    engines: {node: '>=20.0.0'}
+    peerDependencies:
+      react: '>=18'
+      react-dom: '>=18'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+
+  react-router@7.9.5:
+    resolution: {integrity: sha512-JmxqrnBZ6E9hWmf02jzNn9Jm3UqyeimyiwzD69NjxGySG6lIz/1LVPsoTCwN7NBX2XjCEa1LIX5EMz1j2b6u6A==}
     engines: {node: '>=20.0.0'}
     peerDependencies:
       react: '>=18'
@@ -17588,6 +17605,15 @@ snapshots:
       react: 19.1.1
       react-dom: 19.1.1(react@19.1.1)
       react-router-dom: 6.30.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+
+  '@okta/okta-react@6.10.0(@okta/okta-auth-js@7.13.1(encoding@0.1.13))(react-dom@19.1.1(react@19.1.1))(react-router-dom@7.9.5(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@babel/runtime': 7.28.2
+      '@okta/okta-auth-js': 7.13.1(encoding@0.1.13)
+      compare-versions: 4.1.4
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+      react-router-dom: 7.9.5(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
 
   '@opentelemetry/api@1.9.0': {}
 
@@ -27493,6 +27519,12 @@ snapshots:
       react-dom: 19.1.1(react@19.1.1)
       react-router: 7.8.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
 
+  react-router-dom@7.9.5(react-dom@19.1.1(react@19.1.1))(react@19.1.1):
+    dependencies:
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+      react-router: 7.9.5(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+
   react-router@5.3.4(react@19.1.1):
     dependencies:
       '@babel/runtime': 7.28.2
@@ -27512,6 +27544,14 @@ snapshots:
       react: 19.1.1
 
   react-router@7.8.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1):
+    dependencies:
+      cookie: 1.0.2
+      react: 19.1.1
+      set-cookie-parser: 2.7.1
+    optionalDependencies:
+      react-dom: 19.1.1(react@19.1.1)
+
+  react-router@7.9.5(react-dom@19.1.1(react@19.1.1))(react@19.1.1):
     dependencies:
       cookie: 1.0.2
       react: 19.1.1
