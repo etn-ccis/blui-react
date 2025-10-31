@@ -127,7 +127,7 @@ export const LoginScreenBase: React.FC<React.PropsWithChildren<LoginScreenProps>
     );
 
     const handleLogin = (): void => {
-        if (onLogin) void onLogin(username, password, rememberMe);
+        if (onLogin) void onLogin(username, password, showRememberMe !== false ? rememberMe : undefined);
     };
 
     const handleForgotPassword = (): void => {
