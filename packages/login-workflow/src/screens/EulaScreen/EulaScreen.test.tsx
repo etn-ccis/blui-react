@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { act } from 'react';
 import '@testing-library/jest-dom';
-import { cleanup, render, screen, RenderResult, fireEvent, act, waitFor } from '@testing-library/react';
+import { cleanup, render, screen, RenderResult, fireEvent, waitFor } from '@testing-library/react';
 import { EulaScreen } from './EulaScreen';
 import { RegistrationContextProvider } from '../../contexts';
 import { EulaScreenProps } from './types';

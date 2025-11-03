@@ -1,7 +1,7 @@
-import React, { JSX } from 'react';
+import React, { JSX, act } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
-import { cleanup, render, screen, fireEvent, RenderResult, waitFor, act } from '@testing-library/react';
+import { cleanup, render, screen, fireEvent, RenderResult, waitFor } from '@testing-library/react';
 import { ResetPasswordScreen } from './ResetPasswordScreen';
 import { AuthContextProvider } from '../../contexts';
 import { ResetPasswordScreenProps } from './types';

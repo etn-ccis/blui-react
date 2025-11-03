@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { act } from 'react';
 import '@testing-library/jest-dom';
-import { cleanup, fireEvent, render, RenderResult, screen, waitFor, act } from '@testing-library/react';
+import { cleanup, fireEvent, render, RenderResult, screen, waitFor } from '@testing-library/react';
 import { ChangePasswordDialog } from './ChangePasswordDialog';
 import { AuthContextProvider } from '../../contexts';
 import { BrowserRouter } from 'react-router-dom';

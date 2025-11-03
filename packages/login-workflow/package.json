@@ -114,6 +114,9 @@
             "lcov",
             "html"
         ],
+        "setupFilesAfterEnv": [
+            "<rootDir>/src/setupTests.ts"
+        ],
         "transform": {
             "^.+\\.[tj]sx?$": "babel-jest"
         },
