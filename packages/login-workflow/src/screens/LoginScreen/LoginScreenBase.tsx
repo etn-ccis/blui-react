@@ -413,7 +413,7 @@ export const LoginScreenBase: React.FC<React.PropsWithChildren<LoginScreenProps>
                         <img
                             className={defaultClasses.cyberSecurityBadge}
                             data-testid={defaultClasses.cyberSecurityBadge}
-                            src={cyberSecurityBadge}
+                            src={cyberSecurityBadge || undefined}
                             alt="Cyber Security Badge"
                             style={{ width: '100px' }}
                         />
