@@ -5,7 +5,7 @@ env:
     CURRENT_BRANCH: ${{ github.ref_name }}
 
 permissions:
-    contents: read
+    contents: write
     actions: read
     releases: write
 
