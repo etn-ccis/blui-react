@@ -4,6 +4,11 @@ env:
     GH_TOKEN: ${{ github.token }}
     CURRENT_BRANCH: ${{ github.ref_name }}
 
+permissions:
+    contents: read
+    actions: read
+    releases: write
+
 on:
     # Only trigger on workflow completion for master branch
     workflow_run:
@@ -71,7 +76,7 @@ jobs:
                 login_workflow_needs_tag=$(check_package_needs_tag "packages/login-workflow" "login-workflow" "@brightlayer-ui/react-auth-workflow")
                 themes_needs_tag=$(check_package_needs_tag "packages/themes" "themes" "@brightlayer-ui/react-themes")
                 component_library_needs_tag=$(check_package_needs_tag "packages/component-library" "component-library" "@brightlayer-ui/react-components")
-                cli_templates_needs_tag=$(check_package_needs_tag "packages/cli-templates" "cli-templates" "@brightlayer-ui/cli-templates-react")
+                cli_templates_needs_tag=$(check_package_needs_tag "packages/cli-templates" "cli-templates" "create-blui-react-app")
                 
                 echo "login_workflow_needs_tag=$login_workflow_needs_tag" >> $GITHUB_OUTPUT
                 echo "themes_needs_tag=$themes_needs_tag" >> $GITHUB_OUTPUT

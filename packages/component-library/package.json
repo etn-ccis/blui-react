@@ -15,7 +15,8 @@
         "build": "bash ./scripts/buildComponents.sh && node ./scripts/fix-import.js",
         "coverage": "pnpm test --coverage --watchAll=false",
         "test:artifacts": "cd scripts && bash ./buildTest.sh && cd ..",
-        "publish:package": "cd dist && rm -f *.tgz && set npm_config_yes=true && npx -p @brightlayer-ui/publish blui-publish"
+        "publish:package": "cd dist && rm -f *.tgz && set npm_config_yes=true && npx -p @brightlayer-ui/publish blui-publish",
+        "tag:package": "npx -p @brightlayer-ui/tag blui-tag -s -blui-react-components"
     },
     "prettier": "@brightlayer-ui/prettier-config",
     "dependencies": {
