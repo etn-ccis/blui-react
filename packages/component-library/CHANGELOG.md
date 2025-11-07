@@ -5,6 +5,7 @@
 ### Fixed
 
 - Theme related style issues. ([#112](https://github.com/etn-ccis/blui-react/issues/112)).
+- Wrong info list item partial divider under right-to-left ([#17](https://github.com/etn-ccis/blui-react/issues/17))
 
 # v8.0.0 (July 28, 2025)
 
