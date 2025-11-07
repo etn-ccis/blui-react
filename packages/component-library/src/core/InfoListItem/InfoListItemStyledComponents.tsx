@@ -85,11 +85,11 @@ export const StatusStripe = styled(Box, {
     backgroundColor: statusColor,
 }));
 
-export const InfoListItemDivider = styled(Divider)<Pick<InfoListItemProps, 'divider'>>(({ divider, theme }) => ({
+export const InfoListItemDivider = styled(Divider)<Pick<InfoListItemProps, 'divider'>>(({ divider }) => ({
     position: 'absolute',
     bottom: 0,
-    right: theme.direction === 'rtl' ? (divider === 'full' ? 0 : `4.5rem`) : 0,
-    left: theme.direction === 'ltr' ? (divider === 'full' ? 0 : `4.5rem`) : 0,
+    right: 0,
+    left: divider === 'full' ? 0 : `4.5rem`,
     zIndex: 0,
 }));
 
