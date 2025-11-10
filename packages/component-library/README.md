@@ -72,4 +72,5 @@ or
 yarn start:docs
 ```
 
-from the root directory.
+from the root directory
+to run docs.
