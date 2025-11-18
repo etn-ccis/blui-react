@@ -7,7 +7,6 @@ env:
 permissions:
     contents: write
     actions: read
-    releases: write
 
 on:
     # Only trigger on workflow completion for master branch
