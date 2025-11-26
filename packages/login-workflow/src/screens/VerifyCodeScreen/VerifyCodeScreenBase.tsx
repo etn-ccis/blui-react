@@ -65,11 +65,6 @@ export const VerifyCodeScreenBase: React.FC<React.PropsWithChildren<VerifyCodeSc
         if (onNext) onNext({ code: verifyCode });
     };
 
-    const handleOnPrevious = (): void => {
-        const { onPrevious } = actionsProps;
-        if (onPrevious) onPrevious({ code: verifyCode });
-    };
-
     return (
         <WorkflowCard {...cardBaseProps} {...otherProps}>
             <WorkflowCardHeader {...headerProps} />
@@ -116,8 +111,6 @@ export const VerifyCodeScreenBase: React.FC<React.PropsWithChildren<VerifyCodeSc
             <WorkflowCardActions
                 {...actionsProps}
                 canGoNext={(verifyCode.length > 0 && isCodeValid && actionsProps.canGoNext) as any}
-                onNext={handleOnNext}
-                onPrevious={handleOnPrevious}
             />
         </WorkflowCard>
     );

@@ -45,6 +45,10 @@ export const VerifyCodeScreen: React.FC<VerifyCodeScreenProps> = (props) => {
     }, [actions, emailAddress, triggerError]);
 
     const {
+        WorkflowCardBaseProps,
+        WorkflowCardHeaderProps,
+        WorkflowCardInstructionProps,
+        WorkflowCardActionsProps,
         codeValidator = (code: string): boolean | string =>
             code?.length > 0 ? true : t('bluiRegistration:SELF_REGISTRATION.VERIFY_EMAIL.CODE_VALIDATOR_ERROR'),
         onResend = (): void => {
@@ -101,9 +105,6 @@ export const VerifyCodeScreen: React.FC<VerifyCodeScreenProps> = (props) => {
             values: { code },
         });
     };
-
-    const { WorkflowCardBaseProps, WorkflowCardHeaderProps, WorkflowCardInstructionProps, WorkflowCardActionsProps } =
-        props;
 
     const workflowCardBaseProps = {
         loading: isLoading,
