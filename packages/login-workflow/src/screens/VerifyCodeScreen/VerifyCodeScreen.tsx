@@ -132,14 +132,16 @@ export const VerifyCodeScreen: React.FC<VerifyCodeScreenProps> = (props) => {
         currentStep: currentScreen,
         totalSteps: totalScreens,
         ...WorkflowCardActionsProps,
-        onNext: (data: any): void => {
-            setVerifyCode(data.code);
+        onNext: (data?: any): void => {
+            const code = data?.code ?? verifyCode;
+            setVerifyCode(code);
             WorkflowCardActionsProps?.onNext?.(data);
-            void handleOnNext(data.code, emailAddress);
+            void handleOnNext(code, emailAddress);
         },
-        onPrevious: (data: any): void => {
+        onPrevious: (data?: any): void => {
+            const code = data?.code ?? verifyCode;
             WorkflowCardActionsProps?.onPrevious?.(data);
-            void onPrevious(data.code);
+            void onPrevious(code);
         },
     };
 
