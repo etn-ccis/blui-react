@@ -21,16 +21,8 @@ export const VerifyCodeScreen: React.FC<VerifyCodeScreenProps> = (props) => {
     const { nextScreen, previousScreen, screenData, currentScreen, totalScreens, updateScreenData } = regWorkflow;
     const { emailAddress } = screenData.CreateAccount;
     const { triggerError, errorManagerConfig } = useErrorManager();
-    const errorDisplayConfig = {
-        ...errorManagerConfig,
-        ...props.errorDisplayConfig,
-        onClose: (): void => {
-            if (props.errorDisplayConfig?.onClose) props.errorDisplayConfig.onClose();
-            if (errorManagerConfig.onClose) errorManagerConfig?.onClose();
-        },
-    };
 
-    const [verifyCode, setVerifyCode] = useState(screenData.VerifyCode.code);
+    const [verifyCode, setVerifyCode] = useState(screenData.VerifyCode.code ?? '');
     const [isLoading, setIsLoading] = useState(false);
 
     const requestResendCode = useCallback(async (): Promise<void> => {
@@ -57,10 +49,20 @@ export const VerifyCodeScreen: React.FC<VerifyCodeScreenProps> = (props) => {
         resendInstructions = t('bluiRegistration:SELF_REGISTRATION.VERIFY_EMAIL.VERIFICATION_CODE_PROMPT'),
         resendLabel = t('bluiCommon:ACTIONS.RESEND'),
         verifyCodeInputLabel = t('bluiRegistration:SELF_REGISTRATION.VERIFY_EMAIL.VERIFICATION'),
-        initialValue = screenData.VerifyCode.code,
+        initialValue = screenData.VerifyCode.code ?? '',
         verifyCodeTextFieldProps,
+        errorDisplayConfig: propsErrorDisplayConfig,
         ...otherProps
     } = props;
+
+    const errorDisplayConfig = {
+        ...errorManagerConfig,
+        ...propsErrorDisplayConfig,
+        onClose: (): void => {
+            if (propsErrorDisplayConfig?.onClose) propsErrorDisplayConfig.onClose();
+            if (errorManagerConfig.onClose) errorManagerConfig?.onClose();
+        },
+    };
 
     const handleOnNext = useCallback(
         async (code: string, email?: string) => {
@@ -132,12 +134,12 @@ export const VerifyCodeScreen: React.FC<VerifyCodeScreenProps> = (props) => {
         ...WorkflowCardActionsProps,
         onNext: (data: any): void => {
             setVerifyCode(data.code);
+            WorkflowCardActionsProps?.onNext?.(data);
             void handleOnNext(data.code, emailAddress);
-            WorkflowCardActionsProps?.onNext?.();
         },
         onPrevious: (data: any): void => {
+            WorkflowCardActionsProps?.onPrevious?.(data);
             void onPrevious(data.code);
-            WorkflowCardActionsProps?.onPrevious?.();
         },
     };
 
@@ -150,12 +152,12 @@ export const VerifyCodeScreen: React.FC<VerifyCodeScreenProps> = (props) => {
             resendInstructions={resendInstructions}
             resendLabel={resendLabel}
             verifyCodeInputLabel={verifyCodeInputLabel}
-            initialValue={verifyCode.length > 0 ? verifyCode : initialValue}
+            initialValue={(verifyCode?.length ?? 0) > 0 ? verifyCode : initialValue}
             onResend={onResend}
             codeValidator={codeValidator}
             verifyCodeTextFieldProps={verifyCodeTextFieldProps}
-            {...otherProps}
             errorDisplayConfig={errorDisplayConfig}
+            {...otherProps}
         />
     );
 };
