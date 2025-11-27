@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback, useRef, forwardRef } from 'react';
 import { styled } from '@mui/material/styles';
 import MUIDrawer, { DrawerProps as MUIDrawerProps } from '@mui/material/Drawer';
-import { DrawerBodyProps } from './DrawerBody';
+import { DrawerBodyProps } from './DrawerBody/DrawerBody';
 import { useDrawerLayout } from '../DrawerLayout/contexts/DrawerLayoutContextProvider';
 import { DrawerContext } from './DrawerContext';
 import { NavItemSharedStyleProps, SharedStyleProps } from './types';

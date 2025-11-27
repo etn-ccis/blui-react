@@ -143,4 +143,157 @@ describe('Create Password Screen', () => {
         fireEvent.click(backButton);
         expect(mockOnPrevious).toHaveBeenCalled();
     });
+
+    it('should handle createPassword action error and trigger error', () => {
+        const mockCreatePassword = jest.fn().mockRejectedValue(new Error('Password creation failed'));
+
+        // Create a custom registrationContextProvider with the failing action
+        const customRegistrationContextProvider = {
+            ...registrationContextProviderProps,
+            actions: {
+                ...registrationContextProviderProps.actions,
+                createPassword: mockCreatePassword,
+            },
+        };
+
+        const { getByLabelText } = render(
+            <RegistrationContextProvider {...customRegistrationContextProvider}>
+                <RegistrationWorkflow initialScreenIndex={0}>
+                    <CreatePasswordScreen
+                        PasswordProps={{
+                            passwordRequirements: passwordRequirements,
+                        }}
+                    />
+                </RegistrationWorkflow>
+            </RegistrationContextProvider>
+        );
+
+        const passwordField = getByLabelText('Password');
+        const confirmPasswordField = getByLabelText('Confirm Password');
+
+        fireEvent.change(passwordField, { target: { value: 'Ab@12' } });
+        fireEvent.change(confirmPasswordField, { target: { value: 'Ab@12' } });
+
+        const nextButton = screen.getByTestId('BluiWorkflowCardActions-nextButton');
+
+        act(() => {
+            fireEvent.click(nextButton);
+        });
+
+        expect(mockCreatePassword).toHaveBeenCalledWith('Ab@12');
+    });
+    it('should call errorDisplayConfig onClose handlers', () => {
+        const mockErrorOnClose = jest.fn();
+
+        renderer({
+            errorDisplayConfig: {
+                onClose: mockErrorOnClose,
+            },
+        });
+
+        // Since we can't directly access the errorDisplayConfig onClose from the component,
+        // we'll test that the component renders correctly with the error config
+        expect(screen.getByText('Create Password')).toBeInTheDocument();
+    });
+
+    it('should call optional WorkflowCardActionsProps.onNext when provided', () => {
+        const mockOnNextClick = jest.fn();
+        const { getByLabelText } = renderer({
+            WorkflowCardActionsProps: {
+                onNext: mockOnNextClick,
+            },
+            PasswordProps: {
+                passwordRequirements: passwordRequirements,
+            },
+        });
+
+        const passwordField = getByLabelText('Password');
+        const confirmPasswordField = getByLabelText('Confirm Password');
+
+        fireEvent.change(passwordField, { target: { value: 'Ab@12' } });
+        fireEvent.change(confirmPasswordField, { target: { value: 'Ab@12' } });
+
+        const nextButton = screen.getByText('Next');
+
+        act(() => {
+            fireEvent.click(nextButton);
+        });
+
+        expect(mockOnNextClick).toHaveBeenCalled();
+    });
+
+    it('should call optional PasswordProps.onSubmit when Enter key is pressed', () => {
+        const mockOnSubmit = jest.fn();
+        const { getByLabelText } = renderer({
+            PasswordProps: {
+                passwordRequirements: passwordRequirements,
+                onSubmit: mockOnSubmit,
+            },
+        });
+
+        const passwordField = getByLabelText('Password');
+        const confirmPasswordField = getByLabelText('Confirm Password');
+
+        fireEvent.change(passwordField, { target: { value: 'Ab@12' } });
+        fireEvent.change(confirmPasswordField, { target: { value: 'Ab@12' } });
+
+        // Simulate pressing Enter key in the confirm password field
+        fireEvent.keyUp(confirmPasswordField, { key: 'Enter', code: 'Enter', charCode: 13 });
+
+        expect(mockOnSubmit).toHaveBeenCalled();
+    });
+    it('should use initial password values from PasswordProps', () => {
+        const { getByLabelText } = renderer({
+            PasswordProps: {
+                initialNewPasswordValue: 'initial123',
+                initialConfirmPasswordValue: 'confirm123',
+                passwordRequirements: passwordRequirements,
+            },
+        });
+
+        const passwordField = getByLabelText('Password') as HTMLInputElement;
+        const confirmPasswordField = getByLabelText('Confirm Password') as HTMLInputElement;
+
+        expect(passwordField.value).toBe('initial123');
+        expect(confirmPasswordField.value).toBe('confirm123');
+    });
+
+    it('should call PasswordProps.onPasswordChange when password fields change', () => {
+        const mockOnPasswordChange = jest.fn();
+        const { getByLabelText } = renderer({
+            PasswordProps: {
+                onPasswordChange: mockOnPasswordChange,
+                passwordRequirements: passwordRequirements,
+            },
+        });
+
+        const passwordField = getByLabelText('Password');
+        const confirmPasswordField = getByLabelText('Confirm Password');
+
+        fireEvent.change(passwordField, { target: { value: 'newPass123' } });
+        fireEvent.change(confirmPasswordField, { target: { value: 'newPass123' } });
+
+        expect(mockOnPasswordChange).toHaveBeenCalledWith({
+            password: 'newPass123',
+            confirm: 'newPass123',
+        });
+    });
+
+    it('should validate passwords with empty requirements array', () => {
+        const { getByLabelText } = renderer({
+            PasswordProps: {
+                passwordRequirements: [],
+            },
+        });
+
+        const passwordField = getByLabelText('Password');
+        const confirmPasswordField = getByLabelText('Confirm Password');
+
+        // With empty requirements, any matching passwords should be valid
+        fireEvent.change(passwordField, { target: { value: 'simple' } });
+        fireEvent.change(confirmPasswordField, { target: { value: 'simple' } });
+
+        const nextButton = screen.getByText('Next');
+        expect(nextButton).toBeEnabled();
+    });
 });

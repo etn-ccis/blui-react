@@ -114,6 +114,9 @@
             "lcov",
             "html"
         ],
+        "setupFilesAfterEnv": [
+            "<rootDir>/src/setupTests.ts"
+        ],
         "transform": {
             "^.+\\.[tj]sx?$": "babel-jest"
         },
@@ -126,7 +129,7 @@
             "global": {
                 "lines": 85,
                 "statements": 85,
-                "branches": 70,
+                "branches": 80,
                 "functions": 80
             }
         },

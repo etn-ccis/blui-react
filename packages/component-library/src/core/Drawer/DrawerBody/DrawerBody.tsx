@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
-import { DrawerNavGroup, DrawerNavGroupProps } from './DrawerNavGroup';
-import { NavItemSharedStyleProps, SharedStyleProps } from './types';
-import { mergeStyleProp } from './utilities';
+import { DrawerNavGroup, DrawerNavGroupProps } from '../DrawerNavGroup';
+import { NavItemSharedStyleProps, SharedStyleProps } from '../types';
+import { mergeStyleProp } from '../utilities';
 import Box, { BoxProps } from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import { DrawerBodyClasses, DrawerBodyClassKey, getDrawerBodyUtilityClass } from './DrawerBodyClasses';

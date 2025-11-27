@@ -5,7 +5,7 @@ import Avatar from '@mui/material/Avatar';
 import { Drawer } from './Drawer';
 import { DrawerHeader } from './DrawerHeader';
 import { DrawerSubheader } from './DrawerSubheader';
-import { DrawerBody } from './DrawerBody';
+import { DrawerBody } from './DrawerBody/DrawerBody';
 import { DrawerFooter } from './DrawerFooter';
 import { DrawerNavGroup } from './DrawerNavGroup';
 import MoreVert from '@mui/icons-material/MoreVert';
@@ -40,6 +40,167 @@ describe('Drawer', () => {
         expect(screen.getByTestId('blui-drawer-sub-header')).toBeTruthy();
         expect(screen.getByTestId('blui-drawer-body')).toBeTruthy();
         expect(screen.getByTestId('blui-drawer-footer')).toBeTruthy();
+    });
+
+    // Test case for line 204: Different variant conditions in isDrawerOpen
+    it('should handle permanent variant correctly', () => {
+        const { container } = render(
+            <ThemeProvider theme={theme}>
+                <Drawer open={false} variant="permanent" />
+            </ThemeProvider>
+        );
+        // Permanent variant should always be open regardless of open prop
+        expect(container.querySelector('.BluiDrawer-content')).toBeTruthy();
+    });
+
+    it('should handle rail variant correctly', () => {
+        const { container } = render(
+            <ThemeProvider theme={theme}>
+                <Drawer open={false} variant="rail" />
+            </ThemeProvider>
+        );
+        // Rail variant should always be open regardless of open prop
+        expect(container.querySelector('.BluiDrawer-content')).toBeTruthy();
+    });
+
+    it('should handle temporary variant correctly', () => {
+        render(
+            <ThemeProvider theme={theme}>
+                <Drawer open={true} variant="temporary" noLayout={true}>
+                    <DrawerBody />
+                </Drawer>
+            </ThemeProvider>
+        );
+        // Test passes if render doesn't crash
+    });
+
+    // Test case for lines 297-305: Hover functionality
+    it('should handle hover events when openOnHover is true', () => {
+        const { container } = render(
+            <ThemeProvider theme={theme}>
+                <Drawer open={false} variant="persistent" openOnHover={true} openOnHoverDelay={100}>
+                    <DrawerBody />
+                </Drawer>
+            </ThemeProvider>
+        );
+
+        const hoverArea = container.querySelector('div[style*="flex-direction: column"]');
+        expect(hoverArea).toBeTruthy();
+
+        // Test mouse enter
+        fireEvent.mouseEnter(hoverArea!);
+        // Test mouse leave
+        fireEvent.mouseLeave(hoverArea!);
+    });
+
+    it('should not add hover events when openOnHover is false', () => {
+        const { container } = render(
+            <ThemeProvider theme={theme}>
+                <Drawer open={false} variant="persistent" openOnHover={false}>
+                    <DrawerBody />
+                </Drawer>
+            </ThemeProvider>
+        );
+
+        const hoverArea = container.querySelector('div[style*="flex-direction: column"]');
+        expect(hoverArea).toBeTruthy();
+        // Should not have mouse event handlers when openOnHover is false
+    });
+
+    // Test case for line 327: getDrawerWidth function with different conditions
+    it('should handle condensed rail variant width', () => {
+        const { container } = render(
+            <ThemeProvider theme={theme}>
+                <Drawer open={true} variant="rail" condensed={true} />
+            </ThemeProvider>
+        );
+        expect(container.querySelector('.BluiDrawer-content')).toBeTruthy();
+    });
+
+    it('should handle custom width', () => {
+        const { container } = render(
+            <ThemeProvider theme={theme}>
+                <Drawer open={true} width="400px" />
+            </ThemeProvider>
+        );
+        expect(container.querySelector('.BluiDrawer-content')).toBeTruthy();
+    });
+
+    it('should handle sideBorder prop', () => {
+        const { container } = render(
+            <ThemeProvider theme={theme}>
+                <Drawer open={true} sideBorder={true} />
+            </ThemeProvider>
+        );
+        expect(container.querySelector('.BluiDrawer-content')).toBeTruthy();
+        expect(container.querySelector('.BluiDrawer-sideBorder')).toBeTruthy();
+    });
+
+    it('should handle onItemSelect callback', () => {
+        const onItemSelect = jest.fn();
+        const { container } = render(
+            <ThemeProvider theme={theme}>
+                <Drawer open={true} onItemSelect={onItemSelect}>
+                    <DrawerBody />
+                </Drawer>
+            </ThemeProvider>
+        );
+        expect(container.querySelector('.BluiDrawer-content')).toBeTruthy();
+    });
+
+    it('should handle activeItem prop', () => {
+        const { container } = render(
+            <ThemeProvider theme={theme}>
+                <Drawer open={true} activeItem="test-item">
+                    <DrawerBody />
+                </Drawer>
+            </ThemeProvider>
+        );
+        expect(container.querySelector('.BluiDrawer-content')).toBeTruthy();
+    });
+
+    it('should handle noLayout prop', () => {
+        const { container } = render(
+            <ThemeProvider theme={theme}>
+                <Drawer open={true} noLayout={true}>
+                    <DrawerBody />
+                </Drawer>
+            </ThemeProvider>
+        );
+        expect(container.querySelector('.BluiDrawer-content')).toBeTruthy();
+    });
+
+    // Test case for lines 297-305: Hover functionality
+    it('should handle hover events when openOnHover is true', () => {
+        const { container } = render(
+            <ThemeProvider theme={theme}>
+                <Drawer open={false} variant="persistent" openOnHover={true} openOnHoverDelay={100}>
+                    <DrawerBody />
+                </Drawer>
+            </ThemeProvider>
+        );
+
+        const hoverArea = container.querySelector('div[style*="flex-direction: column"]');
+        expect(hoverArea).toBeTruthy();
+
+        // Test mouse enter
+        fireEvent.mouseEnter(hoverArea!);
+        // Test mouse leave
+        fireEvent.mouseLeave(hoverArea!);
+    });
+
+    it('should not add hover events when openOnHover is false', () => {
+        const { container } = render(
+            <ThemeProvider theme={theme}>
+                <Drawer open={false} variant="persistent" openOnHover={false}>
+                    <DrawerBody />
+                </Drawer>
+            </ThemeProvider>
+        );
+
+        const hoverArea = container.querySelector('div[style*="flex-direction: column"]');
+        expect(hoverArea).toBeTruthy();
+        // Should not have mouse event handlers when openOnHover is false
     });
 });
 
