@@ -106,6 +106,8 @@ export const VerifyCodeScreenBase: React.FC<React.PropsWithChildren<VerifyCodeSc
             <WorkflowCardActions
                 {...actionsProps}
                 canGoNext={(verifyCode.length > 0 && isCodeValid && actionsProps.canGoNext) as any}
+                onNext={(): void => actionsProps?.onNext?.({ code: verifyCode })}
+                onPrevious={(): void => actionsProps?.onPrevious?.({ code: verifyCode })}
             />
         </WorkflowCard>
     );
