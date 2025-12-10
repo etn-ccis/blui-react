@@ -43,7 +43,7 @@
   "prettier": "@brightlayer-ui/prettier-config",
    "pnpm": {
     "overrides": {
-      "next": "15.4.7",
+      "next": "15.4.8",
       "nth-check": "2.1.1",
       "css-select": "5.2.2",
       "svgo": "3.0.0",
