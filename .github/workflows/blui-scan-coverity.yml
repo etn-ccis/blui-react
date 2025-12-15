@@ -13,7 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: checkout the code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
 
     - name: Get-repo-name-and-tag-for-building-image
       run: |
@@ -86,9 +88,21 @@ jobs:
     - name: Get Pull Request Changeset
       if: ${{ github.event_name == 'pull_request' }}
       id: changeset
-      uses: jitterbit/get-changed-files@v1
-      with:
-        format: 'json'
+      run: |
+        # Get the base and head refs
+        BASE_SHA=${{ github.event.pull_request.base.sha }}
+        HEAD_SHA=${{ github.event.pull_request.head.sha }}
+        
+        # Get changed files
+        ADDED_FILES=$(git diff --name-only --diff-filter=A $BASE_SHA $HEAD_SHA | tr '\n' ' ')
+        MODIFIED_FILES=$(git diff --name-only --diff-filter=M $BASE_SHA $HEAD_SHA | tr '\n' ' ')
+        DELETED_FILES=$(git diff --name-only --diff-filter=D $BASE_SHA $HEAD_SHA | tr '\n' ' ')
+        ADDED_MODIFIED=$(git diff --name-only --diff-filter=AM $BASE_SHA $HEAD_SHA | tr '\n' ' ')
+        
+        echo "added_files=$ADDED_FILES" >> $GITHUB_OUTPUT
+        echo "modified_files=$MODIFIED_FILES" >> $GITHUB_OUTPUT
+        echo "deleted_files=$DELETED_FILES" >> $GITHUB_OUTPUT
+        echo "added_modified=$ADDED_MODIFIED" >> $GITHUB_OUTPUT
 
     - name: Setup .NET Core SDK
       uses: actions/setup-dotnet@v4
@@ -103,20 +117,25 @@ jobs:
           export COVERITY_BLC_GRADLE_ZIP=$GITHUB_WORKSPACE/gradle-7.6.2-all.zip
           export COVERITY_BLC_GRADLE_JDK=$JAVA_HOME
           export PATH="/opt/coverity/analysis/2023.12.0/bin:$PATH"
-          # Capture added, modified, and deleted files
-          added_files=$(echo '${{ steps.changeset.outputs.added_files }}' | jq -r '.[]')
-          modified_files=$(echo '${{ steps.changeset.outputs.modified_files }}' | jq -r '.[]')
-          deleted_files=$(echo '${{ steps.changeset.outputs.deleted_files }}' | jq -r '.[]')
+          
+          # Get changed files from previous step
+          added_files="${{ steps.changeset.outputs.added_files }}"
+          modified_files="${{ steps.changeset.outputs.modified_files }}"
+          deleted_files="${{ steps.changeset.outputs.deleted_files }}"
     
           # Process added and modified files
           for file in $added_files $modified_files; do
-            echo ${file} >> coverity-files-to-scan.txt
-            echo "Scan changed file ${file}."
+            if [ -n "$file" ]; then
+              echo ${file} >> coverity-files-to-scan.txt
+              echo "Scan changed file ${file}."
+            fi
           done
     
           # Process deleted files
           for file in $deleted_files; do
-            echo "File deleted: ${file}"
+            if [ -n "$file" ]; then
+              echo "File deleted: ${file}"
+            fi
           done
           
           cov-capture --dir idir --project-dir .
