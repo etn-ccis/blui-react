@@ -1,0 +1,81 @@
+# Version: 950e903b4e p-2024.9-push-30
+# Command Line: cov-commit-defects --dir cov-int --url https://coverity.eaton.com/ --stream BLUI-React --auth-key-file /Users/E0661236/coverity-token.txt
+timer                                          ms      calls
+------------------------------------------------------------
+cov-commit-defects                          23752          1
+  set_working_domain                            5          1
+  send_analysis_and_build_metrics              15          2
+    open emit DB                                0          1
+  send_defects_v3                             582          2
+    HashKVS mappingBegin                        0          2
+      HashKVSBigLockRead                        0          2
+  start_determining_blame_v2                  249          1
+  send_snapshot_info                            0          1
+  send_analysis_settings_v1                     0          1
+  send_collectable_analysis_metrics             1          1
+  send_his_metrics                              0          1
+  send_sourcefile_descriptions_v3               4          1
+    retrieve_string_from_table                  0        165
+  send_file_contents_dev                      478          1
+    retrieve_string_from_table                  0        161
+  send_filtering_report                         0          1
+  send_xrefs_v2                                42          1
+    HashKVS mappingBegin                        0          1
+      HashKVSBigLockRead                        0          1
+  send_functions_v1                            43          1
+  send_owners_v1                                3          1
+  send_output_files_v1                       1875          1
+  send_scm_change_record_md5s                   4          1
+    open emit DB                                1          1
+  send_scm_annotation_md5s                      1          1
+    open emit DB                                1          1
+  send_analysis_summaries_md5_v1                9          1
+    HashKVS has_key                             0          1
+      HashKVSBigLockRead                        0          1
+      find                                      0          1
+        read partial table                      0          1
+    HashKVS mappingBegin                        0          1
+      HashKVSBigLockRead                        0          1
+  send_analysis_summaries_contents_v1         584          1
+    HashKVS find                                0        134
+      HashKVSBigLockRead                        0        134
+      find                                      0        134
+        read partial table                      0        134
+  send_desktop_analysis_data_v1                 0          1
+    HashKVS find                                0          1
+      HashKVSBigLockRead                        0          1
+      find                                      0          1
+        read partial table                      0          1
+  (left over)                               19857
+
+activity                                       ms      calls
+------------------------------------------------------------
+cov-commit-defects                          23752          1
+set_working_domain                              5          1
+send_analysis_and_build_metrics                15          2
+open emit DB                                    2          3
+send_defects_v3                               582          2
+HashKVS mappingBegin                            0          4
+HashKVSBigLockRead                              0        140
+start_determining_blame_v2                    249          1
+send_snapshot_info                              0          1
+send_analysis_settings_v1                       0          1
+send_collectable_analysis_metrics               1          1
+send_his_metrics                                0          1
+send_sourcefile_descriptions_v3                 4          1
+retrieve_string_from_table                      0        326
+send_file_contents_dev                        478          1
+send_filtering_report                           0          1
+send_xrefs_v2                                  42          1
+send_functions_v1                              43          1
+send_owners_v1                                  3          1
+send_output_files_v1                         1875          1
+send_scm_change_record_md5s                     4          1
+send_scm_annotation_md5s                        1          1
+send_analysis_summaries_md5_v1                  9          1
+HashKVS has_key                                 0          1
+find                                            0        136
+read partial table                              0        136
+send_analysis_summaries_contents_v1           584          1
+HashKVS find                                    0        135
+send_desktop_analysis_data_v1                   0          1
