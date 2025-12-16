@@ -1,0 +1,6 @@
+[STATUS] Running template dynamic analysis...
+[STATUS] Running template-DA on /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/cli-templates
+[STATUS] Running template-DA on /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/component-library
+[STATUS] Running template-DA on /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/login-workflow
+[STATUS] Running template-DA on /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/themes
+[STATUS] Found 0 XSS-escapable sites in 0 analyzed templates across 4 projects.

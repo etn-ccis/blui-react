@@ -132,18 +132,19 @@ jobs:
           
           # Only run cov-capture if there are files to scan
           if [ -f coverity-files-to-scan.txt ]; then
+            echo "=== Running cov-capture ==="
             cov-capture --dir idir --source-list coverity-files-to-scan.txt
           else
-            echo "No files to scan, skipping cov-capture"
+            echo "No files to scan, creating empty results"
+            echo '{"issues":[]}' > coverity-results.json
             exit 0
           fi
           
-          cov-run-desktop --dir idir --strip-path `pwd` --url https://coverity.eaton.com --stream ${{ env.REPO_NAME }} --present-in-reference false \
-            --ignore-uncapturable-inputs true --auth-key-file $RUNNER_TEMP/auth-key.txt \
-            --json-output-v7 coverity-results.json \
-            --all --webapp-security --enable-callgraph-metrics --aggressiveness-level high --set-new-defect-owner false \
-            --enable-audit-mode -en HARDCODED_CREDENTIALS -en UNENCRYPTED_SENSITIVE_DATA -en USER_POINTER -en WEAK_GUARD -en WEAK_PASSWORD_HASH \
-            ${{ steps.changeset.outputs.added_modified }}
+          echo "=== Running cov-analyze (local analysis) ==="
+          cov-analyze --dir idir \
+            --all --webapp-security --aggressiveness-level high \
+            -en HARDCODED_CREDENTIALS -en UNENCRYPTED_SENSITIVE_DATA -en USER_POINTER -en WEAK_GUARD -en WEAK_PASSWORD_HASH \
+            --strip-path `pwd`
           
           echo "=== Running cov-format-errors ==="
           cov-format-errors --dir idir --json-output-v7 coverity-results.json

@@ -1,0 +1,8 @@
+--config
+cov-int/cov-capture/2025-12-16_16_01_40/compiler-config/sources/coverity_config.xml
+--source-dir
+packages/login-workflow
+--output-file
+cov-int/cov-capture/2025-12-16_16_01_40/project-info/sources-info.json
+--logging-endpoint
+cov-int/cov-capture/cov-internal-fluentd-port

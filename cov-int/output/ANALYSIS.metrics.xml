@@ -5,7 +5,7 @@
 <metrics>
     <metric>
         <name>time</name>
-        <value>34</value>
+        <value>41</value>
     </metric>
     <metric>
         <name>args</name>
@@ -61,19 +61,19 @@
     </metric>
     <metric>
         <name>files-analyzed</name>
-        <value>445</value>
+        <value>572</value>
     </metric>
     <metric>
         <name>javascript-code-lines</name>
-        <value>241</value>
+        <value>343</value>
     </metric>
     <metric>
         <name>javascript-comment-lines</name>
-        <value>36</value>
+        <value>37</value>
     </metric>
     <metric>
         <name>javascript-blank-lines</name>
-        <value>18</value>
+        <value>29</value>
     </metric>
     <metric>
         <name>javascript-code-lines-with-inline-comments</name>
@@ -81,7 +81,7 @@
     </metric>
     <metric>
         <name>text-files-code-lines</name>
-        <value>918</value>
+        <value>1403</value>
     </metric>
     <metric>
         <name>text-files-blank-lines</name>
@@ -89,47 +89,47 @@
     </metric>
     <metric>
         <name>typescript-code-lines</name>
-        <value>58288</value>
+        <value>75892</value>
     </metric>
     <metric>
         <name>typescript-comment-lines</name>
-        <value>43360</value>
+        <value>65605</value>
     </metric>
     <metric>
         <name>typescript-blank-lines</name>
-        <value>11657</value>
+        <value>15224</value>
     </metric>
     <metric>
         <name>typescript-code-lines-with-inline-comments</name>
-        <value>82</value>
+        <value>117</value>
     </metric>
     <metric>
         <name>code-lines</name>
-        <value>59447</value>
+        <value>77638</value>
     </metric>
     <metric>
         <name>comment-lines</name>
-        <value>43396</value>
+        <value>65642</value>
     </metric>
     <metric>
         <name>blank-lines</name>
-        <value>11677</value>
+        <value>15255</value>
     </metric>
     <metric>
         <name>code-lines-with-inline-comments</name>
-        <value>86</value>
+        <value>121</value>
     </metric>
     <metric>
         <name>functions-analyzed</name>
-        <value>2640</value>
+        <value>2945</value>
     </metric>
     <metric>
         <name>function-metrics-count</name>
-        <value>2640</value>
+        <value>2945</value>
     </metric>
     <metric>
         <name>paths-analyzed</name>
-        <value>10543</value>
+        <value>11046</value>
     </metric>
     <metric>
         <name>memout-count</name>
@@ -141,7 +141,7 @@
     </metric>
     <metric>
         <name>tus-count</name>
-        <value>504</value>
+        <value>645</value>
     </metric>
     <metric>
         <name>failures</name>
@@ -149,19 +149,19 @@
     </metric>
     <metric>
         <name>incremental-misses</name>
-        <value>13757</value>
+        <value>14290</value>
     </metric>
     <metric>
         <name>incremental-hits</name>
-        <value>8347</value>
+        <value>10399</value>
     </metric>
     <metric>
         <name>dyncg-sites-resolved</name>
-        <value>4987</value>
+        <value>5315</value>
     </metric>
     <metric>
         <name>dyncg-sites-total</name>
-        <value>15641</value>
+        <value>16852</value>
     </metric>
     <metric>
         <name>FORWARD_NULL-new-defect-count</name>
@@ -169,15 +169,15 @@
     </metric>
     <metric>
         <name>NO_EFFECT-new-defect-count</name>
-        <value>47</value>
+        <value>53</value>
     </metric>
     <metric>
         <name>REVERSE_INULL-new-defect-count</name>
-        <value>9</value>
+        <value>10</value>
     </metric>
     <metric>
         <name>SIGMA.hardcoded_secret-new-defect-count</name>
-        <value>246</value>
+        <value>251</value>
     </metric>
     <metric>
         <name>SIGMA.unsafe_innerhtml_manipulation-new-defect-count</name>
@@ -185,7 +185,7 @@
     </metric>
     <metric>
         <name>total-new-defect-count</name>
-        <value>306</value>
+        <value>318</value>
     </metric>
     <metric>
         <name>extver</name>
@@ -205,7 +205,7 @@
     </metric>
     <metric>
         <name>code-version-date</name>
-        <value>1765877096</value>
+        <value>1765882010</value>
     </metric>
     <metric>
         <name>cxx</name>
@@ -229,15 +229,15 @@
     </metric>
     <metric>
         <name>emit-db-size-bytes</name>
-        <value>18087936</value>
+        <value>20983808</value>
     </metric>
     <metric>
         <name>idir-size-bytes</name>
-        <value>109456710</value>
+        <value>134007311</value>
     </metric>
     <metric>
         <name>output-dir-size-bytes</name>
-        <value>89216277</value>
+        <value>109878300</value>
     </metric>
     <metric>
         <name>paths</name>
@@ -261,103 +261,103 @@
     </metric>
     <metric>
         <name>javascript-wu-time-milliseconds</name>
-        <value>10272</value>
+        <value>19989</value>
     </metric>
     <metric>
         <name>javascript-es6-module-wu-time-milliseconds</name>
-        <value>58032</value>
+        <value>32845</value>
     </metric>
     <metric>
         <name>typescript-es6-module-wu-time-milliseconds</name>
-        <value>5585733</value>
+        <value>12959392</value>
     </metric>
     <metric>
         <name>typescript-jsx-es6-module-wu-time-milliseconds</name>
-        <value>54223688</value>
+        <value>48925887</value>
     </metric>
     <metric>
         <name>all-wu-time-milliseconds</name>
-        <value>59877725</value>
+        <value>61938113</value>
     </metric>
     <metric>
         <name>BUDA_CALLGRAPH-phase-start-time</name>
-        <value>1765877101</value>
+        <value>1765882015</value>
     </metric>
     <metric>
         <name>BUDA_CALLGRAPH-phase-end-time</name>
-        <value>1765877103</value>
+        <value>1765882017</value>
     </metric>
     <metric>
         <name>DYNAMIC_BUDA_CHECKERS1-phase-start-time</name>
-        <value>1765877103</value>
+        <value>1765882017</value>
     </metric>
     <metric>
         <name>DYNAMIC_BUDA_CHECKERS1-phase-end-time</name>
-        <value>1765877126</value>
+        <value>1765882042</value>
     </metric>
     <metric>
         <name>DYNAMIC_BUDA_CHECKERS2-phase-start-time</name>
-        <value>1765877103</value>
+        <value>1765882017</value>
     </metric>
     <metric>
         <name>DYNAMIC_BUDA_CHECKERS2-phase-end-time</name>
-        <value>1765877126</value>
+        <value>1765882045</value>
     </metric>
     <metric>
         <name>DYNAMIC_BUDA_CHECKERS3-phase-start-time</name>
-        <value>1765877103</value>
+        <value>1765882017</value>
     </metric>
     <metric>
         <name>DYNAMIC_BUDA_CHECKERS3-phase-end-time</name>
-        <value>1765877127</value>
+        <value>1765882047</value>
     </metric>
     <metric>
         <name>DYNAMIC_BUDA_DIRECTIVES_TYPE_INFERENCE-phase-start-time</name>
-        <value>1765877103</value>
+        <value>1765882017</value>
     </metric>
     <metric>
         <name>DYNAMIC_BUDA_DIRECTIVES_TYPE_INFERENCE-phase-end-time</name>
-        <value>1765877103</value>
+        <value>1765882017</value>
     </metric>
     <metric>
         <name>ENABLE_ONLY-phase-start-time</name>
-        <value>1765877101</value>
+        <value>1765882015</value>
     </metric>
     <metric>
         <name>ENABLE_ONLY-phase-end-time</name>
-        <value>1765877101</value>
+        <value>1765882015</value>
     </metric>
     <metric>
         <name>GENERIC-phase-start-time</name>
-        <value>1765877102</value>
+        <value>1765882016</value>
     </metric>
     <metric>
         <name>GENERIC-phase-end-time</name>
-        <value>1765877103</value>
+        <value>1765882017</value>
     </metric>
     <metric>
         <name>GENERIC_STATS-phase-start-time</name>
-        <value>1765877101</value>
+        <value>1765882015</value>
     </metric>
     <metric>
         <name>GENERIC_STATS-phase-end-time</name>
-        <value>1765877102</value>
+        <value>1765882016</value>
     </metric>
     <metric>
         <name>PER_TU-phase-start-time</name>
-        <value>1765877103</value>
+        <value>1765882017</value>
     </metric>
     <metric>
         <name>PER_TU-phase-end-time</name>
-        <value>1765877103</value>
+        <value>1765882017</value>
     </metric>
     <metric>
         <name>POST_DYNAMIC_BUDA_DIRECTIVES_CHECKERS-phase-start-time</name>
-        <value>1765877127</value>
+        <value>1765882047</value>
     </metric>
     <metric>
         <name>POST_DYNAMIC_BUDA_DIRECTIVES_CHECKERS-phase-end-time</name>
-        <value>1765877128</value>
+        <value>1765882050</value>
     </metric>
 </metrics>
 </coverity>
