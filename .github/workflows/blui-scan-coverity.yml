@@ -124,7 +124,14 @@ jobs:
             fi
           done
           
-          cov-capture --dir idir --project-dir . --fs-capture-search .
+          # Only run cov-capture if there are files to scan
+          if [ -f coverity-files-to-scan.txt ]; then
+            cov-capture --dir idir --source-list coverity-files-to-scan.txt
+          else
+            echo "No files to scan, skipping cov-capture"
+            exit 0
+          fi
+          
           cov-run-desktop --dir idir --strip-path `pwd` --url https://coverity.eaton.com --stream ${{ env.REPO_NAME }} --present-in-reference false \
             --ignore-uncapturable-inputs true --auth-key-file $RUNNER_TEMP/auth-key.txt \
             --json-output-v7 coverity-results.json \
