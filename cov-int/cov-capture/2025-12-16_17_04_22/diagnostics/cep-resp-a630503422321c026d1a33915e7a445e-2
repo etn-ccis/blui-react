@@ -1,0 +1,11 @@
+--dir
+/Users/E0661236/Desktop/brightlayer-ui/blui-react/cov-int
+--config
+/Users/E0661236/Desktop/brightlayer-ui/blui-react/cov-int/cov-capture/2025-12-16_17_04_22/compiler-config/sources/coverity_config.xml
+cov-filesystem-capture-javascript-0
+/Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/component-library/.eslintrc.js
+/Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/component-library/babel.config.js
+/Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/component-library/index.js
+/Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/component-library/jest.config.cjs
+/Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/component-library/__mocks__/fileMock.js
+/Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/component-library/scripts/fix-import.js

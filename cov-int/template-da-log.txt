@@ -1,71 +1,17 @@
->> Begin js-view-buster log for /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/cli-templates
-[2025-12-16T16:16:46.162] [INFO] app - [BEGIN JS TEMPLATE DA]
-[2025-12-16T16:16:46.164] [INFO] app - [BusterDir] /Users/E0661236/Desktop/brightlayer-ui/blui-react
-[2025-12-16T16:16:46.164] [INFO] app - [OS] darwin 24.4.0
-[2025-12-16T16:16:46.164] [INFO] app - [NODE] {"name":"node","lts":"Hydrogen","sourceUrl":"https://nodejs.org/download/release/v18.20.4/node-v18.20.4.tar.gz","headersUrl":"https://nodejs.org/download/release/v18.20.4/node-v18.20.4-headers.tar.gz"}
-[2025-12-16T16:16:46.164] [INFO] app - [CODEBASE APP-DIR] /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/cli-templates
-[2025-12-16T16:16:46.164] [INFO] app - [PROJECT FILE SCAN] BEGIN
-[2025-12-16T16:16:46.170] [INFO] app - [PROJECT FILE SCAN: 5 ms] DONE --> Files identified: 115
-[2025-12-16T16:16:46.170] [INFO] app - Beginning top-level run on /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/cli-templates
-[2025-12-16T16:16:46.170] [INFO] app - [ENGINE SCAN] BEGIN PROJECT /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/cli-templates
-[2025-12-16T16:16:46.171] [INFO] app - [ENGINE SCAN] No recognized view engine
-[2025-12-16T16:16:46.171] [INFO] app - [ENGINE SCAN] DONE
-[2025-12-16T16:16:46.171] [INFO] app - [ENGINE SCAN] BEGIN PROJECT /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/cli-templates/templates/authentication-typescript
-[2025-12-16T16:16:46.171] [INFO] app - [ENGINE SCAN] No recognized view engine
-[2025-12-16T16:16:46.171] [INFO] app - [ENGINE SCAN] DONE
-[2025-12-16T16:16:46.172] [INFO] app - [ENGINE SCAN] BEGIN PROJECT /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/cli-templates/templates/blank-typescript
-[2025-12-16T16:16:46.172] [INFO] app - [ENGINE SCAN] No recognized view engine
-[2025-12-16T16:16:46.172] [INFO] app - [ENGINE SCAN] DONE
-[2025-12-16T16:16:46.172] [INFO] app - [ENGINE SCAN] BEGIN PROJECT /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/cli-templates/templates/routing-typescript
-[2025-12-16T16:16:46.172] [INFO] app - [ENGINE SCAN] No recognized view engine
-[2025-12-16T16:16:46.172] [INFO] app - [ENGINE SCAN] DONE
-[2025-12-16T16:16:46.172] [INFO] app - [DONE]
-
 >> Begin js-view-buster log for /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/component-library
-[2025-12-16T16:16:46.278] [INFO] app - [BEGIN JS TEMPLATE DA]
-[2025-12-16T16:16:46.279] [INFO] app - [BusterDir] /Users/E0661236/Desktop/brightlayer-ui/blui-react
-[2025-12-16T16:16:46.280] [INFO] app - [OS] darwin 24.4.0
-[2025-12-16T16:16:46.280] [INFO] app - [NODE] {"name":"node","lts":"Hydrogen","sourceUrl":"https://nodejs.org/download/release/v18.20.4/node-v18.20.4.tar.gz","headersUrl":"https://nodejs.org/download/release/v18.20.4/node-v18.20.4-headers.tar.gz"}
-[2025-12-16T16:16:46.280] [INFO] app - [CODEBASE APP-DIR] /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/component-library
-[2025-12-16T16:16:46.280] [INFO] app - [PROJECT FILE SCAN] BEGIN
-[2025-12-16T16:16:46.286] [INFO] app - [PROJECT FILE SCAN: 6 ms] DONE --> Files identified: 260
-[2025-12-16T16:16:46.286] [INFO] app - Beginning top-level run on /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/component-library
-[2025-12-16T16:16:46.286] [INFO] app - [ENGINE SCAN] BEGIN PROJECT /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/component-library
-[2025-12-16T16:16:46.287] [INFO] app - [ENGINE SCAN] No recognized view engine
-[2025-12-16T16:16:46.287] [INFO] app - [ENGINE SCAN] DONE
-[2025-12-16T16:16:46.287] [INFO] app - [ENGINE SCAN] BEGIN PROJECT /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/component-library/dist
-[2025-12-16T16:16:46.287] [INFO] app - [ENGINE SCAN] No recognized view engine
-[2025-12-16T16:16:46.287] [INFO] app - [ENGINE SCAN] DONE
-[2025-12-16T16:16:46.288] [INFO] app - [DONE]
-
->> Begin js-view-buster log for /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/login-workflow
-[2025-12-16T16:16:46.391] [INFO] app - [BEGIN JS TEMPLATE DA]
-[2025-12-16T16:16:46.393] [INFO] app - [BusterDir] /Users/E0661236/Desktop/brightlayer-ui/blui-react
-[2025-12-16T16:16:46.393] [INFO] app - [OS] darwin 24.4.0
-[2025-12-16T16:16:46.393] [INFO] app - [NODE] {"name":"node","lts":"Hydrogen","sourceUrl":"https://nodejs.org/download/release/v18.20.4/node-v18.20.4.tar.gz","headersUrl":"https://nodejs.org/download/release/v18.20.4/node-v18.20.4-headers.tar.gz"}
-[2025-12-16T16:16:46.393] [INFO] app - [CODEBASE APP-DIR] /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/login-workflow
-[2025-12-16T16:16:46.393] [INFO] app - [PROJECT FILE SCAN] BEGIN
-[2025-12-16T16:16:46.403] [INFO] app - [PROJECT FILE SCAN: 9 ms] DONE --> Files identified: 572
-[2025-12-16T16:16:46.403] [INFO] app - Beginning top-level run on /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/login-workflow
-[2025-12-16T16:16:46.404] [INFO] app - [ENGINE SCAN] BEGIN PROJECT /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/login-workflow
-[2025-12-16T16:16:46.404] [INFO] app - [ENGINE SCAN] No recognized view engine
-[2025-12-16T16:16:46.404] [INFO] app - [ENGINE SCAN] DONE
-[2025-12-16T16:16:46.405] [INFO] app - [ENGINE SCAN] BEGIN PROJECT /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/login-workflow/dist
-[2025-12-16T16:16:46.405] [INFO] app - [ENGINE SCAN] No recognized view engine
-[2025-12-16T16:16:46.405] [INFO] app - [ENGINE SCAN] DONE
-[2025-12-16T16:16:46.405] [INFO] app - [DONE]
-
->> Begin js-view-buster log for /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/themes
-[2025-12-16T16:16:46.519] [INFO] app - [BEGIN JS TEMPLATE DA]
-[2025-12-16T16:16:46.520] [INFO] app - [BusterDir] /Users/E0661236/Desktop/brightlayer-ui/blui-react
-[2025-12-16T16:16:46.521] [INFO] app - [OS] darwin 24.4.0
-[2025-12-16T16:16:46.521] [INFO] app - [NODE] {"name":"node","lts":"Hydrogen","sourceUrl":"https://nodejs.org/download/release/v18.20.4/node-v18.20.4.tar.gz","headersUrl":"https://nodejs.org/download/release/v18.20.4/node-v18.20.4-headers.tar.gz"}
-[2025-12-16T16:16:46.521] [INFO] app - [CODEBASE APP-DIR] /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/themes
-[2025-12-16T16:16:46.521] [INFO] app - [PROJECT FILE SCAN] BEGIN
-[2025-12-16T16:16:46.523] [INFO] app - [PROJECT FILE SCAN: 2 ms] DONE --> Files identified: 59
-[2025-12-16T16:16:46.523] [INFO] app - Beginning top-level run on /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/themes
-[2025-12-16T16:16:46.524] [INFO] app - [ENGINE SCAN] BEGIN PROJECT /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/themes
-[2025-12-16T16:16:46.524] [INFO] app - [ENGINE SCAN] No recognized view engine
-[2025-12-16T16:16:46.524] [INFO] app - [ENGINE SCAN] DONE
-[2025-12-16T16:16:46.524] [INFO] app - [DONE]
+[2025-12-16T17:04:52.779] [INFO] app - [BEGIN JS TEMPLATE DA]
+[2025-12-16T17:04:52.781] [INFO] app - [BusterDir] /Users/E0661236/Desktop/brightlayer-ui/blui-react
+[2025-12-16T17:04:52.781] [INFO] app - [OS] darwin 24.4.0
+[2025-12-16T17:04:52.781] [INFO] app - [NODE] {"name":"node","lts":"Hydrogen","sourceUrl":"https://nodejs.org/download/release/v18.20.4/node-v18.20.4.tar.gz","headersUrl":"https://nodejs.org/download/release/v18.20.4/node-v18.20.4-headers.tar.gz"}
+[2025-12-16T17:04:52.781] [INFO] app - [CODEBASE APP-DIR] /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/component-library
+[2025-12-16T17:04:52.781] [INFO] app - [PROJECT FILE SCAN] BEGIN
+[2025-12-16T17:04:52.787] [INFO] app - [PROJECT FILE SCAN: 6 ms] DONE --> Files identified: 260
+[2025-12-16T17:04:52.787] [INFO] app - Beginning top-level run on /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/component-library
+[2025-12-16T17:04:52.787] [INFO] app - [ENGINE SCAN] BEGIN PROJECT /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/component-library
+[2025-12-16T17:04:52.788] [INFO] app - [ENGINE SCAN] No recognized view engine
+[2025-12-16T17:04:52.788] [INFO] app - [ENGINE SCAN] DONE
+[2025-12-16T17:04:52.788] [INFO] app - [ENGINE SCAN] BEGIN PROJECT /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/component-library/dist
+[2025-12-16T17:04:52.788] [INFO] app - [ENGINE SCAN] No recognized view engine
+[2025-12-16T17:04:52.788] [INFO] app - [ENGINE SCAN] DONE
+[2025-12-16T17:04:52.789] [INFO] app - [DONE]
 

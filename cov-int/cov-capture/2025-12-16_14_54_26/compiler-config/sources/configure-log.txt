@@ -1,3 +1,0 @@
-Native Compiler and extra args: ./ 
-Working directory: /Users/E0661236/Desktop/brightlayer-ui/blui-react
-Comptype: typescript

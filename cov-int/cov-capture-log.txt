@@ -1,55 +1,47 @@
-2025-12-16T10:46:17.026Z|cov-capture|15676|debug|> cov-capture 2024.9.0 (build 950e903b4e p-2024.9-push-30)
-2025-12-16T10:46:17.026Z|cov-capture|15676|debug|> Coverity Buildless Capture version 2024.9.0 on Darwin 24.4.0 arm64
-2025-12-16T10:46:17.026Z|cov-capture|15676|debug|> Internal version numbers: 950e903b4e p-2024.9-push-30
-2025-12-16T10:46:17.026Z|cov-capture|15676|debug|> 
-2025-12-16T10:46:17.026Z|cov-capture|15676|debug|> Dumping from hostname : INPU1WP971XD9WL
-2025-12-16T10:46:17.026Z|cov-capture|15676|debug|> Platform info:
-2025-12-16T10:46:17.026Z|cov-capture|15676|debug|> Sysname = Darwin
-2025-12-16T10:46:17.026Z|cov-capture|15676|debug|> Release = 24.4.0
-2025-12-16T10:46:17.026Z|cov-capture|15676|debug|> Machine = arm64
-2025-12-16T10:46:17.026Z|cov-capture|15676|debug|> 
-2025-12-16T10:46:17.026Z|cov-capture|15676|debug|> [WARNING] This platform is not supported by Coverity.
-2025-12-16T10:46:17.026Z|cov-capture|15676|debug|> [WARNING] See documentation for the list of supported platforms.
-2025-12-16T10:46:17.026Z|cov-capture|15676|debug|> 
-2025-12-16T10:46:17.026Z|cov-capture|15676|debug|> 
-2025-12-16T10:46:17.026Z|cov-capture|15676|debug|> cov-capture command: cov-capture --dir cov-int --source-dir ./packages 
-2025-12-16T10:46:17.026Z|cov-capture|15676|debug|> Starting source mode.
-2025-12-16T10:46:18.131Z|cov-inspect-source|15690|info|> Scanning the file system for Apex, Java, JavaScript, PHP, Python, Ruby, TypeScript, and Web App Configuration files.
-2025-12-16T10:46:18.188Z|cov-inspect-source|15690|info|> Finished scanning the file system for Apex, Java, JavaScript, PHP, Python, Ruby, TypeScript, and Web App Configuration files.
-2025-12-16T10:46:18.188Z|cov-inspect-source|15690|info|> Successfully found JavaScript files.
-2025-12-16T10:46:18.188Z|cov-inspect-source|15690|info|> Successfully found HTML (JavaScript) files.
-2025-12-16T10:46:18.188Z|cov-inspect-source|15690|info|> Successfully found TypeScript files.
-2025-12-16T10:46:18.188Z|cov-inspect-source|15690|info|> Successfully found Configuration Files (Web App Configuration) files.
-2025-12-16T10:46:18.197Z|cov-emit-project|15691|debug|> Using project file "cov-int/cov-capture/2025-12-16_16_16_15/project-info/sources-info.json".
-2025-12-16T10:46:18.197Z|cov-emit-project|15691|debug|> Using intermediate directory "cov-int".
-2025-12-16T10:46:18.197Z|cov-emit-project|15691|debug|> Using logging endpoint "cov-int/cov-capture/cov-internal-fluentd-port".
-2025-12-16T10:46:18.198Z|cov-emit-project|15691|debug|> Project ".": Transition from Inspected/Inspected to Emitted/Inspected
-2025-12-16T10:46:18.198Z|cov-emit-project|15691|debug|> Project ".": Transition from Emitted/Inspected to Emitted/Emitting
-2025-12-16T10:46:18.198Z|cov-emit-project|15691|info|> Emitting source group 1 of 4.
-2025-12-16T10:46:18.268Z|cov-emit-project|15691|debug|> Project ".": Transition from Emitted/Emitting to Emitted/Emitted
-2025-12-16T10:46:18.268Z|cov-emit-project|15691|debug|> Project ".": Transition from Emitted/Emitted to Succeeded/Emitted
-2025-12-16T10:46:18.268Z|cov-emit-project|15691|debug|> Project ".": Transition from Succeeded/Emitted to Succeeded/Completed
-2025-12-16T10:46:18.268Z|cov-emit-project|15691|debug|> Project ".": Transition from Inspected/Inspected to Emitted/Inspected
-2025-12-16T10:46:18.268Z|cov-emit-project|15691|debug|> Project ".": Transition from Emitted/Inspected to Emitted/Emitting
-2025-12-16T10:46:18.268Z|cov-emit-project|15691|info|> Emitting source group 2 of 4.
-2025-12-16T10:46:18.363Z|cov-emit-project|15691|debug|> Project ".": Transition from Emitted/Emitting to Emitted/Emitted
-2025-12-16T10:46:18.363Z|cov-emit-project|15691|debug|> Project ".": Transition from Emitted/Emitted to Succeeded/Emitted
-2025-12-16T10:46:18.363Z|cov-emit-project|15691|debug|> Project ".": Transition from Succeeded/Emitted to Succeeded/Completed
-2025-12-16T10:46:18.363Z|cov-emit-project|15691|debug|> Project ".": Transition from Inspected/Inspected to Emitted/Inspected
-2025-12-16T10:46:18.363Z|cov-emit-project|15691|debug|> Project ".": Transition from Emitted/Inspected to Emitted/Emitting
-2025-12-16T10:46:18.363Z|cov-emit-project|15691|info|> Emitting source group 3 of 4.
-2025-12-16T10:46:24.409Z|cov-emit-project|15691|debug|> Project ".": Transition from Emitted/Emitting to Emitted/Emitted
-2025-12-16T10:46:24.409Z|cov-emit-project|15691|debug|> Project ".": Transition from Emitted/Emitted to Succeeded/Emitted
-2025-12-16T10:46:24.409Z|cov-emit-project|15691|debug|> Project ".": Transition from Succeeded/Emitted to Succeeded/Completed
-2025-12-16T10:46:24.409Z|cov-emit-project|15691|debug|> Project ".": Transition from Inspected/Inspected to Emitted/Inspected
-2025-12-16T10:46:24.409Z|cov-emit-project|15691|debug|> Project ".": Transition from Emitted/Inspected to Emitted/Emitting
-2025-12-16T10:46:24.409Z|cov-emit-project|15691|info|> Emitting source group 4 of 4.
-2025-12-16T10:46:46.024Z|cov-emit-project|15691|debug|> Project ".": Transition from Emitted/Emitting to Emitted/Emitted
-2025-12-16T10:46:46.024Z|cov-emit-project|15691|debug|> Project ".": Transition from Emitted/Emitted to Succeeded/Emitted
-2025-12-16T10:46:46.024Z|cov-emit-project|15691|debug|> Project ".": Transition from Succeeded/Emitted to Succeeded/Completed
-2025-12-16T10:46:46.535Z|cov-capture|15676|debug|> Emitted 5 HTML compilation units (100%) successfully.
-2025-12-16T10:46:46.535Z|cov-capture|15676|info|> Emitted 17 JavaScript compilation units (100%) successfully.
-2025-12-16T10:46:46.535Z|cov-capture|15676|debug|> Emitted 12 JavaScript ES6 module compilation units (100%) successfully.
-2025-12-16T10:46:46.535Z|cov-capture|15676|info|> Emitted 106 Text data compilation units (100%) successfully.
-2025-12-16T10:46:46.535Z|cov-capture|15676|debug|> Emitted 196 TypeScript ES6 module compilation units (100%) successfully.
-2025-12-16T10:46:46.535Z|cov-capture|15676|debug|> Emitted 309 TypeScript JSX ES6 module compilation units (100%) successfully.
+2025-12-16T11:34:24.775Z|cov-capture|17381|debug|> cov-capture 2024.9.0 (build 950e903b4e p-2024.9-push-30)
+2025-12-16T11:34:24.775Z|cov-capture|17381|debug|> Coverity Buildless Capture version 2024.9.0 on Darwin 24.4.0 arm64
+2025-12-16T11:34:24.775Z|cov-capture|17381|debug|> Internal version numbers: 950e903b4e p-2024.9-push-30
+2025-12-16T11:34:24.775Z|cov-capture|17381|debug|> 
+2025-12-16T11:34:24.775Z|cov-capture|17381|debug|> Dumping from hostname : INPU1WP971XD9WL
+2025-12-16T11:34:24.775Z|cov-capture|17381|debug|> Platform info:
+2025-12-16T11:34:24.775Z|cov-capture|17381|debug|> Sysname = Darwin
+2025-12-16T11:34:24.775Z|cov-capture|17381|debug|> Release = 24.4.0
+2025-12-16T11:34:24.775Z|cov-capture|17381|debug|> Machine = arm64
+2025-12-16T11:34:24.775Z|cov-capture|17381|debug|> 
+2025-12-16T11:34:24.775Z|cov-capture|17381|debug|> [WARNING] This platform is not supported by Coverity.
+2025-12-16T11:34:24.775Z|cov-capture|17381|debug|> [WARNING] See documentation for the list of supported platforms.
+2025-12-16T11:34:24.775Z|cov-capture|17381|debug|> 
+2025-12-16T11:34:24.775Z|cov-capture|17381|debug|> 
+2025-12-16T11:34:24.775Z|cov-capture|17381|debug|> cov-capture command: cov-capture --dir cov-int --source-dir ./packages/component-library 
+2025-12-16T11:34:24.775Z|cov-capture|17381|debug|> Starting source mode.
+2025-12-16T11:34:25.930Z|cov-inspect-source|17399|info|> Scanning the file system for Apex, Java, JavaScript, PHP, Python, Ruby, TypeScript, and Web App Configuration files.
+2025-12-16T11:34:25.949Z|cov-inspect-source|17399|info|> Finished scanning the file system for Apex, Java, JavaScript, PHP, Python, Ruby, TypeScript, and Web App Configuration files.
+2025-12-16T11:34:25.949Z|cov-inspect-source|17399|info|> Successfully found JavaScript files.
+2025-12-16T11:34:25.949Z|cov-inspect-source|17399|info|> Successfully found TypeScript files.
+2025-12-16T11:34:25.949Z|cov-inspect-source|17399|info|> Successfully found Configuration Files (Web App Configuration) files.
+2025-12-16T11:34:25.965Z|cov-emit-project|17400|debug|> Using project file "cov-int/cov-capture/2025-12-16_17_04_22/project-info/sources-info.json".
+2025-12-16T11:34:25.965Z|cov-emit-project|17400|debug|> Using intermediate directory "cov-int".
+2025-12-16T11:34:25.965Z|cov-emit-project|17400|debug|> Using logging endpoint "cov-int/cov-capture/cov-internal-fluentd-port".
+2025-12-16T11:34:25.968Z|cov-emit-project|17400|debug|> Project ".": Transition from Inspected/Inspected to Emitted/Inspected
+2025-12-16T11:34:25.968Z|cov-emit-project|17400|debug|> Project ".": Transition from Emitted/Inspected to Emitted/Emitting
+2025-12-16T11:34:25.968Z|cov-emit-project|17400|info|> Emitting source group 1 of 3.
+2025-12-16T11:34:26.228Z|cov-emit-project|17400|debug|> Project ".": Transition from Emitted/Emitting to Emitted/Emitted
+2025-12-16T11:34:26.228Z|cov-emit-project|17400|debug|> Project ".": Transition from Emitted/Emitted to Succeeded/Emitted
+2025-12-16T11:34:26.228Z|cov-emit-project|17400|debug|> Project ".": Transition from Succeeded/Emitted to Succeeded/Completed
+2025-12-16T11:34:26.228Z|cov-emit-project|17400|debug|> Project ".": Transition from Inspected/Inspected to Emitted/Inspected
+2025-12-16T11:34:26.228Z|cov-emit-project|17400|debug|> Project ".": Transition from Emitted/Inspected to Emitted/Emitting
+2025-12-16T11:34:26.228Z|cov-emit-project|17400|info|> Emitting source group 2 of 3.
+2025-12-16T11:34:35.247Z|cov-emit-project|17400|debug|> Project ".": Transition from Emitted/Emitting to Emitted/Emitted
+2025-12-16T11:34:35.247Z|cov-emit-project|17400|debug|> Project ".": Transition from Emitted/Emitted to Succeeded/Emitted
+2025-12-16T11:34:35.247Z|cov-emit-project|17400|debug|> Project ".": Transition from Succeeded/Emitted to Succeeded/Completed
+2025-12-16T11:34:35.247Z|cov-emit-project|17400|debug|> Project ".": Transition from Inspected/Inspected to Emitted/Inspected
+2025-12-16T11:34:35.247Z|cov-emit-project|17400|debug|> Project ".": Transition from Emitted/Inspected to Emitted/Emitting
+2025-12-16T11:34:35.247Z|cov-emit-project|17400|info|> Emitting source group 3 of 3.
+2025-12-16T11:34:52.604Z|cov-emit-project|17400|debug|> Project ".": Transition from Emitted/Emitting to Emitted/Emitted
+2025-12-16T11:34:52.604Z|cov-emit-project|17400|debug|> Project ".": Transition from Emitted/Emitted to Succeeded/Emitted
+2025-12-16T11:34:52.604Z|cov-emit-project|17400|debug|> Project ".": Transition from Succeeded/Emitted to Succeeded/Completed
+2025-12-16T11:34:52.797Z|cov-capture|17381|info|> Emitted 11 JavaScript compilation units (100%) successfully.
+2025-12-16T11:34:52.797Z|cov-capture|17381|debug|> Emitted 2 JavaScript ES6 module compilation units (100%) successfully.
+2025-12-16T11:34:52.797Z|cov-capture|17381|info|> Emitted 10 Text data compilation units (100%) successfully.
+2025-12-16T11:34:52.797Z|cov-capture|17381|debug|> Emitted 25 TypeScript ES6 module compilation units (100%) successfully.
+2025-12-16T11:34:52.797Z|cov-capture|17381|debug|> Emitted 67 TypeScript JSX ES6 module compilation units (100%) successfully.

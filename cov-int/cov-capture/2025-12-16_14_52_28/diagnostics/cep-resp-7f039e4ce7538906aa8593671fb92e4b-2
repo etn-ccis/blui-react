@@ -1,9 +1,0 @@
---dir
-/Users/E0661236/Desktop/brightlayer-ui/blui-react/cov-int
---config
-/Users/E0661236/Desktop/brightlayer-ui/blui-react/cov-int/cov-capture/2025-12-16_14_52_28/compiler-config/sources/coverity_config.xml
-cov-filesystem-capture-javascript-0
-/Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/login-workflow/babel.config.cjs
-/Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/login-workflow/index.js
-/Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/login-workflow/__mocks__/fileMock.js
-/Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/login-workflow/scripts/fix-import.js
