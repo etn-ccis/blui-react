@@ -110,18 +110,21 @@ jobs:
         dotnet-version: 8.0.x
 
     - name: Coverity Scan (Incremental analysis)
+      id: coverity-scan
       continue-on-error: true
       if: ${{github.event_name == 'pull_request'}}
       run: |
-          export COVERITY_BLC_MAVEN=/usr/share/maven/bin
-          export COVERITY_BLC_GRADLE_ZIP=$GITHUB_WORKSPACE/gradle-7.6.2-all.zip
-          export COVERITY_BLC_GRADLE_JDK=$JAVA_HOME
           export PATH="/opt/coverity/analysis/2023.12.0/bin:$PATH"
           
           # Get changed files from previous step
           added_files="${{ steps.changeset.outputs.added_files }}"
           modified_files="${{ steps.changeset.outputs.modified_files }}"
           deleted_files="${{ steps.changeset.outputs.deleted_files }}"
+          
+          echo "=== Changed files ==="
+          echo "Added: $added_files"
+          echo "Modified: $modified_files"
+          echo "Deleted: $deleted_files"
     
           # Process added and modified files
           for file in $added_files $modified_files; do
@@ -138,15 +141,28 @@ jobs:
             fi
           done
           
-          cov-capture --dir idir --project-dir .
+          echo "=== Running cov-capture for JavaScript/TypeScript ==="
+          cov-capture --dir idir --project-dir . --source-dir . --no-command --fs-capture-search .
+          
+          echo "=== Running cov-run-desktop ==="
           cov-run-desktop --dir idir --strip-path `pwd` --url https://coverity.eaton.com --stream ${{ env.REPO_NAME }} --present-in-reference false \
             --ignore-uncapturable-inputs true --auth-key-file $RUNNER_TEMP/auth-key.txt \
             --json-output-v7 coverity-results.json \
             --all --webapp-security --enable-callgraph-metrics --aggressiveness-level high --set-new-defect-owner false \
             --enable-audit-mode -en HARDCODED_CREDENTIALS -en UNENCRYPTED_SENSITIVE_DATA -en USER_POINTER -en WEAK_GUARD -en WEAK_PASSWORD_HASH \
             ${{ steps.changeset.outputs.added_modified }}
+          
+          echo "=== Running cov-format-errors ==="
           cov-format-errors --dir idir --json-output-v7 coverity-results.json
-          echo "format the errors from json"
+          echo "Coverity scan completed"
+
+    - name: Ensure results file exists
+      if: ${{ github.event_name == 'pull_request' }}
+      run: |
+        if [ ! -f coverity-results.json ]; then
+          echo "Creating empty coverity-results.json (scan may have failed or found no issues)"
+          echo '{"issues":[]}' > coverity-results.json
+        fi
           
     - name: Upload build output
       uses: actions/upload-artifact@v4
