@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>Coverity error reader: /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/login-workflow/src/contexts/SharedDictionaries/spanish.ts</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head>
+<body link="#000000" vlink="#000000"><pre>
+<b><a name="line1">1    </a></b>	import { CommonTranslationsFile } from './types';
+<b><a name="line2">2    </a></b>	
+<b><a name="line3">3    </a></b>	const resources: CommonTranslationsFile = {
+<b><a name="line4">4    </a></b>	    translation: {
+<b><a name="line5">5    </a></b>	        ACTIONS: {
+<b><a name="line6">6    </a></b>	            FINISH: 'Terminar',
+<b><a name="line7">7    </a></b>	            NEXT: 'Siguiente',
+<b><a name="line8">8    </a></b>	            BACK: 'Atrás',
+<b><a name="line9">9    </a></b>	            CREATE_ACCOUNT: 'Crear una cuenta',
+<b><a name="line10">10   </a></b>	            OKAY: 'Okey',
+<b><a name="line11">11   </a></b>	            CANCEL: 'Cancelar',
+<b><a name="line12">12   </a></b>	            CONTINUE: 'Seguir',
+<b><a name="line13">13   </a></b>	            DONE: 'Hecho',
+<b><a name="line14">14   </a></b>	            LOG_IN: 'Iniciar sesión',
+<b><a name="line15">15   </a></b>	            OKTA_LOG_IN: 'Iniciar sesión con Okta',
+<b><a name="line16">16   </a></b>	            LOG_OUT: 'Cerrar sesión',
+<b><a name="line17">17   </a></b>	            CLICK_BUTTON: '¡Haga clic en el botón',
+<b><a name="line18">18   </a></b>	            UPDATE_REDUX: '¡Haga clic en el botón para actualizar el valor de la tienda redux!',
+<b><a name="line19">19   </a></b>	            CHANGE_LANGUAGE: '¡Cambie el idioma aquí!',
+<b><a name="line20">20   </a></b>	            GO_HOME: 'Ir a casa',
+<b><a name="line21">21   </a></b>	            GO_TEST: 'Ir a la página de prueba',
+<b><a name="line22">22   </a></b>	            RESEND: 'Enviar de nuevo',
+<b><a name="line23">23   </a></b>	            UPDATE: 'Actualizar',
+<b><a name="line24">24   </a></b>	            REMEMBER: 'Recordar contraseña',
+<b><a name="line25">25   </a></b>	            SUBMIT: 'Entregar',
+<b><a name="line26">26   </a></b>	        },
+<b><a name="line27">27   </a></b>	        LABELS: {
+<b><a name="line28">28   </a></b>	            EMAIL: 'Correo electrónico',
+<b><a name="line29">29   </a></b>	            USERNAME: 'Nombre de usuario',
+<b><a name="line30">30   </a></b>	            PASSWORD: 'Contraseña',
+<b><a name="line31">31   </a></b>	            CURRENT_PASSWORD: 'Contraseña actual',
+</pre>
+<table summary="events" bgcolor=#e0e0e0>
+<tr><td><font color="red">
+<a name="error:0"></a>
+<a name="error"></a>
+<!-- merge-key 8d39d676e47b0ab3a3ba6f4525402604 -->
+<b>(1) Event Sigma main event</b>: </font></td>
+<td><font color="red">A secret, such as a password, cryptographic key, or token is stored in plaintext directly in the source code, in an application's properties, or configuration file. Users with access to the secret may then use the secret to access resources that they otherwise would not have access to. Secret type: Password (generic).</font></td>
+</tr>
+<tr><td><font color="red">
+<a name="error:1"></a>
+<!-- merge-key 8d39d676e47b0ab3a3ba6f4525402604 -->
+<b>(2) Event remediation</b>: </font></td>
+<td><font color="red">Avoid setting sensitive configuration values as string literals. Instead, these values should be set using variables with the sensitive data loaded from an encrypted file or a secret store.</font></td>
+</tr>
+</table>
+<pre><b><a name="line32">32   </a></b>	            NEW_PASSWORD: 'Nueva contraseña',
+<b><a name="line33">33   </a></b>	            OPTIONAL: 'Opcional',
+<b><a name="line34">34   </a></b>	            FORGOT_PASSWORD: '¿Ha olvidado su contraseña?',
+<b><a name="line35">35   </a></b>	            NEED_ACCOUNT: '¿Necesitas una cuenta?',
+<b><a name="line36">36   </a></b>	            VIEW_ALL_EVENTS: 'Ver todos los {{count}} eventos',
+<b><a name="line37">37   </a></b>	        },
+<b><a name="line38">38   </a></b>	        MESSAGES: {
+<b><a name="line39">39   </a></b>	            EMAIL_SENT: 'Correo electrónico enviado',
+<b><a name="line40">40   </a></b>	            WELCOME: 'Bienvenido',
+<b><a name="line41">41   </a></b>	            WELCOME_PROJECT: 'Bienvenido a {{project}}',
+<b><a name="line42">42   </a></b>	            LOGIN_MESSAGE: 'Has iniciado sesión',
+<b><a name="line43">43   </a></b>	            CONGRATS: '¡Felicitaciones!',
+<b><a name="line44">44   </a></b>	            CONTACT: 'Contactar un representante de soporte de Eaton',
+<b><a name="line45">45   </a></b>	            ERROR: '¡Error!',
+<b><a name="line46">46   </a></b>	            EMAIL_ENTRY_ERROR: 'Ingrese un correo electrónico válido',
+<b><a name="line47">47   </a></b>	            USERNAME_ENTRY_ERROR: 'Introduzca un nombre de usuario válido',
+<b><a name="line48">48   </a></b>	            SUCCESS: 'Éxito',
+<b><a name="line49">49   </a></b>	            FAILURE: 'Fallo',
+<b><a name="line50">50   </a></b>	            LOADING: 'Cargando...',
+<b><a name="line51">51   </a></b>	            REQUEST_ERROR: 'Lo sentimos, hubo un problema al enviar su solicitud.',
+<b><a name="line52">52   </a></b>	            PASSWORD_REQUIRED_ERROR: 'Se requiere contraseña',
+<b><a name="line53">53   </a></b>	            RETRY: 'Rever',
+<b><a name="line54">54   </a></b>	        },
+<b><a name="line55">55   </a></b>	        FORMS: {
+<b><a name="line56">56   </a></b>	            FIRST_NAME: 'Nombre',
+<b><a name="line57">57   </a></b>	            LAST_NAME: 'Apellido',
+<b><a name="line58">58   </a></b>	            PHONE_NUMBER: 'Número de teléfono',
+<b><a name="line59">59   </a></b>	            PASSWORD: 'Contraseña',
+<b><a name="line60">60   </a></b>	            CONFIRM_PASSWORD: 'Confirmar contraseña',
+<b><a name="line61">61   </a></b>	            PASS_MATCH_ERROR: 'Las contraseñas no coinciden',
+<b><a name="line62">62   </a></b>	            TOGGLE_PASSWORD_VISIBILITY: 'Alternar visibilidad de contraseña',
+<b><a name="line63">63   </a></b>	            RESET_PASSWORD: 'Restablecer contraseña',
+<b><a name="line64">64   </a></b>	            FIRST_NAME_LENGTH_ERROR: 'El nombre debe tener al menos 1 caracteres',
+<b><a name="line65">65   </a></b>	            LAST_NAME_LENGTH_ERROR: 'El apellido debe tener al menos 1 caracteres',
+<b><a name="line66">66   </a></b>	        },
+<b><a name="line67">67   </a></b>	        PASSWORD_REQUIREMENTS: {
+<b><a name="line68">68   </a></b>	            LENGTH: '8-16 caracteres',
+<b><a name="line69">69   </a></b>	            NUMBERS: 'Un número',
+<b><a name="line70">70   </a></b>	            UPPER: 'Una letra mayúscula',
+<b><a name="line71">71   </a></b>	            LOWER: 'Una letra minúscula',
+<b><a name="line72">72   </a></b>	            SPECIAL: 'Un carácter especial',
+<b><a name="line73">73   </a></b>	        },
+<b><a name="line74">74   </a></b>	    },
+<b><a name="line75">75   </a></b>	};
+<b><a name="line76">76   </a></b>	export default resources;
+<b><a name="line77">77   </a></b>	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre></body>
+</html>

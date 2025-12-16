@@ -1,0 +1,498 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>Coverity error reader: /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/login-workflow/src/screens/LoginScreen/LoginScreenBase.tsx</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head>
+<body link="#000000" vlink="#000000"><pre>
+<b><a name="line1">1    </a></b>	import React, { useCallback, useRef, useState } from 'react';
+<b><a name="line2">2    </a></b>	import { LoginScreenProps } from './types';
+<b><a name="line3">3    </a></b>	import { WorkflowCard } from '../../components/WorkflowCard';
+<b><a name="line4">4    </a></b>	import { WorkflowCardBody } from '../../components/WorkflowCard/WorkflowCardBody';
+<b><a name="line5">5    </a></b>	import TextField from '@mui/material/TextField';
+<b><a name="line6">6    </a></b>	import Box from '@mui/material/Box';
+<b><a name="line7">7    </a></b>	import Typography from '@mui/material/Typography';
+<b><a name="line8">8    </a></b>	import cyberSecurityBadge from '../../assets/images/cybersecurity_certified.png';
+<b><a name="line9">9    </a></b>	import { PasswordTextField } from '../../components';
+<b><a name="line10">10   </a></b>	import Button from '@mui/material/Button';
+<b><a name="line11">11   </a></b>	import { useTheme } from '@mui/material/styles';
+<b><a name="line12">12   </a></b>	import Checkbox from '@mui/material/Checkbox';
+<b><a name="line13">13   </a></b>	import { HELPER_TEXT_HEIGHT } from '../../utils/constants';
+<b><a name="line14">14   </a></b>	import { LoginScreenClassKey, getLoginScreenUtilityClass } from './utilityClasses';
+<b><a name="line15">15   </a></b>	import { unstable_composeClasses as composeClasses } from '@mui/material';
+<b><a name="line16">16   </a></b>	import ErrorManager from '../../components/Error/ErrorManager';
+<b><a name="line17">17   </a></b>	import { LinkStyles } from '../../styles';
+<b><a name="line18">18   </a></b>	
+<b><a name="line19">19   </a></b>	const useUtilityClasses = (ownerState: LoginScreenProps): Record&lt;LoginScreenClassKey, string&gt; =&gt; {
+<b><a name="line20">20   </a></b>	    const { classes } = ownerState;
+<b><a name="line21">21   </a></b>	
+<b><a name="line22">22   </a></b>	    const slots = {
+<b><a name="line23">23   </a></b>	        root: ['root'],
+<b><a name="line24">24   </a></b>	        projectImageWrapper: ['projectImageWrapper'],
+<b><a name="line25">25   </a></b>	        inputFieldsWrapper: ['inputFieldsWrapper'],
+<b><a name="line26">26   </a></b>	        usernameTextField: ['usernameTextField'],
+<b><a name="line27">27   </a></b>	        passwordTextField: ['passwordTextField'],
+<b><a name="line28">28   </a></b>	        rememberMeLoginRowWrapper: ['rememberMeLoginRowWrapper'],
+<b><a name="line29">29   </a></b>	        rememberMeWrapper: ['rememberMeWrapper'],
+<b><a name="line30">30   </a></b>	        rememberMeCheckbox: ['rememberMeCheckbox'],
+<b><a name="line31">31   </a></b>	        rememberMeLabel: ['rememberMeLabel'],
+<b><a name="line32">32   </a></b>	        loginButtonWrapper: ['loginButtonWrapper'],
+<b><a name="line33">33   </a></b>	        loginButton: ['loginButton'],
+<b><a name="line34">34   </a></b>	        forgotPasswordWrapper: ['forgotPasswordWrapper'],
+<b><a name="line35">35   </a></b>	        forgotPasswordLabel: ['forgotPasswordLabel'],
+<b><a name="line36">36   </a></b>	        selfRegisterWrapper: ['selfRegisterWrapper'],
+<b><a name="line37">37   </a></b>	        selfRegisterInstructionLabel: ['selfRegisterInstructionLabel'],
+<b><a name="line38">38   </a></b>	        selfRegisterLabel: ['selfRegisterLabel'],
+<b><a name="line39">39   </a></b>	        contactSupportWrapper: ['contactSupportWrapper'],
+<b><a name="line40">40   </a></b>	        contactSupportLabel: ['contactSupportLabel'],
+<b><a name="line41">41   </a></b>	        cyberSecurityBadgeWrapper: ['cyberSecurityBadgeWrapper'],
+<b><a name="line42">42   </a></b>	        cyberSecurityBadge: ['cyberSecurityBadge'],
+<b><a name="line43">43   </a></b>	    };
+<b><a name="line44">44   </a></b>	
+<b><a name="line45">45   </a></b>	    return composeClasses(slots, getLoginScreenUtilityClass, classes);
+<b><a name="line46">46   </a></b>	};
+<b><a name="line47">47   </a></b>	
+<b><a name="line48">48   </a></b>	/**
+<b><a name="line49">49   </a></b>	 * Component that renders a login screen that prompts a user to enter a username and password to login.
+<b><a name="line50">50   </a></b>	 *
+<b><a name="line51">51   </a></b>	 * @param {LoginScreenProps} props - props of LoginScreen base component
+<b><a name="line52">52   </a></b>	 *
+<b><a name="line53">53   </a></b>	 * @category Component
+<b><a name="line54">54   </a></b>	 */
+<b><a name="line55">55   </a></b>	
+<b><a name="line56">56   </a></b>	export const LoginScreenBase: React.FC&lt;React.PropsWithChildren&lt;LoginScreenProps&gt;&gt; = (props) =&gt; {
+<b><a name="line57">57   </a></b>	    const {
+<b><a name="line58">58   </a></b>	        usernameLabel,
+<b><a name="line59">59   </a></b>	        usernameTextFieldProps,
+<b><a name="line60">60   </a></b>	        usernameValidator,
+<b><a name="line61">61   </a></b>	        initialUsernameValue,
+<b><a name="line62">62   </a></b>	        passwordLabel,
+<b><a name="line63">63   </a></b>	        passwordTextFieldProps,
+<b><a name="line64">64   </a></b>	        passwordValidator,
+<b><a name="line65">65   </a></b>	        showRememberMe,
+<b><a name="line66">66   </a></b>	        rememberMeLabel,
+<b><a name="line67">67   </a></b>	        rememberMeInitialValue,
+<b><a name="line68">68   </a></b>	        onRememberMeChanged,
+<b><a name="line69">69   </a></b>	        loginButtonLabel,
+<b><a name="line70">70   </a></b>	        onLogin,
+<b><a name="line71">71   </a></b>	        showForgotPassword,
+<b><a name="line72">72   </a></b>	        forgotPasswordLabel,
+<b><a name="line73">73   </a></b>	        onForgotPassword,
+<b><a name="line74">74   </a></b>	        showSelfRegistration,
+<b><a name="line75">75   </a></b>	        selfRegisterButtonLabel,
+<b><a name="line76">76   </a></b>	        selfRegisterInstructions,
+<b><a name="line77">77   </a></b>	        onSelfRegister,
+<b><a name="line78">78   </a></b>	        showContactSupport,
+<b><a name="line79">79   </a></b>	        contactSupportLabel,
+<b><a name="line80">80   </a></b>	        onContactSupport,
+<b><a name="line81">81   </a></b>	        errorDisplayConfig,
+<b><a name="line82">82   </a></b>	        showCyberSecurityBadge,
+<b><a name="line83">83   </a></b>	        projectImage,
+<b><a name="line84">84   </a></b>	        header,
+<b><a name="line85">85   </a></b>	        footer,
+<b><a name="line86">86   </a></b>	        ...otherProps
+<b><a name="line87">87   </a></b>	    } = props;
+<b><a name="line88">88   </a></b>	
+<b><a name="line89">89   </a></b>	    const theme = useTheme();
+<b><a name="line90">90   </a></b>	    const defaultClasses = useUtilityClasses(props);
+<b><a name="line91">91   </a></b>	
+<b><a name="line92">92   </a></b>	    const [username, setUsername] = React.useState&lt;string&gt;(initialUsernameValue || '');
+<b><a name="line93">93   </a></b>	    const [password, setPassword] = React.useState&lt;string&gt;('');
+<b><a name="line94">94   </a></b>	    const [rememberMe, setRememberMe] = React.useState&lt;boolean | undefined&gt;(rememberMeInitialValue);
+<b><a name="line95">95   </a></b>	
+<b><a name="line96">96   </a></b>	    const [shouldValidateUsername, setShouldValidateUsername] = React.useState&lt;boolean&gt;(false);
+<b><a name="line97">97   </a></b>	    const [shouldValidatePassword, setShouldValidatePassword] = React.useState&lt;boolean&gt;(false);
+<b><a name="line98">98   </a></b>	
+<b><a name="line99">99   </a></b>	    const passwordField = useRef&lt;any&gt;(null);
+<b><a name="line100">100  </a></b>	
+<b><a name="line101">101  </a></b>	    const [isUsernameValid, setIsUsernameValid] = useState(usernameValidator ? usernameValidator(username) : true);
+<b><a name="line102">102  </a></b>	    const [isPasswordValid, setIsPasswordValid] = useState(passwordValidator ? passwordValidator(password) : true);
+<b><a name="line103">103  </a></b>	
+<b><a name="line104">104  </a></b>	    const [usernameError, setUsernameError] = useState(isUsernameValid === true ? '' : isUsernameValid);
+<b><a name="line105">105  </a></b>	    const [passwordError, setPasswordError] = useState(isPasswordValid === true ? '' : isPasswordValid);
+<b><a name="line106">106  </a></b>	
+<b><a name="line107">107  </a></b>	    const handleUsernameInputChange = useCallback(
+<b><a name="line108">108  </a></b>	        (value: string) =&gt; {
+<b><a name="line109">109  </a></b>	            setUsername(value);
+<b><a name="line110">110  </a></b>	            const validatorResponse = usernameValidator?.(value);
+<b><a name="line111">111  </a></b>	
+<b><a name="line112">112  </a></b>	            setIsUsernameValid(typeof validatorResponse === 'boolean' ? validatorResponse : false);
+<b><a name="line113">113  </a></b>	            setUsernameError(typeof validatorResponse === 'string' ? validatorResponse : '');
+<b><a name="line114">114  </a></b>	        },
+<b><a name="line115">115  </a></b>	        [usernameValidator]
+<b><a name="line116">116  </a></b>	    );
+<b><a name="line117">117  </a></b>	
+<b><a name="line118">118  </a></b>	    const handlePasswordInputChange = useCallback(
+<b><a name="line119">119  </a></b>	        (value: string) =&gt; {
+<b><a name="line120">120  </a></b>	            setPassword(value);
+<b><a name="line121">121  </a></b>	            const validatorResponse = passwordValidator?.(value);
+<b><a name="line122">122  </a></b>	
+<b><a name="line123">123  </a></b>	            setIsPasswordValid(typeof validatorResponse === 'boolean' ? validatorResponse : false);
+<b><a name="line124">124  </a></b>	            setPasswordError(typeof validatorResponse === 'string' ? validatorResponse : '');
+<b><a name="line125">125  </a></b>	        },
+<b><a name="line126">126  </a></b>	        [passwordValidator]
+<b><a name="line127">127  </a></b>	    );
+<b><a name="line128">128  </a></b>	
+<b><a name="line129">129  </a></b>	    const handleLogin = (): void =&gt; {
+<b><a name="line130">130  </a></b>	        if (onLogin) void onLogin(username, password, showRememberMe !== false ? rememberMe : undefined);
+<b><a name="line131">131  </a></b>	    };
+<b><a name="line132">132  </a></b>	
+<b><a name="line133">133  </a></b>	    const handleForgotPassword = (): void =&gt; {
+<b><a name="line134">134  </a></b>	        if (onForgotPassword) onForgotPassword();
+<b><a name="line135">135  </a></b>	    };
+<b><a name="line136">136  </a></b>	
+<b><a name="line137">137  </a></b>	    const handleSelfRegister = (): void =&gt; {
+<b><a name="line138">138  </a></b>	        if (onSelfRegister) onSelfRegister();
+<b><a name="line139">139  </a></b>	    };
+<b><a name="line140">140  </a></b>	
+<b><a name="line141">141  </a></b>	    const handleContactSupport = (): void =&gt; {
+<b><a name="line142">142  </a></b>	        if (onContactSupport) onContactSupport();
+<b><a name="line143">143  </a></b>	    };
+<b><a name="line144">144  </a></b>	
+<b><a name="line145">145  </a></b>	    const handleRememberMeChanged = (value: boolean): void =&gt; {
+<b><a name="line146">146  </a></b>	        if (onRememberMeChanged) {
+<b><a name="line147">147  </a></b>	            onRememberMeChanged(value);
+<b><a name="line148">148  </a></b>	            setRememberMe(value);
+<b><a name="line149">149  </a></b>	        }
+<b><a name="line150">150  </a></b>	    };
+<b><a name="line151">151  </a></b>	
+<b><a name="line152">152  </a></b>	    const isFormValid = (): boolean =&gt;
+<b><a name="line153">153  </a></b>	        typeof isUsernameValid === 'boolean' &amp;&amp;
+<b><a name="line154">154  </a></b>	        isUsernameValid &amp;&amp;
+<b><a name="line155">155  </a></b>	        typeof isPasswordValid === 'boolean' &amp;&amp;
+<b><a name="line156">156  </a></b>	        isPasswordValid;
+<b><a name="line157">157  </a></b>	
+<b><a name="line158">158  </a></b>	    const handleLoginSubmit = (e: React.KeyboardEvent&lt;HTMLDivElement&gt;): void =&gt; {
+<b><a name="line159">159  </a></b>	        if (e.key === 'Enter' &amp;&amp; isFormValid()) {
+</pre>
+<table summary="events" bgcolor=#e0e0e0>
+<tr><td><font color="red">
+<a name="error:0"></a>
+<a name="error"></a>
+<!-- merge-key 86f402f4ab562d807cda5f2f92b8c538 -->
+<b>(1) Event unused_expr</b>: </font></td>
+<td><font color="red">Discarding the programmer-written value &quot;void handleLogin()&quot;. What was this code intended to accomplish?</font></td>
+</tr>
+<tr><td><font color="red">
+<a name="error:1"></a>
+<!-- merge-key 86f402f4ab562d807cda5f2f92b8c538 -->
+<b>(2) Event remediation</b>: </font></td>
+<td><font color="red">Perhaps this code is incomplete or mistyped in some way.</font></td>
+</tr>
+</table>
+<pre><b><a name="line160">160  </a></b>	            void handleLogin();
+<b><a name="line161">161  </a></b>	        }
+<b><a name="line162">162  </a></b>	    };
+<b><a name="line163">163  </a></b>	
+<b><a name="line164">164  </a></b>	    return (
+<b><a name="line165">165  </a></b>	        &lt;WorkflowCard className={defaultClasses.root} data-testid={defaultClasses.root} {...otherProps}&gt;
+<b><a name="line166">166  </a></b>	            &lt;WorkflowCardBody sx={{ py: { xs: 4, sm: 4, md: 4 }, px: { xs: 4, sm: 8, md: 8 } }}&gt;
+<b><a name="line167">167  </a></b>	                {header}
+<b><a name="line168">168  </a></b>	                &lt;Box
+<b><a name="line169">169  </a></b>	                    sx={{ display: 'flex', maxWidth: '100%', mb: 6 }}
+<b><a name="line170">170  </a></b>	                    className={defaultClasses.projectImageWrapper}
+<b><a name="line171">171  </a></b>	                    data-testid={defaultClasses.projectImageWrapper}
+<b><a name="line172">172  </a></b>	                &gt;
+<b><a name="line173">173  </a></b>	                    {projectImage}
+<b><a name="line174">174  </a></b>	                &lt;/Box&gt;
+<b><a name="line175">175  </a></b>	
+<b><a name="line176">176  </a></b>	                &lt;ErrorManager {...errorDisplayConfig}&gt;
+<b><a name="line177">177  </a></b>	                    &lt;Box
+<b><a name="line178">178  </a></b>	                        sx={{
+<b><a name="line179">179  </a></b>	                            display: 'flex',
+<b><a name="line180">180  </a></b>	                            flexDirection: 'column',
+<b><a name="line181">181  </a></b>	                            justifyContent: 'center',
+<b><a name="line182">182  </a></b>	                            alignItems: 'center',
+<b><a name="line183">183  </a></b>	                            width: '100%',
+<b><a name="line184">184  </a></b>	                        }}
+<b><a name="line185">185  </a></b>	                        className={defaultClasses.inputFieldsWrapper}
+<b><a name="line186">186  </a></b>	                        data-testid={defaultClasses.inputFieldsWrapper}
+<b><a name="line187">187  </a></b>	                    &gt;
+<b><a name="line188">188  </a></b>	                        &lt;Box
+<b><a name="line189">189  </a></b>	                            sx={{
+<b><a name="line190">190  </a></b>	                                width: '100%',
+<b><a name="line191">191  </a></b>	                                height: theme.spacing(10),
+<b><a name="line192">192  </a></b>	                                mb: 2,
+<b><a name="line193">193  </a></b>	                                [theme.breakpoints.down('sm')]: {
+<b><a name="line194">194  </a></b>	                                    mb: 1,
+<b><a name="line195">195  </a></b>	                                },
+<b><a name="line196">196  </a></b>	                            }}
+<b><a name="line197">197  </a></b>	                        &gt;
+<b><a name="line198">198  </a></b>	                            &lt;TextField
+<b><a name="line199">199  </a></b>	                                fullWidth
+<b><a name="line200">200  </a></b>	                                id=&quot;username&quot;
+<b><a name="line201">201  </a></b>	                                className={defaultClasses.usernameTextField}
+<b><a name="line202">202  </a></b>	                                data-testid={defaultClasses.usernameTextField}
+<b><a name="line203">203  </a></b>	                                label={usernameLabel || 'Username'}
+<b><a name="line204">204  </a></b>	                                name=&quot;username&quot;
+<b><a name="line205">205  </a></b>	                                variant=&quot;filled&quot;
+<b><a name="line206">206  </a></b>	                                value={username}
+<b><a name="line207">207  </a></b>	                                error={shouldValidateUsername &amp;&amp; !isUsernameValid}
+<b><a name="line208">208  </a></b>	                                helperText={shouldValidateUsername &amp;&amp; !isUsernameValid ? usernameError : ''}
+<b><a name="line209">209  </a></b>	                                {...usernameTextFieldProps}
+<b><a name="line210">210  </a></b>	                                onChange={(e): void =&gt; {
+<b><a name="line211">211  </a></b>	                                    usernameTextFieldProps?.onChange?.(e);
+<b><a name="line212">212  </a></b>	                                    handleUsernameInputChange(e.target.value);
+<b><a name="line213">213  </a></b>	                                }}
+<b><a name="line214">214  </a></b>	                                onSubmit={(e: any): void =&gt; {
+<b><a name="line215">215  </a></b>	                                    usernameTextFieldProps?.onSubmit?.(e);
+<b><a name="line216">216  </a></b>	                                    if (e.key === 'Enter' &amp;&amp; passwordField.current) passwordField.current.focus();
+<b><a name="line217">217  </a></b>	                                }}
+<b><a name="line218">218  </a></b>	                                onBlur={(e): void =&gt; {
+<b><a name="line219">219  </a></b>	                                    usernameTextFieldProps?.onBlur?.(e);
+<b><a name="line220">220  </a></b>	                                    setShouldValidateUsername(true);
+<b><a name="line221">221  </a></b>	                                }}
+<b><a name="line222">222  </a></b>	                                onKeyUp={(e): void =&gt; {
+<b><a name="line223">223  </a></b>	                                    if (e.key === 'Enter' &amp;&amp; passwordField.current) passwordField.current.focus();
+<b><a name="line224">224  </a></b>	                                }}
+<b><a name="line225">225  </a></b>	                            /&gt;
+<b><a name="line226">226  </a></b>	                        &lt;/Box&gt;
+<b><a name="line227">227  </a></b>	                        &lt;Box
+<b><a name="line228">228  </a></b>	                            sx={{
+<b><a name="line229">229  </a></b>	                                width: '100%',
+<b><a name="line230">230  </a></b>	                                mb:
+<b><a name="line231">231  </a></b>	                                    username.length &gt; 0 &amp;&amp; !isPasswordValid &amp;&amp; shouldValidatePassword
+<b><a name="line232">232  </a></b>	                                        ? 2
+<b><a name="line233">233  </a></b>	                                        : `${(parseFloat(theme.spacing(2)) || 16) + HELPER_TEXT_HEIGHT}px`,
+<b><a name="line234">234  </a></b>	                            }}
+<b><a name="line235">235  </a></b>	                        &gt;
+<b><a name="line236">236  </a></b>	                            &lt;PasswordTextField
+<b><a name="line237">237  </a></b>	                                fullWidth
+<b><a name="line238">238  </a></b>	                                inputRef={passwordField}
+<b><a name="line239">239  </a></b>	                                id=&quot;password&quot;
+<b><a name="line240">240  </a></b>	                                className={defaultClasses.passwordTextField}
+<b><a name="line241">241  </a></b>	                                data-testid={defaultClasses.passwordTextField}
+<b><a name="line242">242  </a></b>	                                name=&quot;password&quot;
+<b><a name="line243">243  </a></b>	                                label={passwordLabel || 'Password'}
+<b><a name="line244">244  </a></b>	                                variant=&quot;filled&quot;
+<b><a name="line245">245  </a></b>	                                value={password}
+<b><a name="line246">246  </a></b>	                                error={shouldValidatePassword &amp;&amp; !isPasswordValid}
+<b><a name="line247">247  </a></b>	                                helperText={shouldValidatePassword &amp;&amp; !isPasswordValid ? passwordError : ''}
+<b><a name="line248">248  </a></b>	                                {...passwordTextFieldProps}
+<b><a name="line249">249  </a></b>	                                onChange={(e: any): void =&gt; {
+<b><a name="line250">250  </a></b>	                                    passwordTextFieldProps?.onChange?.(e);
+<b><a name="line251">251  </a></b>	                                    handlePasswordInputChange(e.target.value);
+<b><a name="line252">252  </a></b>	                                }}
+<b><a name="line253">253  </a></b>	                                onSubmit={(e: any): void =&gt; {
+<b><a name="line254">254  </a></b>	                                    passwordTextFieldProps?.onSubmit?.(e);
+<b><a name="line255">255  </a></b>	                                    handleLoginSubmit(e);
+<b><a name="line256">256  </a></b>	                                }}
+<b><a name="line257">257  </a></b>	                                onBlur={(e): void =&gt; {
+<b><a name="line258">258  </a></b>	                                    passwordTextFieldProps?.onBlur?.(e);
+<b><a name="line259">259  </a></b>	                                    setShouldValidatePassword(true);
+<b><a name="line260">260  </a></b>	                                }}
+<b><a name="line261">261  </a></b>	                                onKeyUp={(e): void =&gt; {
+<b><a name="line262">262  </a></b>	                                    passwordTextFieldProps?.onSubmit?.(e);
+<b><a name="line263">263  </a></b>	                                    handleLoginSubmit(e);
+<b><a name="line264">264  </a></b>	                                }}
+<b><a name="line265">265  </a></b>	                            /&gt;
+<b><a name="line266">266  </a></b>	                        &lt;/Box&gt;
+<b><a name="line267">267  </a></b>	                    &lt;/Box&gt;
+<b><a name="line268">268  </a></b>	                &lt;/ErrorManager&gt;
+<b><a name="line269">269  </a></b>	                &lt;Box
+<b><a name="line270">270  </a></b>	                    sx={{
+<b><a name="line271">271  </a></b>	                        display: 'flex',
+<b><a name="line272">272  </a></b>	                        alignItems: 'center',
+<b><a name="line273">273  </a></b>	                        width: '100%',
+<b><a name="line274">274  </a></b>	                        mt: 1,
+<b><a name="line275">275  </a></b>	                        mb: 5,
+<b><a name="line276">276  </a></b>	                        flexWrap: { md: 'nowrap', sm: 'wrap' },
+<b><a name="line277">277  </a></b>	                        flexDirection: { md: 'row', sm: 'column' },
+<b><a name="line278">278  </a></b>	                        justifyContent: { md: 'space-between', sm: 'center' },
+<b><a name="line279">279  </a></b>	                    }}
+<b><a name="line280">280  </a></b>	                    className={defaultClasses.rememberMeLoginRowWrapper}
+<b><a name="line281">281  </a></b>	                    data-testid={defaultClasses.rememberMeLoginRowWrapper}
+<b><a name="line282">282  </a></b>	                &gt;
+<b><a name="line283">283  </a></b>	                    {showRememberMe &amp;&amp; (
+<b><a name="line284">284  </a></b>	                        &lt;Box
+<b><a name="line285">285  </a></b>	                            sx={{
+<b><a name="line286">286  </a></b>	                                display: 'flex',
+<b><a name="line287">287  </a></b>	                                alignItems: 'center',
+<b><a name="line288">288  </a></b>	                                ml: -1.5,
+<b><a name="line289">289  </a></b>	                                mr: { md: 1, sm: 0 },
+<b><a name="line290">290  </a></b>	                            }}
+<b><a name="line291">291  </a></b>	                            className={defaultClasses.rememberMeWrapper}
+<b><a name="line292">292  </a></b>	                            data-testid={defaultClasses.rememberMeWrapper}
+<b><a name="line293">293  </a></b>	                        &gt;
+<b><a name="line294">294  </a></b>	                            &lt;Checkbox
+<b><a name="line295">295  </a></b>	                                color=&quot;primary&quot;
+<b><a name="line296">296  </a></b>	                                role=&quot;checkbox&quot;
+<b><a name="line297">297  </a></b>	                                checked={rememberMe}
+<b><a name="line298">298  </a></b>	                                onChange={(e: any): void =&gt; handleRememberMeChanged(e.target.checked)}
+<b><a name="line299">299  </a></b>	                                className={defaultClasses.rememberMeCheckbox}
+<b><a name="line300">300  </a></b>	                                data-testid={defaultClasses.rememberMeCheckbox}
+<b><a name="line301">301  </a></b>	                            /&gt;
+<b><a name="line302">302  </a></b>	                            &lt;Typography
+<b><a name="line303">303  </a></b>	                                variant=&quot;body1&quot;
+<b><a name="line304">304  </a></b>	                                className={defaultClasses.rememberMeLabel}
+<b><a name="line305">305  </a></b>	                                data-testid={defaultClasses.rememberMeLabel}
+<b><a name="line306">306  </a></b>	                            &gt;
+<b><a name="line307">307  </a></b>	                                {rememberMeLabel || 'Remember Me'}
+<b><a name="line308">308  </a></b>	                            &lt;/Typography&gt;
+<b><a name="line309">309  </a></b>	                        &lt;/Box&gt;
+<b><a name="line310">310  </a></b>	                    )}
+<b><a name="line311">311  </a></b>	                    &lt;Box
+<b><a name="line312">312  </a></b>	                        sx={{
+<b><a name="line313">313  </a></b>	                            display: 'flex',
+<b><a name="line314">314  </a></b>	                            flex: 1,
+<b><a name="line315">315  </a></b>	                            justifyContent: 'flex-end',
+<b><a name="line316">316  </a></b>	                            width: showRememberMe ? 'auto' : '100%',
+<b><a name="line317">317  </a></b>	                        }}
+<b><a name="line318">318  </a></b>	                        className={defaultClasses.loginButtonWrapper}
+<b><a name="line319">319  </a></b>	                        data-testid={defaultClasses.loginButtonWrapper}
+<b><a name="line320">320  </a></b>	                    &gt;
+<b><a name="line321">321  </a></b>	                        &lt;Button
+<b><a name="line322">322  </a></b>	                            className={defaultClasses.loginButton}
+<b><a name="line323">323  </a></b>	                            data-testid={defaultClasses.loginButton}
+<b><a name="line324">324  </a></b>	                            onClick={handleLogin}
+<b><a name="line325">325  </a></b>	                            disabled={!isFormValid()}
+<b><a name="line326">326  </a></b>	                            variant=&quot;contained&quot;
+<b><a name="line327">327  </a></b>	                            color=&quot;primary&quot;
+<b><a name="line328">328  </a></b>	                            sx={{
+<b><a name="line329">329  </a></b>	                                width: showRememberMe ? 150 : '100%',
+<b><a name="line330">330  </a></b>	                            }}
+<b><a name="line331">331  </a></b>	                        &gt;
+<b><a name="line332">332  </a></b>	                            {loginButtonLabel || 'Log In'}
+<b><a name="line333">333  </a></b>	                        &lt;/Button&gt;
+<b><a name="line334">334  </a></b>	                    &lt;/Box&gt;
+<b><a name="line335">335  </a></b>	                &lt;/Box&gt;
+<b><a name="line336">336  </a></b>	
+<b><a name="line337">337  </a></b>	                {showForgotPassword &amp;&amp; (
+<b><a name="line338">338  </a></b>	                    &lt;Box
+<b><a name="line339">339  </a></b>	                        sx={{ display: 'flex', justifyContent: 'center', textAlign: 'center' }}
+<b><a name="line340">340  </a></b>	                        className={defaultClasses.forgotPasswordWrapper}
+<b><a name="line341">341  </a></b>	                        data-testid={defaultClasses.forgotPasswordWrapper}
+<b><a name="line342">342  </a></b>	                    &gt;
+<b><a name="line343">343  </a></b>	                        &lt;Typography
+<b><a name="line344">344  </a></b>	                            variant=&quot;body2&quot;
+<b><a name="line345">345  </a></b>	                            sx={LinkStyles}
+<b><a name="line346">346  </a></b>	                            onClick={handleForgotPassword}
+<b><a name="line347">347  </a></b>	                            className={defaultClasses.forgotPasswordLabel}
+<b><a name="line348">348  </a></b>	                            data-testid={defaultClasses.forgotPasswordLabel}
+<b><a name="line349">349  </a></b>	                        &gt;
+<b><a name="line350">350  </a></b>	                            {forgotPasswordLabel || 'Forgot your password?'}
+<b><a name="line351">351  </a></b>	                        &lt;/Typography&gt;
+<b><a name="line352">352  </a></b>	                    &lt;/Box&gt;
+<b><a name="line353">353  </a></b>	                )}
+<b><a name="line354">354  </a></b>	
+<b><a name="line355">355  </a></b>	                {showSelfRegistration &amp;&amp; (
+<b><a name="line356">356  </a></b>	                    &lt;Box
+<b><a name="line357">357  </a></b>	                        sx={{
+<b><a name="line358">358  </a></b>	                            display: 'flex',
+<b><a name="line359">359  </a></b>	                            justifyContent: 'center',
+<b><a name="line360">360  </a></b>	                            alignItems: 'center',
+<b><a name="line361">361  </a></b>	                            flexDirection: 'column',
+<b><a name="line362">362  </a></b>	                            marginTop: 4,
+<b><a name="line363">363  </a></b>	                            textAlign: 'center',
+<b><a name="line364">364  </a></b>	                        }}
+<b><a name="line365">365  </a></b>	                        className={defaultClasses.selfRegisterWrapper}
+<b><a name="line366">366  </a></b>	                        data-testid={defaultClasses.selfRegisterWrapper}
+<b><a name="line367">367  </a></b>	                    &gt;
+<b><a name="line368">368  </a></b>	                        &lt;Typography
+<b><a name="line369">369  </a></b>	                            variant=&quot;body2&quot;
+<b><a name="line370">370  </a></b>	                            className={defaultClasses.selfRegisterInstructionLabel}
+<b><a name="line371">371  </a></b>	                            data-testid={defaultClasses.selfRegisterInstructionLabel}
+<b><a name="line372">372  </a></b>	                        &gt;
+<b><a name="line373">373  </a></b>	                            {selfRegisterInstructions || 'Need an account?'}
+<b><a name="line374">374  </a></b>	                        &lt;/Typography&gt;
+<b><a name="line375">375  </a></b>	                        &lt;Typography
+<b><a name="line376">376  </a></b>	                            variant=&quot;body2&quot;
+<b><a name="line377">377  </a></b>	                            sx={LinkStyles}
+<b><a name="line378">378  </a></b>	                            onClick={handleSelfRegister}
+<b><a name="line379">379  </a></b>	                            className={defaultClasses.selfRegisterLabel}
+<b><a name="line380">380  </a></b>	                            data-testid={defaultClasses.selfRegisterLabel}
+<b><a name="line381">381  </a></b>	                        &gt;
+<b><a name="line382">382  </a></b>	                            {selfRegisterButtonLabel || 'Register now!'}
+<b><a name="line383">383  </a></b>	                        &lt;/Typography&gt;
+<b><a name="line384">384  </a></b>	                    &lt;/Box&gt;
+<b><a name="line385">385  </a></b>	                )}
+<b><a name="line386">386  </a></b>	
+<b><a name="line387">387  </a></b>	                {showContactSupport &amp;&amp; (
+<b><a name="line388">388  </a></b>	                    &lt;Box
+<b><a name="line389">389  </a></b>	                        sx={{ display: 'flex', justifyContent: 'center', marginTop: 4, textAlign: 'center' }}
+<b><a name="line390">390  </a></b>	                        className={defaultClasses.contactSupportWrapper}
+<b><a name="line391">391  </a></b>	                        data-testid={defaultClasses.contactSupportWrapper}
+<b><a name="line392">392  </a></b>	                    &gt;
+<b><a name="line393">393  </a></b>	                        &lt;Typography
+<b><a name="line394">394  </a></b>	                            variant=&quot;body2&quot;
+<b><a name="line395">395  </a></b>	                            sx={LinkStyles}
+<b><a name="line396">396  </a></b>	                            onClick={handleContactSupport}
+<b><a name="line397">397  </a></b>	                            className={defaultClasses.contactSupportLabel}
+<b><a name="line398">398  </a></b>	                            data-testid={defaultClasses.contactSupportLabel}
+<b><a name="line399">399  </a></b>	                        &gt;
+<b><a name="line400">400  </a></b>	                            {contactSupportLabel || 'Contact Support'}
+<b><a name="line401">401  </a></b>	                        &lt;/Typography&gt;
+<b><a name="line402">402  </a></b>	                    &lt;/Box&gt;
+<b><a name="line403">403  </a></b>	                )}
+<b><a name="line404">404  </a></b>	
+<b><a name="line405">405  </a></b>	                &lt;Box sx={{ display: 'flex', justifyContent: 'center' }}&gt;{footer}&lt;/Box&gt;
+<b><a name="line406">406  </a></b>	
+<b><a name="line407">407  </a></b>	                {showCyberSecurityBadge &amp;&amp; (
+<b><a name="line408">408  </a></b>	                    &lt;Box
+<b><a name="line409">409  </a></b>	                        sx={{ display: 'flex', justifyContent: 'center', marginTop: 2 }}
+<b><a name="line410">410  </a></b>	                        className={defaultClasses.cyberSecurityBadgeWrapper}
+<b><a name="line411">411  </a></b>	                        data-testid={defaultClasses.cyberSecurityBadgeWrapper}
+<b><a name="line412">412  </a></b>	                    &gt;
+<b><a name="line413">413  </a></b>	                        &lt;img
+<b><a name="line414">414  </a></b>	                            className={defaultClasses.cyberSecurityBadge}
+<b><a name="line415">415  </a></b>	                            data-testid={defaultClasses.cyberSecurityBadge}
+<b><a name="line416">416  </a></b>	                            src={cyberSecurityBadge || undefined}
+<b><a name="line417">417  </a></b>	                            alt=&quot;Cyber Security Badge&quot;
+<b><a name="line418">418  </a></b>	                            style={{ width: '100px' }}
+<b><a name="line419">419  </a></b>	                        /&gt;
+<b><a name="line420">420  </a></b>	                    &lt;/Box&gt;
+<b><a name="line421">421  </a></b>	                )}
+<b><a name="line422">422  </a></b>	            &lt;/WorkflowCardBody&gt;
+<b><a name="line423">423  </a></b>	        &lt;/WorkflowCard&gt;
+<b><a name="line424">424  </a></b>	    );
+<b><a name="line425">425  </a></b>	};
+<b><a name="line426">426  </a></b>	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre></body>
+</html>

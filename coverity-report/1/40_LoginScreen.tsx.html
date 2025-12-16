@@ -1,0 +1,198 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>Coverity error reader: /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/login-workflow/src/screens/LoginScreen/LoginScreen.tsx</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head>
+<body link="#000000" vlink="#000000"><pre>
+<b><a name="line1">1    </a></b>	import React, { useEffect, useState } from 'react';
+<b><a name="line2">2    </a></b>	import { LoginScreenProps } from './types';
+<b><a name="line3">3    </a></b>	import { LoginScreenBase } from './LoginScreenBase';
+<b><a name="line4">4    </a></b>	import { useAuthContext } from '../../contexts';
+<b><a name="line5">5    </a></b>	import { useErrorManager } from '../../contexts/ErrorContext/useErrorManager';
+<b><a name="line6">6    </a></b>	import { useTranslation } from 'react-i18next';
+<b><a name="line7">7    </a></b>	
+<b><a name="line8">8    </a></b>	const EMAIL_REGEX = /^[A-Z0-9._%+'-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+<b><a name="line9">9    </a></b>	
+<b><a name="line10">10   </a></b>	/**
+<b><a name="line11">11   </a></b>	 * Component that renders a login screen that prompts a user to enter a username and password to login.
+<b><a name="line12">12   </a></b>	 *
+<b><a name="line13">13   </a></b>	 * @param {LoginScreenProps} props - props of LoginScreen
+<b><a name="line14">14   </a></b>	 *
+<b><a name="line15">15   </a></b>	 * @category Component
+<b><a name="line16">16   </a></b>	 */
+<b><a name="line17">17   </a></b>	
+<b><a name="line18">18   </a></b>	export const LoginScreen: React.FC&lt;React.PropsWithChildren&lt;LoginScreenProps&gt;&gt; = (props) =&gt; {
+<b><a name="line19">19   </a></b>	    const { t } = useTranslation();
+<b><a name="line20">20   </a></b>	    const auth = useAuthContext();
+<b><a name="line21">21   </a></b>	    const { actions, navigate, routeConfig, rememberMeDetails } = auth;
+<b><a name="line22">22   </a></b>	    const { triggerError, errorManagerConfig } = useErrorManager();
+<b><a name="line23">23   </a></b>	    const [isLoading, setIsLoading] = useState(false);
+<b><a name="line24">24   </a></b>	    const errorDisplayConfig = {
+<b><a name="line25">25   </a></b>	        ...errorManagerConfig,
+<b><a name="line26">26   </a></b>	        ...props.errorDisplayConfig,
+<b><a name="line27">27   </a></b>	        onClose: (): void =&gt; {
+<b><a name="line28">28   </a></b>	            if (props.errorDisplayConfig?.onClose) props.errorDisplayConfig.onClose();
+<b><a name="line29">29   </a></b>	            if (errorManagerConfig.onClose) errorManagerConfig?.onClose();
+<b><a name="line30">30   </a></b>	        },
+<b><a name="line31">31   </a></b>	    };
+<b><a name="line32">32   </a></b>	
+<b><a name="line33">33   </a></b>	    useEffect(() =&gt; {
+</pre>
+<table summary="events" bgcolor=#e0e0e0>
+<tr><td><font color="red">
+<a name="error:0"></a>
+<a name="error"></a>
+<!-- merge-key 7043338f6730dd59a668454f678b2ebf -->
+<b>(1) Event unused_expr</b>: </font></td>
+<td><font color="red">Discarding the programmer-written value &quot;void actions.initiateSecurity()&quot;. What was this code intended to accomplish?</font></td>
+</tr>
+<tr><td><font color="red">
+<a name="error:1"></a>
+<!-- merge-key 7043338f6730dd59a668454f678b2ebf -->
+<b>(2) Event remediation</b>: </font></td>
+<td><font color="red">Perhaps this code is incomplete or mistyped in some way.</font></td>
+</tr>
+</table>
+<pre><b><a name="line34">34   </a></b>	        void actions.initiateSecurity();
+<b><a name="line35">35   </a></b>	    }, []);
+<b><a name="line36">36   </a></b>	
+<b><a name="line37">37   </a></b>	    const {
+<b><a name="line38">38   </a></b>	        usernameLabel = t('bluiCommon:LABELS.EMAIL'),
+<b><a name="line39">39   </a></b>	        usernameTextFieldProps,
+<b><a name="line40">40   </a></b>	        usernameValidator = (username: string): string | boolean =&gt; {
+<b><a name="line41">41   </a></b>	            if (!EMAIL_REGEX.test(username)) {
+<b><a name="line42">42   </a></b>	                return t('bluiCommon:MESSAGES.EMAIL_ENTRY_ERROR');
+<b><a name="line43">43   </a></b>	            }
+<b><a name="line44">44   </a></b>	            return true;
+<b><a name="line45">45   </a></b>	        },
+<b><a name="line46">46   </a></b>	        initialUsernameValue = rememberMeDetails?.email || '',
+<b><a name="line47">47   </a></b>	        passwordLabel = t('bluiCommon:LABELS.PASSWORD'),
+<b><a name="line48">48   </a></b>	        passwordTextFieldProps,
+<b><a name="line49">49   </a></b>	        passwordValidator = (password: string): string | boolean =&gt; {
+<b><a name="line50">50   </a></b>	            if (password.length &lt; 1) {
+<b><a name="line51">51   </a></b>	                return t('bluiCommon:MESSAGES.PASSWORD_REQUIRED_ERROR');
+<b><a name="line52">52   </a></b>	            }
+<b><a name="line53">53   </a></b>	            return true;
+<b><a name="line54">54   </a></b>	        },
+<b><a name="line55">55   </a></b>	        showRememberMe = true,
+<b><a name="line56">56   </a></b>	        rememberMeLabel = t('bluiCommon:ACTIONS.REMEMBER'),
+<b><a name="line57">57   </a></b>	        rememberMeInitialValue = rememberMeDetails?.rememberMe || false,
+<b><a name="line58">58   </a></b>	        onRememberMeChanged = (value: boolean): void =&gt; {
+<b><a name="line59">59   </a></b>	            props.onRememberMeChanged?.(value);
+<b><a name="line60">60   </a></b>	        },
+<b><a name="line61">61   </a></b>	        loginButtonLabel = t('bluiCommon:ACTIONS.LOG_IN'),
+<b><a name="line62">62   </a></b>	        showForgotPassword = true,
+<b><a name="line63">63   </a></b>	        forgotPasswordLabel = t('bluiCommon:LABELS.FORGOT_PASSWORD'),
+<b><a name="line64">64   </a></b>	        onForgotPassword = (): void =&gt; navigate(routeConfig.FORGOT_PASSWORD!),
+<b><a name="line65">65   </a></b>	        showSelfRegistration = true,
+<b><a name="line66">66   </a></b>	        selfRegisterInstructions = t('bluiCommon:LABELS.NEED_ACCOUNT'),
+<b><a name="line67">67   </a></b>	        selfRegisterButtonLabel = t('bluiCommon:ACTIONS.CREATE_ACCOUNT'),
+<b><a name="line68">68   </a></b>	        onSelfRegister = (): void =&gt; navigate(routeConfig.REGISTER_SELF!),
+<b><a name="line69">69   </a></b>	        showContactSupport = true,
+<b><a name="line70">70   </a></b>	        contactSupportLabel = t('bluiCommon:MESSAGES.CONTACT'),
+<b><a name="line71">71   </a></b>	        onContactSupport = (): void =&gt; navigate(routeConfig.SUPPORT!),
+<b><a name="line72">72   </a></b>	        showCyberSecurityBadge = true,
+<b><a name="line73">73   </a></b>	        projectImage,
+<b><a name="line74">74   </a></b>	        header,
+<b><a name="line75">75   </a></b>	        footer,
+<b><a name="line76">76   </a></b>	        ...otherProps
+<b><a name="line77">77   </a></b>	    } = props;
+<b><a name="line78">78   </a></b>	
+<b><a name="line79">79   </a></b>	    return (
+<b><a name="line80">80   </a></b>	        &lt;LoginScreenBase
+<b><a name="line81">81   </a></b>	            loading={isLoading}
+<b><a name="line82">82   </a></b>	            usernameLabel={usernameLabel}
+<b><a name="line83">83   </a></b>	            usernameTextFieldProps={usernameTextFieldProps}
+<b><a name="line84">84   </a></b>	            usernameValidator={usernameValidator}
+<b><a name="line85">85   </a></b>	            initialUsernameValue={initialUsernameValue}
+<b><a name="line86">86   </a></b>	            passwordLabel={passwordLabel}
+<b><a name="line87">87   </a></b>	            passwordTextFieldProps={passwordTextFieldProps}
+<b><a name="line88">88   </a></b>	            passwordValidator={passwordValidator}
+<b><a name="line89">89   </a></b>	            showRememberMe={showRememberMe}
+<b><a name="line90">90   </a></b>	            rememberMeLabel={rememberMeLabel}
+<b><a name="line91">91   </a></b>	            rememberMeInitialValue={rememberMeInitialValue}
+<b><a name="line92">92   </a></b>	            onRememberMeChanged={onRememberMeChanged}
+<b><a name="line93">93   </a></b>	            loginButtonLabel={loginButtonLabel}
+<b><a name="line94">94   </a></b>	            onLogin={
+<b><a name="line95">95   </a></b>	                (async (username: string, password: string, rememberMe: boolean): Promise&lt;void&gt; =&gt; {
+<b><a name="line96">96   </a></b>	                    try {
+<b><a name="line97">97   </a></b>	                        setIsLoading(true);
+<b><a name="line98">98   </a></b>	                        await actions.logIn(username, password, rememberMe);
+<b><a name="line99">99   </a></b>	                        await props.onLogin?.(username, password, rememberMe);
+<b><a name="line100">100  </a></b>	                    } catch (_error) {
+<b><a name="line101">101  </a></b>	                        triggerError(_error as Error);
+<b><a name="line102">102  </a></b>	                    } finally {
+<b><a name="line103">103  </a></b>	                        setIsLoading(false);
+<b><a name="line104">104  </a></b>	                    }
+<b><a name="line105">105  </a></b>	                }) as any
+<b><a name="line106">106  </a></b>	            }
+<b><a name="line107">107  </a></b>	            showForgotPassword={showForgotPassword}
+<b><a name="line108">108  </a></b>	            forgotPasswordLabel={forgotPasswordLabel}
+<b><a name="line109">109  </a></b>	            onForgotPassword={onForgotPassword}
+<b><a name="line110">110  </a></b>	            showSelfRegistration={showSelfRegistration}
+<b><a name="line111">111  </a></b>	            selfRegisterButtonLabel={selfRegisterButtonLabel}
+<b><a name="line112">112  </a></b>	            selfRegisterInstructions={selfRegisterInstructions}
+<b><a name="line113">113  </a></b>	            onSelfRegister={onSelfRegister}
+<b><a name="line114">114  </a></b>	            showContactSupport={showContactSupport}
+<b><a name="line115">115  </a></b>	            contactSupportLabel={contactSupportLabel}
+<b><a name="line116">116  </a></b>	            onContactSupport={onContactSupport}
+<b><a name="line117">117  </a></b>	            showCyberSecurityBadge={showCyberSecurityBadge}
+<b><a name="line118">118  </a></b>	            projectImage={projectImage}
+<b><a name="line119">119  </a></b>	            header={header}
+<b><a name="line120">120  </a></b>	            footer={footer}
+<b><a name="line121">121  </a></b>	            {...otherProps}
+<b><a name="line122">122  </a></b>	            errorDisplayConfig={errorDisplayConfig}
+<b><a name="line123">123  </a></b>	        /&gt;
+<b><a name="line124">124  </a></b>	    );
+<b><a name="line125">125  </a></b>	};
+<b><a name="line126">126  </a></b>	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre></body>
+</html>

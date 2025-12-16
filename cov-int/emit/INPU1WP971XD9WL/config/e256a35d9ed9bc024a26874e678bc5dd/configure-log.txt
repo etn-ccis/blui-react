@@ -1,0 +1,4 @@
+Native Compiler invocation: ./ /Users/E0661236/Desktop/brightlayer-ui/blui-react/apps/showcase/index.html /Users/E0661236/Desktop/brightlayer-ui/blui-react/apps/showcase/public/index.html
+Working directory: /Users/E0661236/Desktop/brightlayer-ui/blui-react
+Comptype: html
+* Configuring JavaScript Filesystem Capture (html)

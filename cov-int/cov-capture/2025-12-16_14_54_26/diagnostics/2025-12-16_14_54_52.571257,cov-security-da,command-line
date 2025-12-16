@@ -1,0 +1,5 @@
+/Users/E0661236/coverity/cov-analysis-macos-arm-2024.9.0/bin/cov-security-da
+--dir
+cov-int
+--project-dirs
+apps/showcase

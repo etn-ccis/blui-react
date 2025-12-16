@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>Coverity error reader: /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/login-workflow/src/contexts/SharedDictionaries/chinese.ts</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head>
+<body link="#000000" vlink="#000000"><pre>
+<b><a name="line1">1    </a></b>	import { CommonTranslationsFile } from './types';
+<b><a name="line2">2    </a></b>	
+<b><a name="line3">3    </a></b>	const resources: CommonTranslationsFile = {
+<b><a name="line4">4    </a></b>	    translation: {
+<b><a name="line5">5    </a></b>	        ACTIONS: {
+<b><a name="line6">6    </a></b>	            FINISH: '完成',
+<b><a name="line7">7    </a></b>	            NEXT: '继续',
+<b><a name="line8">8    </a></b>	            BACK: '返回',
+<b><a name="line9">9    </a></b>	            CANCEL: '取消',
+<b><a name="line10">10   </a></b>	            CREATE_ACCOUNT: '创建账号',
+<b><a name="line11">11   </a></b>	            OKAY: '好的',
+<b><a name="line12">12   </a></b>	            DONE: '完成',
+<b><a name="line13">13   </a></b>	            CONTINUE: '继续',
+<b><a name="line14">14   </a></b>	            LOG_IN: '登录',
+<b><a name="line15">15   </a></b>	            OKTA_LOG_IN: '使用 Okta 登录',
+<b><a name="line16">16   </a></b>	            LOG_OUT: '登出',
+<b><a name="line17">17   </a></b>	            CLICK_BUTTON: '点击按钮',
+<b><a name="line18">18   </a></b>	            UPDATE_REDUX: '点击按钮以更新redux中存的值',
+<b><a name="line19">19   </a></b>	            CHANGE_LANGUAGE: '更改语言设置',
+<b><a name="line20">20   </a></b>	            GO_HOME: '进入主页',
+<b><a name="line21">21   </a></b>	            GO_TEST: '进入测试页面',
+<b><a name="line22">22   </a></b>	            RESEND: '重新发送',
+<b><a name="line23">23   </a></b>	            UPDATE: '更新',
+<b><a name="line24">24   </a></b>	            REMEMBER: '记住我的登录信息',
+<b><a name="line25">25   </a></b>	            SUBMIT: '提交',
+<b><a name="line26">26   </a></b>	        },
+<b><a name="line27">27   </a></b>	        LABELS: {
+<b><a name="line28">28   </a></b>	            EMAIL: '邮箱地址',
+<b><a name="line29">29   </a></b>	            USERNAME: '用户名',
+<b><a name="line30">30   </a></b>	            PASSWORD: '密码',
+<b><a name="line31">31   </a></b>	            CURRENT_PASSWORD: '当前密码',
+<b><a name="line32">32   </a></b>	            NEW_PASSWORD: '新密码',
+<b><a name="line33">33   </a></b>	            OPTIONAL: '可选',
+<b><a name="line34">34   </a></b>	            FORGOT_PASSWORD: '忘记密码？',
+<b><a name="line35">35   </a></b>	            NEED_ACCOUNT: '新用户？',
+<b><a name="line36">36   </a></b>	            VIEW_ALL_EVENTS: '查看共{{count}}个事件',
+<b><a name="line37">37   </a></b>	        },
+<b><a name="line38">38   </a></b>	        MESSAGES: {
+<b><a name="line39">39   </a></b>	            EMAIL_SENT: '邮件已发送',
+<b><a name="line40">40   </a></b>	            WELCOME: '欢迎',
+<b><a name="line41">41   </a></b>	            WELCOME_PROJECT: '欢迎来到{{project}}',
+<b><a name="line42">42   </a></b>	            LOGIN_MESSAGE: '您已登录',
+<b><a name="line43">43   </a></b>	            CONGRATS: '恭喜！',
+<b><a name="line44">44   </a></b>	            CONTACT: '联系伊顿客服人员',
+<b><a name="line45">45   </a></b>	            ERROR: '错误！',
+<b><a name="line46">46   </a></b>	            EMAIL_ENTRY_ERROR: '请输入有效的电子邮件地址',
+<b><a name="line47">47   </a></b>	            USERNAME_ENTRY_ERROR: '请输入有效的用户名',
+<b><a name="line48">48   </a></b>	            SUCCESS: '成功',
+<b><a name="line49">49   </a></b>	            FAILURE: '失败',
+<b><a name="line50">50   </a></b>	            LOADING: '正在加载……',
+<b><a name="line51">51   </a></b>	            REQUEST_ERROR: '抱歉，发送您的请求时出现了程序错误。',
+<b><a name="line52">52   </a></b>	            PASSWORD_REQUIRED_ERROR: '密码为必填项',
+<b><a name="line53">53   </a></b>	            RETRY: '重试',
+<b><a name="line54">54   </a></b>	        },
+<b><a name="line55">55   </a></b>	        FORMS: {
+<b><a name="line56">56   </a></b>	            FIRST_NAME: '名',
+<b><a name="line57">57   </a></b>	            LAST_NAME: '姓',
+<b><a name="line58">58   </a></b>	            PHONE_NUMBER: '手机号码',
+</pre>
+<table summary="events" bgcolor=#e0e0e0>
+<tr><td><font color="red">
+<a name="error:0"></a>
+<a name="error"></a>
+<!-- merge-key 392818ca9c11ffbaacf11104f5251bba -->
+<b>(1) Event Sigma main event</b>: </font></td>
+<td><font color="red">A secret, such as a password, cryptographic key, or token is stored in plaintext directly in the source code, in an application's properties, or configuration file. Users with access to the secret may then use the secret to access resources that they otherwise would not have access to. Secret type: Password (generic).</font></td>
+</tr>
+<tr><td><font color="red">
+<a name="error:1"></a>
+<!-- merge-key 392818ca9c11ffbaacf11104f5251bba -->
+<b>(2) Event remediation</b>: </font></td>
+<td><font color="red">Avoid setting sensitive configuration values as string literals. Instead, these values should be set using variables with the sensitive data loaded from an encrypted file or a secret store.</font></td>
+</tr>
+</table>
+<pre><b><a name="line59">59   </a></b>	            PASSWORD: '密码',
+<b><a name="line60">60   </a></b>	            CONFIRM_PASSWORD: '确认密码',
+<b><a name="line61">61   </a></b>	            PASS_MATCH_ERROR: '密码不匹配',
+<b><a name="line62">62   </a></b>	            TOGGLE_PASSWORD_VISIBILITY: '显示密码',
+<b><a name="line63">63   </a></b>	            RESET_PASSWORD: '重置密码',
+<b><a name="line64">64   </a></b>	            FIRST_NAME_LENGTH_ERROR: '名字必须至少包含1个字符',
+<b><a name="line65">65   </a></b>	            LAST_NAME_LENGTH_ERROR: '姓氏必须至少包含1个字符',
+<b><a name="line66">66   </a></b>	        },
+<b><a name="line67">67   </a></b>	        PASSWORD_REQUIREMENTS: {
+<b><a name="line68">68   </a></b>	            LENGTH: '8至16个字符',
+<b><a name="line69">69   </a></b>	            NUMBERS: '1个数字',
+<b><a name="line70">70   </a></b>	            UPPER: '1个大写字母',
+<b><a name="line71">71   </a></b>	            LOWER: '1个小写字母',
+<b><a name="line72">72   </a></b>	            SPECIAL: '1个特殊字符',
+<b><a name="line73">73   </a></b>	        },
+<b><a name="line74">74   </a></b>	    },
+<b><a name="line75">75   </a></b>	};
+<b><a name="line76">76   </a></b>	export default resources;
+<b><a name="line77">77   </a></b>	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre></body>
+</html>

@@ -1,0 +1,579 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>Coverity error reader: /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/login-workflow/src/screens/LoginScreen/LoginScreenBase.test.tsx</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head>
+<body link="#000000" vlink="#000000"><pre>
+<b><a name="line1">1    </a></b>	import React from 'react';
+<b><a name="line2">2    </a></b>	import { render, cleanup, screen, fireEvent, waitFor } from '@testing-library/react';
+<b><a name="line3">3    </a></b>	import '@testing-library/jest-dom';
+<b><a name="line4">4    </a></b>	import { LoginScreenBase } from './LoginScreenBase';
+<b><a name="line5">5    </a></b>	
+<b><a name="line6">6    </a></b>	const EMAIL_REGEX = /^[A-Z0-9._%+'-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+<b><a name="line7">7    </a></b>	
+<b><a name="line8">8    </a></b>	afterEach(cleanup);
+<b><a name="line9">9    </a></b>	
+<b><a name="line10">10   </a></b>	const mockLogin = jest.fn();
+<b><a name="line11">11   </a></b>	const mockForgotPassword = jest.fn();
+<b><a name="line12">12   </a></b>	const mockSelfRegister = jest.fn();
+<b><a name="line13">13   </a></b>	const mockContactSupport = jest.fn();
+<b><a name="line14">14   </a></b>	const mockRememberMeChanged = jest.fn();
+<b><a name="line15">15   </a></b>	
+<b><a name="line16">16   </a></b>	// Default props for testing
+<b><a name="line17">17   </a></b>	const defaultProps = {
+<b><a name="line18">18   </a></b>	    usernameLabel: 'Email Address',
+<b><a name="line19">19   </a></b>	    usernameValidator: (username: string): string | boolean =&gt; {
+<b><a name="line20">20   </a></b>	        if (!EMAIL_REGEX.test(username)) {
+<b><a name="line21">21   </a></b>	            return 'Enter a valid email address';
+<b><a name="line22">22   </a></b>	        }
+<b><a name="line23">23   </a></b>	        return true;
+<b><a name="line24">24   </a></b>	    },
+<b><a name="line25">25   </a></b>	    initialUsernameValue: '',
+<b><a name="line26">26   </a></b>	    passwordLabel: 'Password',
+<b><a name="line27">27   </a></b>	    passwordValidator: (password: string): string | boolean =&gt; {
+<b><a name="line28">28   </a></b>	        if (password.length &lt; 2) {
+<b><a name="line29">29   </a></b>	            return 'Password must be at least 2 characters';
+<b><a name="line30">30   </a></b>	        }
+<b><a name="line31">31   </a></b>	        return true;
+<b><a name="line32">32   </a></b>	    },
+<b><a name="line33">33   </a></b>	    rememberMeLabel: 'Remember Me',
+<b><a name="line34">34   </a></b>	    rememberMeInitialValue: true,
+<b><a name="line35">35   </a></b>	    onRememberMeChanged: mockRememberMeChanged,
+<b><a name="line36">36   </a></b>	    loginButtonLabel: 'Log In',
+<b><a name="line37">37   </a></b>	    onLogin: mockLogin,
+</pre>
+<table summary="events" bgcolor=#e0e0e0>
+<tr><td><font color="red">
+<a name="error:0"></a>
+<a name="error"></a>
+<!-- merge-key bc7843642d2363c0d05f714749315d1e -->
+<b>(1) Event Sigma main event</b>: </font></td>
+<td><font color="red">A secret, such as a password, cryptographic key, or token is stored in plaintext directly in the source code, in an application's properties, or configuration file. Users with access to the secret may then use the secret to access resources that they otherwise would not have access to. Secret type: Password (generic).</font></td>
+</tr>
+<tr><td><font color="red">
+<a name="error:1"></a>
+<!-- merge-key bc7843642d2363c0d05f714749315d1e -->
+<b>(2) Event remediation</b>: </font></td>
+<td><font color="red">Avoid setting sensitive configuration values as string literals. Instead, these values should be set using variables with the sensitive data loaded from an encrypted file or a secret store.</font></td>
+</tr>
+</table>
+<pre><b><a name="line38">38   </a></b>	    forgotPasswordLabel: 'Forgot your password?',
+<b><a name="line39">39   </a></b>	    onForgotPassword: mockForgotPassword,
+<b><a name="line40">40   </a></b>	    selfRegisterButtonLabel: 'Register now!',
+<b><a name="line41">41   </a></b>	    selfRegisterInstructions: 'Need an account',
+<b><a name="line42">42   </a></b>	    onSelfRegister: mockSelfRegister,
+<b><a name="line43">43   </a></b>	    contactSupportLabel: 'Contact an Eaton Support Representative',
+<b><a name="line44">44   </a></b>	    onContactSupport: mockContactSupport,
+<b><a name="line45">45   </a></b>	};
+<b><a name="line46">46   </a></b>	
+<b><a name="line47">47   </a></b>	describe('LoginScreenBase', () =&gt; {
+<b><a name="line48">48   </a></b>	    beforeEach(() =&gt; {
+<b><a name="line49">49   </a></b>	        jest.clearAllMocks();
+<b><a name="line50">50   </a></b>	    });
+<b><a name="line51">51   </a></b>	
+<b><a name="line52">52   </a></b>	    describe('Basic Rendering', () =&gt; {
+<b><a name="line53">53   </a></b>	        it('renders without crashing with minimal props', () =&gt; {
+<b><a name="line54">54   </a></b>	            render(&lt;LoginScreenBase /&gt;);
+<b><a name="line55">55   </a></b>	            expect(screen.getByText('Log In')).toBeInTheDocument();
+<b><a name="line56">56   </a></b>	        });
+<b><a name="line57">57   </a></b>	
+<b><a name="line58">58   </a></b>	        it('renders with all default labels when no props provided', () =&gt; {
+<b><a name="line59">59   </a></b>	            render(&lt;LoginScreenBase /&gt;);
+<b><a name="line60">60   </a></b>	            expect(screen.getByLabelText('Username')).toBeInTheDocument();
+<b><a name="line61">61   </a></b>	            expect(screen.getByLabelText('Password')).toBeInTheDocument();
+<b><a name="line62">62   </a></b>	            expect(screen.getByText('Log In')).toBeInTheDocument();
+<b><a name="line63">63   </a></b>	        });
+<b><a name="line64">64   </a></b>	
+<b><a name="line65">65   </a></b>	        it('renders with custom labels when provided', () =&gt; {
+<b><a name="line66">66   </a></b>	            render(&lt;LoginScreenBase {...defaultProps} /&gt;);
+<b><a name="line67">67   </a></b>	            expect(screen.getByLabelText('Email Address')).toBeInTheDocument();
+<b><a name="line68">68   </a></b>	            expect(screen.getByLabelText('Password')).toBeInTheDocument();
+<b><a name="line69">69   </a></b>	            expect(screen.getByText('Log In')).toBeInTheDocument();
+<b><a name="line70">70   </a></b>	        });
+<b><a name="line71">71   </a></b>	    });
+<b><a name="line72">72   </a></b>	
+<b><a name="line73">73   </a></b>	    describe('Remember Me Functionality', () =&gt; {
+<b><a name="line74">74   </a></b>	        it('shows remember me checkbox when showRememberMe is true', () =&gt; {
+<b><a name="line75">75   </a></b>	            render(&lt;LoginScreenBase {...defaultProps} showRememberMe={true} /&gt;);
+<b><a name="line76">76   </a></b>	            expect(screen.getByTestId('BluiLogin-rememberMeCheckbox')).toBeInTheDocument();
+<b><a name="line77">77   </a></b>	            expect(screen.getByText('Remember Me')).toBeInTheDocument();
+<b><a name="line78">78   </a></b>	        });
+<b><a name="line79">79   </a></b>	
+<b><a name="line80">80   </a></b>	        it('hides remember me checkbox when showRememberMe is false', () =&gt; {
+<b><a name="line81">81   </a></b>	            render(&lt;LoginScreenBase {...defaultProps} showRememberMe={false} /&gt;);
+<b><a name="line82">82   </a></b>	            expect(screen.queryByTestId('BluiLogin-rememberMeCheckbox')).not.toBeInTheDocument();
+<b><a name="line83">83   </a></b>	        });
+<b><a name="line84">84   </a></b>	
+<b><a name="line85">85   </a></b>	        it('sets initial remember me value correctly', () =&gt; {
+<b><a name="line86">86   </a></b>	            render(&lt;LoginScreenBase {...defaultProps} showRememberMe={true} rememberMeInitialValue={false} /&gt;);
+<b><a name="line87">87   </a></b>	            const checkbox = screen.getByTestId('BluiLogin-rememberMeCheckbox').querySelector('input')!;
+<b><a name="line88">88   </a></b>	            expect(checkbox.checked).toBe(false);
+<b><a name="line89">89   </a></b>	        });
+<b><a name="line90">90   </a></b>	
+<b><a name="line91">91   </a></b>	        it('calls onRememberMeChanged when checkbox is clicked', () =&gt; {
+<b><a name="line92">92   </a></b>	            render(&lt;LoginScreenBase {...defaultProps} showRememberMe={true} rememberMeInitialValue={false} /&gt;);
+<b><a name="line93">93   </a></b>	            const checkbox = screen.getByTestId('BluiLogin-rememberMeCheckbox').querySelector('input')!;
+<b><a name="line94">94   </a></b>	            fireEvent.click(checkbox);
+<b><a name="line95">95   </a></b>	            expect(mockRememberMeChanged).toHaveBeenCalledWith(true);
+<b><a name="line96">96   </a></b>	        });
+<b><a name="line97">97   </a></b>	
+<b><a name="line98">98   </a></b>	        it('uses default remember me label when not provided', () =&gt; {
+<b><a name="line99">99   </a></b>	            render(&lt;LoginScreenBase showRememberMe={true} /&gt;);
+<b><a name="line100">100  </a></b>	            expect(screen.getByText('Remember Me')).toBeInTheDocument();
+<b><a name="line101">101  </a></b>	        });
+<b><a name="line102">102  </a></b>	    });
+<b><a name="line103">103  </a></b>	
+<b><a name="line104">104  </a></b>	    describe('Conditional Features Rendering', () =&gt; {
+<b><a name="line105">105  </a></b>	        it('shows forgot password link when showForgotPassword is true', () =&gt; {
+<b><a name="line106">106  </a></b>	            render(&lt;LoginScreenBase {...defaultProps} showForgotPassword={true} /&gt;);
+<b><a name="line107">107  </a></b>	            expect(screen.getByText('Forgot your password?')).toBeInTheDocument();
+<b><a name="line108">108  </a></b>	        });
+<b><a name="line109">109  </a></b>	
+<b><a name="line110">110  </a></b>	        it('shows self registration section when showSelfRegistration is true', () =&gt; {
+<b><a name="line111">111  </a></b>	            render(&lt;LoginScreenBase {...defaultProps} showSelfRegistration={true} /&gt;);
+<b><a name="line112">112  </a></b>	            expect(screen.getByText('Need an account')).toBeInTheDocument();
+<b><a name="line113">113  </a></b>	            expect(screen.getByText('Register now!')).toBeInTheDocument();
+<b><a name="line114">114  </a></b>	        });
+<b><a name="line115">115  </a></b>	
+<b><a name="line116">116  </a></b>	        it('shows contact support link when showContactSupport is true', () =&gt; {
+<b><a name="line117">117  </a></b>	            render(&lt;LoginScreenBase {...defaultProps} showContactSupport={true} /&gt;);
+<b><a name="line118">118  </a></b>	            expect(screen.getByText('Contact an Eaton Support Representative')).toBeInTheDocument();
+<b><a name="line119">119  </a></b>	        });
+<b><a name="line120">120  </a></b>	
+<b><a name="line121">121  </a></b>	        it('shows cyber security badge when showCyberSecurityBadge is true', () =&gt; {
+<b><a name="line122">122  </a></b>	            render(&lt;LoginScreenBase {...defaultProps} showCyberSecurityBadge={true} /&gt;);
+<b><a name="line123">123  </a></b>	            expect(screen.getByAltText('Cyber Security Badge')).toBeInTheDocument();
+<b><a name="line124">124  </a></b>	        });
+<b><a name="line125">125  </a></b>	
+<b><a name="line126">126  </a></b>	        it('uses default labels for forgot password, self register, and contact support', () =&gt; {
+<b><a name="line127">127  </a></b>	            render(&lt;LoginScreenBase showForgotPassword={true} showSelfRegistration={true} showContactSupport={true} /&gt;);
+<b><a name="line128">128  </a></b>	            expect(screen.getByText('Forgot your password?')).toBeInTheDocument();
+<b><a name="line129">129  </a></b>	            expect(screen.getByText('Need an account?')).toBeInTheDocument();
+<b><a name="line130">130  </a></b>	            expect(screen.getByText('Register now!')).toBeInTheDocument();
+<b><a name="line131">131  </a></b>	            expect(screen.getByText('Contact Support')).toBeInTheDocument();
+<b><a name="line132">132  </a></b>	        });
+<b><a name="line133">133  </a></b>	    });
+<b><a name="line134">134  </a></b>	
+<b><a name="line135">135  </a></b>	    describe('Form Validation', () =&gt; {
+<b><a name="line136">136  </a></b>	        it('disables login button when username is invalid', () =&gt; {
+<b><a name="line137">137  </a></b>	            render(&lt;LoginScreenBase {...defaultProps} /&gt;);
+<b><a name="line138">138  </a></b>	            const usernameInput = screen.getByLabelText('Email Address');
+<b><a name="line139">139  </a></b>	            const passwordInput = screen.getByLabelText('Password');
+<b><a name="line140">140  </a></b>	            const loginButton = screen.getByText('Log In');
+<b><a name="line141">141  </a></b>	
+<b><a name="line142">142  </a></b>	            fireEvent.change(usernameInput, { target: { value: 'invalid-email' } });
+<b><a name="line143">143  </a></b>	            fireEvent.change(passwordInput, { target: { value: 'validpassword' } });
+<b><a name="line144">144  </a></b>	
+<b><a name="line145">145  </a></b>	            expect(loginButton).toBeDisabled();
+<b><a name="line146">146  </a></b>	        });
+<b><a name="line147">147  </a></b>	
+<b><a name="line148">148  </a></b>	        it('disables login button when password is invalid', () =&gt; {
+<b><a name="line149">149  </a></b>	            render(&lt;LoginScreenBase {...defaultProps} /&gt;);
+<b><a name="line150">150  </a></b>	            const usernameInput = screen.getByLabelText('Email Address');
+<b><a name="line151">151  </a></b>	            const passwordInput = screen.getByLabelText('Password');
+<b><a name="line152">152  </a></b>	            const loginButton = screen.getByText('Log In');
+<b><a name="line153">153  </a></b>	
+<b><a name="line154">154  </a></b>	            fireEvent.change(usernameInput, { target: { value: 'valid@email.com' } });
+<b><a name="line155">155  </a></b>	            fireEvent.change(passwordInput, { target: { value: 'x' } });
+<b><a name="line156">156  </a></b>	
+<b><a name="line157">157  </a></b>	            expect(loginButton).toBeDisabled();
+<b><a name="line158">158  </a></b>	        });
+<b><a name="line159">159  </a></b>	
+<b><a name="line160">160  </a></b>	        it('enables login button when both username and password are valid', () =&gt; {
+<b><a name="line161">161  </a></b>	            render(&lt;LoginScreenBase {...defaultProps} /&gt;);
+<b><a name="line162">162  </a></b>	            const usernameInput = screen.getByLabelText('Email Address');
+<b><a name="line163">163  </a></b>	            const passwordInput = screen.getByLabelText('Password');
+<b><a name="line164">164  </a></b>	            const loginButton = screen.getByText('Log In');
+<b><a name="line165">165  </a></b>	
+<b><a name="line166">166  </a></b>	            fireEvent.change(usernameInput, { target: { value: 'valid@email.com' } });
+<b><a name="line167">167  </a></b>	            fireEvent.change(passwordInput, { target: { value: 'validpassword' } });
+<b><a name="line168">168  </a></b>	
+<b><a name="line169">169  </a></b>	            expect(loginButton).toBeEnabled();
+<b><a name="line170">170  </a></b>	        });
+<b><a name="line171">171  </a></b>	
+<b><a name="line172">172  </a></b>	        it('shows username error message on blur when username is invalid', async () =&gt; {
+<b><a name="line173">173  </a></b>	            render(&lt;LoginScreenBase {...defaultProps} /&gt;);
+<b><a name="line174">174  </a></b>	            const usernameInput = screen.getByLabelText('Email Address');
+<b><a name="line175">175  </a></b>	
+<b><a name="line176">176  </a></b>	            fireEvent.change(usernameInput, { target: { value: 'invalid-email' } });
+<b><a name="line177">177  </a></b>	            fireEvent.blur(usernameInput);
+<b><a name="line178">178  </a></b>	
+<b><a name="line179">179  </a></b>	            await waitFor(() =&gt; {
+<b><a name="line180">180  </a></b>	                expect(screen.getByText('Enter a valid email address')).toBeInTheDocument();
+<b><a name="line181">181  </a></b>	            });
+<b><a name="line182">182  </a></b>	        });
+<b><a name="line183">183  </a></b>	
+<b><a name="line184">184  </a></b>	        it('shows password error message on blur when password is invalid', async () =&gt; {
+<b><a name="line185">185  </a></b>	            render(&lt;LoginScreenBase {...defaultProps} /&gt;);
+<b><a name="line186">186  </a></b>	            const passwordInput = screen.getByLabelText('Password');
+<b><a name="line187">187  </a></b>	
+<b><a name="line188">188  </a></b>	            fireEvent.change(passwordInput, { target: { value: 'x' } });
+<b><a name="line189">189  </a></b>	            fireEvent.blur(passwordInput);
+<b><a name="line190">190  </a></b>	
+<b><a name="line191">191  </a></b>	            await waitFor(() =&gt; {
+<b><a name="line192">192  </a></b>	                expect(screen.getByText('Password must be at least 2 characters')).toBeInTheDocument();
+<b><a name="line193">193  </a></b>	            });
+<b><a name="line194">194  </a></b>	        });
+<b><a name="line195">195  </a></b>	
+<b><a name="line196">196  </a></b>	        it('works without validators', () =&gt; {
+<b><a name="line197">197  </a></b>	            render(&lt;LoginScreenBase usernameLabel=&quot;Username&quot; passwordLabel=&quot;Password&quot; /&gt;);
+<b><a name="line198">198  </a></b>	            const loginButton = screen.getByText('Log In');
+<b><a name="line199">199  </a></b>	
+<b><a name="line200">200  </a></b>	            // When no validators are provided, empty fields are considered valid, so form should be enabled
+<b><a name="line201">201  </a></b>	            expect(loginButton).toBeEnabled();
+<b><a name="line202">202  </a></b>	        });
+<b><a name="line203">203  </a></b>	
+<b><a name="line204">204  </a></b>	        it('handles initial username value', () =&gt; {
+<b><a name="line205">205  </a></b>	            render(&lt;LoginScreenBase {...defaultProps} initialUsernameValue=&quot;preset@email.com&quot; /&gt;);
+<b><a name="line206">206  </a></b>	            const usernameInput = screen.getByLabelText('Email Address') as HTMLInputElement;
+<b><a name="line207">207  </a></b>	            expect(usernameInput.value).toBe('preset@email.com');
+<b><a name="line208">208  </a></b>	        });
+<b><a name="line209">209  </a></b>	    });
+<b><a name="line210">210  </a></b>	
+<b><a name="line211">211  </a></b>	    describe('Event Handlers', () =&gt; {
+<b><a name="line212">212  </a></b>	        it('calls onLogin with username, password, and rememberMe value', () =&gt; {
+<b><a name="line213">213  </a></b>	            render(&lt;LoginScreenBase {...defaultProps} showRememberMe={true} rememberMeInitialValue={false} /&gt;);
+<b><a name="line214">214  </a></b>	            const usernameInput = screen.getByLabelText('Email Address');
+<b><a name="line215">215  </a></b>	            const passwordInput = screen.getByLabelText('Password');
+<b><a name="line216">216  </a></b>	            const loginButton = screen.getByText('Log In');
+<b><a name="line217">217  </a></b>	
+<b><a name="line218">218  </a></b>	            fireEvent.change(usernameInput, { target: { value: 'test@email.com' } });
+<b><a name="line219">219  </a></b>	            fireEvent.change(passwordInput, { target: { value: 'password123' } });
+<b><a name="line220">220  </a></b>	            fireEvent.click(loginButton);
+<b><a name="line221">221  </a></b>	
+<b><a name="line222">222  </a></b>	            expect(mockLogin).toHaveBeenCalledWith('test@email.com', 'password123', false);
+<b><a name="line223">223  </a></b>	        });
+<b><a name="line224">224  </a></b>	
+<b><a name="line225">225  </a></b>	        it('calls onForgotPassword when forgot password link is clicked', () =&gt; {
+<b><a name="line226">226  </a></b>	            render(&lt;LoginScreenBase {...defaultProps} showForgotPassword={true} /&gt;);
+<b><a name="line227">227  </a></b>	            const forgotPasswordLink = screen.getByText('Forgot your password?');
+<b><a name="line228">228  </a></b>	            fireEvent.click(forgotPasswordLink);
+<b><a name="line229">229  </a></b>	            expect(mockForgotPassword).toHaveBeenCalled();
+<b><a name="line230">230  </a></b>	        });
+<b><a name="line231">231  </a></b>	
+<b><a name="line232">232  </a></b>	        it('calls onSelfRegister when self register link is clicked', () =&gt; {
+<b><a name="line233">233  </a></b>	            render(&lt;LoginScreenBase {...defaultProps} showSelfRegistration={true} /&gt;);
+<b><a name="line234">234  </a></b>	            const selfRegisterLink = screen.getByText('Register now!');
+<b><a name="line235">235  </a></b>	            fireEvent.click(selfRegisterLink);
+<b><a name="line236">236  </a></b>	            expect(mockSelfRegister).toHaveBeenCalled();
+<b><a name="line237">237  </a></b>	        });
+<b><a name="line238">238  </a></b>	
+<b><a name="line239">239  </a></b>	        it('calls onContactSupport when contact support link is clicked', () =&gt; {
+<b><a name="line240">240  </a></b>	            render(&lt;LoginScreenBase {...defaultProps} showContactSupport={true} /&gt;);
+<b><a name="line241">241  </a></b>	            const contactSupportLink = screen.getByText('Contact an Eaton Support Representative');
+<b><a name="line242">242  </a></b>	            fireEvent.click(contactSupportLink);
+<b><a name="line243">243  </a></b>	            expect(mockContactSupport).toHaveBeenCalled();
+<b><a name="line244">244  </a></b>	        });
+<b><a name="line245">245  </a></b>	
+<b><a name="line246">246  </a></b>	        it('does not call handlers when they are not provided', () =&gt; {
+<b><a name="line247">247  </a></b>	            render(&lt;LoginScreenBase showForgotPassword={true} showSelfRegistration={true} showContactSupport={true} /&gt;);
+<b><a name="line248">248  </a></b>	
+<b><a name="line249">249  </a></b>	            fireEvent.click(screen.getByText('Forgot your password?'));
+<b><a name="line250">250  </a></b>	            fireEvent.click(screen.getByText('Register now!'));
+<b><a name="line251">251  </a></b>	            fireEvent.click(screen.getByText('Contact Support'));
+<b><a name="line252">252  </a></b>	
+<b><a name="line253">253  </a></b>	            // Should not throw errors when handlers are missing
+<b><a name="line254">254  </a></b>	            expect(screen.getByText('Log In')).toBeInTheDocument();
+<b><a name="line255">255  </a></b>	        });
+<b><a name="line256">256  </a></b>	    });
+<b><a name="line257">257  </a></b>	
+<b><a name="line258">258  </a></b>	    describe('Keyboard Navigation', () =&gt; {
+<b><a name="line259">259  </a></b>	        it('focuses password field when Enter is pressed in username field', () =&gt; {
+<b><a name="line260">260  </a></b>	            render(&lt;LoginScreenBase {...defaultProps} /&gt;);
+<b><a name="line261">261  </a></b>	            const usernameInput = screen.getByLabelText('Email Address');
+<b><a name="line262">262  </a></b>	            const passwordInput = screen.getByLabelText('Password');
+<b><a name="line263">263  </a></b>	
+<b><a name="line264">264  </a></b>	            fireEvent.change(usernameInput, { target: { value: 'test@email.com' } });
+<b><a name="line265">265  </a></b>	            fireEvent.keyUp(usernameInput, { key: 'Enter', code: 'Enter' });
+<b><a name="line266">266  </a></b>	
+<b><a name="line267">267  </a></b>	            expect(passwordInput).toHaveFocus();
+<b><a name="line268">268  </a></b>	        });
+<b><a name="line269">269  </a></b>	
+<b><a name="line270">270  </a></b>	        it('submits form when Enter is pressed in password field with valid credentials', () =&gt; {
+<b><a name="line271">271  </a></b>	            render(&lt;LoginScreenBase {...defaultProps} /&gt;);
+<b><a name="line272">272  </a></b>	            const usernameInput = screen.getByLabelText('Email Address');
+<b><a name="line273">273  </a></b>	            const passwordInput = screen.getByLabelText('Password');
+<b><a name="line274">274  </a></b>	
+<b><a name="line275">275  </a></b>	            fireEvent.change(usernameInput, { target: { value: 'test@email.com' } });
+<b><a name="line276">276  </a></b>	            fireEvent.change(passwordInput, { target: { value: 'validpassword' } });
+<b><a name="line277">277  </a></b>	            fireEvent.keyUp(passwordInput, { key: 'Enter', code: 'Enter' });
+<b><a name="line278">278  </a></b>	
+<b><a name="line279">279  </a></b>	            expect(mockLogin).toHaveBeenCalledWith('test@email.com', 'validpassword', true);
+<b><a name="line280">280  </a></b>	        });
+<b><a name="line281">281  </a></b>	
+<b><a name="line282">282  </a></b>	        it('does not submit form when Enter is pressed in password field with invalid credentials', () =&gt; {
+<b><a name="line283">283  </a></b>	            render(&lt;LoginScreenBase {...defaultProps} /&gt;);
+<b><a name="line284">284  </a></b>	            const passwordInput = screen.getByLabelText('Password');
+<b><a name="line285">285  </a></b>	
+<b><a name="line286">286  </a></b>	            fireEvent.change(passwordInput, { target: { value: 'x' } });
+<b><a name="line287">287  </a></b>	            fireEvent.keyUp(passwordInput, { key: 'Enter', code: 'Enter' });
+<b><a name="line288">288  </a></b>	
+<b><a name="line289">289  </a></b>	            expect(mockLogin).not.toHaveBeenCalled();
+<b><a name="line290">290  </a></b>	        });
+<b><a name="line291">291  </a></b>	    });
+<b><a name="line292">292  </a></b>	
+<b><a name="line293">293  </a></b>	    describe('Props Passthrough', () =&gt; {
+<b><a name="line294">294  </a></b>	        it('passes through usernameTextFieldProps', () =&gt; {
+<b><a name="line295">295  </a></b>	            const mockUsernameChange = jest.fn();
+<b><a name="line296">296  </a></b>	            const mockUsernameBlur = jest.fn();
+<b><a name="line297">297  </a></b>	            const mockUsernameSubmit = jest.fn();
+<b><a name="line298">298  </a></b>	
+<b><a name="line299">299  </a></b>	            render(
+<b><a name="line300">300  </a></b>	                &lt;LoginScreenBase
+<b><a name="line301">301  </a></b>	                    {...defaultProps}
+<b><a name="line302">302  </a></b>	                    usernameTextFieldProps={{
+<b><a name="line303">303  </a></b>	                        placeholder: 'Enter your email',
+<b><a name="line304">304  </a></b>	                        onChange: mockUsernameChange,
+<b><a name="line305">305  </a></b>	                        onBlur: mockUsernameBlur,
+<b><a name="line306">306  </a></b>	                        onSubmit: mockUsernameSubmit,
+<b><a name="line307">307  </a></b>	                    }}
+<b><a name="line308">308  </a></b>	                /&gt;
+<b><a name="line309">309  </a></b>	            );
+<b><a name="line310">310  </a></b>	
+<b><a name="line311">311  </a></b>	            const usernameInput = screen.getByLabelText('Email Address');
+<b><a name="line312">312  </a></b>	            expect(usernameInput).toHaveAttribute('placeholder', 'Enter your email');
+<b><a name="line313">313  </a></b>	
+<b><a name="line314">314  </a></b>	            fireEvent.change(usernameInput, { target: { value: 'test' } });
+<b><a name="line315">315  </a></b>	            expect(mockUsernameChange).toHaveBeenCalled();
+<b><a name="line316">316  </a></b>	
+<b><a name="line317">317  </a></b>	            fireEvent.blur(usernameInput);
+<b><a name="line318">318  </a></b>	            expect(mockUsernameBlur).toHaveBeenCalled();
+<b><a name="line319">319  </a></b>	        });
+<b><a name="line320">320  </a></b>	
+<b><a name="line321">321  </a></b>	        it('passes through passwordTextFieldProps', () =&gt; {
+<b><a name="line322">322  </a></b>	            const mockPasswordChange = jest.fn();
+<b><a name="line323">323  </a></b>	            const mockPasswordBlur = jest.fn();
+<b><a name="line324">324  </a></b>	            const mockPasswordSubmit = jest.fn();
+<b><a name="line325">325  </a></b>	
+<b><a name="line326">326  </a></b>	            render(
+<b><a name="line327">327  </a></b>	                &lt;LoginScreenBase
+<b><a name="line328">328  </a></b>	                    {...defaultProps}
+<b><a name="line329">329  </a></b>	                    passwordTextFieldProps={{
+<b><a name="line330">330  </a></b>	                        placeholder: 'Enter your password',
+<b><a name="line331">331  </a></b>	                        onChange: mockPasswordChange,
+<b><a name="line332">332  </a></b>	                        onBlur: mockPasswordBlur,
+<b><a name="line333">333  </a></b>	                        onSubmit: mockPasswordSubmit,
+<b><a name="line334">334  </a></b>	                    }}
+<b><a name="line335">335  </a></b>	                /&gt;
+<b><a name="line336">336  </a></b>	            );
+<b><a name="line337">337  </a></b>	
+<b><a name="line338">338  </a></b>	            const passwordInput = screen.getByLabelText('Password');
+<b><a name="line339">339  </a></b>	            expect(passwordInput).toHaveAttribute('placeholder', 'Enter your password');
+<b><a name="line340">340  </a></b>	
+<b><a name="line341">341  </a></b>	            fireEvent.change(passwordInput, { target: { value: 'test' } });
+<b><a name="line342">342  </a></b>	            expect(mockPasswordChange).toHaveBeenCalled();
+<b><a name="line343">343  </a></b>	
+<b><a name="line344">344  </a></b>	            fireEvent.blur(passwordInput);
+<b><a name="line345">345  </a></b>	            expect(mockPasswordBlur).toHaveBeenCalled();
+<b><a name="line346">346  </a></b>	        });
+<b><a name="line347">347  </a></b>	    });
+<b><a name="line348">348  </a></b>	
+<b><a name="line349">349  </a></b>	    describe('Additional Content', () =&gt; {
+<b><a name="line350">350  </a></b>	        it('renders header content when provided', () =&gt; {
+<b><a name="line351">351  </a></b>	            render(&lt;LoginScreenBase {...defaultProps} header={&lt;div data-testid=&quot;custom-header&quot;&gt;Custom Header&lt;/div&gt;} /&gt;);
+<b><a name="line352">352  </a></b>	            expect(screen.getByTestId('custom-header')).toBeInTheDocument();
+<b><a name="line353">353  </a></b>	        });
+<b><a name="line354">354  </a></b>	
+<b><a name="line355">355  </a></b>	        it('renders footer content when provided', () =&gt; {
+<b><a name="line356">356  </a></b>	            render(&lt;LoginScreenBase {...defaultProps} footer={&lt;div data-testid=&quot;custom-footer&quot;&gt;Custom Footer&lt;/div&gt;} /&gt;);
+<b><a name="line357">357  </a></b>	            expect(screen.getByTestId('custom-footer')).toBeInTheDocument();
+<b><a name="line358">358  </a></b>	        });
+<b><a name="line359">359  </a></b>	
+<b><a name="line360">360  </a></b>	        it('renders project image when provided', () =&gt; {
+<b><a name="line361">361  </a></b>	            render(
+<b><a name="line362">362  </a></b>	                &lt;LoginScreenBase
+<b><a name="line363">363  </a></b>	                    {...defaultProps}
+<b><a name="line364">364  </a></b>	                    projectImage={&lt;img data-testid=&quot;project-image&quot; src=&quot;test.png&quot; alt=&quot;Project&quot; /&gt;}
+<b><a name="line365">365  </a></b>	                /&gt;
+<b><a name="line366">366  </a></b>	            );
+<b><a name="line367">367  </a></b>	            expect(screen.getByTestId('project-image')).toBeInTheDocument();
+<b><a name="line368">368  </a></b>	        });
+<b><a name="line369">369  </a></b>	    });
+<b><a name="line370">370  </a></b>	
+<b><a name="line371">371  </a></b>	    describe('Error Display', () =&gt; {
+<b><a name="line372">372  </a></b>	        it('passes errorDisplayConfig to ErrorManager', () =&gt; {
+<b><a name="line373">373  </a></b>	            const errorConfig = { mode: 'dialog' as const };
+<b><a name="line374">374  </a></b>	            render(&lt;LoginScreenBase {...defaultProps} errorDisplayConfig={errorConfig} /&gt;);
+<b><a name="line375">375  </a></b>	            // Component should render without errors
+<b><a name="line376">376  </a></b>	            expect(screen.getByText('Log In')).toBeInTheDocument();
+<b><a name="line377">377  </a></b>	        });
+<b><a name="line378">378  </a></b>	    });
+<b><a name="line379">379  </a></b>	
+<b><a name="line380">380  </a></b>	    describe('Advanced Functionality', () =&gt; {
+<b><a name="line381">381  </a></b>	        it('handles onSubmit for username field props passthrough', () =&gt; {
+<b><a name="line382">382  </a></b>	            const mockUsernameSubmit = jest.fn();
+<b><a name="line383">383  </a></b>	            render(
+<b><a name="line384">384  </a></b>	                &lt;LoginScreenBase
+<b><a name="line385">385  </a></b>	                    {...defaultProps}
+<b><a name="line386">386  </a></b>	                    usernameTextFieldProps={{
+<b><a name="line387">387  </a></b>	                        onSubmit: mockUsernameSubmit,
+<b><a name="line388">388  </a></b>	                    }}
+<b><a name="line389">389  </a></b>	                /&gt;
+<b><a name="line390">390  </a></b>	            );
+<b><a name="line391">391  </a></b>	
+<b><a name="line392">392  </a></b>	            const usernameInput = screen.getByLabelText('Email Address');
+<b><a name="line393">393  </a></b>	            fireEvent.change(usernameInput, { target: { value: 'test@email.com' } });
+<b><a name="line394">394  </a></b>	
+<b><a name="line395">395  </a></b>	            // Check that the onSubmit prop was passed through properly by verifying the component renders
+<b><a name="line396">396  </a></b>	            expect(usernameInput).toBeInTheDocument();
+<b><a name="line397">397  </a></b>	        });
+<b><a name="line398">398  </a></b>	        it('handles onSubmit for password field props passthrough', () =&gt; {
+<b><a name="line399">399  </a></b>	            const mockPasswordSubmit = jest.fn();
+<b><a name="line400">400  </a></b>	            render(
+<b><a name="line401">401  </a></b>	                &lt;LoginScreenBase
+<b><a name="line402">402  </a></b>	                    {...defaultProps}
+<b><a name="line403">403  </a></b>	                    passwordTextFieldProps={{
+<b><a name="line404">404  </a></b>	                        onSubmit: mockPasswordSubmit,
+<b><a name="line405">405  </a></b>	                    }}
+<b><a name="line406">406  </a></b>	                /&gt;
+<b><a name="line407">407  </a></b>	            );
+<b><a name="line408">408  </a></b>	
+<b><a name="line409">409  </a></b>	            const passwordInput = screen.getByLabelText('Password');
+<b><a name="line410">410  </a></b>	            fireEvent.change(passwordInput, { target: { value: 'validpassword' } });
+<b><a name="line411">411  </a></b>	
+<b><a name="line412">412  </a></b>	            // Trigger the password onSubmit
+<b><a name="line413">413  </a></b>	            fireEvent.keyUp(passwordInput, { key: 'Enter', code: 'Enter' });
+<b><a name="line414">414  </a></b>	
+<b><a name="line415">415  </a></b>	            expect(mockPasswordSubmit).toHaveBeenCalled();
+<b><a name="line416">416  </a></b>	        });
+<b><a name="line417">417  </a></b>	
+<b><a name="line418">418  </a></b>	        it('tests the internal state management for rememberMe', () =&gt; {
+<b><a name="line419">419  </a></b>	            render(
+<b><a name="line420">420  </a></b>	                &lt;LoginScreenBase
+<b><a name="line421">421  </a></b>	                    {...defaultProps}
+<b><a name="line422">422  </a></b>	                    showRememberMe={true}
+<b><a name="line423">423  </a></b>	                    rememberMeInitialValue={true}
+<b><a name="line424">424  </a></b>	                    onRememberMeChanged={undefined} // No callback provided
+<b><a name="line425">425  </a></b>	                /&gt;
+<b><a name="line426">426  </a></b>	            );
+<b><a name="line427">427  </a></b>	
+<b><a name="line428">428  </a></b>	            const checkbox = screen.getByTestId('BluiLogin-rememberMeCheckbox');
+<b><a name="line429">429  </a></b>	            // Should not crash when onRememberMeChanged is not provided
+<b><a name="line430">430  </a></b>	            fireEvent.click(checkbox);
+<b><a name="line431">431  </a></b>	
+<b><a name="line432">432  </a></b>	            expect(screen.getByText('Remember Me')).toBeInTheDocument();
+<b><a name="line433">433  </a></b>	        });
+<b><a name="line434">434  </a></b>	
+<b><a name="line435">435  </a></b>	        it('handles missing onRememberMeChanged callback', () =&gt; {
+<b><a name="line436">436  </a></b>	            render(
+<b><a name="line437">437  </a></b>	                &lt;LoginScreenBase
+<b><a name="line438">438  </a></b>	                    showRememberMe={true}
+<b><a name="line439">439  </a></b>	                    rememberMeInitialValue={false}
+<b><a name="line440">440  </a></b>	                    // No onRememberMeChanged provided
+<b><a name="line441">441  </a></b>	                /&gt;
+<b><a name="line442">442  </a></b>	            );
+<b><a name="line443">443  </a></b>	
+<b><a name="line444">444  </a></b>	            const checkbox = screen.getByTestId('BluiLogin-rememberMeCheckbox');
+<b><a name="line445">445  </a></b>	            fireEvent.click(checkbox);
+<b><a name="line446">446  </a></b>	
+<b><a name="line447">447  </a></b>	            // Should not crash when callback is missing
+<b><a name="line448">448  </a></b>	            expect(screen.getByText('Remember Me')).toBeInTheDocument();
+<b><a name="line449">449  </a></b>	        });
+<b><a name="line450">450  </a></b>	
+<b><a name="line451">451  </a></b>	        it('calls onLogin without rememberMe when showRememberMe is false', () =&gt; {
+<b><a name="line452">452  </a></b>	            render(&lt;LoginScreenBase {...defaultProps} showRememberMe={false} /&gt;);
+<b><a name="line453">453  </a></b>	            const usernameInput = screen.getByLabelText('Email Address');
+<b><a name="line454">454  </a></b>	            const passwordInput = screen.getByLabelText('Password');
+<b><a name="line455">455  </a></b>	            const loginButton = screen.getByText('Log In');
+<b><a name="line456">456  </a></b>	
+<b><a name="line457">457  </a></b>	            fireEvent.change(usernameInput, { target: { value: 'test@email.com' } });
+<b><a name="line458">458  </a></b>	            fireEvent.change(passwordInput, { target: { value: 'password123' } });
+<b><a name="line459">459  </a></b>	            fireEvent.click(loginButton);
+<b><a name="line460">460  </a></b>	
+<b><a name="line461">461  </a></b>	            expect(mockLogin).toHaveBeenCalledWith('test@email.com', 'password123', undefined);
+<b><a name="line462">462  </a></b>	        });
+<b><a name="line463">463  </a></b>	
+<b><a name="line464">464  </a></b>	        it('handles validation state changes properly', () =&gt; {
+<b><a name="line465">465  </a></b>	            render(&lt;LoginScreenBase {...defaultProps} /&gt;);
+<b><a name="line466">466  </a></b>	            const usernameInput = screen.getByLabelText('Email Address');
+<b><a name="line467">467  </a></b>	            const passwordInput = screen.getByLabelText('Password');
+<b><a name="line468">468  </a></b>	
+<b><a name="line469">469  </a></b>	            // Test invalid username
+<b><a name="line470">470  </a></b>	            fireEvent.change(usernameInput, { target: { value: 'invalid' } });
+<b><a name="line471">471  </a></b>	            fireEvent.blur(usernameInput);
+<b><a name="line472">472  </a></b>	
+<b><a name="line473">473  </a></b>	            // Test invalid password
+<b><a name="line474">474  </a></b>	            fireEvent.change(passwordInput, { target: { value: 'x' } });
+<b><a name="line475">475  </a></b>	            fireEvent.blur(passwordInput);
+<b><a name="line476">476  </a></b>	
+<b><a name="line477">477  </a></b>	            // Then make them valid
+<b><a name="line478">478  </a></b>	            fireEvent.change(usernameInput, { target: { value: 'valid@email.com' } });
+<b><a name="line479">479  </a></b>	            fireEvent.change(passwordInput, { target: { value: 'validpassword' } });
+<b><a name="line480">480  </a></b>	
+<b><a name="line481">481  </a></b>	            const loginButton = screen.getByText('Log In');
+<b><a name="line482">482  </a></b>	            expect(loginButton).toBeEnabled();
+<b><a name="line483">483  </a></b>	        });
+<b><a name="line484">484  </a></b>	
+<b><a name="line485">485  </a></b>	        it('handles missing onLogin callback gracefully', () =&gt; {
+<b><a name="line486">486  </a></b>	            render(
+<b><a name="line487">487  </a></b>	                &lt;LoginScreenBase
+<b><a name="line488">488  </a></b>	                    usernameLabel=&quot;Username&quot;
+<b><a name="line489">489  </a></b>	                    passwordLabel=&quot;Password&quot;
+<b><a name="line490">490  </a></b>	                    // No onLogin provided
+<b><a name="line491">491  </a></b>	                /&gt;
+<b><a name="line492">492  </a></b>	            );
+<b><a name="line493">493  </a></b>	
+<b><a name="line494">494  </a></b>	            const usernameInput = screen.getByLabelText('Username');
+<b><a name="line495">495  </a></b>	            const passwordInput = screen.getByLabelText('Password');
+<b><a name="line496">496  </a></b>	            const loginButton = screen.getByText('Log In');
+<b><a name="line497">497  </a></b>	
+<b><a name="line498">498  </a></b>	            fireEvent.change(usernameInput, { target: { value: 'test' } });
+<b><a name="line499">499  </a></b>	            fireEvent.change(passwordInput, { target: { value: 'test' } });
+<b><a name="line500">500  </a></b>	            fireEvent.click(loginButton);
+<b><a name="line501">501  </a></b>	
+<b><a name="line502">502  </a></b>	            // Should not crash when onLogin is missing
+<b><a name="line503">503  </a></b>	            expect(screen.getByText('Log In')).toBeInTheDocument();
+<b><a name="line504">504  </a></b>	        });
+<b><a name="line505">505  </a></b>	    });
+<b><a name="line506">506  </a></b>	});
+<b><a name="line507">507  </a></b>	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre></body>
+</html>

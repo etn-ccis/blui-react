@@ -1,0 +1,12 @@
+[INFO] Expanded command line: /Users/E0661236/coverity/cov-analysis-macos-arm-2024.9.0/bin/cov-internal-js-fe --dir /Users/E0661236/Desktop/brightlayer-ui/blui-react/cov-int --cov-emit-invocation-id 9 --link-file /Users/E0661236/Desktop/brightlayer-ui/blui-react/cov-int/tmp/cejf-0e3e9f8f35ea996747f759a968fde18e/frontend-emit-0.link /Users/E0661236/Desktop/brightlayer-ui/blui-react/apps/showcase/.eslintrc.cjs 
+[INFO] Command line with response file: /Users/E0661236/coverity/cov-analysis-macos-arm-2024.9.0/bin/cov-internal-js-fe @utf8@/Users/E0661236/Desktop/brightlayer-ui/blui-react/cov-int/tmp/cejf-0e3e9f8f35ea996747f759a968fde18e/fe-to-json-argfile-0.txt 
+[INFO] JavaScript source file: '/Users/E0661236/Desktop/brightlayer-ui/blui-react/apps/showcase/.eslintrc.cjs'
+[INFO] Total functions: 1
+[INFO] Expanded command line: /Users/E0661236/coverity/cov-analysis-macos-arm-2024.9.0/bin/cov-internal-js-fe --dir /Users/E0661236/Desktop/brightlayer-ui/blui-react/cov-int --cov-emit-invocation-id 9 --link-file /Users/E0661236/Desktop/brightlayer-ui/blui-react/cov-int/tmp/cejf-0e3e9f8f35ea996747f759a968fde18e/frontend-emit-1.link /Users/E0661236/Desktop/brightlayer-ui/blui-react/apps/showcase/src/serviceWorker.js 
+[INFO] Command line with response file: /Users/E0661236/coverity/cov-analysis-macos-arm-2024.9.0/bin/cov-internal-js-fe @utf8@/Users/E0661236/Desktop/brightlayer-ui/blui-react/cov-int/tmp/cejf-0e3e9f8f35ea996747f759a968fde18e/fe-to-json-argfile-1.txt 
+[INFO] JavaScript source file: '/Users/E0661236/Desktop/brightlayer-ui/blui-react/apps/showcase/src/serviceWorker.js'
+[INFO] Total functions: 16
+[INFO] Expanded command line: /Users/E0661236/coverity/cov-analysis-macos-arm-2024.9.0/bin/cov-internal-js-fe --dir /Users/E0661236/Desktop/brightlayer-ui/blui-react/cov-int --cov-emit-invocation-id 9 --link-file /Users/E0661236/Desktop/brightlayer-ui/blui-react/cov-int/tmp/cejf-0e3e9f8f35ea996747f759a968fde18e/frontend-emit-2.link /Users/E0661236/Desktop/brightlayer-ui/blui-react/apps/showcase/test/__mocks__/fileMock.js 
+[INFO] Command line with response file: /Users/E0661236/coverity/cov-analysis-macos-arm-2024.9.0/bin/cov-internal-js-fe @utf8@/Users/E0661236/Desktop/brightlayer-ui/blui-react/cov-int/tmp/cejf-0e3e9f8f35ea996747f759a968fde18e/fe-to-json-argfile-2.txt 
+[INFO] JavaScript source file: '/Users/E0661236/Desktop/brightlayer-ui/blui-react/apps/showcase/test/__mocks__/fileMock.js'
+[INFO] Total functions: 1

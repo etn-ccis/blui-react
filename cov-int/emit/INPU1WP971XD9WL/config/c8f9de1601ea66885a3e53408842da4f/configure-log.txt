@@ -1,0 +1,4 @@
+Native Compiler invocation: ./ /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/component-library/.eslintrc.js /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/component-library/babel.config.js /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/component-library/index.js /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/component-library/jest.config.cjs /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/component-library/__mocks__/fileMock.js /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/component-library/scripts/fix-import.js
+Working directory: /Users/E0661236/Desktop/brightlayer-ui/blui-react
+Comptype: javascript
+* Configuring JavaScript Filesystem Capture (javascript)

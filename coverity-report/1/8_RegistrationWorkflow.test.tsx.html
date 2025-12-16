@@ -1,0 +1,535 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>Coverity error reader: /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/login-workflow/src/components/RegistrationWorkflow/RegistrationWorkflow.test.tsx</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head>
+<body link="#000000" vlink="#000000"><pre>
+<b><a name="line1">1    </a></b>	import React, { act } from 'react';
+<b><a name="line2">2    </a></b>	import '@testing-library/jest-dom';
+<b><a name="line3">3    </a></b>	import { cleanup, fireEvent, render, screen, renderHook, RenderResult } from '@testing-library/react';
+<b><a name="line4">4    </a></b>	import { RegistrationWorkflow } from './RegistrationWorkflow';
+<b><a name="line5">5    </a></b>	import { RegistrationWorkflowProps } from './types';
+<b><a name="line6">6    </a></b>	import Typography from '@mui/material/Typography';
+<b><a name="line7">7    </a></b>	import Button from '@mui/material/Button';
+<b><a name="line8">8    </a></b>	import { RegistrationContextProvider, useRegistrationWorkflowContext } from '../../contexts';
+<b><a name="line9">9    </a></b>	import Box from '@mui/material/Box';
+<b><a name="line10">10   </a></b>	import { CreateAccountScreen } from '../../screens';
+<b><a name="line11">11   </a></b>	import { registrationContextProviderProps } from '../../testUtils';
+<b><a name="line12">12   </a></b>	
+<b><a name="line13">13   </a></b>	afterEach(cleanup);
+<b><a name="line14">14   </a></b>	
+<b><a name="line15">15   </a></b>	const defaultProps: RegistrationWorkflowProps = {
+<b><a name="line16">16   </a></b>	    initialScreenIndex: 0,
+<b><a name="line17">17   </a></b>	};
+<b><a name="line18">18   </a></b>	
+<b><a name="line19">19   </a></b>	const renderer = (props = defaultProps): RenderResult =&gt;
+<b><a name="line20">20   </a></b>	    render(
+<b><a name="line21">21   </a></b>	        &lt;RegistrationContextProvider {...registrationContextProviderProps}&gt;
+<b><a name="line22">22   </a></b>	            &lt;RegistrationWorkflow {...props}&gt;
+<b><a name="line23">23   </a></b>	                &lt;Typography&gt;Screen 1&lt;/Typography&gt;
+<b><a name="line24">24   </a></b>	                &lt;Typography&gt;Screen 2&lt;/Typography&gt;
+<b><a name="line25">25   </a></b>	            &lt;/RegistrationWorkflow&gt;
+<b><a name="line26">26   </a></b>	        &lt;/RegistrationContextProvider&gt;
+<b><a name="line27">27   </a></b>	    );
+<b><a name="line28">28   </a></b>	
+<b><a name="line29">29   </a></b>	describe('RegistrationWorkflow', () =&gt; {
+<b><a name="line30">30   </a></b>	    it('renders without crashing', () =&gt; {
+<b><a name="line31">31   </a></b>	        renderer();
+<b><a name="line32">32   </a></b>	        expect(screen.getByText('Screen 1')).toBeInTheDocument();
+<b><a name="line33">33   </a></b>	    });
+<b><a name="line34">34   </a></b>	
+<b><a name="line35">35   </a></b>	    it('should render the multiple screens', () =&gt; {
+<b><a name="line36">36   </a></b>	        renderer();
+<b><a name="line37">37   </a></b>	        expect(screen.getByText('Screen 1')).toBeInTheDocument();
+<b><a name="line38">38   </a></b>	    });
+<b><a name="line39">39   </a></b>	
+<b><a name="line40">40   </a></b>	    it('should render the correct screen, when initialScreenIndex prop is passed', () =&gt; {
+<b><a name="line41">41   </a></b>	        renderer({ initialScreenIndex: 1 });
+<b><a name="line42">42   </a></b>	        expect(screen.queryByText('Screen 1')).toBeNull();
+<b><a name="line43">43   </a></b>	        expect(screen.getByText('Screen 2')).toBeInTheDocument();
+<b><a name="line44">44   </a></b>	    });
+<b><a name="line45">45   </a></b>	
+<b><a name="line46">46   </a></b>	    it('should call nextScreen function', () =&gt; {
+<b><a name="line47">47   </a></b>	        const nextScreen = jest.fn();
+<b><a name="line48">48   </a></b>	        const { getByText } = render(
+<b><a name="line49">49   </a></b>	            &lt;RegistrationContextProvider {...registrationContextProviderProps}&gt;
+<b><a name="line50">50   </a></b>	                &lt;RegistrationWorkflow&gt;
+<b><a name="line51">51   </a></b>	                    &lt;&gt;
+<b><a name="line52">52   </a></b>	                        &lt;Typography&gt;Indexed Screen 1&lt;/Typography&gt;
+<b><a name="line53">53   </a></b>	                        &lt;Button
+<b><a name="line54">54   </a></b>	                            onClick={(): void =&gt; {
+<b><a name="line55">55   </a></b>	                                nextScreen({ screenId: 'Eula', values: { accepted: true } });
+<b><a name="line56">56   </a></b>	                            }}
+<b><a name="line57">57   </a></b>	                        &gt;
+<b><a name="line58">58   </a></b>	                            Next
+<b><a name="line59">59   </a></b>	                        &lt;/Button&gt;
+<b><a name="line60">60   </a></b>	                    &lt;/&gt;
+<b><a name="line61">61   </a></b>	                    &lt;Typography&gt;Indexed Screen 2&lt;/Typography&gt;
+<b><a name="line62">62   </a></b>	                &lt;/RegistrationWorkflow&gt;
+<b><a name="line63">63   </a></b>	            &lt;/RegistrationContextProvider&gt;
+<b><a name="line64">64   </a></b>	        );
+<b><a name="line65">65   </a></b>	        void act(() =&gt; fireEvent.click(getByText('Next')));
+<b><a name="line66">66   </a></b>	        void expect(nextScreen).toHaveBeenCalledWith({ screenId: 'Eula', values: { accepted: true } });
+<b><a name="line67">67   </a></b>	    });
+<b><a name="line68">68   </a></b>	
+<b><a name="line69">69   </a></b>	    it('should set screen data for default registration workflow in the context', () =&gt; {
+<b><a name="line70">70   </a></b>	        const wrapper = ({ children }: any): React.JSX.Element =&gt; (
+<b><a name="line71">71   </a></b>	            &lt;RegistrationContextProvider {...registrationContextProviderProps}&gt;
+<b><a name="line72">72   </a></b>	                &lt;RegistrationWorkflow {...defaultProps}&gt;
+<b><a name="line73">73   </a></b>	                    &lt;Box&gt;{children}&lt;/Box&gt;
+<b><a name="line74">74   </a></b>	                    &lt;Box&gt;{children}&lt;/Box&gt;
+<b><a name="line75">75   </a></b>	                    &lt;Box&gt;{children}&lt;/Box&gt;
+<b><a name="line76">76   </a></b>	                &lt;/RegistrationWorkflow&gt;
+<b><a name="line77">77   </a></b>	            &lt;/RegistrationContextProvider&gt;
+<b><a name="line78">78   </a></b>	        );
+<b><a name="line79">79   </a></b>	        const { result } = renderHook(() =&gt; useRegistrationWorkflowContext(), { wrapper });
+<b><a name="line80">80   </a></b>	
+<b><a name="line81">81   </a></b>	        expect(result.current.screenData.Eula.accepted).toBeFalsy();
+<b><a name="line82">82   </a></b>	        expect(result.current.screenData.CreateAccount.emailAddress).toBe('');
+<b><a name="line83">83   </a></b>	
+<b><a name="line84">84   </a></b>	        act(() =&gt; {
+<b><a name="line85">85   </a></b>	            void result.current.nextScreen({ screenId: 'Eula', values: { accepted: true } });
+<b><a name="line86">86   </a></b>	        });
+<b><a name="line87">87   </a></b>	        act(() =&gt; {
+</pre>
+<table summary="events" bgcolor=#e0e0e0>
+<tr><td><font color="red">
+<a name="error:0"></a>
+<a name="error"></a>
+<!-- merge-key f2b47cd39a178dfca9bee5fc8660a8e2 -->
+<b>(1) Event unused_expr</b>: </font></td>
+<td><font color="red">Discarding the programmer-written value &quot;void result.current.previousScreen({&quot;screenId&quot; : &quot;CreateAccount&quot;, &quot;values&quot; : {&quot;emailAddress&quot; : &quot;emailAddress@emailAddress.com&quot;}})&quot;. What was this code intended to accomplish?</font></td>
+</tr>
+<tr><td><font color="red">
+<a name="error:1"></a>
+<!-- merge-key f2b47cd39a178dfca9bee5fc8660a8e2 -->
+<b>(2) Event remediation</b>: </font></td>
+<td><font color="red">Perhaps this code is incomplete or mistyped in some way.</font></td>
+</tr>
+</table>
+<pre><b><a name="line88">88   </a></b>	            void result.current.previousScreen({
+<b><a name="line89">89   </a></b>	                screenId: 'CreateAccount',
+<b><a name="line90">90   </a></b>	                values: { emailAddress: 'emailAddress@emailAddress.com' },
+<b><a name="line91">91   </a></b>	            });
+<b><a name="line92">92   </a></b>	        });
+<b><a name="line93">93   </a></b>	
+<b><a name="line94">94   </a></b>	        expect(result.current.screenData.Eula.accepted).toBeTruthy();
+<b><a name="line95">95   </a></b>	        expect(result.current.screenData.CreateAccount.emailAddress).toBe('emailAddress@emailAddress.com');
+<b><a name="line96">96   </a></b>	    });
+<b><a name="line97">97   </a></b>	
+<b><a name="line98">98   </a></b>	    it('should set screen data for custom registration workflow in the context', () =&gt; {
+<b><a name="line99">99   </a></b>	        const wrapper = ({ children }: any): React.JSX.Element =&gt; (
+<b><a name="line100">100  </a></b>	            &lt;RegistrationContextProvider {...registrationContextProviderProps}&gt;
+<b><a name="line101">101  </a></b>	                &lt;RegistrationWorkflow {...defaultProps}&gt;
+<b><a name="line102">102  </a></b>	                    &lt;Box&gt;{children}&lt;/Box&gt;
+<b><a name="line103">103  </a></b>	                    &lt;Box&gt;{children}&lt;/Box&gt;
+<b><a name="line104">104  </a></b>	                    &lt;Box&gt;{children}&lt;/Box&gt;
+<b><a name="line105">105  </a></b>	                &lt;/RegistrationWorkflow&gt;
+<b><a name="line106">106  </a></b>	            &lt;/RegistrationContextProvider&gt;
+<b><a name="line107">107  </a></b>	        );
+<b><a name="line108">108  </a></b>	        const { result } = renderHook(() =&gt; useRegistrationWorkflowContext(), { wrapper });
+<b><a name="line109">109  </a></b>	
+<b><a name="line110">110  </a></b>	        expect(result.current.screenData.Eula.accepted).toBeFalsy();
+<b><a name="line111">111  </a></b>	        expect(result.current.screenData.CreateAccount.emailAddress).toBe('');
+<b><a name="line112">112  </a></b>	
+<b><a name="line113">113  </a></b>	        act(() =&gt; {
+<b><a name="line114">114  </a></b>	            void result.current.nextScreen({ screenId: 'Screen1', values: { test: 'test' } });
+<b><a name="line115">115  </a></b>	        });
+<b><a name="line116">116  </a></b>	        act(() =&gt; {
+<b><a name="line117">117  </a></b>	            void result.current.previousScreen({
+<b><a name="line118">118  </a></b>	                screenId: 'Screen2',
+<b><a name="line119">119  </a></b>	                values: { test2: 'test2' },
+<b><a name="line120">120  </a></b>	            });
+<b><a name="line121">121  </a></b>	        });
+<b><a name="line122">122  </a></b>	        expect(result.current.screenData.Other.Screen1.test).toBe('test');
+<b><a name="line123">123  </a></b>	        expect(result.current.screenData.Other.Screen2.test2).toBe('test2');
+<b><a name="line124">124  </a></b>	    });
+<b><a name="line125">125  </a></b>	
+<b><a name="line126">126  </a></b>	    it('should check for lower bound of initialScreenIndex props', () =&gt; {
+<b><a name="line127">127  </a></b>	        renderer({ initialScreenIndex: -1 });
+<b><a name="line128">128  </a></b>	        expect(screen.getByText('Screen 1')).toBeInTheDocument();
+<b><a name="line129">129  </a></b>	    });
+<b><a name="line130">130  </a></b>	
+<b><a name="line131">131  </a></b>	    it('should check for upper bound of initialScreenIndex props', () =&gt; {
+<b><a name="line132">132  </a></b>	        renderer({ initialScreenIndex: 2 });
+<b><a name="line133">133  </a></b>	        expect(screen.getByText('Screen 2')).toBeInTheDocument();
+<b><a name="line134">134  </a></b>	    });
+<b><a name="line135">135  </a></b>	
+<b><a name="line136">136  </a></b>	    it('should render custom success screen', () =&gt; {
+<b><a name="line137">137  </a></b>	        const props = defaultProps;
+<b><a name="line138">138  </a></b>	        defaultProps.successScreen = &lt;Box&gt;Success&lt;/Box&gt;;
+<b><a name="line139">139  </a></b>	        const { getByLabelText, getByText } = render(
+<b><a name="line140">140  </a></b>	            &lt;RegistrationContextProvider {...registrationContextProviderProps}&gt;
+<b><a name="line141">141  </a></b>	                &lt;RegistrationWorkflow {...props}&gt;
+<b><a name="line142">142  </a></b>	                    &lt;CreateAccountScreen /&gt;
+<b><a name="line143">143  </a></b>	                &lt;/RegistrationWorkflow&gt;
+<b><a name="line144">144  </a></b>	            &lt;/RegistrationContextProvider&gt;
+<b><a name="line145">145  </a></b>	        );
+<b><a name="line146">146  </a></b>	        const verifyEmailInput = getByLabelText('Email Address');
+<b><a name="line147">147  </a></b>	        void act(() =&gt; fireEvent.change(verifyEmailInput, { target: { value: 'test@test.net' } }));
+<b><a name="line148">148  </a></b>	        void act(() =&gt; fireEvent.blur(verifyEmailInput));
+<b><a name="line149">149  </a></b>	        const nextButton = getByText('Next');
+<b><a name="line150">150  </a></b>	        expect(screen.getByText(/Next/i)).toBeEnabled();
+<b><a name="line151">151  </a></b>	        void act(() =&gt; {
+<b><a name="line152">152  </a></b>	            fireEvent.click(nextButton);
+<b><a name="line153">153  </a></b>	        });
+<b><a name="line154">154  </a></b>	
+<b><a name="line155">155  </a></b>	        void ((): void =&gt; expect(screen.getByText('Success')).toBeInTheDocument());
+<b><a name="line156">156  </a></b>	    });
+<b><a name="line157">157  </a></b>	
+<b><a name="line158">158  </a></b>	    it('should render existing account success screen when account exists', () =&gt; {
+<b><a name="line159">159  </a></b>	        const customExistingAccountSuccessScreen = &lt;Box&gt;Existing Account Success&lt;/Box&gt;;
+<b><a name="line160">160  </a></b>	        render(
+<b><a name="line161">161  </a></b>	            &lt;RegistrationContextProvider {...registrationContextProviderProps}&gt;
+<b><a name="line162">162  </a></b>	                &lt;RegistrationWorkflow
+<b><a name="line163">163  </a></b>	                    {...defaultProps}
+<b><a name="line164">164  </a></b>	                    existingAccountSuccessScreen={customExistingAccountSuccessScreen}
+<b><a name="line165">165  </a></b>	                &gt;
+<b><a name="line166">166  </a></b>	                    &lt;CreateAccountScreen /&gt;
+<b><a name="line167">167  </a></b>	                &lt;/RegistrationWorkflow&gt;
+<b><a name="line168">168  </a></b>	            &lt;/RegistrationContextProvider&gt;
+<b><a name="line169">169  </a></b>	        );
+<b><a name="line170">170  </a></b>	        const { result } = renderHook(() =&gt; useRegistrationWorkflowContext(), {
+<b><a name="line171">171  </a></b>	            wrapper: ({ children }: any) =&gt; (
+<b><a name="line172">172  </a></b>	                &lt;RegistrationContextProvider {...registrationContextProviderProps}&gt;
+<b><a name="line173">173  </a></b>	                    &lt;RegistrationWorkflow
+<b><a name="line174">174  </a></b>	                        {...defaultProps}
+<b><a name="line175">175  </a></b>	                        existingAccountSuccessScreen={customExistingAccountSuccessScreen}
+<b><a name="line176">176  </a></b>	                    &gt;
+<b><a name="line177">177  </a></b>	                        &lt;Box&gt;{children}&lt;/Box&gt;
+<b><a name="line178">178  </a></b>	                    &lt;/RegistrationWorkflow&gt;
+<b><a name="line179">179  </a></b>	                &lt;/RegistrationContextProvider&gt;
+<b><a name="line180">180  </a></b>	            ),
+<b><a name="line181">181  </a></b>	        });
+<b><a name="line182">182  </a></b>	
+<b><a name="line183">183  </a></b>	        act(() =&gt; {
+<b><a name="line184">184  </a></b>	            void result.current.nextScreen({
+<b><a name="line185">185  </a></b>	                screenId: 'CreateAccount',
+<b><a name="line186">186  </a></b>	                values: { emailAddress: 'test@test.com' },
+<b><a name="line187">187  </a></b>	                isAccountExist: true,
+<b><a name="line188">188  </a></b>	            });
+<b><a name="line189">189  </a></b>	        });
+<b><a name="line190">190  </a></b>	
+<b><a name="line191">191  </a></b>	        expect(screen.getByText('Existing Account Success')).toBeInTheDocument();
+<b><a name="line192">192  </a></b>	    });
+<b><a name="line193">193  </a></b>	
+<b><a name="line194">194  </a></b>	    it('should handle isInviteRegistration prop and set up initial data', () =&gt; {
+<b><a name="line195">195  </a></b>	        // Mock window.location.search
+<b><a name="line196">196  </a></b>	        Object.defineProperty(window, 'location', {
+<b><a name="line197">197  </a></b>	            value: {
+<b><a name="line198">198  </a></b>	                search: '?email=test@test.com&amp;code=123456',
+<b><a name="line199">199  </a></b>	            },
+<b><a name="line200">200  </a></b>	            writable: true,
+<b><a name="line201">201  </a></b>	        });
+<b><a name="line202">202  </a></b>	
+<b><a name="line203">203  </a></b>	        const wrapper = ({ children }: any): React.JSX.Element =&gt; (
+<b><a name="line204">204  </a></b>	            &lt;RegistrationContextProvider {...registrationContextProviderProps}&gt;
+<b><a name="line205">205  </a></b>	                &lt;RegistrationWorkflow isInviteRegistration={true}&gt;
+<b><a name="line206">206  </a></b>	                    &lt;Box&gt;{children}&lt;/Box&gt;
+<b><a name="line207">207  </a></b>	                    &lt;Box&gt;{children}&lt;/Box&gt;
+<b><a name="line208">208  </a></b>	                    &lt;Box&gt;{children}&lt;/Box&gt;
+<b><a name="line209">209  </a></b>	                &lt;/RegistrationWorkflow&gt;
+<b><a name="line210">210  </a></b>	            &lt;/RegistrationContextProvider&gt;
+<b><a name="line211">211  </a></b>	        );
+<b><a name="line212">212  </a></b>	        const { result } = renderHook(() =&gt; useRegistrationWorkflowContext(), { wrapper });
+<b><a name="line213">213  </a></b>	
+<b><a name="line214">214  </a></b>	        expect(result.current.screenData.CreateAccount.emailAddress).toBe('test@test.com');
+<b><a name="line215">215  </a></b>	        expect(result.current.screenData.VerifyCode.code).toBe('123456');
+<b><a name="line216">216  </a></b>	    });
+<b><a name="line217">217  </a></b>	
+<b><a name="line218">218  </a></b>	    it('should handle error during nextScreen navigation', () =&gt; {
+<b><a name="line219">219  </a></b>	        const mockTriggerError = jest.fn();
+<b><a name="line220">220  </a></b>	        const contextProps = {
+<b><a name="line221">221  </a></b>	            ...registrationContextProviderProps,
+<b><a name="line222">222  </a></b>	            actions: {
+<b><a name="line223">223  </a></b>	                ...registrationContextProviderProps.actions,
+<b><a name="line224">224  </a></b>	                triggerError: mockTriggerError,
+<b><a name="line225">225  </a></b>	            },
+<b><a name="line226">226  </a></b>	        };
+<b><a name="line227">227  </a></b>	
+<b><a name="line228">228  </a></b>	        const wrapper = ({ children }: any): React.JSX.Element =&gt; (
+<b><a name="line229">229  </a></b>	            &lt;RegistrationContextProvider {...contextProps}&gt;
+<b><a name="line230">230  </a></b>	                &lt;RegistrationWorkflow {...defaultProps}&gt;
+<b><a name="line231">231  </a></b>	                    &lt;Box&gt;{children}&lt;/Box&gt;
+<b><a name="line232">232  </a></b>	                    &lt;Box&gt;{children}&lt;/Box&gt;
+<b><a name="line233">233  </a></b>	                &lt;/RegistrationWorkflow&gt;
+<b><a name="line234">234  </a></b>	            &lt;/RegistrationContextProvider&gt;
+<b><a name="line235">235  </a></b>	        );
+<b><a name="line236">236  </a></b>	        const { result } = renderHook(() =&gt; useRegistrationWorkflowContext(), { wrapper });
+<b><a name="line237">237  </a></b>	
+<b><a name="line238">238  </a></b>	        // Mock an error scenario by trying to access an undefined method
+<b><a name="line239">239  </a></b>	        const mockError = new Error('Test error');
+<b><a name="line240">240  </a></b>	        jest.spyOn(console, 'error').mockImplementation(() =&gt; {});
+<b><a name="line241">241  </a></b>	
+<b><a name="line242">242  </a></b>	        act(() =&gt; {
+<b><a name="line243">243  </a></b>	            // This should trigger the catch block in nextScreen
+<b><a name="line244">244  </a></b>	            try {
+<b><a name="line245">245  </a></b>	                void result.current.nextScreen({
+<b><a name="line246">246  </a></b>	                    screenId: 'TestScreen',
+<b><a name="line247">247  </a></b>	                    values: { test: 'value' },
+<b><a name="line248">248  </a></b>	                });
+<b><a name="line249">249  </a></b>	                throw mockError;
+<b><a name="line250">250  </a></b>	            } catch (error) {
+<b><a name="line251">251  </a></b>	                console.error(error);
+<b><a name="line252">252  </a></b>	            }
+<b><a name="line253">253  </a></b>	        });
+<b><a name="line254">254  </a></b>	
+<b><a name="line255">255  </a></b>	        jest.restoreAllMocks();
+<b><a name="line256">256  </a></b>	    });
+<b><a name="line257">257  </a></b>	
+<b><a name="line258">258  </a></b>	    it('should handle previousScreen navigation to go back in history when at first screen', () =&gt; {
+<b><a name="line259">259  </a></b>	        const mockNavigate = jest.fn();
+<b><a name="line260">260  </a></b>	        const contextProps = {
+<b><a name="line261">261  </a></b>	            ...registrationContextProviderProps,
+<b><a name="line262">262  </a></b>	            navigate: mockNavigate,
+<b><a name="line263">263  </a></b>	        };
+<b><a name="line264">264  </a></b>	
+<b><a name="line265">265  </a></b>	        const wrapper = ({ children }: any): React.JSX.Element =&gt; (
+<b><a name="line266">266  </a></b>	            &lt;RegistrationContextProvider {...contextProps}&gt;
+<b><a name="line267">267  </a></b>	                &lt;RegistrationWorkflow initialScreenIndex={0}&gt;
+<b><a name="line268">268  </a></b>	                    &lt;Box&gt;{children}&lt;/Box&gt;
+<b><a name="line269">269  </a></b>	                    &lt;Box&gt;{children}&lt;/Box&gt;
+<b><a name="line270">270  </a></b>	                &lt;/RegistrationWorkflow&gt;
+<b><a name="line271">271  </a></b>	            &lt;/RegistrationContextProvider&gt;
+<b><a name="line272">272  </a></b>	        );
+<b><a name="line273">273  </a></b>	        const { result } = renderHook(() =&gt; useRegistrationWorkflowContext(), { wrapper });
+<b><a name="line274">274  </a></b>	
+<b><a name="line275">275  </a></b>	        act(() =&gt; {
+<b><a name="line276">276  </a></b>	            result.current.previousScreen({
+<b><a name="line277">277  </a></b>	                screenId: 'TestScreen',
+<b><a name="line278">278  </a></b>	                values: { test: 'value' },
+<b><a name="line279">279  </a></b>	            });
+<b><a name="line280">280  </a></b>	        });
+<b><a name="line281">281  </a></b>	
+<b><a name="line282">282  </a></b>	        expect(mockNavigate).toHaveBeenCalledWith(-1);
+<b><a name="line283">283  </a></b>	    });
+<b><a name="line284">284  </a></b>	
+<b><a name="line285">285  </a></b>	    it('should handle finishRegistration with successful completion', async () =&gt; {
+<b><a name="line286">286  </a></b>	        const mockCompleteRegistration = jest.fn().mockResolvedValue({
+<b><a name="line287">287  </a></b>	            email: 'test@test.com',
+<b><a name="line288">288  </a></b>	            organizationName: 'Test Org',
+<b><a name="line289">289  </a></b>	        });
+<b><a name="line290">290  </a></b>	
+<b><a name="line291">291  </a></b>	        const contextProps = {
+<b><a name="line292">292  </a></b>	            ...registrationContextProviderProps,
+<b><a name="line293">293  </a></b>	            actions: {
+<b><a name="line294">294  </a></b>	                ...registrationContextProviderProps.actions,
+<b><a name="line295">295  </a></b>	                completeRegistration: mockCompleteRegistration,
+<b><a name="line296">296  </a></b>	            },
+<b><a name="line297">297  </a></b>	        };
+<b><a name="line298">298  </a></b>	
+<b><a name="line299">299  </a></b>	        const wrapper = ({ children }: any): React.JSX.Element =&gt; (
+<b><a name="line300">300  </a></b>	            &lt;RegistrationContextProvider {...contextProps}&gt;
+<b><a name="line301">301  </a></b>	                &lt;RegistrationWorkflow initialScreenIndex={0}&gt;
+<b><a name="line302">302  </a></b>	                    &lt;Box&gt;{children}&lt;/Box&gt;
+<b><a name="line303">303  </a></b>	                &lt;/RegistrationWorkflow&gt;
+<b><a name="line304">304  </a></b>	            &lt;/RegistrationContextProvider&gt;
+<b><a name="line305">305  </a></b>	        );
+<b><a name="line306">306  </a></b>	        const { result } = renderHook(() =&gt; useRegistrationWorkflowContext(), { wrapper });
+<b><a name="line307">307  </a></b>	
+<b><a name="line308">308  </a></b>	        await act(async () =&gt; {
+<b><a name="line309">309  </a></b>	            await result.current.nextScreen({
+<b><a name="line310">310  </a></b>	                screenId: 'FinalScreen',
+<b><a name="line311">311  </a></b>	                values: { finalData: 'complete' },
+<b><a name="line312">312  </a></b>	            });
+<b><a name="line313">313  </a></b>	        });
+<b><a name="line314">314  </a></b>	
+<b><a name="line315">315  </a></b>	        expect(mockCompleteRegistration).toHaveBeenCalled();
+<b><a name="line316">316  </a></b>	    });
+<b><a name="line317">317  </a></b>	
+<b><a name="line318">318  </a></b>	    it('should handle finishRegistration with error', async () =&gt; {
+<b><a name="line319">319  </a></b>	        const mockError = new Error('Registration failed');
+<b><a name="line320">320  </a></b>	        const mockCompleteRegistration = jest.fn().mockRejectedValue(mockError);
+<b><a name="line321">321  </a></b>	        const mockTriggerError = jest.fn();
+<b><a name="line322">322  </a></b>	
+<b><a name="line323">323  </a></b>	        const contextProps = {
+<b><a name="line324">324  </a></b>	            ...registrationContextProviderProps,
+<b><a name="line325">325  </a></b>	            actions: {
+<b><a name="line326">326  </a></b>	                ...registrationContextProviderProps.actions,
+<b><a name="line327">327  </a></b>	                completeRegistration: mockCompleteRegistration,
+<b><a name="line328">328  </a></b>	            },
+<b><a name="line329">329  </a></b>	            triggerError: mockTriggerError,
+<b><a name="line330">330  </a></b>	        };
+<b><a name="line331">331  </a></b>	
+<b><a name="line332">332  </a></b>	        const wrapper = ({ children }: any): React.JSX.Element =&gt; (
+<b><a name="line333">333  </a></b>	            &lt;RegistrationContextProvider {...contextProps}&gt;
+<b><a name="line334">334  </a></b>	                &lt;RegistrationWorkflow initialScreenIndex={0}&gt;
+<b><a name="line335">335  </a></b>	                    &lt;Box&gt;{children}&lt;/Box&gt;
+<b><a name="line336">336  </a></b>	                &lt;/RegistrationWorkflow&gt;
+<b><a name="line337">337  </a></b>	            &lt;/RegistrationContextProvider&gt;
+<b><a name="line338">338  </a></b>	        );
+<b><a name="line339">339  </a></b>	        const { result } = renderHook(() =&gt; useRegistrationWorkflowContext(), { wrapper });
+<b><a name="line340">340  </a></b>	
+<b><a name="line341">341  </a></b>	        await act(async () =&gt; {
+<b><a name="line342">342  </a></b>	            await result.current.nextScreen({
+<b><a name="line343">343  </a></b>	                screenId: 'FinalScreen',
+<b><a name="line344">344  </a></b>	                values: { finalData: 'complete' },
+<b><a name="line345">345  </a></b>	            });
+<b><a name="line346">346  </a></b>	        });
+<b><a name="line347">347  </a></b>	
+<b><a name="line348">348  </a></b>	        expect(mockCompleteRegistration).toHaveBeenCalled();
+<b><a name="line349">349  </a></b>	    });
+<b><a name="line350">350  </a></b>	
+<b><a name="line351">351  </a></b>	    it('should handle finishRegistration without completeRegistration action', async () =&gt; {
+<b><a name="line352">352  </a></b>	        const contextProps = {
+<b><a name="line353">353  </a></b>	            ...registrationContextProviderProps,
+<b><a name="line354">354  </a></b>	            actions: {
+<b><a name="line355">355  </a></b>	                ...registrationContextProviderProps.actions,
+<b><a name="line356">356  </a></b>	                completeRegistration: undefined as any,
+<b><a name="line357">357  </a></b>	            },
+<b><a name="line358">358  </a></b>	        };
+<b><a name="line359">359  </a></b>	
+<b><a name="line360">360  </a></b>	        const wrapper = ({ children }: any): React.JSX.Element =&gt; (
+<b><a name="line361">361  </a></b>	            &lt;RegistrationContextProvider {...contextProps}&gt;
+<b><a name="line362">362  </a></b>	                &lt;RegistrationWorkflow initialScreenIndex={0}&gt;
+<b><a name="line363">363  </a></b>	                    &lt;Box&gt;{children}&lt;/Box&gt;
+<b><a name="line364">364  </a></b>	                &lt;/RegistrationWorkflow&gt;
+<b><a name="line365">365  </a></b>	            &lt;/RegistrationContextProvider&gt;
+<b><a name="line366">366  </a></b>	        );
+<b><a name="line367">367  </a></b>	        const { result } = renderHook(() =&gt; useRegistrationWorkflowContext(), { wrapper });
+<b><a name="line368">368  </a></b>	
+<b><a name="line369">369  </a></b>	        await act(async () =&gt; {
+<b><a name="line370">370  </a></b>	            await result.current.nextScreen({
+<b><a name="line371">371  </a></b>	                screenId: 'FinalScreen',
+<b><a name="line372">372  </a></b>	                values: { finalData: 'complete' },
+<b><a name="line373">373  </a></b>	            });
+<b><a name="line374">374  </a></b>	        });
+<b><a name="line375">375  </a></b>	
+<b><a name="line376">376  </a></b>	        // Should complete without error even without completeRegistration action
+<b><a name="line377">377  </a></b>	    });
+<b><a name="line378">378  </a></b>	
+<b><a name="line379">379  </a></b>	    it('should handle catch block in finishRegistration', async () =&gt; {
+<b><a name="line380">380  </a></b>	        const mockCompleteRegistration = jest.fn().mockImplementation(() =&gt; {
+<b><a name="line381">381  </a></b>	            throw new Error('Unexpected error');
+<b><a name="line382">382  </a></b>	        });
+<b><a name="line383">383  </a></b>	
+<b><a name="line384">384  </a></b>	        const contextProps = {
+<b><a name="line385">385  </a></b>	            ...registrationContextProviderProps,
+<b><a name="line386">386  </a></b>	            actions: {
+<b><a name="line387">387  </a></b>	                ...registrationContextProviderProps.actions,
+<b><a name="line388">388  </a></b>	                completeRegistration: mockCompleteRegistration,
+<b><a name="line389">389  </a></b>	            },
+<b><a name="line390">390  </a></b>	        };
+<b><a name="line391">391  </a></b>	
+<b><a name="line392">392  </a></b>	        jest.spyOn(console, 'error').mockImplementation(() =&gt; {});
+<b><a name="line393">393  </a></b>	
+<b><a name="line394">394  </a></b>	        const wrapper = ({ children }: any): React.JSX.Element =&gt; (
+<b><a name="line395">395  </a></b>	            &lt;RegistrationContextProvider {...contextProps}&gt;
+<b><a name="line396">396  </a></b>	                &lt;RegistrationWorkflow initialScreenIndex={0}&gt;
+<b><a name="line397">397  </a></b>	                    &lt;Box&gt;{children}&lt;/Box&gt;
+<b><a name="line398">398  </a></b>	                &lt;/RegistrationWorkflow&gt;
+<b><a name="line399">399  </a></b>	            &lt;/RegistrationContextProvider&gt;
+<b><a name="line400">400  </a></b>	        );
+<b><a name="line401">401  </a></b>	        const { result } = renderHook(() =&gt; useRegistrationWorkflowContext(), { wrapper });
+<b><a name="line402">402  </a></b>	
+<b><a name="line403">403  </a></b>	        await act(async () =&gt; {
+<b><a name="line404">404  </a></b>	            await result.current.nextScreen({
+<b><a name="line405">405  </a></b>	                screenId: 'FinalScreen',
+<b><a name="line406">406  </a></b>	                values: { finalData: 'complete' },
+<b><a name="line407">407  </a></b>	            });
+<b><a name="line408">408  </a></b>	        });
+<b><a name="line409">409  </a></b>	
+<b><a name="line410">410  </a></b>	        expect(console.error).toHaveBeenCalled();
+<b><a name="line411">411  </a></b>	        jest.restoreAllMocks();
+<b><a name="line412">412  </a></b>	    });
+<b><a name="line413">413  </a></b>	
+<b><a name="line414">414  </a></b>	    it('should handle updateScreenData for existing screen in Other category', () =&gt; {
+<b><a name="line415">415  </a></b>	        const wrapper = ({ children }: any): React.JSX.Element =&gt; (
+<b><a name="line416">416  </a></b>	            &lt;RegistrationContextProvider {...registrationContextProviderProps}&gt;
+<b><a name="line417">417  </a></b>	                &lt;RegistrationWorkflow {...defaultProps}&gt;
+<b><a name="line418">418  </a></b>	                    &lt;Box&gt;{children}&lt;/Box&gt;
+<b><a name="line419">419  </a></b>	                    &lt;Box&gt;{children}&lt;/Box&gt;
+<b><a name="line420">420  </a></b>	                &lt;/RegistrationWorkflow&gt;
+<b><a name="line421">421  </a></b>	            &lt;/RegistrationContextProvider&gt;
+<b><a name="line422">422  </a></b>	        );
+<b><a name="line423">423  </a></b>	        const { result } = renderHook(() =&gt; useRegistrationWorkflowContext(), { wrapper });
+<b><a name="line424">424  </a></b>	
+<b><a name="line425">425  </a></b>	        // First add a screen to Other category
+<b><a name="line426">426  </a></b>	        act(() =&gt; {
+<b><a name="line427">427  </a></b>	            void result.current.nextScreen({
+<b><a name="line428">428  </a></b>	                screenId: 'CustomScreen',
+<b><a name="line429">429  </a></b>	                values: { initialData: 'test' },
+<b><a name="line430">430  </a></b>	            });
+<b><a name="line431">431  </a></b>	        });
+<b><a name="line432">432  </a></b>	
+<b><a name="line433">433  </a></b>	        // Then update the same screen
+<b><a name="line434">434  </a></b>	        act(() =&gt; {
+<b><a name="line435">435  </a></b>	            void result.current.nextScreen({
+<b><a name="line436">436  </a></b>	                screenId: 'CustomScreen',
+<b><a name="line437">437  </a></b>	                values: { additionalData: 'update' },
+<b><a name="line438">438  </a></b>	            });
+<b><a name="line439">439  </a></b>	        });
+<b><a name="line440">440  </a></b>	
+<b><a name="line441">441  </a></b>	        // expect(result.current.screenData.Other.CustomScreen.initialData).toBe('test');
+<b><a name="line442">442  </a></b>	        expect(result.current.screenData.Other.CustomScreen.additionalData).toBe('update');
+<b><a name="line443">443  </a></b>	    });
+<b><a name="line444">444  </a></b>	
+<b><a name="line445">445  </a></b>	    it('should handle custom errorDisplayConfig', () =&gt; {
+<b><a name="line446">446  </a></b>	        const customErrorDisplayConfig = {
+<b><a name="line447">447  </a></b>	            messageBoxConfig: { title: 'Custom Error' },
+<b><a name="line448">448  </a></b>	            dialogConfig: { title: 'Custom Dialog' },
+<b><a name="line449">449  </a></b>	            onClose: jest.fn(),
+<b><a name="line450">450  </a></b>	        };
+<b><a name="line451">451  </a></b>	
+<b><a name="line452">452  </a></b>	        render(
+<b><a name="line453">453  </a></b>	            &lt;RegistrationContextProvider {...registrationContextProviderProps}&gt;
+<b><a name="line454">454  </a></b>	                &lt;RegistrationWorkflow {...defaultProps} errorDisplayConfig={customErrorDisplayConfig}&gt;
+<b><a name="line455">455  </a></b>	                    &lt;Typography&gt;Test Screen&lt;/Typography&gt;
+<b><a name="line456">456  </a></b>	                &lt;/RegistrationWorkflow&gt;
+<b><a name="line457">457  </a></b>	            &lt;/RegistrationContextProvider&gt;
+<b><a name="line458">458  </a></b>	        );
+<b><a name="line459">459  </a></b>	
+<b><a name="line460">460  </a></b>	        expect(screen.getByText('Test Screen')).toBeInTheDocument();
+<b><a name="line461">461  </a></b>	    });
+<b><a name="line462">462  </a></b>	});
+<b><a name="line463">463  </a></b>	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre></body>
+</html>

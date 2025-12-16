@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>Coverity error reader: /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/login-workflow/src/screens/EulaScreen/EulaScreenBase.tsx</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head>
+<body link="#000000" vlink="#000000"><pre>
+<b><a name="line1">1    </a></b>	import React, { useCallback, useState } from 'react';
+<b><a name="line2">2    </a></b>	import { EulaScreenProps } from './types';
+<b><a name="line3">3    </a></b>	import {
+<b><a name="line4">4    </a></b>	    WorkflowCard,
+<b><a name="line5">5    </a></b>	    WorkflowCardActions,
+<b><a name="line6">6    </a></b>	    WorkflowCardBody,
+<b><a name="line7">7    </a></b>	    WorkflowCardHeader,
+<b><a name="line8">8    </a></b>	    WorkflowCardInstructions,
+<b><a name="line9">9    </a></b>	} from '../../components/WorkflowCard';
+<b><a name="line10">10   </a></b>	import FormControlLabel from '@mui/material/FormControlLabel';
+<b><a name="line11">11   </a></b>	import Checkbox from '@mui/material/Checkbox';
+<b><a name="line12">12   </a></b>	import Box from '@mui/material/Box';
+<b><a name="line13">13   </a></b>	import DOMPurify from 'dompurify';
+<b><a name="line14">14   </a></b>	import ErrorManager from '../../components/Error/ErrorManager';
+<b><a name="line15">15   </a></b>	import { Typography } from '@mui/material';
+<b><a name="line16">16   </a></b>	import ReplaySharp from '@mui/icons-material/ReplaySharp';
+<b><a name="line17">17   </a></b>	import { useTranslation } from 'react-i18next';
+<b><a name="line18">18   </a></b>	
+<b><a name="line19">19   </a></b>	/**
+<b><a name="line20">20   </a></b>	 * Component that renders a screen displaying the EULA and requests acceptance via a checkbox.
+<b><a name="line21">21   </a></b>	 *
+<b><a name="line22">22   </a></b>	 * @param {EulaScreenProps} props - props of EUlA screen base component
+<b><a name="line23">23   </a></b>	 *
+<b><a name="line24">24   </a></b>	 * @category Component
+<b><a name="line25">25   </a></b>	 */
+<b><a name="line26">26   </a></b>	
+<b><a name="line27">27   </a></b>	export const EulaScreenBase: React.FC&lt;EulaScreenProps&gt; = (props) =&gt; {
+<b><a name="line28">28   </a></b>	    const {
+<b><a name="line29">29   </a></b>	        onEulaAcceptedChange,
+<b><a name="line30">30   </a></b>	        eulaContent,
+<b><a name="line31">31   </a></b>	        checkboxLabel,
+<b><a name="line32">32   </a></b>	        html,
+<b><a name="line33">33   </a></b>	        initialCheckboxValue,
+<b><a name="line34">34   </a></b>	        checkboxProps,
+<b><a name="line35">35   </a></b>	        errorDisplayConfig,
+<b><a name="line36">36   </a></b>	        refreshConfig,
+<b><a name="line37">37   </a></b>	        WorkflowCardBaseProps: cardBaseProps = {},
+<b><a name="line38">38   </a></b>	        WorkflowCardInstructionProps: instructionsProps = {},
+<b><a name="line39">39   </a></b>	        WorkflowCardActionsProps: actionsProps = {},
+<b><a name="line40">40   </a></b>	        WorkflowCardHeaderProps: headerProps = {},
+<b><a name="line41">41   </a></b>	        ...otherProps
+<b><a name="line42">42   </a></b>	    } = props;
+<b><a name="line43">43   </a></b>	
+<b><a name="line44">44   </a></b>	    const { t } = useTranslation();
+<b><a name="line45">45   </a></b>	
+<b><a name="line46">46   </a></b>	    const [eulaAccepted, setEulaAccepted] = useState(initialCheckboxValue ?? false);
+<b><a name="line47">47   </a></b>	
+<b><a name="line48">48   </a></b>	    const handleEulaAcceptedChecked = useCallback(
+<b><a name="line49">49   </a></b>	        (accepted: boolean) =&gt; {
+<b><a name="line50">50   </a></b>	            setEulaAccepted(accepted);
+<b><a name="line51">51   </a></b>	            onEulaAcceptedChange?.(accepted);
+<b><a name="line52">52   </a></b>	        },
+<b><a name="line53">53   </a></b>	        [onEulaAcceptedChange]
+<b><a name="line54">54   </a></b>	    );
+<b><a name="line55">55   </a></b>	
+<b><a name="line56">56   </a></b>	    const handleOnNext = (): void =&gt; {
+<b><a name="line57">57   </a></b>	        const { onNext } = actionsProps;
+<b><a name="line58">58   </a></b>	        if (onNext) onNext({ accepted: eulaAccepted });
+<b><a name="line59">59   </a></b>	    };
+<b><a name="line60">60   </a></b>	
+<b><a name="line61">61   </a></b>	    return (
+<b><a name="line62">62   </a></b>	        &lt;WorkflowCard {...cardBaseProps} {...otherProps}&gt;
+<b><a name="line63">63   </a></b>	            &lt;WorkflowCardHeader {...headerProps} /&gt;
+<b><a name="line64">64   </a></b>	            {Object.keys(instructionsProps).length !== 0 &amp;&amp; &lt;WorkflowCardInstructions {...instructionsProps} /&gt;}
+<b><a name="line65">65   </a></b>	            &lt;WorkflowCardBody sx={{ pt: 2 }}&gt;
+<b><a name="line66">66   </a></b>	                {refreshConfig?.showRefreshButton ? (
+<b><a name="line67">67   </a></b>	                    &lt;Box
+<b><a name="line68">68   </a></b>	                        sx={{
+<b><a name="line69">69   </a></b>	                            display: 'flex',
+<b><a name="line70">70   </a></b>	                            flexDirection: 'column',
+<b><a name="line71">71   </a></b>	                            alignItems: 'center',
+<b><a name="line72">72   </a></b>	                            justifyContent: 'center',
+<b><a name="line73">73   </a></b>	                            height: '100%',
+<b><a name="line74">74   </a></b>	                        }}
+<b><a name="line75">75   </a></b>	                    &gt;
+<b><a name="line76">76   </a></b>	                        &lt;Box
+<b><a name="line77">77   </a></b>	                            sx={{
+<b><a name="line78">78   </a></b>	                                flexDirection: 'column',
+<b><a name="line79">79   </a></b>	                                alignItems: 'center',
+<b><a name="line80">80   </a></b>	                                justifyContent: 'center',
+<b><a name="line81">81   </a></b>	                                cursor: 'pointer',
+<b><a name="line82">82   </a></b>	                                p: 1,
+<b><a name="line83">83   </a></b>	                            }}
+<b><a name="line84">84   </a></b>	                            onClick={refreshConfig?.onRefresh}
+<b><a name="line85">85   </a></b>	                        &gt;
+<b><a name="line86">86   </a></b>	                            &lt;ReplaySharp color=&quot;primary&quot; sx={{ width: 36, height: 36 }} /&gt;
+<b><a name="line87">87   </a></b>	                            &lt;Typography variant=&quot;subtitle2&quot; color=&quot;primary&quot;&gt;
+<b><a name="line88">88   </a></b>	                                {refreshConfig?.refreshButtonLabel || t('bluiCommon:MESSAGES.RETRY')}
+<b><a name="line89">89   </a></b>	                            &lt;/Typography&gt;
+<b><a name="line90">90   </a></b>	                        &lt;/Box&gt;
+<b><a name="line91">91   </a></b>	                    &lt;/Box&gt;
+<b><a name="line92">92   </a></b>	                ) : html ? (
+<b><a name="line93">93   </a></b>	                    &lt;Box
+<b><a name="line94">94   </a></b>	                        sx={{ flex: '1 1 0', overflow: 'auto' }}
+<b><a name="line95">95   </a></b>	                        // eslint-disable-next-line @typescript-eslint/naming-convention
+</pre>
+<table summary="events" bgcolor=#e0e0e0>
+<tr><td><font color="red">
+<a name="error:0"></a>
+<a name="error"></a>
+<!-- merge-key 2fd59246a3aab46d32550d0dcb60752b -->
+<b>(1) Event Sigma main event</b>: </font></td>
+<td><font color="red">Setting raw HTML content without proper sanitization to the `innerHTML` property of a DOM element by using the `dangerouslySetInnerHTML` attribute may lead to cross-site scripting vulnerabilities.</font></td>
+</tr>
+<tr><td><font color="red">
+<a name="error:1"></a>
+<!-- merge-key 2fd59246a3aab46d32550d0dcb60752b -->
+<b>(2) Event remediation</b>: </font></td>
+<td><font color="red">Audit the usage of `dangerouslySetInnerHTML` to make sure it is necessary and its content is properly sanitized.</font></td>
+</tr>
+</table>
+<pre><b><a name="line96">96   </a></b>	                        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(eulaContent as string) }}
+<b><a name="line97">97   </a></b>	                    /&gt;
+<b><a name="line98">98   </a></b>	                ) : (
+<b><a name="line99">99   </a></b>	                    &lt;Box sx={{ flex: '1 1 0', overflow: 'auto' }}&gt;{eulaContent}&lt;/Box&gt;
+<b><a name="line100">100  </a></b>	                )}
+<b><a name="line101">101  </a></b>	                &lt;ErrorManager {...errorDisplayConfig}&gt;
+<b><a name="line102">102  </a></b>	                    &lt;FormControlLabel
+<b><a name="line103">103  </a></b>	                        control={
+<b><a name="line104">104  </a></b>	                            &lt;Checkbox
+<b><a name="line105">105  </a></b>	                                color={'primary'}
+<b><a name="line106">106  </a></b>	                                checked={eulaAccepted}
+<b><a name="line107">107  </a></b>	                                onChange={(event: React.ChangeEvent&lt;HTMLInputElement&gt;): void =&gt;
+<b><a name="line108">108  </a></b>	                                    handleEulaAcceptedChecked(event.target.checked)
+<b><a name="line109">109  </a></b>	                                }
+<b><a name="line110">110  </a></b>	                                {...checkboxProps}
+<b><a name="line111">111  </a></b>	                            /&gt;
+<b><a name="line112">112  </a></b>	                        }
+<b><a name="line113">113  </a></b>	                        label={checkboxLabel}
+<b><a name="line114">114  </a></b>	                        sx={{ flex: '0 0 auto', mr: 0, mt: 2 }}
+<b><a name="line115">115  </a></b>	                        onKeyUp={(e): void =&gt; {
+<b><a name="line116">116  </a></b>	                            if (e.key === 'Enter' &amp;&amp; eulaAccepted) handleOnNext();
+<b><a name="line117">117  </a></b>	                        }}
+<b><a name="line118">118  </a></b>	                    /&gt;
+<b><a name="line119">119  </a></b>	                &lt;/ErrorManager&gt;
+<b><a name="line120">120  </a></b>	            &lt;/WorkflowCardBody&gt;
+<b><a name="line121">121  </a></b>	            &lt;WorkflowCardActions {...actionsProps} canGoNext={eulaAccepted &amp;&amp; actionsProps.canGoNext} /&gt;
+<b><a name="line122">122  </a></b>	        &lt;/WorkflowCard&gt;
+<b><a name="line123">123  </a></b>	    );
+<b><a name="line124">124  </a></b>	};
+<b><a name="line125">125  </a></b>	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre></body>
+</html>

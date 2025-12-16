@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>Coverity error reader: /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/login-workflow/src/contexts/AuthContext/AuthDictionaries/english.ts</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head>
+<body link="#000000" vlink="#000000"><pre>
+<b><a name="line1">1    </a></b>	import { AuthLanguageFile } from './types';
+<b><a name="line2">2    </a></b>	
+<b><a name="line3">3    </a></b>	const resources: AuthLanguageFile = {
+<b><a name="line4">4    </a></b>	    translation: {
+<b><a name="line5">5    </a></b>	        FORGOT_PASSWORD: {
+<b><a name="line6">6    </a></b>	            ERROR: 'Could not reset your password at this time.',
+<b><a name="line7">7    </a></b>	            INSTRUCTIONS:
+<b><a name="line8">8    </a></b>	                'Please enter the account email associated with the account.\n\n' +
+<b><a name="line9">9    </a></b>	                'If this email has an account with Eaton, you will receive a response within &lt;b&gt;{{time}}&lt;/b&gt;.\n\n' +
+<b><a name="line10">10   </a></b>	                'For urgent account issues, please call {{phone}}.',
+<b><a name="line11">11   </a></b>	            INSTRUCTIONS_ALT:
+<b><a name="line12">12   </a></b>	                'Please enter the account email associated with the account.&lt;br/&gt;&lt;br/&gt;' +
+<b><a name="line13">13   </a></b>	                'If this email has an account with Eaton, you will receive a response within &lt;1&gt;{{time}}&lt;/1&gt;.&lt;br/&gt;&lt;br/&gt;' +
+<b><a name="line14">14   </a></b>	                'For urgent account issues, please call &lt;4&gt;{{phone}}&lt;/4&gt;.',
+<b><a name="line15">15   </a></b>	            RESET_CODE_ERROR: 'There was an error with your reset code. ',
+<b><a name="line16">16   </a></b>	            LINK_SENT: 'A link to reset your password has been sent to &lt;b&gt;{{email}}&lt;/b&gt;.',
+<b><a name="line17">17   </a></b>	            LINK_SENT_ALT: 'A link to reset your password has been sent to &lt;1&gt;{{email}}&lt;/1&gt;.',
+<b><a name="line18">18   </a></b>	            RESPONSE_TIME: 'one business day',
+<b><a name="line19">19   </a></b>	        },
+<b><a name="line20">20   </a></b>	        LOGIN: {
+<b><a name="line21">21   </a></b>	            INCORRECT_CREDENTIALS: 'Incorrect Email or Password',
+<b><a name="line22">22   </a></b>	            INVALID_CREDENTIALS: 'Your username/password combination is not recognized.',
+<b><a name="line23">23   </a></b>	            GENERIC_ERROR: 'Your request could not be processed at this time.',
+<b><a name="line24">24   </a></b>	        },
+<b><a name="line25">25   </a></b>	        PASSWORD_RESET: {
+<b><a name="line26">26   </a></b>	            SUCCESS_MESSAGE: 'Your password was successfully reset.',
+<b><a name="line27">27   </a></b>	            FAILURE_MESSAGE: 'Your password was unable to be reset. Please try again later.',
+<b><a name="line28">28   </a></b>	        },
+<b><a name="line29">29   </a></b>	        USER_SETTINGS: {
+<b><a name="line30">30   </a></b>	            NAME: 'Name',
+<b><a name="line31">31   </a></b>	            EMAIL: 'Email',
+<b><a name="line32">32   </a></b>	            PHONE_NUMBER: 'Phone Number',
+<b><a name="line33">33   </a></b>	            PASSWORD: 'Password',
+<b><a name="line34">34   </a></b>	            EMAIL_NOTIFICATION: 'Email Notification',
+<b><a name="line35">35   </a></b>	            ENABLED: 'Enabled',
+<b><a name="line36">36   </a></b>	            ORGANIZATION: 'Organization',
+<b><a name="line37">37   </a></b>	            ORGANIZATION_NAME: 'Organization Name',
+<b><a name="line38">38   </a></b>	            ADDRESS: 'Address',
+<b><a name="line39">39   </a></b>	            CHANGE_PASSWORD: 'Change Password',
+<b><a name="line40">40   </a></b>	            ACCOUNT: 'Account',
+<b><a name="line41">41   </a></b>	        },
+<b><a name="line42">42   </a></b>	        COUNTER: 'The value is: {{count}}',
+<b><a name="line43">43   </a></b>	        HEADER: {
+</pre>
+<table summary="events" bgcolor=#e0e0e0>
+<tr><td><font color="red">
+<a name="error:0"></a>
+<a name="error"></a>
+<!-- merge-key c94d78becd35fa6fafb0b1d87a711005 -->
+<b>(1) Event Sigma main event</b>: </font></td>
+<td><font color="red">A secret, such as a password, cryptographic key, or token is stored in plaintext directly in the source code, in an application's properties, or configuration file. Users with access to the secret may then use the secret to access resources that they otherwise would not have access to. Secret type: Password (generic).</font></td>
+</tr>
+<tr><td><font color="red">
+<a name="error:1"></a>
+<!-- merge-key c94d78becd35fa6fafb0b1d87a711005 -->
+<b>(2) Event remediation</b>: </font></td>
+<td><font color="red">Avoid setting sensitive configuration values as string literals. Instead, these values should be set using variables with the sensitive data loaded from an encrypted file or a secret store.</font></td>
+</tr>
+</table>
+<pre><b><a name="line44">44   </a></b>	            FORGOT_PASSWORD: 'Forgot Password',
+<b><a name="line45">45   </a></b>	        },
+<b><a name="line46">46   </a></b>	        ERROR_MESSAGES: {
+<b><a name="line47">47   </a></b>	            '2002': 'User registration link is already redeemed.',
+<b><a name="line48">48   </a></b>	            '9003': 'Requested operation cannot be performed, please contact your administrator',
+<b><a name="line49">49   </a></b>	        },
+<b><a name="line50">50   </a></b>	        CHANGE_PASSWORD: {
+<b><a name="line51">51   </a></b>	            PASSWORD_CHANGED: 'Password Changed',
+<b><a name="line52">52   </a></b>	            PASSWORD: 'Change Password',
+<b><a name="line53">53   </a></b>	            SUCCESS_MESSAGE:
+<b><a name="line54">54   </a></b>	                &quot;Your password was successfully updated! To ensure your account's security, you will need to log in to the application with your updated credentials.&quot;,
+<b><a name="line55">55   </a></b>	            EMAIL_CONFIRM_MESSAGE: 'We have sent a confirmation email to &lt;b&gt;{{email}}&lt;/b&gt;',
+<b><a name="line56">56   </a></b>	            PASSWORD_INFO:
+<b><a name="line57">57   </a></b>	                'Please select a password. Make sure that your password meets the necessary complexity requirements outlined below.',
+<b><a name="line58">58   </a></b>	            OLD_PASSWORD: 'Old Password',
+<b><a name="line59">59   </a></b>	            ERROR_MESSAGE:
+<b><a name="line60">60   </a></b>	                'Your information did not match our records. Please re- enter your information to try again.',
+<b><a name="line61">61   </a></b>	            PROBLEM_OCCURRED: 'A problem occurred:',
+<b><a name="line62">62   </a></b>	            CONFIRM_NEW_PASSWORD: 'Confirm New Password',
+<b><a name="line63">63   </a></b>	            NEW_PASSWORD: 'New Password',
+<b><a name="line64">64   </a></b>	            CANCEL: 'Cancel',
+<b><a name="line65">65   </a></b>	            UPDATE: 'Update',
+<b><a name="line66">66   </a></b>	        },
+<b><a name="line67">67   </a></b>	        SETTINGS: {
+<b><a name="line68">68   </a></b>	            TITLE: 'Settings',
+<b><a name="line69">69   </a></b>	        },
+<b><a name="line70">70   </a></b>	        LEGAL: {
+<b><a name="line71">71   </a></b>	            TITLE: 'Legal',
+<b><a name="line72">72   </a></b>	            TERMSANDCONDITIONS: 'Terms and Conditions',
+<b><a name="line73">73   </a></b>	            EULA: 'End User License Agreement',
+<b><a name="line74">74   </a></b>	            OPENSOURCELICENSES: 'Open Source Licenses',
+<b><a name="line75">75   </a></b>	        },
+<b><a name="line76">76   </a></b>	        USER_MENU: {
+<b><a name="line77">77   </a></b>	            LOG_OUT: 'Log Out',
+<b><a name="line78">78   </a></b>	            CONTACT_US: 'Contact Us',
+<b><a name="line79">79   </a></b>	            ACCOUNT_SETTING: 'Account Settings',
+<b><a name="line80">80   </a></b>	        },
+<b><a name="line81">81   </a></b>	        CONTACT_SUPPORT: {
+<b><a name="line82">82   </a></b>	            GENERAL_QUESTIONS: 'General Questions',
+<b><a name="line83">83   </a></b>	            SUPPORT_MESSAGE: 'For questions, feedback, or support please email us at ',
+<b><a name="line84">84   </a></b>	            EMERGENCY_SUPPORT: 'Emergency Support',
+<b><a name="line85">85   </a></b>	            TECHNICAL_ASSISTANCE: 'For technical support, please call ',
+<b><a name="line86">86   </a></b>	        },
+<b><a name="line87">87   </a></b>	    },
+<b><a name="line88">88   </a></b>	};
+<b><a name="line89">89   </a></b>	export default resources;
+<b><a name="line90">90   </a></b>	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre></body>
+</html>

@@ -1,0 +1,7 @@
+--dir
+/Users/E0661236/Desktop/brightlayer-ui/blui-react/cov-int
+--config
+/Users/E0661236/Desktop/brightlayer-ui/blui-react/cov-int/cov-capture/2025-12-16_14_54_26/compiler-config/sources/coverity_config.xml
+cov-filesystem-capture-html-0
+/Users/E0661236/Desktop/brightlayer-ui/blui-react/apps/showcase/index.html
+/Users/E0661236/Desktop/brightlayer-ui/blui-react/apps/showcase/public/index.html

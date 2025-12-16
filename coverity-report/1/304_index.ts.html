@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>Coverity error reader: /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/login-workflow/src/testUtils/index.ts</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head>
+<body link="#000000" vlink="#000000"><pre>
+<b><a name="line1">1    </a></b>	import {
+<b><a name="line2">2    </a></b>	    AuthContextProviderProps,
+<b><a name="line3">3    </a></b>	    RegistrationContextProviderProps,
+<b><a name="line4">4    </a></b>	    RegistrationWorkflowContextProps,
+<b><a name="line5">5    </a></b>	} from '../contexts';
+<b><a name="line6">6    </a></b>	import { i18nAuthInstance } from '../contexts/AuthContext/i18nAuthInstance';
+<b><a name="line7">7    </a></b>	import { i18nRegistrationInstance } from '../contexts/RegistrationContext/i18nRegistrationInstance';
+<b><a name="line8">8    </a></b>	
+<b><a name="line9">9    </a></b>	export const authContextProviderProps: AuthContextProviderProps = {
+<b><a name="line10">10   </a></b>	    language: 'en',
+<b><a name="line11">11   </a></b>	    i18n: i18nAuthInstance,
+<b><a name="line12">12   </a></b>	    navigate: (): void =&gt; {},
+<b><a name="line13">13   </a></b>	    routeConfig: {},
+<b><a name="line14">14   </a></b>	    actions: {
+<b><a name="line15">15   </a></b>	        initiateSecurity: jest.fn(),
+<b><a name="line16">16   </a></b>	        logIn: jest.fn(),
+<b><a name="line17">17   </a></b>	        forgotPassword: jest.fn(),
+<b><a name="line18">18   </a></b>	        verifyResetCode: jest.fn(),
+<b><a name="line19">19   </a></b>	        setPassword: jest.fn(),
+<b><a name="line20">20   </a></b>	        changePassword: jest.fn(),
+<b><a name="line21">21   </a></b>	    },
+<b><a name="line22">22   </a></b>	};
+<b><a name="line23">23   </a></b>	
+<b><a name="line24">24   </a></b>	export const registrationContextProviderProps: RegistrationContextProviderProps = {
+<b><a name="line25">25   </a></b>	    language: 'en',
+<b><a name="line26">26   </a></b>	    i18n: i18nRegistrationInstance,
+<b><a name="line27">27   </a></b>	    navigate: (): void =&gt; {},
+<b><a name="line28">28   </a></b>	    routeConfig: {},
+<b><a name="line29">29   </a></b>	    actions: {
+<b><a name="line30">30   </a></b>	        loadEula: jest.fn(),
+<b><a name="line31">31   </a></b>	        acceptEula: jest.fn(),
+<b><a name="line32">32   </a></b>	        requestRegistrationCode: jest.fn(),
+<b><a name="line33">33   </a></b>	        validateUserRegistrationRequest: jest.fn(),
+<b><a name="line34">34   </a></b>	        createPassword: jest.fn(),
+<b><a name="line35">35   </a></b>	        setAccountDetails: jest.fn(),
+<b><a name="line36">36   </a></b>	        completeRegistration: jest.fn().mockImplementation(() =&gt; Promise.resolve()),
+<b><a name="line37">37   </a></b>	    },
+<b><a name="line38">38   </a></b>	};
+<b><a name="line39">39   </a></b>	
+<b><a name="line40">40   </a></b>	export const registrationWorkflowContextProps: RegistrationWorkflowContextProps = {
+<b><a name="line41">41   </a></b>	    currentScreen: 0,
+<b><a name="line42">42   </a></b>	    totalScreens: 2,
+<b><a name="line43">43   </a></b>	    previousScreen: () =&gt; {},
+<b><a name="line44">44   </a></b>	    screenData: {
+<b><a name="line45">45   </a></b>	        Eula: { accepted: true },
+<b><a name="line46">46   </a></b>	        CreateAccount: { emailAddress: 'emailAddress@emailAddress.emailAddress' },
+<b><a name="line47">47   </a></b>	        VerifyCode: { code: '12345' },
+</pre>
+<table summary="events" bgcolor=#e0e0e0>
+<tr><td><font color="red">
+<a name="error:0"></a>
+<a name="error"></a>
+<!-- merge-key 286607c7cab1d7f56699b017310542cc -->
+<b>(1) Event Sigma main event</b>: </font></td>
+<td><font color="red">A secret, such as a password, cryptographic key, or token is stored in plaintext directly in the source code, in an application's properties, or configuration file. Users with access to the secret may then use the secret to access resources that they otherwise would not have access to. Secret type: Password (generic).</font></td>
+</tr>
+<tr><td><font color="red">
+<a name="error:1"></a>
+<!-- merge-key 286607c7cab1d7f56699b017310542cc -->
+<b>(2) Event remediation</b>: </font></td>
+<td><font color="red">Avoid setting sensitive configuration values as string literals. Instead, these values should be set using variables with the sensitive data loaded from an encrypted file or a secret store.</font></td>
+</tr>
+</table>
+<pre><b><a name="line48">48   </a></b>	        CreatePassword: { password: 'password', confirmPassword: 'confirmPassword' },
+<b><a name="line49">49   </a></b>	        AccountDetails: { firstName: 'firstName', lastName: 'lastName' },
+<b><a name="line50">50   </a></b>	    },
+<b><a name="line51">51   </a></b>	    nextScreen: function (): Promise&lt;void&gt; {
+<b><a name="line52">52   </a></b>	        throw new Error('Function not implemented.');
+<b><a name="line53">53   </a></b>	    },
+<b><a name="line54">54   </a></b>	    updateScreenData: function (): void {
+<b><a name="line55">55   </a></b>	        throw new Error('Function not implemented.');
+<b><a name="line56">56   </a></b>	    },
+<b><a name="line57">57   </a></b>	};
+<b><a name="line58">58   </a></b>	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre></body>
+</html>

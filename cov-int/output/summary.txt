@@ -1,0 +1,18 @@
+cov-analyze --dir cov-int --security --concurrency --webapp-security 
+Analysis summary report:
+------------------------
+Files analyzed                 : 445 Total
+    HTML                       : 2
+    JavaScript                 : 13
+    Text                       : 21
+    TypeScript                 : 409
+Total LoC input to cov-analyze : 59447
+Functions analyzed             : 2640
+Paths analyzed                 : 10543
+Time taken by analysis         : 00:00:34
+Defect occurrences found       : 306 Total
+                                   3 FORWARD_NULL
+                                  47 NO_EFFECT
+                                   9 REVERSE_INULL
+                                 246 SIGMA.hardcoded_secret
+                                   1 SIGMA.unsafe_innerhtml_manipulation

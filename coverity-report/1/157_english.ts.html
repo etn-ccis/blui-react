@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>Coverity error reader: /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/login-workflow/src/contexts/SharedDictionaries/english.ts</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head>
+<body link="#000000" vlink="#000000"><pre>
+<b><a name="line1">1    </a></b>	import { CommonTranslationsFile } from './types';
+<b><a name="line2">2    </a></b>	
+<b><a name="line3">3    </a></b>	const resources: CommonTranslationsFile = {
+<b><a name="line4">4    </a></b>	    translation: {
+<b><a name="line5">5    </a></b>	        ACTIONS: {
+<b><a name="line6">6    </a></b>	            FINISH: 'Finish',
+<b><a name="line7">7    </a></b>	            NEXT: 'Next',
+<b><a name="line8">8    </a></b>	            BACK: 'Back',
+<b><a name="line9">9    </a></b>	            CREATE_ACCOUNT: 'Create Account',
+<b><a name="line10">10   </a></b>	            OKAY: 'Okay',
+<b><a name="line11">11   </a></b>	            CANCEL: 'Cancel',
+<b><a name="line12">12   </a></b>	            CONTINUE: 'Continue',
+<b><a name="line13">13   </a></b>	            DONE: 'Done',
+<b><a name="line14">14   </a></b>	            LOG_IN: 'Log In',
+<b><a name="line15">15   </a></b>	            OKTA_LOG_IN: 'Sign In With Okta',
+<b><a name="line16">16   </a></b>	            LOG_OUT: 'Log Out',
+<b><a name="line17">17   </a></b>	            CLICK_BUTTON: 'Click the button',
+<b><a name="line18">18   </a></b>	            UPDATE_REDUX: 'Click the button to update the redux store value!',
+<b><a name="line19">19   </a></b>	            CHANGE_LANGUAGE: 'Change Language here!',
+<b><a name="line20">20   </a></b>	            GO_HOME: 'Go to Home',
+<b><a name="line21">21   </a></b>	            GO_TEST: 'Go to Test Page',
+<b><a name="line22">22   </a></b>	            RESEND: 'Send Again',
+<b><a name="line23">23   </a></b>	            UPDATE: 'Update',
+<b><a name="line24">24   </a></b>	            REMEMBER: 'Remember Me',
+<b><a name="line25">25   </a></b>	            SUBMIT: 'Submit',
+<b><a name="line26">26   </a></b>	        },
+<b><a name="line27">27   </a></b>	        LABELS: {
+<b><a name="line28">28   </a></b>	            EMAIL: 'Email Address',
+<b><a name="line29">29   </a></b>	            USERNAME: 'Username',
+<b><a name="line30">30   </a></b>	            PASSWORD: 'Password',
+<b><a name="line31">31   </a></b>	            CURRENT_PASSWORD: 'Current Password',
+</pre>
+<table summary="events" bgcolor=#e0e0e0>
+<tr><td><font color="red">
+<a name="error:0"></a>
+<a name="error"></a>
+<!-- merge-key 4885c3704bfed15ae038b132041c5db7 -->
+<b>(1) Event Sigma main event</b>: </font></td>
+<td><font color="red">A secret, such as a password, cryptographic key, or token is stored in plaintext directly in the source code, in an application's properties, or configuration file. Users with access to the secret may then use the secret to access resources that they otherwise would not have access to. Secret type: Password (generic).</font></td>
+</tr>
+<tr><td><font color="red">
+<a name="error:1"></a>
+<!-- merge-key 4885c3704bfed15ae038b132041c5db7 -->
+<b>(2) Event remediation</b>: </font></td>
+<td><font color="red">Avoid setting sensitive configuration values as string literals. Instead, these values should be set using variables with the sensitive data loaded from an encrypted file or a secret store.</font></td>
+</tr>
+</table>
+<pre><b><a name="line32">32   </a></b>	            NEW_PASSWORD: 'New Password',
+<b><a name="line33">33   </a></b>	            OPTIONAL: 'Optional',
+<b><a name="line34">34   </a></b>	            FORGOT_PASSWORD: 'Forgot your password?',
+<b><a name="line35">35   </a></b>	            NEED_ACCOUNT: 'Need an account?',
+<b><a name="line36">36   </a></b>	            VIEW_ALL_EVENTS: 'View All {{count}} Events',
+<b><a name="line37">37   </a></b>	        },
+<b><a name="line38">38   </a></b>	        MESSAGES: {
+<b><a name="line39">39   </a></b>	            EMAIL_SENT: 'Email Sent',
+<b><a name="line40">40   </a></b>	            WELCOME: 'Welcome',
+<b><a name="line41">41   </a></b>	            WELCOME_PROJECT: 'Welcome to {{project}}',
+<b><a name="line42">42   </a></b>	            LOGIN_MESSAGE: &quot;You are 'logged' in&quot;,
+<b><a name="line43">43   </a></b>	            CONGRATS: 'Congratulations!',
+<b><a name="line44">44   </a></b>	            CONTACT: 'Contact an Eaton Support Representative',
+<b><a name="line45">45   </a></b>	            ERROR: 'Error!',
+<b><a name="line46">46   </a></b>	            EMAIL_ENTRY_ERROR: 'Please enter a valid email.',
+<b><a name="line47">47   </a></b>	            USERNAME_ENTRY_ERROR: 'Please enter a valid username',
+<b><a name="line48">48   </a></b>	            SUCCESS: 'Success',
+<b><a name="line49">49   </a></b>	            FAILURE: 'Failure',
+<b><a name="line50">50   </a></b>	            LOADING: 'Loading...',
+<b><a name="line51">51   </a></b>	            REQUEST_ERROR: 'Sorry, there was a problem sending your request.',
+<b><a name="line52">52   </a></b>	            PASSWORD_REQUIRED_ERROR: 'Password Required',
+<b><a name="line53">53   </a></b>	            RETRY: 'Retry',
+<b><a name="line54">54   </a></b>	        },
+<b><a name="line55">55   </a></b>	        FORMS: {
+<b><a name="line56">56   </a></b>	            FIRST_NAME: 'First Name',
+<b><a name="line57">57   </a></b>	            LAST_NAME: 'Last Name',
+<b><a name="line58">58   </a></b>	            PHONE_NUMBER: 'Phone Number',
+<b><a name="line59">59   </a></b>	            PASSWORD: 'Password',
+<b><a name="line60">60   </a></b>	            CONFIRM_PASSWORD: 'Confirm Password',
+<b><a name="line61">61   </a></b>	            PASS_MATCH_ERROR: 'Passwords do not match',
+<b><a name="line62">62   </a></b>	            TOGGLE_PASSWORD_VISIBILITY: 'Toggle password visibility',
+<b><a name="line63">63   </a></b>	            RESET_PASSWORD: 'Reset Password',
+<b><a name="line64">64   </a></b>	            FIRST_NAME_LENGTH_ERROR: 'First name must be at least 1 characters',
+<b><a name="line65">65   </a></b>	            LAST_NAME_LENGTH_ERROR: 'Last name must be at least 1 characters',
+<b><a name="line66">66   </a></b>	        },
+<b><a name="line67">67   </a></b>	        PASSWORD_REQUIREMENTS: {
+<b><a name="line68">68   </a></b>	            LENGTH: '8-16 Characters',
+<b><a name="line69">69   </a></b>	            NUMBERS: 'One number',
+<b><a name="line70">70   </a></b>	            UPPER: 'One uppercase letter',
+<b><a name="line71">71   </a></b>	            LOWER: 'One lowercase letter',
+<b><a name="line72">72   </a></b>	            SPECIAL: 'One special character',
+<b><a name="line73">73   </a></b>	        },
+<b><a name="line74">74   </a></b>	    },
+<b><a name="line75">75   </a></b>	};
+<b><a name="line76">76   </a></b>	export default resources;
+<b><a name="line77">77   </a></b>	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre></body>
+</html>
