@@ -42681,6 +42681,131 @@
       }
     },
     {
+      "type" : "sigma.hardcoded_secret",
+      "subtype" : "pattern_low",
+      "code-language" : "text",
+      "name" : {
+        "en" : "Hard-coded secret"
+      },
+      "description" : {
+        "en" : "A secret, such as a password, cryptographic key, or token is stored in plaintext directly in the source code, in an application's properties, or configuration file. Users with access to the secret may then use the secret to access resources that they otherwise would not have access to."
+      },
+      "local_effect" : {
+        "en" : ""
+      },
+      "origin" : "Coverity",
+      "cim_checker_properties" : {
+        "category" : "Sigma",
+        "cweCategory" : 798,
+        "impact" : "Low",
+        "subcategory" : "pattern_low",
+        "qualityKind" : false,
+        "securityKind" : true,
+        "testKind" : false,
+        "weaknessId" : null
+      }
+    },
+    {
+      "type" : "sigma.hardcoded_secret",
+      "subtype" : "pattern_low",
+      "code-language" : "typescript",
+      "name" : {
+        "en" : "Hard-coded secret"
+      },
+      "description" : {
+        "en" : "A secret, such as a password, cryptographic key, or token is stored in plaintext directly in the source code, in an application's properties, or configuration file. Users with access to the secret may then use the secret to access resources that they otherwise would not have access to."
+      },
+      "local_effect" : {
+        "en" : ""
+      },
+      "origin" : "Coverity",
+      "cim_checker_properties" : {
+        "category" : "Sigma",
+        "cweCategory" : 798,
+        "impact" : "Low",
+        "subcategory" : "pattern_low",
+        "qualityKind" : false,
+        "securityKind" : true,
+        "testKind" : false,
+        "weaknessId" : null
+      }
+    },
+    {
+      "type" : "sigma.reverse_tabnabbing",
+      "subtype" : "core_javascript",
+      "code-language" : "text",
+      "name" : {
+        "en" : "Reverse tabnabbing"
+      },
+      "description" : {
+        "en" : "The application opens a new page in a new window without cutting off the relevance with the original page. The page opened from that target link may have the access to the `location` object of the original page through `window.opener.location`. A malicious page associated with this link will be able to navigate the original page to an arbitrary site, such as a phishing site, and thus, execute a reverse tabnabbing attack."
+      },
+      "local_effect" : {
+        "en" : ""
+      },
+      "origin" : "Coverity",
+      "cim_checker_properties" : {
+        "category" : "Sigma",
+        "cweCategory" : 1022,
+        "impact" : "Low",
+        "subcategory" : "core_javascript",
+        "qualityKind" : false,
+        "securityKind" : true,
+        "testKind" : false,
+        "weaknessId" : null
+      }
+    },
+    {
+      "type" : "sigma.unsafe_innerhtml_manipulation",
+      "subtype" : "react",
+      "code-language" : "text",
+      "name" : {
+        "en" : "Unsafe output of data into innerHtml"
+      },
+      "description" : {
+        "en" : "Setting raw HTML content without proper sanitization to the `innerHTML` property of a DOM element by using the `dangerouslySetInnerHTML` attribute may lead to cross-site scripting vulnerabilities."
+      },
+      "local_effect" : {
+        "en" : ""
+      },
+      "origin" : "Coverity",
+      "cim_checker_properties" : {
+        "category" : "Sigma",
+        "cweCategory" : 79,
+        "impact" : "Low",
+        "subcategory" : "react",
+        "qualityKind" : false,
+        "securityKind" : true,
+        "testKind" : false,
+        "weaknessId" : null
+      }
+    },
+    {
+      "type" : "sigma.weak_hash",
+      "subtype" : "node_crypto",
+      "code-language" : "javascript",
+      "name" : {
+        "en" : "Weak hash algorithm"
+      },
+      "description" : {
+        "en" : "This application uses a weak algorithm to generate hash digests, which may lead to collision attacks."
+      },
+      "local_effect" : {
+        "en" : ""
+      },
+      "origin" : "Coverity",
+      "cim_checker_properties" : {
+        "category" : "Sigma",
+        "cweCategory" : 327,
+        "impact" : "Low",
+        "subcategory" : "node_crypto",
+        "qualityKind" : false,
+        "securityKind" : true,
+        "testKind" : false,
+        "weaknessId" : null
+      }
+    },
+    {
       "type" : "sign_extension",
       "subtype" : null,
       "code-language" : "c/c++",

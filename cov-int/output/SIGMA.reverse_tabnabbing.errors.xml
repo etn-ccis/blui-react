@@ -1,0 +1,129 @@
+<error>
+<domain>OTHER</domain>
+<lang>Text</lang>
+<checker>SIGMA.reverse_tabnabbing</checker>
+<type>sigma.reverse_tabnabbing</type>
+<subtype>core_javascript</subtype>
+<file>/Users/E0661236/Desktop/brightlayer-ui/blui-react/apps/design-patterns/src/App.tsx</file>
+<isRapidScan>true</isRapidScan>
+<function>!&lt;placeholder&gt;!%ANONYMOUS:%ANONYMOUS()Unknown</function>
+<ordered>true</ordered>
+<event>
+<main>true</main>
+<tag>Sigma main event</tag>
+<description>{CovLStrv2{The application opens a new page in a new window without cutting off the relevance with the original page. The page opened from that target link may have the access to the `location` object of the original page through `window.opener.location`. A malicious page associated with this link will be able to navigate the original page to an arbitrary site, such as a phishing site, and thus, execute a reverse tabnabbing attack.}}</description>
+<line>152</line>
+</event>
+<event>
+<remediation>true</remediation>
+<tag>remediation</tag>
+<description>{CovLStrv2{Set the `windowFeatures` parameter to include `noopener` or set the `window.opener` to `null` explicitly, thus disallowing the linked page to access the original page through the `window.opener` object.}}</description>
+<line>152</line>
+</event>
+<extra>reverse_tabnabbing_core_javascript -- design-patterns/src/App.tsx</extra>
+<subcategory>core_javascript</subcategory>
+<antecedentMerge>
+<checker>SIGMA.reverse_tabnabbing_core_javascript</checker>
+</antecedentMerge>
+<antecedentMerge>
+<checker>REVERSE_TABNABBING</checker>
+<file>/Users/E0661236/Desktop/brightlayer-ui/blui-react/apps/design-patterns/src/App.tsx</file>
+<function>!&lt;placeholder&gt;!%ANONYMOUS:%ANONYMOUS()Unknown</function>
+<extra>reverse_tabnabbing_core_javascript -- design-patterns/src/App.tsx</extra>
+</antecedentMerge>
+<typePropertiesGroup>
+<category>Sigma</category>
+<impact>Low</impact>
+<type>Reverse tabnabbing</type>
+<cwe>1022</cwe>
+<localEffect></localEffect>
+<longDescription>The application opens a new page in a new window without cutting off the relevance with the original page. The page opened from that target link may have the access to the `location` object of the original page through `window.opener.location`. A malicious page associated with this link will be able to navigate the original page to an arbitrary site, such as a phishing site, and thus, execute a reverse tabnabbing attack.</longDescription>
+<securityKind>true</securityKind>
+</typePropertiesGroup>
+</error>
+<error>
+<domain>OTHER</domain>
+<lang>Text</lang>
+<checker>SIGMA.reverse_tabnabbing</checker>
+<type>sigma.reverse_tabnabbing</type>
+<subtype>core_javascript</subtype>
+<file>/Users/E0661236/Desktop/brightlayer-ui/blui-react/apps/design-patterns/src/App.tsx</file>
+<isRapidScan>true</isRapidScan>
+<function>!&lt;placeholder&gt;!%ANONYMOUS:%ANONYMOUS()Unknown</function>
+<ordered>true</ordered>
+<event>
+<main>true</main>
+<tag>Sigma main event</tag>
+<description>{CovLStrv2{The application opens a new page in a new window without cutting off the relevance with the original page. The page opened from that target link may have the access to the `location` object of the original page through `window.opener.location`. A malicious page associated with this link will be able to navigate the original page to an arbitrary site, such as a phishing site, and thus, execute a reverse tabnabbing attack.}}</description>
+<line>161</line>
+</event>
+<event>
+<remediation>true</remediation>
+<tag>remediation</tag>
+<description>{CovLStrv2{Set the `windowFeatures` parameter to include `noopener` or set the `window.opener` to `null` explicitly, thus disallowing the linked page to access the original page through the `window.opener` object.}}</description>
+<line>161</line>
+</event>
+<extra>reverse_tabnabbing_core_javascript -- design-patterns/src/App.tsx</extra>
+<subcategory>core_javascript</subcategory>
+<antecedentMerge>
+<checker>SIGMA.reverse_tabnabbing_core_javascript</checker>
+</antecedentMerge>
+<antecedentMerge>
+<checker>REVERSE_TABNABBING</checker>
+<file>/Users/E0661236/Desktop/brightlayer-ui/blui-react/apps/design-patterns/src/App.tsx</file>
+<function>!&lt;placeholder&gt;!%ANONYMOUS:%ANONYMOUS()Unknown</function>
+<extra>reverse_tabnabbing_core_javascript -- design-patterns/src/App.tsx</extra>
+</antecedentMerge>
+<typePropertiesGroup>
+<category>Sigma</category>
+<impact>Low</impact>
+<type>Reverse tabnabbing</type>
+<cwe>1022</cwe>
+<localEffect></localEffect>
+<longDescription>The application opens a new page in a new window without cutting off the relevance with the original page. The page opened from that target link may have the access to the `location` object of the original page through `window.opener.location`. A malicious page associated with this link will be able to navigate the original page to an arbitrary site, such as a phishing site, and thus, execute a reverse tabnabbing attack.</longDescription>
+<securityKind>true</securityKind>
+</typePropertiesGroup>
+</error>
+<error>
+<domain>OTHER</domain>
+<lang>Text</lang>
+<checker>SIGMA.reverse_tabnabbing</checker>
+<type>sigma.reverse_tabnabbing</type>
+<subtype>core_javascript</subtype>
+<file>/Users/E0661236/Desktop/brightlayer-ui/blui-react/apps/design-patterns/src/App.tsx</file>
+<isRapidScan>true</isRapidScan>
+<function>!&lt;placeholder&gt;!%ANONYMOUS:%ANONYMOUS()Unknown</function>
+<ordered>true</ordered>
+<event>
+<main>true</main>
+<tag>Sigma main event</tag>
+<description>{CovLStrv2{The application opens a new page in a new window without cutting off the relevance with the original page. The page opened from that target link may have the access to the `location` object of the original page through `window.opener.location`. A malicious page associated with this link will be able to navigate the original page to an arbitrary site, such as a phishing site, and thus, execute a reverse tabnabbing attack.}}</description>
+<line>176</line>
+</event>
+<event>
+<remediation>true</remediation>
+<tag>remediation</tag>
+<description>{CovLStrv2{Set the `windowFeatures` parameter to include `noopener` or set the `window.opener` to `null` explicitly, thus disallowing the linked page to access the original page through the `window.opener` object.}}</description>
+<line>176</line>
+</event>
+<extra>reverse_tabnabbing_core_javascript -- design-patterns/src/App.tsx</extra>
+<subcategory>core_javascript</subcategory>
+<antecedentMerge>
+<checker>SIGMA.reverse_tabnabbing_core_javascript</checker>
+</antecedentMerge>
+<antecedentMerge>
+<checker>REVERSE_TABNABBING</checker>
+<file>/Users/E0661236/Desktop/brightlayer-ui/blui-react/apps/design-patterns/src/App.tsx</file>
+<function>!&lt;placeholder&gt;!%ANONYMOUS:%ANONYMOUS()Unknown</function>
+<extra>reverse_tabnabbing_core_javascript -- design-patterns/src/App.tsx</extra>
+</antecedentMerge>
+<typePropertiesGroup>
+<category>Sigma</category>
+<impact>Low</impact>
+<type>Reverse tabnabbing</type>
+<cwe>1022</cwe>
+<localEffect></localEffect>
+<longDescription>The application opens a new page in a new window without cutting off the relevance with the original page. The page opened from that target link may have the access to the `location` object of the original page through `window.opener.location`. A malicious page associated with this link will be able to navigate the original page to an arbitrary site, such as a phishing site, and thus, execute a reverse tabnabbing attack.</longDescription>
+<securityKind>true</securityKind>
+</typePropertiesGroup>
+</error>

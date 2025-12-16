@@ -1,8 +1,8 @@
-/Users/E0661236/coverity/cov-analysis-macos-arm-2024.9.0/bin/cov-security-da --dir cov-int --project-dirs packages/component-library 
+/Users/E0661236/coverity/cov-analysis-macos-arm-2024.9.0/bin/cov-security-da --dir cov-int --project-dirs . 
 cov-security-da version 2024.9.0 on Darwin 24.4.0 arm64
 Internal version numbers: 950e903b4e p-2024.9-push-30
 
-da: Resolved root symlinks in /var/folders/8_/tmw51vsd04ggy4bfl2rvsnn80000gp/T/cov-E0661236/88d173d0c8fb00fb78e6bec5bd457290/template_da to /private/var/folders/8_/tmw51vsd04ggy4bfl2rvsnn80000gp/T/cov-E0661236/88d173d0c8fb00fb78e6bec5bd457290/template_da
-da: [STATUS] Running template-DA on /Users/E0661236/Desktop/brightlayer-ui/blui-react/packages/component-library
+da: Resolved root symlinks in /var/folders/8_/tmw51vsd04ggy4bfl2rvsnn80000gp/T/cov-E0661236/66c99ee66408342f976ddaec9ee15743/template_da to /private/var/folders/8_/tmw51vsd04ggy4bfl2rvsnn80000gp/T/cov-E0661236/66c99ee66408342f976ddaec9ee15743/template_da
+da: [STATUS] Running template-DA on /Users/E0661236/Desktop/brightlayer-ui/blui-react
 template-da: [STATUS] Found 0 XSS-escapable sites in 0 analyzed templates.
 da: Finished running template-DA.

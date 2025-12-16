@@ -261,7 +261,7 @@
         "UNIQUE_SYMBOL_CHECKER:reportCUDA_SPECIFIERS_INCONSISTENCY"
       ]
     },
-    "time" : 14,
+    "time" : 66,
     "line-counts" : {
       "Apex" : {
         "blank-lines" : 0,
@@ -304,9 +304,9 @@
         "comment-lines" : 0
       },
       "JavaScript" : {
-        "blank-lines" : 3,
-        "code-lines" : 90,
-        "comment-lines" : 3
+        "blank-lines" : 195,
+        "code-lines" : 1881,
+        "comment-lines" : 479
       },
       "Kotlin" : {
         "blank-lines" : 0,
@@ -349,14 +349,14 @@
         "comment-lines" : 0
       },
       "Text" : {
-        "blank-lines" : 0,
-        "code-lines" : 252,
-        "comment-lines" : 0
+        "blank-lines" : 30,
+        "code-lines" : 2648,
+        "comment-lines" : 11
       },
       "TypeScript" : {
-        "blank-lines" : 5069,
-        "code-lines" : 19341,
-        "comment-lines" : 24797
+        "blank-lines" : 25619,
+        "code-lines" : 137757,
+        "comment-lines" : 68924
       },
       "Visual Basic" : {
         "blank-lines" : 0,
@@ -365,29 +365,89 @@
       }
     },
     "file-statistics-by-extension" : {
-      "cjs" : {
+      "<redacted>" : {
+        "files" : 7,
+        "total-bytes" : 504
+      },
+      "backup" : {
         "files" : 1,
-        "total-bytes" : 585
+        "total-bytes" : 21898
+      },
+      "cjs" : {
+        "files" : 3,
+        "total-bytes" : 1774
+      },
+      "css" : {
+        "files" : 15,
+        "total-bytes" : 4540
+      },
+      "html" : {
+        "files" : 16,
+        "total-bytes" : 23710
+      },
+      "jpeg" : {
+        "files" : 2,
+        "total-bytes" : 12306
       },
       "js" : {
-        "files" : 104,
-        "total-bytes" : 321905
+        "files" : 1091,
+        "total-bytes" : 2676899
       },
       "json" : {
-        "files" : 6,
-        "total-bytes" : 9128
+        "files" : 58,
+        "total-bytes" : 77703
+      },
+      "local" : {
+        "files" : 1,
+        "total-bytes" : 153
+      },
+      "lock" : {
+        "files" : 1,
+        "total-bytes" : 194559
       },
       "md" : {
+        "files" : 65,
+        "total-bytes" : 245570
+      },
+      "mdx" : {
+        "files" : 79,
+        "total-bytes" : 255499
+      },
+      "mjs" : {
+        "files" : 8,
+        "total-bytes" : 8057
+      },
+      "mts" : {
+        "files" : 2,
+        "total-bytes" : 3058
+      },
+      "sample" : {
+        "files" : 2,
+        "total-bytes" : 201
+      },
+      "snap" : {
         "files" : 4,
-        "total-bytes" : 37064
+        "total-bytes" : 261993
       },
       "ts" : {
-        "files" : 98,
-        "total-bytes" : 1542149
+        "files" : 598,
+        "total-bytes" : 5946020
       },
       "tsx" : {
-        "files" : 67,
-        "total-bytes" : 383954
+        "files" : 787,
+        "total-bytes" : 2663769
+      },
+      "txt" : {
+        "files" : 6,
+        "total-bytes" : 402
+      },
+      "yaml" : {
+        "files" : 1,
+        "total-bytes" : 97
+      },
+      "yml" : {
+        "files" : 3,
+        "total-bytes" : 1032
       }
     },
     "ident" : "2024.9.0 (build 950e903b4e p-2024.9-push-30)",
@@ -402,28 +462,40 @@
     "cxx" : true,
     "enable-parse-warnings" : false,
     "failures" : 0,
-    "files-analyzed" : 104,
+    "files-analyzed" : 1187,
     "force" : false,
-    "function-metrics-count" : 819,
-    "functions-analyzed" : 819,
+    "function-metrics-count" : 5331,
+    "functions-analyzed" : 5331,
     "incremental-hits" : 0,
-    "incremental-misses" : 6776,
-    "dyncg-sites-resolved" : 1249,
-    "dyncg-sites-total" : 4912,
+    "incremental-misses" : 44596,
+    "dyncg-sites-resolved" : 11698,
+    "dyncg-sites-total" : 31292,
     "max-mem" : 2048,
     "memout-count" : 0,
     "pathout-count" : 0,
     "paths" : 5000,
-    "paths-analyzed" : 3289,
+    "paths-analyzed" : 18660,
     "peak-mem-bytes" : 0,
     "security" : true,
-    "tus-count" : 115,
+    "tus-count" : 1360,
     "string-graph-nodes" : 0,
     "web-app-entry-points" : 0,
     "web-app-views-unused" : 0,
     "ta.code_age_thresholds" : "0, 0",
     "enabled-checkers" : "ALLOC_FREE_MISMATCH ANDROID_CAPABILITY_LEAK ANGULAR_EXPRESSION_INJECTION ANGULAR_SCE_DISABLED ANONYMOUS_DB_CONNECTION ARRAY_VS_SINGLETON ASPNET_MVC_VERSION_HEADER ASSERT_SIDE_EFFECT ATOMICITY ATTRIBUTE_NAME_CONFLICT AUTO_CAUSES_COPY BAD_ALLOC_ARITHMETIC BAD_ALLOC_STRLEN BAD_CERT_VERIFICATION BAD_CHECK_OF_WAIT_COND BAD_COMPARE BAD_EQ BAD_EQ_TYPES BAD_FREE BAD_LOCK_OBJECT BAD_OVERRIDE BAD_SHIFT BAD_SIZEOF BUFFER_SIZE CALL_SUPER CHAR_IO CHECKED_RETURN CHROOT COM.BAD_FREE COM.BSTR.CONV CONFIG.ANDROID_GRADLE_OBFUSCATION_NOT_ENABLED CONFIG.ASP_VIEWSTATE_MAC CONFIG.BEEGO_CSRF_PROTECTION_DISABLED CONFIG.COOKIE_SIGNING_DISABLED CONFIG.DEAD_AUTHORIZATION_RULE CONFIG.DYNAMIC_DATA_HTML_COMMENT CONFIG.ENABLED_DEBUG_MODE CONFIG.ENABLED_TRACE_MODE CONFIG.HANA_XS_PREVENT_XSRF_DISABLED CONFIG.UNSAFE_SESSION_TIMEOUT CONSTANT_EXPRESSION_RESULT COOKIE_INJECTION COOKIE_SERIALIZER_CONFIG COPY_INSTEAD_OF_MOVE COPY_PASTE_ERROR CORS_MISCONFIGURATION CORS_MISCONFIGURATION_AUDIT CSRF CSS_INJECTION CTOR_DTOR_LEAK CUDA.COLLECTIVE_WARP_SHUFFLE_WIDTH CUDA.CUDEVICE_HANDLES CUDA.DEVICE_DEPENDENT CUDA.DEVICE_DEPENDENT_CALLBACKS CUDA.DIVERGENCE_AT_COLLECTIVE_OPERATION CUDA.ERROR_INTERFACE CUDA.ERROR_KERNEL_LAUNCH CUDA.FORK CUDA.INACTIVE_THREAD_AT_COLLECTIVE_WARP CUDA.INITIATION_OBJECT_DEVICE_THREAD_BLOCK CUDA.INVALID_MEMORY_ACCESS CUDA.SHARE_FUNCTION CUDA.SHARE_OBJECT_STREAM_ASSOCIATED CUDA.SPECIFIERS_INCONSISTENCY CUDA.SYNCHRONIZE_CALLBACKS CUDA.SYNCHRONIZE_TERMINATION DC.DANGEROUS DC.DEADLOCK DC.DEBUGAPI DC.PREDICTABLE_KEY_PASSWORD DC.STREAM_BUFFER DC.WEAK_CRYPTO DEADCODE DELETE_ARRAY DELETE_VOID DENY_LIST_FOR_AUTHN DETEKT.* DIVIDE_BY_ZERO DOM_XSS DYNAMIC_OBJECT_ATTRIBUTES EL_INJECTION END_OF_LIFE_RAILS END_OF_LIFE_RUBY EVALUATION_ORDER EXPOSED_DIRECTORY_LISTING FB.* FORMAT_STRING_INJECTION FORWARD_NULL GLOBAL_INIT_ORDER GUARDED_BY_VIOLATION HARDCODED_CREDENTIALS HEADER_INJECTION HIBERNATE_BAD_HASHCODE IDENTICAL_BRANCHES IDENTIFIER_TYPO IMPLICIT_INTENT INCOMPATIBLE_CAST INEFFICIENT_RESERVE INFINITE_LOOP INSECURE_COMMUNICATION INSECURE_COOKIE INSECURE_CSP INSECURE_FILE_PERMISSIONS INSECURE_NETWORK_BIND INSECURE_RANDOM INSECURE_SALT INSUFFICIENT_LOGGING INTEGER_OVERFLOW INVALIDATE_ITERATOR JAVA_CODE_INJECTION JCR_INJECTION JSONWEBTOKEN_UNTRUSTED_DECODE JSP_DYNAMIC_INCLUDE JSP_SQL_INJECTION LDAP_INJECTION LOCALSTORAGE_MANIPULATION LOCK LOCK_EVASION LOCK_INVERSION MASS_ASSIGNMENT MISMATCHED_ITERATOR MISSING_AUTHZ MISSING_BREAK MISSING_COMMA MISSING_IFRAME_SANDBOX MISSING_LOCK MISSING_MOVE_ASSIGNMENT MISSING_PASSWORD_VALIDATOR MISSING_PERMISSION_FOR_BROADCAST MISSING_RESTORE MISSING_RETURN MISSING_THROW MOBILE_ID_MISUSE MULTIPLE_INIT_SMART_PTRS NEGATIVE_RETURNS NESTING_INDENT_MISMATCH NON_STATIC_GUARDING_STATIC NOSQL_QUERY_INJECTION NO_EFFECT NULL_RETURNS OAUTH2_MISCONFIGURATION OGNL_INJECTION OPEN_ARGS OPEN_REDIRECT ORDER_REVERSAL ORM_LOAD_NULL_CHECK ORM_UNNECESSARY_GET OS_CMD_INJECTION OVERFLOW_BEFORE_WIDEN OVERLAPPING_COPY OVERRUN PASS_BY_VALUE PATH_MANIPULATION PMD.* PRECEDENCE_ERROR PREDICTABLE_RANDOM_SEED PRINTF_ARGS PROPERTY_MIXUP RAILS_DEFAULT_ROUTES RAILS_DEVISE_CONFIG RAILS_MISSING_FILTER_ACTION READLINK REGEX_CONFUSION REGEX_INJECTION REGEX_MISSING_ANCHOR RESOURCE_LEAK RETURN_LOCAL REVERSE_INULL REVERSE_NEGATIVE REVERSE_TABNABBING RISKY_CRYPTO RUBY_VULNERABLE_LIBRARY SCRIPT_CODE_INJECTION SEALED_JAR_ESCAPE SECURE_TEMP SENSITIVE_DATA_LEAK SERVLET_ATOMICITY SESSIONSTORAGE_MANIPULATION SESSION_FIXATION SESSION_MANIPULATION SIGMA.* SIGN_EXTENSION SIZEOF_MISMATCH SLEEP SOCKET_ACCEPT_ALL_ORIGINS SQLI STATIC_API_KEY STRAY_SEMICOLON STREAM_FORMAT_STATE STRICT_TRANSPORT_SECURITY STRING_NULL STRING_OVERFLOW STRING_SIZE SUPPRESSED_ERROR SWAPPED_ARGUMENTS TAINTED_ENVIRONMENT_WITH_EXECUTION TAINTED_SCALAR TAINTED_STRING TAINT_ASSERT TEMPLATE_INJECTION TOCTOU TRUST_BOUNDARY_VIOLATION UNCAUGHT_EXCEPT UNCHECKED_ORIGIN UNENCRYPTED_SENSITIVE_DATA UNEXPECTED_CONTROL_FLOW UNINIT UNINIT_CTOR UNINTENDED_GLOBAL UNINTENDED_INTEGER_DIVISION UNKNOWN_LANGUAGE_INJECTION UNLESS_CASE_SENSITIVE_ROUTE_MATCHING UNLOCKED_ACCESS UNLOGGED_SECURITY_EXCEPTION UNREACHABLE UNRESTRICTED_ACCESS_TO_FILE UNRESTRICTED_DISPATCH UNRESTRICTED_MESSAGE_TARGET UNSAFE_BASIC_AUTH UNSAFE_DESERIALIZATION UNSAFE_FUNCTIONALITY UNSAFE_JNI UNSAFE_NAMED_QUERY UNSAFE_REFLECTION UNSAFE_SESSION_SETTING UNSAFE_XML_PARSE_CONFIG UNUSED_VALUE URL_MANIPULATION USELESS_CALL USER_POINTER USE_AFTER_FREE USE_AFTER_MOVE VARARGS VIRTUAL_DTOR VOLATILE_ATOMICITY WEAK_GUARD WEAK_PASSWORD_HASH WRAPPER_ESCAPE WRITE_CONST_FIELD WRONG_METHOD XML_EXTERNAL_ENTITY XPATH_INJECTION XSS Y2K38_SAFETY",
-    "total-new-defect-count" : 0,
+    "COPY_PASTE_ERROR-new-defect-count" : 1,
+    "DEADCODE-new-defect-count" : 3,
+    "DOM_XSS-new-defect-count" : 2,
+    "FORWARD_NULL-new-defect-count" : 3,
+    "IDENTICAL_BRANCHES-new-defect-count" : 3,
+    "NO_EFFECT-new-defect-count" : 69,
+    "REVERSE_INULL-new-defect-count" : 13,
+    "RISKY_CRYPTO-new-defect-count" : 1,
+    "SIGMA.hardcoded_secret-new-defect-count" : 264,
+    "SIGMA.reverse_tabnabbing-new-defect-count" : 3,
+    "SIGMA.unsafe_innerhtml_manipulation-new-defect-count" : 3,
+    "SIGMA.weak_hash-new-defect-count" : 1,
+    "total-new-defect-count" : 366,
     "total-input-files" : -1,
     "matching-input-files" : -1,
     "wu-time-milliseconds" : {
@@ -442,11 +514,11 @@
       "fortran" : 0,
       "go" : 0,
       "html" : 0,
-      "javascript" : 48647,
+      "javascript" : 445407,
       "javascript-minified" : 0,
-      "javascript-es6-module" : 26917,
+      "javascript-es6-module" : 175368,
       "javascript-es6-module-minified" : 0,
-      "javascript-html" : 0,
+      "javascript-html" : 39151,
       "javascript-html-minified" : 0,
       "javascript-hana-xsc-source" : 0,
       "javascript-hana-xsc-library" : 0,
@@ -463,9 +535,9 @@
       "scala" : 0,
       "text-files" : 0,
       "typescript" : 0,
-      "typescript-es6-module" : 294529,
+      "typescript-es6-module" : 21417480,
       "typescript-jsx" : 0,
-      "typescript-jsx-es6-module" : 6868343,
+      "typescript-jsx-es6-module" : 87264179,
       "vb-source" : 0,
       "vb-generated" : 0,
       "vue.js-sfc" : 0,
