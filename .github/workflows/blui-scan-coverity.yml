@@ -200,6 +200,6 @@ jobs:
         echo "Committing Coverity defects..."
         cov-commit-defects --dir idir \
           --url https://coverity.eaton.com/ \
-          --target "blui-react" \
+          --target "blui" \
           --stream "blui-react" \
           --auth-key-file $AUTH_KEYFILE
