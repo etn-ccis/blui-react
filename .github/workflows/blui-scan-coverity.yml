@@ -196,7 +196,7 @@ jobs:
       if: ${{ github.event_name == 'pull_request' }}
       run: |
         # Only run this step if there are high or critical issues
-        high_issues_count=$(jq '.issues[] | select(.checkerProperties.impact == "High" or .checkerProperties.impact == "Critical")' coverity-results.json | wc -l)
+        high_issues_count=$(jq '.issues[] | select(.checkerProperties.impact == "High" or .checkerProperties.impact == "Critical" or .checkerProperties.impact == "Medium")' coverity-results.json | wc -l)
         if [ $high_issues_count -eq 0 ]; then
           echo "No high or critical issues found. Skipping defect commit."
           exit 0
