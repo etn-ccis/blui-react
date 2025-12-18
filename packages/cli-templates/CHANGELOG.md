@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.0.2 (December 18, 2025)
+
+### Fixed
+
+- CLI generated project has misaligned drawer header menu icon button. ([#116](https://github.com/etn-ccis/blui-react/issues/116))
+
 ## v2.0.1 (September 11, 2025)
 
 ### Fixed
