@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  next: 15.4.7
+  next: 15.6.0-canary.60
   nth-check: 2.1.1
   css-select: 5.2.2
   svgo: 3.0.0
@@ -15,7 +15,8 @@ overrides:
   react: 19.2.3
   react-dom: 19.2.3
   react-is: 19.2.3
-  '@mui/docs': 7.3.6
+  jws: 4.0.1
+  node-forge: 1.3.3
 
 importers:
 
@@ -215,7 +216,7 @@ importers:
         specifier: ^7.3.0
         version: 7.3.5(@babel/preset-env@7.28.5(@babel/core@7.28.5))(jiti@1.21.7)
       '@mui/docs':
-        specifier: 7.3.6
+        specifier: ^7.3.1
         version: 7.3.6(15e4190dd712d10dcfb398faeaf56e43)
       '@mui/envinfo':
         specifier: ^2.0.28
@@ -701,7 +702,7 @@ importers:
         specifier: ^7.1.1
         version: 7.3.5(@babel/preset-env@7.28.5(@babel/core@7.28.5))(jiti@1.21.7)
       '@mui/docs':
-        specifier: 7.3.6
+        specifier: ^7.1.1
         version: 7.3.6(15e4190dd712d10dcfb398faeaf56e43)
       '@mui/envinfo':
         specifier: ^2.0.28
@@ -4558,7 +4559,7 @@ packages:
       '@types/react': ^17.0.0 || ^18.0.0 || ^19.0.0
       chai: ^6.0.1
       csstype: ^3.1.3
-      next: 15.4.7
+      next: 15.6.0-canary.60
       react: 19.2.3
     peerDependenciesMeta:
       '@types/react':
@@ -10119,17 +10120,11 @@ packages:
     resolution: {integrity: sha512-ZZow9HBI5O6EPgSJLUb8n2NKgmVWTwCvHGwFuJlMjvLFqlGG6pjirPhtdsseaLZjSibD8eegzmYpUZwoIlj2cQ==}
     engines: {node: '>=4.0'}
 
-  jwa@1.4.2:
-    resolution: {integrity: sha512-eeH5JO+21J78qMvTIDdBXidBd6nG2kZjg5Ohz/1fpa28Z4CcsWUzJ1ZZyFq/3z3N17aZy+ZuBoHljASbL1WfOw==}
-
   jwa@2.0.1:
     resolution: {integrity: sha512-hRF04fqJIP8Abbkq5NKGN0Bbr3JxlQ+qhZufXVr0DvujKy93ZCbXZMHDL4EOtodSbCWxOqR8MS1tXA5hwqCXDg==}
 
-  jws@3.2.2:
-    resolution: {integrity: sha512-YHlZCB6lMTllWDtSPHz/ZXTsi8S00usEV6v1tjq8tOUZzw7DpSDWVXjXDre6ed1w/pd495ODpHZYSdkRTsa0HA==}
-
-  jws@4.0.0:
-    resolution: {integrity: sha512-KDncfTmOZoOMTFG4mBlG0qUIOlc03fmzH+ru6RgYVZhPkyiy/92Owlt/8UEN+a4TXR1FQetfIpJE8ApdvdVxTg==}
+  jws@4.0.1:
+    resolution: {integrity: sha512-EKI/M/yqPncGUUh44xz0PxSidXFr/+r0pA70+gIYhjv+et7yxM+s29Y+VGDkovRofQem0fs7Uvf4+YmAdyRduA==}
 
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
@@ -10853,8 +10848,8 @@ packages:
     resolution: {integrity: sha512-dRB78srN/l6gqWulah9SrxeYnxeddIG30+GOqK/9OlLVyLg3HPnr6SqOWTWOXKRwC2eGYCkZ59NNuSgvSrpgOA==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
 
-  node-forge@1.3.1:
-    resolution: {integrity: sha512-dPEtOeMvF9VMcYV/1Wb8CPoVAXtp6MKMlcbAt4ddqmGqUJ6fQZFXkNZNkNlfevtNkGtaSoXf/vNNNSvgrdXwtA==}
+  node-forge@1.3.3:
+    resolution: {integrity: sha512-rLvcdSyRCyouf6jcOIPe/BgwG/d7hKjzMKOas33/pHEr6gbq18IK9zV7DiPvzsz0oBJPme6qr6H6kGZuI9/DZg==}
     engines: {node: '>= 6.13.0'}
 
   node-gyp@11.5.0:
@@ -22873,7 +22868,7 @@ snapshots:
       gcp-metadata: 8.1.2
       google-logging-utils: 1.1.3
       gtoken: 8.0.0
-      jws: 4.0.0
+      jws: 4.0.1
     transitivePeerDependencies:
       - supports-color
 
@@ -22884,7 +22879,7 @@ snapshots:
       gaxios: 6.7.1(encoding@0.1.13)
       gcp-metadata: 6.1.1(encoding@0.1.13)
       gtoken: 7.1.0(encoding@0.1.13)
-      jws: 4.0.0
+      jws: 4.0.1
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -22953,7 +22948,7 @@ snapshots:
   gtoken@7.1.0(encoding@0.1.13):
     dependencies:
       gaxios: 6.7.1(encoding@0.1.13)
-      jws: 4.0.0
+      jws: 4.0.1
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -22961,7 +22956,7 @@ snapshots:
   gtoken@8.0.0:
     dependencies:
       gaxios: 7.1.3
-      jws: 4.0.0
+      jws: 4.0.1
     transitivePeerDependencies:
       - supports-color
 
@@ -25040,7 +25035,7 @@ snapshots:
 
   jsonwebtoken@9.0.2:
     dependencies:
-      jws: 3.2.2
+      jws: 4.0.1
       lodash.includes: 4.3.0
       lodash.isboolean: 3.0.3
       lodash.isinteger: 4.0.4
@@ -25155,24 +25150,13 @@ snapshots:
       object.assign: 4.1.7
       object.values: 1.2.1
 
-  jwa@1.4.2:
-    dependencies:
-      buffer-equal-constant-time: 1.0.1
-      ecdsa-sig-formatter: 1.0.11
-      safe-buffer: 5.2.1
-
   jwa@2.0.1:
     dependencies:
       buffer-equal-constant-time: 1.0.1
       ecdsa-sig-formatter: 1.0.11
       safe-buffer: 5.2.1
 
-  jws@3.2.2:
-    dependencies:
-      jwa: 1.4.2
-      safe-buffer: 5.2.1
-
-  jws@4.0.0:
+  jws@4.0.1:
     dependencies:
       jwa: 2.0.1
       safe-buffer: 5.2.1
@@ -26134,7 +26118,7 @@ snapshots:
       fetch-blob: 3.2.0
       formdata-polyfill: 4.0.10
 
-  node-forge@1.3.1: {}
+  node-forge@1.3.3: {}
 
   node-gyp@11.5.0:
     dependencies:
@@ -28112,7 +28096,7 @@ snapshots:
   selfsigned@2.4.1:
     dependencies:
       '@types/node-forge': 1.3.14
-      node-forge: 1.3.1
+      node-forge: 1.3.3
 
   semver-diff@3.1.1:
     dependencies:
