@@ -58,3 +58,4 @@ npx create-blui-react-app
 ## Browser Support
 
 Brightlayer UI CLI Templates will work with any modern browser. For details refer to our [Browser Support](https://brightlayer-ui.github.io/development/frameworks-web/react#browser-support) documentation.
+
