@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  next: 15.6.0-canary.60
+  next: 16.1.0-canary.31
   nth-check: 2.1.1
   css-select: 5.2.2
   svgo: 3.0.0
@@ -4559,7 +4559,7 @@ packages:
       '@types/react': ^17.0.0 || ^18.0.0 || ^19.0.0
       chai: ^6.0.1
       csstype: ^3.1.3
-      next: 15.6.0-canary.60
+      next: 16.1.0-canary.31
       react: 19.2.3
     peerDependenciesMeta:
       '@types/react':
