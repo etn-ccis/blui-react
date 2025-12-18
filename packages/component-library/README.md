@@ -73,5 +73,3 @@ yarn start:docs
 ```
 
 from the root directory.
-
-test
