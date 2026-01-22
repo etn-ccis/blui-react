@@ -482,8 +482,8 @@ importers:
         specifier: ^9.2.0
         version: 9.2.0(@types/react@19.2.6)(react@19.2.0)(redux@5.0.1)
       react-router-dom:
-        specifier: ^5.1.2
-        version: 5.3.4(react@19.2.0)
+        specifier: ^7.12.0
+        version: 7.12.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       redux:
         specifier: ^5.0.1
         version: 5.0.1
@@ -528,7 +528,7 @@ importers:
         specifier: ^7.1.9
         version: 7.1.34
       '@types/react-router-dom':
-        specifier: ^5.1.5
+        specifier: ^5.3.3
         version: 5.3.3
       '@types/react-test-renderer':
         specifier: ^17.0.1
@@ -769,8 +769,8 @@ importers:
         specifier: ^7.2.1
         version: 7.2.9(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       react-router-dom:
-        specifier: ^5.1.2
-        version: 5.3.4(react@19.2.0)
+        specifier: ^7.12.0
+        version: 7.12.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       redux:
         specifier: ^4.0.5
         version: 4.2.1
@@ -815,7 +815,7 @@ importers:
         specifier: ^7.1.9
         version: 7.1.34
       '@types/react-router-dom':
-        specifier: ^5.1.5
+        specifier: ^5.3.3
         version: 5.3.3
       '@types/react-test-renderer':
         specifier: ^17.0.1
@@ -909,7 +909,7 @@ importers:
         version: 7.14.0(encoding@0.1.13)
       '@okta/okta-react':
         specifier: ^6.9.0
-        version: 6.10.0(@okta/okta-auth-js@7.14.0(encoding@0.1.13))(react-dom@19.2.0(react@19.2.0))(react-router-dom@6.30.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react@19.2.0)
+        version: 6.10.0(@okta/okta-auth-js@7.14.0(encoding@0.1.13))(react-dom@19.2.0(react@19.2.0))(react-router-dom@7.12.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react@19.2.0)
       '@pmmmwh/react-refresh-webpack-plugin':
         specifier: ^0.5.3
         version: 0.5.17(react-refresh@0.11.0)(type-fest@4.41.0)(webpack-dev-server@5.2.1(webpack@5.102.1))(webpack@5.102.1)
@@ -1037,8 +1037,8 @@ importers:
         specifier: ^0.11.0
         version: 0.11.0
       react-router-dom:
-        specifier: ^6.8.0
-        version: 6.30.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: ^7.12.0
+        version: 7.12.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       resolve:
         specifier: ^1.20.0
         version: 1.22.11
@@ -1173,8 +1173,8 @@ importers:
         specifier: ^13.0.3
         version: 13.5.0(i18next@23.16.8)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       react-router-dom:
-        specifier: ^6.8.0
-        version: 6.30.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: ^7.12.0
+        version: 7.12.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       react-scripts:
         specifier: ^5.0.0
         version: 5.0.1(eslint@8.57.1)(react@19.2.0)(type-fest@4.41.0)(typescript@5.9.3)(yaml@2.8.1)
@@ -1988,7 +1988,7 @@ importers:
         version: 7.14.0(encoding@0.1.13)
       '@okta/okta-react':
         specifier: ^6.9.0
-        version: 6.10.0(@okta/okta-auth-js@7.14.0(encoding@0.1.13))(react-dom@19.2.0(react@19.2.0))(react-router-dom@6.30.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react@19.2.0)
+        version: 6.10.0(@okta/okta-auth-js@7.14.0(encoding@0.1.13))(react-dom@19.2.0(react@19.2.0))(react-router-dom@7.12.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react@19.2.0)
       dompurify:
         specifier: ^3.2.4
         version: 3.3.0
@@ -2139,8 +2139,8 @@ importers:
         version: 5.9.3
     optionalDependencies:
       react-router-dom:
-        specifier: ^6.8.0
-        version: 6.30.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: ^7.12.0
+        version: 7.12.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
 
   packages/themes:
     dependencies:
@@ -8901,9 +8901,6 @@ packages:
   highlight.js@10.7.3:
     resolution: {integrity: sha512-tzcUFauisWKNHaRkN4Wjl/ZA07gENAjFl3J/c480dprkGTg5EQstgaNFqBfUqCq54kZRIEcreTsAgF/m2quD7A==}
 
-  history@4.10.1:
-    resolution: {integrity: sha512-36nwAD620w12kuzPAsyINPWJqlNbij+hpK1k9XRloDtym8mxzGYl2c17LnV6IAGB2Dmg4tEa7G7DlawS0+qjew==}
-
   hoist-non-react-statics@3.3.2:
     resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
 
@@ -12184,17 +12181,19 @@ packages:
     resolution: {integrity: sha512-QgT5//D3jfjJb6Gsjxv0Slpj23ip+HtOpnNgnb2S5zU3CB26G/IDPGoy4RJB42wzFE46DRsstbW6tKHoKbhAxw==}
     engines: {node: '>=0.10.0'}
 
-  react-router-dom@5.3.4:
-    resolution: {integrity: sha512-m4EqFMHv/Ih4kpcBCONHbkT68KoAeHN4p3lAGoNryfHi0dMy0kCzEZakiKRsvg5wHZ/JLrLW8o8KomWiz/qbYQ==}
-    peerDependencies:
-      react: '>=15'
-
   react-router-dom@6.30.2:
     resolution: {integrity: sha512-l2OwHn3UUnEVUqc6/1VMmR1cvZryZ3j3NzapC2eUXO1dB0sYp5mvwdjiXhpUbRb21eFow3qSxpP8Yv6oAU824Q==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       react: '>=16.8'
       react-dom: '>=16.8'
+
+  react-router-dom@7.12.0:
+    resolution: {integrity: sha512-pfO9fiBcpEfX4Tx+iTYKDtPbrSLLCbwJ5EqP+SPYQu1VYCXdy79GSj0wttR0U4cikVdlImZuEZ/9ZNCgoaxwBA==}
+    engines: {node: '>=20.0.0'}
+    peerDependencies:
+      react: '>=18'
+      react-dom: '>=18'
 
   react-router-dom@7.9.6:
     resolution: {integrity: sha512-2MkC2XSXq6HjGcihnx1s0DBWQETI4mlis4Ux7YTLvP67xnGxCvq+BcCQSO81qQHVUTM1V53tl4iVVaY5sReCOA==}
@@ -12203,16 +12202,21 @@ packages:
       react: '>=18'
       react-dom: '>=18'
 
-  react-router@5.3.4:
-    resolution: {integrity: sha512-Ys9K+ppnJah3QuaRiLxk+jDWOR1MekYQrlytiXxC1RyfbdsZkS5pvKAzCCr031xHixZwpnsYNT5xysdFHQaYsA==}
-    peerDependencies:
-      react: '>=15'
-
   react-router@6.30.2:
     resolution: {integrity: sha512-H2Bm38Zu1bm8KUE5NVWRMzuIyAV8p/JrOaBJAwVmp37AXG72+CZJlEBw6pdn9i5TBgLMhNDgijS4ZlblpHyWTA==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       react: '>=16.8'
+
+  react-router@7.12.0:
+    resolution: {integrity: sha512-kTPDYPFzDVGIIGNLS5VJykK0HfHLY5MF3b+xj0/tTyNYL1gF1qs7u67Z9jEhQk2sQ98SUaHxlG31g1JtF7IfVw==}
+    engines: {node: '>=20.0.0'}
+    peerDependencies:
+      react: '>=18'
+      react-dom: '>=18'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
 
   react-router@7.9.6:
     resolution: {integrity: sha512-Y1tUp8clYRXpfPITyuifmSoE2vncSME18uVLgaqyxh9H35JWpIfzHo+9y3Fzh5odk/jxPW29IgLgzcdwxGqyNA==}
@@ -12435,9 +12439,6 @@ packages:
   resolve-from@5.0.0:
     resolution: {integrity: sha512-qYg9KP24dD5qka9J47d0aVky0N+b4fTU89LN9iDnjB5waksiC49rvMB0PrUJQGoTmH50XPiqOvAjDfaijGxYZw==}
     engines: {node: '>=8'}
-
-  resolve-pathname@3.0.0:
-    resolution: {integrity: sha512-C7rARubxI8bXFNB/hqcp/4iUeIXJhJZvFPFPiSPRnhU5UPxzMFIl+2E6yY6c4k9giDJAhtV+enfA+G89N6Csng==}
 
   resolve-url-loader@4.0.0:
     resolution: {integrity: sha512-05VEMczVREcbtT7Bz+C+96eUO5HDNvdthIiMB34t7FcF8ehcu4wC0sSgPUubs3XW2Q3CNLJk/BJrCU9wVRymiA==}
@@ -13779,9 +13780,6 @@ packages:
   validate-npm-package-name@5.0.1:
     resolution: {integrity: sha512-OljLrQ9SQdOUqTaQxqL5dEfZWrXExyyWsozYlAWFawPVNuD83igl7uJD2RTkNMbniIYgt8l81eCJGIdQF7avLQ==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
-
-  value-equal@1.0.1:
-    resolution: {integrity: sha512-NOJ6JZCAWr0zlxZt+xqCHNTEKOsrks2HQd4MqhP1qy4z1SkbEP467eNx6TgDKXMvUOb+OENfJCZwM+16n7fRfw==}
 
   vary@1.1.2:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
@@ -17738,6 +17736,15 @@ snapshots:
       react: 19.2.0
       react-dom: 19.2.0(react@19.2.0)
       react-router-dom: 6.30.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+
+  '@okta/okta-react@6.10.0(@okta/okta-auth-js@7.14.0(encoding@0.1.13))(react-dom@19.2.0(react@19.2.0))(react-router-dom@7.12.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react@19.2.0)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@okta/okta-auth-js': 7.14.0(encoding@0.1.13)
+      compare-versions: 4.1.4
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
+      react-router-dom: 7.12.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
 
   '@opentelemetry/api@1.9.0': {}
 
@@ -23069,15 +23076,6 @@ snapshots:
 
   highlight.js@10.7.3: {}
 
-  history@4.10.1:
-    dependencies:
-      '@babel/runtime': 7.28.4
-      loose-envify: 1.4.0
-      resolve-pathname: 3.0.0
-      tiny-invariant: 1.3.3
-      tiny-warning: 1.0.3
-      value-equal: 1.0.1
-
   hoist-non-react-statics@3.3.2:
     dependencies:
       react-is: 16.13.1
@@ -27476,17 +27474,6 @@ snapshots:
 
   react-refresh@0.18.0: {}
 
-  react-router-dom@5.3.4(react@19.2.0):
-    dependencies:
-      '@babel/runtime': 7.28.4
-      history: 4.10.1
-      loose-envify: 1.4.0
-      prop-types: 15.8.1
-      react: 19.2.0
-      react-router: 5.3.4(react@19.2.0)
-      tiny-invariant: 1.3.3
-      tiny-warning: 1.0.3
-
   react-router-dom@6.30.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
     dependencies:
       '@remix-run/router': 1.23.1
@@ -27494,29 +27481,30 @@ snapshots:
       react-dom: 19.2.0(react@19.2.0)
       react-router: 6.30.2(react@19.2.0)
 
+  react-router-dom@7.12.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
+    dependencies:
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
+      react-router: 7.12.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+
   react-router-dom@7.9.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
     dependencies:
       react: 19.2.0
       react-dom: 19.2.0(react@19.2.0)
       react-router: 7.9.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
 
-  react-router@5.3.4(react@19.2.0):
-    dependencies:
-      '@babel/runtime': 7.28.4
-      history: 4.10.1
-      hoist-non-react-statics: 3.3.2
-      loose-envify: 1.4.0
-      path-to-regexp: 1.9.0
-      prop-types: 15.8.1
-      react: 19.2.0
-      react-is: 16.13.1
-      tiny-invariant: 1.3.3
-      tiny-warning: 1.0.3
-
   react-router@6.30.2(react@19.2.0):
     dependencies:
       '@remix-run/router': 1.23.1
       react: 19.2.0
+
+  react-router@7.12.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
+    dependencies:
+      cookie: 1.0.2
+      react: 19.2.0
+      set-cookie-parser: 2.7.2
+    optionalDependencies:
+      react-dom: 19.2.0(react@19.2.0)
 
   react-router@7.9.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
     dependencies:
@@ -27900,8 +27888,6 @@ snapshots:
   resolve-from@4.0.0: {}
 
   resolve-from@5.0.0: {}
-
-  resolve-pathname@3.0.0: {}
 
   resolve-url-loader@4.0.0:
     dependencies:
@@ -29594,8 +29580,6 @@ snapshots:
   valid-url@1.0.9: {}
 
   validate-npm-package-name@5.0.1: {}
-
-  value-equal@1.0.1: {}
 
   vary@1.1.2: {}
 
