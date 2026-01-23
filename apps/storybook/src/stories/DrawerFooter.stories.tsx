@@ -11,7 +11,7 @@ import {
 import { Menu, Dashboard, Notifications, Settings, Person, Today } from '@mui/icons-material';
 import { Box, Typography, Button } from '@mui/material';
 import * as Colors from '@brightlayer-ui/colors';
-import EatonFooterLogoLight from '../../../themeShowcase/src/EatonLogoLight.png';
+import EatonFooterLogoLight from '../EatonLogoLight.png';
 
 const meta = {
     component: DrawerFooter,
