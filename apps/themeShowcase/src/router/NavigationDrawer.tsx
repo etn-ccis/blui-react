@@ -6,7 +6,7 @@ import Menu from '@mui/icons-material/Menu';
 import EatonFooterLogoLight from '../EatonLogoLight.png';
 import EatonFooterLogoDark from '../EatonLogoDark.png';
 import * as Colors from '@brightlayer-ui/colors';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {
     Drawer,
     DrawerBody,
@@ -30,34 +30,39 @@ export const NavigationDrawer: React.FC = () => {
     const direction = useSelector((store: AppStore) => store.app.direction);
     const dispatch = useDispatch();
     const theme = useTheme();
-    const history = useHistory();
+    const navigate = useNavigate();
     const location = useLocation();
     const [activeRoute, setActiveRoute] = useState(location.pathname);
     const xsDown = useMediaQuery(theme.breakpoints.down('sm'));
     const rtl = direction === 'rtl';
 
-    const createNavItems = useCallback((navData: SimpleNavItem[], parentUrl: string, depth: number): NavItem[] => {
-        const convertedItems: NavItem[] = [];
-        for (const item of navData) {
-            if (item.hidden) {
-                continue;
+    const createNavItems = useCallback(
+        (navData: SimpleNavItem[], parentUrl: string, depth: number): NavItem[] => {
+            const convertedItems: NavItem[] = [];
+            for (const item of navData) {
+                if (item.hidden) {
+                    continue;
+                }
+                const fullURL = `${parentUrl}${item.url || ''}`;
+                convertedItems.push({
+                    title: item.title,
+                    subtitle: item.subtitle,
+                    icon: depth === 0 ? item.icon : undefined,
+                    itemID: fullURL,
+                    onClick: item.component
+                        ? (): void => {
+                              void navigate(fullURL);
+                          }
+                        : undefined,
+                    items: item.pages
+                        ? createNavItems(item.pages, `${parentUrl}${item.url || ''}`, depth + 1)
+                        : undefined,
+                });
             }
-            const fullURL = `${parentUrl}${item.url || ''}`;
-            convertedItems.push({
-                title: item.title,
-                subtitle: item.subtitle,
-                icon: depth === 0 ? item.icon : undefined,
-                itemID: fullURL,
-                onClick: item.component
-                    ? (): void => {
-                          history.push(fullURL);
-                      }
-                    : undefined,
-                items: item.pages ? createNavItems(item.pages, `${parentUrl}${item.url || ''}`, depth + 1) : undefined,
-            });
-        }
-        return convertedItems;
-    }, []);
+            return convertedItems;
+        },
+        [navigate]
+    );
 
     useEffect(() => {
         setActiveRoute(location.pathname);

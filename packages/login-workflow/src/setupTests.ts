@@ -1,5 +1,10 @@
 /* eslint-disable */
 import '@testing-library/jest-dom';
+import { TextEncoder, TextDecoder } from 'util';
+
+// Polyfill TextEncoder and TextDecoder for react-router-dom v7
+global.TextEncoder = TextEncoder;
+global.TextDecoder = TextDecoder as any;
 
 // Suppress ReactDOMTestUtils.act deprecation warnings that come from @testing-library/react v13.3.0
 // These warnings are internal to the testing library and will be resolved when the library is updated

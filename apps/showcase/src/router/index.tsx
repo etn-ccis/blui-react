@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route, useLocation, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { DrawerLayout } from '@brightlayer-ui/react-components';
 import { NavigationDrawer } from './NavigationDrawer';
 import { SharedAppBar } from '../components/SharedAppBar';
@@ -12,9 +12,7 @@ const buildRoutes = (routes: SimpleNavItem[], url: string): JSX.Element[] => {
     for (const route of routes) {
         if (route.component) {
             ret.push(
-                <Route exact path={`${url}${route.url || ''}`} key={`${url}/${route.url || ''}`}>
-                    {route.component}
-                </Route>
+                <Route path={`${url}${route.url || ''}`} element={route.component} key={`${url}/${route.url || ''}`} />
             );
         }
         if (route.pages) {
@@ -58,13 +56,11 @@ export const MainRouter: React.FC = () => {
                 drawer={<NavigationDrawer />}
             >
                 <SharedAppBar title={title} />
-                <Switch>
+                <Routes>
                     {buildRoutes(pageDefinitions, '')}
 
-                    <Route path="*">
-                        <Redirect to={'/templates/dashboard'} />
-                    </Route>
-                </Switch>
+                    <Route path="*" element={<Navigate to={'/templates/dashboard'} />} />
+                </Routes>
             </DrawerLayout>
         </Router>
     );

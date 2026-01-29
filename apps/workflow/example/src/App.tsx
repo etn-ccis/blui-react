@@ -89,8 +89,7 @@ export const App = (): React.JSX.Element => {
                     setShowChangePasswordDialog,
                 }}
             >
-                {/* eslint-disable @typescript-eslint/naming-convention */}
-                <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }} basename={'/'}>
+                <BrowserRouter basename={'/'}>
                     <AppRouter />
                 </BrowserRouter>
             </AppContext.Provider>
