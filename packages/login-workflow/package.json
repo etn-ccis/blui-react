@@ -95,7 +95,7 @@
         "jest": "^29.3.1",
         "jest-environment-jsdom": "^29.3.1",
         "npm-license-crawler": "^0.2.1",
-        "prettier": "^2.3.1",
+        "prettier": "^3.8.1",
         "react": "^19.1.0",
         "react-dom": "^19.1.0",
         "react-i18next": "^15.6.0",
