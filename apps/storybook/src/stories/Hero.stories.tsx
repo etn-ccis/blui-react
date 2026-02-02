@@ -102,23 +102,9 @@ export const LongLabel: Story = {
 export const MultipleHeroes: Story = {
     render: () => (
         <div style={{ display: 'flex', gap: '16px' }}>
-            <Hero
-                icon={<Temp fontSize="inherit" />}
-                label="Temperature"
-                value="98"
-                units="°F"
-            />
-            <Hero
-                icon={<Fan fontSize="inherit" />}
-                label="Fan Speed"
-                value="2100"
-                units="RPM"
-            />
-            <Hero
-                icon={<GradeA fontSize="inherit" />}
-                label="Grade"
-                value="A"
-            />
+            <Hero icon={<Temp fontSize="inherit" />} label="Temperature" value="98" units="°F" />
+            <Hero icon={<Fan fontSize="inherit" />} label="Fan Speed" value="2100" units="RPM" />
+            <Hero icon={<GradeA fontSize="inherit" />} label="Grade" value="A" />
         </div>
     ),
 };

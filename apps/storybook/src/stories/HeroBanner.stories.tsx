@@ -18,12 +18,7 @@ type Story = StoryObj<typeof HeroBanner>;
 export const Default: Story = {
     render: () => (
         <HeroBanner>
-            <Hero
-                icon={<Temp fontSize="inherit" />}
-                label="Temperature"
-                value={98}
-                units="°F"
-            />
+            <Hero icon={<Temp fontSize="inherit" />} label="Temperature" value={98} units="°F" />
         </HeroBanner>
     ),
 };
@@ -31,23 +26,9 @@ export const Default: Story = {
 export const MultipleHeroes: Story = {
     render: () => (
         <HeroBanner>
-            <Hero
-                icon={<Temp fontSize="inherit" />}
-                label="Temperature"
-                value={98}
-                units="°F"
-            />
-            <Hero
-                icon={<Moisture fontSize="inherit" />}
-                label="Humidity"
-                value={54}
-                units="%"
-            />
-            <Hero
-                icon={<GradeA fontSize="inherit" />}
-                label="Grade"
-                value="A"
-            />
+            <Hero icon={<Temp fontSize="inherit" />} label="Temperature" value={98} units="°F" />
+            <Hero icon={<Moisture fontSize="inherit" />} label="Humidity" value={54} units="%" />
+            <Hero icon={<GradeA fontSize="inherit" />} label="Grade" value="A" />
         </HeroBanner>
     ),
 };
@@ -55,18 +36,8 @@ export const MultipleHeroes: Story = {
 export const WithDivider: Story = {
     render: () => (
         <HeroBanner divider>
-            <Hero
-                icon={<Temp fontSize="inherit" />}
-                label="Temperature"
-                value={98}
-                units="°F"
-            />
-            <Hero
-                icon={<Moisture fontSize="inherit" />}
-                label="Humidity"
-                value={54}
-                units="%"
-            />
+            <Hero icon={<Temp fontSize="inherit" />} label="Temperature" value={98} units="°F" />
+            <Hero icon={<Moisture fontSize="inherit" />} label="Humidity" value={54} units="%" />
         </HeroBanner>
     ),
 };
@@ -74,23 +45,9 @@ export const WithDivider: Story = {
 export const LimitedHeroes: Story = {
     render: () => (
         <HeroBanner limit={2}>
-            <Hero
-                icon={<Temp fontSize="inherit" />}
-                label="Temperature"
-                value={98}
-                units="°F"
-            />
-            <Hero
-                icon={<Moisture fontSize="inherit" />}
-                label="Humidity"
-                value={54}
-                units="%"
-            />
-            <Hero
-                icon={<GradeA fontSize="inherit" />}
-                label="Grade"
-                value="A"
-            />
+            <Hero icon={<Temp fontSize="inherit" />} label="Temperature" value={98} units="°F" />
+            <Hero icon={<Moisture fontSize="inherit" />} label="Humidity" value={54} units="%" />
+            <Hero icon={<GradeA fontSize="inherit" />} label="Grade" value="A" />
         </HeroBanner>
     ),
 };
@@ -98,29 +55,10 @@ export const LimitedHeroes: Story = {
 export const FourHeroes: Story = {
     render: () => (
         <HeroBanner>
-            <Hero
-                icon={<Temp fontSize="inherit" />}
-                label="Temperature"
-                value={98}
-                units="°F"
-            />
-            <Hero
-                icon={<Moisture fontSize="inherit" />}
-                label="Humidity"
-                value={54}
-                units="%"
-            />
-            <Hero
-                icon={<GradeA fontSize="inherit" />}
-                label="Grade"
-                value="A"
-            />
-            <Hero
-                icon={<Temp fontSize="inherit" />}
-                label="Output"
-                value={82}
-                units="kW"
-            />
+            <Hero icon={<Temp fontSize="inherit" />} label="Temperature" value={98} units="°F" />
+            <Hero icon={<Moisture fontSize="inherit" />} label="Humidity" value={54} units="%" />
+            <Hero icon={<GradeA fontSize="inherit" />} label="Grade" value="A" />
+            <Hero icon={<Temp fontSize="inherit" />} label="Output" value={82} units="kW" />
         </HeroBanner>
     ),
 };
