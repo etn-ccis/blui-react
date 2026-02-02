@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { action } from '@storybook/addon-actions';
+import { fn } from 'storybook/test';
 import { InfoListItem } from '@brightlayer-ui/react-components';
 import { Alarm, Notifications, Info, Warning, Error, ChevronRight, MoreVert } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
@@ -173,6 +173,6 @@ export const Clickable: Story = {
         icon: <Alarm />,
         chevron: true,
         ripple: true,
-        onClick: action('Item clicked!'),
+        onClick: fn(),
     },
 };
