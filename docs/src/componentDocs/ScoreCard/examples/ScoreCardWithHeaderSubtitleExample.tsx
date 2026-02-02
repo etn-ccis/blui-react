@@ -6,7 +6,7 @@ import ListItemText from '@mui/material/ListItemText';
 import { ExampleShowcase } from '../../../shared';
 import Box from '@mui/material/Box';
 
-export const ScoreCardWithHeaderSubtitleExample = (): JSX.Element => (
+export const ScoreCardWithHeaderSubtitleExample = (): React.JSX.Element => (
     <ExampleShowcase sx={{ display: 'flex', justifyContent: 'center' }}>
         <Box>
             <ScoreCard

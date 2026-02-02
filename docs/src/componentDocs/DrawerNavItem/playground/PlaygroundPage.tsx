@@ -48,7 +48,7 @@ const inputConfig: InputConfig = [
     {
         id: 'icon',
         type: 'select',
-        typeLabel: 'JSX.Element',
+        typeLabel: 'React.JSX.Element',
         description: 'The icon to display on the left',
         required: false,
         initialValue: '<Home />',
@@ -108,7 +108,7 @@ const generateSnippet: CodeSnippetFunction = (data) =>
         .replace(/^\s*$(?:\r\n?|\n)/gm, '')
         .replace(/(?:^|)( {4}|\t)/gm, '    ');
 
-export const DrawerNavItemPlaygroundComponent = (): JSX.Element => (
+export const DrawerNavItemPlaygroundComponent = (): React.JSX.Element => (
     <Box
         sx={{
             width: '100%',

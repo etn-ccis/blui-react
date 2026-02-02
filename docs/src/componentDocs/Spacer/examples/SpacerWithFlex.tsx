@@ -9,7 +9,7 @@ const codeSnippet = `<Box sx={{ display: 'flex', height: 56, width: 300 }}>
     <Spacer flex={3} sx={{ backgroundColor: colors.red[300] }}>3</Spacer>
 </Box>`;
 
-export const SpacerWithFlex = (): JSX.Element => (
+export const SpacerWithFlex = (): React.JSX.Element => (
     <Box>
         <SpacerWithFlexExample />
         <CodeBlock code={codeSnippet} language="jsx" />

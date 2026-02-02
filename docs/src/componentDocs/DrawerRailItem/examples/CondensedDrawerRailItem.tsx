@@ -13,7 +13,7 @@ const codeSnippet = `<Drawer open width={250} variant="rail" condensed>
     </DrawerBody>
 </Drawer>`;
 
-export const CondensedDrawerRailItem = (): JSX.Element => (
+export const CondensedDrawerRailItem = (): React.JSX.Element => (
     <Box>
         <CondensedDrawerRailItemExample />
         <CodeBlock code={codeSnippet} language="jsx" dataLine={'1'} />

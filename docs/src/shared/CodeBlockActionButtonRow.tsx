@@ -18,7 +18,7 @@ export type CodeBlockActionButtonRowProps = {
     toolTipProps?: TooltipProps;
 };
 
-export const CodeBlockActionButtonRow: React.FC<CodeBlockActionButtonRowProps> = (props): JSX.Element => {
+export const CodeBlockActionButtonRow: React.FC<CodeBlockActionButtonRowProps> = (props): React.JSX.Element => {
     const { title = 'Copy All', copyText = '', url = '', sx } = props;
 
     return (

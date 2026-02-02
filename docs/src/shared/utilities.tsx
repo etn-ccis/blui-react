@@ -19,8 +19,8 @@ import { SvgIconProps } from '@mui/material/SvgIcon';
 import Box from '@mui/material/Box';
 import ArrowBack from '@mui/icons-material/ArrowBack';
 
-const topologyBgImage = require('../shared/images/topology_40.png');
-const farmBgImage = require('../shared/images/farm.jpg');
+import topologyBgImage from '../shared/images/topology_40.png';
+import farmBgImage from '../shared/images/farm.jpg';
 
 export const getSnakeCase = (str: string): string => str.replace(/[A-Z]/g, '_$&').toLowerCase().slice(1);
 
@@ -60,7 +60,7 @@ export const getHash = (str: string): string =>
         .replace(/[#?/&]/g, '')
         .toLowerCase();
 
-export const getIcon = (icon: string, iconProps?: SvgIconProps): JSX.Element | undefined => {
+export const getIcon = (icon: string, iconProps?: SvgIconProps): React.JSX.Element | undefined => {
     switch (icon) {
         case '<Add />':
             return React.createElement(Add, iconProps);
@@ -134,7 +134,7 @@ export const getIconSnippetWithProps = (icon: string, iconProps?: SvgIconProps):
 
 export const removeEmptyLines = (code: string): string => code.replace(/^\s*$(?:\r\n?|\n)/gm, '');
 
-export const getBodyFiller = (): JSX.Element => (
+export const getBodyFiller = (): React.JSX.Element => (
     <Box sx={{ p: 2 }}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis vulputate arcu, quis vulputate mauris
         aliquet in. Praesent sollicitudin erat at augue cursus, a scelerisque odio tristique. Aenean quis dui in nisi

@@ -7,7 +7,7 @@ import ListItemText from '@mui/material/ListItemText';
 import { Moisture, Temp } from '@brightlayer-ui/icons-mui';
 import { ExampleShowcase } from '../../../shared';
 
-export const ScoreCardWithHerosExample = (): JSX.Element => (
+export const ScoreCardWithHerosExample = (): React.JSX.Element => (
     <ExampleShowcase sx={{ display: 'flex', justifyContent: 'center' }}>
         <Box>
             <ScoreCard

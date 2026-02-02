@@ -17,7 +17,7 @@ const codeSnippet = `<Drawer open width={250}>
 </Drawer>
 `;
 
-export const BasicDrawerSubheader = (): JSX.Element => (
+export const BasicDrawerSubheader = (): React.JSX.Element => (
     <Box>
         <BasicDrawerSubheaderExample />
         <CodeBlock code={codeSnippet} language="jsx" dataLine="3-5" />

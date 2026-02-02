@@ -108,7 +108,7 @@ import * as markdownDocs from '../../markdownDocs/';
 
 export type RouteConfig = Omit<RouteProps, 'children'> & {
     title: string;
-    icon?: JSX.Element;
+    icon?: React.JSX.Element;
     pages?: RouteConfig[];
     children?: RouteConfig[];
     hidden?: boolean;
@@ -658,11 +658,11 @@ export const pageDefinitions: RouteConfig[] = [
             },
             {
                 title: 'Components',
-                path: '',
+                path: 'components/',
                 pages: [
                     {
                         title: 'Overview',
-                        path: 'components/',
+                        path: 'overview',
                         element: <MarkdownPage title={'Components'} markdown={WorkflowComponents} />,
                     },
                     {
@@ -694,11 +694,11 @@ export const pageDefinitions: RouteConfig[] = [
             },
             {
                 title: 'Screens',
-                path: '',
+                path: 'screens/',
                 pages: [
                     {
                         title: 'Overview',
-                        path: 'screens/',
+                        path: 'overview',
                         element: <MarkdownPage title={'Screens'} markdown={WorkflowScreens} />,
                     },
                     {

@@ -8,7 +8,7 @@ import { GradeA } from '@brightlayer-ui/icons-mui';
 import * as colors from '@brightlayer-ui/colors';
 import { ExampleShowcase } from '../../../shared';
 
-export const ScoreCardWithScoreBadgeExample = (): JSX.Element => (
+export const ScoreCardWithScoreBadgeExample = (): React.JSX.Element => (
     <ExampleShowcase sx={{ display: 'flex', justifyContent: 'center' }}>
         <Box>
             <ScoreCard

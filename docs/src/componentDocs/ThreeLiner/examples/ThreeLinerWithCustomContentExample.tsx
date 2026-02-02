@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import { ThreeLiner, ToolbarMenu } from '@brightlayer-ui/react-components';
 import { ExampleShowcase } from '../../../shared';
 
-export const ThreeLinerWithCustomContentExample = (): JSX.Element => (
+export const ThreeLinerWithCustomContentExample = (): React.JSX.Element => (
     <ExampleShowcase sx={{ display: 'flex', justifyContent: 'center' }}>
         <Box>
             <ThreeLiner

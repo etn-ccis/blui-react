@@ -10,7 +10,7 @@ export type PageContentProps = HTMLAttributes<HTMLDivElement> & {
     wideLayout?: boolean;
 };
 
-export const PageContent: React.FC<PageContentProps> = (props): JSX.Element => {
+export const PageContent: React.FC<PageContentProps> = (props): React.JSX.Element => {
     const theme = useTheme();
     const { noPadding, children, wideLayout, ...other } = props;
     const pageBodyWidth = useMemo((): number => {
@@ -21,7 +21,14 @@ export const PageContent: React.FC<PageContentProps> = (props): JSX.Element => {
     }, [wideLayout]);
 
     return (
-        <Box sx={{ display: 'flex', justifyContent: 'center', backgroundColor: theme.vars.palette.background.paper }}>
+        <Box
+            sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                backgroundColor: theme.vars.palette.background.paper,
+                minHeight: '100vh',
+            }}
+        >
             <Box
                 sx={{
                     width: '100%',

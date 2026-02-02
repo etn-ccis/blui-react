@@ -111,7 +111,7 @@ const inputConfig: InputConfig = [
     {
         id: 'icon',
         type: 'select',
-        typeLabel: 'JSX.Element',
+        typeLabel: 'React.JSX.Element',
         description: 'A component to render for the icon',
         initialValue: '<Devices />',
         options: ['undefined', '<Devices />'],
@@ -244,7 +244,7 @@ const generateSnippet: CodeSnippetFunction = (data) =>
         .replace(/^\s*$(?:\r\n?|\n)/gm, '')
         .replace(/(?:^|)( {4}|\t)/gm, '    ');
 
-export const InfoListItemPlaygroundComponent = (): JSX.Element => (
+export const InfoListItemPlaygroundComponent = (): React.JSX.Element => (
     <Box
         sx={{
             width: '100%',

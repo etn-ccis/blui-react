@@ -5,7 +5,7 @@ import { Devices, LocationOn } from '@mui/icons-material';
 import { ExampleShowcase } from '../../../shared';
 import Box from '@mui/material/Box';
 
-export const RailDrawerExample = (): JSX.Element => (
+export const RailDrawerExample = (): React.JSX.Element => (
     <ExampleShowcase>
         <DrawerLayout
             drawer={

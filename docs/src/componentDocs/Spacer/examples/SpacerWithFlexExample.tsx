@@ -4,7 +4,7 @@ import { Spacer } from '@brightlayer-ui/react-components';
 import { ExampleShowcase } from '../../../shared';
 import * as colors from '@brightlayer-ui/colors';
 
-export const SpacerWithFlexExample = (): JSX.Element => (
+export const SpacerWithFlexExample = (): React.JSX.Element => (
     <ExampleShowcase sx={{ display: 'flex', justifyContent: 'center' }}>
         <Box sx={{ display: 'flex', height: 56, width: 300 }}>
             <Spacer flex={1} sx={{ backgroundColor: colors.blue[300] }}>

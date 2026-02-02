@@ -16,7 +16,7 @@ const codeSnippet = `<Box>
     </Box>
 </Box>`;
 
-export const SpacerWithPixel = (): JSX.Element => (
+export const SpacerWithPixel = (): React.JSX.Element => (
     <Box>
         <SpacerWithPixelExample />
         <CodeBlock code={codeSnippet} language="jsx" />

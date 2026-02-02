@@ -30,6 +30,7 @@ import AirportShuttle from '@mui/icons-material/AirportShuttle';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
+import { useTheme } from '@mui/material/styles';
 import { sharedPropsConfig } from './sharedPropsConfig';
 import { getIcon, getIconSnippetWithProps, removeEmptyProps } from '../../../shared';
 
@@ -136,6 +137,7 @@ const DrawerPreview: PreviewComponent = ({ data }) => {
     > & { collapseIcon: string; expandIcon: string };
     const { updateData } = usePlaygroundValues();
     const containerRef = useRef(null);
+    const theme = useTheme();
     const persistent = variant === 'persistent';
     const permanent = variant === 'permanent';
     const temporary = variant === 'temporary';
@@ -209,9 +211,7 @@ const DrawerPreview: PreviewComponent = ({ data }) => {
                             ModalProps={{
                                 disableEnforceFocus: true,
                                 disablePortal: temporary,
-                                slotProps: {
-                                    backdrop: { sx: { position: 'absolute' } },
-                                },
+                                hideBackdrop: temporary && open,
                             }}
                             SlideProps={{
                                 container: containerRef.current,
@@ -251,7 +251,10 @@ const DrawerPreview: PreviewComponent = ({ data }) => {
                         </Drawer>
                     }
                     sx={{
-                        '& .BluiDrawerLayout-drawer': { height: 330 },
+                        '& .BluiDrawerLayout-drawer': {
+                            height: 330,
+                            zIndex: temporary && open ? theme.zIndex.appBar - 1 : 'auto',
+                        },
                     }}
                 >
                     <Box
@@ -260,8 +263,23 @@ const DrawerPreview: PreviewComponent = ({ data }) => {
                             height: 330,
                             width: 650,
                             maxWidth: '100%',
+                            position: 'relative',
                         }}
                     >
+                        {temporary && open && (
+                            <Box
+                                sx={{
+                                    position: 'absolute',
+                                    top: 0,
+                                    left: `${rest.width || 360}px`,
+                                    right: 0,
+                                    bottom: 0,
+                                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                                    zIndex: theme.zIndex.drawer - 1,
+                                }}
+                                onClick={(): void => updateData('open', false)}
+                            />
+                        )}
                         {rail ? (
                             <Box sx={{ p: 2, ml: 9 }}>App Content Here.</Box>
                         ) : (
@@ -315,7 +333,7 @@ const generateSnippet: CodeSnippetFunction = (data) =>
         .replace(/^\s*$(?:\r\n?|\n)/gm, '')
         .replace(/(?:^|)( {4}|\t)/gm, '    ');
 
-export const DrawerPlaygroundComponent = (): JSX.Element => (
+export const DrawerPlaygroundComponent = (): React.JSX.Element => (
     <Box
         sx={{
             width: '100%',

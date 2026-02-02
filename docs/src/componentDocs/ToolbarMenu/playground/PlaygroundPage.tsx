@@ -28,7 +28,7 @@ const inputConfig: InputConfig = [
     {
         id: 'icon',
         type: 'select',
-        typeLabel: 'JSX.Element',
+        typeLabel: 'React.JSX.Element',
         description: 'A component to render for the icon',
         initialValue: 'undefined',
         options: ['undefined', '<Home />', '<Place />'],
@@ -96,7 +96,7 @@ const generateSnippet: CodeSnippetFunction = (data) =>
         .replace(/^\s*$(?:\r\n?|\n)/gm, '')
         .replace(/(?:^|)( {4}|\t)/gm, '    ');
 
-export const ToolbarMenuPlaygroundComponent = (): JSX.Element => (
+export const ToolbarMenuPlaygroundComponent = (): React.JSX.Element => (
     <Box
         sx={{
             width: '100%',

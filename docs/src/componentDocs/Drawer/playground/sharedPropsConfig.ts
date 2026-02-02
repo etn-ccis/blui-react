@@ -61,7 +61,7 @@ export const sharedPropsConfig: InputConfig = [
     {
         id: 'collapseIcon',
         type: 'select',
-        typeLabel: 'JSX.Element',
+        typeLabel: 'React.JSX.Element',
         description: 'Icon used to collapse drawer items',
         initialValue: 'undefined',
         options: ['undefined', '<Remove />', '<ArrowDropUp />'],
@@ -89,7 +89,7 @@ export const sharedPropsConfig: InputConfig = [
     {
         id: 'expandIcon',
         type: 'select',
-        typeLabel: 'JSX.Element',
+        typeLabel: 'React.JSX.Element',
         description: 'Icon used to collapse drawer items',
         initialValue: 'undefined',
         options: ['undefined', '<Add />', '<ArrowDropDown />'],

@@ -12,7 +12,7 @@ import { SvgIconProps } from '@mui/material/SvgIcon';
 import { TableProps } from '@mui/material/Table';
 import Box from '@mui/material/Box';
 
-export const ExternalLink = (tProps: TypographyProps<'a'>): JSX.Element => {
+export const ExternalLink = (tProps: TypographyProps<'a'>): React.JSX.Element => {
     const theme = useTheme();
     return (
         <Typography
@@ -25,7 +25,7 @@ export const ExternalLink = (tProps: TypographyProps<'a'>): JSX.Element => {
     );
 };
 
-export const InternalLink = (props: LinkProps): JSX.Element => {
+export const InternalLink = (props: LinkProps): React.JSX.Element => {
     const theme = useTheme();
     return (
         <Link
@@ -64,7 +64,7 @@ const Headline: React.FC<HeadlineType> = ({
 );
 
 export const componentsMap = {
-    h1: (props: TypographyProps): JSX.Element => {
+    h1: (props: TypographyProps): React.JSX.Element => {
         const { children } = props;
 
         return (
@@ -76,7 +76,7 @@ export const componentsMap = {
             />
         );
     },
-    h2: (props: TypographyProps): JSX.Element => {
+    h2: (props: TypographyProps): React.JSX.Element => {
         const { children } = props;
 
         return (
@@ -87,7 +87,7 @@ export const componentsMap = {
             />
         );
     },
-    h3: (props: TypographyProps): JSX.Element => {
+    h3: (props: TypographyProps): React.JSX.Element => {
         const { children } = props;
 
         return (
@@ -98,7 +98,7 @@ export const componentsMap = {
             />
         );
     },
-    h4: (props: TypographyProps): JSX.Element => {
+    h4: (props: TypographyProps): React.JSX.Element => {
         const { children } = props;
 
         return (
@@ -109,7 +109,7 @@ export const componentsMap = {
             />
         );
     },
-    h5: (props: TypographyProps): JSX.Element => {
+    h5: (props: TypographyProps): React.JSX.Element => {
         const { children } = props;
 
         return (
@@ -120,7 +120,7 @@ export const componentsMap = {
             />
         );
     },
-    h6: (props: TypographyProps): JSX.Element => {
+    h6: (props: TypographyProps): React.JSX.Element => {
         const { children } = props;
 
         return (
@@ -131,7 +131,7 @@ export const componentsMap = {
             />
         );
     },
-    a: (props: React.LinkHTMLAttributes<HTMLLinkElement>): JSX.Element => {
+    a: (props: React.LinkHTMLAttributes<HTMLLinkElement>): React.JSX.Element => {
         let tProps;
         if (props.href && (props.href.match(/^http/gi) || props.href.match(/^mailto/gi))) {
             tProps = props as TypographyProps<'a'>;
@@ -141,14 +141,14 @@ export const componentsMap = {
         //@ts-ignore
         return <InternalLink to={props.href} {...tProps} />;
     },
-    p: (props: TypographyProps): JSX.Element => (
+    p: (props: TypographyProps): React.JSX.Element => (
         <Typography sx={{ lineHeight: '1.6', m: '15px auto' }} color={'text.primary'} paragraph {...props} />
     ),
-    ul: (props: BoxProps): JSX.Element => <Box component={'ul'} sx={{ m: '15px auto', pl: '60px' }} {...props} />,
-    li: (props: TypographyProps<'li'>): JSX.Element => (
+    ul: (props: BoxProps): React.JSX.Element => <Box component={'ul'} sx={{ m: '15px auto', pl: '60px' }} {...props} />,
+    li: (props: TypographyProps<'li'>): React.JSX.Element => (
         <Typography component={'li'} className={'mdLi'} sx={{ m: '15px auto' }} color={'text.primary'} {...props} />
     ),
-    blockquote: (props: TypographyProps<'blockquote'>): JSX.Element => (
+    blockquote: (props: TypographyProps<'blockquote'>): React.JSX.Element => (
         <Typography
             component={'blockquote'}
             sx={{
@@ -162,7 +162,7 @@ export const componentsMap = {
             {...props}
         />
     ),
-    pre: (props: TypographyProps<'pre'>): JSX.Element => {
+    pre: (props: TypographyProps<'pre'>): React.JSX.Element => {
         const theme = useTheme();
         return (
             <Typography
@@ -181,7 +181,7 @@ export const componentsMap = {
             />
         );
     },
-    code: (props: TypographyProps<'code'>): JSX.Element => {
+    code: (props: TypographyProps<'code'>): React.JSX.Element => {
         const theme = useTheme();
         return (
             <Typography
@@ -205,7 +205,7 @@ export const componentsMap = {
             />
         );
     },
-    inlineCode: (props: TypographyProps<'code'>): JSX.Element => {
+    inlineCode: (props: TypographyProps<'code'>): React.JSX.Element => {
         const theme = useTheme();
         return (
             <Typography
@@ -223,7 +223,7 @@ export const componentsMap = {
             />
         );
     },
-    table: (props: TableProps): JSX.Element => {
+    table: (props: TableProps): React.JSX.Element => {
         const theme = useTheme();
         return (
             <Box

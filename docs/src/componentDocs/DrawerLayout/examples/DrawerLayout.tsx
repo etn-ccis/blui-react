@@ -26,7 +26,7 @@ const codeSnippet = `<DrawerLayout
     </Box>
 </DrawerLayout>`;
 
-export const DrawerLayout = (): JSX.Element => (
+export const DrawerLayout = (): React.JSX.Element => (
     <Box>
         <DrawerLayoutExample />
         <CodeBlock code={codeSnippet} language="jsx" />

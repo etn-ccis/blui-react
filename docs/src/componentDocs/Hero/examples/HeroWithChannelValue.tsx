@@ -18,7 +18,7 @@ const codeSnippet = `<Hero label={'Duration'} icon={<Schedule fontSize={'inherit
     />
 </Hero>`;
 
-export const HeroWithChannelValue = (): JSX.Element => (
+export const HeroWithChannelValue = (): React.JSX.Element => (
     <Box>
         <HeroWithChannelValueExample />
         <CodeBlock code={codeSnippet} language="jsx" dataLine="2-13" />

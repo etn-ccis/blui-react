@@ -38,7 +38,7 @@ const codeSnippet = `<Stack>
     />
 </Stack>`;
 
-export const InfoListItemInList = (): JSX.Element => (
+export const InfoListItemInList = (): React.JSX.Element => (
     <Box>
         <InfoListItemInListExample />
         <CodeBlock code={codeSnippet} language="jsx" dataLine={'11-12,22-23,31-32'} />

@@ -79,14 +79,14 @@ You may provide a custom success screen to be shown upon successful completion o
 
 const MyCustomSuccessScreen = () => {
 return (
+
 <SuccessScreenBase
-EmptyStateProps={{
-                title: 'Congratulations!',
-                description: 'You have been registered successfully',
-            }}
+    EmptyStateProps={{
+        title: 'Congratulations!',
+        description: 'You have been registered successfully',
+    }}
 />
-);
-};
+); };
 
 <RegistrationWorkflow successScreen={<MyCustomSuccessScreen />} />
 ;`} />
@@ -108,3 +108,10 @@ For more details on customizing our components, refer to our [Components](/workf
 ## Screens
 
 For more details on customizing our screens, refer to our [Screens](/workflows/screens/) documentation.
+
+
+
+
+
+
+

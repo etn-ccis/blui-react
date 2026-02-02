@@ -18,7 +18,7 @@ const codeSnippet = `<InfoListItem
     rightComponent={<ChannelValue value={'15'} units={'A'} />}
 />`;
 
-export const InfoListItemWithRightComponent = (): JSX.Element => (
+export const InfoListItemWithRightComponent = (): React.JSX.Element => (
     <Box>
         <InfoListItemWithRightComponentExample />
         <CodeBlock code={codeSnippet} language="jsx" dataLine="5-13" />

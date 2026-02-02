@@ -8,7 +8,7 @@ type TabPanelProps = BoxProps & {
     value: number;
 };
 
-export const TabPanel = (props: TabPanelProps): JSX.Element => {
+export const TabPanel = (props: TabPanelProps): React.JSX.Element => {
     const { children, value, index, ...other } = props;
 
     return (

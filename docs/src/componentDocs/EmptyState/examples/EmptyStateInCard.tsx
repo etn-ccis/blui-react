@@ -21,7 +21,7 @@ const codeSnippet = `<Accordion defaultExpanded>
     </AccordionDetails>
 </Accordion>`;
 
-export const EmptyStateInCard = (): JSX.Element => (
+export const EmptyStateInCard = (): React.JSX.Element => (
     <Box>
         <EmptyStateInCardExample />
         <CodeBlock code={codeSnippet} language="jsx" />

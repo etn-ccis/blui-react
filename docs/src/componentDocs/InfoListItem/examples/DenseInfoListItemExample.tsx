@@ -2,7 +2,7 @@ import React from 'react';
 import { InfoListItem } from '@brightlayer-ui/react-components';
 import { ExampleShowcase } from '../../../shared';
 
-export const DenseInfoListItemExample = (): JSX.Element => (
+export const DenseInfoListItemExample = (): React.JSX.Element => (
     <ExampleShowcase>
         <InfoListItem
             sx={{ maxWidth: 700, m: 'auto', backgroundColor: 'background.paper' }}

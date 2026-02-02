@@ -131,7 +131,7 @@ const ScoreCardPreview: PreviewComponent = ({ data }) => {
         numberOfHeroes: number;
     };
 
-    const heroes: JSX.Element[] = [
+    const heroes: React.JSX.Element[] = [
         <Hero
             key={'hero1'}
             icon={<Temp fontSize={'inherit'} />}
@@ -258,7 +258,7 @@ const generateSnippet: CodeSnippetFunction = (data) =>
         .replace(/^\s*$(?:\r\n?|\n)/gm, '')
         .replace(/(?:^|)( {4}|\t)/gm, '    ');
 
-export const ScoreCardPlaygroundComponent = (): JSX.Element => (
+export const ScoreCardPlaygroundComponent = (): React.JSX.Element => (
     <Box
         sx={{
             width: '100%',

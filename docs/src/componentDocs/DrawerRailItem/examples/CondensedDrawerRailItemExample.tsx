@@ -4,7 +4,7 @@ import Gavel from '@mui/icons-material/Gavel';
 import { Devices, LocationOn } from '@mui/icons-material';
 import { ExampleShowcase } from '../../../shared';
 
-export const CondensedDrawerRailItemExample = (): JSX.Element => (
+export const CondensedDrawerRailItemExample = (): React.JSX.Element => (
     <ExampleShowcase>
         <Drawer open width={250} sx={{ mx: 'auto' }} variant="rail" condensed noLayout>
             <DrawerBody sx={{ flex: '1 1 auto' }}>

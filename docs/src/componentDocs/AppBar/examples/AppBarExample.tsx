@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
-export const AppBarExample = (): JSX.Element => (
+export const AppBarExample = (): React.JSX.Element => (
     <ExampleShowcase sx={{ overflow: 'hidden' }}>
         <Box sx={{ mb: 2, overflow: 'hidden', height: 400 }}>
             <AppBar

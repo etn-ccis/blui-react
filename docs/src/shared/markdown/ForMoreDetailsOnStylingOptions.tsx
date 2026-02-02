@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material';
 
 // This blurb gets strange styling when used directly in markdown files
-export const ForMoreDetailsOnStylingOptions = (): JSX.Element => {
+export const ForMoreDetailsOnStylingOptions = (): React.JSX.Element => {
     const theme = useTheme();
 
     return (
