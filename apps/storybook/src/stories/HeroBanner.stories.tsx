@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { HeroBanner, Hero } from '@brightlayer-ui/react-components';
 import { GradeA, Temp, Moisture } from '@brightlayer-ui/icons-mui';
 
