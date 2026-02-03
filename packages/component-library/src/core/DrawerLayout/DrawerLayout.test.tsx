@@ -172,8 +172,8 @@ describe('DrawerLayout', () => {
 
     it('applies right padding in RTL layout', () => {
         const rtlTheme = createTheme({
-            ...theme,
             direction: 'rtl',
+            palette: theme.palette,
         });
 
         const TestConsumer = (): any => {

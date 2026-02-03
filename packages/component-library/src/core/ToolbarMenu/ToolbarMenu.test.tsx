@@ -360,8 +360,8 @@ describe('ToolbarMenu', () => {
 
     it('handles RTL theme direction', () => {
         const rtlTheme = createTheme({
-            ...theme,
             direction: 'rtl',
+            palette: theme.palette,
         });
 
         render(
