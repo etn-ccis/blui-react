@@ -1272,9 +1272,6 @@ importers:
       '@brightlayer-ui/react-doc-components':
         specifier: ^3.0.0-alpha.0
         version: 3.0.0-alpha.0(@brightlayer-ui/react-components@packages+component-library)(@emotion/react@11.14.0(@types/react@19.2.6)(react@19.2.0))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.6)(react@19.2.0))(@types/react@19.2.6)(react@19.2.0))(@mui/icons-material@7.3.5(@mui/material@7.3.5(@emotion/react@11.14.0(@types/react@19.2.6)(react@19.2.0))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.6)(react@19.2.0))(@types/react@19.2.6)(react@19.2.0))(@types/react@19.2.6)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@types/react@19.2.6)(react@19.2.0))(@mui/material@7.3.5(@emotion/react@11.14.0(@types/react@19.2.6)(react@19.2.0))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.6)(react@19.2.0))(@types/react@19.2.6)(react@19.2.0))(@types/react@19.2.6)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(prismjs@1.30.0)(react@19.2.0)
-      '@brightlayer-ui/react-progress-icons':
-        specifier: 2.2.0
-        version: 2.2.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@brightlayer-ui/react-themes':
         specifier: workspace:^
         version: link:../packages/themes
@@ -3032,12 +3029,6 @@ packages:
 
   '@brightlayer-ui/react-progress-icons@2.1.1':
     resolution: {integrity: sha512-pNQ62FbWZdVla0RAneBDdUevTBS+C6MsyLLdTaWVoOvhltKDwWGTGuWw2xm0bLFUmZn1VvBB/rmDaRi85x4vAA==}
-    peerDependencies:
-      react: '>=16.6.3'
-      react-dom: '>=16.8.6'
-
-  '@brightlayer-ui/react-progress-icons@2.2.0':
-    resolution: {integrity: sha512-Unw2R7HTSH/RtM3vPhiuk31O/Y6IGnqJtEanKz81uyhVBjNLn1gF1BPCjLPQ5YhYGpAv+C08fZByRNHgFu74tQ==}
     peerDependencies:
       react: '>=16.6.3'
       react-dom: '>=16.8.6'
@@ -15658,14 +15649,6 @@ snapshots:
       react: 19.2.0
 
   '@brightlayer-ui/react-progress-icons@2.1.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
-    dependencies:
-      clsx: 1.2.1
-      color: 3.2.1
-      react: 19.2.0
-      react-dom: 19.2.0(react@19.2.0)
-      react-jss: 10.10.0(react@19.2.0)
-
-  '@brightlayer-ui/react-progress-icons@2.2.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
     dependencies:
       clsx: 1.2.1
       color: 3.2.1
