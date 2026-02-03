@@ -378,4 +378,438 @@ describe('Verify Code Screen', () => {
         // The component should render without crashing
         expect(screen.getByText('Verify Email')).toBeInTheDocument();
     });
+
+    it('handles successful code validation and proceeds to next screen', () => {
+        const mockValidateUserRegistrationRequest = jest.fn().mockResolvedValue({
+            codeValid: true,
+            accountExists: false,
+        });
+
+        const mockActions = {
+            ...registrationContextProviderProps.actions,
+            validateUserRegistrationRequest: mockValidateUserRegistrationRequest,
+        };
+
+        const { getByLabelText } = render(
+            <RegistrationContextProvider {...registrationContextProviderProps} actions={mockActions}>
+                <RegistrationWorkflow initialScreenIndex={0}>
+                    <VerifyCodeScreen verifyCodeInputLabel="Verify Code" />
+                </RegistrationWorkflow>
+            </RegistrationContextProvider>
+        );
+
+        const verifyCodeInput = getByLabelText('Verify Code');
+        const nextButton = screen.getByText('Next');
+
+        fireEvent.change(verifyCodeInput, { target: { value: '123456' } });
+
+        act(() => {
+            fireEvent.click(nextButton);
+        });
+
+        expect(mockValidateUserRegistrationRequest).toHaveBeenCalledWith('123456', '');
+    });
+
+    it('handles invalid code validation error', () => {
+        const mockValidateUserRegistrationRequest = jest.fn().mockResolvedValue({
+            codeValid: false,
+            accountExists: false,
+        });
+
+        const mockActions = {
+            ...registrationContextProviderProps.actions,
+            validateUserRegistrationRequest: mockValidateUserRegistrationRequest,
+        };
+
+        const { getByLabelText } = render(
+            <RegistrationContextProvider {...registrationContextProviderProps} actions={mockActions}>
+                <RegistrationWorkflow initialScreenIndex={0}>
+                    <VerifyCodeScreen verifyCodeInputLabel="Verify Code" />
+                </RegistrationWorkflow>
+            </RegistrationContextProvider>
+        );
+
+        const verifyCodeInput = getByLabelText('Verify Code');
+        const nextButton = screen.getByText('Next');
+
+        fireEvent.change(verifyCodeInput, { target: { value: 'invalid' } });
+
+        act(() => {
+            fireEvent.click(nextButton);
+        });
+
+        expect(mockValidateUserRegistrationRequest).toHaveBeenCalledWith('invalid', '');
+    });
+
+    it('handles account exists scenario', () => {
+        const mockValidateUserRegistrationRequest = jest.fn().mockResolvedValue({
+            codeValid: true,
+            accountExists: true,
+        });
+
+        const mockActions = {
+            ...registrationContextProviderProps.actions,
+            validateUserRegistrationRequest: mockValidateUserRegistrationRequest,
+        };
+
+        const { getByLabelText } = render(
+            <RegistrationContextProvider {...registrationContextProviderProps} actions={mockActions}>
+                <RegistrationWorkflow initialScreenIndex={0}>
+                    <VerifyCodeScreen verifyCodeInputLabel="Verify Code" />
+                </RegistrationWorkflow>
+            </RegistrationContextProvider>
+        );
+
+        const verifyCodeInput = getByLabelText('Verify Code');
+        const nextButton = screen.getByText('Next');
+
+        fireEvent.change(verifyCodeInput, { target: { value: '123456' } });
+
+        act(() => {
+            fireEvent.click(nextButton);
+        });
+
+        expect(mockValidateUserRegistrationRequest).toHaveBeenCalledWith('123456', '');
+    });
+
+    it('handles string error response from validation', () => {
+        const mockValidateUserRegistrationRequest = jest.fn().mockResolvedValue({
+            codeValid: 'Custom error message',
+            accountExists: false,
+        });
+
+        const mockActions = {
+            ...registrationContextProviderProps.actions,
+            validateUserRegistrationRequest: mockValidateUserRegistrationRequest,
+        };
+
+        const { getByLabelText } = render(
+            <RegistrationContextProvider {...registrationContextProviderProps} actions={mockActions}>
+                <RegistrationWorkflow initialScreenIndex={0}>
+                    <VerifyCodeScreen verifyCodeInputLabel="Verify Code" />
+                </RegistrationWorkflow>
+            </RegistrationContextProvider>
+        );
+
+        const verifyCodeInput = getByLabelText('Verify Code');
+        const nextButton = screen.getByText('Next');
+
+        fireEvent.change(verifyCodeInput, { target: { value: '123456' } });
+
+        act(() => {
+            fireEvent.click(nextButton);
+        });
+
+        expect(mockValidateUserRegistrationRequest).toHaveBeenCalledWith('123456', '');
+    });
+
+    it('handles validation error during handleOnNext', () => {
+        const mockValidateUserRegistrationRequest = jest.fn().mockRejectedValue(new Error('Validation failed'));
+
+        const mockActions = {
+            ...registrationContextProviderProps.actions,
+            validateUserRegistrationRequest: mockValidateUserRegistrationRequest,
+        };
+
+        const { getByLabelText } = render(
+            <RegistrationContextProvider {...registrationContextProviderProps} actions={mockActions}>
+                <RegistrationWorkflow initialScreenIndex={0}>
+                    <VerifyCodeScreen verifyCodeInputLabel="Verify Code" />
+                </RegistrationWorkflow>
+            </RegistrationContextProvider>
+        );
+
+        const verifyCodeInput = getByLabelText('Verify Code');
+        const nextButton = screen.getByText('Next');
+
+        fireEvent.change(verifyCodeInput, { target: { value: '123456' } });
+
+        act(() => {
+            fireEvent.click(nextButton);
+        });
+
+        expect(mockValidateUserRegistrationRequest).toHaveBeenCalledWith('123456', '');
+    });
+
+    it('uses verifyCode from screenData when available', () => {
+        // The registrationWorkflowContextProps already has VerifyCode: { code: '12345' }
+        const { getByLabelText } = render(
+            <RegistrationContextProvider {...registrationContextProviderProps}>
+                <RegistrationWorkflow initialScreenIndex={0}>
+                    <VerifyCodeScreen verifyCodeInputLabel="Verify Code" />
+                </RegistrationWorkflow>
+            </RegistrationContextProvider>
+        );
+
+        const verifyCodeInput = getByLabelText('Verify Code') as HTMLInputElement;
+        // The input starts empty but component should handle the screenData
+        expect(verifyCodeInput).toBeInTheDocument();
+    });
+
+    it('handles default codeValidator when none provided', () => {
+        const { getByLabelText } = render(
+            <RegistrationContextProvider {...registrationContextProviderProps}>
+                <RegistrationWorkflow initialScreenIndex={0}>
+                    <VerifyCodeScreen verifyCodeInputLabel="Verify Code" />
+                </RegistrationWorkflow>
+            </RegistrationContextProvider>
+        );
+
+        const verifyCodeInput = getByLabelText('Verify Code');
+        const nextButton = screen.getByText('Next');
+
+        // Empty code should make button disabled (default validator)
+        fireEvent.change(verifyCodeInput, { target: { value: '' } });
+        expect(nextButton).toBeDisabled();
+
+        // Non-empty code should enable button
+        fireEvent.change(verifyCodeInput, { target: { value: '123' } });
+        expect(nextButton).toBeEnabled();
+    });
+
+    it('handles multiple error display config combinations', () => {
+        const propsOnClose = jest.fn();
+
+        render(
+            <RegistrationContextProvider {...registrationContextProviderProps}>
+                <RegistrationWorkflow initialScreenIndex={0}>
+                    <VerifyCodeScreen
+                        errorDisplayConfig={{
+                            onClose: propsOnClose,
+                            mode: 'dialog',
+                        }}
+                    />
+                </RegistrationWorkflow>
+            </RegistrationContextProvider>
+        );
+
+        expect(screen.getByText('Verify Email')).toBeInTheDocument();
+    });
+
+    it('handles loading state during verification', () => {
+        const mockValidateUserRegistrationRequest = jest
+            .fn()
+            .mockImplementation(
+                () =>
+                    new Promise((resolve) => setTimeout(() => resolve({ codeValid: true, accountExists: false }), 100))
+            );
+
+        const mockActions = {
+            ...registrationContextProviderProps.actions,
+            validateUserRegistrationRequest: mockValidateUserRegistrationRequest,
+        };
+
+        const { getByLabelText } = render(
+            <RegistrationContextProvider {...registrationContextProviderProps} actions={mockActions}>
+                <RegistrationWorkflow initialScreenIndex={0}>
+                    <VerifyCodeScreen verifyCodeInputLabel="Verify Code" />
+                </RegistrationWorkflow>
+            </RegistrationContextProvider>
+        );
+
+        const verifyCodeInput = getByLabelText('Verify Code');
+        const nextButton = screen.getByText('Next');
+
+        fireEvent.change(verifyCodeInput, { target: { value: '123456' } });
+
+        act(() => {
+            fireEvent.click(nextButton);
+        });
+
+        expect(mockValidateUserRegistrationRequest).toHaveBeenCalled();
+    });
+
+    it('handles custom WorkflowCardBaseProps with loading', () => {
+        render(
+            <RegistrationContextProvider {...registrationContextProviderProps}>
+                <RegistrationWorkflow initialScreenIndex={0}>
+                    <VerifyCodeScreen
+                        WorkflowCardBaseProps={{
+                            loading: true,
+                        }}
+                    />
+                </RegistrationWorkflow>
+            </RegistrationContextProvider>
+        );
+
+        expect(screen.getByText('Verify Email')).toBeInTheDocument();
+    });
+
+    it('handles initialValue prop over screenData', () => {
+        const { getByLabelText } = render(
+            <RegistrationContextProvider {...registrationContextProviderProps}>
+                <RegistrationWorkflow initialScreenIndex={0}>
+                    <VerifyCodeScreen verifyCodeInputLabel="Verify Code" initialValue="fromProps123" />
+                </RegistrationWorkflow>
+            </RegistrationContextProvider>
+        );
+
+        const verifyCodeInput = getByLabelText('Verify Code') as HTMLInputElement;
+        expect(verifyCodeInput.value).toBe('fromProps123');
+    });
+
+    it('handles email address in validation request', () => {
+        const mockValidateUserRegistrationRequest = jest.fn().mockResolvedValue({
+            codeValid: true,
+            accountExists: false,
+        });
+
+        const mockActions = {
+            ...registrationContextProviderProps.actions,
+            validateUserRegistrationRequest: mockValidateUserRegistrationRequest,
+        };
+
+        const { getByLabelText } = render(
+            <RegistrationContextProvider {...registrationContextProviderProps} actions={mockActions}>
+                <RegistrationWorkflow initialScreenIndex={0}>
+                    <VerifyCodeScreen verifyCodeInputLabel="Verify Code" />
+                </RegistrationWorkflow>
+            </RegistrationContextProvider>
+        );
+
+        const verifyCodeInput = getByLabelText('Verify Code');
+        const nextButton = screen.getByText('Next');
+
+        fireEvent.change(verifyCodeInput, { target: { value: '123456' } });
+
+        act(() => {
+            fireEvent.click(nextButton);
+        });
+
+        // Should use the email address available in the context
+        expect(mockValidateUserRegistrationRequest).toHaveBeenCalledWith('123456', expect.any(String));
+    });
+
+    it('allows customization of button labels via WorkflowCardActionsProps', () => {
+        render(
+            <RegistrationContextProvider {...registrationContextProviderProps}>
+                <RegistrationWorkflow initialScreenIndex={0}>
+                    <VerifyCodeScreen
+                        WorkflowCardActionsProps={{
+                            nextLabel: 'Custom Next',
+                            previousLabel: 'Custom Back',
+                        }}
+                    />
+                </RegistrationWorkflow>
+            </RegistrationContextProvider>
+        );
+
+        expect(screen.getByText('Custom Next')).toBeInTheDocument();
+        expect(screen.getByText('Custom Back')).toBeInTheDocument();
+        expect(screen.queryByText('Next')).not.toBeInTheDocument();
+        expect(screen.queryByText('Back')).not.toBeInTheDocument();
+    });
+
+    it('calls custom onNext callback from WorkflowCardActionsProps', () => {
+        const mockCustomOnNext = jest.fn();
+        const mockValidateUserRegistrationRequest = jest.fn().mockResolvedValue({
+            codeValid: true,
+            accountExists: false,
+        });
+
+        const mockActions = {
+            ...registrationContextProviderProps.actions,
+            validateUserRegistrationRequest: mockValidateUserRegistrationRequest,
+        };
+
+        const { getByLabelText } = render(
+            <RegistrationContextProvider {...registrationContextProviderProps} actions={mockActions}>
+                <RegistrationWorkflow initialScreenIndex={0}>
+                    <VerifyCodeScreen
+                        WorkflowCardActionsProps={{
+                            onNext: mockCustomOnNext,
+                        }}
+                    />
+                </RegistrationWorkflow>
+            </RegistrationContextProvider>
+        );
+
+        const verifyCodeInput = getByLabelText('Verification Code');
+        const nextButton = screen.getByText('Next');
+
+        act(() => {
+            fireEvent.change(verifyCodeInput, { target: { value: '123456' } });
+            fireEvent.blur(verifyCodeInput);
+        });
+
+        act(() => {
+            fireEvent.click(nextButton);
+        });
+
+        expect(mockCustomOnNext).toHaveBeenCalled();
+        expect(mockValidateUserRegistrationRequest).toHaveBeenCalled();
+    });
+
+    it('calls custom onPrevious callback from WorkflowCardActionsProps', () => {
+        const mockCustomOnPrevious = jest.fn();
+
+        render(
+            <RegistrationContextProvider {...registrationContextProviderProps}>
+                <RegistrationWorkflow initialScreenIndex={0}>
+                    <VerifyCodeScreen
+                        WorkflowCardActionsProps={{
+                            onPrevious: mockCustomOnPrevious,
+                        }}
+                    />
+                </RegistrationWorkflow>
+            </RegistrationContextProvider>
+        );
+
+        const backButton = screen.getByText('Back');
+
+        act(() => {
+            fireEvent.click(backButton);
+        });
+
+        expect(mockCustomOnPrevious).toHaveBeenCalled();
+    });
+
+    it('uses fallback verifyCode state when data code is passed from base component', () => {
+        const mockValidateUserRegistrationRequest = jest.fn().mockResolvedValue({
+            codeValid: true,
+            accountExists: false,
+        });
+
+        const mockActions = {
+            ...registrationContextProviderProps.actions,
+            validateUserRegistrationRequest: mockValidateUserRegistrationRequest,
+        };
+
+        const { getByLabelText } = render(
+            <RegistrationContextProvider {...registrationContextProviderProps} actions={mockActions}>
+                <RegistrationWorkflow initialScreenIndex={0}>
+                    <VerifyCodeScreen initialValue="initial123" />
+                </RegistrationWorkflow>
+            </RegistrationContextProvider>
+        );
+
+        const verifyCodeInput = getByLabelText('Verification Code');
+        expect(verifyCodeInput).toHaveValue('initial123');
+
+        const nextButton = screen.getByText('Next');
+
+        act(() => {
+            fireEvent.click(nextButton);
+        });
+
+        expect(mockValidateUserRegistrationRequest).toHaveBeenCalledWith('initial123', '');
+    });
+
+    it('handles button visibility with showNext and showPrevious props', () => {
+        render(
+            <RegistrationContextProvider {...registrationContextProviderProps}>
+                <RegistrationWorkflow initialScreenIndex={0}>
+                    <VerifyCodeScreen
+                        WorkflowCardActionsProps={{
+                            showNext: true,
+                            showPrevious: false,
+                        }}
+                    />
+                </RegistrationWorkflow>
+            </RegistrationContextProvider>
+        );
+
+        expect(screen.getByText('Next')).toBeInTheDocument();
+        expect(screen.queryByText('Back')).not.toBeInTheDocument();
+    });
 });

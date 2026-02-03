@@ -2018,7 +2018,7 @@ importers:
         version: 7.12.1(encoding@0.1.13)
       '@okta/okta-react':
         specifier: ^6.9.0
-        version: 6.10.0(@okta/okta-auth-js@7.12.1(encoding@0.1.13))(react-dom@19.1.0(react@19.1.0))(react-router-dom@6.30.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)
+        version: 6.10.0(@okta/okta-auth-js@7.12.1(encoding@0.1.13))(react-dom@19.1.0(react@19.1.0))(react-router-dom@7.13.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)
       dompurify:
         specifier: ^3.2.4
         version: 3.2.6
@@ -2169,8 +2169,8 @@ importers:
         version: 5.8.3
     optionalDependencies:
       react-router-dom:
-        specifier: ^6.8.0
-        version: 6.30.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        specifier: ^7.12.0
+        version: 7.13.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
 
   packages/themes:
     dependencies:
@@ -10502,6 +10502,7 @@ packages:
   next@15.3.4:
     resolution: {integrity: sha512-mHKd50C+mCjam/gcnwqL1T1vPx/XQNFlXqFIVdgQdVAFY9iIQtY0IfaVflEYzKiqjeA7B0cYYMaCrmAYFjs4rA==}
     engines: {node: ^18.18.0 || ^19.8.0 || >= 20.0.0}
+    deprecated: This version has a security vulnerability. Please upgrade to a patched version. See https://nextjs.org/blog/CVE-2025-66478 for more details.
     hasBin: true
     peerDependencies:
       '@opentelemetry/api': ^1.1.0
@@ -11898,6 +11899,13 @@ packages:
       react: '>=16.8'
       react-dom: '>=16.8'
 
+  react-router-dom@7.13.0:
+    resolution: {integrity: sha512-5CO/l5Yahi2SKC6rGZ+HDEjpjkGaG/ncEP7eWFTvFxbHP8yeeI0PxTDjimtpXYlR3b3i9/WIL4VJttPrESIf2g==}
+    engines: {node: '>=20.0.0'}
+    peerDependencies:
+      react: '>=18'
+      react-dom: '>=18'
+
   react-router-dom@7.7.0:
     resolution: {integrity: sha512-wwGS19VkNBkneVh9/YD0pK3IsjWxQUVMDD6drlG7eJpo1rXBtctBqDyBm/k+oKHRAm1x9XWT3JFC82QI9YOXXA==}
     engines: {node: '>=20.0.0'}
@@ -11915,6 +11923,16 @@ packages:
     engines: {node: '>=14.0.0'}
     peerDependencies:
       react: '>=16.8'
+
+  react-router@7.13.0:
+    resolution: {integrity: sha512-PZgus8ETambRT17BUm/LL8lX3Of+oiLaPuVTRH3l1eLvSPpKO3AvhAEb5N7ihAFZQrYDqkvvWfFh9p0z9VsjLw==}
+    engines: {node: '>=20.0.0'}
+    peerDependencies:
+      react: '>=18'
+      react-dom: '>=18'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
 
   react-router@7.6.3:
     resolution: {integrity: sha512-zf45LZp5skDC6I3jDLXQUu0u26jtuP4lEGbc7BbdyxenBN1vJSTA18czM2D+h5qyMBuMrD+9uB+mU37HIoKGRA==}
@@ -17282,6 +17300,15 @@ snapshots:
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
       react-router-dom: 6.30.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+
+  '@okta/okta-react@6.10.0(@okta/okta-auth-js@7.12.1(encoding@0.1.13))(react-dom@19.1.0(react@19.1.0))(react-router-dom@7.13.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@babel/runtime': 7.27.6
+      '@okta/okta-auth-js': 7.12.1(encoding@0.1.13)
+      compare-versions: 4.1.4
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+      react-router-dom: 7.13.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
 
   '@opentelemetry/api@1.9.0': {}
 
@@ -26885,6 +26912,12 @@ snapshots:
       react-dom: 19.1.0(react@19.1.0)
       react-router: 6.30.1(react@19.1.0)
 
+  react-router-dom@7.13.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+    dependencies:
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+      react-router: 7.13.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+
   react-router-dom@7.7.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
       react: 19.1.0
@@ -26908,6 +26941,14 @@ snapshots:
     dependencies:
       '@remix-run/router': 1.23.0
       react: 19.1.0
+
+  react-router@7.13.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+    dependencies:
+      cookie: 1.0.2
+      react: 19.1.0
+      set-cookie-parser: 2.7.1
+    optionalDependencies:
+      react-dom: 19.1.0(react@19.1.0)
 
   react-router@7.6.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:

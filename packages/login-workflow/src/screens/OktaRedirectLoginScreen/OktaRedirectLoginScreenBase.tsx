@@ -190,7 +190,11 @@ export const OktaRedirectLoginScreenBase: React.FC<OktaRedirectLoginScreenProps>
                         className={defaultClasses.cyberSecurityBadgeWrapper}
                         data-testid={defaultClasses.cyberSecurityBadgeWrapper}
                     >
-                        <img src={cyberSecurityBadge} alt="Cyber Security Badge" style={{ width: '100px' }} />
+                        <img
+                            src={cyberSecurityBadge || undefined}
+                            alt="Cyber Security Badge"
+                            style={{ width: '100px' }}
+                        />
                     </Box>
                 )}
             </WorkflowCardBody>

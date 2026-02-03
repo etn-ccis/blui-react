@@ -1,6 +1,6 @@
 {
     "name": "@brightlayer-ui/react-auth-workflow",
-    "version": "7.0.2",
+    "version": "7.0.3",
     "type": "module",
     "author": "Brightlayer UI <brightlayer-ui@eaton.com> (https://github.com/brightlayer-ui)",
     "license": "BSD-3-Clause",
@@ -42,7 +42,7 @@
         "react-i18next": "^13.0.0"
     },
     "optionalDependencies": {
-        "react-router-dom": "^6.8.0"
+        "react-router-dom": "^7.12.0"
     },
     "repository": {
         "type": "git",
@@ -99,7 +99,7 @@
         "react": "^19.1.0",
         "react-dom": "^19.1.0",
         "react-i18next": "^15.6.0",
-        "react-router-dom": "^6.8.0",
+        "react-router-dom": "^7.12.0",
         "regenerator-runtime": "^0.13.7",
         "ts-jest": "^29.0.0-next.1",
         "@types/node": "22.13.0",
@@ -114,6 +114,9 @@
             "lcov",
             "html"
         ],
+        "setupFilesAfterEnv": [
+            "<rootDir>/src/setupTests.ts"
+        ],
         "transform": {
             "^.+\\.[tj]sx?$": "babel-jest"
         },
@@ -126,7 +129,7 @@
             "global": {
                 "lines": 85,
                 "statements": 85,
-                "branches": 70,
+                "branches": 80,
                 "functions": 80
             }
         },

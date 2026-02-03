@@ -1,10 +1,17 @@
 # Changelog
 
-# v8.0.1 (Unreleased)
+# v8.0.2 (February 3, 2026)
+
+### Fixed
+
+- Wrong info list item partial divider under right-to-left. ([#17](https://github.com/etn-ccis/blui-react/issues/187)).
+
+# v8.0.1 (October 1, 2025)
 
 ### Fixed
 
 - Theme related style issues. ([#112](https://github.com/etn-ccis/blui-react/issues/112)).
+- Wrong info list item partial divider under right-to-left ([#17](https://github.com/etn-ccis/blui-react/issues/17))
 
 # v8.0.0 (July 28, 2025)
 
