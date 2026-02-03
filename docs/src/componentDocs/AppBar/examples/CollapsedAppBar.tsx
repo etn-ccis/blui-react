@@ -13,7 +13,7 @@ const codeSnippet = `<Box>
 </Box>
 `;
 
-export const CollapsedAppBar = (): JSX.Element => (
+export const CollapsedAppBar = (): React.JSX.Element => (
     <Box>
         <CollapsedAppBarExample />
         <CodeBlock code={codeSnippet} language="jsx" dataLine="2" />

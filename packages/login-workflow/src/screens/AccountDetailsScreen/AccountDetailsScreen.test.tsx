@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { act } from 'react';
 import '@testing-library/jest-dom';
-import { cleanup, render, screen, RenderResult, fireEvent, act } from '@testing-library/react';
+import { cleanup, render, screen, RenderResult, fireEvent } from '@testing-library/react';
 import { AccountDetailsScreen } from './AccountDetailsScreen';
 import { RegistrationContextProvider } from '../../contexts';
 import { AccountDetailsScreenProps } from './types';

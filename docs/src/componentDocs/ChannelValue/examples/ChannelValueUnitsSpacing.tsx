@@ -12,7 +12,7 @@ const codeSnippet = `<Stack direction={'column'} spacing={0.25} alignItems={'cen
     <ChannelValue value="13.62" units="$" prefix />
 </Stack>`;
 
-export const ChannelValueUnitsSpacing = (): JSX.Element => (
+export const ChannelValueUnitsSpacing = (): React.JSX.Element => (
     <Box>
         <ChannelValueUnitsSpacingExample />
         <CodeBlock code={codeSnippet} language="jsx" />

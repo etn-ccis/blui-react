@@ -5,7 +5,7 @@ import { MainRouter } from './router/main';
 import { DrawerLayout } from '@brightlayer-ui/react-components';
 import { Routes } from 'react-router-dom';
 
-export const App = (): JSX.Element => {
+export const App = (): React.JSX.Element => {
     const [drawerOpen, setDrawerOpen] = useState(false);
 
     return (

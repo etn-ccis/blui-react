@@ -5,7 +5,7 @@ import { UserMenu } from '@brightlayer-ui/react-components';
 import { Settings } from '@mui/icons-material';
 import { ExampleShowcase } from '../../../shared';
 
-export const UserMenuWithMenuHeaderExample = (): JSX.Element => (
+export const UserMenuWithMenuHeaderExample = (): React.JSX.Element => (
     <ExampleShowcase sx={{ display: 'flex', justifyContent: 'center' }}>
         <Box>
             <UserMenu

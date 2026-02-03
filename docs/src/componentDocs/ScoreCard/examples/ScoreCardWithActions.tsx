@@ -32,7 +32,7 @@ const codeSnippet = `<ScoreCard
     </List>
 </ScoreCard>`;
 
-export const ScoreCardWithActions = (): JSX.Element => (
+export const ScoreCardWithActions = (): React.JSX.Element => (
     <Box>
         <ScoreCardWithActionsExample />
         <CodeBlock code={codeSnippet} language="jsx" dataLine="5-9" />

@@ -12,7 +12,7 @@ const codeSnippet = `<ToolbarMenu
     ]}
 />`;
 
-export const BasicToolbarMenu = (): JSX.Element => (
+export const BasicToolbarMenu = (): React.JSX.Element => (
     <Box>
         <BasicToolbarMenuExample />
         <CodeBlock code={codeSnippet} language="jsx" />

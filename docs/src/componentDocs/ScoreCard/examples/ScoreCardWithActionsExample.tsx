@@ -9,7 +9,7 @@ import Box from '@mui/material/Box';
 import { GradeA } from '@brightlayer-ui/icons-mui';
 import * as colors from '@brightlayer-ui/colors';
 
-export const ScoreCardWithActionsExample = (): JSX.Element => (
+export const ScoreCardWithActionsExample = (): React.JSX.Element => (
     <ExampleShowcase sx={{ display: 'flex', justifyContent: 'center' }}>
         <Box>
             <ScoreCard

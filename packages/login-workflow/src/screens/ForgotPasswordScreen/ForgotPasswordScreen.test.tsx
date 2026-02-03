@@ -1,5 +1,5 @@
-import React from 'react';
-import { act, cleanup, fireEvent, render, RenderResult, screen } from '@testing-library/react';
+import React, { act, JSX } from 'react';
+import { cleanup, fireEvent, render, RenderResult, screen } from '@testing-library/react';
 import { ForgotPasswordScreenProps } from './types';
 import { AuthContextProvider } from '../../contexts';
 import { BrowserRouter } from 'react-router-dom';

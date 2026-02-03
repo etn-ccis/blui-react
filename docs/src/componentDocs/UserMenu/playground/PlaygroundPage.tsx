@@ -130,7 +130,7 @@ const generateSnippet: CodeSnippetFunction = (data) =>
         .replace(/^\s*$(?:\r\n?|\n)/gm, '')
         .replace(/(?:^|)( {4}|\t)/gm, '    ');
 
-export const UserMenuPlaygroundComponent = (): JSX.Element => (
+export const UserMenuPlaygroundComponent = (): React.JSX.Element => (
     <Box
         sx={{
             width: '100%',

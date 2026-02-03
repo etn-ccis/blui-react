@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import { Drawer, DrawerBody, DrawerNavGroup, DrawerNavItem, ListItemTag } from '@brightlayer-ui/react-components';
 import { ExampleShowcase } from '../../../shared';
 
-export const CustomNavGroupTitleContentExample = (): JSX.Element => (
+export const CustomNavGroupTitleContentExample = (): React.JSX.Element => (
     <ExampleShowcase>
         <Drawer open width={250} sx={{ mx: 'auto' }} noLayout>
             <DrawerBody sx={{ flex: '1 1 auto' }}>

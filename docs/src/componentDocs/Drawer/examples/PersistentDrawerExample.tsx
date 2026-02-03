@@ -14,7 +14,7 @@ import Menu from '@mui/icons-material/Menu';
 import { ExampleShowcase } from '../../../shared';
 import Box from '@mui/material/Box';
 
-export const PersistentDrawerExample = (): JSX.Element => {
+export const PersistentDrawerExample = (): React.JSX.Element => {
     const [open, setOpen] = useState(true);
     return (
         <ExampleShowcase>

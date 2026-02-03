@@ -3,7 +3,7 @@ import { Drawer, DrawerBody, DrawerNavGroup, DrawerNavItem } from '@brightlayer-
 import { ExampleShowcase } from '../../../shared';
 import Divider from '@mui/material/Divider';
 
-export const DrawerNavGroupCompositionExample = (): JSX.Element => (
+export const DrawerNavGroupCompositionExample = (): React.JSX.Element => (
     <ExampleShowcase>
         <Drawer open width={250} sx={{ mx: 'auto' }} noLayout>
             <DrawerBody sx={{ flex: '1 1 auto' }}>

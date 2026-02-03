@@ -14,7 +14,7 @@ const codeSnippet = `<EmptyState
     }
 />`;
 
-export const EmptyStateWithActions = (): JSX.Element => (
+export const EmptyStateWithActions = (): React.JSX.Element => (
     <Box>
         <EmptyStateWithActionsExample />
         <CodeBlock code={codeSnippet} language="jsx" dataLine={'5, 6-9'} />

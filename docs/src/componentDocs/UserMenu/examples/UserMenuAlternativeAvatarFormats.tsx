@@ -34,7 +34,7 @@ const codeSnippet = `<UserMenu
     ]}
 />`;
 
-export const UserMenuAlternativeAvatarFormats = (): JSX.Element => (
+export const UserMenuAlternativeAvatarFormats = (): React.JSX.Element => (
     <Box>
         <UserMenuAlternativeAvatarFormatsExample />
         <CodeBlock code={codeSnippet} language="jsx" dataLine="2, 15-19" />

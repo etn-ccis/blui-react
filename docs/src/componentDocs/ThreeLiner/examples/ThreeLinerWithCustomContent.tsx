@@ -28,7 +28,7 @@ const codeSnippet = `<ThreeLiner
     }
 />`;
 
-export const ThreeLinerWithCustomContent = (): JSX.Element => (
+export const ThreeLinerWithCustomContent = (): React.JSX.Element => (
     <Box>
         <ThreeLinerWithCustomContentExample />
         <CodeBlock code={codeSnippet} language="jsx" dataLine="5-22" />

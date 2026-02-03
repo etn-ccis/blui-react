@@ -4,7 +4,7 @@ import * as colors from '@brightlayer-ui/colors';
 import { OfflineBolt } from '@mui/icons-material';
 import { ExampleShowcase } from '../../../shared';
 
-export const InfoListItemWithStatusColorExample = (): JSX.Element => (
+export const InfoListItemWithStatusColorExample = (): React.JSX.Element => (
     <ExampleShowcase>
         <InfoListItem
             sx={{ maxWidth: 700, m: 'auto', backgroundColor: 'background.paper' }}

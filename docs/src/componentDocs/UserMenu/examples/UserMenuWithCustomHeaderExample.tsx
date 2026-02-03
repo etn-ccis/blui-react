@@ -7,9 +7,9 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
-const tRex = require('../images/trex.png');
+import tRex from '../images/trex.png';
 
-export const UserMenuWithCustomHeaderExample = (): JSX.Element => {
+export const UserMenuWithCustomHeaderExample = (): React.JSX.Element => {
     const [open, setOpen] = useState(false);
 
     return (

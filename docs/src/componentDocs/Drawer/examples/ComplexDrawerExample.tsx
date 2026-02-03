@@ -12,7 +12,7 @@ import Notifications from '@mui/icons-material/Notifications';
 import { ExampleShowcase } from '../../../shared';
 import { MoveToInbox } from '@mui/icons-material';
 
-export const ComplexDrawerExample = (): JSX.Element => {
+export const ComplexDrawerExample = (): React.JSX.Element => {
     const [selected, setSelected] = useState('1');
     const group1: DrawerNavItemProps[] = [
         {

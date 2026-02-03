@@ -127,7 +127,7 @@ export const LoginScreenBase: React.FC<React.PropsWithChildren<LoginScreenProps>
     );
 
     const handleLogin = (): void => {
-        if (onLogin) void onLogin(username, password, rememberMe);
+        if (onLogin) void onLogin(username, password, showRememberMe !== false ? rememberMe : undefined);
     };
 
     const handleForgotPassword = (): void => {
@@ -188,15 +188,10 @@ export const LoginScreenBase: React.FC<React.PropsWithChildren<LoginScreenProps>
                         <Box
                             sx={{
                                 width: '100%',
-                                mb:
-                                    username.length > 0 && !isUsernameValid && shouldValidateUsername
-                                        ? 4
-                                        : parseInt(`4 + ${HELPER_TEXT_HEIGHT}px`),
+                                height: theme.spacing(10),
+                                mb: 2,
                                 [theme.breakpoints.down('sm')]: {
-                                    mb:
-                                        username.length > 0 && !isUsernameValid && shouldValidateUsername
-                                            ? 3
-                                            : parseInt(`3 + ${HELPER_TEXT_HEIGHT}px`),
+                                    mb: 1,
                                 },
                             }}
                         >
@@ -418,7 +413,7 @@ export const LoginScreenBase: React.FC<React.PropsWithChildren<LoginScreenProps>
                         <img
                             className={defaultClasses.cyberSecurityBadge}
                             data-testid={defaultClasses.cyberSecurityBadge}
-                            src={cyberSecurityBadge}
+                            src={cyberSecurityBadge || undefined}
                             alt="Cyber Security Badge"
                             style={{ width: '100px' }}
                         />

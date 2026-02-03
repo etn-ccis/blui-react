@@ -5,7 +5,7 @@ import { ChannelValueWithPrefixExample } from './ChannelValueWithPrefixExample';
 
 const codeSnippet = `<ChannelValue value="12" units="$" prefix icon={<CheckCircle />} />`;
 
-export const ChannelValueWithPrefix = (): JSX.Element => (
+export const ChannelValueWithPrefix = (): React.JSX.Element => (
     <Box>
         <ChannelValueWithPrefixExample />
         <CodeBlock code={codeSnippet} language="jsx" />

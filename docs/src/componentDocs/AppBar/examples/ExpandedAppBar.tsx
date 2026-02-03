@@ -13,7 +13,7 @@ const codeSnippet = `<Box>
 </Box>
 `;
 
-export const ExpandedAppBar = (): JSX.Element => (
+export const ExpandedAppBar = (): React.JSX.Element => (
     <Box>
         <ExpandedAppBarExample />
         <CodeBlock code={codeSnippet} language="jsx" dataLine="2" />

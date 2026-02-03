@@ -16,7 +16,7 @@ import {
 
 type CallToActionButtonProps = {
     // The icon used on the left
-    avatar?: JSX.Element;
+    avatar?: React.JSX.Element;
 
     // Secondary description text
     description?: string;
@@ -25,7 +25,7 @@ type CallToActionButtonProps = {
     CardActionAreaProps?: CardActionAreaProps;
 
     // The icon used on the right
-    icon?: JSX.Element;
+    icon?: React.JSX.Element;
 
     // Title text
     title?: string;
@@ -62,7 +62,7 @@ const styles: Record<string, SxProps<Theme>> = {
     },
 };
 
-export const CallToActionButton: React.FC<CallToActionButtonProps> = (props): JSX.Element => {
+export const CallToActionButton: React.FC<CallToActionButtonProps> = (props): React.JSX.Element => {
     const theme = useTheme();
     const colorScheme = useColorScheme();
     const {

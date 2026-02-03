@@ -9,7 +9,7 @@ export const ComponentCatalogGrids: React.FC = () => {
     return (
         <Grid container spacing={6} sx={{ mt: 4 }}>
             {componentCatalogLinks.map((link) => (
-                <Grid item xs={12} sm={6} md={4} key={link.title}>
+                <Grid size={{ xs: 12, sm: 6, md: 4 }} key={link.title}>
                     <InfoCard
                         spacing={6}
                         source={link.image}
@@ -17,7 +17,7 @@ export const ComponentCatalogGrids: React.FC = () => {
                         title={link.title}
                         description={''}
                         onClick={(): void => {
-                            navigate(`/components/${link.path}`);
+                            void navigate(`/components/${link.path}`);
                         }}
                     />
                 </Grid>

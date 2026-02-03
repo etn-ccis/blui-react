@@ -36,7 +36,7 @@ const codeSnippet = `<Drawer open={true} width={250}>
 </Drawer>
 `;
 
-export const DrawerFooter = (): JSX.Element => (
+export const DrawerFooter = (): React.JSX.Element => (
     <Box>
         <DrawerFooterExample />
         <CodeBlock code={codeSnippet} language="jsx" dataLine="9-30" />
