@@ -1,6 +1,6 @@
 # Changelog
 
-# v8.0.2 (February 2, 2026)
+# v8.0.2 (February 3, 2026)
 
 ### Fixed
 
