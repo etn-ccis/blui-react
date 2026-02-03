@@ -39,7 +39,7 @@ const codeSnippet = `<Box>
 </Box>
 `;
 
-export const AppBarWithAdditionalContent = (): JSX.Element => (
+export const AppBarWithAdditionalContent = (): React.JSX.Element => (
     <Box>
         <AppBarWithAdditionalContentExample />
         <CodeBlock code={codeSnippet} language="jsx" dataLine="7-29" />

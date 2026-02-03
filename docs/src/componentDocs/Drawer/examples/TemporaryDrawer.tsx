@@ -33,7 +33,7 @@ const codeSnippet = `<Drawer open={open} variant="temporary">
     </DrawerBody>
 </Drawer>`;
 
-export const TemporaryDrawer = (): JSX.Element => (
+export const TemporaryDrawer = (): React.JSX.Element => (
     <Box>
         <TemporaryDrawerExample />
         <CodeBlock code={codeSnippet} language="jsx" dataLine={'1'} />

@@ -5,7 +5,7 @@ import Devices from '@mui/icons-material/Devices';
 import { EmptyState } from '@brightlayer-ui/react-components';
 import { ExampleShowcase } from '../../../shared';
 
-export const EmptyStateWithActionsExample = (): JSX.Element => (
+export const EmptyStateWithActionsExample = (): React.JSX.Element => (
     <ExampleShowcase>
         <EmptyState
             icon={<Devices fontSize="inherit" />}

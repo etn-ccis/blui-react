@@ -6,7 +6,7 @@ import { ListItemTagExample } from './ListItemTagExample';
 const codeSnippet = `<ListItemTag label="Default Tag" />
 <ListItemTag label="Custom Tag" fontColor="#424e54" backgroundColor="#f0cb2f" />`;
 
-export const ListItemTag = (): JSX.Element => (
+export const ListItemTag = (): React.JSX.Element => (
     <Box>
         <ListItemTagExample />
         <CodeBlock code={codeSnippet} language="jsx" />

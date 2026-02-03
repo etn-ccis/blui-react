@@ -3,7 +3,7 @@ import Stack from '@mui/material/Stack';
 import { ChannelValue } from '@brightlayer-ui/react-components';
 import { ExampleShowcase } from '../../../shared';
 
-export const ChannelValueUnitsSpacingExample = (): JSX.Element => (
+export const ChannelValueUnitsSpacingExample = (): React.JSX.Element => (
     <ExampleShowcase>
         <Stack direction={'column'} spacing={0.25} alignItems={'center'}>
             <ChannelValue value="85" units="kWh" unitSpace="hide" />

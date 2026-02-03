@@ -62,7 +62,7 @@ const playgroundContentStyles = {
     flex: '1 1 0px',
 };
 
-export const ComponentPreviewTabs = (): JSX.Element => {
+export const ComponentPreviewTabs = (): React.JSX.Element => {
     const navigate = useNavigate();
     const location = useLocation();
     const [value, setValue] = React.useState(0);
@@ -70,7 +70,7 @@ export const ComponentPreviewTabs = (): JSX.Element => {
 
     const theme = useTheme();
     const handleChange = (event: React.SyntheticEvent, newValue: number): void => {
-        navigate(`/${newValue === 1 ? 'api-docs' : newValue === 2 ? 'playground' : 'examples'}`);
+        void navigate(`/${newValue === 1 ? 'api-docs' : newValue === 2 ? 'playground' : 'examples'}`);
     };
 
     React.useEffect(() => {

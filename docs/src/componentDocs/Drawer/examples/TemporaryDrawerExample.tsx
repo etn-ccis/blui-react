@@ -17,7 +17,7 @@ import Typography from '@mui/material/Typography';
 import { ExampleShowcase } from '../../../shared';
 import { useTheme } from '@mui/material/styles';
 
-export const TemporaryDrawerExample = (): JSX.Element => {
+export const TemporaryDrawerExample = (): React.JSX.Element => {
     const [open, setOpen] = useState(false);
     const containerRef = useRef(null);
     const theme = useTheme();

@@ -5,7 +5,7 @@ import Notifications from '@mui/icons-material/Notifications';
 import Gavel from '@mui/icons-material/Gavel';
 import { ExampleShowcase } from '../../../shared';
 
-export const DrawerNavItemExample = (): JSX.Element => (
+export const DrawerNavItemExample = (): React.JSX.Element => (
     <ExampleShowcase>
         <Drawer open width={250} sx={{ mx: 'auto' }} noLayout>
             <DrawerBody sx={{ flex: '1 1 auto' }}>

@@ -6,7 +6,7 @@ import { DeviceActivating } from '@brightlayer-ui/icons-mui';
 import { BatteryChargingFull, CheckCircle } from '@mui/icons-material';
 import { ExampleShowcase } from '../../../shared';
 
-export const InfoListItemInListExample = (): JSX.Element => (
+export const InfoListItemInListExample = (): React.JSX.Element => (
     <ExampleShowcase>
         <Stack
             sx={{

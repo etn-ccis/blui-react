@@ -28,7 +28,7 @@ const codeSnippet = `<Drawer open width={250}>
 </Drawer>
 `;
 
-export const DrawerNavGroupComposition = (): JSX.Element => (
+export const DrawerNavGroupComposition = (): React.JSX.Element => (
     <Box>
         <DrawerNavGroupCompositionExample />
         <CodeBlock code={codeSnippet} language="jsx" dataLine="3-20" />

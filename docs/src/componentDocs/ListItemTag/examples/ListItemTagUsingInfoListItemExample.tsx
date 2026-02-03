@@ -4,7 +4,7 @@ import Stack from '@mui/material/Stack';
 import BatteryChargingFull from '@mui/icons-material/BatteryChargingFull';
 import * as Colors from '@brightlayer-ui/colors';
 import { ExampleShowcase } from '../../../shared';
-export const ListItemTagUsingInfoListItemExample = (): JSX.Element => (
+export const ListItemTagUsingInfoListItemExample = (): React.JSX.Element => (
     <ExampleShowcase sx={{ display: 'flex', justifyContent: 'center' }}>
         <InfoListItem
             sx={{ width: 'auto', backgroundColor: 'background.paper' }}

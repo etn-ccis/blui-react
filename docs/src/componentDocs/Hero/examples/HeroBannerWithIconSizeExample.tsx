@@ -6,7 +6,7 @@ import Schedule from '@mui/icons-material/Schedule';
 import Trex from '../images/trex.png';
 import { ExampleShowcase } from '../../../shared';
 
-export const HeroBannerWithIconSizeExample = (): JSX.Element => (
+export const HeroBannerWithIconSizeExample = (): React.JSX.Element => (
     <ExampleShowcase>
         <Box sx={{ maxWidth: 350, mx: 'auto' }}>
             {[36, 48, 72].map((iconSize, index) => (

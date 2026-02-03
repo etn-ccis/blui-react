@@ -13,7 +13,7 @@ const codeSnippet = `<Hero
     icon={<Fan fontSize={'inherit'} />}
 />`;
 
-export const HeroWithSecondaryIcon = (): JSX.Element => (
+export const HeroWithSecondaryIcon = (): React.JSX.Element => (
     <Box>
         <HeroWithSecondaryIconExample />
         <CodeBlock code={codeSnippet} language="jsx" dataLine="4" />

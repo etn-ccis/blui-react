@@ -35,7 +35,7 @@ const codeSnippet = `<Drawer open={true} width={250}>
 </Drawer>
 `;
 
-export const ComplexDrawerSubheader = (): JSX.Element => (
+export const ComplexDrawerSubheader = (): React.JSX.Element => (
     <Box>
         <ComplexDrawerSubheaderExample />
         <CodeBlock code={codeSnippet} language="jsx" dataLine="3-22" />

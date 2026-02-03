@@ -3,7 +3,7 @@ import { EmptyState } from '@brightlayer-ui/react-components';
 import { Box, Button } from '@mui/material';
 import { HelpOutline, Add } from '@mui/icons-material';
 
-export const EmptyStateDemo: JSX.Element = (
+export const EmptyStateDemo: React.JSX.Element = (
     <Box sx={{ maxWidth: 400, py: 5, px: 3 }}>
         <EmptyState
             icon={<HelpOutline fontSize={'inherit'} />}

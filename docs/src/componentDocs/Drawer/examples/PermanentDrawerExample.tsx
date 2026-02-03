@@ -10,7 +10,7 @@ import {
 import { ExampleShowcase } from '../../../shared';
 import Box from '@mui/material/Box';
 
-export const PermanentDrawerExample = (): JSX.Element => (
+export const PermanentDrawerExample = (): React.JSX.Element => (
     <ExampleShowcase>
         <DrawerLayout
             drawer={

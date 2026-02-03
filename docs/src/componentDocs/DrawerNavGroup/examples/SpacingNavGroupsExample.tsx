@@ -3,7 +3,7 @@ import Divider from '@mui/material/Divider';
 import { Drawer, DrawerBody, DrawerNavGroup, DrawerNavItem, Spacer } from '@brightlayer-ui/react-components';
 import { ExampleShowcase } from '../../../shared';
 
-export const SpacingNavGroupsExample = (): JSX.Element => (
+export const SpacingNavGroupsExample = (): React.JSX.Element => (
     <ExampleShowcase>
         <Drawer open width={250} sx={{ mx: 'auto', height: 350 }} noLayout>
             <DrawerBody sx={{ flex: '1 1 auto' }}>

@@ -8,7 +8,7 @@ const codeSnippet = `<InfoListItem title="Dense Info List Item 1" dense divider=
 <InfoListItem title="Dense Info List Item 3" dense divider="full" />
 `;
 
-export const DenseInfoListItem = (): JSX.Element => (
+export const DenseInfoListItem = (): React.JSX.Element => (
     <Box>
         <DenseInfoListItemExample />
         <CodeBlock code={codeSnippet} language="jsx" />

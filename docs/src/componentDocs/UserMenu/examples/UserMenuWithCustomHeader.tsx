@@ -24,7 +24,7 @@ const codeSnippet = `<UserMenu
     }
 />`;
 
-export const UserMenuWithCustomHeader = (): JSX.Element => (
+export const UserMenuWithCustomHeader = (): React.JSX.Element => (
     <Box>
         <UserMenuWithCustomHeaderExample />
         <CodeBlock code={codeSnippet} language="jsx" dataLine="4-19" />

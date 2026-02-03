@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import { AppBar } from '@brightlayer-ui/react-components';
 import { getBodyFiller, ExampleShowcase } from '../../../shared';
 
-export const CollapsedAppBarExample = (): JSX.Element => (
+export const CollapsedAppBarExample = (): React.JSX.Element => (
     <ExampleShowcase>
         <AppBar collapsedHeight={64} variant="collapsed" sx={{ width: 450, mx: 'auto', zIndex: 'auto' }}>
             <Toolbar>

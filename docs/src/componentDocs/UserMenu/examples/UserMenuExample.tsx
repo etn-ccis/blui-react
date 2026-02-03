@@ -7,7 +7,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { ExampleShowcase } from '../../../shared';
 
-export const UserMenuExample = (): JSX.Element => (
+export const UserMenuExample = (): React.JSX.Element => (
     <ExampleShowcase sx={{ display: 'flex', justifyContent: 'center' }}>
         <AppBar position="relative" color="primary" sx={{ width: 300 }}>
             <Toolbar sx={{ px: 2, minHeight: 'unset', height: '4rem' }}>

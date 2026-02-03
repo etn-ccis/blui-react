@@ -2,7 +2,7 @@ import React from 'react';
 import { Drawer, DrawerBody, DrawerNavGroup, DrawerNavItem } from '@brightlayer-ui/react-components';
 import { ExampleShowcase } from '../../../shared';
 
-export const BasicDrawerBodyExample = (): JSX.Element => (
+export const BasicDrawerBodyExample = (): React.JSX.Element => (
     <ExampleShowcase>
         <Drawer open={true} width={250} sx={{ mx: 'auto' }} noLayout>
             <DrawerBody hidePadding sx={{ flex: '1 1 auto' }}>

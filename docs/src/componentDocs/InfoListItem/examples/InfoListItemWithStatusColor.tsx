@@ -11,7 +11,7 @@ const codeSnippet = `<InfoListItem
     statusColor='#2ca618'
 />`;
 
-export const InfoListItemWithStatusColor = (): JSX.Element => (
+export const InfoListItemWithStatusColor = (): React.JSX.Element => (
     <Box>
         <InfoListItemWithStatusColorExample />
         <CodeBlock code={codeSnippet} language="jsx" dataLine="5-6" />

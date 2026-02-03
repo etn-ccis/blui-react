@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Drawer, DrawerBody, DrawerNavGroup, DrawerNavItem } from '@brightlayer-ui/react-components';
 import { ExampleShowcase } from '../../../shared';
 
-export const DrawerNavItemSelectedItemsExample = (): JSX.Element => {
+export const DrawerNavItemSelectedItemsExample = (): React.JSX.Element => {
     const [selected, setSelected] = useState('Item 2');
 
     return (
