@@ -19,7 +19,8 @@ export const Root = styled(ListItem, {
         prop !== 'wrapSubtitle' &&
         prop !== 'wrapTitle' &&
         prop !== 'wrapInfo' &&
-        prop !== 'ripple',
+        prop !== 'ripple' &&
+        prop !== 'ListItemButtonProps',
 })<
     Pick<
         InfoListItemProps,

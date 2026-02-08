@@ -413,4 +413,51 @@ describe('InfoListItem', () => {
         );
         expect(screen.getByText('Test')).toBeTruthy();
     });
+
+    it('passes ListItemButtonProps to the ListItemButton when ripple is enabled', () => {
+        const mockClick = jest.fn();
+        render(
+            <ThemeProvider theme={blueThemes}>
+                <InfoListItem
+                    title="Test"
+                    onClick={mockClick}
+                    ripple={true}
+                    ListItemButtonProps={{ tabIndex: 0, disabled: false }}
+                />
+            </ThemeProvider>
+        );
+        expect(screen.getByText('Test')).toBeTruthy();
+    });
+
+    it('does not pass ListItemButtonProps to the DOM when ripple is disabled', () => {
+        const mockClick = jest.fn();
+        const { container } = render(
+            <ThemeProvider theme={blueThemes}>
+                <InfoListItem
+                    title="Test"
+                    onClick={mockClick}
+                    ripple={false}
+                    ListItemButtonProps={{ tabIndex: 0, disabled: false }}
+                />
+            </ThemeProvider>
+        );
+        expect(screen.getByText('Test')).toBeTruthy();
+
+        // Verify that ListItemButtonProps is not leaked to the DOM
+        const listItem = container.querySelector('li');
+        expect(listItem).not.toHaveAttribute('listitembuttonprops');
+    });
+
+    it('does not pass ListItemButtonProps to the DOM when not interactive', () => {
+        const { container } = render(
+            <ThemeProvider theme={blueThemes}>
+                <InfoListItem title="Test" ListItemButtonProps={{ tabIndex: 0, disabled: false }} />
+            </ThemeProvider>
+        );
+        expect(screen.getByText('Test')).toBeTruthy();
+
+        // Verify that ListItemButtonProps is not leaked to the DOM
+        const listItem = container.querySelector('li');
+        expect(listItem).not.toHaveAttribute('listitembuttonprops');
+    });
 });
