@@ -73,10 +73,36 @@
         "@brightlayer-ui/colors": "^3.1.0",
         "@emotion/react": "^11.7.1",
         "@emotion/styled": "^11.6.0",
+        "@hookform/resolvers": "^3.0.0",
         "@mui/icons-material": "^7.1.1",
         "@mui/material": "^7.1.1",
+        "chart.js": "^4.0.0",
+        "material-react-table": "^3.0.0",
         "react": "^19.1.0",
-        "react-dom": "^19.1.0"
+        "react-chartjs-2": "^5.0.0",
+        "react-dom": "^19.1.0",
+        "react-hook-form": "^7.0.0",
+        "zod": "^3.0.0"
+    },
+    "peerDependenciesMeta": {
+        "chart.js": {
+            "optional": true
+        },
+        "material-react-table": {
+            "optional": true
+        },
+        "react-chartjs-2": {
+            "optional": true
+        },
+        "react-hook-form": {
+            "optional": true
+        },
+        "@hookform/resolvers": {
+            "optional": true
+        },
+        "zod": {
+            "optional": true
+        }
     },
     "repository": {
         "type": "git",
