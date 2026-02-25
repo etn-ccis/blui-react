@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import Typography from '@mui/material/Typography';
-import { TableOfContents, DrawerNavGroup, DrawerNavItem } from '@brightlayer-ui/react-components';
+import { DrawerLite, DrawerNavGroup, DrawerNavItem } from '@brightlayer-ui/react-components';
 import { Home, Settings, Info, Notifications, Person } from '@mui/icons-material';
 import Box from '@mui/material/Box';
 
@@ -24,7 +24,7 @@ const contentSectionStyles = {
     mb: 2,
 };
 
-export const TableOfContentsExample: React.FC = () => {
+export const DrawerLiteExample: React.FC = () => {
     const [activeItem1, setActiveItem1] = useState('home');
     const [activeItem2, setActiveItem2] = useState('notifications');
     const [activeItem3, setActiveItem3] = useState('general');
@@ -45,13 +45,13 @@ export const TableOfContentsExample: React.FC = () => {
                 </Typography>
                 <Box sx={{ display: 'flex', gap: 2 }}>
                     <Box sx={{ minWidth: 200 }}>
-                        <TableOfContents activeItem={activeItem1}>
+                        <DrawerLite activeItem={activeItem1}>
                             <DrawerNavGroup title="Navigation">
                                 <DrawerNavItem title="Home" itemID="home" icon={<Home />} onClick={() => handleNavClick('home', setActiveItem1)} />
                                 <DrawerNavItem title="Settings" itemID="settings" icon={<Settings />} onClick={() => handleNavClick('settings', setActiveItem1)} />
                                 <DrawerNavItem title="About" itemID="about" icon={<Info />} onClick={() => handleNavClick('about', setActiveItem1)} />
                             </DrawerNavGroup>
-                        </TableOfContents>
+                        </DrawerLite>
                     </Box>
                     <Box sx={{ flex: 1 }}>
                         <Box id="home" sx={contentSectionStyles}>
@@ -75,7 +75,7 @@ export const TableOfContentsExample: React.FC = () => {
                 </Typography>
                 <Box sx={{ display: 'flex', gap: 2 }}>
                     <Box sx={{ minWidth: 200 }}>
-                        <TableOfContents activeItem={activeItem2}>
+                        <DrawerLite activeItem={activeItem2}>
                             <DrawerNavGroup title="Main">
                                 <DrawerNavItem title="Home" itemID="home-2" icon={<Home />} onClick={() => handleNavClick('home-2', setActiveItem2)} />
                                 <DrawerNavItem title="Profile" itemID="profile" icon={<Person />} onClick={() => handleNavClick('profile', setActiveItem2)} />
@@ -84,7 +84,7 @@ export const TableOfContentsExample: React.FC = () => {
                                 <DrawerNavItem title="Notifications" itemID="notifications" icon={<Notifications />} onClick={() => handleNavClick('notifications', setActiveItem2)} />
                                 <DrawerNavItem title="Settings" itemID="settings-2" icon={<Settings />} onClick={() => handleNavClick('settings-2', setActiveItem2)} />
                             </DrawerNavGroup>
-                        </TableOfContents>
+                        </DrawerLite>
                     </Box>
                     <Box sx={{ flex: 1 }}>
                         <Box id="home-2" sx={contentSectionStyles}>
@@ -112,7 +112,7 @@ export const TableOfContentsExample: React.FC = () => {
                 </Typography>
                 <Box sx={{ display: 'flex', gap: 2 }}>
                     <Box sx={{ minWidth: 200 }}>
-                        <TableOfContents activeItem={activeItem3}>
+                        <DrawerLite activeItem={activeItem3}>
                             <DrawerNavGroup title="Settings">
                                 <DrawerNavItem
                                     title="Account"
@@ -136,7 +136,7 @@ export const TableOfContentsExample: React.FC = () => {
                                     ]}
                                 />
                             </DrawerNavGroup>
-                        </TableOfContents>
+                        </DrawerLite>
                     </Box>
                     <Box sx={{ flex: 1 }}>
                         <Box id="account" sx={contentSectionStyles}>

@@ -1,12 +1,12 @@
 import React from "react";
 import { DrawerContextProvider } from "../Drawer";
 
-type TableOfContentsProps = {
+type DrawerLiteProps = {
     activeItem: string;
     children: React.ReactNode;
 }
 
-export const TableOfContents: React.FC<TableOfContentsProps> = (props) => {
+export const DrawerLite: React.FC<DrawerLiteProps> = (props) => {
     const { activeItem, children } = props;
     return (
         <DrawerContextProvider open={true} activeItem={activeItem}>

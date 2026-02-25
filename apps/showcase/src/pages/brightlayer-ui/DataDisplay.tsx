@@ -7,7 +7,7 @@ import {
     HeroExample,
     InfoListItemExample,
     ListItemTagExample,
-    TableOfContentsExample,
+    DrawerLiteExample,
     ThreeLinerExample,
     UserMenuExample,
 } from '../../components';
@@ -34,9 +34,9 @@ export const BLUIDataDisplay: React.FC = () => {
             <ExampleCardList examples={examples} />
             <Box sx={{ m: 2 }}>
                 <Card sx={{ width: '100%' }}>
-                    <CardHeader title="Table Of Contents" />
+                    <CardHeader title="Drawer Lite" />
                     <CardContent>
-                        <TableOfContentsExample />
+                        <DrawerLiteExample />
                     </CardContent>
                 </Card>
             </Box>
