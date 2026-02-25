@@ -47,9 +47,24 @@ export const DrawerLiteExample: React.FC = () => {
                     <Box sx={{ minWidth: 200 }}>
                         <DrawerLite activeItem={activeItem1}>
                             <DrawerNavGroup title="Navigation">
-                                <DrawerNavItem title="Home" itemID="home" icon={<Home />} onClick={() => handleNavClick('home', setActiveItem1)} />
-                                <DrawerNavItem title="Settings" itemID="settings" icon={<Settings />} onClick={() => handleNavClick('settings', setActiveItem1)} />
-                                <DrawerNavItem title="About" itemID="about" icon={<Info />} onClick={() => handleNavClick('about', setActiveItem1)} />
+                                <DrawerNavItem
+                                    title="Home"
+                                    itemID="home"
+                                    icon={<Home />}
+                                    onClick={() => handleNavClick('home', setActiveItem1)}
+                                />
+                                <DrawerNavItem
+                                    title="Settings"
+                                    itemID="settings"
+                                    icon={<Settings />}
+                                    onClick={() => handleNavClick('settings', setActiveItem1)}
+                                />
+                                <DrawerNavItem
+                                    title="About"
+                                    itemID="about"
+                                    icon={<Info />}
+                                    onClick={() => handleNavClick('about', setActiveItem1)}
+                                />
                             </DrawerNavGroup>
                         </DrawerLite>
                     </Box>
@@ -77,12 +92,32 @@ export const DrawerLiteExample: React.FC = () => {
                     <Box sx={{ minWidth: 200 }}>
                         <DrawerLite activeItem={activeItem2}>
                             <DrawerNavGroup title="Main">
-                                <DrawerNavItem title="Home" itemID="home-2" icon={<Home />} onClick={() => handleNavClick('home-2', setActiveItem2)} />
-                                <DrawerNavItem title="Profile" itemID="profile" icon={<Person />} onClick={() => handleNavClick('profile', setActiveItem2)} />
+                                <DrawerNavItem
+                                    title="Home"
+                                    itemID="home-2"
+                                    icon={<Home />}
+                                    onClick={() => handleNavClick('home-2', setActiveItem2)}
+                                />
+                                <DrawerNavItem
+                                    title="Profile"
+                                    itemID="profile"
+                                    icon={<Person />}
+                                    onClick={() => handleNavClick('profile', setActiveItem2)}
+                                />
                             </DrawerNavGroup>
                             <DrawerNavGroup title="Other">
-                                <DrawerNavItem title="Notifications" itemID="notifications" icon={<Notifications />} onClick={() => handleNavClick('notifications', setActiveItem2)} />
-                                <DrawerNavItem title="Settings" itemID="settings-2" icon={<Settings />} onClick={() => handleNavClick('settings-2', setActiveItem2)} />
+                                <DrawerNavItem
+                                    title="Notifications"
+                                    itemID="notifications"
+                                    icon={<Notifications />}
+                                    onClick={() => handleNavClick('notifications', setActiveItem2)}
+                                />
+                                <DrawerNavItem
+                                    title="Settings"
+                                    itemID="settings-2"
+                                    icon={<Settings />}
+                                    onClick={() => handleNavClick('settings-2', setActiveItem2)}
+                                />
                             </DrawerNavGroup>
                         </DrawerLite>
                     </Box>
@@ -120,9 +155,21 @@ export const DrawerLiteExample: React.FC = () => {
                                     icon={<Person />}
                                     onClick={() => handleNavClick('account', setActiveItem3)}
                                     items={[
-                                        { title: 'General', itemID: 'general', onClick: () => handleNavClick('general', setActiveItem3) },
-                                        { title: 'Security', itemID: 'security', onClick: () => handleNavClick('security', setActiveItem3) },
-                                        { title: 'Privacy', itemID: 'privacy', onClick: () => handleNavClick('privacy', setActiveItem3) },
+                                        {
+                                            title: 'General',
+                                            itemID: 'general',
+                                            onClick: () => handleNavClick('general', setActiveItem3),
+                                        },
+                                        {
+                                            title: 'Security',
+                                            itemID: 'security',
+                                            onClick: () => handleNavClick('security', setActiveItem3),
+                                        },
+                                        {
+                                            title: 'Privacy',
+                                            itemID: 'privacy',
+                                            onClick: () => handleNavClick('privacy', setActiveItem3),
+                                        },
                                     ]}
                                 />
                                 <DrawerNavItem
@@ -131,8 +178,16 @@ export const DrawerLiteExample: React.FC = () => {
                                     icon={<Notifications />}
                                     onClick={() => handleNavClick('notifications-settings', setActiveItem3)}
                                     items={[
-                                        { title: 'Email', itemID: 'email', onClick: () => handleNavClick('email', setActiveItem3) },
-                                        { title: 'Push', itemID: 'push', onClick: () => handleNavClick('push', setActiveItem3) },
+                                        {
+                                            title: 'Email',
+                                            itemID: 'email',
+                                            onClick: () => handleNavClick('email', setActiveItem3),
+                                        },
+                                        {
+                                            title: 'Push',
+                                            itemID: 'push',
+                                            onClick: () => handleNavClick('push', setActiveItem3),
+                                        },
                                     ]}
                                 />
                             </DrawerNavGroup>

@@ -22,4 +22,4 @@ export const DrawerContextProvider: React.FC<React.PropsWithChildren<DrawerConte
     const { children, ...drawerContextProps } = props;
 
     return <DrawerContext.Provider value={drawerContextProps}>{children}</DrawerContext.Provider>;
-}
+};
