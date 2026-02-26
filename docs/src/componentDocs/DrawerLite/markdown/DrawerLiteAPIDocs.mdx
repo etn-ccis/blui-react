@@ -1,0 +1,35 @@
+import Box from '@mui/material/Box';
+import { ForMoreDetailsOnStylingOptions } from '../../../shared';
+
+# Drawer Lite
+
+The `<DrawerLite>` component is a simplified version of the `<Drawer>` component that provides a navigation container with drawer context but without the full drawer functionality. It is useful when you need to create navigation structures that leverage the drawer context (for active item tracking) without the overhead of the full drawer component.
+
+Unlike the full `<Drawer>` component, `<DrawerLite>` does not provide:
+- Collapsible/expandable behavior
+- Drawer variants (permanent, persistent, temporary, rail)
+- Integration with `<DrawerLayout>`
+
+> **Note:** `<DrawerLite>` cannot be used directly as the `drawer` prop of `<DrawerLayout>`. The `<DrawerLayout>` component requires a full `<Drawer>` component that integrates with the layout context to manage content padding and drawer state. However, you can use `<DrawerLite>` within the content area of a `<DrawerLayout>` as secondary navigation alongside a primary `<Drawer>`.
+
+It is ideal for scenarios where you need a simple, always-visible navigation menu that uses Brightlayer UI's drawer child components (`<DrawerBody>`, `<DrawerNavGroup>`, `<DrawerNavItem>`, etc.).
+
+### Drawer Lite API
+
+<Box>
+
+| Prop Name  | Description                                              | Type              | Required | Default |
+| ---------- | -------------------------------------------------------- | ----------------- | -------- | ------- |
+| activeItem | The identifier of the currently active navigation item   | `string`          | no       |         |
+| children   | The content to be rendered inside the drawer context     | `React.ReactNode` | yes      |         |
+
+</Box>
+
+The `<DrawerLite>` component wraps its children in a `<DrawerContextProvider>` with `open` always set to `true`. This means all child drawer components will behave as if the drawer is always open.
+
+### Usage
+
+Use `<DrawerLite>` when you need:
+- A simple navigation menu without drawer open/close behavior
+- Active item tracking across navigation items
+- Compatibility with drawer child components (`<DrawerBody>`, `<DrawerNavGroup>`, `<DrawerNavItem>`, etc.)

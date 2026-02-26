@@ -10,6 +10,7 @@ import DrawerBodyAPIDocs from '../../componentDocs/DrawerBody/markdown/DrawerBod
 import DrawerRailItemAPIDocs from '../../componentDocs/DrawerRailItem/markdown/DrawerRailItemAPIDocs.mdx';
 import DrawerNavItemAPIDocs from '../../componentDocs/DrawerNavItem/markdown/DrawerNavItemAPIDocs.mdx';
 import DrawerLayoutAPIDocs from '../../componentDocs/DrawerLayout/markdown/DrawerLayoutAPIDocs.mdx';
+import DrawerLiteAPIDocs from '../../componentDocs/DrawerLite/markdown/DrawerLiteAPIDocs.mdx';
 import DrawerSubheaderAPIDocs from '../../componentDocs/DrawerSubheader/markdown/DrawerSubheaderAPIDocs.mdx';
 import ChannelValueAPIDocs from '../../componentDocs/ChannelValue/markdown/ChannelValueAPIDocs.mdx';
 import EmptyStateAPIDocs from '../../componentDocs/EmptyState/markdown/EmptyStateAPIDocs.mdx';
@@ -71,6 +72,7 @@ import HeroExamples from '../../componentDocs/Hero/markdown/HeroExamples.mdx';
 import ListItemTagExamples from '../../componentDocs/ListItemTag/markdown/ListItemTagExamples.mdx';
 import InfoListItemExamples from '../../componentDocs/InfoListItem/markdown/InfoListItemExamples.mdx';
 import DrawerLayoutExamples from '../../componentDocs/DrawerLayout/markdown/DrawerLayoutExamples.mdx';
+import DrawerLiteExamples from '../../componentDocs/DrawerLite/markdown/DrawerLiteExamples.mdx';
 import AppBarExamples from '../../componentDocs/AppBar/markdown/AppBarExamples.mdx';
 import UserMenuExamples from '../../componentDocs/UserMenu/markdown/UserMenuExamples.mdx';
 import ChannelValueExamples from '../../componentDocs/ChannelValue/markdown/ChannelValueExamples.mdx';
@@ -85,6 +87,7 @@ import { AppBarPlaygroundComponent } from '../../componentDocs/AppBar/playground
 import { ChannelValuePlaygroundComponent } from '../../componentDocs/ChannelValue/playground';
 import { DrawerPlaygroundComponent } from '../../componentDocs/Drawer/playground';
 import { DrawerHeaderPlaygroundComponent } from '../../componentDocs/DrawerHeader/playground';
+import { DrawerLitePlaygroundComponent } from '../../componentDocs/DrawerLite/playground';
 import { DrawerSubheaderPlaygroundComponent } from '../../componentDocs/DrawerSubheader/playground';
 import { DrawerFooterPlaygroundComponent } from '../../componentDocs/DrawerFooter/playground';
 import { DrawerNavGroupPlaygroundComponent } from '../../componentDocs/DrawerNavGroup/playground';
@@ -217,6 +220,28 @@ export const pageDefinitions: RouteConfig[] = [
                                 title: 'API Docs',
                                 path: 'api-docs',
                                 element: <DrawerLayoutAPIDocs />,
+                            },
+                        ],
+                    },
+                    {
+                        title: 'Drawer Lite',
+                        path: 'drawer-lite/',
+                        element: <ComponentPreviewPage title={'Drawer Lite'} />,
+                        children: [
+                            {
+                                title: 'examples',
+                                path: 'examples',
+                                element: <DrawerLiteExamples />,
+                            },
+                            {
+                                title: 'API Docs',
+                                path: 'api-docs',
+                                element: <DrawerLiteAPIDocs />,
+                            },
+                            {
+                                title: 'playground',
+                                path: 'playground',
+                                element: <DrawerLitePlaygroundComponent />,
                             },
                         ],
                     },
