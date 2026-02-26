@@ -38,11 +38,15 @@ const meta: Meta<DrawerLiteStoryProps> = {
     parameters: {
         layout: 'centered',
     },
-    decorators: [(story): React.ReactElement => <Box sx={{ height: '400px', display: 'flex' }}>{story()}</Box>],
+    decorators: [
+        (story: () => React.ReactNode): React.ReactElement => (
+            <Box sx={{ height: '400px', display: 'flex' }}>{story()}</Box>
+        ),
+    ],
 };
 
 export default meta;
-type Story = StoryObj<DrawerLiteStoryProps>;
+type Story = StoryObj<typeof meta>;
 
 export const BasicUsage: Story = {
     render: ({ activeItem }) => (
