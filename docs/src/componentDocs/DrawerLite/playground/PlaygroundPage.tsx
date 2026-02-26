@@ -1,11 +1,6 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
-import {
-    InputConfig,
-    PreviewComponent,
-    CodeSnippetFunction,
-    Playground,
-} from '@brightlayer-ui/react-doc-components';
+import { InputConfig, PreviewComponent, CodeSnippetFunction, Playground } from '@brightlayer-ui/react-doc-components';
 import Stack from '@mui/material/Stack';
 import {
     Drawer,
@@ -170,7 +165,9 @@ const DrawerLitePreview: PreviewComponent = ({ data }) => {
 const generateSnippet: CodeSnippetFunction = (data) => {
     const mainNav = data.mainNav as string;
     const subNav = subNavConfigs[mainNav] || subNavConfigs.home;
-    const subItems = subNav.items.map((item) => `{ title: '${item.title}', itemID: '${item.itemID}' }`).join(',\n            ');
+    const subItems = subNav.items
+        .map((item) => `{ title: '${item.title}', itemID: '${item.itemID}' }`)
+        .join(',\n            ');
 
     return `// Dynamic sub-navigation based on main nav selection
 const subNavConfigs = {

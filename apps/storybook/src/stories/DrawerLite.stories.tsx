@@ -75,7 +75,10 @@ export const WithMainDrawer: Story = {
         const [selectedNav, setSelectedNav] = useState('home');
         const [activeSubItem, setActiveSubItem] = useState('overview');
 
-        const subNavConfigs: Record<string, { title: string; items: Array<{ title: string; icon: React.ReactElement; itemID: string }> }> = {
+        const subNavConfigs: Record<
+            string,
+            { title: string; items: Array<{ title: string; icon: React.ReactElement; itemID: string }> }
+        > = {
             home: {
                 title: 'Home',
                 items: [
