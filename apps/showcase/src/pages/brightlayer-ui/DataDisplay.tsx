@@ -2,6 +2,7 @@ import React from 'react';
 import {
     ChannelValueExample,
     ComponentExample,
+    EditableTableExample,
     EmptyStateExample,
     ExampleCardList,
     HeroExample,
@@ -26,6 +27,7 @@ export const BLUIDataDisplay: React.FC = () => {
         { label: 'List Item Tag', component: <ListItemTagExample /> },
         { label: 'Three Liner', component: <ThreeLinerExample /> },
         { label: 'UserMenu', component: <UserMenuExample /> },
+        { label: 'Editable Table', component: <EditableTableExample />, fullWidth: true },
     ];
     usePageTitle('Brightlayer UI Data Display');
 
