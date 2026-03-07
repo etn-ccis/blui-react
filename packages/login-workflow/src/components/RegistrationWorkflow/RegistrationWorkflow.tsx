@@ -193,8 +193,9 @@ export const RegistrationWorkflow: React.FC<React.PropsWithChildren<Registration
                 updateScreenData(data);
                 if (currentScreen === 0) {
                     navigate(-1);
+                } else {
+                    setCurrentScreen((i) => i - 1);
                 }
-                setCurrentScreen((i) => i - 1);
             }}
             screenData={screenData}
             updateScreenData={updateScreenData}
