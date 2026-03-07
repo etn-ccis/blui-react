@@ -64,6 +64,7 @@ const LightThemeColors = {
     text: {
         primary: BLUIColors.black[500],
         secondary: BLUIColors.gray[500],
+        disabled: Color(BLUIColors.black[500]).alpha(0.3).string(),
         hint: BLUIColors.gray[500],
     },
     action: {
