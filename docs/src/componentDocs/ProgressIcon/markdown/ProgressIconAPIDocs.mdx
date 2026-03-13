@@ -1,0 +1,61 @@
+import Box from '@mui/material/Box';
+
+# Progress Icons
+
+The `@brightlayer-ui/react-progress-icons` package includes a set of configurable SVG icons for displaying progress and status values.
+
+All progress icons share a common base prop type, `ProgressIconProps`.
+
+### Progress Icon API
+
+<Box>
+
+| Prop Name        | Description                                                                    | Type                                      | Required | Default  |
+| :--------------- | :----------------------------------------------------------------------------- | :---------------------------------------- | :------- | :------- |
+| backgroundColor  | Background fill color behind the icon                                          | `string`                                  | no       |          |
+| classes          | Style override classes for icon container and labels                           | `{ progressIcon?: string; progressIconLabel?: string;`<br />`centered?: string }` | no       |          |
+| color            | Primary icon color                                                             | `string`                                  | no       |          |
+| labelColor       | Color applied to the percent label text                                        | `string`                                  | no       |          |
+| labelPosition    | Position of the percent label relative to the icon                             | `'top' \| 'bottom' \| 'left' \| 'right'` | no       | `'bottom'` |
+| labelSize        | Font size of the percent label                                                 | `number`                                  | no       |          |
+| outlined         | Renders an outlined visual style (when supported by the icon)                 | `boolean`                                 | no       | `false`  |
+| percent          | Progress value represented by the icon                                         | `number`                                  | no       |          |
+| showPercentLabel | Controls whether the numeric percent label is displayed                        | `boolean`                                 | no       | `false`  |
+| size             | Width and height of the icon in pixels                                         | `number`                                  | no       |          |
+| ...svgProps      | Any valid SVG props passed through to the root SVG element                     | `SVGAttributes<SVGElement>`               | no       |          |
+
+</Box>
+
+### Icon-Specific APIs
+
+<Box>
+
+| Icon     | Additional Prop | Description                                  | Type      | Required | Default |
+| :------- | :-------------- | :------------------------------------------- | :-------- | :------- | :------ |
+| `Pie`    | `ring`          | Thickness of the ring for the pie indicator  | `number`  | no       |         |
+| `Battery`| `charging`      | Displays charging state styling              | `boolean` | no       | `false` |
+| `Heart`  | -               | No additional props; uses `ProgressIconProps`| -         | -        | -       |
+| `Ups`    | -               | No additional props; uses `ProgressIconProps`| -         | -        | -       |
+| `Signal` | -               | No additional props; uses `ProgressIconProps`| -         | -        | -       |
+
+</Box>
+
+### Style Overrides
+
+You can override Progress Icon styles by:
+
+- passing a `classes` prop
+- using inline `style` props
+- passing SVG attributes on the root element
+
+<Box>
+
+| Name              | classes Key         | Description                                   |
+| :---------------- | :------------------ | :-------------------------------------------- |
+| Icon Container    | `progressIcon`      | Styles applied to the icon wrapper container  |
+| Percent Label     | `progressIconLabel` | Styles applied to the percent label element   |
+| Centered Label    | `centered`          | Styles applied when label is centered         |
+
+</Box>
+
+Global CSS class names are not exported for these elements.

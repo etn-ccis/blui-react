@@ -23,6 +23,7 @@ import ThreeLinerAPIDocs from '../../componentDocs/ThreeLiner/markdown/ThreeLine
 import SpacerAPIDocs from '../../componentDocs/Spacer/markdown/SpacerAPIDocs.mdx';
 import ScoreCardAPIDocs from '../../componentDocs/ScoreCard/markdown/ScoreCardAPIDocs.mdx';
 import ToolbarMenuAPIDocs from '../../componentDocs/ToolbarMenu/markdown/ToolbarMenuAPIDocs.mdx';
+import ProgressIconAPIDocs from '../../componentDocs/ProgressIcon/markdown/ProgressIconAPIDocs.mdx';
 
 // workflow docs
 import WorkflowOverview from '../../markdownDocs/workflowDocs/Overview/overview.mdx';
@@ -81,6 +82,7 @@ import ScoreCardExamples from '../../componentDocs/ScoreCard/markdown/ScoreCardE
 import SpacerExamples from '../../componentDocs/Spacer/markdown/SpacerExamples.mdx';
 import ThreeLinerExamples from '../../componentDocs/ThreeLiner/markdown/ThreeLinerExamples.mdx';
 import DrawerRailItemExamples from '../../componentDocs/DrawerRailItem/markdown/DrawerRailItemExamples.mdx';
+import ProgressIconExamples from '../../componentDocs/ProgressIcon/markdown/ProgressIconExamples.mdx';
 
 // Playground components
 import { AppBarPlaygroundComponent } from '../../componentDocs/AppBar/playground/PlaygroundPage';
@@ -104,7 +106,7 @@ import { UserMenuPlaygroundComponent } from '../../componentDocs/UserMenu/playgr
 import { Outlet, RouteProps } from 'react-router';
 import { OpenInNew } from '@mui/icons-material';
 import { Box } from '@mui/material';
-import { ListItemTag } from '@brightlayer-ui/react-components';
+import { ListItemTag, NavItem } from '@brightlayer-ui/react-components';
 
 // Site markdown docs
 import * as markdownDocs from '../../markdownDocs/';
@@ -800,16 +802,59 @@ export const pageDefinitions: RouteConfig[] = [
             },
         ],
     },
+    {
+        title: 'Icons',
+        path: '/icons/',
+        element: <Outlet />,
+        hidden: true,
+        pages: [
+            {
+                title: 'Progress Icons',
+                path: 'progress-icons/',
+                element: <ComponentPreviewPage title={'Progress Icons'} />,
+                children: [
+                    {
+                        title: 'examples',
+                        path: 'examples',
+                        element: <ProgressIconExamples />,
+                    },
+                    {
+                        title: 'API Docs',
+                        path: 'api-docs',
+                        element: <ProgressIconAPIDocs />,
+                    },
+                ],
+            },
+        ],
+    },
 ];
 
 const openInNewTab = (url = '#'): any => {
     window.open(url);
 };
 
-export const externalLinkDefinitions = [
+export const externalLinkDefinitions: NavItem[] = [
     {
-        title: 'Resources',
-        itemID: 'Resources',
+        title: 'Resources & Assets',
+        itemID: 'Resources & Assets',
+        disableActiveItemParentStyles: true,
+        nestedBackgroundColor: 'transparent',
+        items: [
+            {
+                title: 'Icons',
+                itemID: 'Icons',
+                items: [
+                    {
+                        title: 'Progress Icons',
+                        itemID: '/icons/progress-icons/examples',
+                    },
+                ],
+            },
+        ],
+    },
+    {
+        title: 'Packages',
+        itemID: 'Packages',
         rightComponent: <OpenInNew color="disabled" />,
         onClick: (): void => openInNewTab('https://brightlayer-ui.github.io/resources/developer'),
     },
