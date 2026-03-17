@@ -1,6 +1,8 @@
-import React, { useState, useMemo } from 'react';
-import { Box, useTheme, alpha } from '@mui/material';
-import { EditableTable, type EditableTableColumnDef } from '@brightlayer-ui/react-components';
+import React, { useState, useMemo, useCallback } from 'react';
+import { Box, Button, IconButton, Tooltip, Typography, useTheme, alpha } from '@mui/material';
+import UndoIcon from '@mui/icons-material/Undo';
+import RedoIcon from '@mui/icons-material/Redo';
+import { EditableTable, type EditableTableColumnDef, type EditableTableState } from '@brightlayer-ui/react-components';
 
 const componentContainerStyles = {
     display: 'flex',
@@ -104,6 +106,7 @@ export const EditableTableExample: React.FC = () => {
     const [users, setUsers] = useState<User[]>(initialData);
     const [isLoading] = useState(false);
     const [isSaving, setIsSaving] = useState(false);
+    const [tableState, setTableState] = useState<EditableTableState | null>(null);
     const theme = useTheme();
     const primaryBg = alpha(theme.palette.primary.light, 0.85);
 
@@ -262,8 +265,68 @@ export const EditableTableExample: React.FC = () => {
         }
     };
 
+    const handleSave = useCallback(async (): Promise<void> => {
+        if (!tableState?.save) return;
+        setIsSaving(true);
+        try {
+            await tableState.save();
+            // eslint-disable-next-line no-console
+            console.log('Table saved. Updated data:', tableState.tableData);
+        } finally {
+            setIsSaving(false);
+        }
+    }, [tableState]);
+
     return (
         <Box sx={componentContainerStyles}>
+            {/* Custom toolbar — driven by onStateChange */}
+            <Box sx={{ display: 'flex', gap: '0.5rem', alignItems: 'center', mb: 1 }}>
+                <Tooltip title="Undo (Ctrl+Z)">
+                    <span>
+                        <IconButton size="small" onClick={tableState?.undo} disabled={!tableState?.canUndo}>
+                            <UndoIcon fontSize="small" />
+                        </IconButton>
+                    </span>
+                </Tooltip>
+                <Tooltip title="Redo (Ctrl+Shift+Z)">
+                    <span>
+                        <IconButton size="small" onClick={tableState?.redo} disabled={!tableState?.canRedo}>
+                            <RedoIcon fontSize="small" />
+                        </IconButton>
+                    </span>
+                </Tooltip>
+                {tableState?.hasPendingChanges && (
+                    <>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            size="small"
+                            onClick={(): void => {
+                                void handleSave();
+                            }}
+                            disabled={isSaving}
+                            sx={{ textTransform: 'none' }}
+                        >
+                            Save Changes
+                        </Button>
+                        <Button
+                            variant="outlined"
+                            color="error"
+                            size="small"
+                            onClick={(): void => {
+                                tableState.reset();
+                            }}
+                            disabled={isSaving}
+                            sx={{ textTransform: 'none' }}
+                        >
+                            Reset
+                        </Button>
+                        <Typography variant="caption" color="text.secondary">
+                            You have unsaved changes
+                        </Typography>
+                    </>
+                )}
+            </Box>
             <EditableTable
                 columns={columns}
                 data={users}
@@ -285,6 +348,8 @@ export const EditableTableExample: React.FC = () => {
                 createDisplayMode="row"
                 editDisplayMode="cell"
                 createButtonText="Add New User"
+                enableUndoRedo={true}
+                onStateChange={setTableState}
                 deleteConfirmMessage={(row: User) =>
                     `Are you sure you want to delete ${row.firstName} ${row.lastName}?`
                 }

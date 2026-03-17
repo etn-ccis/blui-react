@@ -1,17 +1,13 @@
-import React, { useMemo, useState, useCallback } from 'react';
-import {
-    MaterialReactTable,
-    type MRT_ColumnDef,
-    type MRT_Row,
-    type MRT_TableOptions,
-    useMaterialReactTable,
-} from 'material-react-table';
-import { Box, Button, IconButton, Tooltip, Typography } from '@mui/material';
+import React, { useEffect, useRef, useCallback, useMemo } from 'react';
+import { MaterialReactTable, useMaterialReactTable } from 'material-react-table';
+import { Box, Button, IconButton, Tooltip } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import AddIcon from '@mui/icons-material/Add';
-import { EditableTableColumnDef, EditableTableProps, EditableTableData, ValidationErrors } from './types';
+import { EditableTableProps, EditableTableData } from './types';
+import { useEditableTableHandlers } from './hooks/useEditableTableHandlers';
+import { useEnhancedColumns } from './hooks/useEnhancedColumns';
 
 /**
  * EditableTable is a reusable table component built on material-react-table
@@ -66,232 +62,118 @@ export const EditableTable = (<TData extends EditableTableData>(
         createButtonText = 'New data point',
         deleteConfirmMessage = 'Are you sure you want to delete this item?',
         minHeight = '500px',
+        enableUndoRedo = false,
+        onStateChange,
     } = props;
 
-    const [tableData, setTableData] = useState<TData[]>(data);
-    const [validationErrors, setValidationErrors] = useState<ValidationErrors<TData>>({});
-    const [editedRows, setEditedRows] = useState<Record<string, TData>>({});
+    const {
+        tableData,
+        validationErrors,
+        editedRows,
+        clearValidationErrors,
+        handleCreateRow,
+        handleSaveCell,
+        handleSaveRows,
+        handleResetRows,
+        handleDeleteRow,
+        handleDuplicateRow,
+        undo,
+        redo,
+        canUndo,
+        canRedo,
+    } = useEditableTableHandlers({
+        data,
+        onCreate,
+        onValidate,
+        onUpdate,
+        onDelete,
+        onDuplicate,
+        getRowId,
+        deleteConfirmMessage,
+    });
 
-    // Update table data when prop changes
-    React.useEffect(() => {
-        setTableData(data);
-    }, [data]);
+    // onStateChange — use a ref so the user can pass an inline function without
+    // causing an infinite effect loop.
+    const onStateChangeRef = useRef(onStateChange);
+    useEffect(() => {
+        onStateChangeRef.current = onStateChange;
+    });
 
-    // Handle creating a new row
-    const handleCreateRow: MRT_TableOptions<TData>['onCreatingRowSave'] = useCallback(
-        async ({ values, table }) => {
-            // Validate the new row
-            if (onValidate) {
-                const errors = onValidate(values as TData);
-                if (Object.values(errors).some((err) => !!err)) {
-                    setValidationErrors(errors);
-                    return;
-                }
-            }
+    // Stable refs for action callbacks — updated every render but never change identity.
+    // This means the onStateChange effect only re-fires when the primitive flags change,
+    // not every time the internal callbacks are recreated due to state updates.
+    const undoRef = useRef(undo);
+    const redoRef = useRef(redo);
+    const handleSaveRowsRef = useRef(handleSaveRows);
+    const handleResetRowsRef = useRef(handleResetRows);
+    useEffect(() => {
+        undoRef.current = undo;
+    });
+    useEffect(() => {
+        redoRef.current = redo;
+    });
+    useEffect(() => {
+        handleSaveRowsRef.current = handleSaveRows;
+    });
+    useEffect(() => {
+        handleResetRowsRef.current = handleResetRows;
+    });
 
-            setValidationErrors({});
+    const stableUndo = useCallback(() => undoRef.current(), []);
+    const stableRedo = useCallback(() => redoRef.current(), []);
+    const stableSave = useCallback((): Promise<void> => handleSaveRowsRef.current(), []);
+    const stableReset = useCallback(() => handleResetRowsRef.current(), []);
 
-            // Call onCreate callback if provided
-            if (onCreate) {
-                await onCreate(values as TData);
-            } else {
-                // Default behavior: add to local state
-                setTableData((prev) => [...prev, values as TData]);
-            }
+    // Keyboard shortcuts for undo/redo
+    useEffect(() => {
+        if (!enableUndoRedo) return;
 
-            table.setCreatingRow(null);
-        },
-        [onCreate, onValidate]
-    );
-
-    // Handle updating a row (for cell/table edit modes)
-    const handleSaveCell = useCallback(
-        (cell: any, value: any) => {
-            const rowId = cell.row.id;
-            const columnId = cell.column.id;
-
-            // Update the edited rows state
-            const updatedRow = {
-                ...(editedRows[rowId] || cell.row.original),
-                [columnId]: value,
-            };
-
-            setEditedRows((prev) => ({
-                ...prev,
-                [rowId]: updatedRow,
-            }));
-
-            // Validate the cell if validation is provided
-            if (onValidate) {
-                const errors = onValidate(updatedRow);
-                const cellKey = `${rowId}_${columnId}` as keyof TData;
-                setValidationErrors((prev) => ({
-                    ...prev,
-                    [cellKey]: errors[columnId as keyof TData],
-                }));
-            }
-        },
-        [editedRows, onValidate]
-    );
-
-    // Handle saving all edited rows
-    const handleSaveRows = useCallback(async (): Promise<void> => {
-        // Check for validation errors
-        if (Object.values(validationErrors).some((err) => !!err)) {
-            return;
-        }
-
-        // Call onUpdate for each edited row
-        if (onUpdate) {
-            await Promise.all(Object.values(editedRows).map((row) => Promise.resolve(onUpdate(row))));
-        } else {
-            // Default behavior: update local state
-            setTableData((prev) =>
-                prev.map((row) => {
-                    const rowId = getRowId(row);
-                    return editedRows[rowId] || row;
-                })
-            );
-        }
-
-        setEditedRows({});
-    }, [editedRows, validationErrors, onUpdate, getRowId]);
-
-    // Handle deleting a row
-    const handleDeleteRow = useCallback(
-        (row: MRT_Row<TData>) => {
-            const message =
-                typeof deleteConfirmMessage === 'function' ? deleteConfirmMessage(row.original) : deleteConfirmMessage;
-
-            // eslint-disable-next-line no-alert
-            if (window.confirm(message)) {
-                if (onDelete) {
-                    void onDelete(getRowId(row.original));
+        const handleKeyDown = (e: KeyboardEvent): void => {
+            if (!(e.metaKey || e.ctrlKey)) return;
+            if (e.code === 'KeyZ') {
+                e.preventDefault();
+                if (e.shiftKey) {
+                    redoRef.current();
                 } else {
-                    // Default behavior: remove from local state
-                    setTableData((prev) => prev.filter((r) => getRowId(r) !== getRowId(row.original)));
+                    undoRef.current();
                 }
+            } else if (e.code === 'KeyY') {
+                e.preventDefault();
+                redoRef.current();
             }
-        },
-        [deleteConfirmMessage, onDelete, getRowId]
-    );
+        };
 
-    // Handle duplicating a row
-    const handleDuplicateRow = useCallback(
-        async (row: MRT_Row<TData>) => {
-            const duplicatedRow = { ...row.original };
-            // Remove the id so the consumer can assign a new one
-            delete duplicatedRow.id;
+        window.addEventListener('keydown', handleKeyDown);
+        return (): void => window.removeEventListener('keydown', handleKeyDown);
+    }, [enableUndoRedo]);
 
-            if (onDuplicate) {
-                await onDuplicate(duplicatedRow);
-            } else {
-                // Default behavior: add to local state
-                setTableData((prev) => [...prev, duplicatedRow]);
-            }
-        },
-        [onDuplicate]
-    );
+    const hasPendingChanges = Object.keys(editedRows).length > 0;
 
-    // Enhance columns with edit handlers for cell editing mode
-    const enhancedColumns = useMemo<Array<MRT_ColumnDef<TData>>>(() => {
-        /**
-         * Resolve muiTableBodyCellProps (function or object) and merge with
-         * the alignment default and any `cellStyle` the column defines.
-         */
-        const resolveBodyCellProps =
-            (column: EditableTableColumnDef<TData>): ((cellParams: any) => any) =>
-            (cellParams: any): any => {
-                const isNumber =
-                    column.accessorKey &&
-                    tableData.length > 0 &&
-                    typeof tableData[0][column.accessorKey as keyof TData] === 'number';
+    useEffect(() => {
+        if (!onStateChangeRef.current) return;
+        onStateChangeRef.current({
+            canUndo,
+            canRedo,
+            hasPendingChanges,
+            undo: stableUndo,
+            redo: stableRedo,
+            save: stableSave,
+            reset: stableReset,
+            tableData,
+        });
+    }, [canUndo, canRedo, hasPendingChanges, stableUndo, stableRedo, stableSave, stableReset, tableData]);
 
-                // Handle both function and object forms of muiTableBodyCellProps
-                const originalProps =
-                    typeof column.muiTableBodyCellProps === 'function'
-                        ? (column.muiTableBodyCellProps as (params: any) => any)(cellParams)
-                        : (column.muiTableBodyCellProps ?? {});
+    const originalDataMap = useMemo(() => new Map(data.map((row) => [getRowId(row), row])), [data, getRowId]);
 
-                // Resolve cellStyle if provided
-                const customSx = column.cellStyle
-                    ? column.cellStyle({
-                          cell: cellParams.cell,
-                          row: cellParams.row,
-                          column: cellParams.column,
-                          table: cellParams.table,
-                      })
-                    : undefined;
-
-                // Merge sx: default padding → user's sx → cellStyle (highest priority)
-                const mergedSx = ((): ((t: any) => any) | Record<string, unknown> => {
-                    const defaultSx = { px: 2, height: 52, backgroundColor: 'background.paper' };
-                    if (typeof originalProps.sx === 'function') {
-                        return (t: any): Record<string, unknown> => ({
-                            ...defaultSx,
-                            ...(originalProps.sx as (t: any) => any)(t),
-                            ...(customSx ?? {}),
-                        });
-                    }
-                    return { ...defaultSx, ...(originalProps.sx ?? {}), ...(customSx ?? {}) };
-                })();
-
-                return {
-                    align: isNumber ? 'right' : 'left',
-                    ...originalProps,
-                    sx: mergedSx,
-                };
-            };
-
-        /**
-         * Resolve muiTableHeadCellProps (function or object) and merge alignment.
-         */
-        const resolveHeadCellProps =
-            (column: EditableTableColumnDef<TData>): ((headParams: any) => any) =>
-            (headParams: any): any => {
-                const originalProps =
-                    typeof column.muiTableHeadCellProps === 'function'
-                        ? (column.muiTableHeadCellProps as (params: any) => any)(headParams)
-                        : (column.muiTableHeadCellProps ?? {});
-
-                return {
-                    align: 'center',
-                    ...originalProps,
-                    sx: { px: 2, backgroundColor: 'background.paper', ...(originalProps.sx ?? {}) },
-                };
-            };
-
-        if (editDisplayMode !== 'cell' && editDisplayMode !== 'table') {
-            return columns.map((column) => ({
-                ...column,
-                muiTableBodyCellProps: resolveBodyCellProps(column),
-                muiTableHeadCellProps: resolveHeadCellProps(column),
-            }));
-        }
-
-        return columns.map((column) => ({
-            ...column,
-            muiTableBodyCellProps: resolveBodyCellProps(column),
-            muiTableHeadCellProps: resolveHeadCellProps(column),
-            muiEditTextFieldProps: ({ cell, row, column: col, table: innerTable }: any): any => {
-                const cellKey = `${row.id}_${cell.column.id}` as keyof TData;
-                const originalProps =
-                    typeof column.muiEditTextFieldProps === 'function'
-                        ? column.muiEditTextFieldProps({ cell, row, column: col, table: innerTable })
-                        : column.muiEditTextFieldProps || {};
-
-                return {
-                    ...originalProps,
-                    error: !!validationErrors?.[cellKey],
-                    helperText: validationErrors?.[cellKey],
-                    onBlur: (event: React.FocusEvent<HTMLInputElement>): void => {
-                        handleSaveCell(cell, event.currentTarget.value);
-                        originalProps.onBlur?.(event);
-                    },
-                };
-            },
-        }));
-    }, [columns, editDisplayMode, validationErrors, handleSaveCell, tableData]);
+    const enhancedColumns = useEnhancedColumns({
+        columns,
+        editDisplayMode,
+        validationErrors,
+        handleSaveCell,
+        tableData,
+        editedRows,
+        originalDataMap,
+    });
 
     // Configure the table
     const table = useMaterialReactTable({
@@ -317,13 +199,30 @@ export const EditableTable = (<TData extends EditableTableData>(
         muiBottomToolbarProps: {
             sx: { backgroundColor: 'background.paper' },
         },
-        muiTableBodyRowProps: { hover: true },
+        muiTableBodyRowProps: {
+            hover: true,
+            sx: {
+                '& td[data-pinned="true"]:before': { backgroundColor: 'transparent !important' },
+            },
+        },
         displayColumnDefOptions: {
             'mrt-row-actions': {
-                muiTableHeadCellProps: { align: 'center', sx: { px: 1, backgroundColor: 'background.paper' } },
+                muiTableHeadCellProps: {
+                    align: 'center',
+                    sx: {
+                        px: 1,
+                        backgroundColor: 'background.paper',
+                        '&[data-pinned="true"]:before': { backgroundColor: 'transparent !important' },
+                    },
+                },
                 muiTableBodyCellProps: {
                     align: 'center',
-                    sx: { px: 1, height: 52, backgroundColor: 'background.paper' },
+                    sx: {
+                        px: 1,
+                        height: 52,
+                        backgroundColor: 'background.paper',
+                        '&[data-pinned="true"]:before': { backgroundColor: 'transparent !important' },
+                    },
                 },
             },
         },
@@ -338,7 +237,7 @@ export const EditableTable = (<TData extends EditableTableData>(
                 minHeight,
             },
         },
-        onCreatingRowCancel: (): void => setValidationErrors({}),
+        onCreatingRowCancel: (): void => clearValidationErrors(),
         onCreatingRowSave: handleCreateRow,
         renderRowActions: enableRowActions
             ? ({ row, table: actionTable }): React.ReactElement => (
@@ -383,23 +282,6 @@ export const EditableTable = (<TData extends EditableTableData>(
                     >
                         {createButtonText}
                     </Button>
-                )}
-                {(editDisplayMode === 'cell' || editDisplayMode === 'table') && Object.keys(editedRows).length > 0 && (
-                    <>
-                        <Button
-                            variant="contained"
-                            color="success"
-                            onClick={(): void => {
-                                void handleSaveRows();
-                            }}
-                            disabled={isSaving}
-                        >
-                            {isSaving ? 'Saving...' : 'Save Changes'}
-                        </Button>
-                        {Object.values(validationErrors).some((err) => !!err) && (
-                            <Typography color="error">Fix errors before submitting</Typography>
-                        )}
-                    </>
                 )}
             </Box>
         ),

@@ -212,6 +212,65 @@ export type EditableTableProps<TData extends EditableTableData> = {
      * Default: '500px'
      */
     minHeight?: string | number;
+
+    /**
+     * Enable undo/redo support for cell edits, row additions, deletions,
+     * and duplications. Adds Ctrl/Cmd+Z (undo) and Ctrl/Cmd+Shift+Z (redo)
+     * keyboard shortcuts.
+     *
+     * History is cleared when "Save Changes" is committed so the saved state
+     * becomes the new baseline.
+     *
+     * Default: false
+     */
+    enableUndoRedo?: boolean;
+
+    /**
+     * Called whenever undo/redo availability or pending-changes state changes.
+     * Receives reactive flags (`canUndo`, `canRedo`, `hasPendingChanges`) and
+     * stable action callbacks (`undo`, `redo`, `save`), so you can render your
+     * own controls anywhere outside the table.
+     *
+     * Keyboard shortcuts (Ctrl+Z / Ctrl+Shift+Z) continue to work when
+     * `enableUndoRedo={true}` regardless of whether this prop is provided.
+     *
+     * @example
+     * ```tsx
+     * const [tableState, setTableState] = useState<EditableTableState | null>(null);
+     *
+     * <MyToolbar
+     *   canUndo={tableState?.canUndo}
+     *   onUndo={tableState?.undo}
+     *   onSave={tableState?.save}
+     * />
+     * <EditableTable enableUndoRedo onStateChange={setTableState} ... />
+     * ```
+     */
+    onStateChange?: (state: EditableTableState) => void;
 };
 
 export type ValidationErrors<TData extends EditableTableData> = Partial<Record<keyof TData, string | undefined>>;
+
+/**
+ * State snapshot passed to `onStateChange`.
+ * Contains both reactive flags and stable action callbacks so the parent can
+ * render and wire up its own undo/redo/save controls.
+ */
+export type EditableTableState = {
+    /** Whether there is at least one action that can be undone */
+    canUndo: boolean;
+    /** Whether there is at least one action that can be redone */
+    canRedo: boolean;
+    /** Whether there are unsaved cell edits, row additions or deletions */
+    hasPendingChanges: boolean;
+    /** Undo the last recorded action */
+    undo: () => void;
+    /** Redo the last undone action */
+    redo: () => void;
+    /** Commit all pending changes (calls onUpdate for each edited row) */
+    save: () => Promise<void>;
+    /** Discard all pending changes and restore the table to its last saved state */
+    reset: () => void;
+    /** Current snapshot of all rows in the table (includes any unsaved edits) */
+    tableData: unknown[];
+};
