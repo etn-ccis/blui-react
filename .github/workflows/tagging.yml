@@ -29,7 +29,6 @@ jobs:
               uses: actions/setup-node@v4
               with:
                   node-version: '20'
-                  cache: 'pnpm'
             - name: Install pnpm
               run: npm install -g pnpm
             - name: Install dependencies
@@ -63,6 +62,7 @@ jobs:
                       # Package meets criteria for tagging
                       echo "✅ Package $npm_package_name@$current_version ready for tagging" >&2
                       echo "true"
+                  }
 
                   # Check each package with their NPM package names
                   login_workflow_needs_tag=$(check_package_needs_tag "packages/login-workflow" "login-workflow" "@brightlayer-ui/react-auth-workflow")
