@@ -263,6 +263,8 @@ export type EditableTableState = {
     canRedo: boolean;
     /** Whether there are unsaved cell edits, row additions or deletions */
     hasPendingChanges: boolean;
+    /** Whether any cell currently has a validation error */
+    hasValidationErrors: boolean;
     /** Undo the last recorded action */
     undo: () => void;
     /** Redo the last undone action */

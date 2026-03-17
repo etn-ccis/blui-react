@@ -304,7 +304,7 @@ export const EditableTableExample: React.FC = () => {
                             onClick={(): void => {
                                 void handleSave();
                             }}
-                            disabled={isSaving}
+                            disabled={isSaving || !!tableState?.hasValidationErrors}
                             sx={{ textTransform: 'none' }}
                         >
                             Save Changes

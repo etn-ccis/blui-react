@@ -27,13 +27,20 @@ export const BLUIDataDisplay: React.FC = () => {
         { label: 'List Item Tag', component: <ListItemTagExample /> },
         { label: 'Three Liner', component: <ThreeLinerExample /> },
         { label: 'UserMenu', component: <UserMenuExample /> },
-        { label: 'Editable Table', component: <EditableTableExample />, fullWidth: true },
     ];
     usePageTitle('Brightlayer UI Data Display');
 
     return (
         <>
             <ExampleCardList examples={examples} />
+            <Box sx={{ m: 2 }}>
+                <Card sx={{ width: '100%' }}>
+                    <CardHeader title="Drawer Lite" />
+                    <CardContent>
+                        <EditableTableExample />
+                    </CardContent>
+                </Card>
+            </Box>
             <Box sx={{ m: 2 }}>
                 <Card sx={{ width: '100%' }}>
                     <CardHeader title="Drawer Lite" />

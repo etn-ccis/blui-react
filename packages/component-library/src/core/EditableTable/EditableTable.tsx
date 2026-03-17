@@ -148,6 +148,7 @@ export const EditableTable = (<TData extends EditableTableData>(
     }, [enableUndoRedo]);
 
     const hasPendingChanges = Object.keys(editedRows).length > 0;
+    const hasValidationErrors = Object.values(validationErrors).some(Boolean);
 
     useEffect(() => {
         if (!onStateChangeRef.current) return;
@@ -155,13 +156,24 @@ export const EditableTable = (<TData extends EditableTableData>(
             canUndo,
             canRedo,
             hasPendingChanges,
+            hasValidationErrors,
             undo: stableUndo,
             redo: stableRedo,
             save: stableSave,
             reset: stableReset,
             tableData,
         });
-    }, [canUndo, canRedo, hasPendingChanges, stableUndo, stableRedo, stableSave, stableReset, tableData]);
+    }, [
+        canUndo,
+        canRedo,
+        hasPendingChanges,
+        hasValidationErrors,
+        stableUndo,
+        stableRedo,
+        stableSave,
+        stableReset,
+        tableData,
+    ]);
 
     const originalDataMap = useMemo(() => new Map(data.map((row) => [getRowId(row), row])), [data, getRowId]);
 
