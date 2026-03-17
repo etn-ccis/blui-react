@@ -1,5 +1,5 @@
 name: " Resource Request 🎨"
-description: "Request an icon, font, or other resource for Brightlayer UI HMI components"
+description: "Request an icon, font, or other resource for Brightlayer UI React components"
 title: "[Resource]: "
 labels: ['status: needs-review', 'resource 🎨', 'brightlayer-ui', 'type: enhancement 🚀']
 assignees: []
@@ -9,7 +9,7 @@ body:
       value: '## Resource Request'
   - type: markdown
     attributes:
-      value: Use this template to request a new icon, font, or any other resource for Brightlayer UI HMI components.
+      value: Use this template to request a new icon, font, or any other resource for Brightlayer UI React components.
   - type: dropdown
     id: resource-type
     attributes:
@@ -35,7 +35,7 @@ body:
     id: use-case
     attributes:
       label: Use Case
-      description: 'Describe where and how this resource will be used in HMI components'
+      description: 'Describe where and how this resource will be used in Brightlayer UI React components'
       placeholder: 'Which component(s) need this resource? What is the context?'
     validations:
       required: true
