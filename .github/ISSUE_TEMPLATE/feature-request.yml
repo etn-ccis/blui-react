@@ -45,9 +45,9 @@ body:
         Will this enhancement affect the visual design (how it looks) or user
         interaction (how it behaves)?
       options:
-        # NOTE: The text in these options is used to automatically label the
-        # issue with it's corresponding label. If these are modified,
-        # .github/labeler.yml must be updated as well.
+        # NOTE: The text in these options may be used for automatic labeling.
+        # If these options are modified, update any corresponding labeling
+        # configuration in this repository as needed.
         - 'Yes, visual design'
         - 'Yes, user interaction'
         - 'Yes, both visual and interaction'
@@ -62,9 +62,9 @@ body:
       label: Documentation impact
       description: Does the documentation need to be updated for this enhancement?
       options:
-        # NOTE: The text in these options is used to automatically label the
-        # issue with it's corresponding label. If these are modified,
-        # .github/labeler.yml must be updated as well.
+        # NOTE: The text in these options may be used for automatic labeling.
+        # If these options are modified, update any corresponding labeling
+        # configuration in this repository as needed.
         - label: The website documentation
         - label: Component documentation
         - label: "I'm not sure"
