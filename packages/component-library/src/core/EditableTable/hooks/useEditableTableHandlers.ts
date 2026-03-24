@@ -72,7 +72,7 @@ export const useEditableTableHandlers = <TData extends EditableTableData>({
         undo,
         redo,
         clearHistory,
-    } = useTableHistory<TData>({ setTableData, setEditedRows, getRowId });
+    } = useTableHistory<TData>({ setTableData, setEditedRows, setValidationErrors, getRowId });
 
     // Sync tableData when the data prop changes
     useEffect(() => {
@@ -114,14 +114,11 @@ export const useEditableTableHandlers = <TData extends EditableTableData>({
             // before we overwrite it. This is stored in history so undo can revert tableData.
             const prevValue = cell.row.original[columnId as keyof TData];
             const prevRowEdits = editedRowsRef.current[rowId];
+            const prevError = validationErrorsRef.current[`${rowId}_${columnId}`] as string | undefined;
             const updatedRow = {
                 ...(prevRowEdits || cell.row.original),
                 [columnId]: value,
             };
-
-            if (!isUndoRedoAction.current) {
-                recordCellEdit(rowId, columnId, prevValue, value, prevRowEdits, updatedRow);
-            }
 
             // Write the edit into tableData immediately so the cell display updates
             // and custom Cell renderers (which read cell.getValue / row.original) reflect the change.
@@ -132,13 +129,19 @@ export const useEditableTableHandlers = <TData extends EditableTableData>({
                 [rowId]: updatedRow,
             }));
 
+            let nextError: string | undefined;
             if (onValidate) {
                 const errors = onValidate(updatedRow);
                 const cellKey = `${rowId}_${columnId}` as keyof TData;
+                nextError = errors[columnId as keyof TData] as string | undefined;
                 setValidationErrors((prev) => ({
                     ...prev,
-                    [cellKey]: errors[columnId as keyof TData],
+                    [cellKey]: nextError,
                 }));
+            }
+
+            if (!isUndoRedoAction.current) {
+                recordCellEdit(rowId, columnId, prevValue, value, prevRowEdits, updatedRow, prevError, nextError);
             }
         },
         [onValidate, isUndoRedoAction, recordCellEdit, getRowId]

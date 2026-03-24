@@ -35,7 +35,7 @@ export const BLUIDataDisplay: React.FC = () => {
             <ExampleCardList examples={examples} />
             <Box sx={{ m: 2 }}>
                 <Card sx={{ width: '100%' }}>
-                    <CardHeader title="Drawer Lite" />
+                    <CardHeader title="Editable Table" />
                     <CardContent>
                         <EditableTableExample />
                     </CardContent>
