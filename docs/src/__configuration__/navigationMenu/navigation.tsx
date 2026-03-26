@@ -110,6 +110,7 @@ import { ListItemTag, NavItem } from '@brightlayer-ui/react-components';
 
 // Site markdown docs
 import * as markdownDocs from '../../markdownDocs/';
+import { ProgressIconPlaygroundComponent } from '../../componentDocs/ProgressIcon/playground';
 
 export type RouteConfig = Omit<RouteProps, 'children'> & {
     title: string;
@@ -822,6 +823,11 @@ export const pageDefinitions: RouteConfig[] = [
                         title: 'API Docs',
                         path: 'api-docs',
                         element: <ProgressIconAPIDocs />,
+                    },
+                    {
+                        title: 'playground',
+                        path: 'playground',
+                        element: <ProgressIconPlaygroundComponent />,
                     },
                 ],
             },
