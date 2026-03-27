@@ -234,20 +234,21 @@ const generateSnippet: CodeSnippetFunction = (data) => {
     const propsMapping = getPropsMapping(data, inputConfig);
     let props = getPropsToString(propsMapping, {
         join: '\n\t',
-        skip: ['iconType'],
+        skip: ['iconType', 'ring', 'charging'],
     });
 
-    // Handle icon-specific props
+    const iconSpecificSnippetProps: string[] = [];
+
     if (iconType === 'Battery' && charging !== undefined) {
-        props = props.replace('charging', 'charging');
-    } else if (iconType === 'Battery') {
-        props = props.replace('charging', '');
+        iconSpecificSnippetProps.push(`charging={${charging}}`);
     }
 
     if (iconType === 'Pie' && ring !== undefined) {
-        props = props.replace('ring', 'ring');
-    } else if (iconType === 'Pie') {
-        props = props.replace('ring', '');
+        iconSpecificSnippetProps.push(`ring={${ring}}`);
+    }
+
+    if (iconSpecificSnippetProps.length > 0) {
+        props = [props, ...iconSpecificSnippetProps].filter(Boolean).join('\n\t');
     }
 
     return `<${iconType} 
