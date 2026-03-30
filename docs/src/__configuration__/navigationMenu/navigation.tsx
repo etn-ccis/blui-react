@@ -13,6 +13,7 @@ import DrawerLayoutAPIDocs from '../../componentDocs/DrawerLayout/markdown/Drawe
 import DrawerLiteAPIDocs from '../../componentDocs/DrawerLite/markdown/DrawerLiteAPIDocs.mdx';
 import DrawerSubheaderAPIDocs from '../../componentDocs/DrawerSubheader/markdown/DrawerSubheaderAPIDocs.mdx';
 import ChannelValueAPIDocs from '../../componentDocs/ChannelValue/markdown/ChannelValueAPIDocs.mdx';
+import EditableTableAPIDocs from '../../componentDocs/EditableTable/markdown/EditableTableAPIDocs.mdx';
 import EmptyStateAPIDocs from '../../componentDocs/EmptyState/markdown/EmptyStateAPIDocs.mdx';
 import HeroAPIDocs from '../../componentDocs/Hero/markdown/HeroAPIDocs.mdx';
 import InfoListItemAPIDocs from '../../componentDocs/InfoListItem/markdown/InfoListItemAPIDocs.mdx';
@@ -68,6 +69,7 @@ import DrawerNavGroupExamples from '../../componentDocs/DrawerNavGroup/markdown/
 import DrawerExamples from '../../componentDocs/Drawer/markdown/DrawerExamples.mdx';
 import DrawerHeaderExamples from '../../componentDocs/DrawerHeader/markdown/DrawerHeaderExamples.mdx';
 import DrawerSubheaderExamples from '../../componentDocs/DrawerSubheader/markdown/DrawerSubheaderExamples.mdx';
+import EditableTableExamples from '../../componentDocs/EditableTable/markdown/EditableTableExamples.mdx';
 import EmptyStateExamples from '../../componentDocs/EmptyState/markdown/EmptyStateExamples.mdx';
 import HeroExamples from '../../componentDocs/Hero/markdown/HeroExamples.mdx';
 import ListItemTagExamples from '../../componentDocs/ListItemTag/markdown/ListItemTagExamples.mdx';
@@ -419,6 +421,23 @@ export const pageDefinitions: RouteConfig[] = [
                                 element: <DrawerFooterPlaygroundComponent />,
                             },
                         ],
+                    },
+                ],
+            },
+            {
+                title: 'Editable Table',
+                path: 'editable-table/',
+                element: <ComponentPreviewPage title={'Editable Table'} />,
+                children: [
+                    {
+                        title: 'examples',
+                        path: 'examples',
+                        element: <EditableTableExamples />,
+                    },
+                    {
+                        title: 'API Docs',
+                        path: 'api-docs',
+                        element: <EditableTableAPIDocs />,
                     },
                 ],
             },
