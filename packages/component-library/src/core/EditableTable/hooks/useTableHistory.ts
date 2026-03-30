@@ -16,6 +16,10 @@ type CellEditEntry<TData> = {
     prevRowEdits: TData | undefined;
     /** Snapshot of editedRows[rowId] AFTER the change */
     nextRowEdits: TData;
+    /** Validation error for this cell BEFORE the edit (undefined = no error) */
+    prevError: string | undefined;
+    /** Validation error for this cell AFTER the edit (undefined = no error) */
+    nextError: string | undefined;
 };
 
 type RowAddEntry<TData> = {
@@ -50,6 +54,7 @@ type HistoryEntry<TData extends EditableTableData> =
 type UseTableHistoryProps<TData extends EditableTableData> = {
     setTableData: React.Dispatch<React.SetStateAction<TData[]>>;
     setEditedRows: React.Dispatch<React.SetStateAction<Record<string, TData>>>;
+    setValidationErrors: React.Dispatch<React.SetStateAction<Partial<Record<keyof TData, string | undefined>>>>;
     getRowId: (row: TData) => string;
 };
 
@@ -64,7 +69,9 @@ export type UseTableHistoryReturn<TData extends EditableTableData> = {
         prevValue: any,
         nextValue: any,
         prevRowEdits: TData | undefined,
-        nextRowEdits: TData
+        nextRowEdits: TData,
+        prevError: string | undefined,
+        nextError: string | undefined
     ) => void;
     recordRowAdd: (row: TData, insertedIndex: number) => void;
     recordRowDelete: (row: TData, deletedIndex: number) => void;
@@ -91,6 +98,7 @@ const MAX_HISTORY = 100;
 export const useTableHistory = <TData extends EditableTableData>({
     setTableData,
     setEditedRows,
+    setValidationErrors,
     getRowId,
 }: UseTableHistoryProps<TData>): UseTableHistoryReturn<TData> => {
     const historyRef = useRef<Array<HistoryEntry<TData>>>([]);
@@ -135,9 +143,21 @@ export const useTableHistory = <TData extends EditableTableData>({
             prevValue: any,
             nextValue: any,
             prevRowEdits: TData | undefined,
-            nextRowEdits: TData
+            nextRowEdits: TData,
+            prevError: string | undefined,
+            nextError: string | undefined
         ): void => {
-            pushHistory({ type: 'cell_edit', rowId, columnId, prevValue, nextValue, prevRowEdits, nextRowEdits });
+            pushHistory({
+                type: 'cell_edit',
+                rowId,
+                columnId,
+                prevValue,
+                nextValue,
+                prevRowEdits,
+                nextRowEdits,
+                prevError,
+                nextError,
+            });
         },
         [pushHistory]
     );
@@ -186,6 +206,17 @@ export const useTableHistory = <TData extends EditableTableData>({
             } else {
                 setEditedRows((prev) => ({ ...prev, [entry.rowId]: entry.prevRowEdits! }));
             }
+            // Restore the validation error that existed before this edit
+            setValidationErrors((prev) => {
+                const next: Record<string, string | undefined> = { ...prev } as Record<string, string | undefined>;
+                const cellKey = `${entry.rowId}_${entry.columnId}`;
+                if (entry.prevError !== undefined) {
+                    next[cellKey] = entry.prevError;
+                } else {
+                    delete next[cellKey];
+                }
+                return next as Partial<Record<keyof TData, string | undefined>>;
+            });
         } else if (entry.type === 'row_add') {
             setTableData((prev) => prev.filter((_, i) => i !== entry.insertedIndex));
         } else if (entry.type === 'row_delete') {
@@ -222,6 +253,17 @@ export const useTableHistory = <TData extends EditableTableData>({
                 prev.map((row) => (getRowId(row) === entry.rowId ? { ...row, [entry.columnId]: entry.nextValue } : row))
             );
             setEditedRows((prev) => ({ ...prev, [entry.rowId]: entry.nextRowEdits }));
+            // Restore the validation error that existed after this edit
+            setValidationErrors((prev) => {
+                const next: Record<string, string | undefined> = { ...prev } as Record<string, string | undefined>;
+                const cellKey = `${entry.rowId}_${entry.columnId}`;
+                if (entry.nextError !== undefined) {
+                    next[cellKey] = entry.nextError;
+                } else {
+                    delete next[cellKey];
+                }
+                return next as Partial<Record<keyof TData, string | undefined>>;
+            });
         } else if (entry.type === 'row_add') {
             setTableData((prev) => [
                 ...prev.slice(0, entry.insertedIndex),
