@@ -29,4 +29,4 @@ Original text courtesy of the [Speak Up! project](http://web.archive.org/web/201
 
 ## Questions?
 
-If you have questions, please see [Faq](https://brightlayer-ui.github.io/community/faq). If that doesn't answer your questions, feel free to [contact us](mailto:brightlayer-ui@Eaton.com).
+If you have questions, please see [FAQ](https://brightlayer-ui.github.io/community/faq). If that doesn't answer your questions, feel free to [contact us](mailto:brightlayer-ui@Eaton.com).
