@@ -11,9 +11,9 @@ function fixImports(dir) {
             fixImports(fullPath);
         } else if (file.endsWith('.js') || file.endsWith('.d.ts')) {
             let content = fs.readFileSync(fullPath, 'utf8');
-            // Remove .js or /index.js extension from any @mui/material/* package import
+            // Remove .js or /index.js extension from any @mui/* package import
             content = content.replace(
-                /import (.*?) from ['"](@mui\/material\/[^'"]+?)(\/index)?\.js['"]/g,
+                /import (.*?) from ['"](@mui\/[^'"]+?)(\/index)?\.js['"]/g,
                 (match, imports, modulePath, indexPart) => {
                     // Remove /index.js or .js from the import path
                     let fixedPath = modulePath.replace(/\/index$/, '');
