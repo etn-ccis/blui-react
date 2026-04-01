@@ -1,0 +1,86 @@
+import Box from '@mui/material/Box';
+
+# Editable Table
+
+The `<EditableTable>` component is a fully-featured data table built on top of [material-react-table](https://www.material-react-table.com/) that provides CRUD (Create, Read, Update, Delete) operations with inline validation, undo/redo history, and an external state API for driving custom toolbars.
+
+## EditableTable API
+
+<Box>
+
+| Prop Name             | Description                                                                                                    | Type                                                              | Required | Default           |
+| :-------------------- | :------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------- | :------- | :---------------- |
+| columns               | Column definitions for the table. Use `EditableTableColumnDef<TData>` to access the `cellStyle` convenience prop | `Array<EditableTableColumnDef<TData>>`                            | yes      |                   |
+| data                  | Initial row data for the table                                                                                 | `TData[]`                                                         | no       | `[]`              |
+| enableCreate          | Whether to show the "add row" control                                                                          | `boolean`                                                         | no       | `true`            |
+| enableEdit            | Whether to allow editing rows                                                                                  | `boolean`                                                         | no       | `true`            |
+| enableDelete          | Whether to allow deleting rows                                                                                 | `boolean`                                                         | no       | `true`            |
+| enableDuplicate       | Whether to allow duplicating rows                                                                              | `boolean`                                                         | no       | `false`           |
+| createDisplayMode     | How new rows are created — `'row'` (inline) or `'modal'`                                                       | `'row'` \| `'modal'`                                              | no       | `'row'`           |
+| editDisplayMode       | How rows are edited — `'cell'`, `'row'`, `'table'`, or `'modal'`                                               | `'cell'` \| `'row'` \| `'table'` \| `'modal'`                    | no       | `'cell'`          |
+| onValidate            | Called on every cell save; return an error map keyed by field name                                             | `(row: TData) => Partial<Record<keyof TData, string \| undefined>>` | no       |                   |
+| onCreate              | Called when a new row is saved                                                                                 | `(row: TData) => Promise<void> \| void`                           | no       |                   |
+| onUpdate              | Called for each edited row when changes are committed                                                          | `(row: TData) => Promise<void> \| void`                           | no       |                   |
+| onDelete              | Called when a row is deleted; receives the row's ID                                                            | `(id: string \| number) => Promise<void> \| void`                 | no       |                   |
+| onDuplicate           | Called when a row is duplicated                                                                                | `(row: TData) => Promise<void> \| void`                           | no       |                   |
+| getRowId              | Returns the unique ID for a row                                                                                | `(row: TData) => string`                                          | no       | `(row) => row.id` |
+| isLoading             | Show a loading overlay                                                                                         | `boolean`                                                         | no       | `false`           |
+| isSaving              | Show a saving overlay                                                                                          | `boolean`                                                         | no       | `false`           |
+| error                 | Error message displayed in the toolbar alert banner                                                            | `string`                                                          | no       |                   |
+| enableColumnPinning   | Allow columns to be pinned                                                                                     | `boolean`                                                         | no       | `true`            |
+| enableRowActions      | Show the row actions column (edit / delete / duplicate buttons)                                                | `boolean`                                                         | no       | `true`            |
+| enableCellActions     | Enable right-click context menu on cells                                                                       | `boolean`                                                         | no       | `false`           |
+| enableClickToCopy     | Enable click-to-copy on cells (`true` or `'context-menu'`)                                                     | `boolean` \| `'context-menu'`                                     | no       | `false`           |
+| tableOptions          | Escape hatch — any additional `MRT_TableOptions` props passed directly to material-react-table                 | `Partial<MRT_TableOptions<TData>>`                                 | no       |                   |
+| createButtonText      | Label for the bottom-toolbar create button                                                                     | `string`                                                          | no       | `'New data point'`|
+| deleteConfirmMessage  | Confirmation message (or factory function) shown before a row is deleted                                       | `string \| ((row: TData) => string)`                               | no       | `'Are you sure you want to delete this item?'` |
+| minHeight             | Minimum height of the table container                                                                          | `string \| number`                                                 | no       | `'500px'`         |
+| enableUndoRedo        | Enable undo/redo history with Ctrl/Cmd+Z and Ctrl/Cmd+Shift+Z keyboard shortcuts                               | `boolean`                                                         | no       | `false`           |
+| onStateChange         | Called whenever state changes; receives an `EditableTableState` snapshot for driving external controls         | `(state: EditableTableState) => void`                              | no       |                   |
+
+</Box>
+
+---
+
+## EditableTableColumnDef
+
+`EditableTableColumnDef<TData>` extends MRT's `MRT_ColumnDef<TData>` with one additional convenience prop. All standard MRT column options (including `Cell`, `muiTableBodyCellProps`, `muiEditTextFieldProps`, `editVariant`, `editSelectOptions`, etc.) are fully supported.
+
+<Box>
+
+| Prop Name  | Description                                                                                                                      | Type                                                  | Required | Default |
+| :--------- | :------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------- | :------- | :------ |
+| cellStyle  | Return MUI `sx` styles applied per-cell based on the cell value or row data. Merged on top of `muiTableBodyCellProps.sx`.        | `(params: CellStyleParams<TData>) => SxProps<Theme>`  | no       |         |
+
+</Box>
+
+> For column-wide static styling use `muiTableBodyCellProps: { sx: { ... } }`. Use `cellStyle` for dynamic per-row / per-value styling.
+
+**Built-in column behaviours added by `EditableTable`:**
+- **Numeric alignment** — columns whose first row value is a `number` are automatically right-aligned in both the read and edit state.
+- **Unsaved-change indicator** — a blue dot appears at the top-right corner of any cell that has a pending (unsaved) edit.
+- **Validation error display** — cells with a validation error receive a red outline; hovering shows the error message in a tooltip.
+- **Select support** — columns with `editVariant: 'select'` save the selected value immediately on change (no blur required).
+
+---
+
+## EditableTableState
+
+Passed to `onStateChange` on every relevant state change. Contains both reactive flags and stable action callbacks so a parent component can render its own toolbar outside the table.
+
+<Box>
+
+| Field              | Description                                                                 | Type                |
+| :----------------- | :-------------------------------------------------------------------------- | :------------------ |
+| canUndo            | Whether there is at least one action that can be undone                     | `boolean`           |
+| canRedo            | Whether there is at least one action that can be redone                     | `boolean`           |
+| hasPendingChanges  | Whether there are unsaved cell edits, row additions, or deletions           | `boolean`           |
+| hasValidationErrors| Whether any cell currently has a validation error                           | `boolean`           |
+| undo               | Undo the last recorded action                                               | `() => void`        |
+| redo               | Redo the last undone action                                                 | `() => void`        |
+| save               | Commit all pending changes (calls `onUpdate` for each edited row)           | `() => Promise<void>`|
+| reset              | Discard all pending changes and restore the table to its last saved state   | `() => void`        |
+| tableData          | Current snapshot of all rows in the table (includes unsaved edits)         | `unknown[]`         |
+
+</Box>
+
