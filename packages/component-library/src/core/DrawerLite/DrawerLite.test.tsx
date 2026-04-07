@@ -1,10 +1,11 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { DrawerLite } from './DrawerLite';
 import { DrawerLite as DrawerLiteFromIndex } from './index';
 import { useDrawerContext } from '../Drawer';
 
+afterEach(cleanup);
 // Test component that consumes and displays drawer context values
 const ContextConsumer: React.FC = () => {
     const context = useDrawerContext();
