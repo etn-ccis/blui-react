@@ -12,7 +12,7 @@ const ContextConsumer: React.FC = () => {
     return (
         <div>
             <span data-testid="open-value">{String(context.open)}</span>
-            <span data-testid="active-item-value">{context.activeItem}</span>
+            <span data-testid="active-item-value">{String(context.activeItem)}</span>
         </div>
     );
 };
