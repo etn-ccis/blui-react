@@ -76,9 +76,22 @@ jobs:
               echo "changes=false" >> $GITHUB_OUTPUT
             fi
           fi
+
+      - name: Verify Black Duck endpoint reachability
+        if: steps.check_changes.outputs.changes == 'true'
+        run: |
+          echo "Checking connectivity to Black Duck endpoint..."
+          if ! curl --silent --show-error --fail --max-time 20 "${{ vars.BLACKDUCKSCA_URL }}/api/current-version" > /dev/null; then
+            echo "Unable to reach Black Duck endpoint from this runner: ${{ vars.BLACKDUCKSCA_URL }}"
+            echo "If this is an internal URL, use a self-hosted runner with network access."
+            exit 1
+          fi
+          echo "Black Duck endpoint is reachable."
+
       - name: Black Duck Scan
         id: blackduck_scan
         if: steps.check_changes.outputs.changes == 'true'
+        timeout-minutes: 30
         uses: blackduck-inc/black-duck-security-scan@v2.3.0
         env:
           DETECT_PROJECT_NAME: ${{ vars.PROJECT_NAME }}
@@ -86,12 +99,16 @@ jobs:
         with:
           blackducksca_url: ${{ vars.BLACKDUCKSCA_URL }}
           blackducksca_token: ${{ secrets.BLACKDUCKSCA_TOKEN }}
-          # Fail the build if new CRITICAL or HIGH vulnerabilities are introduced
-          blackducksca_scan_failure_severities: 'CRITICAL,HIGH'
-          # Compare against baseline and fail only on NEW vulnerabilities
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # Black Duck severity mapping: HIGH ~ MAJOR
+          # Fail the build when Critical/High-equivalent vulnerabilities are present.
+          blackducksca_scan_failure_severities: 'BLOCKER,CRITICAL,MAJOR'
+          # Full scan mode
           blackducksca_scan_full: true
           # Keep analysis synchronous so policy gates and PR comments are available in this run
           blackducksca_waitForScan: true
+          # Enforce Detect policy check as an additional fail gate.
+          detect_args: '--detect.policy.check=true --detect.policy.check.fail.on.severities=CRITICAL,HIGH'
           # Generate SARIF report for GitHub Security tab
           blackducksca_reports_sarif_create: true
           blackducksca_reports_sarif_file_path: '${{ github.workspace }}/${{ matrix.app }}/blackduck-sarif.json'

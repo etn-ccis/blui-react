@@ -73,5 +73,3 @@ yarn start:docs
 ```
 
 from the root directory.
-
-## Check for blackduck scan. Will delete post check
