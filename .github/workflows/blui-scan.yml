@@ -98,19 +98,57 @@ jobs:
           # Create fix PRs for vulnerabilities (optional)
           blackducksca_fixpr_enabled: false
 
-      - name: Check if SARIF file exists
-        id: check_sarif
-        if: steps.check_changes.outputs.changes == 'true'
+      - name: Display Critical and High Vulnerabilities
+        if: always() && steps.check_changes.outputs.changes == 'true'
         run: |
-          if [ -f "${{ matrix.app }}/blackduck-sarif.json" ]; then
-            echo "sarif_exists=true" >> $GITHUB_OUTPUT
+          echo "=========================================="
+          echo "Security Scan Results for ${{ matrix.app }}"
+          echo "=========================================="
+          
+          if [ -f "blackduck-sarif.json" ]; then
+            echo ""
+            echo "📊 Analyzing SARIF report for CRITICAL and HIGH vulnerabilities..."
+            echo ""
+            
+            # Extract and display CRITICAL vulnerabilities
+            CRITICAL_COUNT=$(jq '[.runs[].results[] | select(.level == "error")] | length' blackduck-sarif.json 2>/dev/null || echo "0")
+            HIGH_COUNT=$(jq '[.runs[].results[] | select(.level == "warning")] | length' blackduck-sarif.json 2>/dev/null || echo "0")
+            
+            echo "🔴 CRITICAL Vulnerabilities: $CRITICAL_COUNT"
+            echo "🟠 HIGH Vulnerabilities: $HIGH_COUNT"
+            echo ""
+            
+            if [ "$CRITICAL_COUNT" -gt 0 ]; then
+              echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+              echo "🔴 CRITICAL VULNERABILITIES:"
+              echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+              jq -r '.runs[].results[] | select(.level == "error") | "
+              CVE: \(.ruleId // "N/A")
+              Message: \(.message.text)
+              Component: \(.locations[0].physicalLocation.artifactLocation.uri // "N/A")
+              ────────────────────────────────────────
+              "' blackduck-sarif.json 2>/dev/null || echo "Error parsing CRITICAL vulnerabilities"
+            fi
+            
+            if [ "$HIGH_COUNT" -gt 0 ]; then
+              echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+              echo "🟠 HIGH VULNERABILITIES:"
+              echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+              jq -r '.runs[].results[] | select(.level == "warning") | "
+              CVE: \(.ruleId // "N/A")
+              Message: \(.message.text)
+              Component: \(.locations[0].physicalLocation.artifactLocation.uri // "N/A")
+              ────────────────────────────────────────
+              "' blackduck-sarif.json 2>/dev/null || echo "Error parsing HIGH vulnerabilities"
+            fi
+            
+            if [ "$CRITICAL_COUNT" -eq 0 ] && [ "$HIGH_COUNT" -eq 0 ]; then
+              echo "✅ No CRITICAL or HIGH vulnerabilities found!"
+            fi
           else
-            echo "sarif_exists=false" >> $GITHUB_OUTPUT
+            echo "⚠️  SARIF report not found. Black Duck scan may have failed or not generated output."
+            echo "Check the Black Duck Scan step for errors."
           fi
-
-      - name: Upload SARIF results to GitHub Security
-        if: steps.check_sarif.outputs.sarif_exists == 'true'
-        uses: github/codeql-action/upload-sarif@v4
-        with:
-          sarif_file: ${{ matrix.app }}/blackduck-sarif.json
-          category: blackduck-${{ matrix.app }}
+          
+          echo ""
+          echo "=========================================="
