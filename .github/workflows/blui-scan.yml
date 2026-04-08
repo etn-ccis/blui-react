@@ -98,8 +98,18 @@ jobs:
           # Create fix PRs for vulnerabilities (optional)
           blackducksca_fixpr_enabled: false
 
+      - name: Check if SARIF file exists
+        id: check_sarif
+        if: steps.check_changes.outputs.changes == 'true'
+        run: |
+          if [ -f "${{ matrix.app }}/blackduck-sarif.json" ]; then
+            echo "sarif_exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "sarif_exists=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Upload SARIF results to GitHub Security
-        if: always() && steps.check_changes.outputs.changes == 'true'
+        if: steps.check_sarif.outputs.sarif_exists == 'true'
         uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: ${{ matrix.app }}/blackduck-sarif.json
