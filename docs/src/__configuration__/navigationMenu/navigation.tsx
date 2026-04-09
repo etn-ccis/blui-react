@@ -862,18 +862,10 @@ export const externalLinkDefinitions: NavItem[] = [
     {
         title: 'Resources & Assets',
         itemID: 'Resources & Assets',
-        disableActiveItemParentStyles: true,
-        nestedBackgroundColor: 'transparent',
         items: [
             {
-                title: 'Icons',
-                itemID: 'Icons',
-                items: [
-                    {
-                        title: 'Progress Icons',
-                        itemID: '/icons/progress-icons/examples',
-                    },
-                ],
+                title: 'Progress Icons',
+                itemID: '/icons/progress-icons',
             },
         ],
     },
