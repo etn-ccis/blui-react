@@ -71,7 +71,7 @@ Your custom implementation, removing the EulaScreen and VerifyCodeScreen, and ad
 
 ### Customizing the Success Screen
 
-You may provide a custom success screen to be shown upon successful completion of the [Registration Workflow](/workflows/registration-workflow/). The [Success Screen](/workflows/success/) is used by default, but may be customized via props. If you wish to build your own success screen it may look something like this:
+You may provide a custom success screen to be shown upon successful completion of the [Registration Workflow](/workflows/registration-workflow/). The [Success Screen](/workflows/screens/success/) is used by default, but may be customized via props. If you wish to build your own success screen it may look something like this:
 
 <CodeBlock
     language={'jsx'}
@@ -91,7 +91,7 @@ return (
 <RegistrationWorkflow successScreen={<MyCustomSuccessScreen />} />
 ;`} />
 
-A similar prop exists for `existingAccountSuccessScreen` which will be used if the account being registered already exists.Refer [Existing Account Success Screen](/workflows/existing-account-success/).
+A similar prop exists for `existingAccountSuccessScreen` which will be used if the account being registered already exists.Refer [Existing Account Success Screen](/workflows/screens/existing-account-success/).
 
 ## Customizing the Language Support
 
