@@ -116,28 +116,73 @@ jobs:
           # Create fix PRs for vulnerabilities (optional)
           blackducksca_fixpr_enabled: false
 
-      - name: Enforce High/Critical from SARIF
+      - name: Enforce High/Critical vulnerabilities
         if: steps.check_changes.outputs.changes == 'true'
         run: |
           SARIF_FILE="${{ github.workspace }}/${{ matrix.app }}/blackduck-sarif.json"
 
-          if [ ! -f "$SARIF_FILE" ]; then
-            echo "SARIF file not found at $SARIF_FILE"
-            echo "Cannot enforce strict High/Critical gate without SARIF output."
+          if [ -f "$SARIF_FILE" ]; then
+            echo "Using SARIF-based enforcement."
+
+            # Schema-agnostic detection: scan all strings in SARIF for severity tags.
+            CRITICAL_COUNT=$(jq -r '.. | strings? | ascii_downcase' "$SARIF_FILE" | grep -c 'securityrisk:critical' || true)
+            HIGH_COUNT=$(jq -r '.. | strings? | ascii_downcase' "$SARIF_FILE" | grep -c 'securityrisk:high' || true)
+
+            echo "Top SARIF rule tags (debug):"
+            jq -r '.runs[]?.tool.driver.rules[]? | select(.properties.tags? != null) | [.id, (.properties.tags | join(","))] | @tsv' "$SARIF_FILE" | head -n 20 || true
+
+            echo "Critical vulnerabilities in SARIF: $CRITICAL_COUNT"
+            echo "High vulnerabilities in SARIF: $HIGH_COUNT"
+
+            if [ "$CRITICAL_COUNT" -gt 0 ] || [ "$HIGH_COUNT" -gt 0 ]; then
+              echo "Failing job because SARIF contains High/Critical vulnerabilities."
+              exit 1
+            fi
+
+            echo "No High/Critical vulnerabilities found in SARIF."
+            exit 0
+          fi
+
+          echo "SARIF not present. Falling back to Black Duck API-based enforcement."
+
+          PROJECT_NAME="${{ vars.PROJECT_NAME }}"
+          PROJECT_VERSION="react-${{ matrix.app }}"
+          BASE_URL="${{ vars.BLACKDUCKSCA_URL }}"
+          TOKEN="${{ secrets.BLACKDUCKSCA_TOKEN }}"
+
+          if [ -z "$PROJECT_NAME" ] || [ -z "$PROJECT_VERSION" ] || [ -z "$BASE_URL" ] || [ -z "$TOKEN" ]; then
+            echo "Missing required configuration for API fallback enforcement."
             exit 1
           fi
 
-          # Schema-agnostic detection: scan all strings in SARIF for severity tags.
-          CRITICAL_COUNT=$(jq -r '.. | strings? | ascii_downcase' "$SARIF_FILE" | grep -c 'securityrisk:critical' || true)
-          HIGH_COUNT=$(jq -r '.. | strings? | ascii_downcase' "$SARIF_FILE" | grep -c 'securityrisk:high' || true)
+          AUTH_HEADER="Authorization: token $TOKEN"
 
-          echo "Top SARIF rule tags (debug):"
-          jq -r '.runs[]?.tool.driver.rules[]? | select(.properties.tags? != null) | [.id, (.properties.tags | join(","))] | @tsv' "$SARIF_FILE" | head -n 20 || true
+          PROJECTS_JSON=$(curl --silent --show-error --fail -H "$AUTH_HEADER" "$BASE_URL/api/projects?limit=200")
+          PROJECT_HREF=$(echo "$PROJECTS_JSON" | jq -r --arg pn "$PROJECT_NAME" '.items[]? | select(.name == $pn) | ._meta.href' | head -n1)
 
-          echo "Critical vulnerabilities in SARIF: $CRITICAL_COUNT"
-          echo "High vulnerabilities in SARIF: $HIGH_COUNT"
-
-          if [ "$CRITICAL_COUNT" -gt 0 ] || [ "$HIGH_COUNT" -gt 0 ]; then
-            echo "Failing job because SARIF contains High/Critical vulnerabilities."
+          if [ -z "$PROJECT_HREF" ] || [ "$PROJECT_HREF" = "null" ]; then
+            echo "Could not find project '$PROJECT_NAME' in Black Duck."
             exit 1
           fi
+
+          VERSIONS_URL="$PROJECT_HREF/versions?limit=200"
+          VERSIONS_JSON=$(curl --silent --show-error --fail -H "$AUTH_HEADER" "$VERSIONS_URL")
+          VERSION_HREF=$(echo "$VERSIONS_JSON" | jq -r --arg vn "$PROJECT_VERSION" '.items[]? | select((.versionName // .name) == $vn) | ._meta.href' | head -n1)
+
+          if [ -z "$VERSION_HREF" ] || [ "$VERSION_HREF" = "null" ]; then
+            echo "Could not find version '$PROJECT_VERSION' under project '$PROJECT_NAME'."
+            exit 1
+          fi
+
+          CRITICAL_TOTAL=$(curl --silent --show-error --fail -H "$AUTH_HEADER" "$VERSION_HREF/components?limit=1&filter=securityRisk:critical" | jq -r '.totalCount // (.items | length) // 0')
+          HIGH_TOTAL=$(curl --silent --show-error --fail -H "$AUTH_HEADER" "$VERSION_HREF/components?limit=1&filter=securityRisk:high" | jq -r '.totalCount // (.items | length) // 0')
+
+          echo "Critical components from Black Duck API: $CRITICAL_TOTAL"
+          echo "High components from Black Duck API: $HIGH_TOTAL"
+
+          if [ "$CRITICAL_TOTAL" -gt 0 ] || [ "$HIGH_TOTAL" -gt 0 ]; then
+            echo "Failing job because Black Duck reports High/Critical vulnerabilities."
+            exit 1
+          fi
+
+          echo "No High/Critical vulnerabilities found by Black Duck API."
