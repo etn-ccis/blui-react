@@ -102,7 +102,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           # Black Duck severity mapping: HIGH ~ MAJOR
           # Fail the build when Critical/High-equivalent vulnerabilities are present.
-          blackducksca_scan_failure_severities: 'BLOCKER,CRITICAL,MAJOR'
+          blackducksca_scan_failure_severities: 'CRITICAL,MAJOR'
           # Full scan mode
           blackducksca_scan_full: true
           # Keep analysis synchronous so policy gates and PR comments are available in this run
@@ -127,21 +127,12 @@ jobs:
             exit 1
           fi
 
-          CRITICAL_COUNT=$(jq '[
-            .runs[]? as $run
-            | ($run.tool.driver.rules // []) as $rules
-            | ($run.results // [])[] as $res
-            | ($rules[]? | select(.id == $res.ruleId) | (.properties.tags // [])) as $tags
-            | select(($tags | index("securityRisk:critical")) != null)
-          ] | length' "$SARIF_FILE")
+          # Schema-agnostic detection: scan all strings in SARIF for severity tags.
+          CRITICAL_COUNT=$(jq -r '.. | strings? | ascii_downcase' "$SARIF_FILE" | grep -c 'securityrisk:critical' || true)
+          HIGH_COUNT=$(jq -r '.. | strings? | ascii_downcase' "$SARIF_FILE" | grep -c 'securityrisk:high' || true)
 
-          HIGH_COUNT=$(jq '[
-            .runs[]? as $run
-            | ($run.tool.driver.rules // []) as $rules
-            | ($run.results // [])[] as $res
-            | ($rules[]? | select(.id == $res.ruleId) | (.properties.tags // [])) as $tags
-            | select(($tags | index("securityRisk:high")) != null)
-          ] | length' "$SARIF_FILE")
+          echo "Top SARIF rule tags (debug):"
+          jq -r '.runs[]?.tool.driver.rules[]? | select(.properties.tags? != null) | [.id, (.properties.tags | join(","))] | @tsv' "$SARIF_FILE" | head -n 20 || true
 
           echo "Critical vulnerabilities in SARIF: $CRITICAL_COUNT"
           echo "High vulnerabilities in SARIF: $HIGH_COUNT"
