@@ -865,7 +865,7 @@ export const externalLinkDefinitions: NavItem[] = [
         items: [
             {
                 title: 'Progress Icons',
-                itemID: '/icons/progress-icons/examples',
+                itemID: '/icons/progress-icons',
             },
         ],
     },
