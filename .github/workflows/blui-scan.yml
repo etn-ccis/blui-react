@@ -129,9 +129,9 @@ jobs:
 
           echo "Using Black Duck API as source of truth for strict High/Critical enforcement."
 
-          PROJECT_NAME="${{ vars.PROJECT_NAME }}"
+          PROJECT_NAME=$(echo "${{ vars.PROJECT_NAME }}" | xargs)
           PROJECT_VERSION="react-${{ matrix.app }}"
-          BASE_URL="${{ vars.BLACKDUCKSCA_URL }}"
+          BASE_URL=$(echo "${{ vars.BLACKDUCKSCA_URL }}" | xargs)
           TOKEN="${{ secrets.BLACKDUCKSCA_TOKEN }}"
 
           if [ -z "$PROJECT_NAME" ] || [ -z "$PROJECT_VERSION" ] || [ -z "$BASE_URL" ] || [ -z "$TOKEN" ]; then
