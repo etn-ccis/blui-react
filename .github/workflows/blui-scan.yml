@@ -139,7 +139,19 @@ jobs:
             exit 1
           fi
 
-          AUTH_HEADER="Authorization: token $TOKEN"
+          # Black Duck requires exchanging the API token for a bearer token
+          BEARER_RESPONSE=$(curl --silent --show-error --fail -X POST \
+            -H "Authorization: token $TOKEN" \
+            "$BASE_URL/api/tokens/authenticate")
+          BEARER_TOKEN=$(echo "$BEARER_RESPONSE" | jq -r '.bearerToken')
+
+          if [ -z "$BEARER_TOKEN" ] || [ "$BEARER_TOKEN" = "null" ]; then
+            echo "Failed to obtain bearer token from Black Duck API."
+            echo "Response: $BEARER_RESPONSE"
+            exit 1
+          fi
+
+          AUTH_HEADER="Authorization: Bearer $BEARER_TOKEN"
 
           PROJECTS_JSON=$(curl --silent --show-error --fail -H "$AUTH_HEADER" "$BASE_URL/api/projects?limit=1000")
           PROJECT_HREF=$(echo "$PROJECTS_JSON" | jq -r --arg pn "$PROJECT_NAME" '.items[]? | select(.name == $pn) | ._meta.href' | head -n1)
