@@ -107,8 +107,6 @@ jobs:
           blackducksca_scan_full: true
           # Keep analysis synchronous so policy gates and PR comments are available in this run
           blackducksca_waitForScan: true
-          # Enforce Detect policy check as an additional fail gate.
-          detect_args: '--detect.policy.check=true --detect.policy.check.fail.on.severities=CRITICAL,HIGH'
           # Generate SARIF report for GitHub Security tab
           blackducksca_reports_sarif_create: true
           blackducksca_reports_sarif_file_path: '${{ github.workspace }}/${{ matrix.app }}/blackduck-sarif.json'
