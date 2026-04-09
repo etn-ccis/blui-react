@@ -117,6 +117,7 @@ jobs:
           blackducksca_fixpr_enabled: false
 
       - name: Enforce High/Critical vulnerabilities
+        id: enforce_vulns
         if: steps.check_changes.outputs.changes == 'true'
         run: |
           SARIF_FILE="${{ github.workspace }}/${{ matrix.app }}/blackduck-sarif.json"
@@ -176,9 +177,58 @@ jobs:
           echo "Critical components from Black Duck API: $CRITICAL_TOTAL"
           echo "High components from Black Duck API: $HIGH_TOTAL"
 
+          echo "critical_count=$CRITICAL_TOTAL" >> $GITHUB_OUTPUT
+          echo "high_count=$HIGH_TOTAL" >> $GITHUB_OUTPUT
+
           if [ "$CRITICAL_TOTAL" -gt 0 ] || [ "$HIGH_TOTAL" -gt 0 ]; then
             echo "Failing job because Black Duck reports High/Critical vulnerabilities."
             exit 1
           fi
 
           echo "No High/Critical vulnerabilities found by Black Duck API."
+
+      - name: Comment on PR with vulnerability results
+        if: always() && github.event_name == 'pull_request' && steps.check_changes.outputs.changes == 'true' && steps.enforce_vulns.outcome == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const critical = parseInt('${{ steps.enforce_vulns.outputs.critical_count }}') || 0;
+            const high = parseInt('${{ steps.enforce_vulns.outputs.high_count }}') || 0;
+            const app = '${{ matrix.app }}';
+
+            const body = [
+              `## ❌ Black Duck SCA — \`${app}\` — FAILED`,
+              '',
+              '| Severity | Components |',
+              '|----------|-----------|',
+              `| 🔴 Critical | ${critical} |`,
+              `| 🟠 High | ${high} |`,
+              '',
+              '> **Action required:** resolve the High/Critical vulnerabilities above to pass this check.',
+            ].join('\n');
+
+            // Find and update existing comment or create new one
+            const marker = `<!-- bd-sca-${app} -->`;
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            const existing = comments.find(c => c.body.includes(marker));
+
+            const fullBody = `${marker}\n${body}`;
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body: fullBody,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: fullBody,
+              });
+            }
