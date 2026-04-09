@@ -122,28 +122,12 @@ jobs:
           SARIF_FILE="${{ github.workspace }}/${{ matrix.app }}/blackduck-sarif.json"
 
           if [ -f "$SARIF_FILE" ]; then
-            echo "Using SARIF-based enforcement."
-
-            # Schema-agnostic detection: scan all strings in SARIF for severity tags.
-            CRITICAL_COUNT=$(jq -r '.. | strings? | ascii_downcase' "$SARIF_FILE" | grep -c 'securityrisk:critical' || true)
-            HIGH_COUNT=$(jq -r '.. | strings? | ascii_downcase' "$SARIF_FILE" | grep -c 'securityrisk:high' || true)
-
-            echo "Top SARIF rule tags (debug):"
-            jq -r '.runs[]?.tool.driver.rules[]? | select(.properties.tags? != null) | [.id, (.properties.tags | join(","))] | @tsv' "$SARIF_FILE" | head -n 20 || true
-
-            echo "Critical vulnerabilities in SARIF: $CRITICAL_COUNT"
-            echo "High vulnerabilities in SARIF: $HIGH_COUNT"
-
-            if [ "$CRITICAL_COUNT" -gt 0 ] || [ "$HIGH_COUNT" -gt 0 ]; then
-              echo "Failing job because SARIF contains High/Critical vulnerabilities."
-              exit 1
-            fi
-
-            echo "No High/Critical vulnerabilities found in SARIF."
-            exit 0
+            echo "SARIF file found at: $SARIF_FILE"
+          else
+            echo "SARIF file not found at: $SARIF_FILE (this can be expected on PR scans)"
           fi
 
-          echo "SARIF not present. Falling back to Black Duck API-based enforcement."
+          echo "Using Black Duck API as source of truth for strict High/Critical enforcement."
 
           PROJECT_NAME="${{ vars.PROJECT_NAME }}"
           PROJECT_VERSION="react-${{ matrix.app }}"
@@ -157,7 +141,7 @@ jobs:
 
           AUTH_HEADER="Authorization: token $TOKEN"
 
-          PROJECTS_JSON=$(curl --silent --show-error --fail -H "$AUTH_HEADER" "$BASE_URL/api/projects?limit=200")
+          PROJECTS_JSON=$(curl --silent --show-error --fail -H "$AUTH_HEADER" "$BASE_URL/api/projects?limit=1000")
           PROJECT_HREF=$(echo "$PROJECTS_JSON" | jq -r --arg pn "$PROJECT_NAME" '.items[]? | select(.name == $pn) | ._meta.href' | head -n1)
 
           if [ -z "$PROJECT_HREF" ] || [ "$PROJECT_HREF" = "null" ]; then
@@ -165,7 +149,7 @@ jobs:
             exit 1
           fi
 
-          VERSIONS_URL="$PROJECT_HREF/versions?limit=200"
+          VERSIONS_URL="$PROJECT_HREF/versions?limit=1000"
           VERSIONS_JSON=$(curl --silent --show-error --fail -H "$AUTH_HEADER" "$VERSIONS_URL")
           VERSION_HREF=$(echo "$VERSIONS_JSON" | jq -r --arg vn "$PROJECT_VERSION" '.items[]? | select((.versionName // .name) == $vn) | ._meta.href' | head -n1)
 
