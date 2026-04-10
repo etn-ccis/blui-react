@@ -38,6 +38,7 @@ jobs:
     permissions:
       contents: read
       security-events: write
+      issues: write
       pull-requests: write
     strategy:
       matrix:
@@ -100,9 +101,8 @@ jobs:
           blackducksca_url: ${{ vars.BLACKDUCKSCA_URL }}
           blackducksca_token: ${{ secrets.BLACKDUCKSCA_TOKEN }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          # Black Duck severity mapping: HIGH ~ MAJOR
-          # Fail the build when Critical/High-equivalent vulnerabilities are present.
-          blackducksca_scan_failure_severities: 'CRITICAL,MAJOR'
+          # Keep scan step non-gating so custom enforcement/comment steps always run.
+          # Final pass/fail is controlled by the Enforce High/Critical vulnerabilities step.
           # Full scan mode
           blackducksca_scan_full: true
           # Keep analysis synchronous so policy gates and PR comments are available in this run
@@ -148,7 +148,7 @@ jobs:
 
           if [ -z "$BEARER_TOKEN" ] || [ "$BEARER_TOKEN" = "null" ]; then
             echo "Failed to obtain bearer token from Black Duck API."
-            echo "Response: $BEARER_RESPONSE"
+            echo "Authentication response did not contain a usable bearer token."
             exit 1
           fi
 
@@ -209,12 +209,13 @@ jobs:
 
             // Find and update existing comment or create new one
             const marker = `<!-- bd-sca-${app} -->`;
-            const { data: comments } = await github.rest.issues.listComments({
+            const comments = await github.paginate(github.rest.issues.listComments, {
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
+              per_page: 100,
             });
-            const existing = comments.find(c => c.body.includes(marker));
+            const existing = comments.find(c => c.body && c.body.includes(marker));
 
             const fullBody = `${marker}\n${body}`;
             if (existing) {
