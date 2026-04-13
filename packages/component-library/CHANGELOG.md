@@ -1,6 +1,6 @@
 # Changelog
 
-# v8.0.3 (April 13,2026)
+# v8.0.3 (April 13, 2026)
 
 ### Added
 
