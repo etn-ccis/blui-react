@@ -19,6 +19,18 @@ const linearGradientOverlayImage = `linear-gradient(to right, rgba(0, 123, 193, 
 
 const tabs = ['examples', 'api-docs', 'playground'];
 
+const mapResourceNavItems = (items: NavItem[], handleNavigate: (id: string) => void, dispatch: any): NavItem[] =>
+    items.map((item) => ({
+        ...item,
+        onClick: item.itemID?.startsWith('/')
+            ? (): void => {
+                  handleNavigate(item.itemID || '/');
+                  dispatch(closeDrawer());
+              }
+            : item.onClick,
+        items: item.items ? mapResourceNavItems(item.items, handleNavigate, dispatch) : undefined,
+    }));
+
 const convertNavItems = (
     navData: RouteConfig[],
     parentUrl: string,
@@ -85,6 +97,8 @@ export const NavigationDrawer: React.FC = () => {
         },
         [location.pathname, dispatch, navigate]
     );
+
+    const resourceItems = mapResourceNavItems(externalLinkDefinitions, handleNavigate, dispatch);
 
     return (
         <Drawer
@@ -168,7 +182,7 @@ export const NavigationDrawer: React.FC = () => {
                 <DrawerNavGroup
                     title="COMMUNITY"
                     titleColor={theme.vars.palette.primary.main}
-                    items={externalLinkDefinitions}
+                    items={resourceItems}
                     titleDivider={false}
                     sx={styles.navGroupTopDivider}
                 />

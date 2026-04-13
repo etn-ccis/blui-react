@@ -1,0 +1,31 @@
+import {
+    BasicEditableTable,
+    RowEditingEditableTable,
+    CustomCellsEditableTable,
+    ExternalToolbarEditableTable,
+} from '../examples';
+
+## Editable Table
+
+The `<EditableTable>` component provides inline cell editing with built-in validation, CRUD operations, and an unsaved-change indicator (blue dot) per cell.
+
+<BasicEditableTable />
+
+## Row Editing Mode
+
+Set `editDisplayMode="row"` to edit all cells in a row at once. The edit and cancel controls appear as row actions. Enable `enableDuplicate` to allow cloning existing rows.
+
+<RowEditingEditableTable />
+
+
+## Custom Cells and Cell Styling
+
+Use `Cell` to render any React element in a cell (e.g. a progress bar). Use `cellStyle` for conditional per-row MUI `sx` styles. Use `editVariant="select"` with `editSelectOptions` for dropdown editing.
+
+<CustomCellsEditableTable />
+
+## External Toolbar with Save, Undo, Redo and Reset
+
+Use `enableUndoRedo` together with `onStateChange` to receive an `EditableTableState` snapshot. Wire the stable callbacks (`undo`, `redo`, `save`, `reset`) and reactive flags (`canUndo`, `canRedo`, `hasPendingChanges`, `hasValidationErrors`) to your own toolbar controls placed anywhere in the page.
+
+<ExternalToolbarEditableTable />

@@ -1,5 +1,12 @@
 # Changelog
 
+# v8.0.3 (April 13, 2026)
+
+### Added
+
+- Editable Table
+- DrawerLite
+
 # v8.0.2 (February 3, 2026)
 
 ### Fixed

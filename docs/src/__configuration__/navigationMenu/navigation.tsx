@@ -10,8 +10,10 @@ import DrawerBodyAPIDocs from '../../componentDocs/DrawerBody/markdown/DrawerBod
 import DrawerRailItemAPIDocs from '../../componentDocs/DrawerRailItem/markdown/DrawerRailItemAPIDocs.mdx';
 import DrawerNavItemAPIDocs from '../../componentDocs/DrawerNavItem/markdown/DrawerNavItemAPIDocs.mdx';
 import DrawerLayoutAPIDocs from '../../componentDocs/DrawerLayout/markdown/DrawerLayoutAPIDocs.mdx';
+import DrawerLiteAPIDocs from '../../componentDocs/DrawerLite/markdown/DrawerLiteAPIDocs.mdx';
 import DrawerSubheaderAPIDocs from '../../componentDocs/DrawerSubheader/markdown/DrawerSubheaderAPIDocs.mdx';
 import ChannelValueAPIDocs from '../../componentDocs/ChannelValue/markdown/ChannelValueAPIDocs.mdx';
+import EditableTableAPIDocs from '../../componentDocs/EditableTable/markdown/EditableTableAPIDocs.mdx';
 import EmptyStateAPIDocs from '../../componentDocs/EmptyState/markdown/EmptyStateAPIDocs.mdx';
 import HeroAPIDocs from '../../componentDocs/Hero/markdown/HeroAPIDocs.mdx';
 import InfoListItemAPIDocs from '../../componentDocs/InfoListItem/markdown/InfoListItemAPIDocs.mdx';
@@ -22,6 +24,7 @@ import ThreeLinerAPIDocs from '../../componentDocs/ThreeLiner/markdown/ThreeLine
 import SpacerAPIDocs from '../../componentDocs/Spacer/markdown/SpacerAPIDocs.mdx';
 import ScoreCardAPIDocs from '../../componentDocs/ScoreCard/markdown/ScoreCardAPIDocs.mdx';
 import ToolbarMenuAPIDocs from '../../componentDocs/ToolbarMenu/markdown/ToolbarMenuAPIDocs.mdx';
+import ProgressIconAPIDocs from '../../componentDocs/ProgressIcon/markdown/ProgressIconAPIDocs.mdx';
 
 // workflow docs
 import WorkflowOverview from '../../markdownDocs/workflowDocs/Overview/overview.mdx';
@@ -66,11 +69,13 @@ import DrawerNavGroupExamples from '../../componentDocs/DrawerNavGroup/markdown/
 import DrawerExamples from '../../componentDocs/Drawer/markdown/DrawerExamples.mdx';
 import DrawerHeaderExamples from '../../componentDocs/DrawerHeader/markdown/DrawerHeaderExamples.mdx';
 import DrawerSubheaderExamples from '../../componentDocs/DrawerSubheader/markdown/DrawerSubheaderExamples.mdx';
+import EditableTableExamples from '../../componentDocs/EditableTable/markdown/EditableTableExamples.mdx';
 import EmptyStateExamples from '../../componentDocs/EmptyState/markdown/EmptyStateExamples.mdx';
 import HeroExamples from '../../componentDocs/Hero/markdown/HeroExamples.mdx';
 import ListItemTagExamples from '../../componentDocs/ListItemTag/markdown/ListItemTagExamples.mdx';
 import InfoListItemExamples from '../../componentDocs/InfoListItem/markdown/InfoListItemExamples.mdx';
 import DrawerLayoutExamples from '../../componentDocs/DrawerLayout/markdown/DrawerLayoutExamples.mdx';
+import DrawerLiteExamples from '../../componentDocs/DrawerLite/markdown/DrawerLiteExamples.mdx';
 import AppBarExamples from '../../componentDocs/AppBar/markdown/AppBarExamples.mdx';
 import UserMenuExamples from '../../componentDocs/UserMenu/markdown/UserMenuExamples.mdx';
 import ChannelValueExamples from '../../componentDocs/ChannelValue/markdown/ChannelValueExamples.mdx';
@@ -79,12 +84,14 @@ import ScoreCardExamples from '../../componentDocs/ScoreCard/markdown/ScoreCardE
 import SpacerExamples from '../../componentDocs/Spacer/markdown/SpacerExamples.mdx';
 import ThreeLinerExamples from '../../componentDocs/ThreeLiner/markdown/ThreeLinerExamples.mdx';
 import DrawerRailItemExamples from '../../componentDocs/DrawerRailItem/markdown/DrawerRailItemExamples.mdx';
+import ProgressIconExamples from '../../componentDocs/ProgressIcon/markdown/ProgressIconExamples.mdx';
 
 // Playground components
 import { AppBarPlaygroundComponent } from '../../componentDocs/AppBar/playground/PlaygroundPage';
 import { ChannelValuePlaygroundComponent } from '../../componentDocs/ChannelValue/playground';
 import { DrawerPlaygroundComponent } from '../../componentDocs/Drawer/playground';
 import { DrawerHeaderPlaygroundComponent } from '../../componentDocs/DrawerHeader/playground';
+import { DrawerLitePlaygroundComponent } from '../../componentDocs/DrawerLite/playground';
 import { DrawerSubheaderPlaygroundComponent } from '../../componentDocs/DrawerSubheader/playground';
 import { DrawerFooterPlaygroundComponent } from '../../componentDocs/DrawerFooter/playground';
 import { DrawerNavGroupPlaygroundComponent } from '../../componentDocs/DrawerNavGroup/playground';
@@ -101,10 +108,11 @@ import { UserMenuPlaygroundComponent } from '../../componentDocs/UserMenu/playgr
 import { Outlet, RouteProps } from 'react-router';
 import { OpenInNew } from '@mui/icons-material';
 import { Box } from '@mui/material';
-import { ListItemTag } from '@brightlayer-ui/react-components';
+import { ListItemTag, NavItem } from '@brightlayer-ui/react-components';
 
 // Site markdown docs
 import * as markdownDocs from '../../markdownDocs/';
+import { ProgressIconPlaygroundComponent } from '../../componentDocs/ProgressIcon/playground';
 
 export type RouteConfig = Omit<RouteProps, 'children'> & {
     title: string;
@@ -217,6 +225,28 @@ export const pageDefinitions: RouteConfig[] = [
                                 title: 'API Docs',
                                 path: 'api-docs',
                                 element: <DrawerLayoutAPIDocs />,
+                            },
+                        ],
+                    },
+                    {
+                        title: 'Drawer Lite',
+                        path: 'drawer-lite/',
+                        element: <ComponentPreviewPage title={'Drawer Lite'} />,
+                        children: [
+                            {
+                                title: 'examples',
+                                path: 'examples',
+                                element: <DrawerLiteExamples />,
+                            },
+                            {
+                                title: 'API Docs',
+                                path: 'api-docs',
+                                element: <DrawerLiteAPIDocs />,
+                            },
+                            {
+                                title: 'playground',
+                                path: 'playground',
+                                element: <DrawerLitePlaygroundComponent />,
                             },
                         ],
                     },
@@ -391,6 +421,23 @@ export const pageDefinitions: RouteConfig[] = [
                                 element: <DrawerFooterPlaygroundComponent />,
                             },
                         ],
+                    },
+                ],
+            },
+            {
+                title: 'Editable Table',
+                path: 'editable-table/',
+                element: <ComponentPreviewPage title={'Editable Table'} />,
+                children: [
+                    {
+                        title: 'examples',
+                        path: 'examples',
+                        element: <EditableTableExamples />,
+                    },
+                    {
+                        title: 'API Docs',
+                        path: 'api-docs',
+                        element: <EditableTableAPIDocs />,
                     },
                 ],
             },
@@ -775,16 +822,56 @@ export const pageDefinitions: RouteConfig[] = [
             },
         ],
     },
+    {
+        title: 'Icons',
+        path: '/icons/',
+        element: <Outlet />,
+        hidden: true,
+        pages: [
+            {
+                title: 'Progress Icons',
+                path: 'progress-icons/',
+                element: <ComponentPreviewPage title={'Progress Icons'} />,
+                children: [
+                    {
+                        title: 'examples',
+                        path: 'examples',
+                        element: <ProgressIconExamples />,
+                    },
+                    {
+                        title: 'API Docs',
+                        path: 'api-docs',
+                        element: <ProgressIconAPIDocs />,
+                    },
+                    {
+                        title: 'playground',
+                        path: 'playground',
+                        element: <ProgressIconPlaygroundComponent />,
+                    },
+                ],
+            },
+        ],
+    },
 ];
 
 const openInNewTab = (url = '#'): any => {
     window.open(url);
 };
 
-export const externalLinkDefinitions = [
+export const externalLinkDefinitions: NavItem[] = [
     {
-        title: 'Resources',
-        itemID: 'Resources',
+        title: 'Resources & Assets',
+        itemID: 'Resources & Assets',
+        items: [
+            {
+                title: 'Progress Icons',
+                itemID: '/icons/progress-icons',
+            },
+        ],
+    },
+    {
+        title: 'Packages',
+        itemID: 'Packages',
         rightComponent: <OpenInNew color="disabled" />,
         onClick: (): void => openInNewTab('https://brightlayer-ui.github.io/resources/developer'),
     },
