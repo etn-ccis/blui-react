@@ -27,7 +27,7 @@ export const MainRouter: React.FC = () => {
     const { email, rememberMe } = app.loginData;
     const navigate = useCallback(
         (destination: -1 | string) => {
-            navigation(destination as To);
+            void navigation(destination as To);
         },
         [navigation]
     );

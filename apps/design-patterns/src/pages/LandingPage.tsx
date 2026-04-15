@@ -3,57 +3,57 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import MenuIcon from '@mui/icons-material/Menu';
-import { IconButton, useTheme, Theme, Fade, Divider, Button, useMediaQuery } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
-import createStyles from '@mui/styles/createStyles';
+import { IconButton, useTheme, Fade, Divider, Button, useMediaQuery } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import { useDispatch } from 'react-redux';
 import { TOGGLE_DRAWER } from '../redux/actions';
-import clsx from 'clsx';
 
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        pageBackground: {
-            backgroundColor: theme.palette.background.paper,
-            minHeight: '100vh',
-            position: 'relative',
+const PageBackground = styled('div')(({ theme }) => ({
+    backgroundColor: theme.palette.background.paper,
+    minHeight: '100vh',
+    position: 'relative',
+}));
+
+const Body = styled('div')(({ theme }) => ({
+    padding: theme.spacing(3),
+    color: theme.palette.text.primary,
+    paddingTop: '10vh',
+    paddingBottom: theme.spacing(5),
+}));
+
+const Content = styled('div')(({ theme }) => ({
+    maxWidth: 600,
+    margin: '0 auto',
+    '& > *': {
+        marginTop: theme.spacing(3),
+    },
+}));
+
+const Links = styled('div')(({ theme }) => ({
+    columnCount: 2,
+    columnGap: theme.spacing(8),
+    '& > *': {
+        display: 'inline-block',
+        marginBottom: theme.spacing(1),
+        verticalAlign: 'top',
+    },
+    [theme.breakpoints.down('sm')]: {
+        columnCount: 1,
+        '& > *': {
+            display: 'block',
         },
-        body: {
-            padding: theme.spacing(3),
-            color: theme.palette.text.primary,
-            paddingTop: '10vh',
-            paddingBottom: theme.spacing(5),
-        },
-        content: {
-            maxWidth: 600,
-            margin: '0 auto',
-        },
-        spaced: {
-            '& > *': {
-                marginTop: theme.spacing(3),
-            },
-        },
-        links: {
-            columnCount: 2,
-            columnGap: theme.spacing(8),
-            '& > *': {
-                display: 'inline-block',
-                marginBottom: theme.spacing(1),
-                verticalAlign: 'top',
-            },
-            [theme.breakpoints.down('sm')]: {
-                columnCount: 1,
-                '& > *': {
-                    display: 'block',
-                },
-            },
-        },
-    })
-);
+    },
+}));
+
+const SpacedDiv = styled('div')(({ theme }) => ({
+    '& > *': {
+        marginTop: theme.spacing(3),
+    },
+}));
 
 export const LandingPage = (): JSX.Element => {
     const dispatch = useDispatch();
     const theme = useTheme();
-    const classes = useStyles(theme);
     const [displayTitle, setDisplayTitle] = useState(false);
     const [displayBody, setDisplayBody] = useState(false);
     const [displayLinks, setDisplayLinks] = useState(false);
@@ -72,7 +72,7 @@ export const LandingPage = (): JSX.Element => {
     }, []);
 
     return (
-        <div className={classes.pageBackground}>
+        <PageBackground>
             {md ? null : (
                 <AppBar position={'sticky'}>
                     <Toolbar>
@@ -92,15 +92,15 @@ export const LandingPage = (): JSX.Element => {
                     </Toolbar>
                 </AppBar>
             )}
-            <div className={classes.body}>
-                <div className={clsx(classes.content, classes.spaced)}>
+            <Body>
+                <Content>
                     <Fade in={displayTitle} timeout={500}>
                         <Typography variant={'h2'}>
                             The <span style={{ color: theme.palette.primary.main }}>Patterns</span>.
                         </Typography>
                     </Fade>
                     <Fade in={displayBody} timeout={1500}>
-                        <div className={classes.spaced}>
+                        <SpacedDiv>
                             <Typography variant={'body1'}>
                                 A <strong>design pattern</strong> is a common interaction or behavior that should be
                                 consistent across applications. In general, we follow most of the design patterns and
@@ -125,12 +125,12 @@ export const LandingPage = (): JSX.Element => {
                                     Explore Brightlayer UI Design Patterns
                                 </Button>
                             )}
-                        </div>
+                        </SpacedDiv>
                     </Fade>
                     <Fade in={displayLinks} timeout={1000}>
-                        <div className={classes.spaced}>
+                        <SpacedDiv>
                             <Divider />
-                            <div className={classes.links}>
+                            <Links>
                                 <Button
                                     target={'_blank'}
                                     href={'https://brightlayer-ui.github.io/development/frameworks-web/react'}
@@ -158,11 +158,11 @@ export const LandingPage = (): JSX.Element => {
                                 <Button target={'_blank'} href={'https://brightlayer-ui.github.io/community/contactus'}>
                                     Send Feedback or Suggestions
                                 </Button>
-                            </div>
-                        </div>
+                            </Links>
+                        </SpacedDiv>
                     </Fade>
-                </div>
-            </div>
-        </div>
+                </Content>
+            </Body>
+        </PageBackground>
     );
 };

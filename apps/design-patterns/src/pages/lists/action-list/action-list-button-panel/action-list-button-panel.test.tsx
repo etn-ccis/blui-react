@@ -1,14 +1,12 @@
 import React from 'react';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
 import { ActionListButtonPanel } from '.';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { Reducer } from '../../../../redux/reducers';
-import { createTheme, ThemeProvider } from '@mui/material';
-import * as BLUIThemes from '@brightlayer-ui/react-themes';
+import { ThemeProvider } from '@mui/material';
+import { blueThemes as theme } from '@brightlayer-ui/react-themes';
 
-const theme = createTheme(BLUIThemes.blue);
 const store = createStore(Reducer());
 
 const createRenderer = (): any =>

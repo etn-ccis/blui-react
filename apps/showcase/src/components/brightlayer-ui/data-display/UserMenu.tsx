@@ -8,8 +8,7 @@ import Email from '@mui/icons-material/Email';
 import ExitToApp from '@mui/icons-material/ExitToApp';
 import Pets from '@mui/icons-material/Pets';
 import Settings from '@mui/icons-material/Settings';
-import { useSelector } from 'react-redux';
-import { AppStore } from '../../../__types__';
+import { useAppSelector } from '../../../redux/hooks';
 import * as colors from '@brightlayer-ui/colors';
 import Box from '@mui/material/Box';
 
@@ -36,7 +35,7 @@ const AvatarStyles = {
 };
 
 export const UserMenuExample: React.FC = () => {
-    const direction = useSelector((store: AppStore) => store.app.direction);
+    const direction = useAppSelector((store) => store.app.direction);
     const rtl = direction === 'rtl';
 
     const defaultMenuGroup = [

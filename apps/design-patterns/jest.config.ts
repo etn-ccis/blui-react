@@ -1,11 +1,16 @@
 export default {
     preset: 'ts-jest',
     testEnvironment: 'jest-environment-jsdom',
+    setupFilesAfterEnv: ['<rootDir>/test/setupTests.ts'],
     transform: {
-        '^.+\\.tsx?$': 'ts-jest',
-        // process `*.tsx` files with `ts-jest`
+        '^.+\\.tsx?$': [
+            'ts-jest',
+            {
+                useESM: true,
+            },
+        ],
     },
-    transformIgnorePatterns: ['/node_modules/(?!@mui|@brightlayer-ui)'],
+    transformIgnorePatterns: ['/node_modules/(?!@mui|@brightlayer-ui|color|color-string|color-name)'],
     moduleNameMapper: {
         '\\.(gif|ttf|eot|svg|png|jpg)$': '<rootDir>/test/__mocks__/fileMock.js',
         '\\.(css|less)$': '<rootDir>/test/__mocks__/fileMock.js',
@@ -14,9 +19,4 @@ export default {
     },
     moduleDirectories: ['node_modules', '<rootDir>/../'],
     extensionsToTreatAsEsm: ['.ts', '.tsx'],
-    globals: {
-        'ts-jest': {
-            useESM: true,
-        },
-    },
 };

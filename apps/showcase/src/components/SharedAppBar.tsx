@@ -13,8 +13,8 @@ import InvertColors from '@mui/icons-material/InvertColors';
 import SwapHoriz from '@mui/icons-material/SwapHoriz';
 import SendIcon from '@mui/icons-material/Send';
 import React, { useCallback } from 'react';
-import { TOGGLE_DIR, TOGGLE_DRAWER } from '../redux/actions';
-import { useDispatch } from 'react-redux';
+import { toggleDir, toggleDrawer } from '../redux/reducers/app';
+import { useAppDispatch } from '../redux/hooks';
 import { Spacer, UserMenu } from '@brightlayer-ui/react-components';
 
 type SharedAppBarProps = {
@@ -22,7 +22,7 @@ type SharedAppBarProps = {
 };
 
 export const SharedAppBar = (props: SharedAppBarProps): JSX.Element => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const theme = useTheme();
     const rtl = theme.direction === 'rtl';
     const smUp = useMediaQuery(theme.breakpoints.up('sm'));
@@ -36,7 +36,7 @@ export const SharedAppBar = (props: SharedAppBarProps): JSX.Element => {
             <IconButton
                 color={'inherit'}
                 onClick={(): void => {
-                    dispatch({ type: TOGGLE_DRAWER });
+                    dispatch(toggleDrawer());
                 }}
                 size="large"
                 edge={'start'}
@@ -73,7 +73,7 @@ export const SharedAppBar = (props: SharedAppBarProps): JSX.Element => {
                     <IconButton
                         color={'inherit'}
                         onClick={(): void => {
-                            dispatch({ type: TOGGLE_DIR });
+                            dispatch(toggleDir());
                         }}
                         size="large"
                     >

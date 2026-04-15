@@ -1,5 +1,4 @@
-import { Divider, IconButton, useMediaQuery, useTheme, Theme, Typography } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
+import { Divider, IconButton, useMediaQuery, useTheme, Typography, styled } from '@mui/material';
 import {
     Drawer,
     DrawerBody,
@@ -17,45 +16,44 @@ import { useNavigate } from 'react-router-dom';
 import { Main } from './router/main';
 import './style.css';
 import { PAGES, RouteMetaData, Routes } from './router/routes';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from './redux/reducers';
-import { TOGGLE_DRAWER } from './redux/actions';
+import { useAppDispatch, useAppSelector } from './store/hooks';
+import { drawerToggled } from './store/appSlice';
 import { DRAWER_WIDTH } from './assets/constants';
 
 import backgroundImage from './assets/topology_40.png';
 
-const useStyles = makeStyles((theme: Theme) => ({
-    header: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        zIndex: 1,
-        padding: `0 ${theme.spacing(2)}`,
-        alignItems: 'center',
-        width: '100%',
-        height: '100%',
-        [theme.breakpoints.down('md')]: {
-            padding: `0 ${theme.spacing(2)} 0 0`,
-        },
-    },
-    headerDetails: {
-        flex: 1,
-    },
-    subtitle: {
-        marginTop: theme.spacing(-1),
+const HeaderContainer = styled('div')(({ theme }) => ({
+    display: 'flex',
+    justifyContent: 'space-between',
+    zIndex: 1,
+    padding: `0 ${theme.spacing(2)}`,
+    alignItems: 'center',
+    width: '100%',
+    height: '100%',
+    [theme.breakpoints.down('md')]: {
+        padding: `0 ${theme.spacing(2)} 0 0`,
     },
 }));
 
+const HeaderDetails = styled('div')({
+    flex: 1,
+});
+
+const SubtitleTypography = styled(Typography)(({ theme }) => ({
+    marginTop: theme.spacing(-1),
+}));
+
 export const App: React.FC = () => {
-    const classes = useStyles();
     const navigation = useNavigate();
-    const open = useSelector((state: AppState) => state.app.drawerOpen);
+    const open = useAppSelector((state) => state.app.drawerOpen);
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const [selected, setSelected] = useState('');
 
     const navigate = (id: string): void => {
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         navigation(id);
         setSelected(id);
     };
@@ -86,7 +84,7 @@ export const App: React.FC = () => {
             onClick: page.route
                 ? (): void => {
                       if (page.route) navigate(page.route); // this extra if shouldn't be necessary, but TS doesn't understand that it can't be undefined because of the ternary operator.
-                      dispatch({ type: TOGGLE_DRAWER, payload: false });
+                      dispatch(drawerToggled(false));
                   }
                 : undefined,
         };
@@ -100,7 +98,7 @@ export const App: React.FC = () => {
             width={DRAWER_WIDTH}
             ModalProps={{
                 onClose: (): void => {
-                    dispatch({ type: TOGGLE_DRAWER, payload: !open });
+                    dispatch(drawerToggled(!open));
                 },
             }}
             variant={isMobile ? 'temporary' : 'permanent'}
@@ -117,7 +115,7 @@ export const App: React.FC = () => {
                             color={'inherit'}
                             edge={'start'}
                             onClick={(): void => {
-                                dispatch({ type: TOGGLE_DRAWER, payload: false });
+                                dispatch(drawerToggled(false));
                             }}
                             size="large"
                         >
@@ -126,20 +124,17 @@ export const App: React.FC = () => {
                     ) : undefined
                 }
                 titleContent={
-                    <div className={classes.header}>
-                        <div
-                            className={classes.headerDetails}
+                    <HeaderContainer>
+                        <HeaderDetails
                             onClick={(): void => {
                                 navigate('/');
-                                dispatch({ type: TOGGLE_DRAWER, payload: false });
+                                dispatch(drawerToggled(false));
                             }}
                         >
                             <Typography variant="h6">Brightlayer UI</Typography>
-                            <Typography variant="body1" className={classes.subtitle}>
-                                React Design Patterns
-                            </Typography>
-                        </div>
-                    </div>
+                            <SubtitleTypography variant="body1">React Design Patterns</SubtitleTypography>
+                        </HeaderDetails>
+                    </HeaderContainer>
                 }
                 style={{ cursor: 'pointer' }}
             />

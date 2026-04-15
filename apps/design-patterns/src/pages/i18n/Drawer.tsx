@@ -1,7 +1,6 @@
 import React from 'react';
-import { Drawer as MuiDrawer, Typography, List, Theme, useTheme } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
-import clsx from 'clsx';
+import { Drawer as MuiDrawer, Typography, List, useTheme } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import { TFunction } from 'i18next';
 
 // Load moment.js locales
@@ -24,30 +23,24 @@ import { english } from './translations/english';
 import './translations/i18n';
 import { InfoListItem } from '@brightlayer-ui/react-components';
 
-const useStyles = makeStyles((theme: Theme) => ({
-    drawer: {
-        maxWidth: '85%',
-        width: 350,
-    },
-    header: {
-        height: '180px',
-        color: 'white',
-        background: theme.palette.primary.main,
-        padding: theme.spacing(2),
-    },
-    flexVert: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'stretch',
-    },
-    flexVertBottom: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-        justifyContent: 'flex-end',
-    },
-    RTL: { transform: 'scaleX(-1)' },
+const Header = styled('div')(({ theme }) => ({
+    height: '180px',
+    color: 'white',
+    background: theme.palette.primary.main,
+    padding: theme.spacing(2),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-end',
 }));
+
+const FlexVert = styled('div')({
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'stretch',
+    height: '100%',
+    width: '100%',
+});
 
 type IconArrayType = Array<{ icon: React.ReactNode; flipRTL: boolean }>;
 
@@ -72,17 +65,16 @@ type DrawerProps = {
 export const Drawer = (props: DrawerProps): JSX.Element => {
     const { R2L, open, drawerToggler, translator: t, lang } = props;
     const theme = useTheme();
-    const classes = useStyles(theme);
 
     return (
         <MuiDrawer
             open={open}
             onClose={drawerToggler}
-            classes={{ paper: classes.drawer }}
+            PaperProps={{ sx: { maxWidth: '85%', width: 350 } }}
             anchor={R2L ? 'left' : 'right'}
         >
-            <div className={classes.flexVert} style={{ height: '100%', width: '100%' }}>
-                <div dir={R2L ? 'rtl' : 'ltr'} className={clsx(classes.flexVertBottom, classes.header)}>
+            <FlexVert>
+                <Header dir={R2L ? 'rtl' : 'ltr'}>
                     <BoltIcon style={{ fontSize: '64px', transform: 'rotate(42deg)' }} />
                     <div style={{ padding: theme.spacing(0.5) }}>
                         <Typography variant={'h5'} color={'inherit'}>
@@ -97,7 +89,7 @@ export const Drawer = (props: DrawerProps): JSX.Element => {
                                 .format('LL')}
                         </Typography>
                     </div>
-                </div>
+                </Header>
                 <div>
                     <List dir={R2L ? 'rtl' : 'ltr'} disablePadding>
                         {Object.keys(menuItems).map((menuItem, index) => (
@@ -105,9 +97,13 @@ export const Drawer = (props: DrawerProps): JSX.Element => {
                                 dense
                                 title={t(`MENU_ITEMS.${menuItem}`)}
                                 icon={
-                                    <div className={clsx({ [classes.RTL]: R2L && iconArray[index].flipRTL })}>
+                                    <span
+                                        style={
+                                            R2L && iconArray[index].flipRTL ? { transform: 'scaleX(-1)' } : undefined
+                                        }
+                                    >
                                         {iconArray[index].icon}
-                                    </div>
+                                    </span>
                                 }
                                 key={menuItem}
                                 onClick={drawerToggler}
@@ -116,7 +112,7 @@ export const Drawer = (props: DrawerProps): JSX.Element => {
                         ))}
                     </List>
                 </div>
-            </div>
+            </FlexVert>
         </MuiDrawer>
     );
 };

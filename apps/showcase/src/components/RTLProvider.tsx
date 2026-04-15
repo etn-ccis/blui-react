@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
-import { useSelector } from 'react-redux';
-import { AppStore } from '../__types__';
+import { useAppSelector } from '../redux/hooks';
 import rtlPlugin from 'stylis-plugin-rtl';
 import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
@@ -10,7 +9,7 @@ import { blueThemes } from '@brightlayer-ui/react-themes';
 document.body.setAttribute('dir', 'rtl');
 
 export const RTLThemeProvider = (props: any): JSX.Element => {
-    const dir = useSelector((store: AppStore) => store.app.direction);
+    const dir = useAppSelector((store) => store.app.direction);
 
     const cacheRtl = createCache({
         key: dir === 'rtl' ? 'cssrtl' : 'cssltr',

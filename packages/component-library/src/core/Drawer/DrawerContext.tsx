@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react';
+import React, { createContext, useContext } from 'react';
 import { DrawerVariant } from './types';
 
 type DrawerContextType = {
@@ -17,3 +17,9 @@ export const DrawerContext = createContext<DrawerContextType>({
 });
 
 export const useDrawerContext = (): DrawerContextType => useContext(DrawerContext);
+
+export const DrawerContextProvider: React.FC<React.PropsWithChildren<DrawerContextType>> = (props) => {
+    const { children, ...drawerContextProps } = props;
+
+    return <DrawerContext.Provider value={drawerContextProps}>{children}</DrawerContext.Provider>;
+};

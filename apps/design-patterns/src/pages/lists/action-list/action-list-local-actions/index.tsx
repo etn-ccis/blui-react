@@ -1,19 +1,22 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { ReactNode, useState, useEffect, useRef, useCallback } from 'react';
-import { AppBar, Slide } from '@mui/material';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import List from '@mui/material/List';
-import IconButton from '@mui/material/IconButton';
-import { Theme, useTheme } from '@mui/material/styles';
-import makeStyles from '@mui/styles/makeStyles';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
+import {
+    AppBar,
+    Slide,
+    Toolbar,
+    Typography,
+    List,
+    IconButton,
+    useMediaQuery,
+    Accordion,
+    AccordionSummary,
+    AccordionDetails,
+    Menu,
+    MenuItem,
+    Switch,
+} from '@mui/material';
+import { styled, useTheme } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import Switch from '@mui/material/Switch';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import { Language, Email, Sms, MoreVert, Edit, ArrowBack } from '@mui/icons-material';
 import { useDispatch } from 'react-redux';
@@ -25,98 +28,105 @@ import { LanguageSelectMobile } from './select-language-mobile';
 import { DeviceEdit } from './device-edit';
 import { DeviceEditMobile } from './device-edit-mobile';
 
-const useStyles = makeStyles((theme: Theme) => ({
-    appbarRoot: {
+const AppBarRoot = styled(AppBar)(({ theme }) => ({
+    padding: 0,
+}));
+
+const ToolbarGutters = styled(Toolbar)(({ theme }) => ({
+    padding: `0 ${theme.spacing(2)}`,
+    display: 'flex',
+    justifyContent: 'space-between',
+}));
+
+const AccordionContainer = styled('div')(({ theme }) => ({
+    maxWidth: 768,
+    margin: '0 auto',
+    padding: `${theme.spacing(3)} ${theme.spacing(2)}`,
+    [theme.breakpoints.down('md')]: {
+        maxWidth: '100%',
+        margin: `0 auto ${theme.spacing(3)} auto`,
         padding: 0,
     },
-    toolbarGutters: {
-        padding: `0 ${theme.spacing(2)}`,
-        display: 'flex',
-        justifyContent: 'space-between',
+}));
+
+const AccordionRoot = styled(Accordion)(({ theme }) => ({
+    marginBottom: theme.spacing(2),
+    borderRadius: 4,
+    '&:before': {
+        display: 'none',
     },
-    listItemText: {
-        marginLeft: 0,
+    '&.Mui-expanded': {
+        marginBottom: theme.spacing(2),
     },
-    accordionContainer: {
-        maxWidth: 768,
-        margin: '0 auto',
-        padding: `${theme.spacing(3)} ${theme.spacing(2)}`,
-        [theme.breakpoints.down('md')]: {
-            maxWidth: '100%',
-            margin: `0 auto ${theme.spacing(3)} auto`,
-            padding: 0,
+    '& .MuiAccordionSummary-root': {
+        height: theme.spacing(6),
+        minHeight: theme.spacing(6),
+        '&.Mui-expanded': {
+            borderBottom: `1px solid ${theme.palette.divider}`,
         },
     },
-    accordionRoot: {
-        marginBottom: theme.spacing(2),
-        borderRadius: 4,
+    [theme.breakpoints.down('md')]: {
+        maxWidth: '100%',
+        boxShadow: 'none',
+        borderRadius: 0,
         '&:before': {
             display: 'none',
-        },
-        '&.Mui-expanded': {
-            marginBottom: theme.spacing(2),
         },
         '& .MuiAccordionSummary-root': {
             height: theme.spacing(6),
             minHeight: theme.spacing(6),
             '&.Mui-expanded': {
                 borderBottom: `1px solid ${theme.palette.divider}`,
+                margin: 0,
             },
         },
-        [theme.breakpoints.down('md')]: {
-            maxWidth: '100%',
-            boxShadow: 'none',
-            borderRadius: 0,
-            '&:before': {
-                display: 'none',
-            },
-            '& .MuiAccordionSummary-root': {
-                height: theme.spacing(6),
-                minHeight: theme.spacing(6),
-                '&.Mui-expanded': {
-                    borderBottom: `1px solid ${theme.palette.divider}`,
-                    margin: 0,
-                },
-            },
-        },
-    },
-    accordionSummary: {
-        pointerEvents: 'none',
-    },
-    accordionDetails: {
-        display: 'block',
-        padding: 0,
-    },
-    changeBackgroundColor: {
-        [theme.breakpoints.up('md')]: {
-            '&:hover': {
-                backgroundColor: 'transparent',
-            },
-        },
-    },
-    deviceEditMobileContainer: {
-        display: 'flex',
-        flexDirection: 'column',
-        height: 'calc(100vh - 64px)',
-        [theme.breakpoints.down('sm')]: {
-            height: 'calc(100vh - 56px)',
-        },
-    },
-    listItemTitle: {
-        display: 'flex',
-        alignItems: 'center',
-    },
-    menu: {
-        width: 154,
-    },
-    menuList: {
-        padding: 0,
-        '&>*': { height: theme.spacing(6) },
     },
 }));
 
-const getTitle = (deviceStatus: string, device: string, isMobile: boolean, classes: Record<string, any>): ReactNode => (
-    <div className={classes.listItemTitle}>
+const AccordionSummaryRoot = styled(AccordionSummary)(({ theme }) => ({
+    pointerEvents: 'none',
+}));
+
+const AccordionDetailsRoot = styled(AccordionDetails)(({ theme }) => ({
+    display: 'block',
+    padding: 0,
+}));
+
+const ChangeBackgroundColor = styled('div')(({ theme }) => ({
+    [theme.breakpoints.up('md')]: {
+        '&:hover': {
+            backgroundColor: 'transparent',
+        },
+    },
+}));
+
+const DeviceEditMobileContainer = styled('div')(({ theme }) => ({
+    display: 'flex',
+    flexDirection: 'column',
+    height: 'calc(100vh - 64px)',
+    [theme.breakpoints.down('sm')]: {
+        height: 'calc(100vh - 56px)',
+    },
+}));
+
+const ListItemTitle = styled('div')({
+    display: 'flex',
+    alignItems: 'center',
+});
+
+const MenuPaper = styled('div')({
+    width: 154,
+});
+
+const MenuList = styled('ul')(({ theme }) => ({
+    padding: 0,
+    '& > *': { height: theme.spacing(6) },
+}));
+
+const ListItemTextSx = { marginLeft: 0 };
+
+const getTitle = (deviceStatus: string, device: string, isMobile: boolean): ReactNode => (
+    <ListItemTitle>
         <Typography variant={'subtitle1'} noWrap>
             {deviceStatus}
         </Typography>
@@ -125,7 +135,7 @@ const getTitle = (deviceStatus: string, device: string, isMobile: boolean, class
                 : &nbsp;{device}
             </Typography>
         )}
-    </div>
+    </ListItemTitle>
 );
 
 type Screens =
@@ -140,7 +150,6 @@ export const ActionListLocalActions = (): JSX.Element => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
     const md = useMediaQuery(theme.breakpoints.up('md'));
-    const classes = useStyles(theme);
 
     const [isEmailNotificationsEnabled, setIsEmailNotificationsEnabled] = useState(false);
     const [isSmsNotificationsEnabled, setIsSmsNotificationsEnabled] = useState(true);
@@ -257,15 +266,15 @@ export const ActionListLocalActions = (): JSX.Element => {
 
     return (
         <div style={{ backgroundColor: theme.palette.background.default, minHeight: '100vh' }}>
-            <AppBar data-cy="pxb-toolbar" position={'sticky'} classes={{ root: classes.appbarRoot }}>
-                <Toolbar classes={{ gutters: classes.toolbarGutters }}>
+            <AppBarRoot data-cy="pxb-toolbar" position={'sticky'}>
+                <ToolbarGutters>
                     {getToolbarIcon()}
                     <Typography variant={'h6'} color={'inherit'}>
                         {getToolbarTitle()}
                     </Typography>
                     <Spacer />
-                </Toolbar>
-            </AppBar>
+                </ToolbarGutters>
+            </AppBarRoot>
             <Slide
                 direction={'right'}
                 in={activeScreen === 'localItemActionScreen'}
@@ -273,25 +282,18 @@ export const ActionListLocalActions = (): JSX.Element => {
                 unmountOnExit
                 timeout={{ enter: slideAnimationDurationMs, exit: exitSlideAnimationDurationMs }}
             >
-                <div className={classes.accordionContainer}>
-                    <Accordion
-                        key={'today'}
-                        data-testid="accordion"
-                        defaultExpanded={true}
-                        classes={{ root: classes.accordionRoot }}
-                    >
+                <AccordionContainer>
+                    <AccordionRoot key={'today'} data-testid="accordion" defaultExpanded={true}>
                         <AccordionSummary expandIcon={<ExpandMore />}>
                             <Typography variant={'subtitle2'} color={'primary'}>
                                 Today
                             </Typography>
                         </AccordionSummary>
-                        <AccordionDetails classes={{ root: classes.accordionDetails }}>
+                        <AccordionDetailsRoot>
                             <List className={'list'} disablePadding>
                                 <InfoListItem
-                                    classes={{
-                                        listItemText: classes.listItemText,
-                                    }}
-                                    title={getTitle('Battery Service', 'Eaton GH142', isMobile, classes)}
+                                    sx={ListItemTextSx}
+                                    title={getTitle('Battery Service', 'Eaton GH142', isMobile)}
                                     data-testid="infoListItem"
                                     divider={'full'}
                                     hidePadding
@@ -299,11 +301,9 @@ export const ActionListLocalActions = (): JSX.Element => {
                                     chevron
                                 />
                                 <InfoListItem
-                                    classes={{
-                                        listItemText: classes.listItemText,
-                                    }}
+                                    sx={ListItemTextSx}
                                     data-testid="infoListItem"
-                                    title={getTitle('Bypass Over Frequency', 'A2 Max Reveal', isMobile, classes)}
+                                    title={getTitle('Bypass Over Frequency', 'A2 Max Reveal', isMobile)}
                                     divider={'full'}
                                     hidePadding
                                     rightComponent={
@@ -312,7 +312,10 @@ export const ActionListLocalActions = (): JSX.Element => {
                                                 <MoreVert />
                                             </IconButton>
                                             <Menu
-                                                classes={{ paper: classes.menu, list: classes.menuList }}
+                                                PaperProps={{ sx: { width: 154 } }}
+                                                MenuListProps={{
+                                                    sx: { padding: 0, '& > *': { height: theme.spacing(6) } },
+                                                }}
                                                 id="more-menu"
                                                 anchorEl={anchorEl}
                                                 keepMounted
@@ -327,11 +330,9 @@ export const ActionListLocalActions = (): JSX.Element => {
                                     }
                                 />
                                 <InfoListItem
-                                    classes={{
-                                        listItemText: classes.listItemText,
-                                    }}
+                                    sx={ListItemTextSx}
                                     data-testid="infoListItem"
-                                    title={getTitle('Device', subTitle, isMobile, classes)}
+                                    title={getTitle('Device', subTitle, isMobile)}
                                     subtitleSeparator={' '}
                                     hidePadding
                                     rightComponent={
@@ -342,26 +343,23 @@ export const ActionListLocalActions = (): JSX.Element => {
                                     divider={isMobile ? 'full' : undefined}
                                 />
                             </List>
-                        </AccordionDetails>
-                    </Accordion>
-                    <Accordion
+                        </AccordionDetailsRoot>
+                    </AccordionRoot>
+                    <AccordionRoot
                         key={'Notifications'}
                         data-testid="accordion"
                         defaultExpanded={true}
                         TransitionProps={{ in: true }}
-                        classes={{ root: classes.accordionRoot }}
                     >
-                        <AccordionSummary classes={{ root: classes.accordionSummary }}>
+                        <AccordionSummaryRoot>
                             <Typography variant={'subtitle2'} color={'primary'}>
                                 Notifications
                             </Typography>
-                        </AccordionSummary>
-                        <AccordionDetails classes={{ root: classes.accordionDetails }}>
+                        </AccordionSummaryRoot>
+                        <AccordionDetailsRoot>
                             <List className={'list'} disablePadding>
                                 <InfoListItem
-                                    classes={{
-                                        listItemText: classes.listItemText,
-                                    }}
+                                    sx={ListItemTextSx}
                                     title={'Email Notifications'}
                                     data-testid="infoListItem"
                                     subtitle={isEmailNotificationsEnabled ? 'Enabled' : 'Disabled'}
@@ -378,9 +376,7 @@ export const ActionListLocalActions = (): JSX.Element => {
                                     iconAlign="left"
                                 />
                                 <InfoListItem
-                                    classes={{
-                                        listItemText: classes.listItemText,
-                                    }}
+                                    sx={ListItemTextSx}
                                     data-testid="infoListItem"
                                     title={'SMS Notifications'}
                                     subtitle={isSmsNotificationsEnabled ? 'Enabled' : 'Disabled'}
@@ -397,29 +393,32 @@ export const ActionListLocalActions = (): JSX.Element => {
                                     divider={isMobile ? 'full' : undefined}
                                 />
                             </List>
-                        </AccordionDetails>
-                    </Accordion>
-                    <Accordion
+                        </AccordionDetailsRoot>
+                    </AccordionRoot>
+                    <AccordionRoot
                         key={'Locale'}
                         data-testid="accordion"
                         defaultExpanded={true}
                         TransitionProps={{ in: true }}
-                        classes={{ root: classes.accordionRoot }}
                         onChange={(event: any): void => {
                             event.preventDefault();
                         }}
                     >
-                        <AccordionSummary classes={{ root: classes.accordionSummary }}>
+                        <AccordionSummaryRoot>
                             <Typography variant={'subtitle2'} color={'primary'}>
                                 Locale
                             </Typography>
-                        </AccordionSummary>
-                        <AccordionDetails classes={{ root: classes.accordionDetails }}>
+                        </AccordionSummaryRoot>
+                        <AccordionDetailsRoot>
                             <List className={'list'} disablePadding>
                                 <InfoListItem
-                                    classes={{
-                                        listItemText: classes.listItemText,
-                                        root: classes.changeBackgroundColor,
+                                    sx={{
+                                        ...ListItemTextSx,
+                                        ...(theme.breakpoints.up('md') && {
+                                            '&:hover': {
+                                                backgroundColor: 'transparent',
+                                            },
+                                        }),
                                     }}
                                     data-testid="infoListItem"
                                     title={'Language'}
@@ -437,7 +436,7 @@ export const ActionListLocalActions = (): JSX.Element => {
                                             />
                                         )
                                     }
-                                    chevron
+                                    chevron={isMobile}
                                     onClick={
                                         isMobile
                                             ? (): void => {
@@ -448,9 +447,9 @@ export const ActionListLocalActions = (): JSX.Element => {
                                     divider={isMobile ? 'full' : undefined}
                                 />
                             </List>
-                        </AccordionDetails>
-                    </Accordion>
-                </div>
+                        </AccordionDetailsRoot>
+                    </AccordionRoot>
+                </AccordionContainer>
             </Slide>
             <Slide
                 direction={'left'}
@@ -470,7 +469,7 @@ export const ActionListLocalActions = (): JSX.Element => {
                 unmountOnExit
                 timeout={{ enter: slideAnimationDurationMs, exit: exitSlideAnimationDurationMs }}
             >
-                <div className={classes.deviceEditMobileContainer}>
+                <DeviceEditMobileContainer>
                     <DeviceEditMobile
                         navigateBack={(): void => onBackNavigation()}
                         subTitle={subTitle}
@@ -478,7 +477,7 @@ export const ActionListLocalActions = (): JSX.Element => {
                             setSubTitle(updatedSubTitle);
                         }}
                     />
-                </div>
+                </DeviceEditMobileContainer>
             </Slide>
             <Slide
                 direction={'left'}

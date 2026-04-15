@@ -6,7 +6,7 @@ import Menu from '@mui/icons-material/Menu';
 import EatonFooterLogoLight from '../EatonLogoLight.png';
 import EatonFooterLogoDark from '../EatonLogoDark.png';
 import * as Colors from '@brightlayer-ui/colors';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {
     Drawer,
     DrawerBody,
@@ -15,9 +15,8 @@ import {
     DrawerHeader,
     NavItem,
 } from '@brightlayer-ui/react-components';
-import { useSelector, useDispatch } from 'react-redux';
-import { AppStore } from '../__types__';
-import { CLOSE_DRAWER, TOGGLE_DRAWER } from '../redux/actions';
+import { useAppSelector, useAppDispatch } from '../redux/hooks';
+import { closeDrawer, toggleDrawer } from '../redux/reducers/app';
 import { SimpleNavItem, pageDefinitions } from './navigation';
 import Box from '@mui/material/Box';
 
@@ -26,38 +25,43 @@ import top from '../assets/topology_40.png';
 export const NavigationDrawer: React.FC = () => {
     const { mode } = useColorScheme();
     const isDarkMode = mode === 'light' ? false : true;
-    const open = useSelector((store: AppStore) => store.app.drawerOpen);
-    const direction = useSelector((store: AppStore) => store.app.direction);
-    const dispatch = useDispatch();
+    const open = useAppSelector((store) => store.app.drawerOpen);
+    const direction = useAppSelector((store) => store.app.direction);
+    const dispatch = useAppDispatch();
     const theme = useTheme();
-    const history = useHistory();
+    const navigate = useNavigate();
     const location = useLocation();
     const [activeRoute, setActiveRoute] = useState(location.pathname);
     const xsDown = useMediaQuery(theme.breakpoints.down('sm'));
     const rtl = direction === 'rtl';
 
-    const createNavItems = useCallback((navData: SimpleNavItem[], parentUrl: string, depth: number): NavItem[] => {
-        const convertedItems: NavItem[] = [];
-        for (const item of navData) {
-            if (item.hidden) {
-                continue;
+    const createNavItems = useCallback(
+        (navData: SimpleNavItem[], parentUrl: string, depth: number): NavItem[] => {
+            const convertedItems: NavItem[] = [];
+            for (const item of navData) {
+                if (item.hidden) {
+                    continue;
+                }
+                const fullURL = `${parentUrl}${item.url || ''}`;
+                convertedItems.push({
+                    title: item.title,
+                    subtitle: item.subtitle,
+                    icon: depth === 0 ? item.icon : undefined,
+                    itemID: fullURL,
+                    onClick: item.component
+                        ? (): void => {
+                              void navigate(fullURL);
+                          }
+                        : undefined,
+                    items: item.pages
+                        ? createNavItems(item.pages, `${parentUrl}${item.url || ''}`, depth + 1)
+                        : undefined,
+                });
             }
-            const fullURL = `${parentUrl}${item.url || ''}`;
-            convertedItems.push({
-                title: item.title,
-                subtitle: item.subtitle,
-                icon: depth === 0 ? item.icon : undefined,
-                itemID: fullURL,
-                onClick: item.component
-                    ? (): void => {
-                          history.push(fullURL);
-                      }
-                    : undefined,
-                items: item.pages ? createNavItems(item.pages, `${parentUrl}${item.url || ''}`, depth + 1) : undefined,
-            });
-        }
-        return convertedItems;
-    }, []);
+            return convertedItems;
+        },
+        [navigate]
+    );
 
     useEffect(() => {
         setActiveRoute(location.pathname);
@@ -72,7 +76,7 @@ export const NavigationDrawer: React.FC = () => {
             ModalProps={{
                 //@ts-ignore
                 onBackdropClick: (): void => {
-                    dispatch({ type: CLOSE_DRAWER });
+                    dispatch(closeDrawer());
                 },
             }}
             activeItem={activeRoute}
@@ -86,7 +90,7 @@ export const NavigationDrawer: React.FC = () => {
                 backgroundImage={top}
                 icon={<Menu sx={rtl ? { transform: 'scaleX(-1)' } : {}} />}
                 onIconClick={(): void => {
-                    dispatch({ type: TOGGLE_DRAWER });
+                    dispatch(toggleDrawer());
                 }}
             />
             <DrawerBody>

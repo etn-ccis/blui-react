@@ -17,6 +17,7 @@ import { blueThemes } from '@brightlayer-ui/react-themes';
 import * as Colors from '@brightlayer-ui/colors';
 
 const meta = {
+    title: 'Components/EmptyState',
     component: EmptyState,
     argTypes: {
         title: { control: 'text' },

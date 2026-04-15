@@ -1,5 +1,9 @@
 # Changelog
 
+## v3.0.0
+
+- All outdated dependencies are updated to their latest compatible versions.
+
 ## v2.0.0
 
 ### Changed

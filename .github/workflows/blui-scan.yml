@@ -1,0 +1,235 @@
+
+name: CI-BlackDuck-SCA-Basic
+
+on:
+  push:
+    branches: [main, master, dev, feature/*]
+    paths:
+      - 'apps/design-patterns/**'
+      - 'apps/demo/**'
+      - 'apps/showcase/**'
+      - 'apps/storybook/**'
+      - 'apps/themeShowcase/**'
+      - 'apps/workflow/example-vite/**'
+      - 'apps/workflow/example/**'
+      - 'packages/cli-templates/**'
+      - 'packages/component-library/**'
+      - 'packages/login-workflow/**'
+      - 'packages/themes/**'
+  pull_request:
+    branches: [main, master, dev]
+    paths:
+      - 'apps/design-patterns/**'
+      - 'apps/demo/**'
+      - 'apps/showcase/**'
+      - 'apps/storybook/**'
+      - 'apps/themeShowcase/**'
+      - 'apps/workflow/example-vite/**'
+      - 'apps/workflow/example/**'
+      - 'packages/cli-templates/**'
+      - 'packages/component-library/**'
+      - 'packages/login-workflow/**'
+      - 'packages/themes/**'
+  workflow_dispatch:
+
+jobs:
+  blackduck-scan:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+      issues: write
+      pull-requests: write
+    strategy:
+      matrix:
+        app:
+          - apps/design-patterns
+          - apps/demo
+          - apps/showcase
+          - apps/storybook
+          - apps/themeShowcase
+          - apps/workflow/example-vite
+          - apps/workflow/example
+          - packages/cli-templates
+          - packages/component-library
+          - packages/login-workflow
+          - packages/themes
+
+    defaults:
+      run:
+        working-directory: ${{ matrix.app }}
+
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check for changes in app directory
+        id: check_changes
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "changes=true" >> $GITHUB_OUTPUT
+          else
+            if git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -q "^${{ matrix.app }}/"; then
+              echo "changes=true" >> $GITHUB_OUTPUT
+            else
+              echo "changes=false" >> $GITHUB_OUTPUT
+            fi
+          fi
+
+      - name: Verify Black Duck endpoint reachability
+        if: steps.check_changes.outputs.changes == 'true'
+        run: |
+          echo "Checking connectivity to Black Duck endpoint..."
+          if ! curl --silent --show-error --fail --max-time 20 "${{ vars.BLACKDUCKSCA_URL }}/api/current-version" > /dev/null; then
+            echo "Unable to reach Black Duck endpoint from this runner: ${{ vars.BLACKDUCKSCA_URL }}"
+            echo "If this is an internal URL, use a self-hosted runner with network access."
+            exit 1
+          fi
+          echo "Black Duck endpoint is reachable."
+
+      - name: Black Duck Scan
+        id: blackduck_scan
+        if: steps.check_changes.outputs.changes == 'true'
+        timeout-minutes: 30
+        uses: blackduck-inc/black-duck-security-scan@v2.3.0
+        env:
+          DETECT_PROJECT_NAME: ${{ vars.PROJECT_NAME }}
+          DETECT_PROJECT_VERSION_NAME: react-${{ matrix.app }}
+        with:
+          blackducksca_url: ${{ vars.BLACKDUCKSCA_URL }}
+          blackducksca_token: ${{ secrets.BLACKDUCKSCA_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # Keep scan step non-gating so custom enforcement/comment steps always run.
+          # Final pass/fail is controlled by the Enforce High/Critical vulnerabilities step.
+          # Full scan mode
+          blackducksca_scan_full: true
+          # Keep analysis synchronous so policy gates and PR comments are available in this run
+          blackducksca_waitForScan: true
+          # Generate SARIF report for GitHub Security tab
+          blackducksca_reports_sarif_create: true
+          blackducksca_reports_sarif_file_path: '${{ github.workspace }}/${{ matrix.app }}/blackduck-sarif.json'
+          blackducksca_reports_sarif_severities: 'CRITICAL,HIGH,MEDIUM'
+          # Enable PR comments with vulnerability details
+          blackducksca_prComment_enabled: true
+          # Create fix PRs for vulnerabilities (optional)
+          blackducksca_fixpr_enabled: false
+
+      - name: Enforce High/Critical vulnerabilities
+        id: enforce_vulns
+        if: steps.check_changes.outputs.changes == 'true'
+        run: |
+          SARIF_FILE="${{ github.workspace }}/${{ matrix.app }}/blackduck-sarif.json"
+
+          if [ -f "$SARIF_FILE" ]; then
+            echo "SARIF file found at: $SARIF_FILE"
+          else
+            echo "SARIF file not found at: $SARIF_FILE (this can be expected on PR scans)"
+          fi
+
+          echo "Using Black Duck API as source of truth for strict High/Critical enforcement."
+
+          PROJECT_NAME=$(echo "${{ vars.PROJECT_NAME }}" | xargs)
+          PROJECT_VERSION="react-${{ matrix.app }}"
+          BASE_URL=$(echo "${{ vars.BLACKDUCKSCA_URL }}" | xargs)
+          TOKEN="${{ secrets.BLACKDUCKSCA_TOKEN }}"
+
+          if [ -z "$PROJECT_NAME" ] || [ -z "$PROJECT_VERSION" ] || [ -z "$BASE_URL" ] || [ -z "$TOKEN" ]; then
+            echo "Missing required configuration for API fallback enforcement."
+            exit 1
+          fi
+
+          # Black Duck requires exchanging the API token for a bearer token
+          BEARER_RESPONSE=$(curl --silent --show-error --fail -X POST \
+            -H "Authorization: token $TOKEN" \
+            "$BASE_URL/api/tokens/authenticate")
+          BEARER_TOKEN=$(echo "$BEARER_RESPONSE" | jq -r '.bearerToken')
+
+          if [ -z "$BEARER_TOKEN" ] || [ "$BEARER_TOKEN" = "null" ]; then
+            echo "Failed to obtain bearer token from Black Duck API."
+            echo "Authentication response did not contain a usable bearer token."
+            exit 1
+          fi
+
+          AUTH_HEADER="Authorization: Bearer $BEARER_TOKEN"
+
+          PROJECTS_JSON=$(curl --silent --show-error --fail -H "$AUTH_HEADER" "$BASE_URL/api/projects?limit=1000")
+          PROJECT_HREF=$(echo "$PROJECTS_JSON" | jq -r --arg pn "$PROJECT_NAME" '.items[]? | select(.name == $pn) | ._meta.href' | head -n1)
+
+          if [ -z "$PROJECT_HREF" ] || [ "$PROJECT_HREF" = "null" ]; then
+            echo "Could not find project '$PROJECT_NAME' in Black Duck."
+            exit 1
+          fi
+
+          VERSIONS_URL="$PROJECT_HREF/versions?limit=1000"
+          VERSIONS_JSON=$(curl --silent --show-error --fail -H "$AUTH_HEADER" "$VERSIONS_URL")
+          VERSION_HREF=$(echo "$VERSIONS_JSON" | jq -r --arg vn "$PROJECT_VERSION" '.items[]? | select((.versionName // .name) == $vn) | ._meta.href' | head -n1)
+
+          if [ -z "$VERSION_HREF" ] || [ "$VERSION_HREF" = "null" ]; then
+            echo "Could not find version '$PROJECT_VERSION' under project '$PROJECT_NAME'."
+            exit 1
+          fi
+
+          CRITICAL_TOTAL=$(curl --silent --show-error --fail -H "$AUTH_HEADER" "$VERSION_HREF/components?limit=1&filter=securityRisk:critical" | jq -r '.totalCount // (.items | length) // 0')
+          HIGH_TOTAL=$(curl --silent --show-error --fail -H "$AUTH_HEADER" "$VERSION_HREF/components?limit=1&filter=securityRisk:high" | jq -r '.totalCount // (.items | length) // 0')
+
+          echo "Critical components from Black Duck API: $CRITICAL_TOTAL"
+          echo "High components from Black Duck API: $HIGH_TOTAL"
+
+          echo "critical_count=$CRITICAL_TOTAL" >> $GITHUB_OUTPUT
+          echo "high_count=$HIGH_TOTAL" >> $GITHUB_OUTPUT
+
+          if [ "$CRITICAL_TOTAL" -gt 0 ] || [ "$HIGH_TOTAL" -gt 0 ]; then
+            echo "Failing job because Black Duck reports High/Critical vulnerabilities."
+            exit 1
+          fi
+
+          echo "No High/Critical vulnerabilities found by Black Duck API."
+
+      - name: Comment on PR with vulnerability results
+        if: always() && github.event_name == 'pull_request' && steps.check_changes.outputs.changes == 'true' && steps.enforce_vulns.outcome == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const critical = parseInt('${{ steps.enforce_vulns.outputs.critical_count }}') || 0;
+            const high = parseInt('${{ steps.enforce_vulns.outputs.high_count }}') || 0;
+            const app = '${{ matrix.app }}';
+
+            const body = [
+              `## ❌ Black Duck SCA — \`${app}\` — FAILED`,
+              '',
+              '| Severity | Components |',
+              '|----------|-----------|',
+              `| 🔴 Critical | ${critical} |`,
+              `| 🟠 High | ${high} |`,
+              '',
+              '> **Action required:** resolve the High/Critical vulnerabilities above to pass this check.',
+            ].join('\n');
+
+            // Find and update existing comment or create new one
+            const marker = `<!-- bd-sca-${app} -->`;
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              per_page: 100,
+            });
+            const existing = comments.find(c => c.body && c.body.includes(marker));
+
+            const fullBody = `${marker}\n${body}`;
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body: fullBody,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: fullBody,
+              });
+            }

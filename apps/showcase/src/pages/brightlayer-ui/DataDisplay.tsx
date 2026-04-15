@@ -2,15 +2,21 @@ import React from 'react';
 import {
     ChannelValueExample,
     ComponentExample,
+    EditableTableExample,
     EmptyStateExample,
     ExampleCardList,
     HeroExample,
     InfoListItemExample,
     ListItemTagExample,
+    DrawerLiteExample,
     ThreeLinerExample,
     UserMenuExample,
 } from '../../components';
 import { usePageTitle } from '../../hooks/usePageTitle';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardHeader from '@mui/material/CardHeader';
 
 export const BLUIDataDisplay: React.FC = () => {
     const examples: ComponentExample[] = [
@@ -24,5 +30,25 @@ export const BLUIDataDisplay: React.FC = () => {
     ];
     usePageTitle('Brightlayer UI Data Display');
 
-    return <ExampleCardList examples={examples} />;
+    return (
+        <>
+            <ExampleCardList examples={examples} />
+            <Box sx={{ m: 2 }}>
+                <Card sx={{ width: '100%' }}>
+                    <CardHeader title="Editable Table" />
+                    <CardContent>
+                        <EditableTableExample />
+                    </CardContent>
+                </Card>
+            </Box>
+            <Box sx={{ m: 2 }}>
+                <Card sx={{ width: '100%' }}>
+                    <CardHeader title="Drawer Lite" />
+                    <CardContent>
+                        <DrawerLiteExample />
+                    </CardContent>
+                </Card>
+            </Box>
+        </>
+    );
 };
