@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useCallback } from 'react';
-import { Box, Button, IconButton, Tooltip, Typography, useTheme, alpha } from '@mui/material';
+import { Box, Button, IconButton, Tooltip, Typography } from '@mui/material';
 import UndoIcon from '@mui/icons-material/Undo';
 import RedoIcon from '@mui/icons-material/Redo';
 import { EditableTable, type EditableTableColumnDef, type EditableTableState } from '@brightlayer-ui/react-components';
@@ -47,48 +47,6 @@ const initialData: User[] = [
     },
 ];
 
-/**
- * Email cell: just renders the text with padding — the gradient background
- * is applied directly on the <td> via muiTableBodyCellProps so it covers
- * the full cell including its padding area.
- */
-const EmailCellRenderer: React.FC<{ email: string }> = ({ email }) => {
-    const theme = useTheme();
-    return (
-        <Box sx={{ width: '100%', display: 'flex', alignItems: 'center', px: 2, color: theme.palette.text.primary }}>
-            {email}
-        </Box>
-    );
-};
-
-const FirstNameCellRenderer: React.FC<{ name: string }> = ({ name }) => {
-    const theme = useTheme();
-    return (
-        <Box
-            sx={{
-                width: '100%',
-                height: '100%',
-                minHeight: 52,
-                position: 'relative',
-                display: 'flex',
-                alignItems: 'center',
-            }}
-        >
-            <Box
-                sx={{
-                    position: 'relative',
-                    zIndex: 1,
-                    px: 2,
-                    color: theme.palette.text.primary,
-                    // fontWeight: 'bold',
-                }}
-            >
-                {name}
-            </Box>
-        </Box>
-    );
-};
-
 const states = [
     'California',
     'New York',
@@ -107,8 +65,6 @@ export const EditableTableExample: React.FC = () => {
     const [isLoading] = useState(false);
     const [isSaving, setIsSaving] = useState(false);
     const [tableState, setTableState] = useState<EditableTableState | null>(null);
-    const theme = useTheme();
-    const primaryBg = alpha(theme.palette.primary.light, 0.85);
 
     const columns = useMemo<Array<EditableTableColumnDef<User>>>(
         () => [
@@ -124,18 +80,6 @@ export const EditableTableExample: React.FC = () => {
                 muiEditTextFieldProps: {
                     required: true,
                 },
-                // Style the <td> directly so the background covers the entire cell
-                // including its padding. padding:0 is removed here and re-added inside
-                // FirstNameCellRenderer so the content is still properly inset.
-                muiTableBodyCellProps: {
-                    sx: {
-                        padding: 0,
-                        position: 'relative',
-                        overflow: 'hidden',
-                        backgroundColor: primaryBg,
-                    },
-                },
-                Cell: ({ cell }): React.ReactElement => <FirstNameCellRenderer name={cell.getValue<string>()} />,
             },
             {
                 accessorKey: 'lastName',
@@ -160,18 +104,6 @@ export const EditableTableExample: React.FC = () => {
                     type: 'email',
                     required: true,
                 },
-                // Apply gradient on the <td> itself so it covers the full cell.
-                // sx is a function to access theme; age drives how much is filled.
-                muiTableBodyCellProps: ({ row }): { sx: (t: any) => any } => {
-                    const pct = Math.min(100, Math.max(0, row.original.age));
-                    return {
-                        sx: (t: any): Record<string, unknown> => ({
-                            padding: 0,
-                            background: `linear-gradient(to right, ${alpha(t.palette.primary.main, 0.25)} ${pct}%, transparent ${pct}%)`,
-                        }),
-                    };
-                },
-                Cell: ({ cell }): React.ReactElement => <EmailCellRenderer email={cell.getValue<string>()} />,
             },
             {
                 accessorKey: 'state',
@@ -181,14 +113,9 @@ export const EditableTableExample: React.FC = () => {
                 muiEditTextFieldProps: {
                     select: true,
                 },
-                // Example: cellStyle — highlight the user's home state
-                cellStyle: ({ cell }): Record<string, unknown> => ({
-                    fontWeight: cell.getValue<string>() === 'California' ? 'bold' : 'normal',
-                    color: cell.getValue<string>() === 'California' ? 'primary.main' : 'text.primary',
-                }),
             },
         ],
-        [primaryBg]
+        []
     );
 
     const validateUser = (user: User): Partial<Record<keyof User, string | undefined>> => {

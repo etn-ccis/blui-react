@@ -32,16 +32,26 @@ export const resolveBodyCellProps =
               })
             : undefined;
 
-        const mergedSx = ((): ((t: any) => any) | Record<string, unknown> => {
-            const defaultSx = { px: 2, height: 52, backgroundColor: 'background.paper' };
+        const mergedSx = ((): ((t: any) => any) => {
+            const defaultSx = (t: any): Record<string, unknown> => ({
+                px: 2,
+                height: 52,
+                backgroundColor: 'background.paper',
+                borderRight: `1px solid ${t.palette.divider}`,
+                borderBottom: `1px solid ${t.palette.divider}`,
+            });
             if (typeof originalProps.sx === 'function') {
                 return (t: any): Record<string, unknown> => ({
-                    ...defaultSx,
+                    ...defaultSx(t),
                     ...(originalProps.sx as (t: any) => any)(t),
                     ...(customSx ?? {}),
                 });
             }
-            return { ...defaultSx, ...(originalProps.sx ?? {}), ...(customSx ?? {}) };
+            return (t: any): Record<string, unknown> => ({
+                ...defaultSx(t),
+                ...(originalProps.sx ?? {}),
+                ...(customSx ?? {}),
+            });
         })();
 
         return {
@@ -64,8 +74,13 @@ export const resolveHeadCellProps =
                 : (column.muiTableHeadCellProps ?? {});
 
         return {
-            align: 'center',
             ...originalProps,
-            sx: { px: 2, backgroundColor: 'background.paper', ...(originalProps.sx ?? {}) },
+            sx: (t: any): Record<string, unknown> => ({
+                px: 2,
+                backgroundColor: 'background.paper',
+                borderRight: `1px solid ${t.palette.divider}`,
+                borderBottom: `1px solid ${t.palette.divider}`,
+                ...(typeof originalProps.sx === 'function' ? originalProps.sx(t) : (originalProps.sx ?? {})),
+            }),
         };
     };
