@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useCallback, useMemo } from 'react';
 import { MaterialReactTable, useMaterialReactTable } from 'material-react-table';
 import { Box, Button, IconButton, Tooltip } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import AddIcon from '@mui/icons-material/Add';
 import { EditableTableProps, EditableTableData } from './types';
@@ -275,8 +275,8 @@ export const EditableTable = (<TData extends EditableTableData>(
                       )}
                       {enableDelete && (
                           <Tooltip title="Delete">
-                              <IconButton size="small" color="error" onClick={(): void => handleDeleteRow(row)}>
-                                  <DeleteIcon fontSize="small" />
+                              <IconButton size="small" onClick={(): void => handleDeleteRow(row)}>
+                                  <DeleteOutlineIcon fontSize="small" />
                               </IconButton>
                           </Tooltip>
                       )}
