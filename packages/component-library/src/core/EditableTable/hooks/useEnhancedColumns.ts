@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { type MRT_ColumnDef } from 'material-react-table';
-import { Box, Tooltip } from '@mui/material';
+import { alpha, Box, Tooltip, useTheme } from '@mui/material';
 import * as BLUIColors from '@brightlayer-ui/colors';
 import Color from 'color';
 import { EditableTableColumnDef, EditableTableData, ValidationErrors } from '../types';
@@ -33,14 +33,16 @@ export const useEnhancedColumns = <TData extends EditableTableData>({
     tableData,
     editedRows,
     originalDataMap,
-}: UseEnhancedColumnsProps<TData>): Array<MRT_ColumnDef<TData>> =>
-    useMemo<Array<MRT_ColumnDef<TData>>>(() => {
+}: UseEnhancedColumnsProps<TData>): Array<MRT_ColumnDef<TData>> => {
+    const theme = useTheme();
+
+    return useMemo<Array<MRT_ColumnDef<TData>>>(() => {
         if (editDisplayMode !== 'cell' && editDisplayMode !== 'table') {
             return columns.map((column) => ({
                 ...column,
                 muiTableBodyCellProps: resolveBodyCellProps(column, tableData),
                 muiTableHeadCellProps: resolveHeadCellProps(column),
-            }));
+            })) as Array<MRT_ColumnDef<TData>>;
         }
 
         return columns.map((column) => ({
@@ -55,12 +57,21 @@ export const useEnhancedColumns = <TData extends EditableTableData>({
                 const isEditing =
                     editingCell?.row.id === cellParams.row.id && editingCell?.column.id === cellParams.cell.column.id;
 
+                const outlineColor = hasError
+                    ? ((theme.vars as any)?.palette?.error?.main ?? theme.palette.error.main)
+                    : isEditing
+                      ? ((theme.vars as any)?.palette?.primary?.main ?? theme.palette.primary.main)
+                      : 'transparent';
+                const outlineWidth = isEditing ? '2px' : '1px';
+                const hasOutline = isEditing || hasError;
+
                 const additionalSx = {
                     py: 0,
                     px: 0,
                     '&:hover': { backgroundColor: 'transparent' },
-                    ...(isEditing ? { outline: '2px solid', outlineColor: 'primary.main', outlineOffset: '-2px' } : {}),
-                    ...(hasError ? { outline: '2px solid', outlineColor: 'error.main', outlineOffset: '-2px' } : {}),
+                    outline: hasOutline ? `${outlineWidth} solid ${outlineColor} !important` : 'none',
+                    outlineOffset: '-2px',
+                    ...(hasError && { color: (theme.vars as any)?.palette?.error?.main ?? theme.palette.error.main }),
                 };
 
                 return {
@@ -141,16 +152,42 @@ export const useEnhancedColumns = <TData extends EditableTableData>({
                         ? column.muiEditTextFieldProps({ cell, row, column: col, table: innerTable })
                         : column.muiEditTextFieldProps || {};
 
+                const hasEditError = !!validationErrors?.[cellKey];
+
                 return {
                     ...originalProps,
                     variant: 'standard' as const,
-                    error: !!validationErrors?.[cellKey],
+                    error: hasEditError,
                     sx: {
                         '& .MuiInput-root': { border: 'none' },
                         '& .MuiInput-underline:before': { borderBottom: 'none' },
                         '& .MuiInput-underline:after': { borderBottom: 'none' },
                         '& .MuiInput-underline:hover:not(.Mui-disabled):before': { borderBottom: 'none' },
-                        '& .MuiInputBase-input': { px: 2 },
+                        '& .MuiInputBase-input': {
+                            px: 2,
+                            fontSize: '14px',
+                            fontFamily: (theme.typography as any).fontFamilyMonospace ?? 'monospace',
+                            caretColor: (theme.vars as any)?.palette?.primary?.main ?? theme.palette.primary.main,
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            whiteSpace: 'nowrap',
+                            ...(hasEditError && {
+                                color: (theme.vars as any)?.palette?.error?.main ?? theme.palette.error.main,
+                            }),
+                            '&:focus': {
+                                color: (theme.vars as any)?.palette?.text?.primary ?? theme.palette.text.primary,
+                            },
+                            '&::selection': {
+                                backgroundColor: (theme.vars as any)?.palette?.primary?.mainChannel
+                                    ? `rgba(${(theme.vars as any).palette.primary.mainChannel} / 0.36)`
+                                    : alpha(theme.palette.primary.main, 0.36),
+                            },
+                            '&::-moz-selection': {
+                                backgroundColor: (theme.vars as any)?.palette?.primary?.mainChannel
+                                    ? `rgba(${(theme.vars as any).palette.primary.mainChannel} / 0.36)`
+                                    : alpha(theme.palette.primary.main, 0.36),
+                            },
+                        },
                         ...originalProps.sx,
                     },
                     inputProps: {
@@ -176,4 +213,5 @@ export const useEnhancedColumns = <TData extends EditableTableData>({
                 };
             },
         }));
-    }, [columns, editDisplayMode, validationErrors, handleSaveCell, tableData, editedRows, originalDataMap]);
+    }, [columns, editDisplayMode, validationErrors, handleSaveCell, tableData, editedRows, originalDataMap, theme]);
+};

@@ -78,6 +78,13 @@ export type EditableTableColumnDef<TData extends EditableTableData> = MRT_Column
      * ```
      */
     cellStyle?: (params: CellStyleParams<TData>) => SxProps<Theme>;
+
+    /**
+     * Horizontal alignment of the column header text.
+     *
+     * Defaults to `'center'`. Set to `'left'` or `'right'` to override per column.
+     */
+    headerAlign?: 'left' | 'center' | 'right';
 };
 
 export type EditableTableProps<TData extends EditableTableData> = {
@@ -195,6 +202,24 @@ export type EditableTableProps<TData extends EditableTableData> = {
      */
     enableClickToCopy?: boolean | 'context-menu';
 
+    /** Whether to enable column sorting
+     *
+     * Default: false
+     */
+    enableSorting?: boolean;
+
+    /** Whether to enable column filters
+     *
+     * Default: false
+     */
+    enableColumnFilters?: boolean;
+
+    /** Whether to enable column actions menu (hide/show columns, etc.)
+     *
+     * Default: false
+     */
+    enableColumnActions?: boolean;
+
     /** Additional options to pass to material-react-table */
     tableOptions?: Partial<MRT_TableOptions<TData>>;
 
@@ -207,9 +232,9 @@ export type EditableTableProps<TData extends EditableTableData> = {
     /** Custom confirmation message for delete action */
     deleteConfirmMessage?: string | ((row: TData) => string);
 
-    /** Minimum height for the table container
+    /** Minimum height for the table container.
      *
-     * Default: '500px'
+     * Default: '100px'
      */
     minHeight?: string | number;
 

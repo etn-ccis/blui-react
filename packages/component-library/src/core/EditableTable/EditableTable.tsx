@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useCallback, useMemo } from 'react';
 import { MaterialReactTable, useMaterialReactTable } from 'material-react-table';
-import { Box, Button, IconButton, Tooltip } from '@mui/material';
+import { alpha, Box, Button, IconButton, Tooltip } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
@@ -8,6 +8,10 @@ import AddIcon from '@mui/icons-material/Add';
 import { EditableTableProps, EditableTableData } from './types';
 import { useEditableTableHandlers } from './hooks/useEditableTableHandlers';
 import { useEnhancedColumns } from './hooks/useEnhancedColumns';
+
+const MAX_VISIBLE_ROWS = 10;
+const ROW_HEIGHT_PX = 52;
+const HEADER_HEIGHT_PX = 57;
 
 /**
  * EditableTable is a reusable table component built on material-react-table
@@ -61,8 +65,11 @@ export const EditableTable = (<TData extends EditableTableData>(
         tableOptions = {},
         createButtonText = 'New data point',
         deleteConfirmMessage = 'Are you sure you want to delete this item?',
-        minHeight = '500px',
+        minHeight = '100px',
         enableUndoRedo = false,
+        enableSorting = false,
+        enableColumnFilters = false,
+        enableColumnActions = false,
         onStateChange,
     } = props;
 
@@ -198,18 +205,25 @@ export const EditableTable = (<TData extends EditableTableData>(
         enableColumnPinning,
         enableEditing: enableEdit,
         enableRowActions,
-        enableTopToolbar: false,
+        enableTopToolbar: enableColumnFilters,
+        enableSorting,
+        enableColumnFilters,
+        enableColumnActions,
         getRowId,
         muiTablePaperProps: {
-            sx: {
-                backgroundColor: 'background.paper',
-            },
+            sx: (t: any): any => ({
+                backgroundColor: t.vars?.palette?.background?.paper ?? t.palette.background.paper,
+            }),
         },
         muiTopToolbarProps: {
-            sx: { backgroundColor: 'background.paper' },
+            sx: (t: any): any => ({
+                backgroundColor: t.vars?.palette?.background?.paper ?? t.palette.background.paper,
+            }),
         },
         muiBottomToolbarProps: {
-            sx: { backgroundColor: 'background.paper' },
+            sx: (t: any): any => ({
+                backgroundColor: t.vars?.palette?.background?.paper ?? t.palette.background.paper,
+            }),
         },
         muiTableBodyRowProps: {
             hover: true,
@@ -221,20 +235,20 @@ export const EditableTable = (<TData extends EditableTableData>(
             'mrt-row-actions': {
                 muiTableHeadCellProps: {
                     align: 'center',
-                    sx: {
+                    sx: (t: any): any => ({
                         px: 1,
-                        backgroundColor: 'background.paper',
+                        backgroundColor: `${t.vars?.palette?.background?.paper ?? t.palette.background.paper} !important`,
                         '&[data-pinned="true"]:before': { backgroundColor: 'transparent !important' },
-                    },
+                    }),
                 },
                 muiTableBodyCellProps: {
                     align: 'center',
-                    sx: {
+                    sx: (t: any): any => ({
                         px: 1,
                         height: 52,
-                        backgroundColor: 'background.paper',
+                        backgroundColor: `${t.vars?.palette?.background?.paper ?? t.palette.background.paper} !important`,
                         '&[data-pinned="true"]:before': { backgroundColor: 'transparent !important' },
-                    },
+                    }),
                 },
             },
         },
@@ -246,36 +260,68 @@ export const EditableTable = (<TData extends EditableTableData>(
             : undefined,
         muiTableContainerProps: {
             sx: {
-                minHeight,
+                maxHeight: `${MAX_VISIBLE_ROWS * ROW_HEIGHT_PX + HEADER_HEIGHT_PX}px`,
+                overflowY: 'auto',
+                ...(minHeight !== undefined ? { minHeight } : {}),
             },
         },
         onCreatingRowCancel: (): void => clearValidationErrors(),
         onCreatingRowSave: handleCreateRow,
         renderRowActions: enableRowActions
             ? ({ row, table: actionTable }): React.ReactElement => (
-                  <Box sx={{ display: 'flex', gap: '0.25rem' }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 0 }}>
                       {enableEdit && editDisplayMode === 'row' && (
-                          <Tooltip title="Edit">
-                              <IconButton size="small" onClick={(): void => actionTable.setEditingRow(row)}>
+                          <Tooltip title="Edit" placement="top" followCursor>
+                              <IconButton
+                                  size="small"
+                                  onClick={(): void => actionTable.setEditingRow(row)}
+                                  sx={(t: any): any => ({
+                                      '&:hover': {
+                                          backgroundColor: (t.vars as any)?.palette?.primary?.darkChannel
+                                              ? `rgba(${(t.vars as any).palette.primary.darkChannel} / 0.2)`
+                                              : alpha(t.palette.primary.dark, 0.2),
+                                          color: t.vars?.palette?.primary?.main ?? t.palette.primary.main,
+                                      },
+                                  })}
+                              >
                                   <EditIcon fontSize="small" />
                               </IconButton>
                           </Tooltip>
                       )}
                       {enableDuplicate && (
-                          <Tooltip title="Duplicate">
+                          <Tooltip title="Duplicate" placement="top" followCursor>
                               <IconButton
                                   size="small"
                                   onClick={(): void => {
                                       void handleDuplicateRow(row);
                                   }}
+                                  sx={(t: any): any => ({
+                                      '&:hover': {
+                                          backgroundColor: (t.vars as any)?.palette?.primary?.darkChannel
+                                              ? `rgba(${(t.vars as any).palette.primary.darkChannel} / 0.2)`
+                                              : alpha(t.palette.primary.dark, 0.2),
+                                          color: t.vars?.palette?.primary?.main ?? t.palette.primary.main,
+                                      },
+                                  })}
                               >
                                   <ContentCopyIcon fontSize="small" />
                               </IconButton>
                           </Tooltip>
                       )}
                       {enableDelete && (
-                          <Tooltip title="Delete">
-                              <IconButton size="small" onClick={(): void => handleDeleteRow(row)}>
+                          <Tooltip title="Delete" placement="top" followCursor>
+                              <IconButton
+                                  size="small"
+                                  onClick={(): void => handleDeleteRow(row)}
+                                  sx={(t: any): any => ({
+                                      '&:hover': {
+                                          backgroundColor: (t.vars as any)?.palette?.error?.darkChannel
+                                              ? `rgba(${(t.vars as any).palette.error.darkChannel} / 0.2)`
+                                              : alpha(t.palette.error.dark, 0.2),
+                                          color: t.vars?.palette?.error?.main ?? t.palette.error.main,
+                                      },
+                                  })}
+                              >
                                   <DeleteOutlineIcon fontSize="small" />
                               </IconButton>
                           </Tooltip>

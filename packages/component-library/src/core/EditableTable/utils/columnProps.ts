@@ -1,3 +1,4 @@
+import * as BLUIColors from '@brightlayer-ui/colors';
 import { EditableTableColumnDef, EditableTableData } from '../types';
 
 /**
@@ -36,9 +37,16 @@ export const resolveBodyCellProps =
             const defaultSx = (t: any): Record<string, unknown> => ({
                 px: 2,
                 height: 52,
-                backgroundColor: 'background.paper',
-                borderRight: `1px solid ${t.palette.divider}`,
-                borderBottom: `1px solid ${t.palette.divider}`,
+                backgroundColor: `${t.vars?.palette?.background?.default ?? t.palette.background.default} !important`,
+                ...(t.applyStyles?.('dark', {
+                    backgroundColor: `${BLUIColors.black[800]} !important`,
+                }) ?? {}),
+                borderRight: `1px solid ${t.vars?.palette?.divider ?? t.palette.divider}`,
+                borderBottom: `1px solid ${t.vars?.palette?.divider ?? t.palette.divider}`,
+                fontSize: '14px',
+                fontStyle: 'normal',
+                fontWeight: 400,
+                lineHeight: 'normal',
             });
             if (typeof originalProps.sx === 'function') {
                 return (t: any): Record<string, unknown> => ({
@@ -73,13 +81,24 @@ export const resolveHeadCellProps =
                 ? (column.muiTableHeadCellProps as (params: any) => any)(headParams)
                 : (column.muiTableHeadCellProps ?? {});
 
+        const headerAlign = column.headerAlign ?? 'center';
+
         return {
             ...originalProps,
             sx: (t: any): Record<string, unknown> => ({
                 px: 2,
-                backgroundColor: 'background.paper',
-                borderRight: `1px solid ${t.palette.divider}`,
-                borderBottom: `1px solid ${t.palette.divider}`,
+                backgroundColor: `${t.vars?.palette?.background?.paper ?? t.palette.background.paper} !important`,
+                borderRight: `1px solid ${t.vars?.palette?.divider ?? t.palette.divider}`,
+                borderBottom: `1px solid ${t.vars?.palette?.divider ?? t.palette.divider}`,
+                '& .Mui-TableHeadCell-Content': {
+                    justifyContent:
+                        headerAlign === 'right' ? 'flex-end' : headerAlign === 'left' ? 'flex-start' : 'center',
+                },
+                '& .Mui-TableHeadCell-Content-Labels': {
+                    justifyContent:
+                        headerAlign === 'right' ? 'flex-end' : headerAlign === 'left' ? 'flex-start' : 'center',
+                    flex: 1,
+                },
                 ...(typeof originalProps.sx === 'function' ? originalProps.sx(t) : (originalProps.sx ?? {})),
             }),
         };

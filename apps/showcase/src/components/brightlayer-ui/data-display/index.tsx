@@ -1,5 +1,5 @@
 export * from './ChannelValue';
-// export * from './EditableTable';
+export * from './EditableTable';
 export * from './EmptyState';
 export * from './Hero';
 export * from './InfoListItem';
