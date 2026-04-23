@@ -70,13 +70,23 @@ export const ComponentPreviewTabs = (): React.JSX.Element => {
 
     const theme = useTheme();
     const handleChange = (event: React.SyntheticEvent, newValue: number): void => {
-        void navigate(`/${newValue === 1 ? 'api-docs' : newValue === 2 ? 'playground' : 'examples'}`);
+        void navigate(`/${newValue === 1 ? 'api-docs' : newValue === 2 ? 'playground' : 'examples'}`, {
+            replace: true,
+        });
     };
 
     React.useEffect(() => {
         setValue(getTabNumber(location?.pathname));
         setHidePlaygroundTab(togglePlaygroundTab(location.pathname));
     }, [location]);
+
+    // Redirect to valid tab if playground is hidden but URL contains playground
+    React.useEffect(() => {
+        if (hidePlaygroundTab && location.pathname.includes('/playground')) {
+            const parentPath = location.pathname.substring(0, location.pathname.lastIndexOf('/playground'));
+            void navigate(`${parentPath}/examples`, { replace: true });
+        }
+    }, [hidePlaygroundTab, location.pathname, navigate]);
 
     return (
         <>

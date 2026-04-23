@@ -115,9 +115,11 @@ export const useEditableTableHandlers = <TData extends EditableTableData>({
             const prevValue = cell.row.original[columnId as keyof TData];
             const prevRowEdits = editedRowsRef.current[rowId];
             const prevError = validationErrorsRef.current[`${rowId}_${columnId}`] as string | undefined;
+            const coercedValue =
+                typeof prevValue === 'number' && typeof value === 'string' && value !== '' ? Number(value) : value;
             const updatedRow = {
                 ...(prevRowEdits || cell.row.original),
-                [columnId]: value,
+                [columnId]: coercedValue,
             };
 
             // Write the edit into tableData immediately so the cell display updates

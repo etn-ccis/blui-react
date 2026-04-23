@@ -51,10 +51,15 @@ export const useEnhancedColumns = <TData extends EditableTableData>({
                 const baseProps = resolveBodyCellProps(column, tableData)(cellParams);
                 const baseSx = baseProps.sx;
 
+                const editingCell = cellParams.table.getState().editingCell;
+                const isEditing =
+                    editingCell?.row.id === cellParams.row.id && editingCell?.column.id === cellParams.cell.column.id;
+
                 const additionalSx = {
                     py: 0,
                     px: 0,
                     '&:hover': { backgroundColor: 'transparent' },
+                    ...(isEditing ? { outline: '2px solid', outlineColor: 'primary.main', outlineOffset: '-2px' } : {}),
                     ...(hasError ? { outline: '2px solid', outlineColor: 'error.main', outlineOffset: '-2px' } : {}),
                 };
 
@@ -138,7 +143,16 @@ export const useEnhancedColumns = <TData extends EditableTableData>({
 
                 return {
                     ...originalProps,
+                    variant: 'standard' as const,
                     error: !!validationErrors?.[cellKey],
+                    sx: {
+                        '& .MuiInput-root': { border: 'none' },
+                        '& .MuiInput-underline:before': { borderBottom: 'none' },
+                        '& .MuiInput-underline:after': { borderBottom: 'none' },
+                        '& .MuiInput-underline:hover:not(.Mui-disabled):before': { borderBottom: 'none' },
+                        '& .MuiInputBase-input': { px: 2 },
+                        ...originalProps.sx,
+                    },
                     inputProps: {
                         ...originalProps.inputProps,
                         ...(isNumber ? { style: { textAlign: 'right', ...originalProps.inputProps?.style } } : {}),

@@ -87,7 +87,7 @@ describe('EditableTable', () => {
                 />
             </ThemeProvider>
         );
-        const deleteButtons = screen.getAllByTestId('DeleteIcon');
+        const deleteButtons = screen.getAllByTestId('DeleteOutlineIcon');
         expect(deleteButtons.length).toBeGreaterThan(0);
     });
 
@@ -103,7 +103,7 @@ describe('EditableTable', () => {
                 />
             </ThemeProvider>
         );
-        expect(screen.queryByTestId('DeleteIcon')).not.toBeInTheDocument();
+        expect(screen.queryByTestId('DeleteOutlineIcon')).not.toBeInTheDocument();
     });
 
     it('renders edit icon in row actions when editDisplayMode is row', () => {
@@ -276,7 +276,7 @@ describe('EditableTable', () => {
             </ThemeProvider>
         );
 
-        const deleteButtons = screen.getAllByTestId('DeleteIcon');
+        const deleteButtons = screen.getAllByTestId('DeleteOutlineIcon');
         fireEvent.click(deleteButtons[0]);
 
         await waitFor(() => {
@@ -494,7 +494,7 @@ describe('EditableTable', () => {
             </ThemeProvider>
         );
         expect(screen.getAllByTestId('EditIcon').length).toBeGreaterThan(0);
-        expect(screen.getAllByTestId('DeleteIcon').length).toBeGreaterThan(0);
+        expect(screen.getAllByTestId('DeleteOutlineIcon').length).toBeGreaterThan(0);
         expect(screen.getAllByTestId('ContentCopyIcon').length).toBeGreaterThan(0);
     });
 

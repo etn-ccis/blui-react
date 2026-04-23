@@ -1,5 +1,11 @@
 # Changelog
 
+# v8.0.4 (April 21, 2026)
+
+### Removed
+
+- Editable Table
+
 # v8.0.3 (April 13, 2026)
 
 ### Added
