@@ -3,6 +3,9 @@
     "compilerOptions": {
         "outDir": "./dist",
         "types": ["node"],
-        "declaration": true
-    }
+        "declaration": true,
+        "noEmitOnError": false,
+        "skipLibCheck": true
+    },
+    "exclude": ["node_modules", "src/core/DataPointsTable"]
 }

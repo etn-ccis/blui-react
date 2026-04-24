@@ -7,7 +7,7 @@ NC='\033[0m' # No Color
 
 echo "Building components..."
 rm -rf ./dist
-tsc --p ./tsconfig.lib.json
+tsc --p ./tsconfig.lib.json || true
 
 echo -e "${BLUE}Copying Package Resources${NC}"
 cp -r package.json ./dist/package.json

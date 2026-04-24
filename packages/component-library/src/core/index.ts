@@ -14,3 +14,5 @@ export * from './AppBar';
 export * from './ThreeLiner';
 export * from './ToolbarMenu';
 export * from './DrawerLite';
+export * from './DataPointsTable';
+
