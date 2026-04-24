@@ -71,14 +71,27 @@ export const useEnhancedColumns = <TData extends EditableTableData>({
                     '&:hover': { backgroundColor: 'transparent' },
                     outline: hasOutline ? `${outlineWidth} solid ${outlineColor} !important` : 'none',
                     outlineOffset: '-2px',
-                    ...(hasError && { color: (theme.vars as any)?.palette?.error?.main ?? theme.palette.error.main }),
+                    ...(hasError && {
+                        color: (theme.vars as any)?.palette?.error?.main ?? theme.palette.error.main,
+                        backgroundColor: `${(theme.vars as any)?.palette?.error?.light ?? theme.palette.error.light} !important`,
+                    }),
                 };
 
                 return {
                     ...baseProps,
                     sx:
                         typeof baseSx === 'function'
-                            ? (t: any): any => ({ ...baseSx(t), ...additionalSx })
+                            ? (t: any): any => ({
+                                  ...baseSx(t),
+                                  ...additionalSx,
+                                  ...(hasError && {
+                                      color: (t.vars as any)?.palette?.error?.main ?? t.palette.error.main,
+                                      backgroundColor: `${(t.vars as any)?.palette?.error?.light ?? t.palette.error.light} !important`,
+                                      ...(t.applyStyles?.('dark', {
+                                          backgroundColor: `${Color(BLUIColors.black[800]).mix(Color(t.palette.error.dark), 0.2).hex()} !important`,
+                                      }) ?? {}),
+                                  }),
+                              })
                             : { ...baseSx, ...additionalSx },
                 };
             },
