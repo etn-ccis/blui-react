@@ -22,7 +22,7 @@ export const resolveBodyCellProps =
         const originalProps =
             typeof column.muiTableBodyCellProps === 'function'
                 ? (column.muiTableBodyCellProps as (params: any) => any)(cellParams)
-                : column.muiTableBodyCellProps ?? {};
+                : (column.muiTableBodyCellProps ?? {});
 
         const customSx = column.cellStyle
             ? column.cellStyle({
@@ -79,7 +79,7 @@ export const resolveHeadCellProps =
         const originalProps =
             typeof column.muiTableHeadCellProps === 'function'
                 ? (column.muiTableHeadCellProps as (params: any) => any)(headParams)
-                : column.muiTableHeadCellProps ?? {};
+                : (column.muiTableHeadCellProps ?? {});
 
         const headerAlign = column.headerAlign ?? 'center';
 
@@ -104,7 +104,7 @@ export const resolveHeadCellProps =
                         headerAlign === 'right' ? 'flex-end' : headerAlign === 'left' ? 'flex-start' : 'center',
                     flex: 1,
                 },
-                ...(typeof originalProps.sx === 'function' ? originalProps.sx(t) : originalProps.sx ?? {}),
+                ...(typeof originalProps.sx === 'function' ? originalProps.sx(t) : (originalProps.sx ?? {})),
             }),
         };
     };
