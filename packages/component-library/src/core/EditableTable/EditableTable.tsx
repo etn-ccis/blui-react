@@ -237,7 +237,14 @@ export const EditableTable = (<TData extends EditableTableData>(
                     align: 'center',
                     sx: (t: any): any => ({
                         px: 1,
-                        backgroundColor: `${t.vars?.palette?.background?.paper ?? t.palette.background.paper} !important`,
+                        backgroundColor: `${
+                            t.vars?.palette?.background?.paper ?? t.palette.background.paper
+                        } !important`,
+                        fontFamily: '"Open Sans"',
+                        fontSize: '14px',
+                        fontStyle: 'normal',
+                        fontWeight: 600,
+                        lineHeight: 'normal',
                         '&[data-pinned="true"]:before': { backgroundColor: 'transparent !important' },
                     }),
                 },
@@ -246,7 +253,9 @@ export const EditableTable = (<TData extends EditableTableData>(
                     sx: (t: any): any => ({
                         px: 1,
                         height: 52,
-                        backgroundColor: `${t.vars?.palette?.background?.paper ?? t.palette.background.paper} !important`,
+                        backgroundColor: `${
+                            t.vars?.palette?.background?.paper ?? t.palette.background.paper
+                        } !important`,
                         '&[data-pinned="true"]:before': { backgroundColor: 'transparent !important' },
                     }),
                 },

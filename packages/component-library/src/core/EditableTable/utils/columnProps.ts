@@ -22,7 +22,7 @@ export const resolveBodyCellProps =
         const originalProps =
             typeof column.muiTableBodyCellProps === 'function'
                 ? (column.muiTableBodyCellProps as (params: any) => any)(cellParams)
-                : (column.muiTableBodyCellProps ?? {});
+                : column.muiTableBodyCellProps ?? {};
 
         const customSx = column.cellStyle
             ? column.cellStyle({
@@ -79,7 +79,7 @@ export const resolveHeadCellProps =
         const originalProps =
             typeof column.muiTableHeadCellProps === 'function'
                 ? (column.muiTableHeadCellProps as (params: any) => any)(headParams)
-                : (column.muiTableHeadCellProps ?? {});
+                : column.muiTableHeadCellProps ?? {};
 
         const headerAlign = column.headerAlign ?? 'center';
 
@@ -90,6 +90,11 @@ export const resolveHeadCellProps =
                 backgroundColor: `${t.vars?.palette?.background?.paper ?? t.palette.background.paper} !important`,
                 borderRight: `1px solid ${t.vars?.palette?.divider ?? t.palette.divider}`,
                 borderBottom: `1px solid ${t.vars?.palette?.divider ?? t.palette.divider}`,
+                fontFamily: '"Open Sans"',
+                fontSize: '14px',
+                fontStyle: 'normal',
+                fontWeight: 600,
+                lineHeight: 'normal',
                 '& .Mui-TableHeadCell-Content': {
                     justifyContent:
                         headerAlign === 'right' ? 'flex-end' : headerAlign === 'left' ? 'flex-start' : 'center',
@@ -99,7 +104,7 @@ export const resolveHeadCellProps =
                         headerAlign === 'right' ? 'flex-end' : headerAlign === 'left' ? 'flex-start' : 'center',
                     flex: 1,
                 },
-                ...(typeof originalProps.sx === 'function' ? originalProps.sx(t) : (originalProps.sx ?? {})),
+                ...(typeof originalProps.sx === 'function' ? originalProps.sx(t) : originalProps.sx ?? {}),
             }),
         };
     };
