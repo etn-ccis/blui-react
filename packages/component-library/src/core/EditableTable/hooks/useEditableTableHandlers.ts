@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
-import { type MRT_TableOptions, type MRT_Row } from 'material-react-table';
+import { type MRT_Row } from 'material-react-table';
 import { EditableTableData, ValidationErrors } from '../types';
 import { useTableHistory } from './useTableHistory';
 
@@ -19,7 +19,7 @@ type UseEditableTableHandlersReturn<TData extends EditableTableData> = {
     validationErrors: ValidationErrors<TData>;
     editedRows: Record<string, TData>;
     clearValidationErrors: () => void;
-    handleCreateRow: MRT_TableOptions<TData>['onCreatingRowSave'];
+    handleAddEmptyRow: (emptyRow: TData) => void;
     handleSaveCell: (cell: any, value: any) => void;
     handleSaveRows: () => Promise<void>;
     handleResetRows: () => void;
@@ -50,6 +50,10 @@ export const useEditableTableHandlers = <TData extends EditableTableData>({
     const tableDataRef = useRef<TData[]>(data);
     const editedRowsRef = useRef<Record<string, TData>>({});
     const validationErrorsRef = useRef<ValidationErrors<TData>>({});
+    const dupCounterRef = useRef(0);
+    const newCounterRef = useRef(0);
+    // Tracks IDs from the committed data prop — used to distinguish existing rows from new (duplicated) ones during save
+    const originalIdsRef = useRef<Set<string>>(new Set(data.map(getRowId)));
 
     useEffect(() => {
         tableDataRef.current = tableData;
@@ -60,6 +64,9 @@ export const useEditableTableHandlers = <TData extends EditableTableData>({
     useEffect(() => {
         validationErrorsRef.current = validationErrors;
     }, [validationErrors]);
+    useEffect(() => {
+        originalIdsRef.current = new Set(data.map(getRowId));
+    }, [data, getRowId]);
 
     const {
         canUndo,
@@ -78,32 +85,6 @@ export const useEditableTableHandlers = <TData extends EditableTableData>({
     useEffect(() => {
         setTableData(data);
     }, [data]);
-
-    const handleCreateRow: MRT_TableOptions<TData>['onCreatingRowSave'] = useCallback(
-        async ({ values, table }) => {
-            if (onValidate) {
-                const errors = onValidate(values as TData);
-                if (Object.values(errors).some((err) => !!err)) {
-                    setValidationErrors(errors);
-                    return;
-                }
-            }
-
-            setValidationErrors({});
-
-            if (onCreate) {
-                await onCreate(values as TData);
-            } else {
-                // Record before mutating so insertedIndex is stable
-                const insertedIndex = tableDataRef.current.length;
-                recordRowAdd(values as TData, insertedIndex);
-                setTableData((prev) => [...prev, values as TData]);
-            }
-
-            table.setCreatingRow(null);
-        },
-        [onCreate, onValidate, recordRowAdd]
-    );
 
     const handleSaveCell = useCallback(
         (cell: any, value: any) => {
@@ -155,38 +136,115 @@ export const useEditableTableHandlers = <TData extends EditableTableData>({
         }
 
         const currentEditedRows = editedRowsRef.current;
+        const currentOriginalIds = originalIdsRef.current;
 
-        if (onUpdate) {
-            await Promise.all(Object.values(currentEditedRows).map((row) => Promise.resolve(onUpdate(row))));
-        } else {
+        const savePromises: Promise<void>[] = [];
+        const internalUpdates: Record<string, TData> = {};
+
+        Object.values(currentEditedRows).forEach((row) => {
+            const rowId = getRowId(row);
+            const isNewRow = rowId.startsWith('__new__');
+            const isDupeRow = rowId.startsWith('__dup__');
+
+            if (isNewRow) {
+                if (onCreate) {
+                    const rowToSave = { ...row };
+                    delete (rowToSave as any).id;
+                    savePromises.push(Promise.resolve(onCreate(rowToSave as TData)));
+                } else {
+                    // Internal mode: commit new row so future edits treat it as existing
+                    originalIdsRef.current.add(rowId);
+                }
+            } else if (isDupeRow) {
+                if (onDuplicate) {
+                    const rowToSave = { ...row };
+                    delete (rowToSave as any).id;
+                    savePromises.push(Promise.resolve(onDuplicate(rowToSave)));
+                } else {
+                    // Internal mode: commit duplicate row
+                    originalIdsRef.current.add(rowId);
+                }
+            } else if (!currentOriginalIds.has(rowId)) {
+                // Fallback for rows not in original set (shouldn't normally happen)
+            } else {
+                if (onUpdate) {
+                    savePromises.push(Promise.resolve(onUpdate(row)));
+                } else {
+                    internalUpdates[rowId] = row;
+                }
+            }
+        });
+
+        if (Object.keys(internalUpdates).length > 0) {
             setTableData((prev) =>
                 prev.map((row) => {
                     const rowId = getRowId(row);
-                    return currentEditedRows[rowId] || row;
+                    return internalUpdates[rowId] ?? row;
                 })
             );
         }
 
+        await Promise.all(savePromises);
+
         setEditedRows({});
         // Clear history when the user explicitly commits – the saved state is the new baseline
         clearHistory();
-    }, [onUpdate, getRowId, clearHistory]);
+    }, [onCreate, onUpdate, onDuplicate, getRowId, clearHistory]);
+
+    const handleAddEmptyRow = useCallback(
+        (emptyRow: TData): void => {
+            const tempId = `__new__${Date.now()}_${++newCounterRef.current}`;
+            const newRow = { ...emptyRow, id: tempId } as TData;
+            const insertedIndex = tableDataRef.current.length;
+            recordRowAdd(newRow, insertedIndex);
+            setTableData((prev) => [...prev, newRow]);
+            setEditedRows((prev) => ({ ...prev, [tempId]: newRow }));
+
+            // Immediately validate so empty required fields show errors right away
+            if (onValidate) {
+                const errors = onValidate(newRow);
+                const cellErrors: Partial<Record<string, string | undefined>> = {};
+                Object.entries(errors).forEach(([columnId, error]) => {
+                    if (error) {
+                        cellErrors[`${tempId}_${columnId}`] = error as string;
+                    }
+                });
+                if (Object.keys(cellErrors).length > 0) {
+                    setValidationErrors((prev) => ({ ...prev, ...(cellErrors as any) }));
+                }
+            }
+        },
+        [recordRowAdd, onValidate]
+    );
 
     const handleDeleteRow = useCallback(
         (row: MRT_Row<TData>) => {
-            const message =
-                typeof deleteConfirmMessage === 'function' ? deleteConfirmMessage(row.original) : deleteConfirmMessage;
+            const rowId = getRowId(row.original);
+            const isTempRow = rowId.startsWith('__new__') || rowId.startsWith('__dup__');
 
-            // eslint-disable-next-line no-alert
-            if (window.confirm(message)) {
-                if (onDelete) {
-                    void onDelete(getRowId(row.original));
-                } else {
-                    const deletedIndex = tableDataRef.current.findIndex((r) => getRowId(r) === getRowId(row.original));
-                    if (deletedIndex !== -1) {
-                        recordRowDelete(row.original, deletedIndex);
-                    }
-                    setTableData((prev) => prev.filter((r) => getRowId(r) !== getRowId(row.original)));
+            if (!isTempRow) {
+                const message =
+                    typeof deleteConfirmMessage === 'function'
+                        ? deleteConfirmMessage(row.original)
+                        : deleteConfirmMessage;
+                // eslint-disable-next-line no-alert
+                if (!window.confirm(message)) return;
+            }
+
+            if (!isTempRow && onDelete) {
+                void onDelete(rowId);
+            } else {
+                const deletedIndex = tableDataRef.current.findIndex((r) => getRowId(r) === rowId);
+                if (deletedIndex !== -1) {
+                    recordRowDelete(row.original, deletedIndex);
+                }
+                setTableData((prev) => prev.filter((r) => getRowId(r) !== rowId));
+                if (isTempRow) {
+                    setEditedRows((prev) => {
+                        const next = { ...prev };
+                        delete next[rowId];
+                        return next;
+                    });
                 }
             }
         },
@@ -195,18 +253,15 @@ export const useEditableTableHandlers = <TData extends EditableTableData>({
 
     const handleDuplicateRow = useCallback(
         async (row: MRT_Row<TData>) => {
-            const duplicatedRow = { ...row.original };
-            delete duplicatedRow.id;
+            const tempId = `__dup__${Date.now()}_${++dupCounterRef.current}`;
+            const duplicatedRow = { ...row.original, id: tempId } as TData;
 
-            if (onDuplicate) {
-                await onDuplicate(duplicatedRow);
-            } else {
-                const insertedIndex = tableDataRef.current.length;
-                recordRowDuplicate(duplicatedRow, insertedIndex);
-                setTableData((prev) => [...prev, duplicatedRow]);
-            }
+            const insertedIndex = tableDataRef.current.length;
+            recordRowDuplicate(duplicatedRow, insertedIndex);
+            setTableData((prev) => [...prev, duplicatedRow]);
+            setEditedRows((prev) => ({ ...prev, [tempId]: duplicatedRow }));
         },
-        [onDuplicate, recordRowDuplicate]
+        [recordRowDuplicate]
     );
 
     const clearValidationErrors = useCallback(() => setValidationErrors({}), []);
@@ -225,7 +280,7 @@ export const useEditableTableHandlers = <TData extends EditableTableData>({
         validationErrors,
         editedRows,
         clearValidationErrors,
-        handleCreateRow,
+        handleAddEmptyRow,
         handleSaveCell,
         handleSaveRows,
         handleResetRows,

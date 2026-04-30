@@ -78,7 +78,7 @@ export const EditableTable = (<TData extends EditableTableData>(
         validationErrors,
         editedRows,
         clearValidationErrors,
-        handleCreateRow,
+        handleAddEmptyRow,
         handleSaveCell,
         handleSaveRows,
         handleResetRows,
@@ -189,7 +189,6 @@ export const EditableTable = (<TData extends EditableTableData>(
         editDisplayMode,
         validationErrors,
         handleSaveCell,
-        tableData,
         editedRows,
         originalDataMap,
     });
@@ -253,9 +252,8 @@ export const EditableTable = (<TData extends EditableTableData>(
                     sx: (t: any): any => ({
                         px: 1,
                         height: 52,
-                        backgroundColor: `${
-                            t.vars?.palette?.background?.paper ?? t.palette.background.paper
-                        } !important`,
+                        cursor: 'cell',
+                        backgroundColor: `${t.vars?.palette?.background?.paper ?? t.palette.background.paper} !important`,
                         '&[data-pinned="true"]:before': { backgroundColor: 'transparent !important' },
                     }),
                 },
@@ -275,7 +273,7 @@ export const EditableTable = (<TData extends EditableTableData>(
             },
         },
         onCreatingRowCancel: (): void => clearValidationErrors(),
-        onCreatingRowSave: handleCreateRow,
+        onCreatingRowSave: undefined,
         renderRowActions: enableRowActions
             ? ({ row, table: actionTable }): React.ReactElement => (
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 0 }}>
@@ -338,20 +336,33 @@ export const EditableTable = (<TData extends EditableTableData>(
                   </Box>
               )
             : undefined,
-        renderBottomToolbarCustomActions: ({ table: toolbarTable }): React.ReactElement => (
-            <Box sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                {enableCreate && (
-                    <Button
-                        variant="text"
-                        startIcon={<AddIcon />}
-                        onClick={(): void => toolbarTable.setCreatingRow(true)}
-                        sx={{ textTransform: 'none' }}
-                    >
-                        {createButtonText}
-                    </Button>
-                )}
-            </Box>
-        ),
+        renderBottomToolbarCustomActions: ({ table: toolbarTable }): React.ReactElement => {
+            const emptyRow = columns.reduce(
+                (acc, col) => {
+                    if (!col.accessorKey) return acc;
+                    const key = col.accessorKey as string;
+                    if (col.cellType === 'binary') acc[key] = false;
+                    else acc[key] = '';
+                    return acc;
+                },
+                {} as Record<string, any>
+            ) as TData;
+
+            return (
+                <Box sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                    {enableCreate && (
+                        <Button
+                            variant="text"
+                            startIcon={<AddIcon />}
+                            onClick={(): void => handleAddEmptyRow(emptyRow)}
+                            sx={{ textTransform: 'none' }}
+                        >
+                            {createButtonText}
+                        </Button>
+                    )}
+                </Box>
+            );
+        },
         initialState: {
             columnPinning: enableRowActions ? { left: [], right: ['mrt-row-actions'] } : { left: [], right: [] },
             ...tableOptions.initialState,

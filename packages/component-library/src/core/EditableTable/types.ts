@@ -85,6 +85,25 @@ export type EditableTableColumnDef<TData extends EditableTableData> = MRT_Column
      * Defaults to `'center'`. Set to `'left'` or `'right'` to override per column.
      */
     headerAlign?: 'left' | 'center' | 'right';
+
+    /**
+     * Type of cell to render.
+     *
+     * - `'text'`: Text input (default)
+     * - `'number'`: Number input with right alignment
+     * - `'select'`: Dropdown with filterable autocomplete
+     * - `'binary'`: Checkbox with 0/1 text display
+     *
+     * @default 'text'
+     *
+     * @example
+     * ```tsx
+     * { accessorKey: 'age', header: 'Age', cellType: 'number' }
+     * { accessorKey: 'category', header: 'Category', cellType: 'select', editSelectOptions: ['A', 'B', 'C'] }
+     * { accessorKey: 'isActive', header: 'Active', cellType: 'binary' }
+     * ```
+     */
+    cellType?: 'text' | 'number' | 'select' | 'binary';
 };
 
 export type EditableTableProps<TData extends EditableTableData> = {

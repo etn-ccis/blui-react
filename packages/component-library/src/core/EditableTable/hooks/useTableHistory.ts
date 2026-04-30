@@ -218,15 +218,35 @@ export const useTableHistory = <TData extends EditableTableData>({
                 return next as Partial<Record<keyof TData, string | undefined>>;
             });
         } else if (entry.type === 'row_add') {
+            const addedId = getRowId(entry.row);
             setTableData((prev) => prev.filter((_, i) => i !== entry.insertedIndex));
+            // Pending new rows must also be removed from editedRows on undo
+            if (addedId.startsWith('__new__') || addedId.startsWith('__dup__')) {
+                setEditedRows((prev) => {
+                    const next = { ...prev };
+                    delete next[addedId];
+                    return next;
+                });
+            }
         } else if (entry.type === 'row_delete') {
             setTableData((prev) => [
                 ...prev.slice(0, entry.deletedIndex),
                 entry.row,
                 ...prev.slice(entry.deletedIndex),
             ]);
+            // Restore pending state for temp rows on undo of delete
+            const deletedId = getRowId(entry.row);
+            if (deletedId.startsWith('__new__') || deletedId.startsWith('__dup__')) {
+                setEditedRows((prev) => ({ ...prev, [deletedId]: entry.row }));
+            }
         } else if (entry.type === 'row_duplicate') {
+            const dupeId = getRowId(entry.row);
             setTableData((prev) => prev.filter((_, i) => i !== entry.insertedIndex));
+            setEditedRows((prev) => {
+                const next = { ...prev };
+                delete next[dupeId];
+                return next;
+            });
         }
 
         historyIndexRef.current--;
@@ -270,14 +290,29 @@ export const useTableHistory = <TData extends EditableTableData>({
                 entry.row,
                 ...prev.slice(entry.insertedIndex),
             ]);
+            // Restore pending state for temp rows on redo
+            const addedId = getRowId(entry.row);
+            if (addedId.startsWith('__new__') || addedId.startsWith('__dup__')) {
+                setEditedRows((prev) => ({ ...prev, [addedId]: entry.row }));
+            }
         } else if (entry.type === 'row_delete') {
             setTableData((prev) => prev.filter((_, i) => i !== entry.deletedIndex));
+            // Remove from editedRows on redo of delete for temp rows
+            const deletedId = getRowId(entry.row);
+            if (deletedId.startsWith('__new__') || deletedId.startsWith('__dup__')) {
+                setEditedRows((prev) => {
+                    const next = { ...prev };
+                    delete next[deletedId];
+                    return next;
+                });
+            }
         } else if (entry.type === 'row_duplicate') {
             setTableData((prev) => [
                 ...prev.slice(0, entry.insertedIndex),
                 entry.row,
                 ...prev.slice(entry.insertedIndex),
             ]);
+            setEditedRows((prev) => ({ ...prev, [getRowId(entry.row)]: entry.row }));
         }
 
         requestAnimationFrame(() => {
@@ -285,7 +320,7 @@ export const useTableHistory = <TData extends EditableTableData>({
         });
 
         updateCanStates();
-    }, [setTableData, setEditedRows, updateCanStates]);
+    }, [setTableData, setEditedRows, updateCanStates, getRowId]);
 
     // ─── Clear ───────────────────────────────────────────────────────────────
 

@@ -1,6 +1,6 @@
 export * from './EditableTable';
-export * from './EditableTableContext';
 export * from './types';
+export * from './cells';
 
 // Re-export commonly used types from material-react-table
 export type {

@@ -7,19 +7,26 @@ type Product = {
     name: string;
     quantity: number;
     price: number;
+    inStock: boolean;
 };
 
 const initialData: Product[] = [
-    { id: '1', name: 'Widget A', quantity: 10, price: 4.99 },
-    { id: '2', name: 'Widget B', quantity: 5, price: 12.5 },
-    { id: '3', name: 'Widget C', quantity: 20, price: 1.75 },
+    { id: '1', name: 'Widget A', quantity: 10, price: 4.99, inStock: true },
+    { id: '2', name: 'Widget B', quantity: 5, price: 12.5, inStock: false },
+    { id: '3', name: 'Widget C', quantity: 20, price: 1.75, inStock: true },
 ];
 
 const columns: Array<EditableTableColumnDef<Product>> = [
-    { accessorKey: 'id', header: 'ID', enableEditing: false, size: 70 },
-    { accessorKey: 'name', header: 'Name', muiEditTextFieldProps: { required: true } },
-    { accessorKey: 'quantity', header: 'Qty', size: 90, muiEditTextFieldProps: { type: 'number', required: true } },
-    { accessorKey: 'price', header: 'Price ($)', size: 110, muiEditTextFieldProps: { type: 'number', required: true } },
+    { accessorKey: 'id', header: 'ID', cellType: 'text', enableEditing: false, size: 70 },
+    { accessorKey: 'name', header: 'Name', cellType: 'text' },
+    { accessorKey: 'quantity', header: 'Qty', cellType: 'number', size: 90 },
+    { accessorKey: 'price', header: 'Price ($)', cellType: 'number', size: 110 },
+    {
+        accessorKey: 'inStock',
+        header: 'In Stock',
+        cellType: 'binary',
+        size: 100,
+    },
 ];
 
 const validate = (row: Product): Partial<Record<keyof Product, string | undefined>> => ({

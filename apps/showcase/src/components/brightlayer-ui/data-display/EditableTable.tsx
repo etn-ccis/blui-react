@@ -18,6 +18,7 @@ type User = {
     email: string;
     age: number;
     state: string;
+    isActive: boolean;
 };
 
 const initialData: User[] = [
@@ -28,6 +29,7 @@ const initialData: User[] = [
         email: 'john.doe@example.com',
         age: 30,
         state: 'California',
+        isActive: true,
     },
     {
         id: '2',
@@ -36,6 +38,7 @@ const initialData: User[] = [
         email: 'jane.smith@example.com',
         age: 25,
         state: 'New York',
+        isActive: false,
     },
     {
         id: '3',
@@ -44,6 +47,7 @@ const initialData: User[] = [
         email: 'bob.johnson@example.com',
         age: 35,
         state: 'Texas',
+        isActive: true,
     },
 ];
 
@@ -68,53 +72,47 @@ export const EditableTableExample: React.FC = () => {
 
     const columns = useMemo<Array<EditableTableColumnDef<User>>>(
         () => [
-            {
-                accessorKey: 'id',
-                header: 'ID',
-                enableEditing: false,
-                size: 80,
-            },
+            // {
+            //     accessorKey: 'id',
+            //     header: 'ID',
+            //     cellType: 'text',
+            //     enableEditing: false,
+            //     size: 80,
+            // },
             {
                 accessorKey: 'firstName',
                 header: 'First Name',
-                muiEditTextFieldProps: {
-                    required: true,
-                },
+                cellType: 'text',
             },
             {
                 accessorKey: 'lastName',
                 header: 'Last Name',
-                muiEditTextFieldProps: {
-                    required: true,
-                },
+                cellType: 'text',
             },
             {
                 accessorKey: 'age',
                 header: 'Age',
+                cellType: 'number',
                 size: 88,
-                muiEditTextFieldProps: {
-                    type: 'number',
-                    required: true,
-                },
             },
             {
                 accessorKey: 'email',
                 header: 'Email',
                 // headerAlign: 'right',
-                muiEditTextFieldProps: {
-                    type: 'email',
-                    required: true,
-                },
+                cellType: 'text',
             },
             {
                 accessorKey: 'state',
                 header: 'State',
                 // headerAlign: 'left',
-                editVariant: 'select',
+                cellType: 'select',
                 editSelectOptions: states,
-                muiEditTextFieldProps: {
-                    select: true,
-                },
+            },
+            {
+                accessorKey: 'isActive',
+                header: 'Active',
+                cellType: 'binary',
+                size: 100,
             },
         ],
         []
@@ -181,18 +179,9 @@ export const EditableTableExample: React.FC = () => {
         }
     };
 
-    const handleDuplicate = async (duplicatedUser: User): Promise<void> => {
-        setIsSaving(true);
-        try {
-            await new Promise<void>((resolve) => {
-                setTimeout(resolve, 1000);
-            });
-
-            setUsers([...users, { ...duplicatedUser, id: (users.length + 1).toString() }]);
-        } finally {
-            setIsSaving(false);
-        }
-    };
+    const handleDuplicate = useCallback(async (duplicatedUser: User): Promise<void> => {
+        setUsers((prev) => [...prev, { ...duplicatedUser, id: (prev.length + 1).toString() }]);
+    }, []);
 
     const handleSave = useCallback(async (): Promise<void> => {
         if (!tableState?.save) return;
