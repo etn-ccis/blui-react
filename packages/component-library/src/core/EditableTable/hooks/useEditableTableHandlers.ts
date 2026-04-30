@@ -138,7 +138,7 @@ export const useEditableTableHandlers = <TData extends EditableTableData>({
         const currentEditedRows = editedRowsRef.current;
         const currentOriginalIds = originalIdsRef.current;
 
-        const savePromises: Promise<void>[] = [];
+        const savePromises: Array<Promise<void>> = [];
         const internalUpdates: Record<string, TData> = {};
 
         Object.values(currentEditedRows).forEach((row) => {
