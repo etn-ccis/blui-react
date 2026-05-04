@@ -82,7 +82,7 @@ export const useEnhancedColumns = <TData extends EditableTableData>({
 
                 return {
                     ...baseProps,
-                    onClick: () => {
+                    onClick: (): void => {
                         // Enable single-click editing - skip if column is not editable
                         if (column.enableEditing !== false && cellParams.table.options.enableEditing) {
                             cellParams.table.setEditingCell(cellParams.cell);

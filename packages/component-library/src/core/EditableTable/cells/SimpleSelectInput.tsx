@@ -1,8 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { Autocomplete, TextField } from '@mui/material';
-import { EditableTableData } from '../types';
 
-type SimpleSelectInputProps<TData extends EditableTableData> = {
+type SimpleSelectInputProps = {
     value: any;
     onChange: (value: any) => void;
     onBlur: () => void;
@@ -15,14 +14,14 @@ type SimpleSelectInputProps<TData extends EditableTableData> = {
  * SimpleSelectInput - A customized MUI Autocomplete component for dropdown cells
  * Uses MUI Autocomplete with filtering capability - users can type to filter options
  */
-export const SimpleSelectInput = <TData extends EditableTableData>({
+export const SimpleSelectInput = ({
     value,
     onChange,
     onBlur,
     options,
     hasError = false,
     disabled = false,
-}: SimpleSelectInputProps<TData>): React.ReactElement => {
+}: SimpleSelectInputProps): React.ReactElement => {
     const inputRef = useRef<HTMLInputElement>(null);
 
     // Auto-focus on mount

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Checkbox, Box } from '@mui/material';
-import { EditableTableData } from '../types';
 
-type SimpleBinaryInputProps<TData extends EditableTableData> = {
+type SimpleBinaryInputProps = {
     value: boolean;
     onChange: (value: boolean) => void;
     disabled?: boolean;
@@ -12,11 +11,11 @@ type SimpleBinaryInputProps<TData extends EditableTableData> = {
  * SimpleBinaryInput - A MUI Checkbox component with editable text (0/1) for boolean/binary cells
  * Checkbox on left, editable text showing 0 or 1 on right
  */
-export const SimpleBinaryInput = <TData extends EditableTableData>({
+export const SimpleBinaryInput = ({
     value,
     onChange,
     disabled = false,
-}: SimpleBinaryInputProps<TData>): React.ReactElement => {
+}: SimpleBinaryInputProps): React.ReactElement => {
     const checkboxRef = React.useRef<HTMLButtonElement>(null);
     const inputRef = React.useRef<HTMLInputElement>(null);
     const [textValue, setTextValue] = useState(value ? '1' : '0');

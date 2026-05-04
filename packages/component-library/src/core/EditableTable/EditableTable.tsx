@@ -113,6 +113,8 @@ export const EditableTable = (<TData extends EditableTableData>(
     const redoRef = useRef(redo);
     const handleSaveRowsRef = useRef(handleSaveRows);
     const handleResetRowsRef = useRef(handleResetRows);
+    // Holds the MRT table instance so stableReset can close any active editing cell.
+    const tableRef = useRef<any>(null);
     useEffect(() => {
         undoRef.current = undo;
     });
@@ -129,7 +131,12 @@ export const EditableTable = (<TData extends EditableTableData>(
     const stableUndo = useCallback(() => undoRef.current(), []);
     const stableRedo = useCallback(() => redoRef.current(), []);
     const stableSave = useCallback((): Promise<void> => handleSaveRowsRef.current(), []);
-    const stableReset = useCallback(() => handleResetRowsRef.current(), []);
+    const stableReset = useCallback((): void => {
+        // Close any active editing cell first so its Edit component unmounts
+        // and re-renders with the restored value after the reset.
+        tableRef.current?.setEditingCell(null);
+        handleResetRowsRef.current();
+    }, []);
 
     // Keyboard shortcuts for undo/redo
     useEffect(() => {
@@ -193,6 +200,7 @@ export const EditableTable = (<TData extends EditableTableData>(
         originalDataMap,
     });
 
+    // Keep tableRef in sync so stableReset can access setEditingCell.
     // Configure the table
     const table = useMaterialReactTable({
         columns: enhancedColumns,
@@ -236,6 +244,7 @@ export const EditableTable = (<TData extends EditableTableData>(
                     align: 'center',
                     sx: (t: any): any => ({
                         px: 1,
+                        cursor: 'default',
                         backgroundColor: `${
                             t.vars?.palette?.background?.paper ?? t.palette.background.paper
                         } !important`,
@@ -336,7 +345,7 @@ export const EditableTable = (<TData extends EditableTableData>(
                   </Box>
               )
             : undefined,
-        renderBottomToolbarCustomActions: ({ table: toolbarTable }): React.ReactElement => {
+        renderBottomToolbarCustomActions: (): React.ReactElement => {
             const emptyRow = columns.reduce(
                 (acc, col) => {
                     if (!col.accessorKey) return acc;
@@ -375,6 +384,8 @@ export const EditableTable = (<TData extends EditableTableData>(
         },
         ...tableOptions,
     });
+
+    tableRef.current = table;
 
     return <MaterialReactTable table={table} />;
 }) as <TData extends EditableTableData>(props: EditableTableProps<TData>) => React.ReactElement;

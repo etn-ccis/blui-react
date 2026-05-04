@@ -19,7 +19,6 @@ const CELL_HOVER_BG = Color(BLUIColors.black[500]).alpha(0.05).string();
 export const BinaryCell = <TData extends EditableTableData>({
     cell,
     row,
-    renderedCellValue,
     validationErrors,
     editedRows,
     originalDataMap,

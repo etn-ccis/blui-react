@@ -24,7 +24,7 @@ type UseEditableTableHandlersReturn<TData extends EditableTableData> = {
     handleSaveRows: () => Promise<void>;
     handleResetRows: () => void;
     handleDeleteRow: (row: MRT_Row<TData>) => void;
-    handleDuplicateRow: (row: MRT_Row<TData>) => Promise<void>;
+    handleDuplicateRow: (row: MRT_Row<TData>) => void;
     undo: () => void;
     redo: () => void;
     canUndo: boolean;
@@ -107,20 +107,23 @@ export const useEditableTableHandlers = <TData extends EditableTableData>({
             // and custom Cell renderers (which read cell.getValue / row.original) reflect the change.
             setTableData((prev) => prev.map((row) => (getRowId(row) === rowId ? updatedRow : row)));
 
-            setEditedRows((prev) => ({
-                ...prev,
-                [rowId]: updatedRow,
-            }));
+            // Update editedRowsRef synchronously so that handleSaveRows reads the correct value
+            // even when called in the same event tick (blur fires → handleSaveCell → then click
+            // fires → handleSaveRows reads the ref before React has re-rendered and run effects).
+            const updatedEditedRows = { ...editedRowsRef.current, [rowId]: updatedRow };
+            editedRowsRef.current = updatedEditedRows;
+            setEditedRows(updatedEditedRows);
 
             let nextError: string | undefined;
             if (onValidate) {
                 const errors = onValidate(updatedRow);
                 const cellKey = `${rowId}_${columnId}` as keyof TData;
                 nextError = errors[columnId as keyof TData] as string | undefined;
-                setValidationErrors((prev) => ({
-                    ...prev,
-                    [cellKey]: nextError,
-                }));
+                // Same sync update for validationErrorsRef so handleSaveRows' error-gate check
+                // sees the correct (post-blur) validation state.
+                const updatedErrors = { ...validationErrorsRef.current, [cellKey]: nextError };
+                validationErrorsRef.current = updatedErrors;
+                setValidationErrors(updatedErrors);
             }
 
             if (!isUndoRedoAction.current) {
@@ -252,8 +255,14 @@ export const useEditableTableHandlers = <TData extends EditableTableData>({
     );
 
     const handleDuplicateRow = useCallback(
-        async (row: MRT_Row<TData>) => {
-            const tempId = `__dup__${Date.now()}_${++dupCounterRef.current}`;
+        (row: MRT_Row<TData>): void => {
+            const sourceId = getRowId(row.original);
+            const isTempSource = sourceId.startsWith('__new__') || sourceId.startsWith('__dup__');
+            // Duplicating an unsaved row produces another new row (not a duplicate of an existing one),
+            // so route it through onCreate on save by using the __new__ prefix.
+            const tempId = isTempSource
+                ? `__new__${Date.now()}_${++newCounterRef.current}`
+                : `__dup__${Date.now()}_${++dupCounterRef.current}`;
             const duplicatedRow = { ...row.original, id: tempId } as TData;
 
             const insertedIndex = tableDataRef.current.length;
@@ -261,7 +270,7 @@ export const useEditableTableHandlers = <TData extends EditableTableData>({
             setTableData((prev) => [...prev, duplicatedRow]);
             setEditedRows((prev) => ({ ...prev, [tempId]: duplicatedRow }));
         },
-        [recordRowDuplicate]
+        [recordRowDuplicate, getRowId]
     );
 
     const clearValidationErrors = useCallback(() => setValidationErrors({}), []);

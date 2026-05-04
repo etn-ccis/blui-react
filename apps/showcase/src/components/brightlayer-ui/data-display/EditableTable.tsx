@@ -147,7 +147,7 @@ export const EditableTableExample: React.FC = () => {
                 setTimeout(resolve, 1000);
             });
 
-            setUsers([...users, { ...newUser, id: (users.length + 1).toString() }]);
+            setUsers((prev) => [...prev, { ...newUser, id: (prev.length + 1).toString() }]);
         } finally {
             setIsSaving(false);
         }
@@ -179,7 +179,7 @@ export const EditableTableExample: React.FC = () => {
         }
     };
 
-    const handleDuplicate = useCallback(async (duplicatedUser: User): Promise<void> => {
+    const handleDuplicate = useCallback((duplicatedUser: User): void => {
         setUsers((prev) => [...prev, { ...duplicatedUser, id: (prev.length + 1).toString() }]);
     }, []);
 

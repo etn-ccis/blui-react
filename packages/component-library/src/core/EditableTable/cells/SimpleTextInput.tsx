@@ -1,8 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { useTheme } from '@mui/material';
-import { EditableTableData } from '../types';
 
-type SimpleTextInputProps<TData extends EditableTableData> = {
+type SimpleTextInputProps = {
     value: any;
     onChange: (value: any) => void;
     onBlur: () => void;
@@ -16,7 +15,7 @@ type SimpleTextInputProps<TData extends EditableTableData> = {
  * SimpleTextInput - A plain HTML input element styled to match the table design
  * Replaces MUI TextField for better performance and simpler implementation
  */
-export const SimpleTextInput = <TData extends EditableTableData>({
+export const SimpleTextInput = ({
     value,
     onChange,
     onBlur,
@@ -24,7 +23,7 @@ export const SimpleTextInput = <TData extends EditableTableData>({
     isNumber = false,
     type = 'text',
     disabled = false,
-}: SimpleTextInputProps<TData>): React.ReactElement => {
+}: SimpleTextInputProps): React.ReactElement => {
     const theme = useTheme();
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -48,6 +47,7 @@ export const SimpleTextInput = <TData extends EditableTableData>({
         outline: 'none',
         backgroundColor: 'transparent',
         padding: '0 16px',
+        fontFamily: 'inherit',
         fontSize: '14px',
         color: hasError ? errorMain : textPrimary,
         caretColor: primaryMain,
