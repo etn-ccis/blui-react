@@ -75,7 +75,7 @@ export const resolveHeadCellProps =
                 ? (column.muiTableHeadCellProps as (params: any) => any)(headParams)
                 : (column.muiTableHeadCellProps ?? {});
 
-        const headerAlign = column.headerAlign ?? (column.cellType === 'number' ? 'right' : 'center');
+        const headerAlign = column.headerAlign ?? (column.cellType === 'number' ? 'right' : 'left');
 
         return {
             ...originalProps,

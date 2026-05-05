@@ -82,7 +82,7 @@ export type EditableTableColumnDef<TData extends EditableTableData> = MRT_Column
     /**
      * Horizontal alignment of the column header text.
      *
-     * Defaults to `'center'`. Set to `'left'` or `'right'` to override per column.
+     * Defaults to `'left'`. Set to `'left'` or `'right'` to override per column.
      */
     headerAlign?: 'left' | 'center' | 'right';
 

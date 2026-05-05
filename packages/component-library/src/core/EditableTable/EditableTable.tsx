@@ -234,9 +234,11 @@ export const EditableTable = (<TData extends EditableTableData>(
         },
         muiTableBodyRowProps: {
             hover: true,
-            sx: {
-                '& td[data-pinned="true"]:before': { backgroundColor: 'transparent !important' },
-            },
+            sx: (t: any): any => ({
+                '& td[data-pinned="true"]:before': {
+                    backgroundColor: `${t.vars?.palette?.background?.paper ?? t.palette.background.paper} !important`,
+                },
+            }),
         },
         displayColumnDefOptions: {
             'mrt-row-actions': {
@@ -245,6 +247,7 @@ export const EditableTable = (<TData extends EditableTableData>(
                     sx: (t: any): any => ({
                         px: 1,
                         cursor: 'default',
+                        opacity: 1,
                         backgroundColor: `${
                             t.vars?.palette?.background?.paper ?? t.palette.background.paper
                         } !important`,
@@ -253,7 +256,9 @@ export const EditableTable = (<TData extends EditableTableData>(
                         fontStyle: 'normal',
                         fontWeight: 600,
                         lineHeight: 'normal',
-                        '&[data-pinned="true"]:before': { backgroundColor: 'transparent !important' },
+                        '&[data-pinned="true"]:before': {
+                            backgroundColor: `${t.vars?.palette?.background?.paper ?? t.palette.background.paper} !important`,
+                        },
                     }),
                 },
                 muiTableBodyCellProps: {
@@ -262,8 +267,11 @@ export const EditableTable = (<TData extends EditableTableData>(
                         px: 1,
                         height: 52,
                         cursor: 'cell',
+                        opacity: 1,
                         backgroundColor: `${t.vars?.palette?.background?.paper ?? t.palette.background.paper} !important`,
-                        '&[data-pinned="true"]:before': { backgroundColor: 'transparent !important' },
+                        '&[data-pinned="true"]:before': {
+                            backgroundColor: `${t.vars?.palette?.background?.paper ?? t.palette.background.paper} !important`,
+                        },
                     }),
                 },
             },
