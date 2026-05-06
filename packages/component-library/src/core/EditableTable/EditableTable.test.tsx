@@ -286,8 +286,10 @@ describe('EditableTable', () => {
         confirmSpy.mockRestore();
     });
 
-    it('calls onDuplicate when duplicate button is clicked', async () => {
+    it('calls onDuplicate when duplicate button is clicked and saved', async () => {
         const onDuplicate = jest.fn().mockResolvedValue(undefined);
+        let savedSaveFn: (() => Promise<void>) | undefined;
+
         render(
             <ThemeProvider theme={theme}>
                 <EditableTable
@@ -297,6 +299,9 @@ describe('EditableTable', () => {
                     enableDuplicate={true}
                     enableRowActions={true}
                     onDuplicate={onDuplicate}
+                    onStateChange={(state): void => {
+                        savedSaveFn = state.save;
+                    }}
                 />
             </ThemeProvider>
         );
@@ -304,13 +309,17 @@ describe('EditableTable', () => {
         const duplicateButtons = screen.getAllByTestId('ContentCopyIcon');
         fireEvent.click(duplicateButtons[0]);
 
-        await waitFor(() => {
-            expect(onDuplicate).toHaveBeenCalled();
-            // handleDuplicateRow strips the `id` field before calling onDuplicate
-            const calledWith = onDuplicate.mock.calls[0][0];
-            expect(calledWith.name).toBe(sampleData[0].name);
-            expect(calledWith.age).toBe(sampleData[0].age);
+        await waitFor(() => expect(savedSaveFn).toBeDefined());
+
+        await act(async () => {
+            await savedSaveFn!();
         });
+
+        expect(onDuplicate).toHaveBeenCalled();
+        // handleSaveRows strips the `id` field before calling onDuplicate
+        const calledWith = onDuplicate.mock.calls[0][0];
+        expect(calledWith.name).toBe(sampleData[0].name);
+        expect(calledWith.age).toBe(sampleData[0].age);
     });
 
     it('calls onStateChange with initial state when rendered', async () => {

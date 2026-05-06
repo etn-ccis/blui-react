@@ -78,6 +78,32 @@ export type EditableTableColumnDef<TData extends EditableTableData> = MRT_Column
      * ```
      */
     cellStyle?: (params: CellStyleParams<TData>) => SxProps<Theme>;
+
+    /**
+     * Horizontal alignment of the column header text.
+     *
+     * Defaults to `'left'`. Set to `'left'` or `'right'` to override per column.
+     */
+    headerAlign?: 'left' | 'center' | 'right';
+
+    /**
+     * Type of cell to render.
+     *
+     * - `'text'`: Text input (default)
+     * - `'number'`: Number input with right alignment
+     * - `'select'`: Dropdown with filterable autocomplete
+     * - `'binary'`: Checkbox with 0/1 text display
+     *
+     * @default 'text'
+     *
+     * @example
+     * ```tsx
+     * { accessorKey: 'age', header: 'Age', cellType: 'number' }
+     * { accessorKey: 'category', header: 'Category', cellType: 'select', editSelectOptions: ['A', 'B', 'C'] }
+     * { accessorKey: 'isActive', header: 'Active', cellType: 'binary' }
+     * ```
+     */
+    cellType?: 'text' | 'number' | 'select' | 'binary';
 };
 
 export type EditableTableProps<TData extends EditableTableData> = {
@@ -195,6 +221,24 @@ export type EditableTableProps<TData extends EditableTableData> = {
      */
     enableClickToCopy?: boolean | 'context-menu';
 
+    /** Whether to enable column sorting
+     *
+     * Default: false
+     */
+    enableSorting?: boolean;
+
+    /** Whether to enable column filters
+     *
+     * Default: false
+     */
+    enableColumnFilters?: boolean;
+
+    /** Whether to enable column actions menu (hide/show columns, etc.)
+     *
+     * Default: false
+     */
+    enableColumnActions?: boolean;
+
     /** Additional options to pass to material-react-table */
     tableOptions?: Partial<MRT_TableOptions<TData>>;
 
@@ -207,9 +251,9 @@ export type EditableTableProps<TData extends EditableTableData> = {
     /** Custom confirmation message for delete action */
     deleteConfirmMessage?: string | ((row: TData) => string);
 
-    /** Minimum height for the table container
+    /** Minimum height for the table container.
      *
-     * Default: '500px'
+     * Default: '100px'
      */
     minHeight?: string | number;
 

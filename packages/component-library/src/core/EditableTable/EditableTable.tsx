@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useCallback, useMemo } from 'react';
 import { MaterialReactTable, useMaterialReactTable } from 'material-react-table';
-import { Box, Button, IconButton, Tooltip } from '@mui/material';
+import { alpha, Box, Button, IconButton, Tooltip } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
@@ -8,6 +8,10 @@ import AddIcon from '@mui/icons-material/Add';
 import { EditableTableProps, EditableTableData } from './types';
 import { useEditableTableHandlers } from './hooks/useEditableTableHandlers';
 import { useEnhancedColumns } from './hooks/useEnhancedColumns';
+
+const MAX_VISIBLE_ROWS = 10;
+const ROW_HEIGHT_PX = 52;
+const HEADER_HEIGHT_PX = 57;
 
 /**
  * EditableTable is a reusable table component built on material-react-table
@@ -61,8 +65,11 @@ export const EditableTable = (<TData extends EditableTableData>(
         tableOptions = {},
         createButtonText = 'New data point',
         deleteConfirmMessage = 'Are you sure you want to delete this item?',
-        minHeight = '500px',
+        minHeight = '100px',
         enableUndoRedo = false,
+        enableSorting = false,
+        enableColumnFilters = false,
+        enableColumnActions = false,
         onStateChange,
     } = props;
 
@@ -71,7 +78,7 @@ export const EditableTable = (<TData extends EditableTableData>(
         validationErrors,
         editedRows,
         clearValidationErrors,
-        handleCreateRow,
+        handleAddEmptyRow,
         handleSaveCell,
         handleSaveRows,
         handleResetRows,
@@ -106,6 +113,8 @@ export const EditableTable = (<TData extends EditableTableData>(
     const redoRef = useRef(redo);
     const handleSaveRowsRef = useRef(handleSaveRows);
     const handleResetRowsRef = useRef(handleResetRows);
+    // Holds the MRT table instance so stableReset can close any active editing cell.
+    const tableRef = useRef<any>(null);
     useEffect(() => {
         undoRef.current = undo;
     });
@@ -122,7 +131,12 @@ export const EditableTable = (<TData extends EditableTableData>(
     const stableUndo = useCallback(() => undoRef.current(), []);
     const stableRedo = useCallback(() => redoRef.current(), []);
     const stableSave = useCallback((): Promise<void> => handleSaveRowsRef.current(), []);
-    const stableReset = useCallback(() => handleResetRowsRef.current(), []);
+    const stableReset = useCallback((): void => {
+        // Close any active editing cell first so its Edit component unmounts
+        // and re-renders with the restored value after the reset.
+        tableRef.current?.setEditingCell(null);
+        handleResetRowsRef.current();
+    }, []);
 
     // Keyboard shortcuts for undo/redo
     useEffect(() => {
@@ -182,11 +196,11 @@ export const EditableTable = (<TData extends EditableTableData>(
         editDisplayMode,
         validationErrors,
         handleSaveCell,
-        tableData,
         editedRows,
         originalDataMap,
     });
 
+    // Keep tableRef in sync so stableReset can access setEditingCell.
     // Configure the table
     const table = useMaterialReactTable({
         columns: enhancedColumns,
@@ -198,43 +212,67 @@ export const EditableTable = (<TData extends EditableTableData>(
         enableColumnPinning,
         enableEditing: enableEdit,
         enableRowActions,
-        enableTopToolbar: false,
+        enableTopToolbar: enableColumnFilters,
+        enableSorting,
+        enableColumnFilters,
+        enableColumnActions,
         getRowId,
         muiTablePaperProps: {
-            sx: {
-                backgroundColor: 'background.paper',
-            },
+            sx: (t: any): any => ({
+                backgroundColor: t.vars?.palette?.background?.paper ?? t.palette.background.paper,
+            }),
         },
         muiTopToolbarProps: {
-            sx: { backgroundColor: 'background.paper' },
+            sx: (t: any): any => ({
+                backgroundColor: t.vars?.palette?.background?.paper ?? t.palette.background.paper,
+            }),
         },
         muiBottomToolbarProps: {
-            sx: { backgroundColor: 'background.paper' },
+            sx: (t: any): any => ({
+                backgroundColor: t.vars?.palette?.background?.paper ?? t.palette.background.paper,
+            }),
         },
         muiTableBodyRowProps: {
             hover: true,
-            sx: {
-                '& td[data-pinned="true"]:before': { backgroundColor: 'transparent !important' },
-            },
+            sx: (t: any): any => ({
+                '& td[data-pinned="true"]:before': {
+                    backgroundColor: `${t.vars?.palette?.background?.paper ?? t.palette.background.paper} !important`,
+                },
+            }),
         },
         displayColumnDefOptions: {
             'mrt-row-actions': {
                 muiTableHeadCellProps: {
                     align: 'center',
-                    sx: {
+                    sx: (t: any): any => ({
                         px: 1,
-                        backgroundColor: 'background.paper',
-                        '&[data-pinned="true"]:before': { backgroundColor: 'transparent !important' },
-                    },
+                        cursor: 'default',
+                        opacity: 1,
+                        backgroundColor: `${
+                            t.vars?.palette?.background?.paper ?? t.palette.background.paper
+                        } !important`,
+                        fontFamily: '"Open Sans"',
+                        fontSize: '14px',
+                        fontStyle: 'normal',
+                        fontWeight: 600,
+                        lineHeight: 'normal',
+                        '&[data-pinned="true"]:before': {
+                            backgroundColor: `${t.vars?.palette?.background?.paper ?? t.palette.background.paper} !important`,
+                        },
+                    }),
                 },
                 muiTableBodyCellProps: {
                     align: 'center',
-                    sx: {
+                    sx: (t: any): any => ({
                         px: 1,
                         height: 52,
-                        backgroundColor: 'background.paper',
-                        '&[data-pinned="true"]:before': { backgroundColor: 'transparent !important' },
-                    },
+                        cursor: 'cell',
+                        opacity: 1,
+                        backgroundColor: `${t.vars?.palette?.background?.paper ?? t.palette.background.paper} !important`,
+                        '&[data-pinned="true"]:before': {
+                            backgroundColor: `${t.vars?.palette?.background?.paper ?? t.palette.background.paper} !important`,
+                        },
+                    }),
                 },
             },
         },
@@ -246,36 +284,68 @@ export const EditableTable = (<TData extends EditableTableData>(
             : undefined,
         muiTableContainerProps: {
             sx: {
-                minHeight,
+                maxHeight: `${MAX_VISIBLE_ROWS * ROW_HEIGHT_PX + HEADER_HEIGHT_PX}px`,
+                overflowY: 'auto',
+                ...(minHeight !== undefined ? { minHeight } : {}),
             },
         },
         onCreatingRowCancel: (): void => clearValidationErrors(),
-        onCreatingRowSave: handleCreateRow,
+        onCreatingRowSave: undefined,
         renderRowActions: enableRowActions
             ? ({ row, table: actionTable }): React.ReactElement => (
-                  <Box sx={{ display: 'flex', gap: '0.25rem' }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 0 }}>
                       {enableEdit && editDisplayMode === 'row' && (
-                          <Tooltip title="Edit">
-                              <IconButton size="small" onClick={(): void => actionTable.setEditingRow(row)}>
+                          <Tooltip title="Edit" placement="top" followCursor>
+                              <IconButton
+                                  size="small"
+                                  onClick={(): void => actionTable.setEditingRow(row)}
+                                  sx={(t: any): any => ({
+                                      '&:hover': {
+                                          backgroundColor: (t.vars as any)?.palette?.primary?.darkChannel
+                                              ? `rgba(${(t.vars as any).palette.primary.darkChannel} / 0.2)`
+                                              : alpha(t.palette.primary.dark, 0.2),
+                                          color: t.vars?.palette?.primary?.main ?? t.palette.primary.main,
+                                      },
+                                  })}
+                              >
                                   <EditIcon fontSize="small" />
                               </IconButton>
                           </Tooltip>
                       )}
                       {enableDuplicate && (
-                          <Tooltip title="Duplicate">
+                          <Tooltip title="Duplicate" placement="top" followCursor>
                               <IconButton
                                   size="small"
                                   onClick={(): void => {
                                       void handleDuplicateRow(row);
                                   }}
+                                  sx={(t: any): any => ({
+                                      '&:hover': {
+                                          backgroundColor: (t.vars as any)?.palette?.primary?.darkChannel
+                                              ? `rgba(${(t.vars as any).palette.primary.darkChannel} / 0.2)`
+                                              : alpha(t.palette.primary.dark, 0.2),
+                                          color: t.vars?.palette?.primary?.main ?? t.palette.primary.main,
+                                      },
+                                  })}
                               >
                                   <ContentCopyIcon fontSize="small" />
                               </IconButton>
                           </Tooltip>
                       )}
                       {enableDelete && (
-                          <Tooltip title="Delete">
-                              <IconButton size="small" onClick={(): void => handleDeleteRow(row)}>
+                          <Tooltip title="Delete" placement="top" followCursor>
+                              <IconButton
+                                  size="small"
+                                  onClick={(): void => handleDeleteRow(row)}
+                                  sx={(t: any): any => ({
+                                      '&:hover': {
+                                          backgroundColor: (t.vars as any)?.palette?.error?.darkChannel
+                                              ? `rgba(${(t.vars as any).palette.error.darkChannel} / 0.2)`
+                                              : alpha(t.palette.error.dark, 0.2),
+                                          color: t.vars?.palette?.error?.main ?? t.palette.error.main,
+                                      },
+                                  })}
+                              >
                                   <DeleteOutlineIcon fontSize="small" />
                               </IconButton>
                           </Tooltip>
@@ -283,20 +353,33 @@ export const EditableTable = (<TData extends EditableTableData>(
                   </Box>
               )
             : undefined,
-        renderBottomToolbarCustomActions: ({ table: toolbarTable }): React.ReactElement => (
-            <Box sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                {enableCreate && (
-                    <Button
-                        variant="text"
-                        startIcon={<AddIcon />}
-                        onClick={(): void => toolbarTable.setCreatingRow(true)}
-                        sx={{ textTransform: 'none' }}
-                    >
-                        {createButtonText}
-                    </Button>
-                )}
-            </Box>
-        ),
+        renderBottomToolbarCustomActions: (): React.ReactElement => {
+            const emptyRow = columns.reduce(
+                (acc, col) => {
+                    if (!col.accessorKey) return acc;
+                    const key = col.accessorKey as string;
+                    if (col.cellType === 'binary') acc[key] = false;
+                    else acc[key] = '';
+                    return acc;
+                },
+                {} as Record<string, any>
+            ) as TData;
+
+            return (
+                <Box sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                    {enableCreate && (
+                        <Button
+                            variant="text"
+                            startIcon={<AddIcon />}
+                            onClick={(): void => handleAddEmptyRow(emptyRow)}
+                            sx={{ textTransform: 'none' }}
+                        >
+                            {createButtonText}
+                        </Button>
+                    )}
+                </Box>
+            );
+        },
         initialState: {
             columnPinning: enableRowActions ? { left: [], right: ['mrt-row-actions'] } : { left: [], right: [] },
             ...tableOptions.initialState,
@@ -309,6 +392,8 @@ export const EditableTable = (<TData extends EditableTableData>(
         },
         ...tableOptions,
     });
+
+    tableRef.current = table;
 
     return <MaterialReactTable table={table} />;
 }) as <TData extends EditableTableData>(props: EditableTableProps<TData>) => React.ReactElement;

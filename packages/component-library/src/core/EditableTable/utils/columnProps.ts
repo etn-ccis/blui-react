@@ -1,3 +1,4 @@
+import * as BLUIColors from '@brightlayer-ui/colors';
 import { EditableTableColumnDef, EditableTableData } from '../types';
 
 /**
@@ -8,15 +9,9 @@ import { EditableTableColumnDef, EditableTableData } from '../types';
  * - the column's optional `cellStyle` override (highest priority)
  */
 export const resolveBodyCellProps =
-    <TData extends EditableTableData>(
-        column: EditableTableColumnDef<TData>,
-        tableData: TData[]
-    ): ((cellParams: any) => any) =>
+    <TData extends EditableTableData>(column: EditableTableColumnDef<TData>): ((cellParams: any) => any) =>
     (cellParams: any): any => {
-        const isNumber =
-            column.accessorKey &&
-            tableData.length > 0 &&
-            typeof tableData[0][column.accessorKey as keyof TData] === 'number';
+        const isNumber = column.cellType === 'number';
 
         const originalProps =
             typeof column.muiTableBodyCellProps === 'function'
@@ -36,9 +31,16 @@ export const resolveBodyCellProps =
             const defaultSx = (t: any): Record<string, unknown> => ({
                 px: 2,
                 height: 52,
-                backgroundColor: 'background.paper',
-                borderRight: `1px solid ${t.palette.divider}`,
-                borderBottom: `1px solid ${t.palette.divider}`,
+                backgroundColor: `${t.vars?.palette?.background?.default ?? t.palette.background.default} !important`,
+                ...(t.applyStyles?.('dark', {
+                    backgroundColor: `${BLUIColors.black[800]} !important`,
+                }) ?? {}),
+                borderRight: `1px solid ${t.vars?.palette?.divider ?? t.palette.divider}`,
+                borderBottom: `1px solid ${t.vars?.palette?.divider ?? t.palette.divider}`,
+                fontSize: '14px',
+                fontStyle: 'normal',
+                fontWeight: 400,
+                lineHeight: 'normal',
             });
             if (typeof originalProps.sx === 'function') {
                 return (t: any): Record<string, unknown> => ({
@@ -73,13 +75,30 @@ export const resolveHeadCellProps =
                 ? (column.muiTableHeadCellProps as (params: any) => any)(headParams)
                 : (column.muiTableHeadCellProps ?? {});
 
+        const headerAlign = column.headerAlign ?? (column.cellType === 'number' ? 'right' : 'left');
+
         return {
             ...originalProps,
             sx: (t: any): Record<string, unknown> => ({
                 px: 2,
-                backgroundColor: 'background.paper',
-                borderRight: `1px solid ${t.palette.divider}`,
-                borderBottom: `1px solid ${t.palette.divider}`,
+                cursor: 'default',
+                backgroundColor: `${t.vars?.palette?.background?.paper ?? t.palette.background.paper} !important`,
+                borderRight: `1px solid ${t.vars?.palette?.divider ?? t.palette.divider}`,
+                borderBottom: `1px solid ${t.vars?.palette?.divider ?? t.palette.divider}`,
+                fontFamily: '"Open Sans"',
+                fontSize: '14px',
+                fontStyle: 'normal',
+                fontWeight: 600,
+                lineHeight: 'normal',
+                '& .Mui-TableHeadCell-Content': {
+                    justifyContent:
+                        headerAlign === 'right' ? 'flex-end' : headerAlign === 'left' ? 'flex-start' : 'center',
+                },
+                '& .Mui-TableHeadCell-Content-Labels': {
+                    justifyContent:
+                        headerAlign === 'right' ? 'flex-end' : headerAlign === 'left' ? 'flex-start' : 'center',
+                    flex: 1,
+                },
                 ...(typeof originalProps.sx === 'function' ? originalProps.sx(t) : (originalProps.sx ?? {})),
             }),
         };
