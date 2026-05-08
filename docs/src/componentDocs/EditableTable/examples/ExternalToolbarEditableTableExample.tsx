@@ -2,38 +2,44 @@ import React, { useState, useCallback } from 'react';
 import { Box, Button, Tooltip } from '@mui/material';
 import UndoIcon from '@mui/icons-material/Undo';
 import RedoIcon from '@mui/icons-material/Redo';
-import SendIcon from '@mui/icons-material/Send';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import SaveIcon from '@mui/icons-material/Save';
 import { EditableTable, type EditableTableColumnDef, type EditableTableState } from '@brightlayer-ui/react-components';
 import { ExampleShowcase } from '../../../shared';
 
-type Device = {
+type Relay = {
     id: string;
-    name: string;
-    ipAddress: string;
-    port: number;
+    tag: string;
+    description: string;
+    setpoint: number;
+    mode: 'Auto' | 'Manual' | 'Off';
+    armed: boolean;
 };
 
-const initialData: Device[] = [
-    { id: '1', name: 'Sensor Alpha', ipAddress: '192.168.1.10', port: 502 },
-    { id: '2', name: 'Sensor Beta', ipAddress: '192.168.1.11', port: 503 },
-    { id: '3', name: 'Gateway', ipAddress: '192.168.1.1', port: 80 },
+const initialData: Relay[] = [
+    { id: '1', tag: 'R-01', description: 'Overcurrent Protection', setpoint: 50, mode: 'Auto', armed: true },
+    { id: '2', tag: 'R-02', description: 'Ground Fault', setpoint: 10, mode: 'Manual', armed: true },
+    { id: '3', tag: 'R-03', description: 'Voltage Sag', setpoint: 85, mode: 'Off', armed: false },
 ];
 
-const columns: Array<EditableTableColumnDef<Device>> = [
-    { accessorKey: 'id', header: 'ID', enableEditing: false, size: 60 },
-    { accessorKey: 'name', header: 'Device Name', muiEditTextFieldProps: { required: true } },
-    { accessorKey: 'ipAddress', header: 'IP Address', muiEditTextFieldProps: { required: true } },
-    { accessorKey: 'port', header: 'Port', size: 90, muiEditTextFieldProps: { type: 'number', required: true } },
+const modeOptions = ['Auto', 'Manual', 'Off'];
+
+const columns: Array<EditableTableColumnDef<Relay>> = [
+    { accessorKey: 'tag', header: 'Tag', cellType: 'text', size: 90 },
+    { accessorKey: 'description', header: 'Description', cellType: 'text' },
+    { accessorKey: 'setpoint', header: 'Setpoint', cellType: 'number', size: 110 },
+    { accessorKey: 'mode', header: 'Mode', cellType: 'select', editSelectOptions: modeOptions, size: 110 },
+    { accessorKey: 'armed', header: 'Armed', cellType: 'binary', size: 90 },
 ];
 
-const validate = (row: Device): Partial<Record<keyof Device, string | undefined>> => ({
-    name: !row.name ? 'Device name is required' : undefined,
-    ipAddress: !/^\d{1,3}(\.\d{1,3}){3}$/.test(row.ipAddress) ? 'Enter a valid IP address' : undefined,
-    port: row.port < 1 || row.port > 65535 ? 'Port must be 1–65535' : undefined,
+const validate = (row: Relay): Partial<Record<keyof Relay, string | undefined>> => ({
+    tag: !row.tag ? 'Tag is required' : undefined,
+    description: !row.description ? 'Description is required' : undefined,
+    setpoint: row.setpoint < 0 ? 'Must be ≥ 0' : undefined,
 });
 
 export const ExternalToolbarEditableTableExample = (): React.JSX.Element => {
-    const [data, setData] = useState<Device[]>(initialData);
+    const [data, setData] = useState<Relay[]>(initialData);
     const [isSaving, setIsSaving] = useState(false);
     const [tableState, setTableState] = useState<EditableTableState | null>(null);
 
@@ -49,20 +55,19 @@ export const ExternalToolbarEditableTableExample = (): React.JSX.Element => {
 
     return (
         <ExampleShowcase sx={{ p: 2 }}>
-            {/* Toolbar: Undo/Redo/Reset on left — Save on right */}
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                {/* Left group */}
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
                     <Tooltip title="Discard all changes">
                         <span>
                             <Button
                                 variant="outlined"
                                 size="small"
+                                startIcon={<RestartAltIcon />}
                                 onClick={tableState?.reset}
                                 disabled={!tableState?.hasPendingChanges || isSaving}
                                 sx={{ textTransform: 'none' }}
                             >
-                                Reset to Original
+                                Reset
                             </Button>
                         </span>
                     </Tooltip>
@@ -95,13 +100,11 @@ export const ExternalToolbarEditableTableExample = (): React.JSX.Element => {
                         </span>
                     </Tooltip>
                 </Box>
-
-                {/* Right group */}
                 <Box sx={{ ml: 'auto' }}>
                     <Button
                         variant="contained"
                         size="small"
-                        startIcon={<SendIcon />}
+                        startIcon={<SaveIcon />}
                         onClick={(): void => {
                             void handleSave();
                         }}
@@ -135,7 +138,7 @@ export const ExternalToolbarEditableTableExample = (): React.JSX.Element => {
                 enableDuplicate
                 enableUndoRedo
                 onStateChange={setTableState}
-                createButtonText="Add Device"
+                createButtonText="Add Relay"
                 minHeight="300px"
             />
         </ExampleShowcase>

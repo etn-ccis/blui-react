@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useCallback, useMemo } from 'react';
 import { MaterialReactTable, useMaterialReactTable } from 'material-react-table';
 import { alpha, Box, Button, IconButton, Tooltip } from '@mui/material';
+import * as BLUIColors from '@brightlayer-ui/colors';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
@@ -216,6 +217,7 @@ export const EditableTable = (<TData extends EditableTableData>(
         enableSorting,
         enableColumnFilters,
         enableColumnActions,
+        enableStickyHeader: true,
         getRowId,
         muiTablePaperProps: {
             sx: (t: any): any => ({
@@ -246,11 +248,19 @@ export const EditableTable = (<TData extends EditableTableData>(
                     align: 'center',
                     sx: (t: any): any => ({
                         px: 1,
-                        cursor: 'default',
                         opacity: 1,
                         backgroundColor: `${
                             t.vars?.palette?.background?.paper ?? t.palette.background.paper
                         } !important`,
+                        borderBottom: `1px solid ${BLUIColors.gray[500]}`,
+                        ...(t.applyStyles?.('dark', {
+                            borderBottom: `1px solid ${BLUIColors.black[200]}`,
+                        }) ?? {}),
+                        borderLeft: `1px solid ${BLUIColors.gray[500]}`,
+                        ...(t.applyStyles?.('dark', {
+                            borderLeft: `1px solid ${BLUIColors.black[200]}`,
+                        }) ?? {}),
+                        boxShadow: 'none',
                         fontFamily: '"Open Sans"',
                         fontSize: '14px',
                         fontStyle: 'normal',
@@ -258,6 +268,7 @@ export const EditableTable = (<TData extends EditableTableData>(
                         lineHeight: 'normal',
                         '&[data-pinned="true"]:before': {
                             backgroundColor: `${t.vars?.palette?.background?.paper ?? t.palette.background.paper} !important`,
+                            boxShadow: 'none',
                         },
                     }),
                 },
@@ -269,8 +280,14 @@ export const EditableTable = (<TData extends EditableTableData>(
                         cursor: 'cell',
                         opacity: 1,
                         backgroundColor: `${t.vars?.palette?.background?.paper ?? t.palette.background.paper} !important`,
+                        borderLeft: `1px solid ${BLUIColors.gray[500]}`,
+                        ...(t.applyStyles?.('dark', {
+                            borderLeft: `1px solid ${BLUIColors.black[200]}`,
+                        }) ?? {}),
+                        boxShadow: 'none',
                         '&[data-pinned="true"]:before': {
                             backgroundColor: `${t.vars?.palette?.background?.paper ?? t.palette.background.paper} !important`,
+                            boxShadow: 'none',
                         },
                     }),
                 },

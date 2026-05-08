@@ -81,10 +81,12 @@ export const resolveHeadCellProps =
             ...originalProps,
             sx: (t: any): Record<string, unknown> => ({
                 px: 2,
-                cursor: 'default',
                 backgroundColor: `${t.vars?.palette?.background?.paper ?? t.palette.background.paper} !important`,
                 borderRight: `1px solid ${t.vars?.palette?.divider ?? t.palette.divider}`,
-                borderBottom: `1px solid ${t.vars?.palette?.divider ?? t.palette.divider}`,
+                borderBottom: `1px solid ${BLUIColors.gray[500]}`,
+                ...(t.applyStyles?.('dark', {
+                    borderBottom: `1px solid ${BLUIColors.black[200]}`,
+                }) ?? {}),
                 fontFamily: '"Open Sans"',
                 fontSize: '14px',
                 fontStyle: 'normal',

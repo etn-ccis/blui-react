@@ -3,36 +3,44 @@ import Box from '@mui/material/Box';
 import { CodeBlock, CodeBlockActionButtonRow } from '../../../shared';
 import { CustomCellsEditableTableExample } from './CustomCellsEditableTableExample';
 
-const codeSnippet = `{
-    accessorKey: 'status',
-    header: 'Status',
-    editVariant: 'select',
-    editSelectOptions: ['Online', 'Offline', 'Warning'],
-    // cellStyle: color the text by status value
+const codeSnippet = `// cellType: 'select' with cellStyle for conditional text color
+{
+    accessorKey: 'zone',
+    header: 'Zone',
+    cellType: 'select',
+    editSelectOptions: ['Zone A', 'Zone B', 'Zone C'],
     cellStyle: ({ cell }) => ({
-        color: statusColor[cell.getValue<string>()],
+        color: zoneColor[cell.getValue<string>()],
         fontWeight: 'bold',
     }),
 },
+
+// cellType: 'number' with a custom Cell renderer (load bar)
 {
-    accessorKey: 'health',
-    header: 'Health (%)',
-    // Custom Cell: render a progress bar
+    accessorKey: 'load',
+    header: 'Load (%)',
+    cellType: 'number',
     Cell: ({ cell }) => {
         const value = cell.getValue<number>();
+        const color = value >= 70 ? 'error.main' : value >= 40 ? 'warning.main' : 'success.main';
         return (
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <LinearProgress variant="determinate" value={value} sx={{ flex: 1 }} />
-                <span>{value}%</span>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, width: '100%' }}>
+                <Box sx={{ flex: 1, height: 8, borderRadius: 4, backgroundColor: 'action.disabledBackground', overflow: 'hidden' }}>
+                    <Box sx={{ width: \`\${value}%\`, height: '100%', backgroundColor: color, borderRadius: 4 }} />
+                </Box>
+                <Box sx={{ minWidth: 32, fontSize: 12, textAlign: 'right' }}>{value}%</Box>
             </Box>
         );
     },
-}`;
+},
+
+// cellType: 'binary' for boolean toggle
+{ accessorKey: 'active', header: 'Active', cellType: 'binary' }`;
 
 export const CustomCellsEditableTable = (): React.JSX.Element => (
     <Box>
         <CustomCellsEditableTableExample />
-        <CodeBlock code={codeSnippet} language="jsx" dataLine={'6-10,17-27'} />
+        <CodeBlock code={codeSnippet} language="jsx" dataLine={'3-14,17-33,36'} />
         <CodeBlockActionButtonRow
             copyText={codeSnippet}
             url="componentDocs/EditableTable/examples/CustomCellsEditableTableExample.tsx"

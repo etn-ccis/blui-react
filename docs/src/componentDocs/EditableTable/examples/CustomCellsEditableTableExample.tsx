@@ -3,51 +3,50 @@ import { Box } from '@mui/material';
 import { EditableTable, type EditableTableColumnDef } from '@brightlayer-ui/react-components';
 import { ExampleShowcase } from '../../../shared';
 
-type Asset = {
+type Circuit = {
     id: string;
-    name: string;
-    status: 'Online' | 'Offline' | 'Warning';
-    health: number;
-    location: string;
+    panel: string;
+    label: string;
+    zone: 'Zone A' | 'Zone B' | 'Zone C';
+    load: number;
+    active: boolean;
 };
 
-const initialData: Asset[] = [
-    { id: '1', name: 'Generator A', status: 'Online', health: 92, location: 'Building 1' },
-    { id: '2', name: 'Generator B', status: 'Warning', health: 45, location: 'Building 2' },
-    { id: '3', name: 'UPS Unit', status: 'Offline', health: 10, location: 'Data Center' },
+const initialData: Circuit[] = [
+    { id: '1', panel: 'P-01', label: 'Main Feed', zone: 'Zone A', load: 78, active: true },
+    { id: '2', panel: 'P-02', label: 'Backup Line', zone: 'Zone B', load: 42, active: true },
+    { id: '3', panel: 'P-03', label: 'Emergency', zone: 'Zone C', load: 15, active: false },
 ];
 
-const statusOptions = ['Online', 'Offline', 'Warning'];
+const zoneOptions = ['Zone A', 'Zone B', 'Zone C'];
 
-const statusColor: Record<string, string> = {
-    Online: 'success.main',
-    Warning: 'warning.main',
-    Offline: 'error.main',
+const zoneColor: Record<string, string> = {
+    'Zone A': 'success.main',
+    'Zone B': 'warning.main',
+    'Zone C': 'error.main',
 };
 
-const columns: Array<EditableTableColumnDef<Asset>> = [
-    { accessorKey: 'id', header: 'ID', enableEditing: false, size: 70 },
-    { accessorKey: 'name', header: 'Asset Name', muiEditTextFieldProps: { required: true } },
+const columns: Array<EditableTableColumnDef<Circuit>> = [
+    { accessorKey: 'panel', header: 'Panel', cellType: 'text', size: 90 },
+    { accessorKey: 'label', header: 'Label', cellType: 'text' },
     {
-        accessorKey: 'status',
-        header: 'Status',
-        editVariant: 'select',
-        editSelectOptions: statusOptions,
-        // cellStyle: highlight row by status
+        accessorKey: 'zone',
+        header: 'Zone',
+        cellType: 'select',
+        editSelectOptions: zoneOptions,
         cellStyle: ({ cell }): Record<string, unknown> => ({
-            color: statusColor[cell.getValue<string>()] ?? 'text.primary',
+            color: zoneColor[cell.getValue<string>()] ?? 'text.primary',
             fontWeight: 'bold',
         }),
     },
     {
-        accessorKey: 'health',
-        header: 'Health (%)',
-        size: 120,
-        muiEditTextFieldProps: { type: 'number', required: true },
-        // Custom Cell: progress bar
+        accessorKey: 'load',
+        header: 'Load (%)',
+        cellType: 'number',
+        size: 130,
         Cell: ({ cell }): React.ReactElement => {
             const value = cell.getValue<number>();
-            const color = value >= 70 ? 'success.main' : value >= 40 ? 'warning.main' : 'error.main';
+            const color = value >= 70 ? 'error.main' : value >= 40 ? 'warning.main' : 'success.main';
             return (
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, width: '100%' }}>
                     <Box
@@ -66,16 +65,17 @@ const columns: Array<EditableTableColumnDef<Asset>> = [
             );
         },
     },
-    { accessorKey: 'location', header: 'Location' },
+    { accessorKey: 'active', header: 'Active', cellType: 'binary', size: 90 },
 ];
 
-const validate = (row: Asset): Partial<Record<keyof Asset, string | undefined>> => ({
-    name: !row.name ? 'Name is required' : undefined,
-    health: row.health < 0 || row.health > 100 ? 'Must be 0–100' : undefined,
+const validate = (row: Circuit): Partial<Record<keyof Circuit, string | undefined>> => ({
+    panel: !row.panel ? 'Panel is required' : undefined,
+    label: !row.label ? 'Label is required' : undefined,
+    load: row.load < 0 || row.load > 100 ? 'Must be 0–100' : undefined,
 });
 
 export const CustomCellsEditableTableExample = (): React.JSX.Element => {
-    const [data, setData] = useState<Asset[]>(initialData);
+    const [data, setData] = useState<Circuit[]>(initialData);
 
     return (
         <ExampleShowcase sx={{ p: 2 }}>
@@ -83,11 +83,19 @@ export const CustomCellsEditableTableExample = (): React.JSX.Element => {
                 columns={columns}
                 data={data}
                 onValidate={validate}
-                onCreate={(row): void => setData((prev) => [...prev, { ...row, id: String(prev.length + 1) }])}
+                onCreate={(row): void =>
+                    setData((prev) => [
+                        ...prev,
+                        { ...row, id: String(prev.length + 1), panel: row.panel || `P-0${prev.length + 1}` },
+                    ])
+                }
                 onUpdate={(row): void => setData((prev) => prev.map((r) => (r.id === row.id ? row : r)))}
                 onDelete={(id): void => setData((prev) => prev.filter((r) => r.id !== id))}
+                onDuplicate={(row): void =>
+                    setData((prev) => [...prev, { ...row, id: String(prev.length + 1), panel: `${row.panel}-copy` }])
+                }
                 enableDuplicate
-                createButtonText="Add Asset"
+                createButtonText="Add Circuit"
                 minHeight="300px"
             />
         </ExampleShowcase>

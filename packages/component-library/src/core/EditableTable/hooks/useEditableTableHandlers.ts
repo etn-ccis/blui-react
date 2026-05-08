@@ -98,6 +98,13 @@ export const useEditableTableHandlers = <TData extends EditableTableData>({
             const prevError = validationErrorsRef.current[`${rowId}_${columnId}`] as string | undefined;
             const coercedValue =
                 typeof prevValue === 'number' && typeof value === 'string' && value !== '' ? Number(value) : value;
+
+            // If the value is identical to the original and this row has no other pending edits,
+            // nothing has actually changed — skip to avoid a false hasPendingChanges signal.
+            if (coercedValue === prevValue && prevRowEdits === undefined) {
+                return;
+            }
+
             const updatedRow = {
                 ...(prevRowEdits || cell.row.original),
                 [columnId]: coercedValue,
@@ -202,22 +209,8 @@ export const useEditableTableHandlers = <TData extends EditableTableData>({
             recordRowAdd(newRow, insertedIndex);
             setTableData((prev) => [...prev, newRow]);
             setEditedRows((prev) => ({ ...prev, [tempId]: newRow }));
-
-            // Immediately validate so empty required fields show errors right away
-            if (onValidate) {
-                const errors = onValidate(newRow);
-                const cellErrors: Partial<Record<string, string | undefined>> = {};
-                Object.entries(errors).forEach(([columnId, error]) => {
-                    if (error) {
-                        cellErrors[`${tempId}_${columnId}`] = error as string;
-                    }
-                });
-                if (Object.keys(cellErrors).length > 0) {
-                    setValidationErrors((prev) => ({ ...prev, ...(cellErrors as any) }));
-                }
-            }
         },
-        [recordRowAdd, onValidate]
+        [recordRowAdd]
     );
 
     const handleDeleteRow = useCallback(

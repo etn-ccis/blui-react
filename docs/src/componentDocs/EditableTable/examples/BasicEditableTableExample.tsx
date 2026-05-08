@@ -2,41 +2,40 @@ import React, { useState } from 'react';
 import { EditableTable, type EditableTableColumnDef } from '@brightlayer-ui/react-components';
 import { ExampleShowcase } from '../../../shared';
 
-type Product = {
+type Sensor = {
     id: string;
     name: string;
-    quantity: number;
-    price: number;
-    inStock: boolean;
+    unit: string;
+    location: 'Boiler Room' | 'Pump Station' | 'Server Room' | 'Control Room';
+    threshold: number;
+    enabled: boolean;
 };
 
-const initialData: Product[] = [
-    { id: '1', name: 'Widget A', quantity: 10, price: 4.99, inStock: true },
-    { id: '2', name: 'Widget B', quantity: 5, price: 12.5, inStock: false },
-    { id: '3', name: 'Widget C', quantity: 20, price: 1.75, inStock: true },
+const locationOptions = ['Boiler Room', 'Pump Station', 'Server Room', 'Control Room'];
+
+const initialData: Sensor[] = [
+    { id: '1', name: 'Temperature Sensor', unit: '°C', location: 'Boiler Room', threshold: 80, enabled: true },
+    { id: '2', name: 'Pressure Gauge', unit: 'bar', location: 'Pump Station', threshold: 120, enabled: true },
+    { id: '3', name: 'Humidity Monitor', unit: '%RH', location: 'Server Room', threshold: 60, enabled: false },
 ];
 
-const columns: Array<EditableTableColumnDef<Product>> = [
-    { accessorKey: 'id', header: 'ID', cellType: 'text', enableEditing: false, size: 70 },
+const columns: Array<EditableTableColumnDef<Sensor>> = [
     { accessorKey: 'name', header: 'Name', cellType: 'text' },
-    { accessorKey: 'quantity', header: 'Qty', cellType: 'number', size: 90 },
-    { accessorKey: 'price', header: 'Price ($)', cellType: 'number', size: 110 },
-    {
-        accessorKey: 'inStock',
-        header: 'In Stock',
-        cellType: 'binary',
-        size: 100,
-    },
+    { accessorKey: 'unit', header: 'Unit', cellType: 'text', size: 90 },
+    { accessorKey: 'location', header: 'Location', cellType: 'select', editSelectOptions: locationOptions },
+    { accessorKey: 'threshold', header: 'Threshold', cellType: 'number', size: 110 },
+    { accessorKey: 'enabled', header: 'Enabled', cellType: 'binary', size: 90 },
 ];
 
-const validate = (row: Product): Partial<Record<keyof Product, string | undefined>> => ({
+const validate = (row: Sensor): Partial<Record<keyof Sensor, string | undefined>> => ({
     name: !row.name ? 'Name is required' : undefined,
-    quantity: row.quantity < 0 ? 'Must be ≥ 0' : undefined,
-    price: row.price < 0 ? 'Must be ≥ 0' : undefined,
+    unit: !row.unit ? 'Unit is required' : undefined,
+    location: !row.location ? 'Location is required' : undefined,
+    threshold: row.threshold < 0 ? 'Must be ≥ 0' : undefined,
 });
 
 export const BasicEditableTableExample = (): React.JSX.Element => {
-    const [data, setData] = useState<Product[]>(initialData);
+    const [data, setData] = useState<Sensor[]>(initialData);
 
     return (
         <ExampleShowcase sx={{ p: 2 }}>
@@ -47,7 +46,9 @@ export const BasicEditableTableExample = (): React.JSX.Element => {
                 onCreate={(row): void => setData((prev) => [...prev, { ...row, id: String(prev.length + 1) }])}
                 onUpdate={(row): void => setData((prev) => prev.map((r) => (r.id === row.id ? row : r)))}
                 onDelete={(id): void => setData((prev) => prev.filter((r) => r.id !== id))}
-                createButtonText="Add Product"
+                onDuplicate={(row): void => setData((prev) => [...prev, { ...row, id: String(prev.length + 1) }])}
+                enableDuplicate
+                createButtonText="Add Sensor"
                 minHeight="300px"
             />
         </ExampleShowcase>

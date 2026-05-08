@@ -3,21 +3,42 @@ import Box from '@mui/material/Box';
 import { CodeBlock, CodeBlockActionButtonRow } from '../../../shared';
 import { BasicEditableTableExample } from './BasicEditableTableExample';
 
-const codeSnippet = `const columns: Array<EditableTableColumnDef<Product>> = [
-    { accessorKey: 'id', header: 'ID', enableEditing: false, size: 70 },
-    { accessorKey: 'name', header: 'Name', muiEditTextFieldProps: { required: true } },
-    { accessorKey: 'quantity', header: 'Qty', size: 90, muiEditTextFieldProps: { type: 'number', required: true } },
-    { accessorKey: 'price', header: 'Price ($)', size: 110, muiEditTextFieldProps: { type: 'number', required: true } },
+const codeSnippet = `type Sensor = {
+    id: string;
+    name: string;
+    unit: string;
+    location: string;
+    threshold: number;
+    enabled: boolean;
+};
+
+const locationOptions = ['Boiler Room', 'Pump Station', 'Server Room', 'Control Room'];
+
+const columns: Array<EditableTableColumnDef<Sensor>> = [
+    { accessorKey: 'name', header: 'Name', cellType: 'text' },
+    { accessorKey: 'unit', header: 'Unit', cellType: 'text', size: 90 },
+    { accessorKey: 'location', header: 'Location', cellType: 'select', editSelectOptions: locationOptions },
+    { accessorKey: 'threshold', header: 'Threshold', cellType: 'number', size: 110 },
+    { accessorKey: 'enabled', header: 'Enabled', cellType: 'binary', size: 90 },
 ];
+
+const validate = (row: Sensor) => ({
+    name: !row.name ? 'Name is required' : undefined,
+    unit: !row.unit ? 'Unit is required' : undefined,
+    location: !row.location ? 'Location is required' : undefined,
+    threshold: row.threshold < 0 ? 'Must be ≥ 0' : undefined,
+});
 
 <EditableTable
     columns={columns}
     data={data}
     onValidate={validate}
-    onCreate={handleCreate}
-    onUpdate={handleUpdate}
-    onDelete={handleDelete}
-    createButtonText="Add Product"
+    onCreate={(row) => setData((prev) => [...prev, { ...row, id: String(prev.length + 1) }])}
+    onUpdate={(row) => setData((prev) => prev.map((r) => (r.id === row.id ? row : r)))}
+    onDelete={(id) => setData((prev) => prev.filter((r) => r.id !== id))}
+    onDuplicate={(row) => setData((prev) => [...prev, { ...row, id: String(prev.length + 1) }])}
+    enableDuplicate
+    createButtonText="Add Sensor"
 />`;
 
 export const BasicEditableTable = (): React.JSX.Element => (

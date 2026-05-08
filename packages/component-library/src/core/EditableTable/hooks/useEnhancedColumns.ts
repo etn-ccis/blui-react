@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { type MRT_ColumnDef } from 'material-react-table';
-import { useTheme } from '@mui/material';
+import { useTheme, Box } from '@mui/material';
 import * as BLUIColors from '@brightlayer-ui/colors';
 import Color from 'color';
 import { EditableTableColumnDef, EditableTableData, ValidationErrors } from '../types';
@@ -69,14 +69,16 @@ export const useEnhancedColumns = <TData extends EditableTableData>({
                     px: 0,
                     '&:hover': { backgroundColor: 'transparent' },
                     outline: hasError
-                        ? `1px solid ${(theme.vars as any)?.palette?.error?.main ?? theme.palette.error.main} !important`
+                        ? `1px solid ${BLUIColors.red[500]} !important`
                         : isEditing
                           ? `2px solid ${(theme.vars as any)?.palette?.primary?.main ?? theme.palette.primary.main} !important`
                           : 'none',
                     outlineOffset: '-2px',
                     ...(hasError && {
                         color: (theme.vars as any)?.palette?.error?.main ?? theme.palette.error.main,
-                        backgroundColor: `${(theme.vars as any)?.palette?.error?.light ?? theme.palette.error.light} !important`,
+                        backgroundColor: `${Color(BLUIColors.red[500])
+                            .alpha(theme.palette.mode === 'dark' ? 0.2 : 0.05)
+                            .string()} !important`,
                     }),
                 };
 
@@ -96,10 +98,9 @@ export const useEnhancedColumns = <TData extends EditableTableData>({
                                   cursor: column.enableEditing !== false ? (isEditing ? 'pointer' : 'cell') : 'cell',
                                   ...(hasError && {
                                       color: (t.vars as any)?.palette?.error?.main ?? t.palette.error.main,
-                                      backgroundColor: `${(t.vars as any)?.palette?.error?.light ?? t.palette.error.light} !important`,
-                                      ...(t.applyStyles?.('dark', {
-                                          backgroundColor: `${Color(BLUIColors.black[800]).mix(Color(t.palette.error.dark), 0.2).hex()} !important`,
-                                      }) ?? {}),
+                                      backgroundColor: `${Color(BLUIColors.red[500])
+                                          .alpha(t.palette.mode === 'dark' ? 0.2 : 0.05)
+                                          .string()} !important`,
                                   }),
                               })
                             : {
@@ -159,45 +160,110 @@ export const useEnhancedColumns = <TData extends EditableTableData>({
                         typeof opt === 'string' ? { value: opt, label: opt } : opt
                     );
 
-                    return React.createElement(SimpleSelectInput, {
-                        value: localValue,
-                        onChange: (newValue: any) => {
-                            setLocalValue(newValue);
-                            handleSaveCell(cell, newValue);
-                        },
-                        onBlur: () => {
-                            handleSaveCell(cell, localValue);
-                        },
-                        options,
-                        hasError,
-                    });
+                    const origDataSelect = originalDataMap.get(row.id);
+                    const isNewRowSelect = !originalDataMap.has(row.id);
+                    const showDotSelect =
+                        isNewRowSelect || localValue !== origDataSelect?.[cell.column.id as keyof TData];
+                    return React.createElement(
+                        Box,
+                        { sx: { position: 'relative', width: '100%' } },
+                        showDotSelect &&
+                            React.createElement(Box, {
+                                sx: {
+                                    position: 'absolute',
+                                    top: 4,
+                                    right: 4,
+                                    width: 8,
+                                    height: 8,
+                                    borderRadius: '50%',
+                                    backgroundColor: BLUIColors.blue[500],
+                                    pointerEvents: 'none',
+                                    zIndex: 1,
+                                },
+                            }),
+                        React.createElement(SimpleSelectInput, {
+                            value: localValue,
+                            onChange: (newValue: any) => {
+                                setLocalValue(newValue);
+                                handleSaveCell(cell, newValue);
+                            },
+                            onBlur: () => {
+                                handleSaveCell(cell, localValue);
+                            },
+                            options,
+                            hasError,
+                        })
+                    );
                 }
 
                 // Handle binary/boolean fields
                 if (cellType === 'binary') {
-                    return React.createElement(SimpleBinaryInput, {
-                        value: localValue,
-                        onChange: (newValue: boolean) => {
-                            setLocalValue(newValue);
-                            handleSaveCell(cell, newValue);
-                        },
-                    });
+                    const origDataBinary = originalDataMap.get(row.id);
+                    const isNewRowBinary = !originalDataMap.has(row.id);
+                    const showDotBinary =
+                        isNewRowBinary || localValue !== origDataBinary?.[cell.column.id as keyof TData];
+                    return React.createElement(
+                        Box,
+                        { sx: { position: 'relative', width: '100%' } },
+                        showDotBinary &&
+                            React.createElement(Box, {
+                                sx: {
+                                    position: 'absolute',
+                                    top: 4,
+                                    right: 4,
+                                    width: 8,
+                                    height: 8,
+                                    borderRadius: '50%',
+                                    backgroundColor: BLUIColors.blue[500],
+                                    pointerEvents: 'none',
+                                    zIndex: 1,
+                                },
+                            }),
+                        React.createElement(SimpleBinaryInput, {
+                            value: localValue,
+                            onChange: (newValue: boolean) => {
+                                setLocalValue(newValue);
+                                handleSaveCell(cell, newValue);
+                            },
+                        })
+                    );
                 }
 
                 // Handle text/number fields
                 const isNumber = cellType === 'number';
-                return React.createElement(SimpleTextInput, {
-                    value: localValue,
-                    onChange: (newValue: any) => {
-                        setLocalValue(newValue);
-                    },
-                    onBlur: () => {
-                        handleSaveCell(cell, localValue);
-                    },
-                    hasError,
-                    isNumber,
-                    type: isNumber ? 'number' : 'text',
-                });
+                const originalData = originalDataMap.get(row.id);
+                const isNewRow = !originalDataMap.has(row.id);
+                const showDot = isNewRow || localValue !== originalData?.[cell.column.id as keyof TData];
+                return React.createElement(
+                    Box,
+                    { sx: { position: 'relative', width: '100%' } },
+                    showDot &&
+                        React.createElement(Box, {
+                            sx: {
+                                position: 'absolute',
+                                top: 4,
+                                right: 4,
+                                width: 8,
+                                height: 8,
+                                borderRadius: '50%',
+                                backgroundColor: BLUIColors.blue[500],
+                                pointerEvents: 'none',
+                                zIndex: 1,
+                            },
+                        }),
+                    React.createElement(SimpleTextInput, {
+                        value: localValue,
+                        onChange: (newValue: any) => {
+                            setLocalValue(newValue);
+                        },
+                        onBlur: () => {
+                            handleSaveCell(cell, localValue);
+                        },
+                        hasError,
+                        isNumber,
+                        type: isNumber ? 'number' : 'text',
+                    })
+                );
             },
         }));
     }, [columns, editDisplayMode, validationErrors, handleSaveCell, editedRows, originalDataMap, theme]);
