@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useMemo, useReducer, type Dispatch } from 'react';
+import React, { createContext, useContext, useReducer, type Dispatch } from 'react';
 
 // ---------- State shape ----------
 export type AppState = {
@@ -57,21 +57,18 @@ function appReducer(state: AppState, action: AppAction): AppState {
 }
 
 // ---------- Split Contexts (prevents cascading re-renders) ----------
-const DirectionContext = createContext<'ltr' | 'rtl'>('ltr');
-const DrawerContext = createContext<boolean>(true);
-const PageTitleContext = createContext<string>('Showcase');
-const ThemeContext = createContext<'light' | 'dark'>('light');
-const AppDispatchContext = createContext<Dispatch<AppAction>>(() => {});
+const DirectionContext = createContext<'ltr' | 'rtl' | undefined>(undefined);
+const DrawerContext = createContext<boolean | undefined>(undefined);
+const PageTitleContext = createContext<string | undefined>(undefined);
+const ThemeContext = createContext<'light' | 'dark' | undefined>(undefined);
+const AppDispatchContext = createContext<Dispatch<AppAction> | undefined>(undefined);
 
 // ---------- Provider ----------
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [state, dispatch] = useReducer(appReducer, initialState);
 
-    // Memoize dispatch so it never causes re-renders on its own
-    const stableDispatch = useMemo(() => dispatch, []);
-
     return (
-        <AppDispatchContext.Provider value={stableDispatch}>
+        <AppDispatchContext.Provider value={dispatch}>
             <DirectionContext.Provider value={state.direction}>
                 <DrawerContext.Provider value={state.drawerOpen}>
                     <PageTitleContext.Provider value={state.pageTitle}>
@@ -84,16 +81,24 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 };
 
 // ---------- Granular Hooks ----------
-export const useDirection = (): 'ltr' | 'rtl' => useContext(DirectionContext);
-export const useDrawerOpen = (): boolean => useContext(DrawerContext);
-export const usePageTitle = (): string => useContext(PageTitleContext);
-export const useThemeMode = (): 'light' | 'dark' => useContext(ThemeContext);
-export const useAppDispatch = (): Dispatch<AppAction> => useContext(AppDispatchContext);
+function useRequiredContext<T>(context: React.Context<T | undefined>, name: string): T {
+    const value = useContext(context);
+    if (value === undefined) {
+        throw new Error(`${name} must be used within an <AppProvider>`);
+    }
+    return value;
+}
+
+export const useDirection = (): 'ltr' | 'rtl' => useRequiredContext(DirectionContext, 'useDirection');
+export const useDrawerOpen = (): boolean => useRequiredContext(DrawerContext, 'useDrawerOpen');
+export const useCurrentPageTitle = (): string => useRequiredContext(PageTitleContext, 'useCurrentPageTitle');
+export const useThemeMode = (): 'light' | 'dark' => useRequiredContext(ThemeContext, 'useThemeMode');
+export const useAppDispatch = (): Dispatch<AppAction> => useRequiredContext(AppDispatchContext, 'useAppDispatch');
 
 // ---------- Convenience (reads all — use sparingly) ----------
 export const useAppState = (): AppState => ({
     direction: useDirection(),
     drawerOpen: useDrawerOpen(),
-    pageTitle: usePageTitle(),
+    pageTitle: useCurrentPageTitle(),
     theme: useThemeMode(),
 });
