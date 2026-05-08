@@ -12,7 +12,7 @@ import MoreVert from '@mui/icons-material/MoreVert';
 import Notifications from '@mui/icons-material/Notifications';
 import Search from '@mui/icons-material/Search';
 import { GradeA, Moisture as Humidity, Temp } from '@brightlayer-ui/icons-mui';
-import { useAppSelector } from '../../../redux/hooks';
+import { useDirection } from '../../../contexts/AppContext';
 import Box from '@mui/material/Box';
 import { useColorScheme } from '@mui/material';
 
@@ -32,7 +32,7 @@ const InfoListItemStyles = {
 export const ScoreCardExample: React.FC = () => {
     const { mode } = useColorScheme();
     const isDarkMode = mode === 'light' ? false : true;
-    const direction = useAppSelector((store) => store.app.direction);
+    const direction = useDirection();
     const rtl = direction === 'rtl';
 
     const actionRow = (

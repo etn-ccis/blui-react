@@ -445,9 +445,6 @@ importers:
       '@mui/x-date-pickers':
         specifier: ^7.22.1
         version: 7.29.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react@19.2.4))(@mui/material@7.3.10(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@mui/system@7.3.10(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(date-fns@2.30.0)(moment@2.30.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      '@reduxjs/toolkit':
-        specifier: ^2.8.2
-        version: 2.11.2(react-redux@9.2.0(@types/react@19.2.14)(react@19.2.4)(redux@5.0.1))(react@19.2.4)
       '@types/jest':
         specifier: ^29.5.14
         version: 29.5.14
@@ -478,18 +475,9 @@ importers:
       react-dom:
         specifier: ^19.1.0
         version: 19.2.4(react@19.2.4)
-      react-redux:
-        specifier: ^9.2.0
-        version: 9.2.0(@types/react@19.2.14)(react@19.2.4)(redux@5.0.1)
       react-router-dom:
         specifier: ^7.12.0
         version: 7.14.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      redux:
-        specifier: ^5.0.1
-        version: 5.0.1
-      redux-thunk:
-        specifier: ^3.1.0
-        version: 3.1.0(redux@5.0.1)
       stylis:
         specifier: ^4.0.13
         version: 4.3.6
@@ -524,9 +512,6 @@ importers:
       '@types/react-dom':
         specifier: 19.1.6
         version: 19.1.6(@types/react@19.2.14)
-      '@types/react-redux':
-        specifier: ^7.1.9
-        version: 7.1.34
       '@types/react-router-dom':
         specifier: ^5.3.3
         version: 5.3.3
@@ -10592,8 +10577,8 @@ packages:
   libsodium@0.7.16:
     resolution: {integrity: sha512-3HrzSPuzm6Yt9aTYCDxYEG8x8/6C0+ag655Y7rhhWZM9PT4NpdnbqlzXhGZlDnkgR6MeSTnOt/VIyHLs9aSf+Q==}
 
-  license-checker@git+https://github.com/mwittig/license-checker.git#d546e3f738e14c62e732346fa355162d46700893:
-    resolution: {commit: d546e3f738e14c62e732346fa355162d46700893, repo: https://github.com/mwittig/license-checker.git, type: git}
+  license-checker@https://codeload.github.com/mwittig/license-checker/tar.gz/d546e3f738e14c62e732346fa355162d46700893:
+    resolution: {tarball: https://codeload.github.com/mwittig/license-checker/tar.gz/d546e3f738e14c62e732346fa355162d46700893}
     version: 1.0.0
     hasBin: true
 
@@ -26002,7 +25987,7 @@ snapshots:
 
   libsodium@0.7.16: {}
 
-  license-checker@git+https://github.com/mwittig/license-checker.git#d546e3f738e14c62e732346fa355162d46700893:
+  license-checker@https://codeload.github.com/mwittig/license-checker/tar.gz/d546e3f738e14c62e732346fa355162d46700893:
     dependencies:
       chalk: 0.5.1
       mkdirp: 0.3.5
@@ -26991,7 +26976,7 @@ snapshots:
       async: 2.6.4
       chalk: 2.4.2
       jquery-extend: 2.0.3
-      license-checker: git+https://github.com/mwittig/license-checker.git#d546e3f738e14c62e732346fa355162d46700893
+      license-checker: https://codeload.github.com/mwittig/license-checker/tar.gz/d546e3f738e14c62e732346fa355162d46700893
       mkdirp: 0.5.6
       nopt: 3.0.6
       nopt-defaults: 0.0.1

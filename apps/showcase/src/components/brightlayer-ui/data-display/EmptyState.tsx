@@ -6,7 +6,7 @@ import Devices from '@mui/icons-material/Devices';
 import LocationOff from '@mui/icons-material/LocationOff';
 import NotListedLocation from '@mui/icons-material/NotListedLocation';
 import { EmptyState } from '@brightlayer-ui/react-components';
-import { useAppSelector } from '../../../redux/hooks';
+import { useDirection } from '../../../contexts/AppContext';
 import Box from '@mui/material/Box';
 
 const containerStyles = {
@@ -18,7 +18,7 @@ const sectionTitleStyles = {
 };
 
 export const EmptyStateExample: React.FC = () => {
-    const direction = useAppSelector((store) => store.app.direction);
+    const direction = useDirection();
     const rtl = direction === 'rtl';
 
     return (

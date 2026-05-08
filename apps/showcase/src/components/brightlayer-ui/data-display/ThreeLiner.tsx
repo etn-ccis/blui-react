@@ -2,10 +2,10 @@ import React from 'react';
 import { ChannelValue, ThreeLiner } from '@brightlayer-ui/react-components';
 import TrendingUp from '@mui/icons-material/TrendingUp';
 import * as colors from '@brightlayer-ui/colors';
-import { useAppSelector } from '../../../redux/hooks';
+import { useDirection } from '../../../contexts/AppContext';
 
 export const ThreeLinerExample: React.FC = () => {
-    const direction = useAppSelector((store) => store.app.direction);
+    const direction = useDirection();
     const rtl = direction === 'rtl';
 
     return (

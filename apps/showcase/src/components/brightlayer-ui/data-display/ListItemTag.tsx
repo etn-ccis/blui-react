@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography';
 import { InfoListItem, ListItemTag } from '@brightlayer-ui/react-components';
 import * as colors from '@brightlayer-ui/colors';
 import BrightnessMedium from '@mui/icons-material/BrightnessMedium';
-import { useAppSelector } from '../../../redux/hooks';
+import { useDirection } from '../../../contexts/AppContext';
 import Box from '@mui/material/Box';
 
 const componentContainerStyles = {
@@ -18,7 +18,7 @@ const labelStyles = {
 };
 
 export const ListItemTagExample: React.FC = () => {
-    const direction = useAppSelector((store) => store.app.direction);
+    const direction = useDirection();
     const rtl = direction === 'rtl';
 
     return (
