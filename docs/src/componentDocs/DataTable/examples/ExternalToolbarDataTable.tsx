@@ -53,7 +53,7 @@ const handleSave = useCallback(async () => {
     <Box sx={{ ml: 'auto' }}>
         <Button variant="contained" size="small" startIcon={<SaveIcon />}
             onClick={() => void handleSave()}
-            disabled={!tableState?.hasPendingChanges || isSaving || !!tableState?.hasValidationErrors}>
+            disabled={!tableState?.canSave || isSaving}>
             Save to Device
         </Button>
     </Box>

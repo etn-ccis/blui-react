@@ -14,6 +14,13 @@ import {
     SimpleBinaryInput,
 } from '../cells';
 
+// Pre-mixed solid colors: red[500] blended with the known cell backgrounds.
+// This avoids transparency bleed-through from elements behind the cell.
+// Light: red[500] at 5% over white[50] (#ffffff)
+// Dark:  red[500] at 20% over black[800] (#2b353a)
+const ERROR_BG_LIGHT = Color(BLUIColors.red[500]).mix(Color(BLUIColors.white[50]), 0.95).hex();
+const ERROR_BG_DARK = Color(BLUIColors.red[500]).mix(Color(BLUIColors.black[800]), 0.8).hex();
+
 type UseEnhancedColumnsProps<TData extends DataTableData> = {
     columns: Array<DataTableColumnDef<TData>>;
     editDisplayMode: 'modal' | 'row' | 'cell' | 'table';
@@ -76,9 +83,7 @@ export const useEnhancedColumns = <TData extends DataTableData>({
                     outlineOffset: '-2px',
                     ...(hasError && {
                         color: (theme.vars as any)?.palette?.error?.main ?? theme.palette.error.main,
-                        backgroundColor: `${Color(BLUIColors.red[500])
-                            .alpha(theme.palette.mode === 'dark' ? 0.2 : 0.05)
-                            .string()} !important`,
+                        backgroundColor: `${ERROR_BG_LIGHT} !important`,
                     }),
                 };
 
@@ -98,9 +103,10 @@ export const useEnhancedColumns = <TData extends DataTableData>({
                                   cursor: column.enableEditing !== false ? (isEditing ? 'pointer' : 'cell') : 'cell',
                                   ...(hasError && {
                                       color: (t.vars as any)?.palette?.error?.main ?? t.palette.error.main,
-                                      backgroundColor: `${Color(BLUIColors.red[500])
-                                          .alpha(t.palette.mode === 'dark' ? 0.2 : 0.05)
-                                          .string()} !important`,
+                                      backgroundColor: `${ERROR_BG_LIGHT} !important`,
+                                      ...(t.applyStyles?.('dark', {
+                                          backgroundColor: `${ERROR_BG_DARK} !important`,
+                                      }) ?? {}),
                                   }),
                               })
                             : {

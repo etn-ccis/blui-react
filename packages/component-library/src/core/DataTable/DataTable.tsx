@@ -129,7 +129,11 @@ export const DataTable = (<TData extends DataTableData>(props: DataTableProps<TD
 
     const stableUndo = useCallback(() => undoRef.current(), []);
     const stableRedo = useCallback(() => redoRef.current(), []);
-    const stableSave = useCallback((): Promise<void> => handleSaveRowsRef.current(), []);
+    const stableSave = useCallback((): Promise<void> => {
+        // Close any active editing cell so its value is committed before saving.
+        tableRef.current?.setEditingCell(null);
+        return handleSaveRowsRef.current();
+    }, []);
     const stableReset = useCallback((): void => {
         // Close any active editing cell first so its Edit component unmounts
         // and re-renders with the restored value after the reset.
@@ -160,8 +164,45 @@ export const DataTable = (<TData extends DataTableData>(props: DataTableProps<TD
         return (): void => window.removeEventListener('keydown', handleKeyDown);
     }, [enableUndoRedo]);
 
-    const hasPendingChanges = Object.keys(editedRows).length > 0;
+    const hasPendingChanges = Object.entries(editedRows).some(([rowId, row]) => {
+        // Existing rows and duplicates of existing rows (prefixed __dup__) are always pending.
+        if (!rowId.startsWith('__new__')) return true;
+        // A freshly-added empty row (all fields '' or false) should not enable the save button
+        // until the user has actually typed something into at least one field.
+        return Object.entries(row as Record<string, unknown>).some(
+            ([key, val]) => key !== 'id' && val !== '' && val !== false && val !== null && val !== undefined
+        );
+    });
     const hasValidationErrors = Object.values(validationErrors).some(Boolean);
+
+    // canSave is recomputed after every edit by running onValidate against every pending row.
+    // It is true only when there is at least one meaningful pending row and all of them pass
+    // validation — i.e. all required fields are present and error-free.
+    const canSave = useMemo(() => {
+        const entries = Object.entries(editedRows);
+        if (entries.length === 0) return false;
+
+        // Run onValidate on ALL rows in editedRows — including empty new rows.
+        // An empty new row that fails validation (required fields missing) will block Save
+        // even when other already-edited rows are valid.
+        if (onValidate) {
+            const allValid = entries.every(([, row]) => {
+                const errors = onValidate(row as TData);
+                return !Object.values(errors).some(Boolean);
+            });
+            if (!allValid) return false;
+        }
+
+        // Only enable Save if at least one row represents a meaningful change.
+        // A freshly-added empty row (no fields filled) is excluded so that simply
+        // clicking "Add row" without typing anything doesn't enable the Save button.
+        return entries.some(([rowId, row]) => {
+            if (!rowId.startsWith('__new__')) return true;
+            return Object.entries(row as Record<string, unknown>).some(
+                ([key, val]) => key !== 'id' && val !== '' && val !== false && val !== null && val !== undefined
+            );
+        });
+    }, [editedRows, onValidate]);
 
     useEffect(() => {
         if (!onStateChangeRef.current) return;
@@ -170,6 +211,7 @@ export const DataTable = (<TData extends DataTableData>(props: DataTableProps<TD
             canRedo,
             hasPendingChanges,
             hasValidationErrors,
+            canSave,
             undo: stableUndo,
             redo: stableRedo,
             save: stableSave,
@@ -181,6 +223,7 @@ export const DataTable = (<TData extends DataTableData>(props: DataTableProps<TD
         canRedo,
         hasPendingChanges,
         hasValidationErrors,
+        canSave,
         stableUndo,
         stableRedo,
         stableSave,

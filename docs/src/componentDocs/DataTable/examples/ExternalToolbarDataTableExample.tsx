@@ -108,7 +108,7 @@ export const ExternalToolbarDataTableExample = (): React.JSX.Element => {
                         onClick={(): void => {
                             void handleSave();
                         }}
-                        disabled={!tableState?.hasPendingChanges || isSaving || !!tableState?.hasValidationErrors}
+                        disabled={!tableState?.canSave || isSaving}
                         sx={{ textTransform: 'none' }}
                     >
                         Save to Device

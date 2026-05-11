@@ -223,7 +223,7 @@ export const DataTableExample: React.FC = () => {
                             onClick={(): void => {
                                 void handleSave();
                             }}
-                            disabled={isSaving || !!tableState?.hasValidationErrors}
+                            disabled={!tableState?.canSave || isSaving}
                             sx={{ textTransform: 'none' }}
                         >
                             Save Changes
@@ -257,7 +257,7 @@ export const DataTableExample: React.FC = () => {
                 isLoading={isLoading}
                 isSaving={isSaving}
                 enableCreate={true}
-                editable={false}
+                editable={true}
                 enableDelete={true}
                 enableDuplicate={true}
                 enableColumnPinning={true}
