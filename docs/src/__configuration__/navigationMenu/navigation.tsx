@@ -208,6 +208,23 @@ export const pageDefinitions: RouteConfig[] = [
                 ],
             },
             {
+                title: 'Data Table',
+                path: 'data-table/',
+                element: <ComponentPreviewPage title={'Data Table'} />,
+                children: [
+                    {
+                        title: 'examples',
+                        path: 'examples',
+                        element: <DataTableExamples />,
+                    },
+                    {
+                        title: 'API Docs',
+                        path: 'api-docs',
+                        element: <DataTableAPIDocs />,
+                    },
+                ],
+            },
+            {
                 title: 'Drawer',
                 path: '',
                 pages: [
@@ -421,23 +438,6 @@ export const pageDefinitions: RouteConfig[] = [
                                 element: <DrawerFooterPlaygroundComponent />,
                             },
                         ],
-                    },
-                ],
-            },
-            {
-                title: 'Data Table',
-                path: 'data-table/',
-                element: <ComponentPreviewPage title={'Data Table'} />,
-                children: [
-                    {
-                        title: 'examples',
-                        path: 'examples',
-                        element: <DataTableExamples />,
-                    },
-                    {
-                        title: 'API Docs',
-                        path: 'api-docs',
-                        element: <DataTableAPIDocs />,
                     },
                 ],
             },

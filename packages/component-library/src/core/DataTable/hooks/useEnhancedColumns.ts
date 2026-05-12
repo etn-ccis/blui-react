@@ -78,7 +78,7 @@ export const useEnhancedColumns = <TData extends DataTableData>({
                     outline: hasError
                         ? `1px solid ${BLUIColors.red[500]} !important`
                         : isEditing
-                          ? `2px solid ${(theme.vars as any)?.palette?.primary?.main ?? theme.palette.primary.main} !important`
+                          ? `2px solid ${BLUIColors.blue[500]} !important`
                           : 'none',
                     outlineOffset: '-2px',
                     ...(hasError && {
