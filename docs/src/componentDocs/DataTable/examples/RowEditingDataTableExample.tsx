@@ -18,9 +18,9 @@ const initialData: Employee[] = [
 
 const columns: Array<DataTableColumnDef<Employee>> = [
     { accessorKey: 'id', header: 'ID', enableEditing: false, size: 70 },
-    { accessorKey: 'firstName', header: 'First Name', muiEditTextFieldProps: { required: true } },
-    { accessorKey: 'lastName', header: 'Last Name', muiEditTextFieldProps: { required: true } },
-    { accessorKey: 'role', header: 'Role', muiEditTextFieldProps: { required: true } },
+    { accessorKey: 'firstName', header: 'First Name', required: true, muiEditTextFieldProps: { required: true } },
+    { accessorKey: 'lastName', header: 'Last Name', required: true, muiEditTextFieldProps: { required: true } },
+    { accessorKey: 'role', header: 'Role', required: true, muiEditTextFieldProps: { required: true } },
     { accessorKey: 'department', header: 'Department' },
 ];
 

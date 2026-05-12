@@ -104,6 +104,14 @@ export type DataTableColumnDef<TData extends DataTableData> = MRT_ColumnDef<TDat
      * ```
      */
     cellType?: 'text' | 'number' | 'select' | 'binary';
+
+    /**
+     * When `true`, a red asterisk (*) is appended to the column header label to
+     * indicate this field is required when editing.
+     *
+     * @default false
+     */
+    required?: boolean;
 };
 
 export type DataTableProps<TData extends DataTableData> = {

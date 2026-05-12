@@ -20,9 +20,15 @@ const initialData: Sensor[] = [
 ];
 
 const columns: Array<DataTableColumnDef<Sensor>> = [
-    { accessorKey: 'name', header: 'Name', cellType: 'text' },
-    { accessorKey: 'unit', header: 'Unit', cellType: 'text', size: 90 },
-    { accessorKey: 'location', header: 'Location', cellType: 'select', editSelectOptions: locationOptions },
+    { accessorKey: 'name', header: 'Name', cellType: 'text', required: true },
+    { accessorKey: 'unit', header: 'Unit', cellType: 'text', size: 90, required: true },
+    {
+        accessorKey: 'location',
+        header: 'Location',
+        cellType: 'select',
+        editSelectOptions: locationOptions,
+        required: true,
+    },
     { accessorKey: 'threshold', header: 'Threshold', cellType: 'number', size: 110 },
     { accessorKey: 'enabled', header: 'Enabled', cellType: 'binary', size: 90 },
 ];

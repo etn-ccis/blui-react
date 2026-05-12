@@ -54,6 +54,7 @@ export const useEnhancedColumns = <TData extends DataTableData>({
         if (editDisplayMode !== 'cell' && editDisplayMode !== 'table') {
             return columns.map((column) => ({
                 ...column,
+                ...(column.required && { header: `${column.header as string}*` }),
                 muiTableBodyCellProps: resolveBodyCellProps(column),
                 muiTableHeadCellProps: resolveHeadCellProps(column),
             })) as Array<MRT_ColumnDef<TData>>;
@@ -61,6 +62,7 @@ export const useEnhancedColumns = <TData extends DataTableData>({
 
         return columns.map((column) => ({
             ...column,
+            ...(column.required && { header: `${column.header as string}*` }),
             muiTableBodyCellProps: (cellParams: any): any => {
                 const cellKey = `${cellParams.row.id}_${cellParams.cell.column.id}` as keyof TData;
                 const hasError = !!validationErrors?.[cellKey];

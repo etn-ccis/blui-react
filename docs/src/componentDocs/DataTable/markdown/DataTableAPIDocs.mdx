@@ -55,6 +55,7 @@ The `<DataTable>` component is a fully-featured data table built on top of [mate
 | :----------- | :------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------- | :------- | :------- |
 | cellType     | Type of cell editor to render: `'text'`, `'number'`, `'select'`, or `'binary'` (checkbox)                                       | `'text'` \| `'number'` \| `'select'` \| `'binary'`    | no       | `'text'` |
 | headerAlign  | Horizontal alignment of the column header text                                                                                   | `'left'` \| `'center'` \| `'right'`                   | no       | `'left'` |
+| required     | When `true`, appends a red `*` to the column header to indicate the field is required when editing                               | `boolean`                                             | no       | `false`  |
 | cellStyle    | Return MUI `sx` styles applied per-cell based on the cell value or row data. Merged on top of `muiTableBodyCellProps.sx`.        | `(params: CellStyleParams<TData>) => SxProps<Theme>`  | no       |          |
 
 </Box>

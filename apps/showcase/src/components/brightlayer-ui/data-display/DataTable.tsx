@@ -83,23 +83,27 @@ export const DataTableExample: React.FC = () => {
                 accessorKey: 'firstName',
                 header: 'First Name',
                 cellType: 'text',
+                required: true,
             },
             {
                 accessorKey: 'lastName',
                 header: 'Last Name',
                 cellType: 'text',
+                required: true,
             },
             {
                 accessorKey: 'age',
                 header: 'Age',
                 cellType: 'number',
                 size: 88,
+                required: true,
             },
             {
                 accessorKey: 'email',
                 header: 'Email',
                 // headerAlign: 'right',
                 cellType: 'text',
+                required: true,
             },
             {
                 accessorKey: 'state',
@@ -107,6 +111,7 @@ export const DataTableExample: React.FC = () => {
                 // headerAlign: 'left',
                 cellType: 'select',
                 editSelectOptions: states,
+                required: true,
             },
             {
                 accessorKey: 'isActive',

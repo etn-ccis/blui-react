@@ -25,8 +25,8 @@ const initialData: Relay[] = [
 const modeOptions = ['Auto', 'Manual', 'Off'];
 
 const columns: Array<DataTableColumnDef<Relay>> = [
-    { accessorKey: 'tag', header: 'Tag', cellType: 'text', size: 90 },
-    { accessorKey: 'description', header: 'Description', cellType: 'text' },
+    { accessorKey: 'tag', header: 'Tag', cellType: 'text', size: 90, required: true },
+    { accessorKey: 'description', header: 'Description', cellType: 'text', required: true },
     { accessorKey: 'setpoint', header: 'Setpoint', cellType: 'number', size: 110 },
     { accessorKey: 'mode', header: 'Mode', cellType: 'select', editSelectOptions: modeOptions, size: 110 },
     { accessorKey: 'armed', header: 'Armed', cellType: 'binary', size: 90 },

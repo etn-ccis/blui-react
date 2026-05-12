@@ -27,8 +27,8 @@ const zoneColor: Record<string, string> = {
 };
 
 const columns: Array<DataTableColumnDef<Circuit>> = [
-    { accessorKey: 'panel', header: 'Panel', cellType: 'text', size: 90 },
-    { accessorKey: 'label', header: 'Label', cellType: 'text' },
+    { accessorKey: 'panel', header: 'Panel', cellType: 'text', size: 90, required: true },
+    { accessorKey: 'label', header: 'Label', cellType: 'text', required: true },
     {
         accessorKey: 'zone',
         header: 'Zone',
