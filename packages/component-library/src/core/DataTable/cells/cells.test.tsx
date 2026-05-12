@@ -417,6 +417,33 @@ describe('SimpleBinaryInput', () => {
         // Should not throw
         fireEvent.click(textInput);
     });
+
+    it('calls onChange with false and sets text to "0" when wrapper is clicked while checked', () => {
+        const onChange = jest.fn();
+        render(
+            <ThemeProvider theme={theme}>
+                <SimpleBinaryInput value={true} onChange={onChange} />
+            </ThemeProvider>
+        );
+        const checkbox = screen.getByRole('checkbox');
+        // Click the wrapper Box (pointerEvents:none is on the checkbox itself)
+        fireEvent.click(checkbox.closest('[class*="MuiBox-root"]')!);
+        expect(onChange).toHaveBeenCalledWith(false);
+        expect(screen.getByDisplayValue('0')).toBeInTheDocument();
+    });
+
+    it('sets textValue to empty string when text input is cleared', () => {
+        const onChange = jest.fn();
+        render(
+            <ThemeProvider theme={theme}>
+                <SimpleBinaryInput value={true} onChange={onChange} />
+            </ThemeProvider>
+        );
+        const textInput = screen.getByDisplayValue('1');
+        fireEvent.change(textInput, { target: { value: '' } });
+        // onChange should NOT be called — empty string is not a real value change
+        expect(onChange).not.toHaveBeenCalled();
+    });
 });
 
 // ---------------------------------------------------------------------------

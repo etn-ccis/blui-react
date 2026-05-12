@@ -33,12 +33,6 @@ export const SimpleBinaryInput = ({
         setTextValue(value ? '1' : '0');
     }, [value]);
 
-    const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        const newValue = event.target.checked;
-        onChange(newValue);
-        setTextValue(newValue ? '1' : '0');
-    };
-
     const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         const inputValue = event.target.value;
         // Only allow '0' or '1'
@@ -92,7 +86,6 @@ export const SimpleBinaryInput = ({
                 <Checkbox
                     ref={checkboxRef}
                     checked={value ?? false}
-                    onChange={handleCheckboxChange}
                     disabled={disabled}
                     size="small"
                     sx={{

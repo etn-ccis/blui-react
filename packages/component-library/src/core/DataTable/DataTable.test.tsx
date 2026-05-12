@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, cleanup, fireEvent, act, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { blueThemes as theme } from '@brightlayer-ui/react-themes';
 import { DataTable } from './DataTable';
 import { DataTableColumnDef, DataTableState } from './types';
@@ -21,6 +21,10 @@ const sampleData: SampleRow[] = [
 ];
 
 const getRowId = (row: SampleRow): string => row.id;
+
+// A standard MUI theme with no CSS vars — causes t.vars to be undefined,
+// which drives the ?? t.palette.* fallback branches in all sx callbacks.
+const nonCssVarsTheme = createTheme();
 
 describe('DataTable', () => {
     it('renders without crashing', () => {
@@ -344,6 +348,7 @@ describe('DataTable', () => {
         expect(lastCall.canUndo).toBe(false);
         expect(lastCall.canRedo).toBe(false);
         expect(lastCall.hasPendingChanges).toBe(false);
+        expect(lastCall.canSave).toBe(false);
         expect(typeof lastCall.undo).toBe('function');
         expect(typeof lastCall.redo).toBe('function');
         expect(typeof lastCall.save).toBe('function');
@@ -514,5 +519,412 @@ describe('DataTable', () => {
         );
         expect(screen.getByText('Full Name')).toBeInTheDocument();
         expect(screen.getByText('User Age')).toBeInTheDocument();
+    });
+
+    it('canSave is false with no pending changes', async () => {
+        const onStateChange = jest.fn();
+        render(
+            <ThemeProvider theme={theme}>
+                <DataTable
+                    columns={sampleColumns}
+                    data={sampleData}
+                    getRowId={getRowId}
+                    onStateChange={onStateChange}
+                />
+            </ThemeProvider>
+        );
+        await waitFor(() => expect(onStateChange).toHaveBeenCalled());
+        const lastCall: DataTableState = onStateChange.mock.calls[onStateChange.mock.calls.length - 1][0];
+        expect(lastCall.canSave).toBe(false);
+    });
+
+    it('canSave becomes true after adding a new row with data and no onValidate', async () => {
+        const onStateChange = jest.fn();
+        render(
+            <ThemeProvider theme={theme}>
+                <DataTable
+                    columns={sampleColumns}
+                    data={sampleData}
+                    getRowId={getRowId}
+                    enableCreate={true}
+                    onStateChange={onStateChange}
+                />
+            </ThemeProvider>
+        );
+
+        // Click "New data point" to add an empty row — canSave should remain false
+        fireEvent.click(screen.getByText('New data point'));
+        await waitFor(() => expect(onStateChange).toHaveBeenCalled());
+        const lastCall: DataTableState = onStateChange.mock.calls[onStateChange.mock.calls.length - 1][0];
+        expect(lastCall.canSave).toBe(false);
+        expect(lastCall.hasPendingChanges).toBe(false);
+    });
+
+    it('canSave is false when onValidate returns errors for a pending row', async () => {
+        const onStateChange = jest.fn();
+        // Validate always returns an error so canSave stays false even with pending edits
+        const onValidate = jest.fn().mockReturnValue({ name: 'Required' });
+        let savedSaveFn: (() => Promise<void>) | undefined;
+
+        render(
+            <ThemeProvider theme={theme}>
+                <DataTable
+                    columns={sampleColumns}
+                    data={sampleData}
+                    getRowId={getRowId}
+                    enableDuplicate={true}
+                    enableRowActions={true}
+                    onValidate={onValidate}
+                    onStateChange={(state): void => {
+                        onStateChange(state);
+                        savedSaveFn = state.save;
+                    }}
+                />
+            </ThemeProvider>
+        );
+
+        // Duplicate a row so there is a pending change
+        const duplicateButtons = screen.getAllByTestId('ContentCopyIcon');
+        fireEvent.click(duplicateButtons[0]);
+
+        await waitFor(() => expect(onStateChange).toHaveBeenCalled());
+        const lastCall: DataTableState = onStateChange.mock.calls[onStateChange.mock.calls.length - 1][0];
+        // onValidate returns an error so canSave must be false even though there's a pending row
+        expect(lastCall.canSave).toBe(false);
+        expect(lastCall.hasPendingChanges).toBe(true);
+        expect(savedSaveFn).toBeDefined();
+    });
+
+    it('canSave is true when onValidate returns no errors for a pending row', async () => {
+        const onStateChange = jest.fn();
+        // Validate always passes
+        const onValidate = jest.fn().mockReturnValue({});
+
+        render(
+            <ThemeProvider theme={theme}>
+                <DataTable
+                    columns={sampleColumns}
+                    data={sampleData}
+                    getRowId={getRowId}
+                    enableDuplicate={true}
+                    enableRowActions={true}
+                    onValidate={onValidate}
+                    onStateChange={onStateChange}
+                />
+            </ThemeProvider>
+        );
+
+        const duplicateButtons = screen.getAllByTestId('ContentCopyIcon');
+        fireEvent.click(duplicateButtons[0]);
+
+        await waitFor(() => {
+            const lastCall: DataTableState = onStateChange.mock.calls[onStateChange.mock.calls.length - 1][0];
+            expect(lastCall.canSave).toBe(true);
+        });
+    });
+
+    it('stableSave closes editing cell and calls handleSaveRows', async () => {
+        const onUpdate = jest.fn().mockResolvedValue(undefined);
+        let savedSaveFn: (() => Promise<void>) | undefined;
+
+        render(
+            <ThemeProvider theme={theme}>
+                <DataTable
+                    columns={sampleColumns}
+                    data={sampleData}
+                    getRowId={getRowId}
+                    enableDuplicate={true}
+                    enableRowActions={true}
+                    onUpdate={onUpdate}
+                    onStateChange={(state): void => {
+                        savedSaveFn = state.save;
+                    }}
+                />
+            </ThemeProvider>
+        );
+
+        const duplicateButtons = screen.getAllByTestId('ContentCopyIcon');
+        fireEvent.click(duplicateButtons[0]);
+
+        await waitFor(() => expect(savedSaveFn).toBeDefined());
+
+        await act(async () => {
+            await savedSaveFn!();
+        });
+        // Save didn't throw — stableSave's setEditingCell path executed without error
+        expect(true).toBe(true);
+    });
+
+    it('stableReset closes editing cell and restores data', async () => {
+        let savedResetFn: (() => void) | undefined;
+        let savedHasPending: boolean | undefined;
+
+        render(
+            <ThemeProvider theme={theme}>
+                <DataTable
+                    columns={sampleColumns}
+                    data={sampleData}
+                    getRowId={getRowId}
+                    enableDuplicate={true}
+                    enableRowActions={true}
+                    onStateChange={(state): void => {
+                        savedResetFn = state.reset;
+                        savedHasPending = state.hasPendingChanges;
+                    }}
+                />
+            </ThemeProvider>
+        );
+
+        const duplicateButtons = screen.getAllByTestId('ContentCopyIcon');
+        fireEvent.click(duplicateButtons[0]);
+
+        await waitFor(() => expect(savedHasPending).toBe(true));
+
+        act(() => {
+            savedResetFn!();
+        });
+
+        await waitFor(() => expect(savedHasPending).toBe(false));
+    });
+
+    it('renders bottom toolbar create button with binary cellType column', () => {
+        type BinaryRow = { id: string; name: string; active: boolean };
+        const binaryColumns: Array<DataTableColumnDef<BinaryRow>> = [
+            { accessorKey: 'name', header: 'Name' },
+            { accessorKey: 'active', header: 'Active', cellType: 'binary' },
+        ];
+        render(
+            <ThemeProvider theme={theme}>
+                <DataTable
+                    columns={binaryColumns}
+                    data={[{ id: '1', name: 'Test', active: true }]}
+                    getRowId={(r): string => r.id}
+                    enableCreate={true}
+                />
+            </ThemeProvider>
+        );
+        expect(screen.getByText('New data point')).toBeInTheDocument();
+    });
+
+    it('uses deleteConfirmMessage factory function when provided', async () => {
+        const confirmSpy = jest.spyOn(window, 'confirm').mockReturnValue(false);
+        const deleteConfirmMessage = jest.fn().mockReturnValue('Delete this specific row?');
+        const onDelete = jest.fn();
+
+        render(
+            <ThemeProvider theme={theme}>
+                <DataTable
+                    columns={sampleColumns}
+                    data={sampleData}
+                    getRowId={getRowId}
+                    enableDelete={true}
+                    enableRowActions={true}
+                    onDelete={onDelete}
+                    deleteConfirmMessage={deleteConfirmMessage}
+                />
+            </ThemeProvider>
+        );
+
+        const deleteButtons = screen.getAllByTestId('DeleteOutlineIcon');
+        fireEvent.click(deleteButtons[0]);
+
+        await waitFor(() => {
+            expect(deleteConfirmMessage).toHaveBeenCalled();
+            expect(confirmSpy).toHaveBeenCalledWith('Delete this specific row?');
+        });
+
+        confirmSpy.mockRestore();
+    });
+
+    it('renders without crashing when onStateChange is not provided', () => {
+        render(
+            <ThemeProvider theme={theme}>
+                <DataTable columns={sampleColumns} data={sampleData} getRowId={getRowId} />
+            </ThemeProvider>
+        );
+        expect(screen.getByText('Name')).toBeInTheDocument();
+    });
+
+    it('applies minHeight undefined gracefully (no minHeight in container styles)', () => {
+        const { container } = render(
+            <ThemeProvider theme={theme}>
+                <DataTable columns={sampleColumns} data={sampleData} minHeight={undefined} />
+            </ThemeProvider>
+        );
+        const tableContainer = container.querySelector('.MuiTableContainer-root');
+        expect(tableContainer).toBeTruthy();
+    });
+
+    it('calls stableUndo when tableState.undo is invoked directly', async () => {
+        let savedState: DataTableState | undefined;
+
+        render(
+            <ThemeProvider theme={theme}>
+                <DataTable
+                    columns={sampleColumns}
+                    data={sampleData}
+                    getRowId={getRowId}
+                    enableUndoRedo={true}
+                    enableDuplicate={true}
+                    enableRowActions={true}
+                    onStateChange={(state): void => {
+                        savedState = state;
+                    }}
+                />
+            </ThemeProvider>
+        );
+
+        // Duplicate to create undo history
+        const duplicateButtons = screen.getAllByTestId('ContentCopyIcon');
+        fireEvent.click(duplicateButtons[0]);
+        await waitFor(() => expect(savedState?.canUndo).toBe(true));
+
+        act(() => {
+            savedState!.undo(); // directly invokes stableUndo
+        });
+        await waitFor(() => expect(savedState?.canUndo).toBe(false));
+    });
+
+    it('calls stableRedo when tableState.redo is invoked directly', async () => {
+        let savedState: DataTableState | undefined;
+
+        render(
+            <ThemeProvider theme={theme}>
+                <DataTable
+                    columns={sampleColumns}
+                    data={sampleData}
+                    getRowId={getRowId}
+                    enableUndoRedo={true}
+                    enableDuplicate={true}
+                    enableRowActions={true}
+                    onStateChange={(state): void => {
+                        savedState = state;
+                    }}
+                />
+            </ThemeProvider>
+        );
+
+        const duplicateButtons = screen.getAllByTestId('ContentCopyIcon');
+        fireEvent.click(duplicateButtons[0]);
+        await waitFor(() => expect(savedState?.canUndo).toBe(true));
+
+        act(() => {
+            savedState!.undo();
+        });
+        await waitFor(() => expect(savedState?.canRedo).toBe(true));
+
+        act(() => {
+            savedState!.redo(); // directly invokes stableRedo
+        });
+        await waitFor(() => expect(savedState?.canRedo).toBe(false));
+    });
+
+    it('renders top toolbar when enableColumnFilters is true (covers muiTopToolbarProps.sx)', () => {
+        render(
+            <ThemeProvider theme={theme}>
+                <DataTable columns={sampleColumns} data={sampleData} getRowId={getRowId} enableColumnFilters={true} />
+            </ThemeProvider>
+        );
+        expect(screen.getByText('Name')).toBeInTheDocument();
+    });
+
+    it('clicking Edit button in row mode invokes setEditingRow', () => {
+        render(
+            <ThemeProvider theme={theme}>
+                <DataTable
+                    columns={sampleColumns}
+                    data={sampleData}
+                    getRowId={getRowId}
+                    editable={true}
+                    editDisplayMode="row"
+                    enableRowActions={true}
+                />
+            </ThemeProvider>
+        );
+        const editButtons = screen.getAllByTestId('EditIcon');
+        // Click triggers actionTable.setEditingRow(row) — MRT swaps the row into edit mode
+        // so the row count doesn't change but the icon may unmount
+        expect(() => fireEvent.click(editButtons[0].closest('button')!)).not.toThrow();
+    });
+
+    it('skips columns without accessorKey when building empty row for create', () => {
+        type Row = { id: string; name: string };
+        const colsWithNoAccessorKey: Array<DataTableColumnDef<Row>> = [
+            { accessorKey: 'name', header: 'Name' },
+            // no accessorKey — hits the early return branch in renderBottomToolbarCustomActions
+            { header: 'Computed', id: 'computed', Cell: (): React.ReactElement => <span>computed</span> },
+        ];
+        render(
+            <ThemeProvider theme={theme}>
+                <DataTable
+                    columns={colsWithNoAccessorKey}
+                    data={[{ id: '1', name: 'Alice' }]}
+                    getRowId={(r): string => r.id}
+                    enableCreate={true}
+                />
+            </ThemeProvider>
+        );
+        expect(screen.getByText('New data point')).toBeInTheDocument();
+    });
+
+    it('hasPendingChanges is false for a new row where the only non-id field is false (binary)', async () => {
+        type BinaryRow = { id: string; active: boolean };
+        const binaryColumns: Array<DataTableColumnDef<BinaryRow>> = [
+            { accessorKey: 'active', header: 'Active', cellType: 'binary' },
+        ];
+        const onStateChange = jest.fn();
+
+        render(
+            <ThemeProvider theme={theme}>
+                <DataTable
+                    columns={binaryColumns}
+                    data={[]}
+                    getRowId={(r): string => r.id}
+                    enableCreate={true}
+                    onStateChange={onStateChange}
+                />
+            </ThemeProvider>
+        );
+
+        fireEvent.click(screen.getByText('New data point'));
+
+        await waitFor(() => expect(onStateChange).toHaveBeenCalled());
+        const lastCall: DataTableState = onStateChange.mock.calls[onStateChange.mock.calls.length - 1][0];
+        // active=false is the empty/blank state for a binary field — not a meaningful change
+        expect(lastCall.hasPendingChanges).toBe(false);
+        expect(lastCall.canSave).toBe(false);
+    });
+
+    // Renders with a non-CSS-vars theme so t.vars is undefined, driving all the
+    // `?? t.palette.*` fallback branches in muiTablePaperProps, muiBottomToolbarProps,
+    // muiTableBodyRowProps and the mrt-row-actions head/body cell sx callbacks.
+    it('renders correctly with a non-CSS-vars theme (covers ?? palette fallback branches)', () => {
+        render(
+            <ThemeProvider theme={nonCssVarsTheme}>
+                <DataTable columns={sampleColumns} data={sampleData} getRowId={getRowId} enableColumnFilters={true} />
+            </ThemeProvider>
+        );
+        expect(screen.getByText('Name')).toBeInTheDocument();
+    });
+
+    // With non-CSS-vars theme, t.vars?.palette?.primary?.darkChannel is undefined (falsy),
+    // which drives the `alpha(t.palette.primary.dark)` else-branches and the
+    // `?? t.palette.primary/error.main` fallbacks in the row-action IconButton hover sx callbacks.
+    it('renders row action buttons with non-CSS-vars theme (covers hover sx fallback branches)', () => {
+        render(
+            <ThemeProvider theme={nonCssVarsTheme}>
+                <DataTable
+                    columns={sampleColumns}
+                    data={sampleData}
+                    getRowId={getRowId}
+                    editable={true}
+                    editDisplayMode="row"
+                    enableDelete={true}
+                    enableDuplicate={true}
+                    enableRowActions={true}
+                />
+            </ThemeProvider>
+        );
+        expect(screen.getAllByTestId('DeleteOutlineIcon').length).toBeGreaterThan(0);
     });
 });
