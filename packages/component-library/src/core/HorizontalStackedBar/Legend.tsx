@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
-import { Box, BoxProps, styled, Typography, unstable_composeClasses as composeClasses } from '@mui/material';
+import { Box, BoxProps, Typography, unstable_composeClasses as composeClasses } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import { getLegendUtilityClass, LegendClasses, LegendClassKey } from './LegendClasses';
 import { cx } from '@emotion/css';
 
