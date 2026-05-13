@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
-import { Box, BoxProps, styled, unstable_composeClasses as composeClasses } from '@mui/material';
+import { Box, BoxProps, unstable_composeClasses as composeClasses } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import { getHorizontalBarUtilityClass, HorizontalBarClasses, HorizontalBarClassKey } from './HorizontalBarClasses';
 import { cx } from '@emotion/css';
 
