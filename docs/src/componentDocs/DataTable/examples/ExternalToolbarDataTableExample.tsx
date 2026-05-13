@@ -139,7 +139,6 @@ export const ExternalToolbarDataTableExample = (): React.JSX.Element => {
                 enableUndoRedo
                 onStateChange={setTableState}
                 createButtonText="Add Relay"
-                minHeight="300px"
             />
         </ExampleShowcase>
     );

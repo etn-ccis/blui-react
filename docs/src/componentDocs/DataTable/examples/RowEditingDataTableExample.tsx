@@ -46,7 +46,6 @@ export const RowEditingDataTableExample = (): React.JSX.Element => {
                 onDelete={(id): void => setData((prev) => prev.filter((r) => r.id !== id))}
                 enableDuplicate
                 createButtonText="Add Employee"
-                minHeight="300px"
             />
         </ExampleShowcase>
     );

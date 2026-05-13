@@ -64,7 +64,7 @@ export const DataTable = (<TData extends DataTableData>(props: DataTableProps<TD
         tableOptions = {},
         createButtonText = 'New data point',
         deleteConfirmMessage = 'Are you sure you want to delete this item?',
-        minHeight = '100px',
+        minHeight = `${HEADER_HEIGHT_PX + ROW_HEIGHT_PX}px`,
         enableUndoRedo = false,
         enableSorting = false,
         enableColumnFilters = false,
@@ -288,17 +288,14 @@ export const DataTable = (<TData extends DataTableData>(props: DataTableProps<TD
                 muiTableHeadCellProps: {
                     align: 'center',
                     sx: (t: any): any => ({
-                        px: 1,
                         opacity: 1,
                         backgroundColor: `${
                             t.vars?.palette?.background?.paper ?? t.palette.background.paper
                         } !important`,
                         borderBottom: `1px solid ${BLUIColors.gray[500]}`,
-                        ...(t.applyStyles?.('dark', {
-                            borderBottom: `1px solid ${BLUIColors.black[200]}`,
-                        }) ?? {}),
                         borderLeft: `1px solid ${BLUIColors.gray[500]}`,
                         ...(t.applyStyles?.('dark', {
+                            borderBottom: `1px solid ${BLUIColors.black[200]}`,
                             borderLeft: `1px solid ${BLUIColors.black[200]}`,
                         }) ?? {}),
                         boxShadow: 'none',
@@ -314,9 +311,10 @@ export const DataTable = (<TData extends DataTableData>(props: DataTableProps<TD
                     }),
                 },
                 muiTableBodyCellProps: {
-                    align: 'center',
+                    align: 'right',
                     sx: (t: any): any => ({
-                        px: 1,
+                        pl: 0,
+                        pr: 2,
                         height: 52,
                         cursor: 'cell',
                         opacity: 1,
@@ -345,13 +343,17 @@ export const DataTable = (<TData extends DataTableData>(props: DataTableProps<TD
                 maxHeight: `${MAX_VISIBLE_ROWS * ROW_HEIGHT_PX + HEADER_HEIGHT_PX}px`,
                 overflowY: 'auto',
                 ...(minHeight !== undefined ? { minHeight } : {}),
+                // Remove the right border on the last data column that sits directly
+                // before the pinned actions column so there is no double-border.
+                '& thead tr > th:has(+ th[data-pinned="true"])': { borderRight: 'none !important' },
+                '& tbody tr > td:has(+ td[data-pinned="true"])': { borderRight: 'none !important' },
             },
         },
         onCreatingRowCancel: (): void => clearValidationErrors(),
         onCreatingRowSave: undefined,
         renderRowActions: enableRowActions
             ? ({ row, table: actionTable }): React.ReactElement => (
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 0 }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 2 }}>
                       {editable && editDisplayMode === 'row' && (
                           <Tooltip title="Edit" placement="top" followCursor>
                               <IconButton

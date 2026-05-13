@@ -96,7 +96,6 @@ export const CustomCellsDataTableExample = (): React.JSX.Element => {
                 }
                 enableDuplicate
                 createButtonText="Add Circuit"
-                minHeight="300px"
             />
         </ExampleShowcase>
     );

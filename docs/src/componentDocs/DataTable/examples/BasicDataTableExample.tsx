@@ -55,7 +55,6 @@ export const BasicDataTableExample = (): React.JSX.Element => {
                 onDuplicate={(row): void => setData((prev) => [...prev, { ...row, id: String(prev.length + 1) }])}
                 enableDuplicate
                 createButtonText="Add Sensor"
-                minHeight="300px"
             />
         </ExampleShowcase>
     );
