@@ -51,6 +51,11 @@ const Root = styled(
         background: color,
         cursor: 'pointer',
         boxShadow: selectedStatus && selectedStatus === name ? '1px 1px 3px rgba(0, 0, 0, 0.25)' : 'none',
+        transition: 'height 0.2s ease-in-out, box-shadow 0.2s ease-in-out',
+        '&:hover': {
+            height: '8px',
+            boxShadow: '1px 1px 3px rgba(0, 0, 0, 0.25)',
+        },
     })
 );
 
@@ -59,17 +64,37 @@ const HorizontalBarRender: React.ForwardRefRenderFunction<unknown, HorizontalBar
     ref: any
 ) => {
     const generatedClasses = useUtilityClasses(props);
-    const { className: userClassName, selectedStatus, name, barPercentage, color = '#727E84', ...otherProps } = props;
+    const {
+        className: userClassName,
+        selectedStatus,
+        name,
+        barPercentage,
+        color = '#727E84',
+        onClick,
+        ...otherProps
+    } = props;
+
+    const [selectedState, setSelectedState] = React.useState<string | undefined>(selectedStatus);
+
+    React.useEffect(() => {
+        setSelectedState(selectedStatus);
+    }, [selectedStatus]);
+
+    const handleClick = (event: React.MouseEvent<HTMLDivElement>): void => {
+        setSelectedState(selectedState !== name ? name : '');
+        onClick?.(event);
+    };
 
     return (
         <Root
             ref={ref}
-            selectedStatus={selectedStatus}
+            selectedStatus={selectedState}
             name={name}
             barPercentage={barPercentage}
             color={color}
             className={cx(generatedClasses.root, userClassName)}
             data-testid={'blui-horizontal-bar-root'}
+            onClick={handleClick}
             {...otherProps}
         ></Root>
     );

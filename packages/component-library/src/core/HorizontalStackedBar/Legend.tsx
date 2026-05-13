@@ -29,7 +29,7 @@ export type LegendProps = BoxProps & {
      *
      * Default: none
      */
-    iconColor: string;
+    iconColor?: string;
 
     /** The count of the item in the legend
      *
@@ -54,12 +54,13 @@ export type LegendProps = BoxProps & {
      * Default: none
      */
     backgroundColor?: string;
+
+    variant?: 'failed' | 'success' | 'pending' | 'warning' | 'info' | 'cancelled';
 };
 
-const Root = styled(
-    Box,
-    {}
-)<Pick<LegendProps, 'selectedStatus' | 'label' | 'backgroundColor'>>(({ selectedStatus, label, backgroundColor }) => ({
+const Root = styled(Box, {
+    shouldForwardProp: (prop) => prop !== 'backgroundColor',
+})<Pick<LegendProps, 'selectedStatus' | 'label' | 'backgroundColor'>>(({ selectedStatus, label, backgroundColor }) => ({
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'center',
@@ -68,20 +69,24 @@ const Root = styled(
     padding: '8px',
     cursor: 'pointer',
     color: selectedStatus && selectedStatus === label ? '#ffff' : '',
-    background: selectedStatus === label ? backgroundColor : '',
-    flex: 1,
+    background: selectedStatus && selectedStatus === label ? backgroundColor : '',
+    transition: 'background 0.2s ease-in-out, color 0.2s ease-in-out',
 }));
 
 const Icon = styled(Box, {
-    shouldForwardProp: (prop) => !['iconSize', 'iconBackgroundColor'].includes(prop.toString()),
-})<Pick<LegendProps, 'iconColor'>>(({ iconColor }) => ({
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: '2px',
-    backgroundColor: iconColor,
-    borderRadius: '4px',
-}));
+    shouldForwardProp: (prop) =>
+        !['iconSize', 'iconBackgroundColor', 'isSelected', 'legendBackgroundColor'].includes(prop.toString()),
+})<{ iconColor: string; isSelected: boolean; legendBackgroundColor?: string }>(
+    ({ iconColor, isSelected, legendBackgroundColor }) => ({
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '2px',
+        color: !isSelected && legendBackgroundColor ? legendBackgroundColor : iconColor,
+        borderRadius: '4px',
+        transition: 'background-color 0.2s ease-in-out',
+    })
+);
 
 const LegendRender: React.ForwardRefRenderFunction<unknown, LegendProps> = (props: LegendProps, ref: any) => {
     const generatedClasses = useUtilityClasses(props);
@@ -93,20 +98,38 @@ const LegendRender: React.ForwardRefRenderFunction<unknown, LegendProps> = (prop
         label,
         selectedStatus,
         backgroundColor,
+        onClick,
         ...otherProps
     } = props;
+
+    const [selectedState, setSelectedState] = React.useState<string | undefined>(selectedStatus);
+
+    React.useEffect(() => {
+        setSelectedState(selectedStatus);
+    }, [selectedStatus]);
+
+    const handleClick = (event: React.MouseEvent<HTMLDivElement>): void => {
+        setSelectedState(selectedState !== label ? label : '');
+        onClick?.(event);
+    };
 
     return (
         <Root
             ref={ref}
-            selectedStatus={selectedStatus}
+            selectedStatus={selectedState}
             label={label}
             backgroundColor={backgroundColor}
             className={cx(generatedClasses.root, userClassName)}
             data-testid={'blui-horizontal-bar-root'}
+            onClick={handleClick}
             {...otherProps}
         >
-            <Icon iconColor={iconColor} className={generatedClasses.icon}>
+            <Icon
+                iconColor={iconColor}
+                isSelected={selectedState === label}
+                legendBackgroundColor={backgroundColor}
+                className={generatedClasses.icon}
+            >
                 {icon}
             </Icon>
             <Typography variant="body2" className={generatedClasses.count} sx={{ fontSize: '14px', fontWeight: 600 }}>

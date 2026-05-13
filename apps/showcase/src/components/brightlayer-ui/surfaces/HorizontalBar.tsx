@@ -3,51 +3,64 @@ import { HorizontalBar, Legend } from '@brightlayer-ui/react-components';
 import Box from '@mui/material/Box';
 import { Cancel, CheckCircle, Error, Pending, PlayCircle } from '@mui/icons-material';
 
-export const HorizontalBarExample: React.FC = () => (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-        <Box sx={{ display: 'flex', flexDirection: 'row', gap: '4px', alignItems: 'center', flex: 1 }}>
-            <Legend
-                label={'Failed'}
-                icon={<Error fontSize="medium" sx={{ color: '#fff' }} />}
-                iconColor={''}
-                count={5}
-                backgroundColor={'#CA3C3D'}
-            />
-            <Legend
-                label={'Cancelled'}
-                backgroundColor={'#2CA618'}
-                icon={<Cancel fontSize="medium" sx={{ color: '#fff' }} />}
-                iconColor={''}
-                count={16}
-            />
-            <Legend
-                label={'Deployed'}
-                icon={<CheckCircle fontSize="medium" />}
-                iconColor={''}
-                count={45}
-                backgroundColor={'#aec8aa'}
-            />
-            <Legend
-                label={'Deploying'}
-                backgroundColor={'#2CA618'}
-                icon={<PlayCircle fontSize="medium" sx={{ color: '#fff' }} />}
-                iconColor={''}
-                count={3}
-            />
-            <Legend
-                label={'Pending'}
-                backgroundColor={'#2CA618'}
-                icon={<Pending fontSize="medium" sx={{ color: '#fff' }} />}
-                iconColor={''}
-                count={80}
-            />
+const LegendData = [
+    { label: 'Failed', icon: <Error fontSize="medium" />, backgroundColor: '#CA3C3D', count: 5 },
+    { label: 'Cancelled', icon: <Cancel fontSize="medium" />, backgroundColor: '#F2B741', count: 16 },
+    { label: 'Deployed', icon: <CheckCircle fontSize="medium" />, backgroundColor: '#2CA618', count: 45 },
+    { label: 'Deploying', icon: <PlayCircle fontSize="medium" />, backgroundColor: '#0075EE', count: 3 },
+    { label: 'Pending', icon: <Pending fontSize="medium" />, backgroundColor: '#424E54', count: 80 },
+];
+
+const horizontalBarData = [
+    { name: 'Failed', color: '#CA3C3D', barPercentage: 25 },
+    { name: 'Cancelled', color: '#F2B741', barPercentage: 75 },
+    { name: 'Deployed', color: '#2CA618', barPercentage: 75 },
+    { name: 'Deploying', color: '#0075EE', barPercentage: 200 },
+    { name: 'Pending', color: '#424E54', barPercentage: 125 },
+];
+
+export const HorizontalBarExample: React.FC = () => {
+    const [selectedStatus, setSelectedStatus] = React.useState<string>('');
+
+    return (
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <Box
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    gap: '4px',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                }}
+            >
+                {LegendData.map((item) => (
+                    <Legend
+                        key={item.label}
+                        label={item.label}
+                        icon={item.icon}
+                        count={item.count}
+                        backgroundColor={item.backgroundColor}
+                        selectedStatus={selectedStatus}
+                        onClick={(): void => {
+                            setSelectedStatus(selectedStatus !== item.label ? item.label : '');
+                        }}
+                    />
+                ))}
+            </Box>
+            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '4px' }}>
+                {horizontalBarData.map((bar) => (
+                    <HorizontalBar
+                        key={bar.name}
+                        name={bar.name}
+                        color={bar.color}
+                        barPercentage={bar.barPercentage}
+                        selectedStatus={selectedStatus}
+                        onClick={(): void => {
+                            setSelectedStatus(selectedStatus !== bar.name ? bar.name : '');
+                        }}
+                    />
+                ))}
+            </Box>
         </Box>
-        <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '4px' }}>
-            <HorizontalBar name={'Failed'} color={'#727E84'} barPercentage={25} />
-            <HorizontalBar name={'Cancelled'} color={'#2296d0'} barPercentage={75} />
-            <HorizontalBar name={'Deployed'} color={'#ea2929'} barPercentage={75} />
-            <HorizontalBar name={'Deploying'} color={'#727E84'} barPercentage={100} />
-            <HorizontalBar name={'Pending'} color={'#dd75d2'} barPercentage={125} />
-        </Box>
-    </Box>
-);
+    );
+};
