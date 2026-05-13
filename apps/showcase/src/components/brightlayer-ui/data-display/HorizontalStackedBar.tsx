@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import { HorizontalBar, Legend, HorizontalStackedBar } from '@brightlayer-ui/react-components';
 import { Cancel, CheckCircle, Error, Pending, PlayCircle } from '@mui/icons-material';
 
-const LegendData = [
+const legendData = [
     { label: 'Failed', icon: <Error fontSize="medium" />, backgroundColor: '#CA3C3D', count: 5 },
     { label: 'Cancelled', icon: <Cancel fontSize="medium" />, backgroundColor: '#F2B741', count: 16 },
     { label: 'Deployed', icon: <CheckCircle fontSize="medium" />, backgroundColor: '#2CA618', count: 45 },
@@ -51,7 +51,7 @@ export const HorizontalStackedBarExample: React.FC = () => {
                             justifyContent: 'space-between',
                         }}
                     >
-                        {LegendData.map((item) => (
+                        {legendData.map((item) => (
                             <Legend
                                 key={item.label}
                                 label={item.label}
