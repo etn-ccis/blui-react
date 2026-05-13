@@ -1,5 +1,6 @@
 import React, { forwardRef, useEffect } from 'react';
-import { Box, BoxProps, styled, unstable_composeClasses as composeClasses } from '@mui/material';
+import { Box, BoxProps, unstable_composeClasses as composeClasses } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import {
     getHorizontalStackedBarUtilityClass,
     HorizontalStackedBarClasses,
