@@ -7,3 +7,4 @@ export * from './ListItemTag';
 export * from './DrawerLiteExample';
 export * from './ThreeLiner';
 export * from './UserMenu';
+export * from './HorizontalStackedBar';

@@ -11,6 +11,7 @@ import {
     DrawerLiteExample,
     ThreeLinerExample,
     UserMenuExample,
+    HorizontalStackedBarExample,
 } from '../../components';
 import { usePageTitle } from '../../hooks/usePageTitle';
 import Box from '@mui/material/Box';
@@ -27,6 +28,7 @@ export const BLUIDataDisplay: React.FC = () => {
         { label: 'List Item Tag', component: <ListItemTagExample /> },
         { label: 'Three Liner', component: <ThreeLinerExample /> },
         { label: 'UserMenu', component: <UserMenuExample /> },
+        { label: 'Horizontal Stacked Bar', component: <HorizontalStackedBarExample />, fullWidth: true },
     ];
     usePageTitle('Brightlayer UI Data Display');
 
