@@ -59,7 +59,7 @@ export type LegendProps = BoxProps & {
 };
 
 const Root = styled(Box, {
-    shouldForwardProp: (prop) => prop !== 'backgroundColor',
+    shouldForwardProp: (prop) => !['backgroundColor', 'selectedStatus', 'label', 'count'].includes(prop as string),
 })<Pick<LegendProps, 'selectedStatus' | 'label' | 'backgroundColor' | 'count'>>(
     ({ selectedStatus, label, backgroundColor, count }) => ({
         display: 'flex',
@@ -76,8 +76,7 @@ const Root = styled(Box, {
 );
 
 const Icon = styled(Box, {
-    shouldForwardProp: (prop) =>
-        !['iconSize', 'iconBackgroundColor', 'isSelected', 'legendBackgroundColor'].includes(prop.toString()),
+    shouldForwardProp: (prop) => !['iconColor', 'isSelected', 'legendBackgroundColor'].includes(prop.toString()),
 })<{ iconColor: string; isSelected: boolean; legendBackgroundColor?: string }>(
     ({ iconColor, isSelected, legendBackgroundColor }) => ({
         display: 'flex',

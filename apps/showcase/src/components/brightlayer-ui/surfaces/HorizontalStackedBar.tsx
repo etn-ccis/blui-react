@@ -1,6 +1,6 @@
 import React from 'react';
-import { HorizontalBar, Legend, HorizontalStackedBar } from '@brightlayer-ui/react-components';
 import Box from '@mui/material/Box';
+import { HorizontalBar, Legend, HorizontalStackedBar } from '@brightlayer-ui/react-components';
 import { Cancel, CheckCircle, Error, Pending, PlayCircle } from '@mui/icons-material';
 
 const LegendData = [
@@ -27,20 +27,20 @@ const combinedData = [
     { label: 'Pending', icon: <Pending fontSize="medium" />, backgroundColor: '#424E54', count: 80 },
 ];
 
-export const HorizontalBarExample: React.FC = () => {
+export const HorizontalStackedBarExample: React.FC = () => {
     const [selectedStatus, setSelectedStatus] = React.useState<string>('');
 
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
             {/* Combined Component Example */}
             <Box>
-                <h3>Combined HorizontalStackedBar Component</h3>
+                <h3>Combined Component</h3>
                 <HorizontalStackedBar data={combinedData} />
             </Box>
 
-            {/* Original Separate Components Example */}
+            {/* Separate Components Example */}
             <Box>
-                <h3>Separate Components (Original)</h3>
+                <h3>Separate Components</h3>
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                     <Box
                         sx={{

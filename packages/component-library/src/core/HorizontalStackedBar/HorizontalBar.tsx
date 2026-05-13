@@ -41,10 +41,9 @@ export type HorizontalBarProps = BoxProps & {
     color: string;
 };
 
-const Root = styled(
-    Box,
-    {}
-)<Pick<HorizontalBarProps, 'selectedStatus' | 'name' | 'barPercentage' | 'color'>>(
+const Root = styled(Box, {
+    shouldForwardProp: (prop) => !['selectedStatus', 'name', 'barPercentage', 'color'].includes(prop as string),
+})<Pick<HorizontalBarProps, 'selectedStatus' | 'name' | 'barPercentage' | 'color'>>(
     ({ selectedStatus, name, barPercentage, color }) => ({
         height: selectedStatus && selectedStatus === name ? '8px' : '4px',
         width: `${barPercentage}%`,
