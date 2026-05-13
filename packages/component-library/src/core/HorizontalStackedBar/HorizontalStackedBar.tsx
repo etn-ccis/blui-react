@@ -32,9 +32,6 @@ export type HorizontalStackedBarItem = {
 
     /** The count to display in the legend */
     count: number;
-
-    /** The width of the bar as a percentage */
-    barPercentage: number;
 };
 
 export type HorizontalStackedBarProps = Omit<BoxProps, 'onChange'> & {

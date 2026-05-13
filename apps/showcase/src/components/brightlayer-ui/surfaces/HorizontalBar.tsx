@@ -20,35 +20,11 @@ const horizontalBarData = [
 ];
 
 const combinedData = [
-    { label: 'Failed', icon: <Error fontSize="medium" />, backgroundColor: '#CA3C3D', count: 5, barPercentage: 25 },
-    {
-        label: 'Cancelled',
-        icon: <Cancel fontSize="medium" />,
-        backgroundColor: '#F2B741',
-        count: 16,
-        barPercentage: 75,
-    },
-    {
-        label: 'Deployed',
-        icon: <CheckCircle fontSize="medium" />,
-        backgroundColor: '#2CA618',
-        count: 45,
-        barPercentage: 75,
-    },
-    {
-        label: 'Deploying',
-        icon: <PlayCircle fontSize="medium" />,
-        backgroundColor: '#0075EE',
-        count: 3,
-        barPercentage: 200,
-    },
-    {
-        label: 'Pending',
-        icon: <Pending fontSize="medium" />,
-        backgroundColor: '#424E54',
-        count: 80,
-        barPercentage: 125,
-    },
+    { label: 'Failed', icon: <Error fontSize="medium" />, backgroundColor: '#CA3C3D', count: 5 },
+    { label: 'Cancelled', icon: <Cancel fontSize="medium" />, backgroundColor: '#F2B741', count: 16 },
+    { label: 'Deployed', icon: <CheckCircle fontSize="medium" />, backgroundColor: '#2CA618', count: 45 },
+    { label: 'Deploying', icon: <PlayCircle fontSize="medium" />, backgroundColor: '#0075EE', count: 3 },
+    { label: 'Pending', icon: <Pending fontSize="medium" />, backgroundColor: '#424E54', count: 80 },
 ];
 
 export const HorizontalBarExample: React.FC = () => {
