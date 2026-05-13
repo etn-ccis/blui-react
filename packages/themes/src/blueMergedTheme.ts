@@ -15,6 +15,8 @@ import MuiCheckbox from './componentStylesOverrides/MuiCheckbox';
 import MuiButtonBase from './componentStylesOverrides/MuiButtonBase';
 import MuiChip from './componentStylesOverrides/MuiChip';
 import MuiDrawer from './componentStylesOverrides/MuiDrawer';
+import MuiMenu from './componentStylesOverrides/MuiMenu';
+import MuiDialog from './componentStylesOverrides/MuiDialog';
 import MuiFab from './componentStylesOverrides/MuiFab';
 import MuiListItem from './componentStylesOverrides/MuiListItem';
 import MuiListSubheader from './componentStylesOverrides/MuiListSubheader';
@@ -86,8 +88,8 @@ const DarkThemeColors = {
         dark: BLUIColors.yellow[900],
     },
     background: {
-        default: BLUIColors.darkBlack[800],
-        paper: BLUIColors.black[900],
+        default: BLUIColors.darkBlack[900],
+        paper: BLUIColors.darkBlack[500],
     },
     text: {
         primary: BLUIColors.black[50],
@@ -137,6 +139,8 @@ export const blueThemes = createTheme({
         MuiButtonBase: MuiButtonBase,
         MuiChip: MuiChip,
         MuiDrawer: MuiDrawer,
+        MuiMenu: MuiMenu,
+        MuiDialog: MuiDialog,
         MuiFab: MuiFab,
         MuiListItem: MuiListItem,
         MuiListSubheader: MuiListSubheader,

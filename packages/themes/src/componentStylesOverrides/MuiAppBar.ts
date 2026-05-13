@@ -19,7 +19,7 @@ export default {
         colorPrimary: ({ theme }) => ({
             ...theme.applyStyles('dark', {
                 color: theme.vars.palette.text.primary,
-                backgroundColor: BLUIColors.black[800],
+                backgroundColor: BLUIColors.darkBlack[300],
             }),
         }),
         colorSecondary: ({ theme }) => ({

@@ -10,7 +10,7 @@ export default {
         }),
         paperAnchorBottom: ({ theme }) => ({
             ...theme.applyStyles('dark', {
-                backgroundColor: theme.vars.palette.background.paper,
+                backgroundColor: BLUIColors.darkBlack[300],
             }),
         }),
     },
