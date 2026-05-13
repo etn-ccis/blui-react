@@ -51,7 +51,7 @@ const Root = styled(
         background: color,
         cursor: 'pointer',
         boxShadow: selectedStatus && selectedStatus === name ? '1px 1px 3px rgba(0, 0, 0, 0.25)' : 'none',
-        transition: 'height 0.2s ease-in-out, box-shadow 0.2s ease-in-out',
+        transition: 'height 0.2s ease-in-out, box-shadow 0.2s ease-in-out, width 0.3s ease-in-out',
         '&:hover': {
             height: '8px',
             boxShadow: '1px 1px 3px rgba(0, 0, 0, 0.25)',

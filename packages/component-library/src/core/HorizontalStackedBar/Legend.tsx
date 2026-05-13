@@ -60,18 +60,20 @@ export type LegendProps = BoxProps & {
 
 const Root = styled(Box, {
     shouldForwardProp: (prop) => prop !== 'backgroundColor',
-})<Pick<LegendProps, 'selectedStatus' | 'label' | 'backgroundColor'>>(({ selectedStatus, label, backgroundColor }) => ({
-    display: 'flex',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    gap: '4px',
-    borderRadius: '4px',
-    padding: '8px',
-    cursor: 'pointer',
-    color: selectedStatus && selectedStatus === label ? '#ffff' : '',
-    background: selectedStatus && selectedStatus === label ? backgroundColor : '',
-    transition: 'background 0.2s ease-in-out, color 0.2s ease-in-out',
-}));
+})<Pick<LegendProps, 'selectedStatus' | 'label' | 'backgroundColor' | 'count'>>(
+    ({ selectedStatus, label, backgroundColor, count }) => ({
+        display: 'flex',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        gap: '4px',
+        borderRadius: '4px',
+        padding: '8px',
+        cursor: count !== 0 ? 'pointer' : 'default',
+        color: selectedStatus && selectedStatus === label ? '#ffff' : '',
+        background: selectedStatus && selectedStatus === label ? backgroundColor : '',
+        transition: 'background 0.2s ease-in-out, color 0.2s ease-in-out',
+    })
+);
 
 const Icon = styled(Box, {
     shouldForwardProp: (prop) =>
@@ -109,6 +111,7 @@ const LegendRender: React.ForwardRefRenderFunction<unknown, LegendProps> = (prop
     }, [selectedStatus]);
 
     const handleClick = (event: React.MouseEvent<HTMLDivElement>): void => {
+        if (count === 0) return;
         setSelectedState(selectedState !== label ? label : '');
         onClick?.(event);
     };
@@ -119,6 +122,7 @@ const LegendRender: React.ForwardRefRenderFunction<unknown, LegendProps> = (prop
             selectedStatus={selectedState}
             label={label}
             backgroundColor={backgroundColor}
+            count={count}
             className={cx(generatedClasses.root, userClassName)}
             data-testid={'blui-horizontal-bar-root'}
             onClick={handleClick}
@@ -132,12 +136,18 @@ const LegendRender: React.ForwardRefRenderFunction<unknown, LegendProps> = (prop
             >
                 {icon}
             </Icon>
-            <Typography variant="body2" className={generatedClasses.count} sx={{ fontSize: '14px', fontWeight: 600 }}>
+            <Typography
+                variant="body2"
+                className={generatedClasses.count}
+                color={count === 0 ? 'textDisabled' : ''}
+                sx={{ fontSize: '14px', fontWeight: 600 }}
+            >
                 {count}
             </Typography>
             <Typography
                 variant="subtitle2"
                 className={generatedClasses.label}
+                color={count === 0 ? 'textDisabled' : ''}
                 sx={{ fontSize: '14px', fontWeight: 400 }}
             >
                 {label}

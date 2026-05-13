@@ -55,6 +55,7 @@ const Root = styled(Box)({
     display: 'flex',
     flexDirection: 'column',
     gap: '16px',
+    height: '68px',
 });
 
 const LegendContainer = styled(Box)({
