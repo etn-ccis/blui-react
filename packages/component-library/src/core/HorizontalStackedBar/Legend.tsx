@@ -104,37 +104,42 @@ export type LegendProps = BoxProps & {
 };
 
 const Root = styled(Box, {
-    shouldForwardProp: (prop) => !['finalBackgroundColor', 'selectedStatus', 'label', 'count'].includes(prop as string),
-})<{ selectedStatus?: string; label: string; finalBackgroundColor?: string; count: number }>(
-    ({ selectedStatus, label, finalBackgroundColor, count }) => ({
-        display: 'flex',
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        gap: '4px',
-        borderRadius: '4px',
-        padding: '8px',
-        cursor: count !== 0 ? 'pointer' : 'default',
-        color: selectedStatus && selectedStatus === label ? '#ffff' : '',
-        background: selectedStatus && selectedStatus === label ? finalBackgroundColor : '',
-        transition: 'background 0.2s ease-in-out, color 0.2s ease-in-out',
-        '&:hover':
-            count !== 0 && selectedStatus !== label
-                ? {
-                      background: finalBackgroundColor ? `${finalBackgroundColor}1A` : 'rgba(0, 0, 0, 0.04)',
-                  }
-                : {},
-    })
-);
+    shouldForwardProp: (prop) =>
+        !['finalBackgroundColor', 'selectedStatus', 'label', 'count', 'selectedTextColor'].includes(prop as string),
+})<{
+    selectedStatus?: string;
+    label: string;
+    finalBackgroundColor?: string;
+    count: number;
+    selectedTextColor?: string;
+}>(({ selectedStatus, label, finalBackgroundColor, count, selectedTextColor }) => ({
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    gap: '4px',
+    borderRadius: '4px',
+    padding: '8px',
+    cursor: count !== 0 ? 'pointer' : 'default',
+    color: selectedStatus && selectedStatus === label ? selectedTextColor || '#ffff' : '',
+    background: selectedStatus && selectedStatus === label ? finalBackgroundColor : '',
+    transition: 'background 0.2s ease-in-out, color 0.2s ease-in-out',
+    '&:hover':
+        count !== 0 && selectedStatus !== label
+            ? {
+                  background: finalBackgroundColor ? `${finalBackgroundColor}1A` : 'rgba(0, 0, 0, 0.04)',
+              }
+            : {},
+}));
 
 const Icon = styled(Box, {
-    shouldForwardProp: (prop) => !['iconColor', 'isSelected', 'legendBackgroundColor'].includes(prop.toString()),
-})<{ iconColor?: string; isSelected: boolean; legendBackgroundColor?: string }>(
-    ({ iconColor, isSelected, legendBackgroundColor }) => ({
+    shouldForwardProp: (prop) => !['iconColorUnselected', 'iconColorSelected', 'isSelected'].includes(prop.toString()),
+})<{ iconColorUnselected?: string; iconColorSelected?: string; isSelected: boolean }>(
+    ({ iconColorUnselected, iconColorSelected, isSelected }) => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         padding: '2px',
-        color: !isSelected && legendBackgroundColor ? legendBackgroundColor : iconColor || 'inherit',
+        color: isSelected ? iconColorSelected || 'inherit' : iconColorUnselected || 'inherit',
         borderRadius: '4px',
         transition: 'background-color 0.2s ease-in-out',
     })
@@ -148,6 +153,15 @@ const LegendRender: React.ForwardRefRenderFunction<unknown, LegendProps> = (prop
         success: BLUIColors.green[700],
         pending: BLUIColors.black[500],
         info: BLUIColors.lightBlue[700],
+    };
+
+    const variantIconColors: Record<string, string> = {
+        canceled: BLUIColors.yellow[900],
+        info: BLUIColors.lightBlue[500],
+    };
+
+    const selectedVariantIconColors: Record<string, string> = {
+        canceled: BLUIColors.gray[900],
     };
     const {
         className: userClassName,
@@ -172,6 +186,12 @@ const LegendRender: React.ForwardRefRenderFunction<unknown, LegendProps> = (prop
     const variantColor = variant ? variantColors[variant] : undefined;
     const finalBackgroundColor = backgroundColor || variantColor;
 
+    // Icon color when not selected: variant-specific override, then finalBackgroundColor; prop overrides all
+    const resolvedIconColorUnselected =
+        iconColor ?? (variant ? (variantIconColors[variant] ?? finalBackgroundColor) : finalBackgroundColor);
+    // Icon color when selected: variant-specific override; prop overrides all
+    const resolvedIconColorSelected = iconColor ?? (variant ? selectedVariantIconColors[variant] : undefined);
+
     // Use provided icon or fall back to variant's default icon
     const variantIcon = variant ? (count === 0 ? VARIANT_OUTLINE_ICONS[variant] : VARIANT_ICONS[variant]) : undefined;
     const displayIcon = count === 0 ? (disabledIcon ?? icon ?? variantIcon) : (icon ?? variantIcon);
@@ -183,15 +203,16 @@ const LegendRender: React.ForwardRefRenderFunction<unknown, LegendProps> = (prop
             label={label}
             finalBackgroundColor={finalBackgroundColor}
             count={count}
+            selectedTextColor={resolvedIconColorSelected}
             className={cx(generatedClasses.root, userClassName)}
             data-testid={'blui-horizontal-bar-root'}
             onClick={handleClick}
             {...otherProps}
         >
             <Icon
-                iconColor={iconColor}
+                iconColorUnselected={resolvedIconColorUnselected}
+                iconColorSelected={resolvedIconColorSelected}
                 isSelected={selectedStatus === label}
-                legendBackgroundColor={finalBackgroundColor}
                 className={generatedClasses.icon}
             >
                 {displayIcon}
