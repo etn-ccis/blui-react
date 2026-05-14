@@ -1,10 +1,12 @@
 import { Components, Theme, CssVarsTheme } from '@mui/material/styles';
+import * as BLUIColors from '@brightlayer-ui/colors';
 
 export default {
     styleOverrides: {
         root: ({ theme }) => ({
             ...theme.applyStyles('dark', {
                 color: theme.vars.palette.text.secondary,
+                backgroundColor: BLUIColors.darkBlack[300],
             }),
         }),
         indicator: ({ theme }) => ({
