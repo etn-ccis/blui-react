@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import { Box, BoxProps, Typography, unstable_composeClasses as composeClasses } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import { getLegendUtilityClass, LegendClasses, LegendClassKey } from './LegendClasses';
 import { cx } from '@emotion/css';
 import {
@@ -17,15 +17,6 @@ import {
     PendingOutlined,
     WarningOutlined,
 } from '@mui/icons-material';
-
-const VARIANT_COLORS: Record<string, string> = {
-    failed: '#CA3C3D',
-    canceled: '#F2B741',
-    success: '#2CA618',
-    pending: '#424E54',
-    info: '#0075EE',
-    warning: '#FF9800',
-};
 
 const VARIANT_ICONS: Record<string, React.JSX.Element> = {
     failed: <Error fontSize="medium" />,
@@ -66,6 +57,13 @@ export type LegendProps = BoxProps & {
      * Default: variant icon if variant is specified, otherwise none
      */
     icon?: React.JSX.Element;
+
+    /** Icon to be shown in the legend when count === 0 (disabled state).
+     * Falls back to `icon` when not provided.
+     *
+     * Default: none
+     */
+    disabledIcon?: React.JSX.Element;
 
     /** Icon color to be shown in the legend
      *
@@ -118,6 +116,12 @@ const Root = styled(Box, {
         color: selectedStatus && selectedStatus === label ? '#ffff' : '',
         background: selectedStatus && selectedStatus === label ? finalBackgroundColor : '',
         transition: 'background 0.2s ease-in-out, color 0.2s ease-in-out',
+        '&:hover':
+            count !== 0 && selectedStatus !== label
+                ? {
+                      background: finalBackgroundColor ? `${finalBackgroundColor}1A` : 'rgba(0, 0, 0, 0.04)',
+                  }
+                : {},
     })
 );
 
@@ -137,9 +141,20 @@ const Icon = styled(Box, {
 
 const LegendRender: React.ForwardRefRenderFunction<unknown, LegendProps> = (props: LegendProps, ref: any) => {
     const generatedClasses = useUtilityClasses(props);
+    const theme = useTheme();
+    const isDark = theme.palette.mode === 'dark';
+    const variantColors: Record<string, string> = {
+        failed: '#CA3C3D',
+        canceled: isDark ? '#F2B741' : '#E57F0A',
+        success: '#2CA618',
+        pending: '#424E54',
+        info: '#0075EE',
+        warning: '#FF9800',
+    };
     const {
         className: userClassName,
         icon,
+        disabledIcon,
         iconColor,
         count,
         label,
@@ -163,12 +178,12 @@ const LegendRender: React.ForwardRefRenderFunction<unknown, LegendProps> = (prop
     };
 
     // Calculate final background color: custom backgroundColor takes precedence over variant color
-    const variantColor = variant ? VARIANT_COLORS[variant] : undefined;
+    const variantColor = variant ? variantColors[variant] : undefined;
     const finalBackgroundColor = backgroundColor || variantColor;
 
     // Use provided icon or fall back to variant's default icon
     const variantIcon = variant ? (count === 0 ? VARIANT_OUTLINE_ICONS[variant] : VARIANT_ICONS[variant]) : undefined;
-    const displayIcon = icon || variantIcon;
+    const displayIcon = count === 0 ? (disabledIcon ?? icon ?? variantIcon) : (icon ?? variantIcon);
 
     return (
         <Root

@@ -1,17 +1,8 @@
 import React, { forwardRef } from 'react';
 import { Box, BoxProps, unstable_composeClasses as composeClasses } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import { getHorizontalBarUtilityClass, HorizontalBarClasses, HorizontalBarClassKey } from './HorizontalBarClasses';
 import { cx } from '@emotion/css';
-
-const VARIANT_COLORS: Record<string, string> = {
-    failed: '#CA3C3D',
-    canceled: '#F2B741',
-    success: '#2CA618',
-    pending: '#424E54',
-    info: '#0075EE',
-    warning: '#FF9800',
-};
 
 const useUtilityClasses = (ownerState: HorizontalBarProps): Record<HorizontalBarClassKey, string> => {
     const { classes } = ownerState;
@@ -63,6 +54,7 @@ const Root = styled(Box, {
     ({ selectedStatus, name, barPercentage, color }) => ({
         height: selectedStatus && selectedStatus === name ? '8px' : '4px',
         width: `${barPercentage}%`,
+        minWidth: barPercentage && barPercentage > 0 ? '4px' : '0px',
         background: color,
         cursor: 'pointer',
         boxShadow: selectedStatus && selectedStatus === name ? '1px 1px 3px rgba(0, 0, 0, 0.25)' : 'none',
@@ -79,6 +71,16 @@ const HorizontalBarRender: React.ForwardRefRenderFunction<unknown, HorizontalBar
     ref: any
 ) => {
     const generatedClasses = useUtilityClasses(props);
+    const theme = useTheme();
+    const isDark = theme.palette.mode === 'dark';
+    const variantColors: Record<string, string> = {
+        failed: '#CA3C3D',
+        canceled: isDark ? '#F2B741' : '#E57F0A',
+        success: '#2CA618',
+        pending: '#424E54',
+        info: '#0075EE',
+        warning: '#FF9800',
+    };
     const {
         className: userClassName,
         selectedStatus,
@@ -93,7 +95,7 @@ const HorizontalBarRender: React.ForwardRefRenderFunction<unknown, HorizontalBar
     const [selectedState, setSelectedState] = React.useState<string | undefined>(selectedStatus);
 
     // Calculate final color: custom color takes precedence over variant color
-    const variantColor = variant ? VARIANT_COLORS[variant] : undefined;
+    const variantColor = variant ? variantColors[variant] : undefined;
     const finalColor = color || variantColor || '#727E84';
 
     React.useEffect(() => {

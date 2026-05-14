@@ -31,12 +31,23 @@ export type HorizontalStackedBarItem = {
      */
     icon?: React.JSX.Element;
 
+    /** Icon to be shown in the legend when count === 0 (disabled state).
+     * Falls back to `icon` when not provided.
+     *
+     * Default: none
+     */
+    disabledIcon?: React.JSX.Element;
+
     /** Background color for both legend and bar */
     backgroundColor?: string;
 
     /** The count to display in the legend */
     count: number;
 
+    /** The variant of the horizontal stacked bar item
+     *
+     * Default: none
+     */
     variant?: 'failed' | 'success' | 'pending' | 'warning' | 'info' | 'canceled';
 };
 
@@ -55,6 +66,11 @@ export type HorizontalStackedBarProps = Omit<BoxProps, 'onChange'> & {
 
     /** Controlled selected status */
     selectedStatus?: string;
+
+    /** When true, legend items with count === 0 are not rendered.
+     * @default false
+     */
+    hideEmptyCategories?: boolean;
 };
 
 const Root = styled(Box)({
@@ -76,7 +92,7 @@ const BarContainer = styled(Box)({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    gap: '4px',
+    gap: '2px',
 });
 
 const HorizontalStackedBarRender: React.ForwardRefRenderFunction<unknown, HorizontalStackedBarProps> = (
@@ -84,7 +100,14 @@ const HorizontalStackedBarRender: React.ForwardRefRenderFunction<unknown, Horizo
     ref: any
 ) => {
     const generatedClasses = useUtilityClasses(props);
-    const { className: userClassName, data, onChange, selectedStatus: controlledSelectedStatus, ...otherProps } = props;
+    const {
+        className: userClassName,
+        data,
+        onChange,
+        selectedStatus: controlledSelectedStatus,
+        hideEmptyCategories = false,
+        ...otherProps
+    } = props;
 
     const [internalSelectedStatus, setInternalSelectedStatus] = React.useState<string>('');
     const [totalCount, setTotalCount] = React.useState<number>(0);
@@ -114,11 +137,12 @@ const HorizontalStackedBarRender: React.ForwardRefRenderFunction<unknown, Horizo
             {...otherProps}
         >
             <LegendContainer className={generatedClasses.legendContainer}>
-                {data.map((item) => (
+                {(hideEmptyCategories ? data.filter((item) => item.count > 0) : data).map((item) => (
                     <Legend
                         key={item.label}
                         label={item.label}
                         icon={item.icon}
+                        disabledIcon={item.disabledIcon}
                         count={item.count}
                         variant={item.variant}
                         backgroundColor={item.backgroundColor}
@@ -128,17 +152,19 @@ const HorizontalStackedBarRender: React.ForwardRefRenderFunction<unknown, Horizo
                 ))}
             </LegendContainer>
             <BarContainer className={generatedClasses.barContainer}>
-                {data.map((item) => (
-                    <HorizontalBar
-                        key={item.label}
-                        name={item.label}
-                        color={item.backgroundColor}
-                        variant={item.variant}
-                        barPercentage={(item.count / totalCount) * 100}
-                        selectedStatus={selectedStatus}
-                        onClick={(): void => handleSelectionChange(item.label)}
-                    />
-                ))}
+                {data
+                    .filter((item) => item.count > 0)
+                    .map((item) => (
+                        <HorizontalBar
+                            key={item.label}
+                            name={item.label}
+                            color={item.backgroundColor}
+                            variant={item.variant}
+                            barPercentage={(item.count / totalCount) * 100}
+                            selectedStatus={selectedStatus}
+                            onClick={(): void => handleSelectionChange(item.label)}
+                        />
+                    ))}
             </BarContainer>
         </Root>
     );
