@@ -1,30 +1,32 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import { HorizontalBar, Legend, HorizontalStackedBar } from '@brightlayer-ui/react-components';
-import { Cancel, CheckCircle, Error, Pending, PlayCircle } from '@mui/icons-material';
 
 const legendData = [
-    { label: 'Failed', icon: <Error fontSize="medium" />, backgroundColor: '#CA3C3D', count: 5 },
-    { label: 'Cancelled', icon: <Cancel fontSize="medium" />, backgroundColor: '#F2B741', count: 16 },
-    { label: 'Deployed', icon: <CheckCircle fontSize="medium" />, backgroundColor: '#2CA618', count: 45 },
-    { label: 'Deploying', icon: <PlayCircle fontSize="medium" />, backgroundColor: '#0075EE', count: 3 },
-    { label: 'Pending', icon: <Pending fontSize="medium" />, backgroundColor: '#424E54', count: 80 },
+    { label: 'Failed', variant: 'failed' as const, count: 0 },
+    { label: 'Cancelled', variant: 'canceled' as const, count: 0 },
+    { label: 'Deployed', variant: 'success' as const, count: 0 },
+    { label: 'Deploying', variant: 'info' as const, count: 0 },
+    { label: 'Pending', variant: 'pending' as const, count: 0 },
+    { label: 'Warning', variant: 'warning' as const, count: 25 },
 ];
 
 const horizontalBarData = [
-    { name: 'Failed', color: '#CA3C3D', barPercentage: 25 },
-    { name: 'Cancelled', color: '#F2B741', barPercentage: 75 },
-    { name: 'Deployed', color: '#2CA618', barPercentage: 75 },
-    { name: 'Deploying', color: '#0075EE', barPercentage: 200 },
-    { name: 'Pending', color: '#424E54', barPercentage: 125 },
+    { name: 'Failed', variant: 'failed' as const, barPercentage: 0 },
+    { name: 'Cancelled', variant: 'canceled' as const, barPercentage: 0 },
+    { name: 'Deployed', variant: 'success' as const, barPercentage: 0 },
+    { name: 'Deploying', variant: 'info' as const, barPercentage: 0 },
+    { name: 'Pending', variant: 'pending' as const, barPercentage: 0 },
+    { name: 'Warning', variant: 'warning' as const, barPercentage: 100 },
 ];
 
 const combinedData = [
-    { label: 'Failed', icon: <Error fontSize="medium" />, backgroundColor: '#CA3C3D', count: 5 },
-    { label: 'Cancelled', icon: <Cancel fontSize="medium" />, backgroundColor: '#F2B741', count: 16 },
-    { label: 'Deployed', icon: <CheckCircle fontSize="medium" />, backgroundColor: '#2CA618', count: 45 },
-    { label: 'Deploying', icon: <PlayCircle fontSize="medium" />, backgroundColor: '#0075EE', count: 3 },
-    { label: 'Pending', icon: <Pending fontSize="medium" />, backgroundColor: '#424E54', count: 80 },
+    { label: 'Failed', variant: 'failed' as const, count: 10 },
+    { label: 'Cancelled', variant: 'canceled' as const, count: 30 },
+    { label: 'Deployed', variant: 'success' as const, count: 20 },
+    { label: 'Deploying', variant: 'info' as const, count: 50 },
+    { label: 'Pending', variant: 'pending' as const, count: 40 },
+    { label: 'Warning', variant: 'warning' as const, count: 60 },
 ];
 
 export const HorizontalStackedBarExample: React.FC = () => {
@@ -41,7 +43,7 @@ export const HorizontalStackedBarExample: React.FC = () => {
             {/* Separate Components Example */}
             <Box>
                 <h3>Separate Components</h3>
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: '16px', overflowX: 'auto' }}>
                     <Box
                         sx={{
                             display: 'flex',
@@ -55,9 +57,8 @@ export const HorizontalStackedBarExample: React.FC = () => {
                             <Legend
                                 key={item.label}
                                 label={item.label}
-                                icon={item.icon}
                                 count={item.count}
-                                backgroundColor={item.backgroundColor}
+                                variant={item.variant}
                                 selectedStatus={selectedStatus}
                                 onClick={(): void => {
                                     setSelectedStatus(selectedStatus !== item.label ? item.label : '');
@@ -70,7 +71,7 @@ export const HorizontalStackedBarExample: React.FC = () => {
                             <HorizontalBar
                                 key={bar.name}
                                 name={bar.name}
-                                color={bar.color}
+                                variant={bar.variant}
                                 barPercentage={bar.barPercentage}
                                 selectedStatus={selectedStatus}
                                 onClick={(): void => {

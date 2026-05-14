@@ -3,6 +3,47 @@ import { Box, BoxProps, Typography, unstable_composeClasses as composeClasses } 
 import { styled } from '@mui/material/styles';
 import { getLegendUtilityClass, LegendClasses, LegendClassKey } from './LegendClasses';
 import { cx } from '@emotion/css';
+import {
+    Error,
+    Cancel,
+    CheckCircle,
+    PlayCircle,
+    Pending,
+    Warning,
+    ErrorOutline,
+    CancelOutlined,
+    CheckCircleOutline,
+    PlayCircleOutline,
+    PendingOutlined,
+    WarningOutlined,
+} from '@mui/icons-material';
+
+const VARIANT_COLORS: Record<string, string> = {
+    failed: '#CA3C3D',
+    canceled: '#F2B741',
+    success: '#2CA618',
+    pending: '#424E54',
+    info: '#0075EE',
+    warning: '#FF9800',
+};
+
+const VARIANT_ICONS: Record<string, React.JSX.Element> = {
+    failed: <Error fontSize="medium" />,
+    canceled: <Cancel fontSize="medium" />,
+    success: <CheckCircle fontSize="medium" />,
+    info: <PlayCircle fontSize="medium" />,
+    pending: <Pending fontSize="medium" />,
+    warning: <Warning fontSize="medium" />,
+};
+
+const VARIANT_OUTLINE_ICONS: Record<string, React.JSX.Element> = {
+    failed: <ErrorOutline fontSize="medium" color="disabled" />,
+    canceled: <CancelOutlined fontSize="medium" color="disabled" />,
+    success: <CheckCircleOutline fontSize="medium" color="disabled" />,
+    info: <PlayCircleOutline fontSize="medium" color="disabled" />,
+    pending: <PendingOutlined fontSize="medium" color="disabled" />,
+    warning: <WarningOutlined fontSize="medium" color="disabled" />,
+};
 
 const useUtilityClasses = (ownerState: LegendProps): Record<LegendClassKey, string> => {
     const { classes } = ownerState;
@@ -22,9 +63,9 @@ export type LegendProps = BoxProps & {
 
     /** Icon to be shown in the legend
      *
-     * Default: none
+     * Default: variant icon if variant is specified, otherwise none
      */
-    icon: React.JSX.Element;
+    icon?: React.JSX.Element;
 
     /** Icon color to be shown in the legend
      *
@@ -56,13 +97,17 @@ export type LegendProps = BoxProps & {
      */
     backgroundColor?: string;
 
-    variant?: 'failed' | 'success' | 'pending' | 'warning' | 'info' | 'cancelled';
+    /** The variant of the legend item
+     *
+     * Default: none
+     */
+    variant?: 'failed' | 'success' | 'pending' | 'warning' | 'info' | 'canceled';
 };
 
 const Root = styled(Box, {
-    shouldForwardProp: (prop) => !['backgroundColor', 'selectedStatus', 'label', 'count'].includes(prop as string),
-})<Pick<LegendProps, 'selectedStatus' | 'label' | 'backgroundColor' | 'count'>>(
-    ({ selectedStatus, label, backgroundColor, count }) => ({
+    shouldForwardProp: (prop) => !['finalBackgroundColor', 'selectedStatus', 'label', 'count'].includes(prop as string),
+})<{ selectedStatus?: string; label: string; finalBackgroundColor?: string; count: number }>(
+    ({ selectedStatus, label, finalBackgroundColor, count }) => ({
         display: 'flex',
         justifyContent: 'flex-start',
         alignItems: 'center',
@@ -71,20 +116,20 @@ const Root = styled(Box, {
         padding: '8px',
         cursor: count !== 0 ? 'pointer' : 'default',
         color: selectedStatus && selectedStatus === label ? '#ffff' : '',
-        background: selectedStatus && selectedStatus === label ? backgroundColor : '',
+        background: selectedStatus && selectedStatus === label ? finalBackgroundColor : '',
         transition: 'background 0.2s ease-in-out, color 0.2s ease-in-out',
     })
 );
 
 const Icon = styled(Box, {
     shouldForwardProp: (prop) => !['iconColor', 'isSelected', 'legendBackgroundColor'].includes(prop.toString()),
-})<{ iconColor: string; isSelected: boolean; legendBackgroundColor?: string }>(
+})<{ iconColor?: string; isSelected: boolean; legendBackgroundColor?: string }>(
     ({ iconColor, isSelected, legendBackgroundColor }) => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         padding: '2px',
-        color: !isSelected && legendBackgroundColor ? legendBackgroundColor : iconColor,
+        color: !isSelected && legendBackgroundColor ? legendBackgroundColor : iconColor || 'inherit',
         borderRadius: '4px',
         transition: 'background-color 0.2s ease-in-out',
     })
@@ -100,6 +145,7 @@ const LegendRender: React.ForwardRefRenderFunction<unknown, LegendProps> = (prop
         label,
         selectedStatus,
         backgroundColor,
+        variant,
         onClick,
         ...otherProps
     } = props;
@@ -116,12 +162,20 @@ const LegendRender: React.ForwardRefRenderFunction<unknown, LegendProps> = (prop
         onClick?.(event);
     };
 
+    // Calculate final background color: custom backgroundColor takes precedence over variant color
+    const variantColor = variant ? VARIANT_COLORS[variant] : undefined;
+    const finalBackgroundColor = backgroundColor || variantColor;
+
+    // Use provided icon or fall back to variant's default icon
+    const variantIcon = variant ? (count === 0 ? VARIANT_OUTLINE_ICONS[variant] : VARIANT_ICONS[variant]) : undefined;
+    const displayIcon = icon || variantIcon;
+
     return (
         <Root
             ref={ref}
             selectedStatus={selectedState}
             label={label}
-            backgroundColor={backgroundColor}
+            finalBackgroundColor={finalBackgroundColor}
             count={count}
             className={cx(generatedClasses.root, userClassName)}
             data-testid={'blui-horizontal-bar-root'}
@@ -131,10 +185,10 @@ const LegendRender: React.ForwardRefRenderFunction<unknown, LegendProps> = (prop
             <Icon
                 iconColor={iconColor}
                 isSelected={selectedState === label}
-                legendBackgroundColor={backgroundColor}
+                legendBackgroundColor={finalBackgroundColor}
                 className={generatedClasses.icon}
             >
-                {icon}
+                {displayIcon}
             </Icon>
             <Typography
                 variant="body2"

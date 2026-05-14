@@ -25,14 +25,19 @@ export type HorizontalStackedBarItem = {
     /** The label of the item */
     label: string;
 
-    /** Icon to be shown in the legend */
-    icon: React.JSX.Element;
+    /** Icon to be shown in the legend
+     *
+     * Default: variant icon if variant is specified, otherwise none
+     */
+    icon?: React.JSX.Element;
 
     /** Background color for both legend and bar */
-    backgroundColor: string;
+    backgroundColor?: string;
 
     /** The count to display in the legend */
     count: number;
+
+    variant?: 'failed' | 'success' | 'pending' | 'warning' | 'info' | 'canceled';
 };
 
 export type HorizontalStackedBarProps = Omit<BoxProps, 'onChange'> & {
@@ -115,6 +120,7 @@ const HorizontalStackedBarRender: React.ForwardRefRenderFunction<unknown, Horizo
                         label={item.label}
                         icon={item.icon}
                         count={item.count}
+                        variant={item.variant}
                         backgroundColor={item.backgroundColor}
                         selectedStatus={selectedStatus}
                         onClick={(): void => handleSelectionChange(item.label)}
@@ -127,6 +133,7 @@ const HorizontalStackedBarRender: React.ForwardRefRenderFunction<unknown, Horizo
                         key={item.label}
                         name={item.label}
                         color={item.backgroundColor}
+                        variant={item.variant}
                         barPercentage={(item.count / totalCount) * 100}
                         selectedStatus={selectedStatus}
                         onClick={(): void => handleSelectionChange(item.label)}

@@ -4,6 +4,15 @@ import { styled } from '@mui/material/styles';
 import { getHorizontalBarUtilityClass, HorizontalBarClasses, HorizontalBarClassKey } from './HorizontalBarClasses';
 import { cx } from '@emotion/css';
 
+const VARIANT_COLORS: Record<string, string> = {
+    failed: '#CA3C3D',
+    canceled: '#F2B741',
+    success: '#2CA618',
+    pending: '#424E54',
+    info: '#0075EE',
+    warning: '#FF9800',
+};
+
 const useUtilityClasses = (ownerState: HorizontalBarProps): Record<HorizontalBarClassKey, string> => {
     const { classes } = ownerState;
     const slots = {
@@ -39,7 +48,13 @@ export type HorizontalBarProps = BoxProps & {
      *
      * Default: (--primary-gray-500, #727E84);
      */
-    color: string;
+    color?: string;
+
+    /** The variant of the horizontal bar item
+     *
+     * Default: none
+     */
+    variant?: 'failed' | 'success' | 'pending' | 'warning' | 'info' | 'canceled';
 };
 
 const Root = styled(Box, {
@@ -69,12 +84,17 @@ const HorizontalBarRender: React.ForwardRefRenderFunction<unknown, HorizontalBar
         selectedStatus,
         name,
         barPercentage,
-        color = '#727E84',
+        color,
+        variant,
         onClick,
         ...otherProps
     } = props;
 
     const [selectedState, setSelectedState] = React.useState<string | undefined>(selectedStatus);
+
+    // Calculate final color: custom color takes precedence over variant color
+    const variantColor = variant ? VARIANT_COLORS[variant] : undefined;
+    const finalColor = color || variantColor || '#727E84';
 
     React.useEffect(() => {
         setSelectedState(selectedStatus);
@@ -91,7 +111,7 @@ const HorizontalBarRender: React.ForwardRefRenderFunction<unknown, HorizontalBar
             selectedStatus={selectedState}
             name={name}
             barPercentage={barPercentage}
-            color={color}
+            color={finalColor}
             className={cx(generatedClasses.root, userClassName)}
             data-testid={'blui-horizontal-bar-root'}
             onClick={handleClick}
