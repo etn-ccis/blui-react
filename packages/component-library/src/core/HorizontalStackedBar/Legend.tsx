@@ -165,15 +165,8 @@ const LegendRender: React.ForwardRefRenderFunction<unknown, LegendProps> = (prop
         ...otherProps
     } = props;
 
-    const [selectedState, setSelectedState] = React.useState<string | undefined>(selectedStatus);
-
-    React.useEffect(() => {
-        setSelectedState(selectedStatus);
-    }, [selectedStatus]);
-
     const handleClick = (event: React.MouseEvent<HTMLDivElement>): void => {
         if (count === 0) return;
-        setSelectedState(selectedState !== label ? label : '');
         onClick?.(event);
     };
 
@@ -188,7 +181,7 @@ const LegendRender: React.ForwardRefRenderFunction<unknown, LegendProps> = (prop
     return (
         <Root
             ref={ref}
-            selectedStatus={selectedState}
+            selectedStatus={selectedStatus}
             label={label}
             finalBackgroundColor={finalBackgroundColor}
             count={count}
@@ -199,7 +192,7 @@ const LegendRender: React.ForwardRefRenderFunction<unknown, LegendProps> = (prop
         >
             <Icon
                 iconColor={iconColor}
-                isSelected={selectedState === label}
+                isSelected={selectedStatus === label}
                 legendBackgroundColor={finalBackgroundColor}
                 className={generatedClasses.icon}
             >
