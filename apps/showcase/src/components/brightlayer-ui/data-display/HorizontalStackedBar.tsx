@@ -5,7 +5,6 @@ import Typography from '@mui/material/Typography';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
-import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import { HorizontalStackedBar } from '@brightlayer-ui/react-components';
 
 const sectionTitleStyles = { mb: 1 };
@@ -17,7 +16,6 @@ const combinedData = [
     { label: 'Deployed', variant: 'success' as const, count: 0 },
     { label: 'Deploying', variant: 'info' as const, count: 10 },
     { label: 'Pending', variant: 'pending' as const, count: 40 },
-    { label: 'Warning', variant: 'warning' as const, count: 60 },
 ];
 
 const equalData = [
@@ -26,7 +24,6 @@ const equalData = [
     { label: 'Deployed', variant: 'success' as const, count: 20 },
     { label: 'Deploying', variant: 'info' as const, count: 20 },
     { label: 'Pending', variant: 'pending' as const, count: 20 },
-    { label: 'Warning', variant: 'warning' as const, count: 20 },
 ];
 
 const emptyData = [
@@ -35,7 +32,6 @@ const emptyData = [
     { label: 'Deployed', variant: 'success' as const, count: 0 },
     { label: 'Deploying', variant: 'info' as const, count: 0 },
     { label: 'Pending', variant: 'pending' as const, count: 0 },
-    { label: 'Warning', variant: 'warning' as const, count: 0 },
 ];
 
 const singleData = [{ label: 'Deployed', variant: 'success' as const, count: 150 }];
@@ -69,13 +65,6 @@ const customIconData = [
         disabledIcon: <HourglassEmptyIcon fontSize="small" />,
         count: 30,
     },
-    {
-        label: 'Warning',
-        variant: 'warning' as const,
-        icon: <WarningAmberIcon fontSize="small" />,
-        disabledIcon: <WarningAmberIcon fontSize="small" />,
-        count: 20,
-    },
 ];
 
 const mixedData = [
@@ -86,7 +75,7 @@ const mixedData = [
     { label: 'Pending', variant: 'pending' as const, count: 10 },
 ];
 
-const controlledStatuses = ['Failed', 'Cancelled', 'Deploying', 'Pending', 'Warning'];
+const controlledStatuses = ['Failed', 'Cancelled', 'Deploying', 'Pending'];
 
 const InteractiveExample: React.FC = () => {
     const [selectedStatus, setSelectedStatus] = useState('');

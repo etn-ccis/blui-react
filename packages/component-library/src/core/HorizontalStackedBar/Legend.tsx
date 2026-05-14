@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import { Box, BoxProps, Typography, unstable_composeClasses as composeClasses } from '@mui/material';
-import { styled, useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import { getLegendUtilityClass, LegendClasses, LegendClassKey } from './LegendClasses';
 import { cx } from '@emotion/css';
 import {
@@ -99,7 +99,7 @@ export type LegendProps = BoxProps & {
      *
      * Default: none
      */
-    variant?: 'failed' | 'success' | 'pending' | 'warning' | 'info' | 'canceled';
+    variant?: 'failed' | 'success' | 'pending' | 'info' | 'canceled';
 };
 
 const Root = styled(Box, {
@@ -141,15 +141,12 @@ const Icon = styled(Box, {
 
 const LegendRender: React.ForwardRefRenderFunction<unknown, LegendProps> = (props: LegendProps, ref: any) => {
     const generatedClasses = useUtilityClasses(props);
-    const theme = useTheme();
-    const isDark = theme.palette.mode === 'dark';
     const variantColors: Record<string, string> = {
         failed: '#CA3C3D',
-        canceled: isDark ? '#F2B741' : '#E57F0A',
+        canceled: '#F2B741',
         success: '#2CA618',
         pending: '#424E54',
         info: '#0075EE',
-        warning: '#FF9800',
     };
     const {
         className: userClassName,

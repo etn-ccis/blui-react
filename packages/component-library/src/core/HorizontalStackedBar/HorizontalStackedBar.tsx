@@ -48,7 +48,7 @@ export type HorizontalStackedBarItem = {
      *
      * Default: none
      */
-    variant?: 'failed' | 'success' | 'pending' | 'warning' | 'info' | 'canceled';
+    variant?: 'failed' | 'success' | 'pending' | 'info' | 'canceled';
 };
 
 export type HorizontalStackedBarProps = Omit<BoxProps, 'onChange'> & {
