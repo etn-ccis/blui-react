@@ -17,6 +17,7 @@ import {
     PendingOutlined,
     WarningOutlined,
 } from '@mui/icons-material';
+import { BLUIColors } from '@brightlayer-ui/colors';
 
 const VARIANT_ICONS: Record<string, React.JSX.Element> = {
     failed: <Error fontSize="medium" />,
@@ -142,11 +143,11 @@ const Icon = styled(Box, {
 const LegendRender: React.ForwardRefRenderFunction<unknown, LegendProps> = (props: LegendProps, ref: any) => {
     const generatedClasses = useUtilityClasses(props);
     const variantColors: Record<string, string> = {
-        failed: '#CA3C3D',
-        canceled: '#F2B741',
-        success: '#2CA618',
-        pending: '#424E54',
-        info: '#0075EE',
+        failed: BLUIColors.red[500],
+        canceled: BLUIColors.gold[400],
+        success: BLUIColors.green[700],
+        pending: BLUIColors.black[500],
+        info: BLUIColors.lightBlue[700],
     };
     const {
         className: userClassName,

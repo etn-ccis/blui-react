@@ -3,6 +3,7 @@ import { Box, BoxProps, unstable_composeClasses as composeClasses } from '@mui/m
 import { styled } from '@mui/material/styles';
 import { getHorizontalBarUtilityClass, HorizontalBarClasses, HorizontalBarClassKey } from './HorizontalBarClasses';
 import { cx } from '@emotion/css';
+import { BLUIColors } from '@brightlayer-ui/colors';
 
 const useUtilityClasses = (ownerState: HorizontalBarProps): Record<HorizontalBarClassKey, string> => {
     const { classes } = ownerState;
@@ -72,11 +73,11 @@ const HorizontalBarRender: React.ForwardRefRenderFunction<unknown, HorizontalBar
 ) => {
     const generatedClasses = useUtilityClasses(props);
     const variantColors: Record<string, string> = {
-        failed: '#CA3C3D',
-        canceled: '#F2B741',
-        success: '#2CA618',
-        pending: '#424E54',
-        info: '#0075EE',
+        failed: BLUIColors.red[500],
+        canceled: BLUIColors.yellow[900],
+        success: BLUIColors.green[700],
+        pending: BLUIColors.gray[500],
+        info: BLUIColors.lightBlue[500],
     };
     const {
         className: userClassName,
