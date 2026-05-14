@@ -15,8 +15,7 @@ import {
     DrawerHeader,
     NavItem,
 } from '@brightlayer-ui/react-components';
-import { useAppSelector, useAppDispatch } from '../redux/hooks';
-import { closeDrawer, toggleDrawer } from '../redux/reducers/app';
+import { useDrawerOpen, useDirection, useAppDispatch } from '../contexts/AppContext';
 import { SimpleNavItem, pageDefinitions } from './navigation';
 import Box from '@mui/material/Box';
 
@@ -25,8 +24,8 @@ import top from '../assets/topology_40.png';
 export const NavigationDrawer: React.FC = () => {
     const { mode } = useColorScheme();
     const isDarkMode = mode === 'light' ? false : true;
-    const open = useAppSelector((store) => store.app.drawerOpen);
-    const direction = useAppSelector((store) => store.app.direction);
+    const open = useDrawerOpen();
+    const direction = useDirection();
     const dispatch = useAppDispatch();
     const theme = useTheme();
     const navigate = useNavigate();
@@ -76,7 +75,7 @@ export const NavigationDrawer: React.FC = () => {
             ModalProps={{
                 //@ts-ignore
                 onBackdropClick: (): void => {
-                    dispatch(closeDrawer());
+                    dispatch({ type: 'CLOSE_DRAWER' });
                 },
             }}
             activeItem={activeRoute}
@@ -90,7 +89,7 @@ export const NavigationDrawer: React.FC = () => {
                 backgroundImage={top}
                 icon={<Menu sx={rtl ? { transform: 'scaleX(-1)' } : {}} />}
                 onIconClick={(): void => {
-                    dispatch(toggleDrawer());
+                    dispatch({ type: 'TOGGLE_DRAWER' });
                 }}
             />
             <DrawerBody>

@@ -1,8 +1,7 @@
 import CssBaseline from '@mui/material/CssBaseline';
 import '@testing-library/jest-dom';
-import { Provider } from 'react-redux';
+import { AppProvider } from '../../contexts/AppContext';
 import renderer from 'react-test-renderer';
-import { store } from '../../redux/store';
 import { RTLThemeProvider } from '../../components/RTLProvider';
 import * as components from '../../components/brightlayer-ui/surfaces/index';
 
@@ -12,12 +11,12 @@ Object.keys(components).forEach((componentName) => {
         test(`${componentName} renders examples correctly`, () => {
             const tree = renderer
                 .create(
-                    <Provider store={store}>
+                    <AppProvider>
                         <RTLThemeProvider>
                             <CssBaseline />
                             <Component />
                         </RTLThemeProvider>
-                    </Provider>
+                    </AppProvider>
                 )
                 .toJSON();
             expect(tree).toMatchSnapshot();

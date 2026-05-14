@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
-import { useAppSelector } from '../redux/hooks';
+import { useDirection } from '../contexts/AppContext';
 import rtlPlugin from 'stylis-plugin-rtl';
 import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
@@ -9,26 +9,35 @@ import { blueThemes } from '@brightlayer-ui/react-themes';
 document.body.setAttribute('dir', 'rtl');
 
 export const RTLThemeProvider = (props: any): JSX.Element => {
-    const dir = useAppSelector((store) => store.app.direction);
+    const dir = useDirection();
 
-    const cacheRtl = createCache({
-        key: dir === 'rtl' ? 'cssrtl' : 'cssltr',
-        prepend: true,
-        stylisPlugins: [rtlPlugin],
-    });
+    const cacheRtl = useMemo(
+        () =>
+            createCache({
+                key: 'cssrtl',
+                prepend: true,
+                stylisPlugins: [rtlPlugin],
+            }),
+        []
+    );
 
-    const cacheLtr = createCache({
-        key: dir === 'ltr' ? 'cssltr' : 'cssrtl',
-        prepend: true,
-        stylisPlugins: dir === 'ltr' ? undefined : [rtlPlugin],
-    });
+    const cacheLtr = useMemo(
+        () =>
+            createCache({
+                key: 'cssltr',
+                prepend: true,
+            }),
+        []
+    );
+
+    const theme = useMemo(() => ({ ...blueThemes, direction: dir }), [dir]);
 
     useEffect(() => {
         document.body.dir = dir;
     }, [dir]);
 
     return (
-        <ThemeProvider theme={{ ...blueThemes, direction: dir }} defaultMode="light">
+        <ThemeProvider theme={theme} defaultMode="light">
             <CacheProvider value={dir === 'ltr' ? cacheLtr : cacheRtl}>{props.children}</CacheProvider>
         </ThemeProvider>
     );
