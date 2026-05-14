@@ -2,7 +2,7 @@ import React from 'react';
 import {
     ChannelValueExample,
     ComponentExample,
-    EditableTableExample,
+    DataTableExample,
     EmptyStateExample,
     ExampleCardList,
     HeroExample,
@@ -35,9 +35,9 @@ export const BLUIDataDisplay: React.FC = () => {
             <ExampleCardList examples={examples} />
             <Box sx={{ m: 2 }}>
                 <Card sx={{ width: '100%' }}>
-                    <CardHeader title="Editable Table" />
+                    <CardHeader title="Data Table" />
                     <CardContent>
-                        <EditableTableExample />
+                        <DataTableExample />
                     </CardContent>
                 </Card>
             </Box>
