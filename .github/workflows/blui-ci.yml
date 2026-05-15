@@ -326,6 +326,12 @@ jobs:
             - name: Build showcase
               run: pnpm build
               working-directory: apps/showcase
+            - name: Save build
+              uses: actions/upload-artifact@v4
+              with:
+                  name: showcase-dist
+                  if-no-files-found: error
+                  path: apps/showcase/dist
 
     publish-components:
         name: Publish Component Library
@@ -620,3 +626,24 @@ jobs:
                   clean-exclude: |
                       .nojekyll
                       CNAME
+
+    deploy_showcase_preview:
+        name: Deploy Showcase Firebase Preview
+        runs-on: ubuntu-latest
+        if: ${{ github.event_name == 'pull_request' && github.base_ref == 'dev' && github.event.pull_request.head.repo.full_name == github.repository }}
+        needs: build_showcase
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+            - name: Download build
+              uses: actions/download-artifact@v4
+              with:
+                  name: showcase-dist
+                  path: apps/showcase/dist
+            - name: Deploy to Firebase Hosting Preview
+              uses: FirebaseExtended/action-hosting-deploy@v0
+              with:
+                  repoToken: ${{ secrets.GITHUB_TOKEN }}
+                  firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BLUI_REACT_SHOWCASE }}
+                  projectId: blui-react-showcase
+                  expires: 7d
