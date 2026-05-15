@@ -2,8 +2,7 @@ import React, { useEffect } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import jssPreset from '@mui/styles/jssPreset';
 import StylesProvider from '@mui/styles/StylesProvider';
-import { useSelector } from 'react-redux';
-import { AppStore } from '../__types__';
+import { useDirection } from '../contexts/AppContext';
 import rtl from 'jss-rtl';
 import { create } from 'jss';
 import rtlPlugin from 'stylis-plugin-rtl';
@@ -18,7 +17,7 @@ const jss = create({
 });
 
 export const RTLThemeProvider = (props: any): JSX.Element => {
-    const dir = useSelector((store: AppStore) => store.app.direction);
+    const dir = useDirection();
 
     const cacheRtl = createCache({
         key: dir === 'rtl' ? 'cssrtl' : 'cssltr',

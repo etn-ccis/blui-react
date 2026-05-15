@@ -8,10 +8,9 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import CssBaseline from '@mui/material/CssBaseline';
-import { Provider } from 'react-redux';
 import './index.css';
 import { MainRouter } from './router';
-import { store } from './redux/store';
+import { AppProvider } from './contexts/AppContext';
 import { RTLThemeProvider } from './components/RTLProvider';
 import '@brightlayer-ui/react-themes/open-sans';
 
@@ -34,12 +33,12 @@ declare global {
 
 root.render(
     <React.StrictMode>
-        <Provider store={store}>
+        <AppProvider>
             <RTLThemeProvider>
                 <CssBaseline />
                 <MainRouter />
             </RTLThemeProvider>
-        </Provider>
+        </AppProvider>
     </React.StrictMode>
 );
 
