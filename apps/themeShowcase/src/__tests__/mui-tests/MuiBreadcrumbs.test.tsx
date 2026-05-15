@@ -1,8 +1,7 @@
 import { cleanup, render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import CssBaseline from '@mui/material/CssBaseline';
-import { Provider } from 'react-redux';
-import { store } from '../../redux/store';
+import { AppProvider } from '../../contexts/AppContext';
 import { RTLThemeProvider } from '../../components/RTLProvider';
 import { BreadcrumbsExample } from '../../components/material-ui/navigation/Breadcrumbs';
 
@@ -10,12 +9,12 @@ describe('Channel value example', () => {
     afterEach(cleanup);
     it('renders without crashing', () => {
         render(
-            <Provider store={store}>
+            <AppProvider>
                 <RTLThemeProvider>
                     <CssBaseline />
                     <BreadcrumbsExample />
                 </RTLThemeProvider>
-            </Provider>
+            </AppProvider>
         );
     });
 });

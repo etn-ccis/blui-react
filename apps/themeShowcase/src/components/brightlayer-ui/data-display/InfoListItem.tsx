@@ -3,12 +3,11 @@ import { ChannelValue, InfoListItem } from '@brightlayer-ui/react-components';
 import * as colors from '@brightlayer-ui/colors';
 import { Alarm } from '@mui/icons-material';
 import { Device, GradeA, Leaf, Temp } from '@brightlayer-ui/icons-mui';
-import { AppStore } from '../../../__types__';
-import { useSelector } from 'react-redux';
+import { useDirection } from '../../../contexts/AppContext';
 import Box from '@mui/material/Box';
 
 export const InfoListItemExample: React.FC = () => {
-    const direction = useSelector((store: AppStore) => store.app.direction);
+    const direction = useDirection();
     const rtl = direction === 'rtl';
 
     return (
