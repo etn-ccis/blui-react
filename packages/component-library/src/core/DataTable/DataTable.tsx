@@ -276,7 +276,7 @@ export const DataTable = (<TData extends DataTableData>(props: DataTableProps<TD
             }),
         },
         muiTableBodyRowProps: {
-            hover: true,
+            hover: false,
             sx: (t: any): any => ({
                 '& td[data-pinned="true"]:before': {
                     backgroundColor: `${t.vars?.palette?.background?.paper ?? t.palette.background.paper} !important`,
@@ -455,7 +455,19 @@ export const DataTable = (<TData extends DataTableData>(props: DataTableProps<TD
 
     tableRef.current = table;
 
-    return <MaterialReactTable table={table} />;
+    return (
+        <Box
+            onBlur={(e: React.FocusEvent<HTMLDivElement>): void => {
+                // Clear editing cell when focus moves outside the table container
+                // so the blue outline doesn't persist after clicking away.
+                if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+                    tableRef.current?.setEditingCell(null);
+                }
+            }}
+        >
+            <MaterialReactTable table={table} />
+        </Box>
+    );
 }) as <TData extends DataTableData>(props: DataTableProps<TData>) => React.ReactElement;
 
 export type DataTableComponentProps<TData extends DataTableData> = DataTableProps<TData>;
