@@ -46,6 +46,25 @@ import MuiFormHelperText from './componentStylesOverrides/MuiFormHelperText';
 import MuiToggleButtonGroup from './componentStylesOverrides/MuiToggleButtonGroup';
 import MuiToggleButton from './componentStylesOverrides/MuiToggleButton';
 
+declare module '@mui/material/styles' {
+    // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+    interface Palette {
+        shadows: {
+            level1: string;
+            level2: string;
+            level3: string;
+        };
+    }
+    // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+    interface PaletteOptions {
+        shadows?: {
+            level1?: string;
+            level2?: string;
+            level3?: string;
+        };
+    }
+}
+
 // Light Theme Colors
 const LightThemeColors = {
     primary: createSimplePalette(BLUIColors.blue),
@@ -107,6 +126,20 @@ const DarkThemeColors = {
 
 const Spacing = 8;
 
+// light shadows
+const lightShadows = {
+    level1: '0 0 2px 0 rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.04), 0 1px 4px 0 rgba(0, 0, 0, 0.04)',
+    level2: '0 0 6px 0 rgba(0, 0, 0, 0.04), 0 1px 4px 0 rgba(0, 0, 0, 0.04), 0 4px 8px 0 rgba(0, 0, 0, 0.04)',
+    level3: '0 0 2px 0 rgba(0, 0, 0, 0.12), 0 8px 16px 0 rgba(0, 0, 0, 0.12), 0 10px 32px 0 rgba(0, 0, 0, 0.12)',
+};
+
+// dark shadows
+const darkShadows = {
+    level1: '0 0 2px 0 rgba(0, 0, 0, 0.32), 0 1px 2px 0 rgba(0, 0, 0, 0.32), 0 1px 4px 0 rgba(0, 0, 0, 0.32)',
+    level2: '0 0 6px 0 rgba(0, 0, 0, 0.32), 0 1px 4px 0 rgba(0, 0, 0, 0.32), 0 4px 8px 0 rgba(0, 0, 0, 0.32)',
+    level3: '0 0 2px 0 rgba(0, 0, 0, 0.48), 0 8px 16px 0 rgba(0, 0, 0, 0.48), 0 10px 32px 0 rgba(0, 0, 0, 0.48)',
+};
+
 export const blueThemes = createTheme({
     cssVariables: { colorSchemeSelector: 'class' },
     direction: 'ltr',
@@ -117,12 +150,14 @@ export const blueThemes = createTheme({
             palette: {
                 mode: 'light',
                 ...LightThemeColors,
+                shadows: lightShadows,
             },
         },
         dark: {
             palette: {
                 mode: 'dark',
                 ...DarkThemeColors,
+                shadows: darkShadows,
             },
         },
     },

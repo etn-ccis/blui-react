@@ -4,8 +4,10 @@ import * as BLUIColors from '@brightlayer-ui/colors';
 export default {
     styleOverrides: {
         root: ({ theme }) => ({
+            boxShadow: theme.vars.palette.shadows.level2,
             ...theme.applyStyles('dark', {
                 backgroundImage: 'none',
+                boxShadow: theme.vars.palette.shadows.level2,
             }),
         }),
         colorDefault: ({ theme }) => ({
