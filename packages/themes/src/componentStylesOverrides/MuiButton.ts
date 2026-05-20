@@ -2,6 +2,9 @@ import { Components, Theme, CssVarsTheme } from '@mui/material/styles';
 import * as BLUIColors from '@brightlayer-ui/colors';
 import Color from 'color';
 
+const LightHover = Color(BLUIColors.highlight).alpha(0.08).string();
+const DarkHover = Color(BLUIColors.highlightBlue).alpha(0.2).string();
+
 export default {
     styleOverrides: {
         root: ({ theme }) => ({
@@ -9,7 +12,7 @@ export default {
             ...theme.applyStyles('dark', {
                 textTransform: 'none',
                 '&:hover': {
-                    backgroundColor: BLUIColors.black[400],
+                    backgroundColor: DarkHover,
                 },
             }),
         }),
@@ -31,14 +34,14 @@ export default {
             '& .MuiButton-disableElevation:not(.MuiButton-containedPrimary):not(.MuiButton-containedSecondary)': {
                 backgroundColor: BLUIColors.white[500],
                 '&:hover': {
-                    backgroundColor: BLUIColors.white[300],
+                    backgroundColor: LightHover,
                 },
                 '&.Mui-disabled': {
                     borderWidth: 0,
                 },
             },
             '&:hover': {
-                backgroundColor: Color(BLUIColors.black[500]).alpha(0.05).string(),
+                backgroundColor: LightHover,
             },
             '&.Mui-disabled': {
                 backgroundColor: theme.vars.palette.background.paper,
@@ -48,7 +51,7 @@ export default {
                 backgroundColor: BLUIColors.black[500],
                 color: BLUIColors.white[50],
                 '&:hover': {
-                    backgroundColor: BLUIColors.black[400],
+                    backgroundColor: DarkHover,
                 },
                 '&.Mui-disabled': {
                     backgroundColor: theme.vars.palette.action.disabledBackground,
@@ -105,7 +108,7 @@ export default {
         }),
         outlined: ({ theme }) => ({
             '&:hover': {
-                backgroundColor: Color(BLUIColors.black[500]).alpha(0.05).string(),
+                backgroundColor: LightHover,
             },
             '&.Mui-disabled': {
                 backgroundColor: theme.vars.palette.background.paper,
@@ -113,7 +116,7 @@ export default {
             },
             ...theme.applyStyles('dark', {
                 '&:hover': {
-                    backgroundColor: Color(BLUIColors.black[50]).alpha(0.1).string(),
+                    backgroundColor: DarkHover,
                 },
                 '&.Mui-disabled': {
                     borderColor: Color(BLUIColors.black[300]).alpha(0.36).string(),
@@ -125,7 +128,7 @@ export default {
         outlinedInherit: ({ theme }) => ({
             borderColor: theme.vars.palette.divider,
             '&:hover': {
-                backgroundColor: Color(BLUIColors.black[500]).alpha(0.05).string(),
+                backgroundColor: LightHover,
             },
             '&.Mui-disabled': {
                 backgroundColor: theme.vars.palette.background.paper,
@@ -134,7 +137,7 @@ export default {
             ...theme.applyStyles('dark', {
                 borderColor: BLUIColors.black[200],
                 '&:hover': {
-                    backgroundColor: Color(BLUIColors.black[50]).alpha(0.1).string(),
+                    backgroundColor: DarkHover,
                 },
                 '&.Mui-disabled': {
                     borderColor: Color(BLUIColors.black[300]).alpha(0.36).string(),
@@ -149,12 +152,12 @@ export default {
                 borderColor: Color(BLUIColors.black[500]).alpha(0.12).string(),
             },
             '&:hover': {
-                backgroundColor: `rgba(${theme.vars.palette.primary.main} / 0.05)`,
+                backgroundColor: LightHover,
             },
             ...theme.applyStyles('dark', {
                 borderColor: theme.vars.palette.primary.main,
                 '&:hover': {
-                    backgroundColor: `rgba(${theme.vars.palette.primary.dark} / 0.2)`,
+                    backgroundColor: DarkHover,
                 },
                 '&.Mui-disabled': {
                     borderColor: Color(BLUIColors.black[300]).alpha(0.36).string(),
@@ -169,13 +172,13 @@ export default {
                 borderColor: Color(BLUIColors.black[500]).alpha(0.12).string(),
             },
             '&:hover': {
-                backgroundColor: `rgba(${theme.vars.palette.secondary.main} / 0.05)`,
+                backgroundColor: LightHover,
             },
             ...theme.applyStyles('dark', {
                 '&:not(.Mui-disabled)': {
                     borderColor: theme.vars.palette.secondary.main,
                     '&:hover': {
-                        backgroundColor: `rgba(${theme.vars.palette.secondary.dark} / 0.2)`,
+                        backgroundColor: DarkHover,
                     },
                 },
                 '&.Mui-disabled': {
@@ -190,7 +193,7 @@ export default {
                 color: theme.vars.palette.action.disabled,
             },
             '&:hover': {
-                backgroundColor: Color(BLUIColors.black[500]).alpha(0.05).string(),
+                backgroundColor: LightHover,
             },
             ...theme.applyStyles('dark', {
                 '&.Mui-disabled': {
@@ -203,21 +206,21 @@ export default {
         }),
         textPrimary: ({ theme }) => ({
             '&:hover': {
-                backgroundColor: `rgba(${theme.vars.palette.primary.main} / 0.05)`,
+                backgroundColor: LightHover,
             },
             ...theme.applyStyles('dark', {
                 '&:hover': {
-                    backgroundColor: `rgba(${theme.vars.palette.primary.dark} / 0.2)`,
+                    backgroundColor: DarkHover,
                 },
             }),
         }),
         textSecondary: ({ theme }) => ({
             '&:hover': {
-                backgroundColor: `rgba(${theme.vars.palette.secondary.main} / 0.05)`,
+                backgroundColor: LightHover,
             },
             ...theme.applyStyles('dark', {
                 '&:hover': {
-                    backgroundColor: `rgba(${theme.vars.palette.secondary.dark} / 0.2)`,
+                    backgroundColor: DarkHover,
                 },
             }),
         }),
