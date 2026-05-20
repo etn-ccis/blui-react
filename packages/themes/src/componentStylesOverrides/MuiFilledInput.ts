@@ -5,7 +5,7 @@ import Color from 'color';
 export default {
     styleOverrides: {
         root: ({ theme }) => ({
-            backgroundColor: theme.vars.palette.background.default,
+            backgroundColor: Color(BLUIColors.textFieldContainer).alpha(0.2).string(),
             '&:hover': {
                 '@media (hover: none)': {
                     backgroundColor: BLUIColors.white[400],
@@ -13,7 +13,7 @@ export default {
                 backgroundColor: BLUIColors.white[400],
             },
             '&.Mui-focused': {
-                backgroundColor: theme.vars.palette.background.default,
+                backgroundColor: Color(BLUIColors.textFieldContainer).alpha(0.2).string(),
             },
             '&.Mui-disabled': {
                 color: `rgba(${theme.vars.palette.text.primary} / 0.3)`,
@@ -21,12 +21,12 @@ export default {
                 pointerEvents: 'none',
             },
             ...theme.applyStyles('dark', {
-                backgroundColor: BLUIColors.black[800],
+                backgroundColor: Color(BLUIColors.textFieldContainer).alpha(0.1).string(),
                 '&:hover': {
                     backgroundColor: BLUIColors.black[600],
                 },
                 '&.Mui-focused': {
-                    backgroundColor: BLUIColors.black[800],
+                    backgroundColor: Color(BLUIColors.textFieldContainer).alpha(0.1).string(),
                 },
                 '&.Mui-disabled': {
                     color: theme.vars.palette.text.disabled,
