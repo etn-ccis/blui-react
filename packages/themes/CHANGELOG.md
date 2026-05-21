@@ -6,6 +6,10 @@
 
 - Updated highlight color for hover states of components.
 
+### Added
+
+- Added `textFieldContainer` token for filled text field background styling.
+
 # v9.0.1 (October 16, 2025)
 
 ### Fixed

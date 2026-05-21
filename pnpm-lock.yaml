@@ -63,8 +63,8 @@ importers:
   apps/demo:
     dependencies:
       '@brightlayer-ui/colors':
-        specifier: ^3.1.1
-        version: 3.1.1
+        specifier: ^3.2.0-alpha.3
+        version: 3.2.0-alpha.3
       '@brightlayer-ui/icons-mui':
         specifier: ^3.6.0
         version: 3.6.1(@mui/icons-material@6.5.0(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(@types/react@19.2.14)(react@19.2.6))(@types/react@19.2.14)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(@types/react@19.2.14)(react@19.2.6))(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(@types/react@19.2.14)(react@19.2.6))(@types/react@19.2.14)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))
@@ -172,8 +172,8 @@ importers:
   apps/design-patterns:
     dependencies:
       '@brightlayer-ui/colors':
-        specifier: ^3.1.1
-        version: 3.1.1
+        specifier: ^3.2.0-alpha.3
+        version: 3.2.0-alpha.3
       '@brightlayer-ui/icons-mui':
         specifier: ^4.0.0
         version: 4.2.1(@mui/icons-material@7.3.11(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(@types/react@19.2.14)(react@19.2.6))(@types/react@19.2.14)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(@types/react@19.2.14)(react@19.2.6))(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(@types/react@19.2.14)(react@19.2.6))(@types/react@19.2.14)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))
@@ -404,8 +404,8 @@ importers:
   apps/showcase:
     dependencies:
       '@brightlayer-ui/colors':
-        specifier: ^3.2.0-alpha.2
-        version: 3.2.0-alpha.2
+        specifier: ^3.2.0-alpha.3
+        version: 3.2.0-alpha.3
       '@brightlayer-ui/icons-mui':
         specifier: ^3.6.0
         version: 3.6.1(@mui/icons-material@7.3.11(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(@types/react@19.2.14)(react@19.2.6))(@types/react@19.2.14)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(@types/react@19.2.14)(react@19.2.6))(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(@types/react@19.2.14)(react@19.2.6))(@types/react@19.2.14)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))
@@ -586,8 +586,8 @@ importers:
         version: 19.2.6(react@19.2.6)
     devDependencies:
       '@brightlayer-ui/colors':
-        specifier: ^3.1.1
-        version: 3.1.1
+        specifier: ^3.2.0-alpha.3
+        version: 3.2.0-alpha.3
       '@brightlayer-ui/react-components':
         specifier: workspace:^
         version: link:../../packages/component-library
@@ -649,8 +649,8 @@ importers:
   apps/themeShowcase:
     dependencies:
       '@brightlayer-ui/colors':
-        specifier: ^3.1.1
-        version: 3.1.1
+        specifier: ^3.2.0-alpha.3
+        version: 3.2.0-alpha.3
       '@brightlayer-ui/icons-mui':
         specifier: ^3.6.0
         version: 3.6.1(@mui/icons-material@7.3.11(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(@types/react@19.2.14)(react@19.2.6))(@types/react@19.2.14)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(@types/react@19.2.14)(react@19.2.6))(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(@types/react@19.2.14)(react@19.2.6))(@types/react@19.2.14)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))
@@ -854,8 +854,8 @@ importers:
         specifier: ^7.16.0
         version: 7.29.0
       '@brightlayer-ui/colors':
-        specifier: ^3.0.1
-        version: 3.1.1
+        specifier: ^3.2.0-alpha.3
+        version: 3.2.0-alpha.3
       '@brightlayer-ui/icons-mui':
         specifier: ^3.6.0
         version: 3.6.1(@mui/icons-material@7.3.11(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(@types/react@19.2.14)(react@19.2.6))(@types/react@19.2.14)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(@types/react@19.2.14)(react@19.2.6))(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(@types/react@19.2.14)(react@19.2.6))(@types/react@19.2.14)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))
@@ -1101,8 +1101,8 @@ importers:
   apps/workflow/example-vite:
     dependencies:
       '@brightlayer-ui/colors':
-        specifier: ^3.0.1
-        version: 3.1.1
+        specifier: ^3.2.0-alpha.3
+        version: 3.2.0-alpha.3
       '@brightlayer-ui/icons-mui':
         specifier: ^3.3.0
         version: 3.6.1(@mui/icons-material@7.3.11(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(@types/react@19.2.14)(react@19.2.6))(@types/react@19.2.14)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(@types/react@19.2.14)(react@19.2.6))(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(@types/react@19.2.14)(react@19.2.6))(@types/react@19.2.14)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))
@@ -2130,8 +2130,8 @@ importers:
   packages/themes:
     dependencies:
       '@brightlayer-ui/colors':
-        specifier: 3.2.0-alpha.2
-        version: 3.2.0-alpha.2
+        specifier: ^3.2.0-alpha.3
+        version: 3.2.0-alpha.3
       '@brightlayer-ui/types':
         specifier: ^2.0.0
         version: 2.0.0
@@ -2948,8 +2948,8 @@ packages:
   '@brightlayer-ui/colors@3.1.1':
     resolution: {integrity: sha512-fV10E5JDuVGDQ0gCY3pEfDwUo1+lvDFC5pmOAAGpN7YDramS6ggUpJ/LmYavKAudw7FNcaJnPi7tsQWJjvv/7w==}
 
-  '@brightlayer-ui/colors@3.2.0-alpha.2':
-    resolution: {integrity: sha512-Q3ad7Pe41rnQ+l3GMBpsQgzL1GHMrZfdGXzHfeOGeWS6r56PYqJds/cYrkSn++zMASaHlHFLOveyivjL5oRNhw==}
+  '@brightlayer-ui/colors@3.2.0-alpha.3':
+    resolution: {integrity: sha512-jnTGIZh3y4yCZfo/+cELu3LFn+Yei6kpGoyYTviFlpMJcxjS8AFzjbAXPT4lN7dD7V5AouHIFOIDbqCxvqZA0w==}
 
   '@brightlayer-ui/colors@4.0.0':
     resolution: {integrity: sha512-fF7Ne7cz4yFCzR96HrP1RVBw55s+cWbqYkPallnpmmtYnPwNS/DyAbbHFEnl2bxziq3CvAR2S+D6AnjIeluOZA==}
@@ -16006,7 +16006,7 @@ snapshots:
     dependencies:
       '@brightlayer-ui/types': 2.0.0
 
-  '@brightlayer-ui/colors@3.2.0-alpha.2':
+  '@brightlayer-ui/colors@3.2.0-alpha.3':
     dependencies:
       '@brightlayer-ui/types': 2.0.0
 
