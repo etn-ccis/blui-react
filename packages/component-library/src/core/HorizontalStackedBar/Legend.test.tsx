@@ -81,11 +81,6 @@ describe('Legend', () => {
         expect(screen.getByTestId('PendingIcon')).toBeInTheDocument();
     });
 
-    it('renders filled Warning icon for variant="warning" with count > 0', () => {
-        renderWithTheme(<Legend label="Warning" count={5} variant="warning" />);
-        expect(screen.getByTestId('WarningIcon')).toBeInTheDocument();
-    });
-
     // ─── Variant outline icons (count === 0) ──────────────────────────────────
 
     it('renders outline ErrorOutline icon for variant="failed" with count === 0', () => {
@@ -111,11 +106,6 @@ describe('Legend', () => {
     it('renders outline PendingOutlined icon for variant="pending" with count === 0', () => {
         renderWithTheme(<Legend label="Pending" count={0} variant="pending" />);
         expect(screen.getByTestId('PendingOutlinedIcon')).toBeInTheDocument();
-    });
-
-    it('renders outline WarningOutlined icon for variant="warning" with count === 0', () => {
-        renderWithTheme(<Legend label="Warning" count={0} variant="warning" />);
-        expect(screen.getByTestId('WarningOutlinedIcon')).toBeInTheDocument();
     });
 
     // ─── variant="canceled" dark/light theme color branch ────────────────────
@@ -206,7 +196,7 @@ describe('Legend', () => {
     });
 
     it('uses variant color when no custom backgroundColor is provided', () => {
-        renderWithTheme(<Legend label="X" count={5} variant="warning" />);
+        renderWithTheme(<Legend label="X" count={5} variant="info" />);
         expect(screen.getByTestId('blui-horizontal-bar-root')).toBeInTheDocument();
     });
 
@@ -367,16 +357,16 @@ describe('Legend', () => {
 
     // ─── Edge cases ───────────────────────────────────────────────────────────
 
-    it('renders all six variant types without crashing', () => {
-        const variants = ['failed', 'success', 'pending', 'warning', 'info', 'canceled'] as const;
+    it('renders all five variant types without crashing', () => {
+        const variants = ['failed', 'success', 'pending', 'info', 'canceled'] as const;
         variants.forEach((v) => {
             const { unmount } = renderWithTheme(<Legend label={v} count={5} variant={v} />);
             unmount();
         });
     });
 
-    it('renders all six variant outline types without crashing', () => {
-        const variants = ['failed', 'success', 'pending', 'warning', 'info', 'canceled'] as const;
+    it('renders all five variant outline types without crashing', () => {
+        const variants = ['failed', 'success', 'pending', 'info', 'canceled'] as const;
         variants.forEach((v) => {
             const { unmount } = renderWithTheme(<Legend label={v} count={0} variant={v} />);
             unmount();
@@ -393,7 +383,7 @@ describe('Legend', () => {
             <Legend
                 label="Test"
                 count={7}
-                variant="warning"
+                variant="info"
                 backgroundColor="#FF0000"
                 iconColor="#00FF00"
                 selectedStatus="Test"
