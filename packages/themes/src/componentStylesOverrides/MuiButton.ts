@@ -28,6 +28,7 @@ export default {
         contained: ({ theme }) => ({
             backgroundColor: theme.vars.palette.background.paper,
             color: theme.vars.palette.text.primary,
+            boxShadow: theme.vars.palette.shadows.level1,
             '& .MuiButton-disableElevation:not(.MuiButton-containedPrimary):not(.MuiButton-containedSecondary)': {
                 backgroundColor: BLUIColors.white[500],
                 '&:hover': {
@@ -39,10 +40,14 @@ export default {
             },
             '&:hover': {
                 backgroundColor: Color(BLUIColors.black[500]).alpha(0.05).string(),
+                boxShadow: theme.vars.palette.shadows.level2,
             },
             '&.Mui-disabled': {
                 backgroundColor: theme.vars.palette.background.paper,
                 border: `1px solid ${Color(BLUIColors.black[500]).alpha(0.12).string()}`,
+            },
+            '&:active': {
+                boxShadow: theme.vars.palette.shadows.level1,
             },
             ...theme.applyStyles('dark', {
                 backgroundColor: BLUIColors.black[500],
