@@ -2,10 +2,13 @@ import { BLUIColors } from '@brightlayer-ui/colors';
 import { Components, Theme, CssVarsTheme } from '@mui/material/styles';
 import Color from 'color';
 
+const TextFieldContainerLight = Color(BLUIColors.textFieldContainer).alpha(0.2).string();
+const TextFieldContainerDark = Color(BLUIColors.textFieldContainer).alpha(0.1).string();
+
 export default {
     styleOverrides: {
         root: ({ theme }) => ({
-            backgroundColor: theme.vars.palette.background.default,
+            backgroundColor: TextFieldContainerLight,
             '&:hover': {
                 '@media (hover: none)': {
                     backgroundColor: BLUIColors.white[400],
@@ -13,7 +16,7 @@ export default {
                 backgroundColor: BLUIColors.white[400],
             },
             '&.Mui-focused': {
-                backgroundColor: theme.vars.palette.background.default,
+                backgroundColor: TextFieldContainerLight,
             },
             '&.Mui-disabled': {
                 color: `rgba(${theme.vars.palette.text.primary} / 0.3)`,
@@ -21,12 +24,12 @@ export default {
                 pointerEvents: 'none',
             },
             ...theme.applyStyles('dark', {
-                backgroundColor: BLUIColors.black[800],
+                backgroundColor: TextFieldContainerDark,
                 '&:hover': {
                     backgroundColor: BLUIColors.black[600],
                 },
                 '&.Mui-focused': {
-                    backgroundColor: BLUIColors.black[800],
+                    backgroundColor: TextFieldContainerDark,
                 },
                 '&.Mui-disabled': {
                     color: theme.vars.palette.text.disabled,

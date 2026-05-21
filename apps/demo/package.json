@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "private": true,
     "dependencies": {
-        "@brightlayer-ui/colors": "^3.1.1",
+        "@brightlayer-ui/colors": "^3.2.0-alpha.3",
         "@brightlayer-ui/icons-mui": "^3.6.0",
         "@brightlayer-ui/react-components": "workspace:^",
         "@brightlayer-ui/react-themes": "workspace:^",
