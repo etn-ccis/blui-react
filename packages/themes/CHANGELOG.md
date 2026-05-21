@@ -1,5 +1,15 @@
 # Changelog
 
+# v9.1.0 (Unreleased)
+
+### Added
+
+- Added custom shadow configurations to the theme.
+
+### Changed
+
+- Updated component shadows using theme.
+
 # v9.0.1 (October 16, 2025)
 
 ### Fixed
