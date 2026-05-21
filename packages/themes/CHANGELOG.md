@@ -1,5 +1,11 @@
 # Changelog
 
+# v9.1.0 (Unreleased)
+
+### Added
+
+- Added `textFieldContainer` token for filled text field background styling.
+
 # v9.0.1 (October 16, 2025)
 
 ### Fixed
