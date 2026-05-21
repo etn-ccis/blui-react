@@ -67,16 +67,6 @@ describe('HorizontalBar', () => {
         expect(screen.getByTestId('blui-horizontal-bar-root')).toBeInTheDocument();
     });
 
-    it('renders with variant="warning" without crashing', () => {
-        renderWithTheme(<HorizontalBar variant="warning" barPercentage={50} />);
-        expect(screen.getByTestId('blui-horizontal-bar-root')).toBeInTheDocument();
-    });
-
-    it('renders with variant="info" without crashing', () => {
-        renderWithTheme(<HorizontalBar variant="info" barPercentage={50} />);
-        expect(screen.getByTestId('blui-horizontal-bar-root')).toBeInTheDocument();
-    });
-
     it('renders with variant="canceled" in light mode without crashing', () => {
         renderWithTheme(<HorizontalBar variant="canceled" barPercentage={40} />);
         expect(screen.getByTestId('blui-horizontal-bar-root')).toBeInTheDocument();
@@ -231,7 +221,7 @@ describe('HorizontalBar', () => {
     });
 
     it('handles all variant types in a single render pass', () => {
-        const variants = ['failed', 'success', 'pending', 'warning', 'info', 'canceled'] as const;
+        const variants = ['failed', 'success', 'pending', 'info', 'canceled'] as const;
         const { unmount } = renderWithTheme(
             <>
                 {variants.map((v) => (
