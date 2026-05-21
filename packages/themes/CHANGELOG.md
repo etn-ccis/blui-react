@@ -4,7 +4,7 @@
 
 ### Changed
 
-- Updated highlight color for hover state of component.
+- Updated highlight color for hover states of components.
 
 # v9.0.1 (October 16, 2025)
 
