@@ -10,12 +10,11 @@ afterEach(cleanup);
 const renderWithTheme = (ui: React.ReactElement): ReturnType<typeof render> =>
     render(<ThemeProvider theme={theme}>{ui}</ThemeProvider>);
 
-/** Mixed data: Failed(10), Success(20), Pending(0), Warning(30) — total 60 */
+/** Mixed data: Failed(10), Success(20), Pending(0) — total 30 */
 const defaultData: HorizontalStackedBarItem[] = [
     { label: 'Failed', variant: 'failed', count: 10 },
     { label: 'Success', variant: 'success', count: 20 },
     { label: 'Pending', variant: 'pending', count: 0 },
-    { label: 'Warning', variant: 'warning', count: 30 },
 ];
 
 /** Helper: return all bar elements inside the BarContainer */
@@ -73,12 +72,11 @@ describe('HorizontalStackedBar', () => {
         expect(screen.getByText('Only')).toBeInTheDocument();
     });
 
-    it('renders all six variant types without crashing', () => {
+    it('renders all five variant types without crashing', () => {
         const allVariants: HorizontalStackedBarItem[] = [
             { label: 'Failed', variant: 'failed', count: 10 },
             { label: 'Success', variant: 'success', count: 20 },
             { label: 'Pending', variant: 'pending', count: 30 },
-            { label: 'Warning', variant: 'warning', count: 40 },
             { label: 'Info', variant: 'info', count: 50 },
             { label: 'Canceled', variant: 'canceled', count: 60 },
         ];
@@ -93,7 +91,6 @@ describe('HorizontalStackedBar', () => {
         expect(screen.getByText('Failed')).toBeInTheDocument();
         expect(screen.getByText('Success')).toBeInTheDocument();
         expect(screen.getByText('Pending')).toBeInTheDocument();
-        expect(screen.getByText('Warning')).toBeInTheDocument();
     });
 
     it('renders count values for all items', () => {
@@ -101,12 +98,11 @@ describe('HorizontalStackedBar', () => {
         expect(screen.getByText('10')).toBeInTheDocument();
         expect(screen.getByText('20')).toBeInTheDocument();
         expect(screen.getByText('0')).toBeInTheDocument();
-        expect(screen.getByText('30')).toBeInTheDocument();
     });
 
-    it('renders all 4 legend items when hideEmptyCategories=false', () => {
+    it('renders all 3 legend items when hideEmptyCategories=false', () => {
         const { container } = renderWithTheme(<HorizontalStackedBar data={defaultData} hideEmptyCategories={false} />);
-        expect(getLegends(container).length).toBe(4);
+        expect(getLegends(container).length).toBe(3);
     });
 
     it('hides zero-count legend items when hideEmptyCategories=true', () => {
@@ -116,22 +112,21 @@ describe('HorizontalStackedBar', () => {
 
     it('renders only non-zero legend items when hideEmptyCategories=true', () => {
         const { container } = renderWithTheme(<HorizontalStackedBar data={defaultData} hideEmptyCategories />);
-        expect(getLegends(container).length).toBe(3);
+        expect(getLegends(container).length).toBe(2);
     });
 
     it('still shows non-zero items when hideEmptyCategories=true', () => {
         renderWithTheme(<HorizontalStackedBar data={defaultData} hideEmptyCategories />);
         expect(screen.getByText('Failed')).toBeInTheDocument();
         expect(screen.getByText('Success')).toBeInTheDocument();
-        expect(screen.getByText('Warning')).toBeInTheDocument();
     });
 
     // ─── Bar rendering ────────────────────────────────────────────────────────
 
     it('renders bars only for items with count > 0', () => {
         const { container } = renderWithTheme(<HorizontalStackedBar data={defaultData} />);
-        // Failed(10), Success(20), Warning(30) = 3 bars; Pending(0) excluded
-        expect(getBars(container).length).toBe(3);
+        // Failed(10), Success(20) = 2 bars; Pending(0) excluded
+        expect(getBars(container).length).toBe(2);
     });
 
     it('renders no bars when all counts are zero', () => {
