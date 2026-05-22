@@ -9,4 +9,5 @@ import type {} from '@mui/material/themeCssVarsAugmentation';
 import { blueThemes } from './blueMergedTheme';
 export { blueThemes as theme } from './blueMergedTheme';
 export { blueThemes as blueThemes } from './blueMergedTheme';
+export { default as HMIThemeProvider } from './HMIThemeProvider';
 export default blueThemes;

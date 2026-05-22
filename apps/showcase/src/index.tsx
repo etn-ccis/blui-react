@@ -14,7 +14,8 @@ import { AppProvider } from './contexts/AppContext';
 import { RTLThemeProvider } from './components/RTLProvider';
 import '@brightlayer-ui/react-themes/open-sans';
 import { ThemeProvider } from '@mui/material';
-import { blueThemes as theme } from '@brightlayer-ui/react-themes';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { blueThemes as theme, HMIThemeProvider } from '@brightlayer-ui/react-themes';
 const container = document.getElementById('root');
 
 const root = createRoot(container!);
@@ -35,12 +36,22 @@ declare global {
 root.render(
     <React.StrictMode>
         <AppProvider>
+            {/* Uncomment this block to test the default BLUI theme */}
+
             <ThemeProvider theme={theme}>
                 <RTLThemeProvider>
                     <CssBaseline />
                     <MainRouter />
                 </RTLThemeProvider>
             </ThemeProvider>
+
+            {/* HMI theme provider (active) */}
+            {/* <HMIThemeProvider size='s'>
+                <RTLThemeProvider>
+                    <CssBaseline />
+                    <MainRouter />
+                </RTLThemeProvider>
+            </HMIThemeProvider> */}
         </AppProvider>
     </React.StrictMode>
 );
