@@ -9,11 +9,11 @@
 ### Added
 
 - Added custom shadow configurations to the theme.
+- Added `textFieldContainer` token for filled text field background styling.
 
 ### Changed
 
 - Updated component shadows using theme.
-- Added `textFieldContainer` token for filled text field background styling.
 
 # v9.0.1 (October 16, 2025)
 
