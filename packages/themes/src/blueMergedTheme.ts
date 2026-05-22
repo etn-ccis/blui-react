@@ -45,6 +45,9 @@ import MuiFormLabel from './componentStylesOverrides/MuiFormLabel';
 import MuiFormHelperText from './componentStylesOverrides/MuiFormHelperText';
 import MuiToggleButtonGroup from './componentStylesOverrides/MuiToggleButtonGroup';
 import MuiToggleButton from './componentStylesOverrides/MuiToggleButton';
+import MuiIconButton from './componentStylesOverrides/MuiIconButton';
+import MuiRadio from './componentStylesOverrides/MuiRadio';
+import MuiFormControlLabel from './componentStylesOverrides/MuiFormControlLabel';
 
 declare module '@mui/material/styles' {
     // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
@@ -88,6 +91,7 @@ const LightThemeColors = {
         hint: BLUIColors.gray[500],
     },
     action: {
+        hover: Color(BLUIColors.highlight).alpha(0.08).string(),
         active: BLUIColors.gray[500],
         disabled: Color(BLUIColors.black[500]).alpha(0.3).string(),
     },
@@ -117,7 +121,7 @@ const DarkThemeColors = {
         hint: Color(BLUIColors.black[300]).alpha(0.36).string(),
     },
     action: {
-        hover: Color(BLUIColors.black[50]).alpha(0.1).string(),
+        hover: Color(BLUIColors.highlightBlue).alpha(0.2).string(),
         active: BLUIColors.black[200],
         disabled: Color(BLUIColors.black[300]).alpha(0.36).string(),
         disabledBackground: Color(BLUIColors.black[200]).alpha(0.24).string(),
@@ -204,5 +208,8 @@ export const blueThemes = createTheme({
         MuiFormHelperText: MuiFormHelperText,
         MuiToggleButtonGroup: MuiToggleButtonGroup,
         MuiToggleButton: MuiToggleButton,
+        MuiIconButton: MuiIconButton,
+        MuiRadio: MuiRadio,
+        MuiFormControlLabel: MuiFormControlLabel,
     },
 });

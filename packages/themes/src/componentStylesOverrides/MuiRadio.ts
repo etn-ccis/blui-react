@@ -9,9 +9,6 @@ export default {
             '.MuiFormControlLabel-root &:hover': {
                 backgroundColor: 'transparent',
             },
-            ...theme.applyStyles('light', {
-                color: theme.vars.palette.action.active,
-            }),
         }),
     },
-} as Components<Omit<Theme, 'components' | 'palette'> & CssVarsTheme>['MuiCheckbox'];
+} as Components<Omit<Theme, 'components' | 'palette'> & CssVarsTheme>['MuiRadio'];
