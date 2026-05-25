@@ -48,6 +48,7 @@ import MuiToggleButton from './componentStylesOverrides/MuiToggleButton';
 import MuiIconButton from './componentStylesOverrides/MuiIconButton';
 import MuiRadio from './componentStylesOverrides/MuiRadio';
 import MuiFormControlLabel from './componentStylesOverrides/MuiFormControlLabel';
+import MuiCard from './componentStylesOverrides/MuiCard';
 
 declare module '@mui/material/styles' {
     // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
@@ -211,5 +212,6 @@ export const blueThemes = createTheme({
         MuiIconButton: MuiIconButton,
         MuiRadio: MuiRadio,
         MuiFormControlLabel: MuiFormControlLabel,
+        MuiCard: MuiCard,
     },
 });
