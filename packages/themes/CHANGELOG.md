@@ -5,6 +5,7 @@
 ### Changed
 
 - Updated highlight color for hover states of components.
+- Updated pressed state color for buttons.
 
 ### Added
 
