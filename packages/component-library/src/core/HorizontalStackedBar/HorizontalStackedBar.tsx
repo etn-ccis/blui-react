@@ -93,6 +93,7 @@ const BarContainer = styled(Box)({
     flexDirection: 'row',
     alignItems: 'center',
     gap: '2px',
+    height: '8px',
 });
 
 const HorizontalStackedBarRender: React.ForwardRefRenderFunction<unknown, HorizontalStackedBarProps> = (

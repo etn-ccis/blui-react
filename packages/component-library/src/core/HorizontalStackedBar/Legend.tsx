@@ -9,13 +9,11 @@ import {
     CheckCircle,
     PlayCircle,
     Pending,
-    Warning,
     ErrorOutline,
     CancelOutlined,
     CheckCircleOutline,
     PlayCircleOutline,
     PendingOutlined,
-    WarningOutlined,
 } from '@mui/icons-material';
 import { BLUIColors } from '@brightlayer-ui/colors';
 
@@ -25,7 +23,6 @@ const VARIANT_ICONS: Record<string, React.JSX.Element> = {
     success: <CheckCircle fontSize="medium" />,
     info: <PlayCircle fontSize="medium" />,
     pending: <Pending fontSize="medium" />,
-    warning: <Warning fontSize="medium" />,
 };
 
 const VARIANT_OUTLINE_ICONS: Record<string, React.JSX.Element> = {
@@ -34,7 +31,6 @@ const VARIANT_OUTLINE_ICONS: Record<string, React.JSX.Element> = {
     success: <CheckCircleOutline fontSize="medium" color="disabled" />,
     info: <PlayCircleOutline fontSize="medium" color="disabled" />,
     pending: <PendingOutlined fontSize="medium" color="disabled" />,
-    warning: <WarningOutlined fontSize="medium" color="disabled" />,
 };
 
 const useUtilityClasses = (ownerState: LegendProps): Record<LegendClassKey, string> => {
@@ -163,6 +159,7 @@ const LegendRender: React.ForwardRefRenderFunction<unknown, LegendProps> = (prop
     const selectedVariantIconColors: Record<string, string> = {
         canceled: BLUIColors.gray[900],
     };
+
     const {
         className: userClassName,
         icon,
@@ -209,14 +206,16 @@ const LegendRender: React.ForwardRefRenderFunction<unknown, LegendProps> = (prop
             onClick={handleClick}
             {...otherProps}
         >
-            <Icon
-                iconColorUnselected={resolvedIconColorUnselected}
-                iconColorSelected={resolvedIconColorSelected}
-                isSelected={selectedStatus === label}
-                className={generatedClasses.icon}
-            >
-                {displayIcon}
-            </Icon>
+            {displayIcon && (
+                <Icon
+                    iconColorUnselected={resolvedIconColorUnselected}
+                    iconColorSelected={resolvedIconColorSelected}
+                    isSelected={selectedStatus === label}
+                    className={generatedClasses.icon}
+                >
+                    {displayIcon}
+                </Icon>
+            )}
             <Typography
                 variant="body2"
                 className={generatedClasses.count}
