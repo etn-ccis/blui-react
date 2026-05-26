@@ -9,7 +9,7 @@ export default {
     styleOverrides: {
         ...baseOverride!.styleOverrides,
         root: (args: Parameters<typeof baseRoot>[0]) => ({
-            Height: 'var(--blui-input-inner-height)',
+            height: 'var(--blui-input-inner-height)',
             borderRadius: 'var(--blui-input-radius)',
             ...baseRoot(args),
         }),
