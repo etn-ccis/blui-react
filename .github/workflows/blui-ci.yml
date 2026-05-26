@@ -648,4 +648,4 @@ jobs:
                   firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BLUI_REACT_SHOWCASE }}
                   projectId: blui-react-showcase-4d420
                   entryPoint: apps/showcase
-                  expires: 7d
+                  channelId: live
