@@ -76,7 +76,15 @@ export const useEnhancedColumns = <TData extends DataTableData>({
                 const additionalSx = {
                     py: 0,
                     px: 0,
-                    '&:hover': { backgroundColor: 'transparent' },
+                    '&:hover': {
+                        backgroundColor: 'transparent',
+                        // Only show the hover border when the cell is not already in an active/error state
+                        ...(!hasError &&
+                            !isEditing && {
+                                outline: `1px solid ${(theme.vars as any)?.palette?.action?.active ?? theme.palette.action.active} !important`,
+                                outlineOffset: '-1px',
+                            }),
+                    },
                     outline: hasError
                         ? `1px solid ${BLUIColors.red[500]} !important`
                         : isEditing
@@ -92,10 +100,14 @@ export const useEnhancedColumns = <TData extends DataTableData>({
                 return {
                     ...baseProps,
                     onClick: (): void => {
-                        // Enable single-click editing - skip if column is not editable
-                        if (column.enableEditing !== false && cellParams.table.options.enableEditing) {
-                            cellParams.table.setEditingCell(cellParams.cell);
+                        if (column.enableEditing === false || !cellParams.table.options.enableEditing) return;
+                        // Binary cells toggle directly in one click — no need to enter edit mode
+                        if (column.cellType === 'binary') {
+                            handleSaveCell(cellParams.cell, !(cellParams.cell.getValue() as boolean));
+                            return;
                         }
+                        // Enable single-click editing for all other cell types
+                        cellParams.table.setEditingCell(cellParams.cell);
                     },
                     sx:
                         typeof baseSx === 'function'
