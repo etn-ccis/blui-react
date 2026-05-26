@@ -49,13 +49,11 @@ export default {
             },
             '&:active': {
                 backgroundColor: BLUIColors.blue[100],
+                boxShadow: theme.vars.palette.shadows.level1,
             },
             '&.Mui-disabled': {
                 backgroundColor: theme.vars.palette.background.paper,
                 border: `1px solid ${Color(BLUIColors.black[500]).alpha(0.12).string()}`,
-            },
-            '&:active': {
-                boxShadow: theme.vars.palette.shadows.level1,
             },
             ...theme.applyStyles('dark', {
                 backgroundColor: BLUIColors.black[500],
