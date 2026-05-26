@@ -8,10 +8,8 @@ on:
     pull_request_target:
         types:
             - opened
-            - synchronize
         branches:
-            - 'dev'
-            - 'master'
+            - '*/*'
 
 permissions:
     pull-requests: write
@@ -633,7 +631,7 @@ jobs:
     deploy_showcase_preview:
         name: Deploy Showcase Firebase Preview
         runs-on: ubuntu-latest
-        if: ${{ (github.event_name == 'pull_request' && github.base_ref == 'dev' && github.event.pull_request.head.repo.full_name == github.repository) || (github.event_name == 'pull_request_target' && github.base_ref == 'dev') || (github.event_name == 'push' && github.ref == 'refs/heads/dev') }}
+        if: ${{ (github.event_name == 'pull_request' && github.base_ref == 'dev' && github.event.pull_request.head.repo.full_name == github.repository) || (github.event_name == 'push' && github.ref == 'refs/heads/dev') }}
         needs: build_showcase
         steps:
             - name: Checkout
@@ -653,7 +651,7 @@ jobs:
                   entryPoint: apps/showcase
                   channelId: live
             - name: Deploy to Firebase Hosting (PR preview)
-              if: ${{ github.event_name == 'pull_request' || github.event_name == 'pull_request_target' }}
+              if: ${{ github.event_name == 'pull_request' }}
               uses: FirebaseExtended/action-hosting-deploy@v0
               with:
                   repoToken: ${{ secrets.GITHUB_TOKEN }}
