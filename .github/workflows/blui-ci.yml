@@ -641,11 +641,22 @@ jobs:
               with:
                   name: showcase-dist
                   path: apps/showcase/dist
-            - name: Deploy to Firebase Hosting Preview
+            - name: Deploy to Firebase Hosting (dev - live channel)
+              if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/dev' }}
               uses: FirebaseExtended/action-hosting-deploy@v0
               with:
                   repoToken: ${{ secrets.GITHUB_TOKEN }}
                   firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BLUI_REACT_SHOWCASE }}
                   projectId: blui-react-showcase-4d420
                   entryPoint: apps/showcase
+                  channelId: live
+            - name: Deploy to Firebase Hosting (PR preview)
+              if: ${{ github.event_name == 'pull_request' }}
+              uses: FirebaseExtended/action-hosting-deploy@v0
+              with:
+                  repoToken: ${{ secrets.GITHUB_TOKEN }}
+                  firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BLUI_REACT_SHOWCASE }}
+                  projectId: blui-react-showcase-4d420
+                  entryPoint: apps/showcase
+                  channelId: pr-${{ github.event.pull_request.number }}
                   expires: 7d
