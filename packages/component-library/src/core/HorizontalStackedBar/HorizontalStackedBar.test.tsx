@@ -129,7 +129,7 @@ describe('HorizontalStackedBar', () => {
         expect(getBars(container).length).toBe(2);
     });
 
-    it('renders no bars when all counts are zero', () => {
+    it('renders an empty-state bar when all counts are zero', () => {
         const { container } = renderWithTheme(
             <HorizontalStackedBar
                 data={[
@@ -139,6 +139,7 @@ describe('HorizontalStackedBar', () => {
             />
         );
         expect(getBars(container).length).toBe(0);
+        expect(screen.getByTestId('blui-horizontal-bar-empty-root')).toBeInTheDocument();
     });
 
     it('renders one bar when only one item has count > 0', () => {
@@ -161,7 +162,7 @@ describe('HorizontalStackedBar', () => {
         expect(getBars(c1).length).toBe(getBars(c2).length);
     });
 
-    // ─── totalCount computation (useEffect) ──────────────────────────────────
+    // ─── totalCount computation ───────────────────────────────────────────────
 
     it('computes totalCount from data on mount', () => {
         // Bars render without crashing — confirms totalCount was computed

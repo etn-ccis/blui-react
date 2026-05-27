@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import { Box, BoxProps, Typography, unstable_composeClasses as composeClasses } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import { getLegendUtilityClass, LegendClasses, LegendClassKey } from './LegendClasses';
 import { cx } from '@emotion/css';
 import {
@@ -143,6 +143,7 @@ const Icon = styled(Box, {
 
 const LegendRender: React.ForwardRefRenderFunction<unknown, LegendProps> = (props: LegendProps, ref: any) => {
     const generatedClasses = useUtilityClasses(props);
+    const theme = useTheme();
     const variantColors: Record<string, string> = {
         failed: BLUIColors.red[500],
         canceled: BLUIColors.gold[400],
@@ -182,12 +183,14 @@ const LegendRender: React.ForwardRefRenderFunction<unknown, LegendProps> = (prop
     // Calculate final background color: custom backgroundColor takes precedence over variant color
     const variantColor = variant ? variantColors[variant] : undefined;
     const finalBackgroundColor = backgroundColor || variantColor;
+    const contrastTextColor = finalBackgroundColor ? theme.palette.getContrastText(finalBackgroundColor) : undefined;
 
     // Icon color when not selected: variant-specific override, then finalBackgroundColor; prop overrides all
     const resolvedIconColorUnselected =
         iconColor ?? (variant ? (variantIconColors[variant] ?? finalBackgroundColor) : finalBackgroundColor);
-    // Icon color when selected: variant-specific override; prop overrides all
-    const resolvedIconColorSelected = iconColor ?? (variant ? selectedVariantIconColors[variant] : undefined);
+    // Icon color when selected: explicit override first, then contrast-safe color
+    const resolvedIconColorSelected =
+        iconColor ?? (variant ? selectedVariantIconColors[variant] : undefined) ?? contrastTextColor;
 
     // Use provided icon or fall back to variant's default icon
     const variantIcon = variant ? (count === 0 ? VARIANT_OUTLINE_ICONS[variant] : VARIANT_ICONS[variant]) : undefined;
