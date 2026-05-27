@@ -18,7 +18,7 @@ The `<DataTable>` component is a fully-featured data table built on top of [mate
 | enableDuplicate       | Whether to allow duplicating rows                                                                              | `boolean`                                                         | no       | `false`           |
 | createDisplayMode     | How new rows are created — `'row'` (inline) or `'modal'`                                                       | `'row'` \| `'modal'`                                              | no       | `'row'`           |
 | editDisplayMode       | How rows are edited — `'cell'`, `'row'`, `'table'`, or `'modal'`                                               | `'cell'` \| `'row'` \| `'table'` \| `'modal'`                    | no       | `'cell'`          |
-| onValidate            | Called on every cell save; return an error map keyed by field name                                             | `(row: TData) => Partial<Record<keyof TData, string \| undefined>>` | no       |                   |
+| onValidate            | Called on cell save and when evaluating save eligibility; return an error map keyed by field name              | `(row: TData) => Partial<Record<keyof TData, string \| undefined>>` | no       |                   |
 | onCreate              | Called when a new row is saved                                                                                 | `(row: TData) => Promise<void> \| void`                           | no       |                   |
 | onUpdate              | Called for each edited row when changes are committed                                                          | `(row: TData) => Promise<void> \| void`                           | no       |                   |
 | onDelete              | Called when a row is deleted; receives the row's ID                                                            | `(id: string \| number) => Promise<void> \| void`                 | no       |                   |
@@ -38,7 +38,7 @@ The `<DataTable>` component is a fully-featured data table built on top of [mate
 | createButtonText      | Label for the bottom-toolbar create button                                                                     | `string`                                                          | no       | `'New data point'`|
 | deleteConfirmMessage  | Confirmation message (or factory function) shown before a row is deleted                                       | `string \| ((row: TData) => string)`                               | no       | `'Are you sure you want to delete this item?'` |
 | minHeight             | Minimum height of the table container                                                                          | `string \| number`                                                 | no       | `'109px'`         |
-| enableUndoRedo        | Enable undo/redo history with Ctrl/Cmd+Z and Ctrl/Cmd+Shift+Z keyboard shortcuts                               | `boolean`                                                         | no       | `false`           |
+| enableUndoRedo        | Enable undo/redo history with Ctrl/Cmd+Z and Ctrl/Cmd+Shift+Z (or Ctrl/Cmd+Y) keyboard shortcuts              | `boolean`                                                         | no       | `false`           |
 | onStateChange         | Called whenever state changes; receives an `DataTableState` snapshot for driving external controls         | `(state: DataTableState) => void`                              | no       |                   |
 
 </Box>
@@ -74,6 +74,8 @@ The `<DataTable>` component is a fully-featured data table built on top of [mate
 
 Passed to `onStateChange` on every relevant state change. Contains both reactive flags and stable action callbacks so a parent component can render its own toolbar outside the table.
 
+When `save` or `reset` is invoked, `DataTable` first closes any actively edited cell so the latest value is committed before the action runs.
+
 <Box>
 
 | Field              | Description                                                                 | Type                |
@@ -85,8 +87,8 @@ Passed to `onStateChange` on every relevant state change. Contains both reactive
 | canSave            | Whether saving is currently permitted — there are pending changes and every pending row passes `onValidate` | `boolean` |
 | undo               | Undo the last recorded action                                               | `() => void`        |
 | redo               | Redo the last undone action                                                 | `() => void`        |
-| save               | Commit all pending changes (calls `onUpdate` for each edited row)           | `() => Promise<void>`|
-| reset              | Discard all pending changes and restore the table to its last saved state   | `() => void`        |
+| save               | Commit all pending changes (calls `onUpdate` for each edited row) after closing any active edit cell | `() => Promise<void>`|
+| reset              | Discard all pending changes and restore the table to its last saved state after closing any active edit cell | `() => void`        |
 | tableData          | Current snapshot of all rows in the table (includes unsaved edits)         | `unknown[]`         |
 
 </Box>

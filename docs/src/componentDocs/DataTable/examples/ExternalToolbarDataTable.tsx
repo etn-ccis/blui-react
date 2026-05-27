@@ -41,7 +41,7 @@ const handleSave = useCallback(async () => {
                 </Button>
             </span>
         </Tooltip>
-        <Tooltip title="Ctrl+Shift+Z">
+        <Tooltip title="Ctrl+Shift+Z / Ctrl+Y">
             <span>
                 <Button variant="outlined" size="small" startIcon={<RedoIcon />}
                     onClick={tableState?.redo} disabled={!tableState?.canRedo}>
