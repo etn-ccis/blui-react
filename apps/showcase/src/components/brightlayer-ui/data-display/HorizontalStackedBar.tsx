@@ -13,7 +13,7 @@ const containerStyles = { mb: 4 };
 const combinedData = [
     { label: 'Failed', variant: 'failed' as const, count: 10 },
     { label: 'Cancelled', variant: 'canceled' as const, count: 30 },
-    { label: 'Deployed', variant: 'success' as const, count: 0 },
+    { label: 'Deployed', variant: 'success' as const, count: 19 },
     { label: 'Deploying', variant: 'info' as const, count: 10 },
     { label: 'Pending', variant: 'pending' as const, count: 40 },
 ];

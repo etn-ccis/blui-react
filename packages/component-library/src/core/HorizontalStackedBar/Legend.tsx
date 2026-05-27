@@ -148,7 +148,7 @@ const LegendRender: React.ForwardRefRenderFunction<unknown, LegendProps> = (prop
         failed: BLUIColors.red[500],
         canceled: BLUIColors.gold[400],
         success: BLUIColors.green[700],
-        pending: BLUIColors.black[500],
+        pending: BLUIColors.gray[500],
         info: BLUIColors.lightBlue[700],
     };
 
