@@ -9,8 +9,8 @@ export default {
                 border: `1px solid ${Color(BLUIColors.black[500]).alpha(0.12).string()}`,
             },
         }),
-        outlined: () => ({
-            color: BLUIColors.black[50],
+        outlined: ({ theme }) => ({
+            color: theme.vars.palette.text.primary,
         }),
         groupedText: ({ theme }) => ({
             ...theme.applyStyles('dark', {
@@ -24,6 +24,11 @@ export default {
                 '&:hover': {
                     borderRightColor: 'transparent',
                 },
+            },
+        }),
+        groupedContainedHorizontal: ({ theme }) => ({
+            '&:not(:last-of-type)': {
+                borderRightColor: theme.vars.palette.divider,
             },
         }),
         groupedTextPrimary: ({ theme }) => ({

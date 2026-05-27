@@ -46,6 +46,7 @@ import MuiFormHelperText from './componentStylesOverrides/MuiFormHelperText';
 import MuiToggleButtonGroup from './componentStylesOverrides/MuiToggleButtonGroup';
 import MuiToggleButton from './componentStylesOverrides/MuiToggleButton';
 import MuiIconButton from './componentStylesOverrides/MuiIconButton';
+import MuiPaper from './componentStylesOverrides/MuiPaper';
 import MuiRadio from './componentStylesOverrides/MuiRadio';
 import MuiFormControlLabel from './componentStylesOverrides/MuiFormControlLabel';
 
@@ -174,6 +175,7 @@ export const blueThemes = createTheme({
         MuiToggleButtonGroup: MuiToggleButtonGroup,
         MuiToggleButton: MuiToggleButton,
         MuiIconButton: MuiIconButton,
+        MuiPaper: MuiPaper,
         MuiRadio: MuiRadio,
         MuiFormControlLabel: MuiFormControlLabel,
     },
