@@ -1,33 +1,42 @@
 import React from 'react';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
+import { useTheme } from '@mui/material';
 
-export const PaperExample: React.FC = () => (
-    <Box
-        sx={{
-            display: 'flex',
-            flexWrap: 'wrap',
+export const PaperExample: React.FC = () => {
+    const theme = useTheme();
 
-            '& > *': {
-                m: 1,
-                width: 112,
-                height: 112,
+    return (
+        <Box
+            sx={{
                 display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-            },
-        }}
-    >
-        <Paper elevation={0}>Elevation: 0</Paper>
-        <Paper elevation={2}>Elevation: 2</Paper>
-        <Paper elevation={4}>Elevation: 4</Paper>
-        <Paper elevation={6}>Elevation: 6</Paper>
-        <Paper elevation={8}>Elevation: 8</Paper>
-        <Paper elevation={12}>Elevation: 12</Paper>
-        <Paper elevation={18}>Elevation: 18</Paper>
-        <Paper elevation={24}>Elevation: 24</Paper>
-        <Paper elevation={0} variant={'outlined'}>
-            Outlined
-        </Paper>
-    </Box>
-);
+                flexWrap: 'wrap',
+
+                '& > *': {
+                    m: 1,
+                    width: 112,
+                    height: 112,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                },
+            }}
+        >
+            <Paper elevation={0}>Elevation: 0</Paper>
+            <Paper elevation={2}>Elevation: 2</Paper>
+            <Paper elevation={4}>Elevation: 4</Paper>
+            <Paper elevation={6}>Elevation: 6</Paper>
+            <Paper elevation={8}>Elevation: 8</Paper>
+            <Paper elevation={12}>Elevation: 12</Paper>
+            <Paper elevation={18}>Elevation: 18</Paper>
+            <Paper elevation={24}>Elevation: 24</Paper>
+            <Paper elevation={0} variant={'outlined'}>
+                Outlined
+            </Paper>
+
+            <Paper sx={{ boxShadow: theme.vars.palette.shadows.level1, fontSize: '0.9rem' }}>Shadow level 1</Paper>
+            <Paper sx={{ boxShadow: theme.vars.palette.shadows.level2, fontSize: '0.9rem' }}>Shadow level 2</Paper>
+            <Paper sx={{ boxShadow: theme.vars.palette.shadows.level3, fontSize: '0.9rem' }}>Shadow level 3</Paper>
+        </Box>
+    );
+};

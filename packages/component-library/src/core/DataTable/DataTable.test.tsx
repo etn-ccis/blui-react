@@ -895,6 +895,71 @@ describe('DataTable', () => {
         expect(lastCall.canSave).toBe(false);
     });
 
+    it('clicking a binary cell toggles value in one click without entering edit mode', async () => {
+        type BinaryRow = { id: string; active: boolean };
+        const binaryColumns: Array<DataTableColumnDef<BinaryRow>> = [
+            { accessorKey: 'active', header: 'Active', cellType: 'binary' },
+        ];
+        const onStateChange = jest.fn();
+        const { container } = render(
+            <ThemeProvider theme={theme}>
+                <DataTable
+                    columns={binaryColumns}
+                    data={[{ id: '1', active: false }]}
+                    getRowId={(r): string => r.id}
+                    onStateChange={onStateChange}
+                />
+            </ThemeProvider>
+        );
+
+        // Initial state: active=false → checkbox unchecked, text shows "0"
+        expect(screen.getByText('0')).toBeInTheDocument();
+        expect(screen.queryByText('1')).not.toBeInTheDocument();
+
+        // The binary TD cell contains the checkbox — click the TD to trigger the one-click toggle
+        const checkbox = screen.getByRole('checkbox');
+        const binaryCell = checkbox.closest('td')!;
+        fireEvent.click(binaryCell);
+
+        // No edit <input> should appear — binary bypasses MRT's edit mode entirely
+        expect(container.querySelector('input[type="text"]')).toBeNull();
+
+        // hasPendingChanges becomes true and the displayed value flips to "1"
+        await waitFor(() => {
+            const lastCall: DataTableState = onStateChange.mock.calls[onStateChange.mock.calls.length - 1][0];
+            expect(lastCall.hasPendingChanges).toBe(true);
+        });
+        expect(screen.getByText('1')).toBeInTheDocument();
+        expect(screen.queryByText('0')).not.toBeInTheDocument();
+    });
+
+    it('clicking a non-binary text cell enters edit mode (renders an input)', async () => {
+        const { container } = render(
+            <ThemeProvider theme={theme}>
+                <DataTable
+                    columns={sampleColumns}
+                    data={sampleData}
+                    getRowId={getRowId}
+                    editDisplayMode="cell"
+                    editable={true}
+                />
+            </ThemeProvider>
+        );
+
+        // MRT renders a hidden <input> for pagination — no visible edit input should exist yet
+        // SimpleTextInput renders an input without aria-hidden, so we can distinguish the two
+        expect(container.querySelector('input:not([aria-hidden="true"])')).toBeNull();
+
+        // Find the "Alice" cell and click it to enter cell-edit mode
+        const aliceCell = screen.getByText('Alice').closest('td')!;
+        fireEvent.click(aliceCell);
+
+        // SimpleTextInput renders an <input> without aria-hidden when the cell enters edit mode
+        await waitFor(() => {
+            expect(container.querySelector('input:not([aria-hidden="true"])')).not.toBeNull();
+        });
+    });
+
     // Renders with a non-CSS-vars theme so t.vars is undefined, driving all the
     // `?? t.palette.*` fallback branches in muiTablePaperProps, muiBottomToolbarProps,
     // muiTableBodyRowProps and the mrt-row-actions head/body cell sx callbacks.
