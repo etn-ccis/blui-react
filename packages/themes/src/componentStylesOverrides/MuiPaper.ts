@@ -5,6 +5,11 @@ import Color from 'color';
 export default {
     styleOverrides: {
         root: ({ theme, ownerState }: any) => {
+            const variant = ownerState?.variant;
+            if (variant && variant !== 'elevation') {
+                return { boxShadow: 'none' };
+            }
+
             const elevation = ownerState?.elevation ?? 0;
             if (elevation >= 8) {
                 return {
