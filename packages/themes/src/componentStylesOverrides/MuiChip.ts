@@ -73,7 +73,10 @@ export default {
         }),
         clickable: ({ theme }) => ({
             '&:hover': {
-                backgroundColor: theme.vars.palette.action.hover,
+                backgroundColor: BLUIColors.gray[100],
+            },
+            '&:active': {
+                backgroundColor: BLUIColors.gray[50],
             },
             '&.MuiChip-clickableColorPrimary': {
                 '&:hover': {
@@ -87,7 +90,10 @@ export default {
             },
             ...theme.applyStyles('dark', {
                 '&:hover': {
-                    backgroundColor: theme.vars.palette.action.hover,
+                    backgroundColor: BLUIColors.black[400],
+                },
+                '&:active': {
+                    backgroundColor: BLUIColors.gray[400],
                 },
                 '&.MuiChip-clickableColorPrimary': {
                     '&:hover': {
@@ -195,7 +201,10 @@ export default {
             borderColor: Color(BlackBorder).alpha(0.12).string(),
             backgroundColor: 'transparent',
             '&.MuiChip-clickable:hover': {
-                backgroundColor: theme.vars.palette.action.hover,
+                backgroundColor: BLUIColors.white[200],
+            },
+            '&.MuiChip-clickable:active': {
+                backgroundColor: BLUIColors.white[200],
             },
             '& .MuiChip-avatar': {
                 backgroundColor: BLUIColors.gray[500],
@@ -261,7 +270,10 @@ export default {
                 backgroundColor: theme.vars.palette.background.paper,
                 borderColor: Color(BLUIColors.black[200]).alpha(0.32).string(),
                 '&.MuiChip-clickable:hover': {
-                    backgroundColor: theme.vars.palette.action.hover,
+                    backgroundColor: BLUIColors.black[800],
+                },
+                '&.MuiChip-clickable:active': {
+                    backgroundColor: BLUIColors.gray[800],
                 },
                 '& .MuiChip-avatar': {
                     backgroundColor: BLUIColors.black[600],

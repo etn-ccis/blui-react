@@ -8,17 +8,18 @@ export default {
             const elevation = ownerState?.elevation ?? 0;
             if (elevation >= 8) {
                 return {
+                    backgroundImage: 'none',
                     boxShadow: theme.vars.palette.shadows.level3,
                     border: `1px solid ${Color(BLUIColors.gray[900]).alpha(0.12).string()}`,
                 };
             }
             if (elevation >= 3) {
-                return { boxShadow: theme.vars.palette.shadows.level2 };
+                return { backgroundImage: 'none', boxShadow: theme.vars.palette.shadows.level2 };
             }
             if (elevation >= 1) {
-                return { boxShadow: theme.vars.palette.shadows.level1 };
+                return { backgroundImage: 'none', boxShadow: theme.vars.palette.shadows.level1 };
             }
-            return { boxShadow: 'none' };
+            return { backgroundImage: 'none', boxShadow: 'none' };
         },
     },
 } as Components<Omit<Theme, 'components' | 'palette'> & CssVarsTheme>['MuiPaper'];
