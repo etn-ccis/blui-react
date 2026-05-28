@@ -404,8 +404,8 @@ importers:
   apps/showcase:
     dependencies:
       '@brightlayer-ui/colors':
-        specifier: ^3.2.0-alpha.3
-        version: 3.2.0-alpha.3
+        specifier: ^3.2.0-alpha.4
+        version: 3.2.0-alpha.4
       '@brightlayer-ui/icons-mui':
         specifier: ^3.6.0
         version: 3.6.1(@mui/icons-material@7.3.11(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(@types/react@19.2.14)(react@19.2.6))(@types/react@19.2.14)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(@types/react@19.2.14)(react@19.2.6))(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(@types/react@19.2.14)(react@19.2.6))(@types/react@19.2.14)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))
@@ -2130,8 +2130,8 @@ importers:
   packages/themes:
     dependencies:
       '@brightlayer-ui/colors':
-        specifier: ^3.2.0-alpha.3
-        version: 3.2.0-alpha.3
+        specifier: ^3.2.0-alpha.4
+        version: 3.2.0-alpha.4
       '@brightlayer-ui/types':
         specifier: ^2.0.0
         version: 2.0.0
@@ -2950,6 +2950,9 @@ packages:
 
   '@brightlayer-ui/colors@3.2.0-alpha.3':
     resolution: {integrity: sha512-jnTGIZh3y4yCZfo/+cELu3LFn+Yei6kpGoyYTviFlpMJcxjS8AFzjbAXPT4lN7dD7V5AouHIFOIDbqCxvqZA0w==}
+
+  '@brightlayer-ui/colors@3.2.0-alpha.4':
+    resolution: {integrity: sha512-yYI6OWNceGyp9gO37PqHMfzJExhsx9gq+OvApvWiVRVoZK/UgCkaXX/RGPvUDBgAtU2pCqpOuLp3K/BxiGFMDg==}
 
   '@brightlayer-ui/colors@4.0.0':
     resolution: {integrity: sha512-fF7Ne7cz4yFCzR96HrP1RVBw55s+cWbqYkPallnpmmtYnPwNS/DyAbbHFEnl2bxziq3CvAR2S+D6AnjIeluOZA==}
@@ -10716,8 +10719,8 @@ packages:
   libsodium@0.7.16:
     resolution: {integrity: sha512-3HrzSPuzm6Yt9aTYCDxYEG8x8/6C0+ag655Y7rhhWZM9PT4NpdnbqlzXhGZlDnkgR6MeSTnOt/VIyHLs9aSf+Q==}
 
-  license-checker@https://codeload.github.com/mwittig/license-checker/tar.gz/d546e3f738e14c62e732346fa355162d46700893:
-    resolution: {tarball: https://codeload.github.com/mwittig/license-checker/tar.gz/d546e3f738e14c62e732346fa355162d46700893}
+  license-checker@git+https://github.com/mwittig/license-checker.git#d546e3f738e14c62e732346fa355162d46700893:
+    resolution: {commit: d546e3f738e14c62e732346fa355162d46700893, repo: https://github.com/mwittig/license-checker.git, type: git}
     version: 1.0.0
     hasBin: true
 
@@ -16007,6 +16010,10 @@ snapshots:
       '@brightlayer-ui/types': 2.0.0
 
   '@brightlayer-ui/colors@3.2.0-alpha.3':
+    dependencies:
+      '@brightlayer-ui/types': 2.0.0
+
+  '@brightlayer-ui/colors@3.2.0-alpha.4':
     dependencies:
       '@brightlayer-ui/types': 2.0.0
 
@@ -26603,7 +26610,7 @@ snapshots:
 
   libsodium@0.7.16: {}
 
-  license-checker@https://codeload.github.com/mwittig/license-checker/tar.gz/d546e3f738e14c62e732346fa355162d46700893:
+  license-checker@git+https://github.com/mwittig/license-checker.git#d546e3f738e14c62e732346fa355162d46700893:
     dependencies:
       chalk: 0.5.1
       mkdirp: 0.3.5
@@ -27587,7 +27594,7 @@ snapshots:
       async: 2.6.4
       chalk: 2.4.2
       jquery-extend: 2.0.3
-      license-checker: https://codeload.github.com/mwittig/license-checker/tar.gz/d546e3f738e14c62e732346fa355162d46700893
+      license-checker: git+https://github.com/mwittig/license-checker.git#d546e3f738e14c62e732346fa355162d46700893
       mkdirp: 0.5.6
       nopt: 3.0.6
       nopt-defaults: 0.0.1
