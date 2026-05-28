@@ -108,7 +108,7 @@ const Root = styled(Box, {
     finalBackgroundColor?: string;
     count: number;
     selectedTextColor?: string;
-}>(({ selectedStatus, label, finalBackgroundColor, count, selectedTextColor }) => ({
+}>(({ selectedStatus, label, finalBackgroundColor, count, selectedTextColor, theme }) => ({
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'center',
@@ -116,7 +116,7 @@ const Root = styled(Box, {
     borderRadius: '4px',
     padding: '8px',
     cursor: count !== 0 ? 'pointer' : 'default',
-    color: selectedStatus && selectedStatus === label ? selectedTextColor || '#ffff' : '',
+    color: selectedStatus && selectedStatus === label ? selectedTextColor || theme.vars.palette.background.paper : '',
     background: selectedStatus && selectedStatus === label ? finalBackgroundColor : '',
     transition: 'background 0.2s ease-in-out, color 0.2s ease-in-out',
     '&:hover':
