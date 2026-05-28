@@ -1,15 +1,22 @@
 import {
     BasicDataTable,
+    ReadOnlyDataTable,
     RowEditingDataTable,
     CustomCellsDataTable,
     ExternalToolbarDataTable,
 } from '../examples';
 
-## Editable Table
+## Data Table 
 
 The `<DataTable>` component provides inline cell editing with built-in validation, CRUD operations, and an unsaved-change indicator (blue dot) per cell.
 
 <BasicDataTable />
+
+## Read-Only Mode
+
+Use `editable={false}` when you want the table in read-only mode. This is useful for dashboards and detail pages where users should be able to view data but not modify rows.
+
+<ReadOnlyDataTable />
 
 ## Row Editing Mode
 
