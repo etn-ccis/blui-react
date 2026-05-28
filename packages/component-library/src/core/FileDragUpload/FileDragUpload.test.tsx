@@ -224,4 +224,115 @@ describe('FileDragUpload', () => {
         fireEvent.drop(dropzone, { dataTransfer: dt });
         expect(handleFiles).toHaveBeenCalledTimes(1);
     });
+
+    it('shows invalid type title when dragging incompatible MIME type', () => {
+        render(
+            <ThemeProvider theme={theme}>
+                <FileDragUpload accept="image/png" />
+            </ThemeProvider>
+        );
+        const dropzone = screen.getByTestId('blui-file-drag-upload-dropzone');
+        const dt = createDataTransfer(['Files'], [{ kind: 'file', type: 'application/pdf' }]);
+        fireEvent.dragEnter(dropzone, { dataTransfer: dt });
+        expect(screen.getByText('Wrong File Type')).toBeTruthy();
+    });
+
+    it('shows too many files title when dragging multiple files with multiple={false}', () => {
+        render(
+            <ThemeProvider theme={theme}>
+                <FileDragUpload multiple={false} />
+            </ThemeProvider>
+        );
+        const dropzone = screen.getByTestId('blui-file-drag-upload-dropzone');
+        const dt = createDataTransfer(
+            ['Files'],
+            [
+                { kind: 'file', type: 'image/png' },
+                { kind: 'file', type: 'image/jpeg' },
+            ]
+        );
+        fireEvent.dragEnter(dropzone, { dataTransfer: dt });
+        expect(screen.getByText('Too Many Files')).toBeTruthy();
+    });
+
+    it('does not reject when non-file items are present alongside a single file with multiple={false}', () => {
+        render(
+            <ThemeProvider theme={theme}>
+                <FileDragUpload multiple={false} />
+            </ThemeProvider>
+        );
+        const dropzone = screen.getByTestId('blui-file-drag-upload-dropzone');
+        const dt = createDataTransfer(
+            ['Files'],
+            [
+                { kind: 'file', type: 'image/png' },
+                { kind: 'string', type: 'text/plain' },
+            ]
+        );
+        fireEvent.dragEnter(dropzone, { dataTransfer: dt });
+        expect(screen.queryByText('Too Many Files')).toBeNull();
+    });
+
+    it('opens file picker on Enter key press', () => {
+        render(
+            <ThemeProvider theme={theme}>
+                <FileDragUpload />
+            </ThemeProvider>
+        );
+        const dropzone = screen.getByTestId('blui-file-drag-upload-dropzone');
+        const input = screen.getByTestId('blui-file-drag-upload-input');
+        const clickSpy = jest.spyOn(input, 'click');
+        fireEvent.keyDown(dropzone, { key: 'Enter' });
+        expect(clickSpy).toHaveBeenCalledTimes(1);
+        clickSpy.mockRestore();
+    });
+
+    it('opens file picker on Space key press', () => {
+        render(
+            <ThemeProvider theme={theme}>
+                <FileDragUpload />
+            </ThemeProvider>
+        );
+        const dropzone = screen.getByTestId('blui-file-drag-upload-dropzone');
+        const input = screen.getByTestId('blui-file-drag-upload-input');
+        const clickSpy = jest.spyOn(input, 'click');
+        fireEvent.keyDown(dropzone, { key: ' ' });
+        expect(clickSpy).toHaveBeenCalledTimes(1);
+        clickSpy.mockRestore();
+    });
+
+    it('does not open file picker on Enter when customButton is provided', () => {
+        render(
+            <ThemeProvider theme={theme}>
+                <FileDragUpload customButton={<button>Custom</button>} />
+            </ThemeProvider>
+        );
+        const dropzone = screen.getByTestId('blui-file-drag-upload-dropzone');
+        const input = screen.getByTestId('blui-file-drag-upload-input');
+        const clickSpy = jest.spyOn(input, 'click');
+        fireEvent.keyDown(dropzone, { key: 'Enter' });
+        expect(clickSpy).not.toHaveBeenCalled();
+        clickSpy.mockRestore();
+    });
+
+    it('rejects drop with incompatible files', () => {
+        const handleFiles = jest.fn();
+        render(
+            <ThemeProvider theme={theme}>
+                <FileDragUpload accept="image/png" onFilesSelected={handleFiles} />
+            </ThemeProvider>
+        );
+        const dropzone = screen.getByTestId('blui-file-drag-upload-dropzone');
+        const file = new File(['content'], 'doc.pdf', { type: 'application/pdf' });
+        const dt = {
+            types: ['Files'],
+            items: [{ kind: 'file', type: 'application/pdf' }],
+            files: [file] as unknown as FileList,
+            dropEffect: 'none',
+            effectAllowed: 'all',
+        } as unknown as DataTransfer;
+        Object.defineProperty(dt.files, 'length', { value: 1 });
+        fireEvent.drop(dropzone, { dataTransfer: dt });
+        expect(handleFiles).not.toHaveBeenCalled();
+    });
 });

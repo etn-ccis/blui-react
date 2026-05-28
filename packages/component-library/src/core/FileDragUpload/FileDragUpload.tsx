@@ -65,6 +65,15 @@ function isTypeAccepted(itemType: string, accepted: { mimeTypes: string[]; exten
     return false;
 }
 
+function countFileItems(items: DataTransferItemList): number {
+    let count = 0;
+    // eslint-disable-next-line @typescript-eslint/prefer-for-of
+    for (let i = 0; i < items.length; i++) {
+        if (items[i].kind === 'file') count++;
+    }
+    return count;
+}
+
 function checkDragCompatibility(
     dataTransfer: DataTransfer,
     accepted: { mimeTypes: string[]; extensions: string[] } | null
@@ -76,11 +85,42 @@ function checkDragCompatibility(
     for (let i = 0; i < items.length; i++) {
         const item = items[i];
         if (item.kind === 'file') {
-            if (item.type && isTypeAccepted(item.type, accepted)) return true;
-            if (!item.type) return true;
+            // Unknown type — can't reject during drag, allow it through
+            if (!item.type) continue;
+            if (!isTypeAccepted(item.type, accepted)) return false;
+        }
+    }
+    return true;
+}
+
+/**
+ * Check if a single File matches the accepted types/extensions.
+ * Used at drop time when full file info (name, type) is available.
+ */
+function isFileAccepted(file: File, accepted: { mimeTypes: string[]; extensions: string[] }): boolean {
+    if (file.type && isTypeAccepted(file.type, accepted)) return true;
+    if (accepted.extensions.length > 0) {
+        const name = file.name.toLowerCase();
+        for (const ext of accepted.extensions) {
+            if (name.endsWith(ext)) return true;
         }
     }
     return false;
+}
+
+/**
+ * Filter a FileList to only files matching the accept constraint.
+ * Returns a new DataTransfer's FileList so the consumer gets a real FileList.
+ */
+function filterFiles(files: FileList, accepted: { mimeTypes: string[]; extensions: string[] } | null): FileList {
+    if (!accepted) return files;
+    const dt = new DataTransfer();
+    for (let i = 0; i < files.length; i++) {
+        if (isFileAccepted(files[i], accepted)) {
+            dt.items.add(files[i]);
+        }
+    }
+    return dt.files;
 }
 
 export type FileDragUploadProps = Omit<BoxProps, 'title'> & {
@@ -119,7 +159,7 @@ export type FileDragUploadProps = Omit<BoxProps, 'title'> & {
      * Default: false
      */
     multiple?: boolean;
-    /** Accepted file types (e.g., 'image/png,image/jpeg,.pdf') */
+    /** Accepted file types, comma-separated (e.g., 'application/pdf', 'image/*') */
     accept?: string;
     /** Callback when files are selected or dropped */
     onFilesSelected?: (files: FileList) => void;
@@ -263,6 +303,12 @@ const DescriptionText = styled(Typography, {
     }),
 }));
 
+const UploadButton = styled(Button)({
+    '& .MuiButton-startIcon > *:nth-of-type(1)': {
+        fontSize: 16,
+    },
+});
+
 const FileDragUploadRender: React.ForwardRefRenderFunction<unknown, FileDragUploadProps> = (
     props: FileDragUploadProps,
     ref: any
@@ -312,7 +358,7 @@ const FileDragUploadRender: React.ForwardRefRenderFunction<unknown, FileDragUplo
             e.stopPropagation();
             if (!e.dataTransfer) return;
             const compatible = checkDragCompatibility(e.dataTransfer, acceptedRef.current);
-            const tooMany = !multiple && e.dataTransfer.items.length > 1;
+            const tooMany = !multiple && countFileItems(e.dataTransfer.items) > 1;
             if (compatible && !tooMany) {
                 e.dataTransfer.dropEffect = 'copy';
                 setDragState((prev) => (prev !== 'drag-over' ? 'drag-over' : prev));
@@ -341,7 +387,7 @@ const FileDragUploadRender: React.ForwardRefRenderFunction<unknown, FileDragUplo
         };
         const handleDragLeave = (e: DragEvent): void => {
             e.preventDefault();
-            dragCounterRef.current--;
+            dragCounterRef.current = Math.max(0, dragCounterRef.current - 1);
             if (dragCounterRef.current === 0) {
                 zoneCounterRef.current = 0;
                 setDragState('idle');
@@ -377,7 +423,7 @@ const FileDragUploadRender: React.ForwardRefRenderFunction<unknown, FileDragUplo
             e.preventDefault();
             zoneCounterRef.current++;
             const compatible = checkDragCompatibility(e.dataTransfer, acceptedRef.current);
-            const tooMany = !multiple && e.dataTransfer.items.length > 1;
+            const tooMany = !multiple && countFileItems(e.dataTransfer.items) > 1;
             if (compatible && !tooMany) {
                 setDragState('drag-over');
             } else {
@@ -413,10 +459,11 @@ const FileDragUploadRender: React.ForwardRefRenderFunction<unknown, FileDragUplo
             if (isReject) return;
             const compatible = checkDragCompatibility(e.dataTransfer, acceptedRef.current);
             if (!compatible) return;
-            const files = e.dataTransfer.files;
-            if (!multiple && files.length > 1) return;
-            if (files.length > 0) {
-                onFilesSelected?.(files);
+            const allFiles = e.dataTransfer.files;
+            const filtered = filterFiles(allFiles, acceptedRef.current);
+            if (!multiple && filtered.length > 1) return;
+            if (filtered.length > 0) {
+                onFilesSelected?.(filtered);
             }
         },
         [isReject, multiple, onFilesSelected]
@@ -464,7 +511,7 @@ const FileDragUploadRender: React.ForwardRefRenderFunction<unknown, FileDragUplo
 
     // Button rendering
     const defaultButton = (
-        <Button
+        <UploadButton
             variant="contained"
             color="primary"
             size="medium"
@@ -473,7 +520,7 @@ const FileDragUploadRender: React.ForwardRefRenderFunction<unknown, FileDragUplo
             disabled={isActive}
         >
             Upload
-        </Button>
+        </UploadButton>
     );
 
     return (
@@ -493,6 +540,12 @@ const FileDragUploadRender: React.ForwardRefRenderFunction<unknown, FileDragUplo
                 onDragLeave={handleZoneDragLeave}
                 onDrop={handleZoneDrop}
                 onClick={handleClick}
+                onKeyDown={(e): void => {
+                    if ((e.key === 'Enter' || e.key === ' ') && !customButton) {
+                        e.preventDefault();
+                        inputRef.current?.click();
+                    }
+                }}
                 role="button"
                 tabIndex={0}
             >

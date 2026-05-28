@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
@@ -13,12 +13,30 @@ const sectionTitleStyles = {
     mb: 2,
 };
 
-export const FileDragUploadExample: React.FC = () => {
-    const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
+const SelectedFileChips: React.FC<{ files: string[] }> = ({ files }) =>
+    files.length > 0 ? (
+        <Box sx={{ mt: 1, display: 'flex', gap: 0.5, flexWrap: 'wrap' }}>
+            {files.map((name) => (
+                <Chip key={name} label={name} size="small" />
+            ))}
+        </Box>
+    ) : null;
 
-    const handleFiles = (files: FileList): void => {
-        setSelectedFiles(Array.from(files).map((f) => f.name));
-    };
+const useFileHandler = (): { files: string[]; handleFiles: (fl: FileList) => void } => {
+    const [files, setFiles] = useState<string[]>([]);
+    const handleFiles = useCallback((fl: FileList): void => {
+        setFiles(Array.from(fl).map((f) => f.name));
+    }, []);
+    return { files, handleFiles };
+};
+
+export const FileDragUploadExample: React.FC = () => {
+    const defaultEx = useFileHandler();
+    const imageEx = useFileHandler();
+    const pdfEx = useFileHandler();
+    const singleEx = useFileHandler();
+    const singlePdfEx = useFileHandler();
+    const compactEx = useFileHandler();
 
     return (
         <>
@@ -27,15 +45,9 @@ export const FileDragUploadExample: React.FC = () => {
                     Default (No Props Required)
                 </Typography>
                 <Box sx={{ maxWidth: 340, mx: 'auto' }}>
-                    <FileDragUpload onFilesSelected={handleFiles} />
+                    <FileDragUpload onFilesSelected={defaultEx.handleFiles} />
                 </Box>
-                {selectedFiles.length > 0 && (
-                    <Box sx={{ mt: 1, display: 'flex', gap: 0.5, flexWrap: 'wrap' }}>
-                        {selectedFiles.map((name) => (
-                            <Chip key={name} label={name} size="small" />
-                        ))}
-                    </Box>
-                )}
+                <SelectedFileChips files={defaultEx.files} />
             </Box>
 
             <Box sx={containerStyles}>
@@ -49,9 +61,10 @@ export const FileDragUploadExample: React.FC = () => {
                         description={'Max file size: 25 MB\nAllowed format: PNG, JPG, WEBP, TIFF, SVG'}
                         accept="image/png,image/jpeg,image/webp,image/tiff,image/svg+xml"
                         multiple
-                        onFilesSelected={handleFiles}
+                        onFilesSelected={imageEx.handleFiles}
                     />
                 </Box>
+                <SelectedFileChips files={imageEx.files} />
             </Box>
 
             <Box sx={containerStyles}>
@@ -64,9 +77,10 @@ export const FileDragUploadExample: React.FC = () => {
                         description={'Max file size: 10 MB\nAllowed format: PDF'}
                         accept="application/pdf"
                         multiple
-                        onFilesSelected={handleFiles}
+                        onFilesSelected={pdfEx.handleFiles}
                     />
                 </Box>
+                <SelectedFileChips files={pdfEx.files} />
             </Box>
 
             <Box sx={containerStyles}>
@@ -77,9 +91,10 @@ export const FileDragUploadExample: React.FC = () => {
                     <FileDragUpload
                         description={'Max file size: 5 MB\nOnly one file allowed'}
                         multiple={false}
-                        onFilesSelected={handleFiles}
+                        onFilesSelected={singleEx.handleFiles}
                     />
                 </Box>
+                <SelectedFileChips files={singleEx.files} />
             </Box>
 
             <Box sx={containerStyles}>
@@ -91,9 +106,10 @@ export const FileDragUploadExample: React.FC = () => {
                         description={'Max file size: 10 MB\nAllowed format: PDF\nOnly one file allowed'}
                         accept="application/pdf"
                         multiple={false}
-                        onFilesSelected={handleFiles}
+                        onFilesSelected={singlePdfEx.handleFiles}
                     />
                 </Box>
+                <SelectedFileChips files={singlePdfEx.files} />
             </Box>
 
             <Box sx={containerStyles}>
@@ -105,9 +121,10 @@ export const FileDragUploadExample: React.FC = () => {
                         compact
                         description={'Max file size: 25 MB\nAllowed format: PNG, JPG, WEBP, TIFF, SVG'}
                         accept="image/png,image/jpeg,image/webp,image/tiff,image/svg+xml"
-                        onFilesSelected={handleFiles}
+                        onFilesSelected={compactEx.handleFiles}
                     />
                 </Box>
+                <SelectedFileChips files={compactEx.files} />
             </Box>
         </>
     );
