@@ -115,6 +115,7 @@ function isFileAccepted(file: File, accepted: { mimeTypes: string[]; extensions:
 function filterFiles(files: FileList, accepted: { mimeTypes: string[]; extensions: string[] } | null): FileList {
     if (!accepted) return files;
     const dt = new DataTransfer();
+    // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i < files.length; i++) {
         if (isFileAccepted(files[i], accepted)) {
             dt.items.add(files[i]);
