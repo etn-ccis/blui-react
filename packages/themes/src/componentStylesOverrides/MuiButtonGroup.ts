@@ -12,6 +12,9 @@ export default {
         outlined: () => ({
             color: BLUIColors.black[50],
         }),
+        contained: ({ theme }) => ({
+            boxShadow: theme.vars.palette.shadows.level1,
+        }),
         groupedText: ({ theme }) => ({
             ...theme.applyStyles('dark', {
                 '&:not(:last-child).Mui-disabled': {
