@@ -5,6 +5,7 @@ import {
     DataTableExample,
     EmptyStateExample,
     ExampleCardList,
+    FileDragUploadExample,
     HeroExample,
     InfoListItemExample,
     ListItemTagExample,
@@ -23,6 +24,7 @@ export const BLUIDataDisplay: React.FC = () => {
     const examples: ComponentExample[] = [
         { label: 'Channel Value', component: <ChannelValueExample /> },
         { label: 'Empty State', component: <EmptyStateExample /> },
+        { label: 'File Drag Upload', component: <FileDragUploadExample />, fullWidth: true },
         { label: 'Hero', component: <HeroExample /> },
         { label: 'Info List Item', component: <InfoListItemExample /> },
         { label: 'List Item Tag', component: <ListItemTagExample /> },
