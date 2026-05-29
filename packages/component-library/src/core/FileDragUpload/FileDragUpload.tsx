@@ -50,12 +50,12 @@ function parseAccept(accept?: string): { mimeTypes: string[]; extensions: string
 }
 
 function isTypeAccepted(itemType: string, accepted: { mimeTypes: string[]; extensions: string[] }): boolean {
-    const t = itemType.toLowerCase();
+    const fileType = itemType.toLowerCase();
     for (const mime of accepted.mimeTypes) {
-        if (mime === t) return true;
+        if (mime === fileType) return true;
         if (mime.endsWith('/*')) {
             const prefix = mime.slice(0, -1);
-            if (t.startsWith(prefix)) return true;
+            if (fileType.startsWith(prefix)) return true;
         }
     }
     // If only extensions are specified, we can't reliably check during drag
@@ -67,9 +67,8 @@ function isTypeAccepted(itemType: string, accepted: { mimeTypes: string[]; exten
 
 function countFileItems(items: DataTransferItemList): number {
     let count = 0;
-    // eslint-disable-next-line @typescript-eslint/prefer-for-of
-    for (let i = 0; i < items.length; i++) {
-        if (items[i].kind === 'file') count++;
+    for (const item of Array.from(items)) {
+        if (item.kind === 'file') count++;
     }
     return count;
 }
@@ -81,9 +80,7 @@ function checkDragCompatibility(
     if (!accepted) return true;
     const items = dataTransfer.items;
     if (!items || items.length === 0) return true;
-    // eslint-disable-next-line @typescript-eslint/prefer-for-of
-    for (let i = 0; i < items.length; i++) {
-        const item = items[i];
+    for (const item of Array.from(items)) {
         if (item.kind === 'file') {
             // Unknown type — can't reject during drag, allow it through
             if (!item.type) continue;
@@ -115,10 +112,9 @@ function isFileAccepted(file: File, accepted: { mimeTypes: string[]; extensions:
 function filterFiles(files: FileList, accepted: { mimeTypes: string[]; extensions: string[] } | null): FileList {
     if (!accepted) return files;
     const dt = new DataTransfer();
-    // eslint-disable-next-line @typescript-eslint/prefer-for-of
-    for (let i = 0; i < files.length; i++) {
-        if (isFileAccepted(files[i], accepted)) {
-            dt.items.add(files[i]);
+    for (const file of Array.from(files)) {
+        if (isFileAccepted(file, accepted)) {
+            dt.items.add(file);
         }
     }
     return dt.files;
