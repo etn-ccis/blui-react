@@ -10,67 +10,99 @@ import {
 import { css } from '@emotion/css';
 import { getIcon, getIconSnippetWithProps, removeEmptyProps } from '../../../shared';
 
+const iconOptions = ['undefined', '<TrendingUp />', '<Fan />', '<TrendingDown />', '<SensorsOff />'] as const;
+const variantOptions = ['undefined', 'failed', 'success', 'pending', 'info', 'canceled'] as const;
+
+const itemConfigs = [
+    { key: 'failed', label: 'Failed', count: 10, variant: 'failed' as const },
+    { key: 'canceled', label: 'Canceled', count: 18, variant: 'canceled' as const },
+    { key: 'success', label: 'Success', count: 44, variant: 'success' as const },
+    { key: 'pending', label: 'Pending', count: 28, variant: 'pending' as const },
+    { key: 'info', label: 'Info', count: 19, variant: 'info' as const },
+] as const;
+
+type ItemConfig = (typeof itemConfigs)[number];
+
+type HorizontalStackedBarPlaygroundData = {
+    hideEmptyCategories?: boolean;
+    selectedStatus?: string;
+    addOnChange?: boolean;
+    useCustomClasses?: boolean;
+} & Record<`${ItemConfig['key']}Label`, string> &
+    Record<`${ItemConfig['key']}Count`, number> &
+    Record<`${ItemConfig['key']}Variant`, HorizontalStackedBarItem['variant'] | 'undefined'> &
+    Record<`${ItemConfig['key']}BackgroundColor`, string> &
+    Record<`${ItemConfig['key']}Icon`, string> &
+    Record<`${ItemConfig['key']}DisabledIcon`, string>;
+
+const buildItemInputConfig = (item: ItemConfig): InputConfig => [
+    {
+        id: `${item.key}Label`,
+        type: 'string',
+        typeLabel: 'string',
+        description: `Label for the ${item.label} item`,
+        required: true,
+        initialValue: item.label,
+        category: `Data - ${item.label}`,
+    },
+    {
+        id: `${item.key}Count`,
+        type: 'number',
+        typeLabel: 'number',
+        description: `Count for the ${item.label} item`,
+        required: true,
+        initialValue: item.count,
+        minValue: 0,
+        maxValue: 200,
+        valueStep: 1,
+        category: `Data - ${item.label}`,
+    },
+    {
+        id: `${item.key}Variant`,
+        type: 'select',
+        typeLabel: "'failed' | 'success' | 'pending' | 'info' | 'canceled'",
+        description: `Variant for the ${item.label} item`,
+        required: false,
+        initialValue: item.variant,
+        defaultValue: item.variant,
+        options: variantOptions as unknown as string[],
+        category: `Data - ${item.label}`,
+    },
+    {
+        id: `${item.key}BackgroundColor`,
+        type: 'color',
+        typeLabel: 'string',
+        description: `Custom background color for the ${item.label} item`,
+        required: false,
+        initialValue: '',
+        category: `Data - ${item.label}`,
+    },
+    {
+        id: `${item.key}Icon`,
+        type: 'select',
+        typeLabel: 'React.JSX.Element',
+        description: `Legend icon shown when the ${item.label} item is enabled`,
+        required: false,
+        initialValue: 'undefined',
+        defaultValue: 'undefined',
+        options: iconOptions as unknown as string[],
+        category: `Data - ${item.label}`,
+    },
+    {
+        id: `${item.key}DisabledIcon`,
+        type: 'select',
+        typeLabel: 'React.JSX.Element',
+        description: `Legend icon shown when the ${item.label} item count is 0`,
+        required: false,
+        initialValue: 'undefined',
+        defaultValue: 'undefined',
+        options: iconOptions as unknown as string[],
+        category: `Data - ${item.label}`,
+    },
+];
+
 const inputConfig: InputConfig = [
-    {
-        id: 'failedCount',
-        type: 'number',
-        typeLabel: 'number',
-        description: 'Count for the Failed category',
-        required: true,
-        initialValue: 10,
-        minValue: 0,
-        maxValue: 200,
-        valueStep: 1,
-        category: 'Data',
-    },
-    {
-        id: 'canceledCount',
-        type: 'number',
-        typeLabel: 'number',
-        description: 'Count for the Canceled category',
-        required: true,
-        initialValue: 18,
-        minValue: 0,
-        maxValue: 200,
-        valueStep: 1,
-        category: 'Data',
-    },
-    {
-        id: 'successCount',
-        type: 'number',
-        typeLabel: 'number',
-        description: 'Count for the Success category',
-        required: true,
-        initialValue: 44,
-        minValue: 0,
-        maxValue: 200,
-        valueStep: 1,
-        category: 'Data',
-    },
-    {
-        id: 'pendingCount',
-        type: 'number',
-        typeLabel: 'number',
-        description: 'Count for the Pending category',
-        required: true,
-        initialValue: 28,
-        minValue: 0,
-        maxValue: 200,
-        valueStep: 1,
-        category: 'Data',
-    },
-    {
-        id: 'infoCount',
-        type: 'number',
-        typeLabel: 'number',
-        description: 'Count for the Info category',
-        required: true,
-        initialValue: 19,
-        minValue: 0,
-        maxValue: 200,
-        valueStep: 1,
-        category: 'Data',
-    },
+    ...itemConfigs.flatMap(buildItemInputConfig),
     {
         id: 'hideEmptyCategories',
         type: 'boolean',
@@ -80,49 +112,6 @@ const inputConfig: InputConfig = [
         initialValue: false,
         defaultValue: false,
         category: 'Optional Props',
-    },
-    {
-        id: 'selectedStatus',
-        type: 'select',
-        typeLabel: 'string',
-        description: 'Controlled selected category label',
-        required: false,
-        initialValue: 'undefined',
-        defaultValue: 'undefined',
-        options: ['undefined', 'Failed', 'Canceled', 'Success', 'Pending', 'Info'],
-        category: 'Optional Props',
-    },
-    {
-        id: 'useCustomColors',
-        type: 'boolean',
-        typeLabel: 'boolean',
-        description: 'Use custom background colors instead of variants',
-        required: false,
-        initialValue: false,
-        defaultValue: false,
-        category: 'Other Configuration',
-    },
-    {
-        id: 'icon',
-        type: 'select',
-        typeLabel: 'React.JSX.Element',
-        description: 'Legend icon shown when count > 0',
-        required: false,
-        initialValue: 'undefined',
-        defaultValue: 'undefined',
-        options: ['undefined', '<TrendingUp />', '<Fan />'],
-        category: 'Item Props',
-    },
-    {
-        id: 'disabledIcon',
-        type: 'select',
-        typeLabel: 'React.JSX.Element',
-        description: 'Legend icon shown when count = 0',
-        required: false,
-        initialValue: 'undefined',
-        defaultValue: 'undefined',
-        options: ['undefined', '<TrendingDown />', '<SensorsOff />'],
-        category: 'Item Props',
     },
     {
         id: 'addOnChange',
@@ -135,32 +124,7 @@ const inputConfig: InputConfig = [
         defaultValue: false,
         category: 'Optional Props',
     },
-    {
-        id: 'useCustomClasses',
-        type: 'boolean',
-        typeLabel: 'boolean',
-        description: 'Apply custom classes to root, legendContainer, and barContainer',
-        required: false,
-        initialValue: false,
-        defaultValue: false,
-        category: 'Optional Props',
-    },
 ];
-
-type HorizontalStackedBarPlaygroundData = {
-    failedCount: number;
-    canceledCount: number;
-    successCount: number;
-    pendingCount: number;
-    infoCount: number;
-    hideEmptyCategories?: boolean;
-    selectedStatus?: string;
-    useCustomColors?: boolean;
-    icon?: string;
-    disabledIcon?: string;
-    addOnChange?: boolean;
-    useCustomClasses?: boolean;
-};
 
 const customClasses: HorizontalStackedBarProps['classes'] = {
     root: css({
@@ -179,40 +143,33 @@ const customClasses: HorizontalStackedBarProps['classes'] = {
     }),
 };
 
-const buildData = (data: HorizontalStackedBarPlaygroundData): HorizontalStackedBarItem[] => {
-    const icon = data.icon && data.icon !== 'undefined' ? getIcon(data.icon) : undefined;
-    const disabledIcon =
-        data.disabledIcon && data.disabledIcon !== 'undefined' ? getIcon(data.disabledIcon) : undefined;
+const buildData = (data: HorizontalStackedBarPlaygroundData): HorizontalStackedBarItem[] =>
+    itemConfigs.map((item) => {
+        const label = data[`${item.key}Label` as keyof HorizontalStackedBarPlaygroundData] as string;
+        const count = Number(data[`${item.key}Count` as keyof HorizontalStackedBarPlaygroundData]) || 0;
+        const variant = data[`${item.key}Variant` as keyof HorizontalStackedBarPlaygroundData] as
+            | HorizontalStackedBarItem['variant']
+            | 'undefined';
+        const backgroundColor = data[
+            `${item.key}BackgroundColor` as keyof HorizontalStackedBarPlaygroundData
+        ] as string;
+        const icon = data[`${item.key}Icon` as keyof HorizontalStackedBarPlaygroundData] as string;
+        const disabledIcon = data[`${item.key}DisabledIcon` as keyof HorizontalStackedBarPlaygroundData] as string;
 
-    const baseData: HorizontalStackedBarItem[] = [
-        { label: 'Failed', variant: 'failed', count: Number(data.failedCount) || 0, icon, disabledIcon },
-        { label: 'Canceled', variant: 'canceled', count: Number(data.canceledCount) || 0, icon, disabledIcon },
-        { label: 'Success', variant: 'success', count: Number(data.successCount) || 0, icon, disabledIcon },
-        { label: 'Pending', variant: 'pending', count: Number(data.pendingCount) || 0, icon, disabledIcon },
-        { label: 'Info', variant: 'info', count: Number(data.infoCount) || 0, icon, disabledIcon },
-    ];
-
-    if (!data.useCustomColors) {
-        return baseData;
-    }
-
-    const customColors = ['#0b5fff', '#7b1fa2', '#2e7d32', '#ef6c00', '#00838f'];
-    return baseData.map((item, index) => ({
-        label: item.label,
-        count: item.count,
-        icon: item.icon,
-        disabledIcon: item.disabledIcon,
-        backgroundColor: customColors[index],
-    }));
-};
+        return {
+            label,
+            count,
+            ...(variant && variant !== 'undefined' ? { variant } : {}),
+            ...(backgroundColor ? { backgroundColor } : {}),
+            ...(icon && icon !== 'undefined' ? { icon: getIcon(icon) } : {}),
+            ...(disabledIcon && disabledIcon !== 'undefined' ? { disabledIcon: getIcon(disabledIcon) } : {}),
+        };
+    });
 
 const HorizontalStackedBarPreview: PreviewComponent = ({ data }) => {
     const previewData = data as unknown as HorizontalStackedBarPlaygroundData;
     const [latestSelection, setLatestSelection] = React.useState<string>('');
-    const selectedStatus =
-        previewData.selectedStatus && previewData.selectedStatus !== 'undefined'
-            ? previewData.selectedStatus
-            : undefined;
+    const selectedStatus = previewData.selectedStatus || undefined;
     const onChange = previewData.addOnChange
         ? (selectedLabel: string): void => setLatestSelection(selectedLabel)
         : undefined;
@@ -243,20 +200,30 @@ const HorizontalStackedBarPreview: PreviewComponent = ({ data }) => {
 
 const generateSnippet: CodeSnippetFunction = (rawData) => {
     const data = rawData as unknown as HorizontalStackedBarPlaygroundData;
-    const selectedStatus = data.selectedStatus && data.selectedStatus !== 'undefined' ? data.selectedStatus : undefined;
-    const iconSnippet = data.icon && data.icon !== 'undefined' ? `, icon: ${getIconSnippetWithProps(data.icon)}` : '';
-    const disabledIconSnippet =
-        data.disabledIcon && data.disabledIcon !== 'undefined'
-            ? `, disabledIcon: ${getIconSnippetWithProps(data.disabledIcon)}`
-            : '';
-    const items = buildData(data);
-    const dataSnippet = `const data = [\n${items
-        .map((item) => {
-            const variantPart = item.variant ? `, variant: '${item.variant}'` : '';
-            const backgroundColorPart = item.backgroundColor ? `, backgroundColor: '${item.backgroundColor}'` : '';
-            return `    { label: '${item.label}', count: ${item.count}${variantPart}${backgroundColorPart}${iconSnippet}${disabledIconSnippet} }`;
-        })
-        .join(',\n')}\n];`;
+    const selectedStatus = data.selectedStatus || undefined;
+    const items = itemConfigs.map((item) => {
+        const label = data[`${item.key}Label` as keyof HorizontalStackedBarPlaygroundData] as string;
+        const count = Number(data[`${item.key}Count` as keyof HorizontalStackedBarPlaygroundData]) || 0;
+        const variant = data[`${item.key}Variant` as keyof HorizontalStackedBarPlaygroundData] as
+            | HorizontalStackedBarItem['variant']
+            | 'undefined';
+        const backgroundColor = data[
+            `${item.key}BackgroundColor` as keyof HorizontalStackedBarPlaygroundData
+        ] as string;
+        const icon = data[`${item.key}Icon` as keyof HorizontalStackedBarPlaygroundData] as string;
+        const disabledIcon = data[`${item.key}DisabledIcon` as keyof HorizontalStackedBarPlaygroundData] as string;
+
+        const variantPart = variant && variant !== 'undefined' ? `, variant: '${variant}'` : '';
+        const backgroundColorPart = backgroundColor ? `, backgroundColor: '${backgroundColor}'` : '';
+        const iconPart = icon && icon !== 'undefined' ? `, icon: ${getIconSnippetWithProps(icon)}` : '';
+        const disabledIconPart =
+            disabledIcon && disabledIcon !== 'undefined'
+                ? `, disabledIcon: ${getIconSnippetWithProps(disabledIcon)}`
+                : '';
+
+        return `    { label: '${label}', count: ${count}${variantPart}${backgroundColorPart}${iconPart}${disabledIconPart} }`;
+    });
+    const dataSnippet = `const data = [\n${items.join(',\n')}\n];`;
 
     const classesSnippet = data.useCustomClasses
         ? `const classes = {\n    root: 'my-horizontal-stacked-bar-root',\n    legendContainer: 'my-horizontal-stacked-bar-legend-container',\n    barContainer: 'my-horizontal-stacked-bar-bar-container',\n};\n\n`
