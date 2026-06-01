@@ -99,7 +99,7 @@ const BarContainer = styled(Box)({
 const EmptyBar = styled(Box)(({ theme }) => ({
     height: '4px',
     width: '100%',
-    backgroundColor: theme.vars.palette.action.disabledBackground,
+    backgroundColor: (theme.vars || theme).palette.action.disabledBackground,
 }));
 
 const HorizontalStackedBarRender: React.ForwardRefRenderFunction<unknown, HorizontalStackedBarProps> = (
