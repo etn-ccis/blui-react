@@ -95,7 +95,7 @@ const HorizontalBarRender: React.ForwardRefRenderFunction<unknown, HorizontalBar
 
     // Calculate final color: custom color takes precedence over variant color
     const variantColor = variant ? variantColors[variant] : undefined;
-    const finalColor = color || variantColor || theme.vars.palette.text.secondary;
+    const finalColor = color || variantColor || (theme.vars || theme).palette.text.secondary;
 
     React.useEffect(() => {
         setSelectedState(selectedStatus);
