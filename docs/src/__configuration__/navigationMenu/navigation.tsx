@@ -489,6 +489,28 @@ export const pageDefinitions: RouteConfig[] = [
                 ],
             },
             {
+                title: 'Horizontal Stacked Bar',
+                path: 'horizontal-stacked-bar/',
+                element: <ComponentPreviewPage title={'Horizontal Stacked Bar'} />,
+                children: [
+                    {
+                        title: 'examples',
+                        path: 'examples',
+                        element: <HorizontalStackedBarExamples />,
+                    },
+                    {
+                        title: 'API Docs',
+                        path: 'api-docs',
+                        element: <HorizontalStackedBarAPIDocs />,
+                    },
+                    {
+                        title: 'playground',
+                        path: 'playground',
+                        element: <HorizontalStackedBarPlaygroundComponent />,
+                    },
+                ],
+            },
+            {
                 title: 'Info List Item',
                 path: 'info-list-item/',
                 element: <ComponentPreviewPage title={'Info List Item'} />,
@@ -634,28 +656,6 @@ export const pageDefinitions: RouteConfig[] = [
                         title: 'playground',
                         path: 'playground',
                         element: <UserMenuPlaygroundComponent />,
-                    },
-                ],
-            },
-            {
-                title: 'Horizontal Stacked Bar',
-                path: 'horizontal-stacked-bar/',
-                element: <ComponentPreviewPage title={'Horizontal Stacked Bar'} />,
-                children: [
-                    {
-                        title: 'examples',
-                        path: 'examples',
-                        element: <HorizontalStackedBarExamples />,
-                    },
-                    {
-                        title: 'API Docs',
-                        path: 'api-docs',
-                        element: <HorizontalStackedBarAPIDocs />,
-                    },
-                    {
-                        title: 'playground',
-                        path: 'playground',
-                        element: <HorizontalStackedBarPlaygroundComponent />,
                     },
                 ],
             },
