@@ -2,21 +2,12 @@ import { Components, Theme, CssVarsTheme } from '@mui/material/styles';
 
 export default {
     styleOverrides: {
-        root: ({ theme }) => ({
-            borderColor: theme.vars.palette.divider,
-            '&::before': {
-                backgroundColor: theme.vars.palette.divider,
+        root: () => ({
+            '&.Mui-expanded + .MuiAccordion-root:not(.Mui-expanded)': {
+                borderTop: 0,
             },
-            '&.Mui-expanded': {
-                borderColor: theme.vars.palette.divider,
-                '&::before': {
-                    opacity: 0,
-                },
-            },
-            '&:first-of-type': {
-                '&::before': {
-                    display: 'none',
-                },
+            '&.Mui-expanded + .MuiAccordion-root:not(.Mui-expanded)::before': {
+                display: 'none',
             },
         }),
     },
