@@ -116,7 +116,10 @@ const Root = styled(Box, {
     borderRadius: '4px',
     padding: '8px',
     cursor: count !== 0 ? 'pointer' : 'default',
-    color: selectedStatus && selectedStatus === label ? selectedTextColor || theme.vars.palette.background.paper : '',
+    color:
+        selectedStatus && selectedStatus === label
+            ? selectedTextColor || (theme.vars || theme).palette.background.paper
+            : '',
     background: selectedStatus && selectedStatus === label ? finalBackgroundColor : '',
     transition: 'background 0.2s ease-in-out, color 0.2s ease-in-out',
     '&:hover':
