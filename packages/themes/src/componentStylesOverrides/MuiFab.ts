@@ -10,6 +10,8 @@ export default {
             textTransform: 'none',
             backgroundColor: theme.vars.palette.background.paper,
             color: theme.vars.palette.text.primary,
+            boxShadow: theme.vars.palette.shadows.level3,
+            border: `1px solid ${Color(BLUIColors.gray[900]).alpha(0.12).string()}`,
             '&:hover': {
                 backgroundColor: Color(BLUIColors.black[500]).alpha(0.05).string(),
             },

@@ -10,7 +10,6 @@ export default {
             }),
         }),
         paperAnchorBottom: ({ theme }) => ({
-            boxShadow: theme.vars.palette.shadows.level2,
             ...theme.applyStyles('dark', {
                 backgroundColor: BLUIColors.darkBlack[300],
             }),
