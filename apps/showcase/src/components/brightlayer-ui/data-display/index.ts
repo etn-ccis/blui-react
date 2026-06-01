@@ -1,6 +1,7 @@
 export * from './ChannelValue';
 export * from './DataTable';
 export * from './EmptyState';
+export * from './FileDragUpload';
 export * from './Hero';
 export * from './InfoListItem';
 export * from './ListItemTag';
