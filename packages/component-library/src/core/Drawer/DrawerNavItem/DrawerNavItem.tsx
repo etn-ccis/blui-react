@@ -9,7 +9,6 @@ import Collapse from '@mui/material/Collapse';
 import { InfoListItem, InfoListItemProps as BLUIInfoListItemProps } from '../../InfoListItem';
 import { ArrowDropDown, ExpandMore } from '@mui/icons-material';
 import { NavItemSharedStyleProps, NavItemSharedStylePropTypes, SharedStyleProps, SharedStylePropTypes } from '../types';
-import color from 'color';
 import { findChildByType, mergeStyleProp } from '../utilities';
 import { white, darkBlack } from '@brightlayer-ui/colors';
 import { DrawerRailItemProps } from '../DrawerRailItem';
@@ -203,14 +202,6 @@ const DrawerNavItemRender: React.ForwardRefRenderFunction<HTMLElement, DrawerNav
     const colorScheme = useColorScheme();
     const systemMode = colorScheme.mode === 'system' ? theme.palette.mode : colorScheme.mode;
 
-    // approximating primary[200] but we don't have access to it directly from the theme
-    const lightenedPrimary = color(
-        colorScheme.mode === 'dark' ? theme.palette.primary.dark : theme.palette.primary.main
-    )
-        .lighten(0.83)
-        .desaturate(0.39)
-        .string();
-
     // Destructure the props
     const {
         activeItemBackgroundColor = systemMode === 'light'
@@ -218,13 +209,9 @@ const DrawerNavItemRender: React.ForwardRefRenderFunction<HTMLElement, DrawerNav
             : `rgba(${(theme.vars || theme).palette.primary.darkChannel} / 0.20)`,
 
         activeItemBackgroundShape = 'square',
-        activeItemFontColor = systemMode === 'light'
-            ? (theme.vars || theme).palette.primary.main
-            : color(theme.palette.primary.dark).lighten(0.83).desaturate(0.39).string(),
+        activeItemFontColor = (theme.vars || theme).palette.primary.main,
 
-        activeItemIconColor = colorScheme.mode === 'light'
-            ? (theme.vars || theme).palette.primary.main
-            : lightenedPrimary,
+        activeItemIconColor = (theme.vars || theme).palette.primary.main,
         backgroundColor,
         chevron,
         chevronColor,

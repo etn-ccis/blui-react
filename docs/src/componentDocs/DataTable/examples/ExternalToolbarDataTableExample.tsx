@@ -85,7 +85,7 @@ export const ExternalToolbarDataTableExample = (): React.JSX.Element => {
                             </Button>
                         </span>
                     </Tooltip>
-                    <Tooltip title="Ctrl+Shift+Z">
+                    <Tooltip title="Ctrl+Shift+Z / Ctrl+Y">
                         <span>
                             <Button
                                 variant="outlined"
