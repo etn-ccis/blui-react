@@ -104,7 +104,6 @@ const Root = styled(MUIDrawer, {
     [`& .${drawerClasses.paper}`]: {
         overflow: 'hidden',
         position: 'inherit',
-        boxShadow: sideBorder ? 'none' : theme.shadows[4],
         borderWidth: sideBorder ? 1 : 0,
     },
 }));

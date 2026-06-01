@@ -49,7 +49,7 @@ import MuiIconButton from './componentStylesOverrides/MuiIconButton';
 import MuiPaper from './componentStylesOverrides/MuiPaper';
 import MuiRadio from './componentStylesOverrides/MuiRadio';
 import MuiFormControlLabel from './componentStylesOverrides/MuiFormControlLabel';
-import MuiCard from './componentStylesOverrides/MuiCard';
+import MuiAccordion from './componentStylesOverrides/MuiAccordion';
 
 declare module '@mui/material/styles' {
     // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
@@ -77,7 +77,7 @@ const LightThemeColors = {
     error: createSimplePalette(BLUIColors.red),
     success: createSimplePalette(BLUIColors.green),
     info: createSimplePalette(BLUIColors.lightBlue),
-    divider: Color(BLUIColors.black[500]).alpha(0.12).string(),
+    divider: Color(BLUIColors.lightThemeDivider).alpha(0.12).string(),
     warning: {
         light: BLUIColors.yellow[100],
         main: BLUIColors.yellow[500],
@@ -106,7 +106,7 @@ const DarkThemeColors = {
     error: createSimpleDarkPalette(BLUIColors.red),
     success: createSimpleDarkPalette(BLUIColors.green),
     info: createSimpleDarkPalette(BLUIColors.lightBlue),
-    divider: Color(BLUIColors.black[200]).alpha(0.36).string(),
+    divider: Color(BLUIColors.darkThemeDivider).alpha(0.1).string(),
     warning: {
         light: BLUIColors.yellow[100],
         main: BLUIColors.yellow[300],
@@ -214,6 +214,6 @@ export const blueThemes = createTheme({
         MuiPaper: MuiPaper,
         MuiRadio: MuiRadio,
         MuiFormControlLabel: MuiFormControlLabel,
-        MuiCard: MuiCard,
+        MuiAccordion: MuiAccordion,
     },
 });
