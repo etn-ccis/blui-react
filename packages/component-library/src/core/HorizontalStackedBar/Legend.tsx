@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import { Box, BoxProps, Typography, unstable_composeClasses as composeClasses } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import { getLegendUtilityClass, LegendClasses, LegendClassKey } from './LegendClasses';
 import { cx } from '@emotion/css';
 import {
@@ -9,13 +9,11 @@ import {
     CheckCircle,
     PlayCircle,
     Pending,
-    Warning,
     ErrorOutline,
     CancelOutlined,
     CheckCircleOutline,
     PlayCircleOutline,
     PendingOutlined,
-    WarningOutlined,
 } from '@mui/icons-material';
 import { BLUIColors } from '@brightlayer-ui/colors';
 
@@ -25,7 +23,6 @@ const VARIANT_ICONS: Record<string, React.JSX.Element> = {
     success: <CheckCircle fontSize="medium" />,
     info: <PlayCircle fontSize="medium" />,
     pending: <Pending fontSize="medium" />,
-    warning: <Warning fontSize="medium" />,
 };
 
 const VARIANT_OUTLINE_ICONS: Record<string, React.JSX.Element> = {
@@ -34,7 +31,6 @@ const VARIANT_OUTLINE_ICONS: Record<string, React.JSX.Element> = {
     success: <CheckCircleOutline fontSize="medium" color="disabled" />,
     info: <PlayCircleOutline fontSize="medium" color="disabled" />,
     pending: <PendingOutlined fontSize="medium" color="disabled" />,
-    warning: <WarningOutlined fontSize="medium" color="disabled" />,
 };
 
 const useUtilityClasses = (ownerState: LegendProps): Record<LegendClassKey, string> => {
@@ -112,7 +108,7 @@ const Root = styled(Box, {
     finalBackgroundColor?: string;
     count: number;
     selectedTextColor?: string;
-}>(({ selectedStatus, label, finalBackgroundColor, count, selectedTextColor }) => ({
+}>(({ selectedStatus, label, finalBackgroundColor, count, selectedTextColor, theme }) => ({
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'center',
@@ -120,7 +116,10 @@ const Root = styled(Box, {
     borderRadius: '4px',
     padding: '8px',
     cursor: count !== 0 ? 'pointer' : 'default',
-    color: selectedStatus && selectedStatus === label ? selectedTextColor || '#ffff' : '',
+    color:
+        selectedStatus && selectedStatus === label
+            ? selectedTextColor || (theme.vars || theme).palette.background.paper
+            : '',
     background: selectedStatus && selectedStatus === label ? finalBackgroundColor : '',
     transition: 'background 0.2s ease-in-out, color 0.2s ease-in-out',
     '&:hover':
@@ -147,11 +146,12 @@ const Icon = styled(Box, {
 
 const LegendRender: React.ForwardRefRenderFunction<unknown, LegendProps> = (props: LegendProps, ref: any) => {
     const generatedClasses = useUtilityClasses(props);
+    const theme = useTheme();
     const variantColors: Record<string, string> = {
         failed: BLUIColors.red[500],
         canceled: BLUIColors.gold[400],
         success: BLUIColors.green[700],
-        pending: BLUIColors.black[500],
+        pending: BLUIColors.gray[500],
         info: BLUIColors.lightBlue[700],
     };
 
@@ -163,6 +163,7 @@ const LegendRender: React.ForwardRefRenderFunction<unknown, LegendProps> = (prop
     const selectedVariantIconColors: Record<string, string> = {
         canceled: BLUIColors.gray[900],
     };
+
     const {
         className: userClassName,
         icon,
@@ -185,12 +186,14 @@ const LegendRender: React.ForwardRefRenderFunction<unknown, LegendProps> = (prop
     // Calculate final background color: custom backgroundColor takes precedence over variant color
     const variantColor = variant ? variantColors[variant] : undefined;
     const finalBackgroundColor = backgroundColor || variantColor;
+    const contrastTextColor = finalBackgroundColor ? theme.palette.getContrastText(finalBackgroundColor) : undefined;
 
     // Icon color when not selected: variant-specific override, then finalBackgroundColor; prop overrides all
     const resolvedIconColorUnselected =
         iconColor ?? (variant ? (variantIconColors[variant] ?? finalBackgroundColor) : finalBackgroundColor);
-    // Icon color when selected: variant-specific override; prop overrides all
-    const resolvedIconColorSelected = iconColor ?? (variant ? selectedVariantIconColors[variant] : undefined);
+    // Icon color when selected: explicit override first, then contrast-safe color
+    const resolvedIconColorSelected =
+        iconColor ?? (variant ? selectedVariantIconColors[variant] : undefined) ?? contrastTextColor;
 
     // Use provided icon or fall back to variant's default icon
     const variantIcon = variant ? (count === 0 ? VARIANT_OUTLINE_ICONS[variant] : VARIANT_ICONS[variant]) : undefined;
@@ -209,14 +212,16 @@ const LegendRender: React.ForwardRefRenderFunction<unknown, LegendProps> = (prop
             onClick={handleClick}
             {...otherProps}
         >
-            <Icon
-                iconColorUnselected={resolvedIconColorUnselected}
-                iconColorSelected={resolvedIconColorSelected}
-                isSelected={selectedStatus === label}
-                className={generatedClasses.icon}
-            >
-                {displayIcon}
-            </Icon>
+            {displayIcon && (
+                <Icon
+                    iconColorUnselected={resolvedIconColorUnselected}
+                    iconColorSelected={resolvedIconColorSelected}
+                    isSelected={selectedStatus === label}
+                    className={generatedClasses.icon}
+                >
+                    {displayIcon}
+                </Icon>
+            )}
             <Typography
                 variant="body2"
                 className={generatedClasses.count}

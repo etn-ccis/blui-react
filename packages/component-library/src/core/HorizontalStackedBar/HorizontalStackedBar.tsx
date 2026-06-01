@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect } from 'react';
+import React, { forwardRef, useMemo } from 'react';
 import { Box, BoxProps, unstable_composeClasses as composeClasses } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import {
@@ -93,7 +93,14 @@ const BarContainer = styled(Box)({
     flexDirection: 'row',
     alignItems: 'center',
     gap: '2px',
+    height: '8px',
 });
+
+const EmptyBar = styled(Box)(({ theme }) => ({
+    height: '4px',
+    width: '100%',
+    backgroundColor: (theme.vars || theme).palette.action.disabledBackground,
+}));
 
 const HorizontalStackedBarRender: React.ForwardRefRenderFunction<unknown, HorizontalStackedBarProps> = (
     props: HorizontalStackedBarProps,
@@ -110,9 +117,10 @@ const HorizontalStackedBarRender: React.ForwardRefRenderFunction<unknown, Horizo
     } = props;
 
     const [internalSelectedStatus, setInternalSelectedStatus] = React.useState<string>('');
-    const [totalCount, setTotalCount] = React.useState<number>(0);
     const isControlled = controlledSelectedStatus !== undefined;
     const selectedStatus = isControlled ? controlledSelectedStatus : internalSelectedStatus;
+    const totalCount = useMemo(() => data.reduce((acc, item) => acc + item.count, 0), [data]);
+    const isAllZeroState = data.length > 0 && totalCount === 0;
 
     const handleSelectionChange = (label: string): void => {
         const newSelection = selectedStatus !== label ? label : '';
@@ -123,11 +131,6 @@ const HorizontalStackedBarRender: React.ForwardRefRenderFunction<unknown, Horizo
 
         onChange?.(newSelection);
     };
-
-    useEffect(() => {
-        const sum = data.reduce((acc, item) => acc + item.count, 0);
-        setTotalCount(sum);
-    }, [data]);
 
     return (
         <Root
@@ -152,19 +155,23 @@ const HorizontalStackedBarRender: React.ForwardRefRenderFunction<unknown, Horizo
                 ))}
             </LegendContainer>
             <BarContainer className={generatedClasses.barContainer}>
-                {data
-                    .filter((item) => item.count > 0)
-                    .map((item) => (
-                        <HorizontalBar
-                            key={item.label}
-                            name={item.label}
-                            color={item.backgroundColor}
-                            variant={item.variant}
-                            barPercentage={(item.count / totalCount) * 100}
-                            selectedStatus={selectedStatus}
-                            onClick={(): void => handleSelectionChange(item.label)}
-                        />
-                    ))}
+                {isAllZeroState ? (
+                    <EmptyBar data-testid={'blui-horizontal-bar-empty-root'} />
+                ) : (
+                    data
+                        .filter((item) => item.count > 0)
+                        .map((item) => (
+                            <HorizontalBar
+                                key={item.label}
+                                name={item.label}
+                                color={item.backgroundColor}
+                                variant={item.variant}
+                                barPercentage={(item.count / totalCount) * 100}
+                                selectedStatus={selectedStatus}
+                                onClick={(): void => handleSelectionChange(item.label)}
+                            />
+                        ))
+                )}
             </BarContainer>
         </Root>
     );

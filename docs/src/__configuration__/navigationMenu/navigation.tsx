@@ -16,6 +16,7 @@ import ChannelValueAPIDocs from '../../componentDocs/ChannelValue/markdown/Chann
 import DataTableAPIDocs from '../../componentDocs/DataTable/markdown/DataTableAPIDocs.mdx';
 import EmptyStateAPIDocs from '../../componentDocs/EmptyState/markdown/EmptyStateAPIDocs.mdx';
 import HeroAPIDocs from '../../componentDocs/Hero/markdown/HeroAPIDocs.mdx';
+import HorizontalStackedBarAPIDocs from '../../componentDocs/HorizontalStackedBar/markdown/HorizontalStackedBarAPIDocs.mdx';
 import InfoListItemAPIDocs from '../../componentDocs/InfoListItem/markdown/InfoListItemAPIDocs.mdx';
 import AppBarAPIDocs from '../../componentDocs/AppBar/markdown/AppBarAPIDocs.mdx';
 import ListItemTagAPIDocs from '../../componentDocs/ListItemTag/markdown/ListItemTagAPIDocs.mdx';
@@ -83,6 +84,7 @@ import ToolbarMenuExamples from '../../componentDocs/ToolbarMenu/markdown/Toolba
 import ScoreCardExamples from '../../componentDocs/ScoreCard/markdown/ScoreCardExamples.mdx';
 import SpacerExamples from '../../componentDocs/Spacer/markdown/SpacerExamples.mdx';
 import ThreeLinerExamples from '../../componentDocs/ThreeLiner/markdown/ThreeLinerExamples.mdx';
+import HorizontalStackedBarExamples from '../../componentDocs/HorizontalStackedBar/markdown/HorizontalStackedBarExamples.mdx';
 import DrawerRailItemExamples from '../../componentDocs/DrawerRailItem/markdown/DrawerRailItemExamples.mdx';
 import ProgressIconExamples from '../../componentDocs/ProgressIcon/markdown/ProgressIconExamples.mdx';
 
@@ -105,6 +107,7 @@ import { ScoreCardPlaygroundComponent } from '../../componentDocs/ScoreCard/play
 import { ThreeLinerPlaygroundComponent } from '../../componentDocs/ThreeLiner/playground';
 import { ToolbarMenuPlaygroundComponent } from '../../componentDocs/ToolbarMenu/playground';
 import { UserMenuPlaygroundComponent } from '../../componentDocs/UserMenu/playground';
+import { HorizontalStackedBarPlaygroundComponent } from '../../componentDocs/HorizontalStackedBar/playground/PlaygroundPage';
 import { Outlet, RouteProps } from 'react-router';
 import { OpenInNew } from '@mui/icons-material';
 import { Box } from '@mui/material';
@@ -482,6 +485,28 @@ export const pageDefinitions: RouteConfig[] = [
                         title: 'playground',
                         path: 'playground',
                         element: <HeroPlaygroundComponent />,
+                    },
+                ],
+            },
+            {
+                title: 'Horizontal Stacked Bar',
+                path: 'horizontal-stacked-bar/',
+                element: <ComponentPreviewPage title={'Horizontal Stacked Bar'} />,
+                children: [
+                    {
+                        title: 'examples',
+                        path: 'examples',
+                        element: <HorizontalStackedBarExamples />,
+                    },
+                    {
+                        title: 'API Docs',
+                        path: 'api-docs',
+                        element: <HorizontalStackedBarAPIDocs />,
+                    },
+                    {
+                        title: 'playground',
+                        path: 'playground',
+                        element: <HorizontalStackedBarPlaygroundComponent />,
                     },
                 ],
             },

@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import { Box, BoxProps, unstable_composeClasses as composeClasses } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import { getHorizontalBarUtilityClass, HorizontalBarClasses, HorizontalBarClassKey } from './HorizontalBarClasses';
 import { cx } from '@emotion/css';
 import { BLUIColors } from '@brightlayer-ui/colors';
@@ -90,11 +90,12 @@ const HorizontalBarRender: React.ForwardRefRenderFunction<unknown, HorizontalBar
         ...otherProps
     } = props;
 
+    const theme = useTheme();
     const [selectedState, setSelectedState] = React.useState<string | undefined>(selectedStatus);
 
     // Calculate final color: custom color takes precedence over variant color
     const variantColor = variant ? variantColors[variant] : undefined;
-    const finalColor = color || variantColor || '#727E84';
+    const finalColor = color || variantColor || (theme.vars || theme).palette.text.secondary;
 
     React.useEffect(() => {
         setSelectedState(selectedStatus);
