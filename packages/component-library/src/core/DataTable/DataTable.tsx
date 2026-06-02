@@ -259,6 +259,7 @@ export const DataTable = (<TData extends DataTableData>(props: DataTableProps<TD
         enableColumnFilters,
         enableColumnActions,
         enableStickyHeader: true,
+        enableKeyboardShortcuts: false,
         getRowId,
         muiTablePaperProps: {
             sx: (t: any): any => ({
