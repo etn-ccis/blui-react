@@ -59,6 +59,7 @@ export const BinaryCell = <TData extends DataTableData>({
         <Box key="content" sx={{ flex: 1, minWidth: 0, display: 'flex', alignItems: 'stretch' }}>
             {/* Checkbox half - 50% width, center-aligned; pointer cursor signals one-click toggle */}
             <Box
+                data-binary-half="left"
                 sx={{
                     flex: '0 0 50%',
                     display: 'flex',

@@ -104,8 +104,9 @@ export const useEnhancedColumns = <TData extends DataTableData>({
                         if (column.cellType === 'binary') {
                             // When already in edit mode, SimpleBinaryInput handles all interactions
                             if (isEditing) return;
-                            const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
-                            const isLeftHalf = e.clientX < rect.left + rect.width / 2;
+                            // Use data attribute to detect which half was clicked — avoids
+                            // coordinate math that breaks in jsdom (getBoundingClientRect → all zeros)
+                            const isLeftHalf = !!(e.target as HTMLElement).closest('[data-binary-half="left"]');
                             if (isLeftHalf) {
                                 // One-click toggle on the checkbox side
                                 handleSaveCell(cellParams.cell, !(cellParams.cell.getValue() as boolean));
