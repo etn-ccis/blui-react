@@ -1,0 +1,56 @@
+import Box from '@mui/material/Box';
+import { ForMoreDetailsOnStylingOptions } from '../../../shared';
+
+# File Drag Upload
+
+The `<FileDragUpload>` component allows users to upload files by clicking or dragging and dropping. It supports file type validation, single or multiple file uploads, and is available in both default and compact layout variants.
+
+## File Drag Upload API
+
+<Box>
+
+| Prop Name        | Description                                                        | Type                                              | Required | Default                                        |
+| ---------------- | ------------------------------------------------------------------ | ------------------------------------------------- | -------- | ---------------------------------------------- |
+| accept           | Accepted file types, comma-separated (e.g., 'application/pdf')    | `string`                                          | no       |                                                |
+| classes          | Style overrides                                                    | `FileDragUploadClasses`                           | no       |                                                |
+| compact          | Use compact variant for limited space                              | `boolean`                                         | no       | `false`                                        |
+| customButton     | Custom button to replace the default upload button                 | `ReactNode`                                       | no       |                                                |
+| description      | Additional description (e.g., file size limits, allowed formats)   | `ReactNode`                                       | no       | `'Max file size: 5 MB'`<br/>`'Allowed format: Any'`   |
+| dragIcon         | Custom icon for drag-over state                                    | `ReactNode`                                       | no       |                                                |
+| dragTitle        | Title shown during drag-over state                                 | `ReactNode`                                       | no       | `'Drop Here'`                                  |
+| icon             | Custom icon for idle state                                         | `ReactNode`                                       | no       |                                                |
+| inputProps       | Additional props for the hidden file input                         | `React.InputHTMLAttributes<HTMLInputElement>`     | no       |                                                |
+| invalidTypeTitle | Title shown when an incompatible file type is dragged over         | `ReactNode`                                       | no       | `'Wrong File Type'`                            |
+| multiple         | Whether to allow multiple file uploads                             | `boolean`                                         | no       | `false`                                        |
+| onFilesSelected  | Callback when files are selected or dropped                        | `(files: FileList) => void`                       | no       |                                                |
+| subtitle         | Instruction text shown below the title                             | `ReactNode`                                       | no       | `'Use upload button or drag files here'`       |
+| title            | The main title text                                                | `ReactNode`                                       | no       | `'Upload a File'`                              |
+| tooManyFilesTitle | Title shown when too many files are dragged over (multiple=false) | `ReactNode`                                       | no       | `'Too Many Files'`                             |
+
+</Box>
+
+Any other props supplied will be provided to the root element ([`<Box>`](https://mui.com/material-ui/api/box/)).
+
+### Style Overrides
+
+You can override the default styles used by Brightlayer UI by:
+
+- using the `sx` prop
+- passing a `classes` prop with keys from the Name column below
+- using the Global CSS Class in your main stylesheet
+
+<ForMoreDetailsOnStylingOptions />
+
+<Box>
+
+| Name        | Global CSS Class                  | Description                            |
+| ----------- | --------------------------------- | -------------------------------------- |
+| root        | .BluiFileDragUpload-root          | Styles applied to the root element     |
+| dropzone    | .BluiFileDragUpload-dropzone      | Styles applied to the dropzone area    |
+| icon        | .BluiFileDragUpload-icon          | Styles applied to the icon             |
+| title       | .BluiFileDragUpload-title         | Styles applied to the title            |
+| subtitle    | .BluiFileDragUpload-subtitle      | Styles applied to the subtitle         |
+| description | .BluiFileDragUpload-description   | Styles applied to the description      |
+| actions     | .BluiFileDragUpload-actions       | Styles applied to the actions area     |
+
+</Box>

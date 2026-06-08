@@ -1,13 +1,18 @@
 import React from 'react';
 import Add from '@mui/icons-material/Add';
 import AddAPhoto from '@mui/icons-material/AddAPhoto';
+import CloudUpload from '@mui/icons-material/CloudUpload';
+import Description from '@mui/icons-material/Description';
 import Device from '@brightlayer-ui/icons-mui/Device';
 import Devices from '@mui/icons-material/Devices';
 import Fan from '@brightlayer-ui/icons-mui/Fan';
 import FanCircled from '@brightlayer-ui/icons-mui/FanCircled';
 import FitnessCenter from '@mui/icons-material/FitnessCenter';
+import Folder from '@mui/icons-material/Folder';
 import Home from '@mui/icons-material/Home';
 import Menu from '@mui/icons-material/Menu';
+import MoveToInbox from '@mui/icons-material/MoveToInbox';
+import Photo from '@mui/icons-material/Photo';
 import Place from '@mui/icons-material/Place';
 import PinDrop from '@mui/icons-material/PinDrop';
 import Remove from '@mui/icons-material/Remove';
@@ -15,6 +20,7 @@ import Router from '@mui/icons-material/Router';
 import SensorsOff from '@mui/icons-material/SensorsOff';
 import TrendingUp from '@mui/icons-material/TrendingUp';
 import TrendingDown from '@mui/icons-material/TrendingDown';
+import UploadFile from '@mui/icons-material/UploadFile';
 import { SvgIconProps } from '@mui/material/SvgIcon';
 import Box from '@mui/material/Box';
 import ArrowBack from '@mui/icons-material/ArrowBack';
@@ -68,6 +74,10 @@ export const getIcon = (icon: string, iconProps?: SvgIconProps): React.JSX.Eleme
             return React.createElement(AddAPhoto, iconProps);
         case '<ArrowBack />':
             return React.createElement(ArrowBack, iconProps);
+        case '<CloudUpload />':
+            return React.createElement(CloudUpload, iconProps);
+        case '<Description />':
+            return React.createElement(Description, iconProps);
         case '<Device />':
             return React.createElement(Device, iconProps);
         case '<Devices />':
@@ -78,10 +88,16 @@ export const getIcon = (icon: string, iconProps?: SvgIconProps): React.JSX.Eleme
             return React.createElement(FanCircled, iconProps);
         case '<FitnessCenter />':
             return React.createElement(FitnessCenter, iconProps);
+        case '<Folder />':
+            return React.createElement(Folder, iconProps);
         case '<Home />':
             return React.createElement(Home, iconProps);
         case '<Menu />':
             return React.createElement(Menu, iconProps);
+        case '<MoveToInbox />':
+            return React.createElement(MoveToInbox, iconProps);
+        case '<Photo />':
+            return React.createElement(Photo, iconProps);
         case '<Place />':
             return React.createElement(Place, iconProps);
         case '<PinDrop />':
@@ -96,6 +112,8 @@ export const getIcon = (icon: string, iconProps?: SvgIconProps): React.JSX.Eleme
             return React.createElement(TrendingUp, iconProps);
         case '<TrendingDown />':
             return React.createElement(TrendingDown, iconProps);
+        case '<UploadFile />':
+            return React.createElement(UploadFile, iconProps);
         case 'undefined':
         default:
             return undefined;

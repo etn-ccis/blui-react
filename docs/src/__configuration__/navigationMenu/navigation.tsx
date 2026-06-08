@@ -15,6 +15,7 @@ import DrawerSubheaderAPIDocs from '../../componentDocs/DrawerSubheader/markdown
 import ChannelValueAPIDocs from '../../componentDocs/ChannelValue/markdown/ChannelValueAPIDocs.mdx';
 import DataTableAPIDocs from '../../componentDocs/DataTable/markdown/DataTableAPIDocs.mdx';
 import EmptyStateAPIDocs from '../../componentDocs/EmptyState/markdown/EmptyStateAPIDocs.mdx';
+import FileDragUploadAPIDocs from '../../componentDocs/FileDragUpload/markdown/FileDragUploadAPIDocs.mdx';
 import HeroAPIDocs from '../../componentDocs/Hero/markdown/HeroAPIDocs.mdx';
 import HorizontalStackedBarAPIDocs from '../../componentDocs/HorizontalStackedBar/markdown/HorizontalStackedBarAPIDocs.mdx';
 import InfoListItemAPIDocs from '../../componentDocs/InfoListItem/markdown/InfoListItemAPIDocs.mdx';
@@ -72,6 +73,7 @@ import DrawerHeaderExamples from '../../componentDocs/DrawerHeader/markdown/Draw
 import DrawerSubheaderExamples from '../../componentDocs/DrawerSubheader/markdown/DrawerSubheaderExamples.mdx';
 import DataTableExamples from '../../componentDocs/DataTable/markdown/DataTableExamples.mdx';
 import EmptyStateExamples from '../../componentDocs/EmptyState/markdown/EmptyStateExamples.mdx';
+import FileDragUploadExamples from '../../componentDocs/FileDragUpload/markdown/FileDragUploadExamples.mdx';
 import HeroExamples from '../../componentDocs/Hero/markdown/HeroExamples.mdx';
 import ListItemTagExamples from '../../componentDocs/ListItemTag/markdown/ListItemTagExamples.mdx';
 import InfoListItemExamples from '../../componentDocs/InfoListItem/markdown/InfoListItemExamples.mdx';
@@ -100,6 +102,7 @@ import { DrawerNavGroupPlaygroundComponent } from '../../componentDocs/DrawerNav
 import { DrawerNavItemPlaygroundComponent } from '../../componentDocs/DrawerNavItem/playground';
 import { DrawerRailItemPlaygroundComponent } from '../../componentDocs/DrawerRailItem/playground';
 import { EmptyStatePlaygroundComponent } from '../../componentDocs/EmptyState/playground';
+import { FileDragUploadPlaygroundComponent } from '../../componentDocs/FileDragUpload/playground';
 import { HeroPlaygroundComponent } from '../../componentDocs/Hero/playground';
 import { InfoListItemPlaygroundComponent } from '../../componentDocs/InfoListItem/playground';
 import { ListItemTagPlaygroundComponent } from '../../componentDocs/ListItemTag/playground';
@@ -463,6 +466,28 @@ export const pageDefinitions: RouteConfig[] = [
                         title: 'playground',
                         path: 'playground',
                         element: <EmptyStatePlaygroundComponent />,
+                    },
+                ],
+            },
+            {
+                title: 'File Drag Upload',
+                path: 'file-drag-upload/',
+                element: <ComponentPreviewPage title={'File Drag Upload'} />,
+                children: [
+                    {
+                        title: 'examples',
+                        path: 'examples',
+                        element: <FileDragUploadExamples />,
+                    },
+                    {
+                        title: 'API Docs',
+                        path: 'api-docs',
+                        element: <FileDragUploadAPIDocs />,
+                    },
+                    {
+                        title: 'playground',
+                        path: 'playground',
+                        element: <FileDragUploadPlaygroundComponent />,
                     },
                 ],
             },
