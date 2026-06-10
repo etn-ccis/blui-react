@@ -126,46 +126,6 @@ export const FileDragUploadExample: React.FC = () => {
                 </Box>
                 <SelectedFileChips files={compactEx.files} />
             </Box>
-
-            {/* ===== Custom Styling Examples (commented out for reference) ===== */}
-
-            {/* --- 1. Using the `classes` prop to override specific parts --- */}
-            {/* <FileDragUpload
-                classes={{
-                    root: 'my-root',
-                    dropzone: 'my-dropzone',
-                    title: 'my-title',
-                    subtitle: 'my-subtitle',
-                    description: 'my-desc',
-                    icon: 'my-icon',
-                    actions: 'my-actions',
-                }}
-            /> */}
-
-            {/* --- 2. Using the `className` prop to style the root --- */}
-            {/* <FileDragUpload className="my-upload" /> */}
-
-            {/* --- 3. Using the `sx` prop for inline MUI styles --- */}
-            {/* <FileDragUpload
-                sx={{
-                    maxWidth: 500,
-                    mx: 'auto',
-                    '& .BluiFileDragUpload-dropzone': {
-                        borderRadius: 4,
-                        padding: 5,
-                    },
-                    '& .BluiFileDragUpload-title': {
-                        color: 'purple',
-                    },
-                }}
-            /> */}
-
-            {/* --- 4. Using custom content via props --- */}
-            {/* <FileDragUpload
-                title={<span style={{ fontSize: 24 }}>My Custom Title</span>}
-                icon={<PhotoIcon sx={{ color: 'red', fontSize: 80 }} />}
-                customButton={<Button variant="outlined">Browse Files</Button>}
-            /> */}
         </>
     );
 };

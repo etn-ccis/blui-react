@@ -9,9 +9,7 @@ const codeSnippet = `<FileDragUpload
     description={'Max file size: 25 MB\\nAllowed format: PNG, JPG, WEBP, TIFF, SVG'}
     accept="image/png,image/jpeg,image/webp,image/tiff,image/svg+xml"
     multiple
-    onFilesSelected={(files) => {
-        console.log('Selected files:', files);
-    }}
+    onFilesSelected={(): void => {}}
 />`;
 
 export const FileDragUploadImageAccept = (): React.JSX.Element => (

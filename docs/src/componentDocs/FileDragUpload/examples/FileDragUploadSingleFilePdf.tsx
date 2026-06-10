@@ -7,9 +7,7 @@ const codeSnippet = `<FileDragUpload
     description={'Max file size: 10 MB\\nAllowed format: PDF\\nOnly one file allowed'}
     accept="application/pdf"
     multiple={false}
-    onFilesSelected={(files) => {
-        console.log('Selected files:', files);
-    }}
+    onFilesSelected={(): void => {}}
 />`;
 
 export const FileDragUploadSingleFilePdf = (): React.JSX.Element => (

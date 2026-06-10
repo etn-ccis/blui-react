@@ -5,9 +5,7 @@ import { FileDragUploadCompactExample } from './FileDragUploadCompactExample';
 
 const codeSnippet = `<FileDragUpload
     compact
-    onFilesSelected={(files) => {
-        console.log('Selected files:', files);
-    }}
+    onFilesSelected={(): void => {}}
 />`;
 
 export const FileDragUploadCompact = (): React.JSX.Element => (

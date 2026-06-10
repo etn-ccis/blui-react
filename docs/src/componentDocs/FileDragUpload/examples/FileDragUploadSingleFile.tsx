@@ -6,9 +6,7 @@ import { FileDragUploadSingleFileExample } from './FileDragUploadSingleFileExamp
 const codeSnippet = `<FileDragUpload
     description={'Max file size: 5 MB\\nOnly one file allowed'}
     multiple={false}
-    onFilesSelected={(files) => {
-        console.log('Selected files:', files);
-    }}
+    onFilesSelected={(): void => {}}
 />`;
 
 export const FileDragUploadSingleFile = (): React.JSX.Element => (

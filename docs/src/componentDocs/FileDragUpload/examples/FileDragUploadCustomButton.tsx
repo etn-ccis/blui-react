@@ -9,9 +9,7 @@ const codeSnippet = `<FileDragUpload
             Browse Files
         </Button>
     }
-    onFilesSelected={(files) => {
-        console.log('Selected files:', files);
-    }}
+    onFilesSelected={(): void => {}}
 />`;
 
 export const FileDragUploadCustomButton = (): React.JSX.Element => (

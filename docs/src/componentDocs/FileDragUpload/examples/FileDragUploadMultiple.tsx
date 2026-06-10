@@ -8,9 +8,7 @@ const codeSnippet = `<FileDragUpload
     accept="image/*"
     title="Upload Images"
     description={'Max file size: 5 MB\\nAllowed format: Images'}
-    onFilesSelected={(files) => {
-        console.log('Selected files:', files);
-    }}
+    onFilesSelected={(): void => {}}
 />`;
 
 export const FileDragUploadMultiple = (): React.JSX.Element => (

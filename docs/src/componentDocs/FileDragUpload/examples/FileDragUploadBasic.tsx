@@ -4,9 +4,7 @@ import { CodeBlock, CodeBlockActionButtonRow } from '../../../shared';
 import { FileDragUploadBasicExample } from './FileDragUploadBasicExample';
 
 const codeSnippet = `<FileDragUpload
-    onFilesSelected={(files) => {
-        console.log('Selected files:', files);
-    }}
+    onFilesSelected={(): void => {}}
 />`;
 
 export const FileDragUploadBasic = (): React.JSX.Element => (
