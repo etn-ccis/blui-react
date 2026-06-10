@@ -82,6 +82,7 @@ export const resolveHeadCellProps =
             sx: (t: any): Record<string, unknown> => ({
                 px: 2,
                 backgroundColor: `${t.vars?.palette?.background?.paper ?? t.palette.background.paper} !important`,
+                borderTop: `1px solid ${t.vars?.palette?.divider ?? t.palette.divider}`,
                 borderRight: `1px solid ${t.vars?.palette?.divider ?? t.palette.divider}`,
                 borderBottom: `1px solid ${BLUIColors.gray[500]}`,
                 ...(t.applyStyles?.('dark', {

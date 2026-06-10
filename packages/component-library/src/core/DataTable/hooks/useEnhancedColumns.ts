@@ -99,11 +99,21 @@ export const useEnhancedColumns = <TData extends DataTableData>({
 
                 return {
                     ...baseProps,
-                    onClick: (): void => {
+                    onClick: (e: React.MouseEvent<HTMLElement>): void => {
                         if (column.enableEditing === false || !cellParams.table.options.enableEditing) return;
-                        // Binary cells toggle directly in one click — no need to enter edit mode
                         if (column.cellType === 'binary') {
-                            handleSaveCell(cellParams.cell, !(cellParams.cell.getValue() as boolean));
+                            // When already in edit mode, SimpleBinaryInput handles all interactions
+                            if (isEditing) return;
+                            // Use data attribute to detect which half was clicked — avoids
+                            // coordinate math that breaks in jsdom (getBoundingClientRect → all zeros)
+                            const isLeftHalf = !!(e.target as HTMLElement).closest('[data-binary-half="left"]');
+                            if (isLeftHalf) {
+                                // One-click toggle on the checkbox side
+                                handleSaveCell(cellParams.cell, !(cellParams.cell.getValue() as boolean));
+                            } else {
+                                // Enter edit mode on the text side — text input will auto-focus
+                                cellParams.table.setEditingCell(cellParams.cell);
+                            }
                             return;
                         }
                         // Enable single-click editing for all other cell types
@@ -114,7 +124,15 @@ export const useEnhancedColumns = <TData extends DataTableData>({
                             ? (t: any): any => ({
                                   ...baseSx(t),
                                   ...additionalSx,
-                                  cursor: column.enableEditing !== false ? (isEditing ? 'pointer' : 'cell') : 'cell',
+                                  // Binary cells: use 'default' so the inner halves' cursors (pointer/text) show through
+                                  cursor:
+                                      column.cellType === 'binary'
+                                          ? 'default'
+                                          : column.enableEditing !== false
+                                            ? isEditing
+                                                ? 'pointer'
+                                                : 'cell'
+                                            : 'cell',
                                   ...(hasError && {
                                       color: (t.vars as any)?.palette?.error?.main ?? t.palette.error.main,
                                       backgroundColor: `${ERROR_BG_LIGHT} !important`,
@@ -126,7 +144,14 @@ export const useEnhancedColumns = <TData extends DataTableData>({
                             : {
                                   ...baseSx,
                                   ...additionalSx,
-                                  cursor: column.enableEditing !== false ? (isEditing ? 'pointer' : 'cell') : 'cell',
+                                  cursor:
+                                      column.cellType === 'binary'
+                                          ? 'default'
+                                          : column.enableEditing !== false
+                                            ? isEditing
+                                                ? 'pointer'
+                                                : 'cell'
+                                            : 'cell',
                               },
                 };
             },

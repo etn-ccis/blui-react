@@ -60,10 +60,9 @@ export const SimpleBinaryInput = ({
         <Box
             sx={{
                 display: 'flex',
-                alignItems: 'center',
+                alignItems: 'stretch',
                 width: '100%',
                 minHeight: 52,
-                px: '8px',
             }}
         >
             {/* Checkbox half - 50% width, center-aligned */}
@@ -74,6 +73,7 @@ export const SimpleBinaryInput = ({
                     justifyContent: 'center',
                     alignItems: 'center',
                     cursor: 'pointer',
+                    pl: '16px',
                 }}
                 onClick={() => {
                     if (!disabled) {
@@ -106,6 +106,8 @@ export const SimpleBinaryInput = ({
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
+                    cursor: 'text',
+                    pr: '16px',
                 }}
             >
                 <input

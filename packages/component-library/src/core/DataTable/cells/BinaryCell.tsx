@@ -56,9 +56,19 @@ export const BinaryCell = <TData extends DataTableData>({
 
     // Content: checkbox on left (50%), text (0/1) on right (50%)
     cellChildren.push(
-        <Box key="content" sx={{ flex: 1, minWidth: 0, display: 'flex', alignItems: 'center' }}>
-            {/* Checkbox half - 50% width, center-aligned */}
-            <Box sx={{ flex: '0 0 50%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Box key="content" sx={{ flex: 1, minWidth: 0, display: 'flex', alignItems: 'stretch' }}>
+            {/* Checkbox half - 50% width, center-aligned; pointer cursor signals one-click toggle */}
+            <Box
+                data-binary-half="left"
+                sx={{
+                    flex: '0 0 50%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    cursor: 'pointer',
+                    pl: '16px',
+                }}
+            >
                 <Checkbox
                     checked={value ?? false}
                     size="small"
@@ -68,8 +78,17 @@ export const BinaryCell = <TData extends DataTableData>({
                     }}
                 />
             </Box>
-            {/* Text half - 50% width, center-aligned */}
-            <Box sx={{ flex: '0 0 50%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            {/* Text half - 50% width, center-aligned; text cursor signals click-to-edit */}
+            <Box
+                sx={{
+                    flex: '0 0 50%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    cursor: 'text',
+                    pr: '16px',
+                }}
+            >
                 <span>{value ? '1' : '0'}</span>
             </Box>
         </Box>
@@ -82,8 +101,7 @@ export const BinaryCell = <TData extends DataTableData>({
                 width: '100%',
                 minHeight: 52,
                 display: 'flex',
-                alignItems: 'center',
-                px: '8px',
+                alignItems: 'stretch',
                 '&:hover': { backgroundColor: CELL_HOVER_BG },
             }}
         >

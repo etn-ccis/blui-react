@@ -916,12 +916,13 @@ describe('DataTable', () => {
         expect(screen.getByText('0')).toBeInTheDocument();
         expect(screen.queryByText('1')).not.toBeInTheDocument();
 
-        // The binary TD cell contains the checkbox — click the TD to trigger the one-click toggle
+        // The binary TD cell contains the checkbox — click the checkbox (inside the left half)
+        // so the event bubbles to the <td> with a target inside [data-binary-half="left"],
+        // triggering the one-click toggle path instead of entering edit mode.
         const checkbox = screen.getByRole('checkbox');
-        const binaryCell = checkbox.closest('td')!;
-        fireEvent.click(binaryCell);
+        fireEvent.click(checkbox);
 
-        // No edit <input> should appear — binary bypasses MRT's edit mode entirely
+        // No edit <input> should appear — binary left-half click bypasses MRT's edit mode entirely
         expect(container.querySelector('input[type="text"]')).toBeNull();
 
         // hasPendingChanges becomes true and the displayed value flips to "1"

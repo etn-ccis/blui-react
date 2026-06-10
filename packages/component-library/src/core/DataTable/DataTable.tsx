@@ -259,6 +259,7 @@ export const DataTable = (<TData extends DataTableData>(props: DataTableProps<TD
         enableColumnFilters,
         enableColumnActions,
         enableStickyHeader: true,
+        enableKeyboardShortcuts: false,
         getRowId,
         muiTablePaperProps: {
             sx: (t: any): any => ({
@@ -292,6 +293,7 @@ export const DataTable = (<TData extends DataTableData>(props: DataTableProps<TD
                         backgroundColor: `${
                             t.vars?.palette?.background?.paper ?? t.palette.background.paper
                         } !important`,
+                        borderTop: `1px solid ${t.vars?.palette?.divider ?? t.palette.divider}`,
                         borderBottom: `1px solid ${BLUIColors.gray[500]}`,
                         borderLeft: `1px solid ${BLUIColors.gray[500]}`,
                         ...(t.applyStyles?.('dark', {
