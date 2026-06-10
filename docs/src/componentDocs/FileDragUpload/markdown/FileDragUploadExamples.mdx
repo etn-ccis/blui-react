@@ -1,0 +1,49 @@
+import { FileDragUploadBasic } from '../examples/FileDragUploadBasic';
+import { FileDragUploadCompact } from '../examples/FileDragUploadCompact';
+import { FileDragUploadMultiple } from '../examples/FileDragUploadMultiple';
+import { FileDragUploadCustomButton } from '../examples/FileDragUploadCustomButton';
+import { FileDragUploadImageAccept } from '../examples/FileDragUploadImageAccept';
+import { FileDragUploadSingleFile } from '../examples/FileDragUploadSingleFile';
+import { FileDragUploadSingleFilePdf } from '../examples/FileDragUploadSingleFilePdf';
+
+## File Drag Upload
+
+A `<FileDragUpload>` allows users to upload files by clicking or dragging and dropping.
+
+<FileDragUploadBasic />
+
+## Compact Variant
+
+For limited space, you can use the `compact` prop to display a more condensed layout with a horizontal arrangement.
+
+<FileDragUploadCompact />
+
+## Image Accept
+
+You can restrict accepted file types and customize the title, icon, and description.
+
+<FileDragUploadImageAccept />
+
+## Multiple Files with Type Filtering
+
+You can allow multiple file uploads and restrict accepted file types.
+
+<FileDragUploadMultiple />
+
+## Single File
+
+Restrict uploads to a single file. When a user tries to drag multiple files, a rejection state is shown.
+
+<FileDragUploadSingleFile />
+
+## Single File with Type Filtering
+
+Combine single-file restriction with type filtering to accept only one PDF file.
+
+<FileDragUploadSingleFilePdf />
+
+## Custom Button
+
+You can replace the default upload button with a custom button. Note that clicking the dropzone area will not open the file picker — only the custom button will trigger it.
+
+<FileDragUploadCustomButton />
