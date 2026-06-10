@@ -98,14 +98,13 @@ const inputConfig: InputConfig = [
         category: 'Optional Props',
     },
 
-    // Other Configuration
     {
         id: 'compact',
         type: 'boolean',
         description: 'Use compact variant for limited space',
         required: false,
         initialValue: false,
-        category: 'Other Configuration',
+        category: 'Optional Props',
     },
     {
         id: 'multiple',
@@ -113,7 +112,7 @@ const inputConfig: InputConfig = [
         description: 'Whether to allow multiple file uploads',
         required: false,
         initialValue: false,
-        category: 'Other Configuration',
+        category: 'Optional Props',
     },
 ];
 
