@@ -15,6 +15,6 @@ figma.connect(
     'https://www.figma.com/design/ZwJ3feoFnLiV3JNYqI7A3c/-Limited-Support--Brightlayer-UI-Component-Sticker-Sheet?node-id=6355-4023&m=dev',
     {
         props: {},
-        example: () => <Drawer />,
+        example: () => <Drawer open={true} />,
     }
 );

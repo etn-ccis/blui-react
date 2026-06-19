@@ -15,6 +15,6 @@ figma.connect(
     'https://www.figma.com/design/ZwJ3feoFnLiV3JNYqI7A3c/-Limited-Support--Brightlayer-UI-Component-Sticker-Sheet?node-id=6380-1224&m=dev',
     {
         props: {},
-        example: (props) => <ScoreCard {...props} />,
+        example: () => <ScoreCard headerTitle={'Header Title'} />,
     }
 );

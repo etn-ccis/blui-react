@@ -16,8 +16,8 @@ figma.connect(
     {
         props: {
             title: figma.string('Title'),
-            instruction: figma.string('Instruction'),
-            info: figma.string('Info'),
+            subtitle: figma.string('Instruction'),
+            description: figma.string('Info'),
             icon: figma.instance('Icon'),
         },
         example: (props) => <FileDragUpload {...props} />,

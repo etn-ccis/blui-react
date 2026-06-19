@@ -16,9 +16,7 @@ figma.connect(
     {
         props: {
             icon: figma.instance('Icon'),
-            showButton: figma.boolean('Show Button'),
             description: figma.string('Description'),
-            showDescription: figma.boolean('Show Description'),
             title: figma.string('Title'),
         },
         example: (props) => <EmptyState {...props} />,

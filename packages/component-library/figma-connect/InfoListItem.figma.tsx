@@ -15,11 +15,8 @@ figma.connect(
     'https://www.figma.com/design/ZwJ3feoFnLiV3JNYqI7A3c/-Limited-Support--Brightlayer-UI-Component-Sticker-Sheet?node-id=4480-7065&m=dev',
     {
         props: {
-            showStatusStripe: figma.boolean('Show Status Stripe'),
-            showTimestamp: figma.boolean('Show Timestamp'),
             icon: figma.instance('Icon'),
-            title: figma.instance('Title'),
         },
-        example: (props) => <InfoListItem {...props} />,
+        example: (props) => <InfoListItem title={'Title'} {...props} />,
     }
 );

@@ -19,6 +19,6 @@ figma.connect(
             subtitle: figma.string('Subtitle'),
             icon: figma.instance('Icon'),
         },
-        example: (props) => <DrawerNavItem {...props} />,
+        example: (props) => <DrawerNavItem itemID={'item-1'} {...props} />,
     }
 );

@@ -14,11 +14,7 @@ figma.connect(
     AppBar,
     'https://www.figma.com/design/ZwJ3feoFnLiV3JNYqI7A3c/-Limited-Support--Brightlayer-UI-Component-Sticker-Sheet?node-id=4417-16',
     {
-        props: {
-            leftIcon: figma.instance('Left Icon'),
-            showLeftIcon: figma.boolean('Show Left Icon'),
-            showIconButtonRow: figma.boolean('Show Icon Button Row'),
-        },
+        props: {},
         example: (props) => <AppBar {...props} />,
     }
 );

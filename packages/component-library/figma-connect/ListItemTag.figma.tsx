@@ -15,6 +15,6 @@ figma.connect(
     'https://www.figma.com/design/ZwJ3feoFnLiV3JNYqI7A3c/-Limited-Support--Brightlayer-UI-Component-Sticker-Sheet?node-id=4364-2123&m=dev',
     {
         props: {},
-        example: () => <ListItemTag />,
+        example: () => <ListItemTag label={'Label'} />,
     }
 );
