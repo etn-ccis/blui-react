@@ -14,13 +14,13 @@ export default {
             color: theme.vars.palette.text.primary,
             ...theme.applyStyles('dark', {
                 color: theme.vars.palette.text.primary,
-                backgroundColor: BLUIColors.darkBlack[100],
+                backgroundColor: BLUIColors.darkBlack[300],
             }),
         }),
         colorPrimary: ({ theme }) => ({
             ...theme.applyStyles('dark', {
                 color: theme.vars.palette.text.primary,
-                backgroundColor: BLUIColors.darkBlack[300],
+                backgroundColor: theme.vars.palette.primary.dark,
             }),
         }),
         colorSecondary: ({ theme }) => ({
