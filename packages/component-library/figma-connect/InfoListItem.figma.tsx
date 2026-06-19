@@ -18,6 +18,7 @@ figma.connect(
             showStatusStripe: figma.boolean('Show Status Stripe'),
             showTimestamp: figma.boolean('Show Timestamp'),
             icon: figma.instance('Icon'),
+            title: figma.instance('Title'),
         },
         example: (props) => <InfoListItem {...props} />,
     }
