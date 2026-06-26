@@ -16,7 +16,7 @@ const titleStyles = {
 
 export const AppBarExample: React.FC = () => (
     <Box>
-        <AppBar position="static">
+        <AppBar position="static" color="default">
             <Toolbar>
                 <IconButton edge="start" color="inherit" aria-label="menu" size="large">
                     <Menu />
