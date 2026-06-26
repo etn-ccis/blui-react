@@ -1,5 +1,5 @@
 import React from 'react';
-import { DrawerRailItem } from '../src/core/Drawer/DrawerRailItem';
+import { DrawerLite } from '../src/core/DrawerLite/DrawerLite';
 import figma from '@figma/code-connect';
 
 /**
@@ -11,13 +11,13 @@ import figma from '@figma/code-connect';
  */
 
 figma.connect(
-    DrawerRailItem,
-    'https://www.figma.com/design/ZwJ3feoFnLiV3JNYqI7A3c/-Limited-Support--Brightlayer-UI-Component-Sticker-Sheet?node-id=4861-60988&m=dev',
+    DrawerLite,
+    'https://www.figma.com/design/ZwJ3feoFnLiV3JNYqI7A3c/-Limited-Support--Brightlayer-UI-Component-Sticker-Sheet?node-id=10417-143805&m=dev',
     {
         props: {
-            icon: figma.instance('Icon'),
-            title: figma.string('Title'),
+            activeItem: 'string',
+            children: 'string',
         },
-        example: (props) => <DrawerRailItem itemID={'item-1'} {...props} />,
+        example: (props) => <DrawerLite activeItem={props.activeItem}>{props.children}</DrawerLite>,
     }
 );
