@@ -93,7 +93,7 @@ All branches must follow the pattern: `<type>/blui-<JIRA-ID>[-optional-descripti
 
 \`\`\`sh
 git pull origin dev
-git checkout -b feature/blui-<JIRA-ID>-optional-description
+git checkout -b feature/blui-<JIRA-ID>[-optional-description]
 \`\`\`
 
 #### Build and Start the Development Server
