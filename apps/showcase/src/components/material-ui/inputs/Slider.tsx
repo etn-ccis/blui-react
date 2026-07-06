@@ -58,7 +58,7 @@ export const SliderExample: React.FC = () => {
                         <Grid>
                             <VolumeDown />
                         </Grid>
-                        <Grid sx={{ xs: 12 }}>
+                        <Grid size={12}>
                             <Slider value={defaultValue} onChange={handleDefaultChange} />
                         </Grid>
                         <Grid>
@@ -74,7 +74,7 @@ export const SliderExample: React.FC = () => {
                         <Grid>
                             <VolumeDown />
                         </Grid>
-                        <Grid sx={{ xs: 12 }}>
+                        <Grid size={12}>
                             <Slider disabled defaultValue={30} />
                         </Grid>
                         <Grid>
@@ -95,7 +95,7 @@ export const SliderExample: React.FC = () => {
                         <Grid>
                             <VolumeDown />
                         </Grid>
-                        <Grid sx={{ xs: 12 }}>
+                        <Grid size={12}>
                             <Slider
                                 value={primaryValue}
                                 onChange={handlePrimaryChange}
@@ -119,7 +119,7 @@ export const SliderExample: React.FC = () => {
                         <Grid>
                             <VolumeDown />
                         </Grid>
-                        <Grid sx={{ xs: 12 }}>
+                        <Grid size={12}>
                             <Slider disabled defaultValue={30} color="primary" step={10} marks min={10} max={100} />
                         </Grid>
                         <Grid>
@@ -140,7 +140,7 @@ export const SliderExample: React.FC = () => {
                         <Grid>
                             <VolumeDown />
                         </Grid>
-                        <Grid sx={{ xs: 12 }}>
+                        <Grid size={12}>
                             <Slider
                                 value={secondaryValue}
                                 onChange={handleSecondaryChange}
@@ -164,7 +164,7 @@ export const SliderExample: React.FC = () => {
                         <Grid>
                             <VolumeDown />
                         </Grid>
-                        <Grid sx={{ xs: 12 }}>
+                        <Grid size={12}>
                             <Slider
                                 disabled
                                 defaultValue={30}
@@ -190,7 +190,7 @@ export const SliderExample: React.FC = () => {
                         <Grid>
                             <VolumeDown />
                         </Grid>
-                        <Grid sx={{ xs: 12 }}>
+                        <Grid size={12}>
                             <Slider value={default2Value} onChange={handleDefault2Change} valueLabelDisplay="on" />
                         </Grid>
                         <Grid>

@@ -2,15 +2,17 @@ import React from 'react';
 import {
     ChannelValueExample,
     ComponentExample,
-    // EditableTableExample,
+    DataTableExample,
     EmptyStateExample,
     ExampleCardList,
+    FileDragUploadExample,
     HeroExample,
     InfoListItemExample,
     ListItemTagExample,
     DrawerLiteExample,
     ThreeLinerExample,
     UserMenuExample,
+    HorizontalStackedBarExample,
 } from '../../components';
 import { usePageTitle } from '../../hooks/usePageTitle';
 import Box from '@mui/material/Box';
@@ -22,11 +24,13 @@ export const BLUIDataDisplay: React.FC = () => {
     const examples: ComponentExample[] = [
         { label: 'Channel Value', component: <ChannelValueExample /> },
         { label: 'Empty State', component: <EmptyStateExample /> },
+        { label: 'File Drag Upload', component: <FileDragUploadExample />, fullWidth: true },
         { label: 'Hero', component: <HeroExample /> },
         { label: 'Info List Item', component: <InfoListItemExample /> },
         { label: 'List Item Tag', component: <ListItemTagExample /> },
         { label: 'Three Liner', component: <ThreeLinerExample /> },
         { label: 'UserMenu', component: <UserMenuExample /> },
+        { label: 'Horizontal Stacked Bar', component: <HorizontalStackedBarExample />, fullWidth: true },
     ];
     usePageTitle('Brightlayer UI Data Display');
 
@@ -35,8 +39,10 @@ export const BLUIDataDisplay: React.FC = () => {
             <ExampleCardList examples={examples} />
             <Box sx={{ m: 2 }}>
                 <Card sx={{ width: '100%' }}>
-                    <CardHeader title="Editable Table" />
-                    <CardContent>{/* <EditableTableExample /> */}</CardContent>
+                    <CardHeader title="Data Table" />
+                    <CardContent>
+                        <DataTableExample />
+                    </CardContent>
                 </Card>
             </Box>
             <Box sx={{ m: 2 }}>

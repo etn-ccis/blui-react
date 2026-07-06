@@ -13,9 +13,11 @@ import DrawerLayoutAPIDocs from '../../componentDocs/DrawerLayout/markdown/Drawe
 import DrawerLiteAPIDocs from '../../componentDocs/DrawerLite/markdown/DrawerLiteAPIDocs.mdx';
 import DrawerSubheaderAPIDocs from '../../componentDocs/DrawerSubheader/markdown/DrawerSubheaderAPIDocs.mdx';
 import ChannelValueAPIDocs from '../../componentDocs/ChannelValue/markdown/ChannelValueAPIDocs.mdx';
-// import EditableTableAPIDocs from '../../componentDocs/EditableTable/markdown/EditableTableAPIDocs.mdx';
+import DataTableAPIDocs from '../../componentDocs/DataTable/markdown/DataTableAPIDocs.mdx';
 import EmptyStateAPIDocs from '../../componentDocs/EmptyState/markdown/EmptyStateAPIDocs.mdx';
+import FileDragUploadAPIDocs from '../../componentDocs/FileDragUpload/markdown/FileDragUploadAPIDocs.mdx';
 import HeroAPIDocs from '../../componentDocs/Hero/markdown/HeroAPIDocs.mdx';
+import HorizontalStackedBarAPIDocs from '../../componentDocs/HorizontalStackedBar/markdown/HorizontalStackedBarAPIDocs.mdx';
 import InfoListItemAPIDocs from '../../componentDocs/InfoListItem/markdown/InfoListItemAPIDocs.mdx';
 import AppBarAPIDocs from '../../componentDocs/AppBar/markdown/AppBarAPIDocs.mdx';
 import ListItemTagAPIDocs from '../../componentDocs/ListItemTag/markdown/ListItemTagAPIDocs.mdx';
@@ -69,8 +71,9 @@ import DrawerNavGroupExamples from '../../componentDocs/DrawerNavGroup/markdown/
 import DrawerExamples from '../../componentDocs/Drawer/markdown/DrawerExamples.mdx';
 import DrawerHeaderExamples from '../../componentDocs/DrawerHeader/markdown/DrawerHeaderExamples.mdx';
 import DrawerSubheaderExamples from '../../componentDocs/DrawerSubheader/markdown/DrawerSubheaderExamples.mdx';
-// import EditableTableExamples from '../../componentDocs/EditableTable/markdown/EditableTableExamples.mdx';
+import DataTableExamples from '../../componentDocs/DataTable/markdown/DataTableExamples.mdx';
 import EmptyStateExamples from '../../componentDocs/EmptyState/markdown/EmptyStateExamples.mdx';
+import FileDragUploadExamples from '../../componentDocs/FileDragUpload/markdown/FileDragUploadExamples.mdx';
 import HeroExamples from '../../componentDocs/Hero/markdown/HeroExamples.mdx';
 import ListItemTagExamples from '../../componentDocs/ListItemTag/markdown/ListItemTagExamples.mdx';
 import InfoListItemExamples from '../../componentDocs/InfoListItem/markdown/InfoListItemExamples.mdx';
@@ -83,6 +86,7 @@ import ToolbarMenuExamples from '../../componentDocs/ToolbarMenu/markdown/Toolba
 import ScoreCardExamples from '../../componentDocs/ScoreCard/markdown/ScoreCardExamples.mdx';
 import SpacerExamples from '../../componentDocs/Spacer/markdown/SpacerExamples.mdx';
 import ThreeLinerExamples from '../../componentDocs/ThreeLiner/markdown/ThreeLinerExamples.mdx';
+import HorizontalStackedBarExamples from '../../componentDocs/HorizontalStackedBar/markdown/HorizontalStackedBarExamples.mdx';
 import DrawerRailItemExamples from '../../componentDocs/DrawerRailItem/markdown/DrawerRailItemExamples.mdx';
 import ProgressIconExamples from '../../componentDocs/ProgressIcon/markdown/ProgressIconExamples.mdx';
 
@@ -98,6 +102,7 @@ import { DrawerNavGroupPlaygroundComponent } from '../../componentDocs/DrawerNav
 import { DrawerNavItemPlaygroundComponent } from '../../componentDocs/DrawerNavItem/playground';
 import { DrawerRailItemPlaygroundComponent } from '../../componentDocs/DrawerRailItem/playground';
 import { EmptyStatePlaygroundComponent } from '../../componentDocs/EmptyState/playground';
+import { FileDragUploadPlaygroundComponent } from '../../componentDocs/FileDragUpload/playground';
 import { HeroPlaygroundComponent } from '../../componentDocs/Hero/playground';
 import { InfoListItemPlaygroundComponent } from '../../componentDocs/InfoListItem/playground';
 import { ListItemTagPlaygroundComponent } from '../../componentDocs/ListItemTag/playground';
@@ -105,6 +110,7 @@ import { ScoreCardPlaygroundComponent } from '../../componentDocs/ScoreCard/play
 import { ThreeLinerPlaygroundComponent } from '../../componentDocs/ThreeLiner/playground';
 import { ToolbarMenuPlaygroundComponent } from '../../componentDocs/ToolbarMenu/playground';
 import { UserMenuPlaygroundComponent } from '../../componentDocs/UserMenu/playground';
+import { HorizontalStackedBarPlaygroundComponent } from '../../componentDocs/HorizontalStackedBar/playground/PlaygroundPage';
 import { Outlet, RouteProps } from 'react-router';
 import { OpenInNew } from '@mui/icons-material';
 import { Box } from '@mui/material';
@@ -204,6 +210,23 @@ export const pageDefinitions: RouteConfig[] = [
                         title: 'playground',
                         path: 'playground',
                         element: <ChannelValuePlaygroundComponent />,
+                    },
+                ],
+            },
+            {
+                title: 'Data Table',
+                path: 'data-table/',
+                element: <ComponentPreviewPage title={'Data Table'} />,
+                children: [
+                    {
+                        title: 'examples',
+                        path: 'examples',
+                        element: <DataTableExamples />,
+                    },
+                    {
+                        title: 'API Docs',
+                        path: 'api-docs',
+                        element: <DataTableAPIDocs />,
                     },
                 ],
             },
@@ -424,23 +447,6 @@ export const pageDefinitions: RouteConfig[] = [
                     },
                 ],
             },
-            // {
-            //     title: 'Editable Table',
-            //     path: 'editable-table/',
-            //     element: <ComponentPreviewPage title={'Editable Table'} />,
-            //     children: [
-            //         {
-            //             title: 'examples',
-            //             path: 'examples',
-            //             element: <EditableTableExamples />,
-            //         },
-            //         {
-            //             title: 'API Docs',
-            //             path: 'api-docs',
-            //             element: <EditableTableAPIDocs />,
-            //         },
-            //     ],
-            // },
             {
                 title: 'Empty State',
                 path: 'empty-state/',
@@ -464,6 +470,28 @@ export const pageDefinitions: RouteConfig[] = [
                 ],
             },
             {
+                title: 'File Drag Upload',
+                path: 'file-drag-upload/',
+                element: <ComponentPreviewPage title={'File Drag Upload'} />,
+                children: [
+                    {
+                        title: 'examples',
+                        path: 'examples',
+                        element: <FileDragUploadExamples />,
+                    },
+                    {
+                        title: 'API Docs',
+                        path: 'api-docs',
+                        element: <FileDragUploadAPIDocs />,
+                    },
+                    {
+                        title: 'playground',
+                        path: 'playground',
+                        element: <FileDragUploadPlaygroundComponent />,
+                    },
+                ],
+            },
+            {
                 title: 'Hero',
                 path: 'hero/',
                 element: <ComponentPreviewPage title={'Hero'} />,
@@ -482,6 +510,28 @@ export const pageDefinitions: RouteConfig[] = [
                         title: 'playground',
                         path: 'playground',
                         element: <HeroPlaygroundComponent />,
+                    },
+                ],
+            },
+            {
+                title: 'Horizontal Stacked Bar',
+                path: 'horizontal-stacked-bar/',
+                element: <ComponentPreviewPage title={'Horizontal Stacked Bar'} />,
+                children: [
+                    {
+                        title: 'examples',
+                        path: 'examples',
+                        element: <HorizontalStackedBarExamples />,
+                    },
+                    {
+                        title: 'API Docs',
+                        path: 'api-docs',
+                        element: <HorizontalStackedBarAPIDocs />,
+                    },
+                    {
+                        title: 'playground',
+                        path: 'playground',
+                        element: <HorizontalStackedBarPlaygroundComponent />,
                     },
                 ],
             },

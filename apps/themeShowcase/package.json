@@ -17,7 +17,7 @@
         "analyze": "source-map-explorer 'build/static/js/*.js'"
     },
     "dependencies": {
-        "@brightlayer-ui/colors": "^3.1.1",
+        "@brightlayer-ui/colors": "^3.2.0-alpha.3",
         "@brightlayer-ui/icons-mui": "^3.6.0",
         "@brightlayer-ui/react-components": "workspace:^",
         "@brightlayer-ui/react-progress-icons": "^2.1.1",
@@ -52,10 +52,7 @@
         "react": "^19.1.0",
         "react-app-polyfill": "^3.0.0",
         "react-dom": "^19.1.0",
-        "react-redux": "^7.2.1",
         "react-router-dom": "^7.12.0",
-        "redux": "^4.0.5",
-        "redux-thunk": "^2.3.0",
         "stylis": "^4.0.13",
         "stylis-plugin-rtl": "^2.1.1",
         "typescript": "^5.1.6",
@@ -85,12 +82,11 @@
         "@testing-library/user-event": "^14.0.4",
         "@types/react": "^19.1.8",
         "@types/react-dom": "19.1.6",
-        "@types/react-redux": "^7.1.9",
         "@types/react-router-dom": "^5.3.3",
         "@types/react-test-renderer": "^17.0.1",
         "@typescript-eslint/eslint-plugin": "^7.0.0",
         "@typescript-eslint/parser": "^6.0.0",
-        "@vitejs/plugin-react": "^4.0.3",
+        "@vitejs/plugin-react": "^4.7.0",
         "eslint": "^8.45.0",
         "eslint-config-prettier": "^8.4.0",
         "eslint-plugin-react": "^7.32.2",
@@ -105,7 +101,7 @@
         "source-map-explorer": "^2.5.0",
         "ts-jest": "^29.4.9",
         "ts-node": "^10.9.2",
-        "vite": "^4.5.14"
+        "vite": "^6.4.3"
     },
     "prettier": "@brightlayer-ui/prettier-config"
 }

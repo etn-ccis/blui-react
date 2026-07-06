@@ -7,7 +7,6 @@ import react from '@vitejs/plugin-react';
 import viteTsconfigPaths from 'vite-tsconfig-paths';
 import mdx from '@mdx-js/rollup';
 import remarkGfm from 'remark-gfm';
-import prism from 'vite-plugin-prismjs';
 
 export default defineConfig({
     base: process.env.VITE_PUBLIC_URL || '/',
@@ -17,12 +16,6 @@ export default defineConfig({
         mdx({
             remarkPlugins: [remarkGfm],
             providerImportSource: '@mdx-js/react',
-        }),
-        prism({
-            languages: ['javascript', 'css', 'html', 'typescript', 'jsx'],
-            plugins: ['line-numbers'],
-            theme: 'tomorrow',
-            css: true,
         }),
     ],
     server: {

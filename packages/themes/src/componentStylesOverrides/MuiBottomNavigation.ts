@@ -5,8 +5,9 @@ export default {
     styleOverrides: {
         root: ({ theme }) => ({
             backgroundColor: theme.vars.palette.primary.main,
+            boxShadow: theme.vars.palette.shadows.level2,
             ...theme.applyStyles('dark', {
-                backgroundColor: BLUIColors.black[800],
+                backgroundColor: BLUIColors.darkBlack[300],
             }),
         }),
     },

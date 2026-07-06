@@ -4,13 +4,14 @@ import { Components, Theme, CssVarsTheme } from '@mui/material/styles';
 export default {
     styleOverrides: {
         paper: ({ theme }) => ({
+            boxShadow: theme.vars.palette.shadows.level2,
             ...theme.applyStyles('dark', {
                 backgroundColor: BLUIColors.darkBlack[300],
             }),
         }),
         paperAnchorBottom: ({ theme }) => ({
             ...theme.applyStyles('dark', {
-                backgroundColor: theme.vars.palette.background.paper,
+                backgroundColor: BLUIColors.darkBlack[300],
             }),
         }),
     },

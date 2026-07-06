@@ -15,6 +15,8 @@ import MuiCheckbox from './componentStylesOverrides/MuiCheckbox';
 import MuiButtonBase from './componentStylesOverrides/MuiButtonBase';
 import MuiChip from './componentStylesOverrides/MuiChip';
 import MuiDrawer from './componentStylesOverrides/MuiDrawer';
+import MuiMenu from './componentStylesOverrides/MuiMenu';
+import MuiDialog from './componentStylesOverrides/MuiDialog';
 import MuiFab from './componentStylesOverrides/MuiFab';
 import MuiListItem from './componentStylesOverrides/MuiListItem';
 import MuiListSubheader from './componentStylesOverrides/MuiListSubheader';
@@ -43,6 +45,30 @@ import MuiFormLabel from './componentStylesOverrides/MuiFormLabel';
 import MuiFormHelperText from './componentStylesOverrides/MuiFormHelperText';
 import MuiToggleButtonGroup from './componentStylesOverrides/MuiToggleButtonGroup';
 import MuiToggleButton from './componentStylesOverrides/MuiToggleButton';
+import MuiIconButton from './componentStylesOverrides/MuiIconButton';
+import MuiPaper from './componentStylesOverrides/MuiPaper';
+import MuiRadio from './componentStylesOverrides/MuiRadio';
+import MuiFormControlLabel from './componentStylesOverrides/MuiFormControlLabel';
+import MuiAccordion from './componentStylesOverrides/MuiAccordion';
+
+declare module '@mui/material/styles' {
+    // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+    interface Palette {
+        shadows: {
+            level1: string;
+            level2: string;
+            level3: string;
+        };
+    }
+    // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+    interface PaletteOptions {
+        shadows?: {
+            level1?: string;
+            level2?: string;
+            level3?: string;
+        };
+    }
+}
 
 // Light Theme Colors
 const LightThemeColors = {
@@ -51,7 +77,7 @@ const LightThemeColors = {
     error: createSimplePalette(BLUIColors.red),
     success: createSimplePalette(BLUIColors.green),
     info: createSimplePalette(BLUIColors.lightBlue),
-    divider: Color(BLUIColors.black[500]).alpha(0.12).string(),
+    divider: Color(BLUIColors.lightThemeDivider).alpha(0.12).string(),
     warning: {
         light: BLUIColors.yellow[100],
         main: BLUIColors.yellow[500],
@@ -67,6 +93,7 @@ const LightThemeColors = {
         hint: BLUIColors.gray[500],
     },
     action: {
+        hover: Color(BLUIColors.highlight).alpha(0.08).string(),
         active: BLUIColors.gray[500],
         disabled: Color(BLUIColors.black[500]).alpha(0.3).string(),
     },
@@ -79,15 +106,15 @@ const DarkThemeColors = {
     error: createSimpleDarkPalette(BLUIColors.red),
     success: createSimpleDarkPalette(BLUIColors.green),
     info: createSimpleDarkPalette(BLUIColors.lightBlue),
-    divider: Color(BLUIColors.black[200]).alpha(0.36).string(),
+    divider: Color(BLUIColors.darkThemeDivider).alpha(0.1).string(),
     warning: {
         light: BLUIColors.yellow[100],
         main: BLUIColors.yellow[300],
         dark: BLUIColors.yellow[900],
     },
     background: {
-        default: BLUIColors.darkBlack[800],
-        paper: BLUIColors.black[900],
+        default: BLUIColors.darkBlack[900],
+        paper: BLUIColors.darkBlack[500],
     },
     text: {
         primary: BLUIColors.black[50],
@@ -96,7 +123,7 @@ const DarkThemeColors = {
         hint: Color(BLUIColors.black[300]).alpha(0.36).string(),
     },
     action: {
-        hover: Color(BLUIColors.black[50]).alpha(0.1).string(),
+        hover: Color(BLUIColors.highlightBlue).alpha(0.2).string(),
         active: BLUIColors.black[200],
         disabled: Color(BLUIColors.black[300]).alpha(0.36).string(),
         disabledBackground: Color(BLUIColors.black[200]).alpha(0.24).string(),
@@ -104,6 +131,20 @@ const DarkThemeColors = {
 };
 
 const Spacing = 8;
+
+// light shadows
+const lightShadows = {
+    level1: '0 0 2px 0 rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.04), 0 1px 4px 0 rgba(0, 0, 0, 0.04)',
+    level2: '0 0 6px 0 rgba(0, 0, 0, 0.04), 0 1px 4px 0 rgba(0, 0, 0, 0.04), 0 4px 8px 0 rgba(0, 0, 0, 0.04)',
+    level3: '0 0 2px 0 rgba(0, 0, 0, 0.12), 0 8px 16px 0 rgba(0, 0, 0, 0.12), 0 10px 32px 0 rgba(0, 0, 0, 0.12)',
+};
+
+// dark shadows
+const darkShadows = {
+    level1: '0 0 2px 0 rgba(0, 0, 0, 0.32), 0 1px 2px 0 rgba(0, 0, 0, 0.32), 0 1px 4px 0 rgba(0, 0, 0, 0.32)',
+    level2: '0 0 6px 0 rgba(0, 0, 0, 0.32), 0 1px 4px 0 rgba(0, 0, 0, 0.32), 0 4px 8px 0 rgba(0, 0, 0, 0.32)',
+    level3: '0 0 2px 0 rgba(0, 0, 0, 0.48), 0 8px 16px 0 rgba(0, 0, 0, 0.48), 0 10px 32px 0 rgba(0, 0, 0, 0.48)',
+};
 
 export const blueThemes = createTheme({
     cssVariables: { colorSchemeSelector: 'class' },
@@ -115,12 +156,14 @@ export const blueThemes = createTheme({
             palette: {
                 mode: 'light',
                 ...LightThemeColors,
+                shadows: lightShadows,
             },
         },
         dark: {
             palette: {
                 mode: 'dark',
                 ...DarkThemeColors,
+                shadows: darkShadows,
             },
         },
     },
@@ -137,6 +180,8 @@ export const blueThemes = createTheme({
         MuiButtonBase: MuiButtonBase,
         MuiChip: MuiChip,
         MuiDrawer: MuiDrawer,
+        MuiMenu: MuiMenu,
+        MuiDialog: MuiDialog,
         MuiFab: MuiFab,
         MuiListItem: MuiListItem,
         MuiListSubheader: MuiListSubheader,
@@ -165,5 +210,10 @@ export const blueThemes = createTheme({
         MuiFormHelperText: MuiFormHelperText,
         MuiToggleButtonGroup: MuiToggleButtonGroup,
         MuiToggleButton: MuiToggleButton,
+        MuiIconButton: MuiIconButton,
+        MuiPaper: MuiPaper,
+        MuiRadio: MuiRadio,
+        MuiFormControlLabel: MuiFormControlLabel,
+        MuiAccordion: MuiAccordion,
     },
 });

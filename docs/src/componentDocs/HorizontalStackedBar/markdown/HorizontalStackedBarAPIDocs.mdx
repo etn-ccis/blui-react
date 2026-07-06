@@ -1,0 +1,57 @@
+import Box from '@mui/material/Box';
+import { ForMoreDetailsOnStylingOptions } from '../../../shared';
+
+# Horizontal Stacked Bar
+
+The `<HorizontalStackedBar>` component visualizes categorical counts as a segmented bar with an accompanying legend.
+
+### Horizontal Stacked Bar API
+
+<Box>
+
+| Prop Name           | Description                                                      | Type                                  | Required | Default |
+| ------------------- | ---------------------------------------------------------------- | ------------------------------------- | -------- | ------- |
+| classes             | Style overrides                                                  | `HorizontalStackedBarClasses`         | no       |         |
+| data                | Array of legend / segment items                                  | `HorizontalStackedBarItem[]`          | yes      |         |
+| hideEmptyCategories | Hides legend items with `count === 0`                            | `boolean`                             | no       | `false` |
+| onChange            | Fires when selected category changes, returns label or empty     | `(selectedLabel: string) => void`     | no       |         |
+| selectedStatus      | Controlled selected category label                               | `string`                              | no       |         |
+
+</Box>
+
+Any other props will be provided to the root element [**Material UI Box**](https://mui.com/material-ui/api/box/).
+
+### Item API
+
+<Box>
+
+| Field           | Description                                            | Type                                                        | Required |
+| --------------- | ------------------------------------------------------ | ----------------------------------------------------------- | -------- |
+| label           | Label shown in legend and used as selection key        | `string`                                                    | yes      |
+| count           | Numeric count used for legend and segment sizing       | `number`                                                    | yes      |
+| variant         | Preset status variant                                  | `'failed' \| 'success' \| 'pending' \| 'info' \| 'canceled'` | no       |
+| backgroundColor | Custom color for legend and segment                    | `string`                                                    | no       |
+| icon            | Legend icon in enabled state                           | `React.JSX.Element`                                         | no       |
+| disabledIcon    | Legend icon when `count === 0`                         | `React.JSX.Element`                                         | no       |
+
+</Box>
+
+### Style Overrides
+
+You can override the default styles used by Brightlayer UI by:
+
+- using the `sx` prop
+- passing a `classes` prop with keys from the Name column below
+- using the Global CSS Class in your main stylesheet
+
+<ForMoreDetailsOnStylingOptions />
+
+<Box>
+
+| Name            | Global CSS Class                           | Description                         |
+| --------------- | ------------------------------------------ | ----------------------------------- |
+| root            | .BluiHorizontalStackedBar-root             | Styles applied to the root element  |
+| legendContainer | .BluiHorizontalStackedBar-legendContainer  | Styles for the legend container     |
+| barContainer    | .BluiHorizontalStackedBar-barContainer     | Styles for the bar segments wrapper |
+
+</Box>

@@ -4,7 +4,7 @@ import { DrawerLayout } from '@brightlayer-ui/react-components';
 import { NavigationDrawer } from './NavigationDrawer';
 import { SharedAppBar } from '../components/SharedAppBar';
 import { SimpleNavItem, pageDefinitions } from './navigation';
-import { useAppSelector } from '../redux/hooks';
+import { useCurrentPageTitle } from '../contexts/AppContext';
 import { useColorScheme } from '@mui/material';
 
 const buildRoutes = (routes: SimpleNavItem[], url: string): JSX.Element[] => {
@@ -33,7 +33,7 @@ const ScrollToTop = (): null => {
 };
 
 export const MainRouter: React.FC = () => {
-    const title = useAppSelector((state) => state.app.pageTitle);
+    const title = useCurrentPageTitle();
     const { setMode } = useColorScheme();
 
     useEffect(() => {
