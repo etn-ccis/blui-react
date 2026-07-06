@@ -44,7 +44,7 @@ fi
 
 # Validate branch name
 if [[ ! $local_branch =~ $valid_branch_pattern ]]; then
-    echo -e "$message"
+    printf '%s\n' "$message"
     exit 1
 fi
 
