@@ -54,7 +54,7 @@
     },
     "dependencies": {
         "inquirer": "^12.6.0",
-        "typescript": "^5.5.3"
+        "typescript": "^6.0.3"
     },
     "files": [
         "LICENSE",
