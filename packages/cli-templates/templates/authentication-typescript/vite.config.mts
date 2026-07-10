@@ -15,7 +15,7 @@ export default defineConfig({
     base: '/',
     plugins: [react(), viteTsconfigPaths()],
     define: {
-        'process.env': process.env,
+        'process.env': {},
     },
     server: {
         port: 4200,
