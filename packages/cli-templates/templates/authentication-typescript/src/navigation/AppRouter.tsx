@@ -10,7 +10,7 @@ const oktaAuth = new OktaAuth(oktaConfig as OktaAuthOptions);
 export const AppRouter: React.FC = () => {
     const navigation = useNavigate();
     const navigate = useCallback((destination: -1 | string) => {
-        navigation(destination as To);
+        void navigation(destination as To);
     }, []);
 
     const restoreOriginalUri = (_oktaAuth: any, originalUri: any): void => {
