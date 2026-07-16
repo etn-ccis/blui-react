@@ -25,7 +25,7 @@ jobs:
                 node-version: [20.x]
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v5
             - name: Use Node.js ${{ matrix.node-version }}
               uses: actions/setup-node@v4
               with:
@@ -45,7 +45,7 @@ jobs:
                 node-version: [20.x]
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v5
             - name: Use Node.js ${{ matrix.node-version }}
               uses: actions/setup-node@v4
               with:
@@ -66,7 +66,7 @@ jobs:
                 node-version: [20.x]
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v5
             - name: Use Node.js
               uses: actions/setup-node@v4
               with:
@@ -103,7 +103,7 @@ jobs:
                 node-version: [20.x]
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v5
             - name: Use Node.js
               uses: actions/setup-node@v4
               with:
@@ -133,7 +133,7 @@ jobs:
             NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
             BRANCH: ${{ github.ref == 'refs/heads/master' && 'master' || 'dev' }}
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v5
             - name: Download dist
               uses: actions/download-artifact@v4
               with:
@@ -161,7 +161,7 @@ jobs:
                 node-version: [20.x]
 
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v5
             - name: Use Node.js
               uses: actions/setup-node@v4
               with:
@@ -194,7 +194,7 @@ jobs:
             NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
             BRANCH: ${{ github.ref == 'refs/heads/master' && 'master' || 'dev' }}
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v5
             - name: Download dist
               uses: actions/download-artifact@v4
               with:
@@ -220,7 +220,7 @@ jobs:
                 node-version: [20.x]
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v5
             - name: Use Node.js
               uses: actions/setup-node@v4
               with:
@@ -255,7 +255,7 @@ jobs:
                 node-version: [20.x]
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v5
             - name: Use Node.js
               uses: actions/setup-node@v4
               with:
@@ -281,7 +281,7 @@ jobs:
         needs: [build_component_library, prettier_lint]
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v5
             - name: Download the dist folder
               uses: actions/download-artifact@v4
               with:
@@ -299,7 +299,7 @@ jobs:
         needs: [build_component_library, prettier_lint]
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v5
             - name: Download the dist folder
               uses: actions/download-artifact@v4
               with:
@@ -324,7 +324,7 @@ jobs:
                 node-version: [20.x]
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v5
             - name: Use Node.js ${{ matrix.node-version }}
               uses: actions/setup-node@v4
               with:
@@ -366,7 +366,7 @@ jobs:
             NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
             BRANCH: ${{ github.ref == 'refs/heads/master' && 'master' || 'dev' }}
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v5
             - name: Download dist
               uses: actions/download-artifact@v4
               with:
@@ -391,7 +391,7 @@ jobs:
             matrix:
                 node-version: [20.x]
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v5
             - name: Use Node.js ${{ matrix.node-version }}
               uses: actions/setup-node@v4
               with:
@@ -420,7 +420,7 @@ jobs:
                 node-version: [20.x]
 
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v5
             - name: Use Node.js ${{ matrix.node-version }}
               uses: actions/setup-node@v4
               with:
@@ -454,7 +454,7 @@ jobs:
             BRANCH: ${{ github.ref == 'refs/heads/master' && 'master' || 'dev' }}
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v5
             - uses: actions/setup-node@v4
               with:
                   node-version: ${{ matrix.node-version }}
@@ -475,7 +475,7 @@ jobs:
                 node-version: [20.x]
 
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v5
             - name: Use Node.js
               uses: actions/setup-node@v4
               with:
@@ -493,7 +493,7 @@ jobs:
         needs: [build_theme_verify_artifacts, build_component_library]
         steps:
             - name: Checkout code
-              uses: actions/checkout@v4
+              uses: actions/checkout@v5
               with:
                   fetch-depth: 0
 
@@ -537,7 +537,7 @@ jobs:
 
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v5
             - name: Use Node.js ${{ matrix.node-version }}
               uses: actions/setup-node@v4
               with:
@@ -585,7 +585,7 @@ jobs:
             DEV_DEPLOY_TOKEN: ${{secrets.DEV_DEPLOY_TOKEN}}
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v5
             - name: Download build
               uses: actions/download-artifact@v4
               with:
@@ -621,7 +621,7 @@ jobs:
             DEV_DEPLOY_TOKEN: ${{secrets.DEV_DEPLOY_TOKEN}}
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v5
             - name: Download build
               uses: actions/download-artifact@v4
               with:
@@ -655,7 +655,7 @@ jobs:
         needs: build_showcase
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v5
             - name: Download build
               uses: actions/download-artifact@v4
               with:
