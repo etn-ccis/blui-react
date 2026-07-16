@@ -55,7 +55,7 @@ jobs:
             - name: Install dependencies
               run: pnpm install
             - name: Audit for high/critical vulnerabilities
-              run: pnpm audit --audit-level high
+              run: pnpm audit --audit-level high --ignore-registry-errors
 
     unit_tests_workflow:
         name: Workflow Unit Tests
