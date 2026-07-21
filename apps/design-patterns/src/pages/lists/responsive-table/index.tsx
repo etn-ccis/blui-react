@@ -91,11 +91,9 @@ export const ResponsiveTable = (): JSX.Element => {
             </Typography>
             {sm ? null : (
                 <List disablePadding component="nav">
-                    {list.map(
-                        (item, i): JSX.Element => (
-                            <InfoListItem hidePadding key={i} title={item.name} subtitle={item.description} />
-                        )
-                    )}
+                    {list.map((item, i): JSX.Element => (
+                        <InfoListItem hidePadding key={i} title={item.name} subtitle={item.description} />
+                    ))}
                 </List>
             )}
             {smDown ? null : (
@@ -107,16 +105,14 @@ export const ResponsiveTable = (): JSX.Element => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {list.map(
-                            (item, i): JSX.Element => (
-                                <TableRow key={i}>
-                                    <TableCell component="th" scope="row">
-                                        {item.name}
-                                    </TableCell>
-                                    <TableCell align="right">{item.description}</TableCell>
-                                </TableRow>
-                            )
-                        )}
+                        {list.map((item, i): JSX.Element => (
+                            <TableRow key={i}>
+                                <TableCell component="th" scope="row">
+                                    {item.name}
+                                </TableCell>
+                                <TableCell align="right">{item.description}</TableCell>
+                            </TableRow>
+                        ))}
                     </TableBody>
                 </Table>
             )}

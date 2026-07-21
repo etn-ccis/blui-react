@@ -240,22 +240,20 @@ export const ActionListButtonPanel = (): JSX.Element => {
                     )}
                     <CardRoot>
                         <CardContentRoot>
-                            {list.map(
-                                (item, i): JSX.Element => (
-                                    <InfoListItem
-                                        key={i}
-                                        data-testid="infoListItem"
-                                        classes={{
-                                            rightComponent: RightComponentChevron,
-                                        }}
-                                        hidePadding
-                                        ripple
-                                        title={item.name}
-                                        divider={list.length - 1 !== i || isMobile ? 'full' : undefined}
-                                        chevron
-                                    />
-                                )
-                            )}
+                            {list.map((item, i): JSX.Element => (
+                                <InfoListItem
+                                    key={i}
+                                    data-testid="infoListItem"
+                                    classes={{
+                                        rightComponent: RightComponentChevron,
+                                    }}
+                                    hidePadding
+                                    ripple
+                                    title={item.name}
+                                    divider={list.length - 1 !== i || isMobile ? 'full' : undefined}
+                                    chevron
+                                />
+                            ))}
                         </CardContentRoot>
                     </CardRoot>
                 </ContentContainer>
