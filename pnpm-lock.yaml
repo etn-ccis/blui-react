@@ -2156,8 +2156,8 @@ importers:
   packages/themes:
     dependencies:
       '@brightlayer-ui/colors':
-        specifier: ^3.2.0-alpha.4
-        version: 3.2.0-alpha.4
+        specifier: ^3.2.0
+        version: 3.2.0
       '@brightlayer-ui/types':
         specifier: ^2.0.0
         version: 2.0.0
@@ -3021,6 +3021,9 @@ packages:
 
   '@brightlayer-ui/colors@3.1.1':
     resolution: {integrity: sha512-fV10E5JDuVGDQ0gCY3pEfDwUo1+lvDFC5pmOAAGpN7YDramS6ggUpJ/LmYavKAudw7FNcaJnPi7tsQWJjvv/7w==}
+
+  '@brightlayer-ui/colors@3.2.0':
+    resolution: {integrity: sha512-tM1jFf0aIx/pKp85je+1HJQidwmlTbqDMTkl/9MnymwX3H8xMYuomXJOGS89cailDUQUiN5SR1vmRN9EFNhwXQ==}
 
   '@brightlayer-ui/colors@3.2.0-alpha.4':
     resolution: {integrity: sha512-yYI6OWNceGyp9gO37PqHMfzJExhsx9gq+OvApvWiVRVoZK/UgCkaXX/RGPvUDBgAtU2pCqpOuLp3K/BxiGFMDg==}
@@ -15709,6 +15712,10 @@ snapshots:
       css-tree: 3.2.1
 
   '@brightlayer-ui/colors@3.1.1':
+    dependencies:
+      '@brightlayer-ui/types': 2.0.0
+
+  '@brightlayer-ui/colors@3.2.0':
     dependencies:
       '@brightlayer-ui/types': 2.0.0
 
