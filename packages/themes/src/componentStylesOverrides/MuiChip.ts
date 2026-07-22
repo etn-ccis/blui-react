@@ -75,6 +75,9 @@ export default {
             '&:hover': {
                 backgroundColor: BLUIColors.gray[100],
             },
+            '&:active': {
+                backgroundColor: BLUIColors.gray[50],
+            },
             '&.MuiChip-clickableColorPrimary': {
                 '&:hover': {
                     backgroundColor: BLUIColors.blue[300],
@@ -88,6 +91,9 @@ export default {
             ...theme.applyStyles('dark', {
                 '&:hover': {
                     backgroundColor: BLUIColors.black[400],
+                },
+                '&:active': {
+                    backgroundColor: BLUIColors.gray[400],
                 },
                 '&.MuiChip-clickableColorPrimary': {
                     '&:hover': {
@@ -197,6 +203,9 @@ export default {
             '&.MuiChip-clickable:hover': {
                 backgroundColor: BLUIColors.white[200],
             },
+            '&.MuiChip-clickable:active': {
+                backgroundColor: BLUIColors.white[200],
+            },
             '& .MuiChip-avatar': {
                 backgroundColor: BLUIColors.gray[500],
                 marginRight: -4,
@@ -224,7 +233,7 @@ export default {
                 border: `1px solid ${theme.vars.palette.primary.main}`,
                 color: theme.vars.palette.primary.main,
                 '&.MuiChip-clickable:hover': {
-                    backgroundColor: `rgba(${theme.vars.palette.primary.main} / 0.1)`,
+                    backgroundColor: theme.vars.palette.action.hover,
                 },
                 '&.Mui-disabled': {
                     opacity: 1,
@@ -243,7 +252,7 @@ export default {
                 border: `1px solid ${theme.vars.palette.secondary.main}`,
                 color: theme.vars.palette.secondary.main,
                 '&.MuiChip-clickable:hover': {
-                    backgroundColor: `rgba(${theme.vars.palette.secondary.main} / 0.1)`,
+                    backgroundColor: theme.vars.palette.action.hover,
                 },
                 '&.Mui-disabled': {
                     opacity: 1,
@@ -262,6 +271,9 @@ export default {
                 borderColor: Color(BLUIColors.black[200]).alpha(0.32).string(),
                 '&.MuiChip-clickable:hover': {
                     backgroundColor: BLUIColors.black[800],
+                },
+                '&.MuiChip-clickable:active': {
+                    backgroundColor: BLUIColors.gray[800],
                 },
                 '& .MuiChip-avatar': {
                     backgroundColor: BLUIColors.black[600],
@@ -301,7 +313,7 @@ export default {
 
                     color: theme.vars.palette.primary.main,
                     '&.MuiChip-clickable:hover': {
-                        backgroundColor: Color(BLUIColors.blue[500]).alpha(0.4).string(),
+                        backgroundColor: theme.vars.palette.action.hover,
                     },
                     '& .MuiChip-deleteIconOutlinedColorPrimary': {
                         color: BLUIColors.blue[400],
@@ -324,7 +336,7 @@ export default {
                     border: `1px solid ${theme.vars.palette.secondary.main}`,
                     color: theme.vars.palette.secondary.main,
                     '&.MuiChip-clickable:hover': {
-                        backgroundColor: Color(BLUIColors.blue[600]).alpha(0.4).string(),
+                        backgroundColor: theme.vars.palette.action.hover,
                     },
                     '& .MuiChip-deleteIconOutlinedColorSecondary': {
                         color: BLUIColors.lightBlue[400],
