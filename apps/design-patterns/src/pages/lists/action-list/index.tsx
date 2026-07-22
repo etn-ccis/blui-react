@@ -146,31 +146,29 @@ export const ActionList = (): JSX.Element => {
             </StyledAppBar>
             {list.length < 1 && <EmptyState onAddItem={onAddItem} />}
             <List data-cy={'list-content'} disablePadding component="nav" className={'list'}>
-                {list.map(
-                    (item, i): JSX.Element => (
-                        <InfoListItem
-                            key={i}
-                            hidePadding
-                            ripple
-                            data-testid={'infoListItem'}
-                            title={item.name}
-                            subtitle={item.details}
-                            onClick={(): void => {
-                                /* handle item onClick */
-                            }}
-                            rightComponent={
-                                <IconButton
-                                    data-cy={'action-menu'}
-                                    onClick={(evt): void => onMenuClick(evt, i)}
-                                    edge={'end'}
-                                    size="large"
-                                >
-                                    <MoreVertIcon />
-                                </IconButton>
-                            }
-                        />
-                    )
-                )}
+                {list.map((item, i): JSX.Element => (
+                    <InfoListItem
+                        key={i}
+                        hidePadding
+                        ripple
+                        data-testid={'infoListItem'}
+                        title={item.name}
+                        subtitle={item.details}
+                        onClick={(): void => {
+                            /* handle item onClick */
+                        }}
+                        rightComponent={
+                            <IconButton
+                                data-cy={'action-menu'}
+                                onClick={(evt): void => onMenuClick(evt, i)}
+                                edge={'end'}
+                                size="large"
+                            >
+                                <MoreVertIcon />
+                            </IconButton>
+                        }
+                    />
+                ))}
             </List>
             <Menu
                 id={'long-menu'}

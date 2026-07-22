@@ -44,10 +44,7 @@ type RowDuplicateEntry<TData> = {
 };
 
 type HistoryEntry<TData extends DataTableData> =
-    | CellEditEntry<TData>
-    | RowAddEntry<TData>
-    | RowDeleteEntry<TData>
-    | RowDuplicateEntry<TData>;
+    CellEditEntry<TData> | RowAddEntry<TData> | RowDeleteEntry<TData> | RowDuplicateEntry<TData>;
 
 // ─── Hook types ───────────────────────────────────────────────────────────────
 

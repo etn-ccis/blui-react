@@ -206,109 +206,107 @@ export const ActionListInline = (): JSX.Element => {
                 <CardRoot>
                     <CardContentRoot>
                         {list.length ? (
-                            list.map(
-                                (item, i): JSX.Element => (
-                                    <InfoListItem
-                                        key={i}
-                                        data-testid="infoListItem"
-                                        classes={{
-                                            root: hoveredItem === item.id && !isMobile ? undefined : undefined,
-                                            rightComponent: undefined,
-                                        }}
-                                        sx={
-                                            hoveredItem === item.id && !isMobile
-                                                ? { backgroundColor: theme.palette.background.default }
-                                                : undefined
-                                        }
-                                        hidePadding
-                                        ripple
-                                        title={getTitle(item.title)}
-                                        divider={list.length - 1 !== i || isMobile ? 'full' : undefined}
-                                        info={
-                                            item.hasTag && isMobile
-                                                ? [
-                                                      <ListItemTag
-                                                          key="active"
-                                                          label={'active'}
-                                                          backgroundColor={colors.red[500]}
-                                                      />,
-                                                  ]
-                                                : undefined
-                                        }
-                                        rightComponent={
-                                            !isMobile ? (
-                                                hoveredItem === item.id ? (
-                                                    <div>
-                                                        <Tooltip title={'Delete'}>
-                                                            <StyledIconButton
-                                                                data-testid="deleteIcon"
-                                                                onClick={(): void => onDeleteItem('Delete', i)}
-                                                                size="large"
-                                                            >
-                                                                <DeleteIcon />
-                                                            </StyledIconButton>
-                                                        </Tooltip>
-                                                        <Tooltip title={'Save'}>
-                                                            <StyledIconButton data-testid="saveIcon" size="large">
-                                                                <BookmarkIcon />
-                                                            </StyledIconButton>
-                                                        </Tooltip>
-                                                        <Tooltip title={'Archive'}>
-                                                            <StyledIconButton data-testid="archiveIcon" size="large">
-                                                                <ArchiveIcon />
-                                                            </StyledIconButton>
-                                                        </Tooltip>
-                                                    </div>
-                                                ) : item.hasTag ? (
-                                                    <ListItemTag label={'active'} backgroundColor={colors.red[500]} />
-                                                ) : undefined
-                                            ) : (
-                                                <>
-                                                    <IconButton
-                                                        data-cy={'action-menu'}
-                                                        onClick={(evt): void => onMenuClick(evt, i)}
-                                                        edge={'end'}
-                                                        size="large"
-                                                    >
-                                                        <MoreVertIcon />
-                                                    </IconButton>
-                                                    <Menu
-                                                        id={'long-menu'}
-                                                        anchorEl={menuPosition}
-                                                        onClose={onMenuClose}
-                                                        open={Boolean(menuPosition)}
-                                                        PaperProps={{
-                                                            style: {
-                                                                minWidth: theme.spacing(19),
-                                                            },
-                                                        }}
-                                                        elevation={6}
-                                                        anchorOrigin={{
-                                                            vertical: 'bottom',
-                                                            horizontal: 'right',
-                                                        }}
-                                                        transformOrigin={{
-                                                            vertical: 'top',
-                                                            horizontal: 'right',
-                                                        }}
-                                                    >
-                                                        {options.map((option) => (
-                                                            <MenuItemRoot
-                                                                key={option}
-                                                                onClick={(): void => onDeleteItem(option, activeIndex)}
-                                                            >
-                                                                {option}
-                                                            </MenuItemRoot>
-                                                        ))}
-                                                    </Menu>
-                                                </>
-                                            )
-                                        }
-                                        onMouseOver={(): void => setHoveredItem(item.id)}
-                                        onMouseLeave={(): void => setHoveredItem(0)}
-                                    />
-                                )
-                            )
+                            list.map((item, i): JSX.Element => (
+                                <InfoListItem
+                                    key={i}
+                                    data-testid="infoListItem"
+                                    classes={{
+                                        root: hoveredItem === item.id && !isMobile ? undefined : undefined,
+                                        rightComponent: undefined,
+                                    }}
+                                    sx={
+                                        hoveredItem === item.id && !isMobile
+                                            ? { backgroundColor: theme.palette.background.default }
+                                            : undefined
+                                    }
+                                    hidePadding
+                                    ripple
+                                    title={getTitle(item.title)}
+                                    divider={list.length - 1 !== i || isMobile ? 'full' : undefined}
+                                    info={
+                                        item.hasTag && isMobile
+                                            ? [
+                                                  <ListItemTag
+                                                      key="active"
+                                                      label={'active'}
+                                                      backgroundColor={colors.red[500]}
+                                                  />,
+                                              ]
+                                            : undefined
+                                    }
+                                    rightComponent={
+                                        !isMobile ? (
+                                            hoveredItem === item.id ? (
+                                                <div>
+                                                    <Tooltip title={'Delete'}>
+                                                        <StyledIconButton
+                                                            data-testid="deleteIcon"
+                                                            onClick={(): void => onDeleteItem('Delete', i)}
+                                                            size="large"
+                                                        >
+                                                            <DeleteIcon />
+                                                        </StyledIconButton>
+                                                    </Tooltip>
+                                                    <Tooltip title={'Save'}>
+                                                        <StyledIconButton data-testid="saveIcon" size="large">
+                                                            <BookmarkIcon />
+                                                        </StyledIconButton>
+                                                    </Tooltip>
+                                                    <Tooltip title={'Archive'}>
+                                                        <StyledIconButton data-testid="archiveIcon" size="large">
+                                                            <ArchiveIcon />
+                                                        </StyledIconButton>
+                                                    </Tooltip>
+                                                </div>
+                                            ) : item.hasTag ? (
+                                                <ListItemTag label={'active'} backgroundColor={colors.red[500]} />
+                                            ) : undefined
+                                        ) : (
+                                            <>
+                                                <IconButton
+                                                    data-cy={'action-menu'}
+                                                    onClick={(evt): void => onMenuClick(evt, i)}
+                                                    edge={'end'}
+                                                    size="large"
+                                                >
+                                                    <MoreVertIcon />
+                                                </IconButton>
+                                                <Menu
+                                                    id={'long-menu'}
+                                                    anchorEl={menuPosition}
+                                                    onClose={onMenuClose}
+                                                    open={Boolean(menuPosition)}
+                                                    PaperProps={{
+                                                        style: {
+                                                            minWidth: theme.spacing(19),
+                                                        },
+                                                    }}
+                                                    elevation={6}
+                                                    anchorOrigin={{
+                                                        vertical: 'bottom',
+                                                        horizontal: 'right',
+                                                    }}
+                                                    transformOrigin={{
+                                                        vertical: 'top',
+                                                        horizontal: 'right',
+                                                    }}
+                                                >
+                                                    {options.map((option) => (
+                                                        <MenuItemRoot
+                                                            key={option}
+                                                            onClick={(): void => onDeleteItem(option, activeIndex)}
+                                                        >
+                                                            {option}
+                                                        </MenuItemRoot>
+                                                    ))}
+                                                </Menu>
+                                            </>
+                                        )
+                                    }
+                                    onMouseOver={(): void => setHoveredItem(item.id)}
+                                    onMouseLeave={(): void => setHoveredItem(0)}
+                                />
+                            ))
                         ) : (
                             <InfoListItem
                                 data-testid="infoListItem"
