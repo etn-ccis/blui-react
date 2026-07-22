@@ -190,9 +190,8 @@ const ToolbarMenuRenderer: React.ForwardRefRenderFunction<unknown, ToolbarMenuPr
                                     itemIconColor={group.iconColor}
                                     itemFontColor={group.fontColor}
                                     title={group.title}
-                                    items={group.items.map(
-                                        (item: ToolbarMenuItem, itemIndex: number): NavItem =>
-                                            Object.assign({ itemID: itemIndex.toString() }, item)
+                                    items={group.items.map((item: ToolbarMenuItem, itemIndex: number): NavItem =>
+                                        Object.assign({ itemID: itemIndex.toString() }, item)
                                     )}
                                 />
                             </ToolbarMenuNavGroups>

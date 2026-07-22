@@ -237,19 +237,18 @@ const UserMenuRender: React.ForwardRefRenderFunction<unknown, UserMenuProps> = (
                         itemIconColor={group.iconColor}
                         itemFontColor={group.fontColor}
                         title={group.title}
-                        items={group.items.map(
-                            (item: UserMenuItem, itemIndex: number): NavItem =>
-                                Object.assign({ itemID: itemIndex.toString() }, item, {
-                                    InfoListItemProps: Object.assign(
-                                        {
-                                            iconColor:
-                                                item.itemIconColor ||
-                                                group.iconColor ||
-                                                (theme.vars || theme).palette.text.secondary,
-                                        },
-                                        item.InfoListItemProps
-                                    ),
-                                })
+                        items={group.items.map((item: UserMenuItem, itemIndex: number): NavItem =>
+                            Object.assign({ itemID: itemIndex.toString() }, item, {
+                                InfoListItemProps: Object.assign(
+                                    {
+                                        iconColor:
+                                            item.itemIconColor ||
+                                            group.iconColor ||
+                                            (theme.vars || theme).palette.text.secondary,
+                                    },
+                                    item.InfoListItemProps
+                                ),
+                            })
                         )}
                     />
                 </UserMenuNavGroups>
