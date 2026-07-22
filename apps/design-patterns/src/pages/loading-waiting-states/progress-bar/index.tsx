@@ -253,59 +253,55 @@ export const ProgressBar = (): JSX.Element => {
                     </CardContentStyled>
                 </Card>
                 <PlacementOfList data-cy={'list-content'} disablePadding component="nav">
-                    {fileUploadList.map(
-                        (item): JSX.Element => (
-                            <FileUploadItem key={item.id}>
-                                <Snackbar
-                                    slotProps={{
-                                        root: {
-                                            component: SnackbarRoot,
-                                        },
-                                    }}
-                                    open={item.open}
-                                    autoHideDuration={item.progress === 100 ? 3000 : null}
-                                    onClose={(e, reason): void => markUploadComplete(item.id, item.status, reason)}
-                                    TransitionProps={{
-                                        timeout: 300,
-                                        onExited: (): void => removeFileFromList(item.id),
-                                    }}
-                                    anchorOrigin={
-                                        isMobile
-                                            ? { vertical: 'bottom', horizontal: 'center' }
-                                            : { vertical: 'bottom', horizontal: 'right' }
-                                    }
-                                >
-                                    <div>
-                                        <StyledEngineProvider injectFirst>
-                                            <ThemeProvider theme={createTheme(BLUIThemes.blueDark)}>
-                                                <InfoListItem
-                                                    data-cy={'upload-status-snackbar'}
-                                                    style={{ boxShadow: theme.shadows[6] }}
-                                                    title={item.name}
-                                                    subtitle={item.status}
-                                                    icon={<Description />}
-                                                    backgroundColor={Colors.black[900]}
-                                                    rightComponent={
-                                                        <Button
-                                                            variant="outlined"
-                                                            color="inherit"
-                                                            style={{ width: 80 }}
-                                                            onClick={(): void =>
-                                                                markUploadComplete(item.id, item.status)
-                                                            }
-                                                        >
-                                                            {item.progress === 100 ? 'View' : 'Cancel'}
-                                                        </Button>
-                                                    }
-                                                />
-                                                <LinearProgress variant={'determinate'} value={item.progress} />
-                                            </ThemeProvider>
-                                        </StyledEngineProvider>
-                                    </div>
-                                </Snackbar>
-                            </FileUploadItem>
-                        )
-                    )}
+                    {fileUploadList.map((item): JSX.Element => (
+                        <FileUploadItem key={item.id}>
+                            <Snackbar
+                                slotProps={{
+                                    root: {
+                                        component: SnackbarRoot,
+                                    },
+                                }}
+                                open={item.open}
+                                autoHideDuration={item.progress === 100 ? 3000 : null}
+                                onClose={(e, reason): void => markUploadComplete(item.id, item.status, reason)}
+                                TransitionProps={{
+                                    timeout: 300,
+                                    onExited: (): void => removeFileFromList(item.id),
+                                }}
+                                anchorOrigin={
+                                    isMobile
+                                        ? { vertical: 'bottom', horizontal: 'center' }
+                                        : { vertical: 'bottom', horizontal: 'right' }
+                                }
+                            >
+                                <div>
+                                    <StyledEngineProvider injectFirst>
+                                        <ThemeProvider theme={createTheme(BLUIThemes.blueDark)}>
+                                            <InfoListItem
+                                                data-cy={'upload-status-snackbar'}
+                                                style={{ boxShadow: theme.shadows[6] }}
+                                                title={item.name}
+                                                subtitle={item.status}
+                                                icon={<Description />}
+                                                backgroundColor={Colors.black[900]}
+                                                rightComponent={
+                                                    <Button
+                                                        variant="outlined"
+                                                        color="inherit"
+                                                        style={{ width: 80 }}
+                                                        onClick={(): void => markUploadComplete(item.id, item.status)}
+                                                    >
+                                                        {item.progress === 100 ? 'View' : 'Cancel'}
+                                                    </Button>
+                                                }
+                                            />
+                                            <LinearProgress variant={'determinate'} value={item.progress} />
+                                        </ThemeProvider>
+                                    </StyledEngineProvider>
+                                </div>
+                            </Snackbar>
+                        </FileUploadItem>
+                    ))}
                 </PlacementOfList>
             </Container>
         </div>

@@ -237,21 +237,19 @@ export const ActionListPanelHeader = (): JSX.Element => {
                     <StyledCardHeader title={getCardHeaderTitle()} />
                     <CardContent sx={CardContentSx}>
                         {list.length ? (
-                            list.map(
-                                (item, i): JSX.Element => (
-                                    <InfoListItem
-                                        key={i}
-                                        data-testid="infoListItem"
-                                        sx={RightComponentChevronSx(theme)}
-                                        hidePadding
-                                        ripple
-                                        title={item.name}
-                                        subtitle={item.details}
-                                        divider={list.length - 1 !== i || isMobile ? 'full' : undefined}
-                                        chevron
-                                    />
-                                )
-                            )
+                            list.map((item, i): JSX.Element => (
+                                <InfoListItem
+                                    key={i}
+                                    data-testid="infoListItem"
+                                    sx={RightComponentChevronSx(theme)}
+                                    hidePadding
+                                    ripple
+                                    title={item.name}
+                                    subtitle={item.details}
+                                    divider={list.length - 1 !== i || isMobile ? 'full' : undefined}
+                                    chevron
+                                />
+                            ))
                         ) : (
                             <InfoListItem
                                 data-testid="infoListItem"
