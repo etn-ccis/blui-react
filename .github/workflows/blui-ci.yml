@@ -40,7 +40,8 @@ jobs:
     security_audit:
         name: Security Audit (High/Critical)
         runs-on: ubuntu-latest
-        if: ${{ (github.event_name == 'pull_request' || github.event_name == 'pull_request_target') && github.base_ref == 'dev' }}
+        if: ${{ (github.event_name == 'pull_request' || github.event_name == 'pull_request_target') && (github.base_ref == 'dev' || github.base_ref == 'master') }}
+        continue-on-error: ${{ github.base_ref == 'master' }}
         strategy:
             matrix:
                 node-version: [20.x]
