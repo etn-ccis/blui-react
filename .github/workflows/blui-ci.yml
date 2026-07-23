@@ -121,17 +121,48 @@ jobs:
                   name: workflow-dist
                   path: packages/login-workflow/dist
 
-    publish_login_workflow:
-        name: Publish Workflow
+    publish_login_workflow_dev:
+        name: Publish Workflow (Dev)
         runs-on: ubuntu-latest
-        if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev') }}
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/dev' }}
         needs: [prettier_lint, security_audit, unit_tests_workflow, build_login_workflow]
         strategy:
             matrix:
                 node-version: [20.x]
         env:
             NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-            BRANCH: ${{ github.ref == 'refs/heads/master' && 'master' || 'dev' }}
+            BRANCH: dev
+        steps:
+            - uses: actions/checkout@v5
+            - name: Download dist
+              uses: actions/download-artifact@v4
+              with:
+                  name: workflow-dist
+                  path: packages/login-workflow/dist
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ matrix.node-version }}
+                  registry-url: 'https://registry.npmjs.org'
+            - name: Install pnpm
+              run: npm install -g pnpm
+            - name: Install dependencies
+              run: pnpm install
+              working-directory: packages/login-workflow/dist
+            - name: Publish package
+              run: npm run publish:package -- -b ${{ env.BRANCH }}
+              working-directory: packages/login-workflow/dist
+
+    publish_login_workflow_master:
+        name: Publish Workflow (Master)
+        runs-on: ubuntu-latest
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+        needs: [prettier_lint, unit_tests_workflow, build_login_workflow]
+        strategy:
+            matrix:
+                node-version: [20.x]
+        env:
+            NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+            BRANCH: master
         steps:
             - uses: actions/checkout@v5
             - name: Download dist
@@ -182,17 +213,46 @@ jobs:
               working-directory: packages/themes
               run: pnpm test
 
-    publish_react_theme:
-        name: Publish React Theme
+    publish_react_theme_dev:
+        name: Publish React Theme (Dev)
         runs-on: ubuntu-latest
-        if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev') }}
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/dev' }}
         needs: [build_theme_verify_artifacts, security_audit, prettier_lint]
         strategy:
             matrix:
                 node-version: [20.x]
         env:
             NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-            BRANCH: ${{ github.ref == 'refs/heads/master' && 'master' || 'dev' }}
+            BRANCH: dev
+        steps:
+            - uses: actions/checkout@v5
+            - name: Download dist
+              uses: actions/download-artifact@v4
+              with:
+                  name: theme-dist
+                  path: packages/themes/dist
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ matrix.node-version }}
+                  registry-url: 'https://registry.npmjs.org'
+            - name: Install pnpm
+              run: npm install -g pnpm
+            - run: pnpm install --frozen-lockfile
+            - name: Publish package
+              run: npm run publish:package -- -b ${{env.BRANCH}}
+              working-directory: packages/themes
+
+    publish_react_theme_master:
+        name: Publish React Theme (Master)
+        runs-on: ubuntu-latest
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+        needs: [build_theme_verify_artifacts, prettier_lint]
+        strategy:
+            matrix:
+                node-version: [20.x]
+        env:
+            NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+            BRANCH: master
         steps:
             - uses: actions/checkout@v5
             - name: Download dist
@@ -354,17 +414,47 @@ jobs:
                   if-no-files-found: error
                   path: apps/showcase/dist
 
-    publish-components:
-        name: Publish Component Library
+    publish_components_dev:
+        name: Publish Component Library (Dev)
         runs-on: ubuntu-latest
-        if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev') }}
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/dev' }}
         needs: [build_component_library, test_component_library, build_showcase, security_audit, prettier_lint]
         strategy:
             matrix:
                 node-version: [20.x]
         env:
             NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-            BRANCH: ${{ github.ref == 'refs/heads/master' && 'master' || 'dev' }}
+            BRANCH: dev
+        steps:
+            - uses: actions/checkout@v5
+            - name: Download dist
+              uses: actions/download-artifact@v4
+              with:
+                  name: dist-component-library
+                  path: packages/component-library/dist
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ matrix.node-version }}
+                  registry-url: 'https://registry.npmjs.org'
+            - name: Install pnpm
+              run: npm install -g pnpm
+            - name: Install dependencies
+              run: pnpm install
+            - name: Publish package
+              run: npm run publish:package -- -b ${{env.BRANCH}}
+              working-directory: packages/component-library
+
+    publish_components_master:
+        name: Publish Component Library (Master)
+        runs-on: ubuntu-latest
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+        needs: [build_component_library, test_component_library, build_showcase, prettier_lint]
+        strategy:
+            matrix:
+                node-version: [20.x]
+        env:
+            NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+            BRANCH: master
         steps:
             - uses: actions/checkout@v5
             - name: Download dist
@@ -441,17 +531,42 @@ jobs:
             - run: pnpm build
               working-directory: packages/cli-templates/templates/routing-typescript
 
-    publish_cli_templates:
-        name: Publish CLI Templates
+    publish_cli_templates_dev:
+        name: Publish CLI Templates (Dev)
         runs-on: ubuntu-latest
-        if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev') }}
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/dev' }}
         needs: [prettier_lint, security_audit, unit_test_cli_templates, build_cli_templates]
         strategy:
             matrix:
                 node-version: [20.x]
         env:
             NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-            BRANCH: ${{ github.ref == 'refs/heads/master' && 'master' || 'dev' }}
+            BRANCH: dev
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v5
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ matrix.node-version }}
+                  registry-url: 'https://registry.npmjs.org'
+            - name: Install pnpm
+              run: npm install -g pnpm
+            - run: pnpm install
+            - name: Publish package
+              run: npm run publish:package -- -b ${{env.BRANCH}}
+              working-directory: packages/cli-templates
+
+    publish_cli_templates_master:
+        name: Publish CLI Templates (Master)
+        runs-on: ubuntu-latest
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+        needs: [prettier_lint, unit_test_cli_templates, build_cli_templates]
+        strategy:
+            matrix:
+                node-version: [20.x]
+        env:
+            NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+            BRANCH: master
         steps:
             - name: Checkout
               uses: actions/checkout@v5
@@ -620,7 +735,7 @@ jobs:
         name: Deploy react docs on master
         runs-on: ubuntu-latest
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
-        needs: [Build-Dev-Docs, security_audit]
+        needs: [Build-Dev-Docs]
         env:
             DEV_DEPLOY_TOKEN: ${{secrets.DEV_DEPLOY_TOKEN}}
         steps:
