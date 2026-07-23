@@ -14,6 +14,7 @@ on:
 permissions:
     pull-requests: write
     contents: read
+    checks: write
 
 jobs:
     prettier_lint:
@@ -24,7 +25,7 @@ jobs:
                 node-version: [20.x]
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v5
             - name: Use Node.js ${{ matrix.node-version }}
               uses: actions/setup-node@v4
               with:
@@ -36,6 +37,26 @@ jobs:
             - name: Run Prettier check
               run: pnpm prettier:check
 
+    security_audit:
+        name: Security Audit (High/Critical)
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-version: [20.x]
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v5
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ matrix.node-version }}
+            - name: Install pnpm
+              run: npm install -g pnpm
+            - name: Install dependencies
+              run: pnpm install
+            - name: Audit for high/critical vulnerabilities
+              run: pnpm audit --audit-level high --ignore-registry-errors
+
     unit_tests_workflow:
         name: Workflow Unit Tests
         runs-on: ubuntu-latest
@@ -45,7 +66,7 @@ jobs:
                 node-version: [20.x]
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v5
             - name: Use Node.js
               uses: actions/setup-node@v4
               with:
@@ -82,7 +103,7 @@ jobs:
                 node-version: [20.x]
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v5
             - name: Use Node.js
               uses: actions/setup-node@v4
               with:
@@ -104,7 +125,7 @@ jobs:
         name: Publish Workflow
         runs-on: ubuntu-latest
         if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev') }}
-        needs: [prettier_lint, unit_tests_workflow, build_login_workflow]
+        needs: [prettier_lint, security_audit, unit_tests_workflow, build_login_workflow]
         strategy:
             matrix:
                 node-version: [20.x]
@@ -112,7 +133,7 @@ jobs:
             NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
             BRANCH: ${{ github.ref == 'refs/heads/master' && 'master' || 'dev' }}
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v5
             - name: Download dist
               uses: actions/download-artifact@v4
               with:
@@ -140,7 +161,7 @@ jobs:
                 node-version: [20.x]
 
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v5
             - name: Use Node.js
               uses: actions/setup-node@v4
               with:
@@ -165,7 +186,7 @@ jobs:
         name: Publish React Theme
         runs-on: ubuntu-latest
         if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev') }}
-        needs: [build_theme_verify_artifacts, prettier_lint]
+        needs: [build_theme_verify_artifacts, security_audit, prettier_lint]
         strategy:
             matrix:
                 node-version: [20.x]
@@ -173,7 +194,7 @@ jobs:
             NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
             BRANCH: ${{ github.ref == 'refs/heads/master' && 'master' || 'dev' }}
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v5
             - name: Download dist
               uses: actions/download-artifact@v4
               with:
@@ -199,7 +220,7 @@ jobs:
                 node-version: [20.x]
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v5
             - name: Use Node.js
               uses: actions/setup-node@v4
               with:
@@ -234,7 +255,7 @@ jobs:
                 node-version: [20.x]
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v5
             - name: Use Node.js
               uses: actions/setup-node@v4
               with:
@@ -260,7 +281,7 @@ jobs:
         needs: [build_component_library, prettier_lint]
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v5
             - name: Download the dist folder
               uses: actions/download-artifact@v4
               with:
@@ -278,7 +299,7 @@ jobs:
         needs: [build_component_library, prettier_lint]
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v5
             - name: Download the dist folder
               uses: actions/download-artifact@v4
               with:
@@ -303,7 +324,7 @@ jobs:
                 node-version: [20.x]
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v5
             - name: Use Node.js ${{ matrix.node-version }}
               uses: actions/setup-node@v4
               with:
@@ -326,12 +347,18 @@ jobs:
             - name: Build showcase
               run: pnpm build
               working-directory: apps/showcase
+            - name: Save build
+              uses: actions/upload-artifact@v4
+              with:
+                  name: showcase-dist
+                  if-no-files-found: error
+                  path: apps/showcase/dist
 
     publish-components:
         name: Publish Component Library
         runs-on: ubuntu-latest
         if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev') }}
-        needs: [build_component_library, test_component_library, build_showcase, prettier_lint]
+        needs: [build_component_library, test_component_library, build_showcase, security_audit, prettier_lint]
         strategy:
             matrix:
                 node-version: [20.x]
@@ -339,7 +366,7 @@ jobs:
             NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
             BRANCH: ${{ github.ref == 'refs/heads/master' && 'master' || 'dev' }}
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v5
             - name: Download dist
               uses: actions/download-artifact@v4
               with:
@@ -364,7 +391,7 @@ jobs:
             matrix:
                 node-version: [20.x]
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v5
             - name: Use Node.js ${{ matrix.node-version }}
               uses: actions/setup-node@v4
               with:
@@ -393,7 +420,7 @@ jobs:
                 node-version: [20.x]
 
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v5
             - name: Use Node.js ${{ matrix.node-version }}
               uses: actions/setup-node@v4
               with:
@@ -418,7 +445,7 @@ jobs:
         name: Publish CLI Templates
         runs-on: ubuntu-latest
         if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev') }}
-        needs: [prettier_lint, unit_test_cli_templates, build_cli_templates]
+        needs: [prettier_lint, security_audit, unit_test_cli_templates, build_cli_templates]
         strategy:
             matrix:
                 node-version: [20.x]
@@ -427,7 +454,7 @@ jobs:
             BRANCH: ${{ github.ref == 'refs/heads/master' && 'master' || 'dev' }}
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v5
             - uses: actions/setup-node@v4
               with:
                   node-version: ${{ matrix.node-version }}
@@ -448,7 +475,7 @@ jobs:
                 node-version: [20.x]
 
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v5
             - name: Use Node.js
               uses: actions/setup-node@v4
               with:
@@ -466,7 +493,7 @@ jobs:
         needs: [build_theme_verify_artifacts, build_component_library]
         steps:
             - name: Checkout code
-              uses: actions/checkout@v4
+              uses: actions/checkout@v5
               with:
                   fetch-depth: 0
 
@@ -485,7 +512,7 @@ jobs:
             - name: Setup Node.js
               uses: actions/setup-node@v4
               with:
-                  node-version: ${{ matrix.node-version }}
+                  node-version: '22'
             - name: Install pnpm
               run: npm install -g pnpm
 
@@ -493,8 +520,12 @@ jobs:
               run: pnpm install
 
             - name: Publish to Chromatic
-              working-directory: apps/storybook
-              run: npx chromatic --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+              uses: chromaui/action@latest
+              with:
+                  projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+                  workingDir: apps/storybook
+                  exitZeroOnChanges: true
+                  exitOnceUploaded: true
 
     Build-Dev-Docs:
         runs-on: ubuntu-latest
@@ -510,7 +541,7 @@ jobs:
 
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v5
             - name: Use Node.js ${{ matrix.node-version }}
               uses: actions/setup-node@v4
               with:
@@ -558,7 +589,7 @@ jobs:
             DEV_DEPLOY_TOKEN: ${{secrets.DEV_DEPLOY_TOKEN}}
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v5
             - name: Download build
               uses: actions/download-artifact@v4
               with:
@@ -589,12 +620,12 @@ jobs:
         name: Deploy react docs on master
         runs-on: ubuntu-latest
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
-        needs: Build-Dev-Docs
+        needs: [Build-Dev-Docs, security_audit]
         env:
             DEV_DEPLOY_TOKEN: ${{secrets.DEV_DEPLOY_TOKEN}}
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v5
             - name: Download build
               uses: actions/download-artifact@v4
               with:
@@ -620,3 +651,36 @@ jobs:
                   clean-exclude: |
                       .nojekyll
                       CNAME
+
+    deploy_showcase_preview:
+        name: Deploy Showcase Firebase Preview
+        runs-on: ubuntu-latest
+        if: ${{ (github.event_name == 'pull_request' && github.base_ref == 'dev' && github.event.pull_request.head.repo.full_name == github.repository) || (github.event_name == 'push' && github.ref == 'refs/heads/dev') }}
+        needs: build_showcase
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v5
+            - name: Download build
+              uses: actions/download-artifact@v4
+              with:
+                  name: showcase-dist
+                  path: apps/showcase/dist
+            - name: Deploy to Firebase Hosting (dev - live channel)
+              if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/dev' }}
+              uses: FirebaseExtended/action-hosting-deploy@v0
+              with:
+                  repoToken: ${{ secrets.GITHUB_TOKEN }}
+                  firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BLUI_REACT_SHOWCASE }}
+                  projectId: blui-react-showcase-4d420
+                  entryPoint: apps/showcase
+                  channelId: live
+            - name: Deploy to Firebase Hosting (PR preview)
+              if: ${{ github.event_name == 'pull_request' }}
+              uses: FirebaseExtended/action-hosting-deploy@v0
+              with:
+                  repoToken: ${{ secrets.GITHUB_TOKEN }}
+                  firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BLUI_REACT_SHOWCASE }}
+                  projectId: blui-react-showcase-4d420
+                  entryPoint: apps/showcase
+                  channelId: pr-${{ github.event.pull_request.number }}
+                  expires: 7d

@@ -10,7 +10,7 @@ export default {
             color: BLUIColors.white[500],
             zIndex: 1,
             '&.Mui-active': {
-                color: theme.vars.palette.primary.dark,
+                color: theme.vars.palette.primary.main,
                 '& .MuiStepIcon-text': {
                     fill: WhiteText,
                     fontWeight: 600,

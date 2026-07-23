@@ -2,6 +2,8 @@ import { Components, Theme, CssVarsTheme } from '@mui/material/styles';
 import * as BLUIColors from '@brightlayer-ui/colors';
 import Color from 'color';
 
+const DarkPressed = Color(BLUIColors.highlight).alpha(0.36).string();
+
 export default {
     styleOverrides: {
         root: ({ theme }) => ({
@@ -9,7 +11,10 @@ export default {
             ...theme.applyStyles('dark', {
                 textTransform: 'none',
                 '&:hover': {
-                    backgroundColor: BLUIColors.black[400],
+                    backgroundColor: theme.vars.palette.action.hover,
+                },
+                '&:active': {
+                    backgroundColor: DarkPressed,
                 },
             }),
         }),
@@ -28,17 +33,23 @@ export default {
         contained: ({ theme }) => ({
             backgroundColor: theme.vars.palette.background.paper,
             color: theme.vars.palette.text.primary,
+            boxShadow: theme.vars.palette.shadows.level1,
             '& .MuiButton-disableElevation:not(.MuiButton-containedPrimary):not(.MuiButton-containedSecondary)': {
                 backgroundColor: BLUIColors.white[500],
                 '&:hover': {
-                    backgroundColor: BLUIColors.white[300],
+                    backgroundColor: theme.vars.palette.action.hover,
                 },
                 '&.Mui-disabled': {
                     borderWidth: 0,
                 },
             },
             '&:hover': {
-                backgroundColor: Color(BLUIColors.black[500]).alpha(0.05).string(),
+                boxShadow: theme.vars.palette.shadows.level2,
+                backgroundColor: theme.vars.palette.action.hover,
+            },
+            '&:active': {
+                backgroundColor: BLUIColors.blue[100],
+                boxShadow: theme.vars.palette.shadows.level1,
             },
             '&.Mui-disabled': {
                 backgroundColor: theme.vars.palette.background.paper,
@@ -48,7 +59,10 @@ export default {
                 backgroundColor: BLUIColors.black[500],
                 color: BLUIColors.white[50],
                 '&:hover': {
-                    backgroundColor: BLUIColors.black[400],
+                    backgroundColor: theme.vars.palette.action.hover,
+                },
+                '&:active': {
+                    backgroundColor: DarkPressed,
                 },
                 '&.Mui-disabled': {
                     backgroundColor: theme.vars.palette.action.disabledBackground,
@@ -62,6 +76,9 @@ export default {
             '&:hover': {
                 backgroundColor: BLUIColors.blue[300],
             },
+            '&:active': {
+                backgroundColor: BLUIColors.blue[700],
+            },
             '&.Mui-disabled': {
                 backgroundColor: theme.vars.palette.primary.light,
                 borderWidth: 0,
@@ -72,6 +89,9 @@ export default {
                 color: BLUIColors.white[50],
                 '&:hover': {
                     backgroundColor: BLUIColors.blue[300],
+                },
+                '&:active': {
+                    backgroundColor: BLUIColors.blue[200],
                 },
                 '&.Mui-disabled': {
                     borderWidth: 0,
@@ -86,6 +106,9 @@ export default {
             '&:hover': {
                 backgroundColor: BLUIColors.lightBlue[300],
             },
+            '&:active': {
+                backgroundColor: BLUIColors.lightBlue[500],
+            },
             '&.Mui-disabled': {
                 backgroundColor: theme.vars.palette.primary.light,
                 borderWidth: 0,
@@ -97,6 +120,9 @@ export default {
                 '&:hover': {
                     backgroundColor: BLUIColors.lightBlue[300],
                 },
+                '&:active': {
+                    backgroundColor: BLUIColors.lightBlue[200],
+                },
                 '&.Mui-disabled': {
                     backgroundColor: theme.vars.palette.action.disabledBackground,
                     color: BLUIColors.black[400],
@@ -105,7 +131,10 @@ export default {
         }),
         outlined: ({ theme }) => ({
             '&:hover': {
-                backgroundColor: Color(BLUIColors.black[500]).alpha(0.05).string(),
+                backgroundColor: theme.vars.palette.action.hover,
+            },
+            '&:active': {
+                backgroundColor: BLUIColors.blue[100],
             },
             '&.Mui-disabled': {
                 backgroundColor: theme.vars.palette.background.paper,
@@ -113,7 +142,10 @@ export default {
             },
             ...theme.applyStyles('dark', {
                 '&:hover': {
-                    backgroundColor: Color(BLUIColors.black[50]).alpha(0.1).string(),
+                    backgroundColor: theme.vars.palette.action.hover,
+                },
+                '&:active': {
+                    backgroundColor: DarkPressed,
                 },
                 '&.Mui-disabled': {
                     borderColor: Color(BLUIColors.black[300]).alpha(0.36).string(),
@@ -125,7 +157,10 @@ export default {
         outlinedInherit: ({ theme }) => ({
             borderColor: theme.vars.palette.divider,
             '&:hover': {
-                backgroundColor: Color(BLUIColors.black[500]).alpha(0.05).string(),
+                backgroundColor: theme.vars.palette.action.hover,
+            },
+            '&:active': {
+                backgroundColor: BLUIColors.blue[50],
             },
             '&.Mui-disabled': {
                 backgroundColor: theme.vars.palette.background.paper,
@@ -134,7 +169,10 @@ export default {
             ...theme.applyStyles('dark', {
                 borderColor: BLUIColors.black[200],
                 '&:hover': {
-                    backgroundColor: Color(BLUIColors.black[50]).alpha(0.1).string(),
+                    backgroundColor: theme.vars.palette.action.hover,
+                },
+                '&:active': {
+                    backgroundColor: DarkPressed,
                 },
                 '&.Mui-disabled': {
                     borderColor: Color(BLUIColors.black[300]).alpha(0.36).string(),
@@ -149,12 +187,18 @@ export default {
                 borderColor: Color(BLUIColors.black[500]).alpha(0.12).string(),
             },
             '&:hover': {
-                backgroundColor: `rgba(${theme.vars.palette.primary.main} / 0.05)`,
+                backgroundColor: theme.vars.palette.action.hover,
+            },
+            '&:active': {
+                backgroundColor: BLUIColors.blue[100],
             },
             ...theme.applyStyles('dark', {
                 borderColor: theme.vars.palette.primary.main,
                 '&:hover': {
-                    backgroundColor: `rgba(${theme.vars.palette.primary.dark} / 0.2)`,
+                    backgroundColor: theme.vars.palette.action.hover,
+                },
+                '&:active': {
+                    backgroundColor: DarkPressed,
                 },
                 '&.Mui-disabled': {
                     borderColor: Color(BLUIColors.black[300]).alpha(0.36).string(),
@@ -169,13 +213,19 @@ export default {
                 borderColor: Color(BLUIColors.black[500]).alpha(0.12).string(),
             },
             '&:hover': {
-                backgroundColor: `rgba(${theme.vars.palette.secondary.main} / 0.05)`,
+                backgroundColor: theme.vars.palette.action.hover,
+            },
+            '&:active': {
+                backgroundColor: BLUIColors.blue[100],
             },
             ...theme.applyStyles('dark', {
                 '&:not(.Mui-disabled)': {
                     borderColor: theme.vars.palette.secondary.main,
                     '&:hover': {
-                        backgroundColor: `rgba(${theme.vars.palette.secondary.dark} / 0.2)`,
+                        backgroundColor: theme.vars.palette.action.hover,
+                    },
+                    '&:active': {
+                        backgroundColor: DarkPressed,
                     },
                 },
                 '&.Mui-disabled': {
@@ -190,7 +240,10 @@ export default {
                 color: theme.vars.palette.action.disabled,
             },
             '&:hover': {
-                backgroundColor: Color(BLUIColors.black[500]).alpha(0.05).string(),
+                backgroundColor: theme.vars.palette.action.hover,
+            },
+            '&:active': {
+                backgroundColor: BLUIColors.blue[100],
             },
             ...theme.applyStyles('dark', {
                 '&.Mui-disabled': {
@@ -199,25 +252,40 @@ export default {
                 '&:hover': {
                     backgroundColor: theme.vars.palette.action.hover,
                 },
+                '&:active': {
+                    backgroundColor: DarkPressed,
+                },
             }),
         }),
         textPrimary: ({ theme }) => ({
             '&:hover': {
-                backgroundColor: `rgba(${theme.vars.palette.primary.main} / 0.05)`,
+                backgroundColor: theme.vars.palette.action.hover,
+            },
+            '&:active': {
+                backgroundColor: BLUIColors.blue[100],
             },
             ...theme.applyStyles('dark', {
                 '&:hover': {
-                    backgroundColor: `rgba(${theme.vars.palette.primary.dark} / 0.2)`,
+                    backgroundColor: theme.vars.palette.action.hover,
+                },
+                '&:active': {
+                    backgroundColor: DarkPressed,
                 },
             }),
         }),
         textSecondary: ({ theme }) => ({
             '&:hover': {
-                backgroundColor: `rgba(${theme.vars.palette.secondary.main} / 0.05)`,
+                backgroundColor: theme.vars.palette.action.hover,
+            },
+            '&:active': {
+                backgroundColor: BLUIColors.blue[100],
             },
             ...theme.applyStyles('dark', {
                 '&:hover': {
-                    backgroundColor: `rgba(${theme.vars.palette.secondary.dark} / 0.2)`,
+                    backgroundColor: theme.vars.palette.action.hover,
+                },
+                '&:active': {
+                    backgroundColor: DarkPressed,
                 },
             }),
         }),

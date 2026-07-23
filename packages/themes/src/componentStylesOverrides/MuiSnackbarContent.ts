@@ -6,6 +6,7 @@ export default {
         root: ({ theme }) => ({
             backgroundColor: BLUIColors.black[900],
             color: BLUIColors.black[50],
+            boxShadow: theme.vars.palette.shadows.level2,
             '& .MuiButton-textPrimary': {
                 color: BLUIColors.blue[200],
             },
