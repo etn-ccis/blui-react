@@ -125,7 +125,7 @@ jobs:
         name: Publish Workflow
         runs-on: ubuntu-latest
         if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev') }}
-        needs: [prettier_lint, unit_tests_workflow, build_login_workflow]
+        needs: [prettier_lint, security_audit, unit_tests_workflow, build_login_workflow]
         strategy:
             matrix:
                 node-version: [20.x]
@@ -186,7 +186,7 @@ jobs:
         name: Publish React Theme
         runs-on: ubuntu-latest
         if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev') }}
-        needs: [build_theme_verify_artifacts, prettier_lint]
+        needs: [build_theme_verify_artifacts, security_audit, prettier_lint]
         strategy:
             matrix:
                 node-version: [20.x]
@@ -358,7 +358,7 @@ jobs:
         name: Publish Component Library
         runs-on: ubuntu-latest
         if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev') }}
-        needs: [build_component_library, test_component_library, build_showcase, prettier_lint]
+        needs: [build_component_library, test_component_library, build_showcase, security_audit, prettier_lint]
         strategy:
             matrix:
                 node-version: [20.x]
@@ -445,7 +445,7 @@ jobs:
         name: Publish CLI Templates
         runs-on: ubuntu-latest
         if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev') }}
-        needs: [prettier_lint, unit_test_cli_templates, build_cli_templates]
+        needs: [prettier_lint, security_audit, unit_test_cli_templates, build_cli_templates]
         strategy:
             matrix:
                 node-version: [20.x]
@@ -620,7 +620,7 @@ jobs:
         name: Deploy react docs on master
         runs-on: ubuntu-latest
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
-        needs: [Build-Dev-Docs]
+        needs: [Build-Dev-Docs, security_audit]
         env:
             DEV_DEPLOY_TOKEN: ${{secrets.DEV_DEPLOY_TOKEN}}
         steps:
