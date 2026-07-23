@@ -1902,9 +1902,6 @@ importers:
       '@brightlayer-ui/prettier-config':
         specifier: ^1.0.3
         version: 1.0.3(prettier@2.8.8)
-      '@brightlayer-ui/react-components':
-        specifier: workspace:^
-        version: 'link:'
       '@brightlayer-ui/react-themes':
         specifier: workspace:^
         version: link:../themes
