@@ -14,7 +14,7 @@
     },
     "eslintConfig": {},
     "dependencies": {
-        "@brightlayer-ui/colors": "^3.1.1",
+        "@brightlayer-ui/colors": "^3.2.0",
         "@brightlayer-ui/icons-mui": "^4.0.0",
         "@brightlayer-ui/react-auth-workflow": "^7.0.2",
         "@brightlayer-ui/react-components": "^8.0.1",

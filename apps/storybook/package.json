@@ -16,7 +16,7 @@
         "react-dom": "^19.1.0"
     },
     "devDependencies": {
-        "@brightlayer-ui/colors": "^3.2.0-alpha.3",
+        "@brightlayer-ui/colors": "^3.2.0",
         "@brightlayer-ui/react-components": "workspace:^",
         "@brightlayer-ui/react-themes": "workspace:^",
         "@eslint/js": "^9.25.0",

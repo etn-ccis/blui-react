@@ -32,7 +32,7 @@
     },
     "dependencies": {
         "@babel/core": "^7.16.0",
-        "@brightlayer-ui/colors": "^3.2.0-alpha.3",
+        "@brightlayer-ui/colors": "^3.2.0",
         "@brightlayer-ui/icons-mui": "^3.6.0",
         "@brightlayer-ui/react-auth-workflow": "workspace:^",
         "@brightlayer-ui/react-components": "workspace:^",
