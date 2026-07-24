@@ -8,12 +8,12 @@ import {
 } from 'material-react-table';
 import { type SxProps, type Theme } from '@mui/material';
 
-export type EditableTableData = Record<string, any>;
+export type DataTableData = Record<string, any>;
 
 /**
  * Parameters passed to per-cell callbacks such as `cellStyle`.
  */
-export type CellStyleParams<TData extends EditableTableData> = {
+export type CellStyleParams<TData extends DataTableData> = {
     cell: MRT_Cell<TData>;
     row: MRT_Row<TData>;
     column: MRT_Column<TData>;
@@ -21,7 +21,7 @@ export type CellStyleParams<TData extends EditableTableData> = {
 };
 
 /**
- * Extended column definition for `EditableTable`.
+ * Extended column definition for `DataTable`.
  *
  * Extends MRT's `MRT_ColumnDef` with convenience props for styling and custom
  * cell rendering. All standard MRT column options (including `Cell` for fully
@@ -53,7 +53,7 @@ export type CellStyleParams<TData extends EditableTableData> = {
  * }
  * ```
  */
-export type EditableTableColumnDef<TData extends EditableTableData> = MRT_ColumnDef<TData> & {
+export type DataTableColumnDef<TData extends DataTableData> = MRT_ColumnDef<TData> & {
     /**
      * Apply conditional MUI `sx` styles to individual cells based on cell value
      * or row data. Merged on top of any styles provided via `muiTableBodyCellProps`.
@@ -78,17 +78,51 @@ export type EditableTableColumnDef<TData extends EditableTableData> = MRT_Column
      * ```
      */
     cellStyle?: (params: CellStyleParams<TData>) => SxProps<Theme>;
+
+    /**
+     * Horizontal alignment of the column header text.
+     *
+     * Defaults to `'left'`. Set to `'left'` or `'right'` to override per column.
+     */
+    headerAlign?: 'left' | 'center' | 'right';
+
+    /**
+     * Type of cell to render.
+     *
+     * - `'text'`: Text input (default)
+     * - `'number'`: Number input with right alignment
+     * - `'select'`: Dropdown with filterable autocomplete
+     * - `'binary'`: Checkbox with 0/1 text display
+     *
+     * @default 'text'
+     *
+     * @example
+     * ```tsx
+     * { accessorKey: 'age', header: 'Age', cellType: 'number' }
+     * { accessorKey: 'category', header: 'Category', cellType: 'select', editSelectOptions: ['A', 'B', 'C'] }
+     * { accessorKey: 'isActive', header: 'Active', cellType: 'binary' }
+     * ```
+     */
+    cellType?: 'text' | 'number' | 'select' | 'binary';
+
+    /**
+     * When `true`, a red asterisk (*) is appended to the column header label to
+     * indicate this field is required when editing.
+     *
+     * @default false
+     */
+    required?: boolean;
 };
 
-export type EditableTableProps<TData extends EditableTableData> = {
+export type DataTableProps<TData extends DataTableData> = {
     /**
      * Column definitions for the table.
      *
-     * Use `EditableTableColumnDef<TData>` to access the `cellStyle` convenience
+     * Use `DataTableColumnDef<TData>` to access the `cellStyle` convenience
      * prop and `Cell` for fully custom cell rendering. All standard MRT column
      * options are supported.
      */
-    columns: Array<EditableTableColumnDef<TData>>;
+    columns: Array<DataTableColumnDef<TData>>;
 
     /** Initial data for the table */
     data?: TData[];
@@ -99,11 +133,12 @@ export type EditableTableProps<TData extends EditableTableData> = {
      */
     enableCreate?: boolean;
 
-    /** Whether to enable editing rows
+    /** Whether to allow the table to enter edit mode.
+     * When false, no cell or row editing is possible.
      *
      * Default: true
      */
-    enableEdit?: boolean;
+    editable?: boolean;
 
     /** Whether to enable deleting rows
      *
@@ -195,6 +230,24 @@ export type EditableTableProps<TData extends EditableTableData> = {
      */
     enableClickToCopy?: boolean | 'context-menu';
 
+    /** Whether to enable column sorting
+     *
+     * Default: false
+     */
+    enableSorting?: boolean;
+
+    /** Whether to enable column filters
+     *
+     * Default: false
+     */
+    enableColumnFilters?: boolean;
+
+    /** Whether to enable column actions menu (hide/show columns, etc.)
+     *
+     * Default: false
+     */
+    enableColumnActions?: boolean;
+
     /** Additional options to pass to material-react-table */
     tableOptions?: Partial<MRT_TableOptions<TData>>;
 
@@ -207,9 +260,9 @@ export type EditableTableProps<TData extends EditableTableData> = {
     /** Custom confirmation message for delete action */
     deleteConfirmMessage?: string | ((row: TData) => string);
 
-    /** Minimum height for the table container
+    /** Minimum height for the table container.
      *
-     * Default: '500px'
+     * Default: '100px'
      */
     minHeight?: string | number;
 
@@ -236,27 +289,27 @@ export type EditableTableProps<TData extends EditableTableData> = {
      *
      * @example
      * ```tsx
-     * const [tableState, setTableState] = useState<EditableTableState | null>(null);
+     * const [tableState, setTableState] = useState<DataTableState | null>(null);
      *
      * <MyToolbar
      *   canUndo={tableState?.canUndo}
      *   onUndo={tableState?.undo}
      *   onSave={tableState?.save}
      * />
-     * <EditableTable enableUndoRedo onStateChange={setTableState} ... />
+     * <DataTable enableUndoRedo onStateChange={setTableState} ... />
      * ```
      */
-    onStateChange?: (state: EditableTableState) => void;
+    onStateChange?: (state: DataTableState) => void;
 };
 
-export type ValidationErrors<TData extends EditableTableData> = Partial<Record<keyof TData, string | undefined>>;
+export type ValidationErrors<TData extends DataTableData> = Partial<Record<keyof TData, string | undefined>>;
 
 /**
  * State snapshot passed to `onStateChange`.
  * Contains both reactive flags and stable action callbacks so the parent can
  * render and wire up its own undo/redo/save controls.
  */
-export type EditableTableState = {
+export type DataTableState = {
     /** Whether there is at least one action that can be undone */
     canUndo: boolean;
     /** Whether there is at least one action that can be redone */
@@ -265,6 +318,14 @@ export type EditableTableState = {
     hasPendingChanges: boolean;
     /** Whether any cell currently has a validation error */
     hasValidationErrors: boolean;
+    /**
+     * Whether saving is currently permitted.
+     * `true` when there is at least one meaningful pending change AND every pending row
+     * passes `onValidate` (all required fields are filled and error-free).
+     * Use this flag to gate the Save button instead of combining `hasPendingChanges`
+     * and `hasValidationErrors` manually.
+     */
+    canSave: boolean;
     /** Undo the last recorded action */
     undo: () => void;
     /** Redo the last undone action */

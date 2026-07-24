@@ -1,4 +1,5 @@
-import { EditableTableColumnDef, EditableTableData } from '../types';
+import * as BLUIColors from '@brightlayer-ui/colors';
+import { DataTableColumnDef, DataTableData } from '../types';
 
 /**
  * Returns a resolver function for `muiTableBodyCellProps` that merges:
@@ -8,15 +9,9 @@ import { EditableTableColumnDef, EditableTableData } from '../types';
  * - the column's optional `cellStyle` override (highest priority)
  */
 export const resolveBodyCellProps =
-    <TData extends EditableTableData>(
-        column: EditableTableColumnDef<TData>,
-        tableData: TData[]
-    ): ((cellParams: any) => any) =>
+    <TData extends DataTableData>(column: DataTableColumnDef<TData>): ((cellParams: any) => any) =>
     (cellParams: any): any => {
-        const isNumber =
-            column.accessorKey &&
-            tableData.length > 0 &&
-            typeof tableData[0][column.accessorKey as keyof TData] === 'number';
+        const isNumber = column.cellType === 'number';
 
         const originalProps =
             typeof column.muiTableBodyCellProps === 'function'
@@ -36,9 +31,16 @@ export const resolveBodyCellProps =
             const defaultSx = (t: any): Record<string, unknown> => ({
                 px: 2,
                 height: 52,
-                backgroundColor: 'background.paper',
-                borderRight: `1px solid ${t.palette.divider}`,
-                borderBottom: `1px solid ${t.palette.divider}`,
+                backgroundColor: `${t.vars?.palette?.background?.default ?? t.palette.background.default} !important`,
+                ...(t.applyStyles?.('dark', {
+                    backgroundColor: `${BLUIColors.black[800]} !important`,
+                }) ?? {}),
+                borderRight: `1px solid ${t.vars?.palette?.divider ?? t.palette.divider}`,
+                borderBottom: `1px solid ${t.vars?.palette?.divider ?? t.palette.divider}`,
+                fontSize: '14px',
+                fontStyle: 'normal',
+                fontWeight: 400,
+                lineHeight: 'normal',
             });
             if (typeof originalProps.sx === 'function') {
                 return (t: any): Record<string, unknown> => ({
@@ -66,20 +68,40 @@ export const resolveBodyCellProps =
  * center-alignment and default padding with any consumer-supplied props.
  */
 export const resolveHeadCellProps =
-    <TData extends EditableTableData>(column: EditableTableColumnDef<TData>): ((headParams: any) => any) =>
+    <TData extends DataTableData>(column: DataTableColumnDef<TData>): ((headParams: any) => any) =>
     (headParams: any): any => {
         const originalProps =
             typeof column.muiTableHeadCellProps === 'function'
                 ? (column.muiTableHeadCellProps as (params: any) => any)(headParams)
                 : (column.muiTableHeadCellProps ?? {});
 
+        const headerAlign = column.headerAlign ?? (column.cellType === 'number' ? 'right' : 'left');
+
         return {
             ...originalProps,
             sx: (t: any): Record<string, unknown> => ({
                 px: 2,
-                backgroundColor: 'background.paper',
-                borderRight: `1px solid ${t.palette.divider}`,
-                borderBottom: `1px solid ${t.palette.divider}`,
+                backgroundColor: `${t.vars?.palette?.background?.paper ?? t.palette.background.paper} !important`,
+                borderTop: `1px solid ${t.vars?.palette?.divider ?? t.palette.divider}`,
+                borderRight: `1px solid ${t.vars?.palette?.divider ?? t.palette.divider}`,
+                borderBottom: `1px solid ${BLUIColors.gray[500]}`,
+                ...(t.applyStyles?.('dark', {
+                    borderBottom: `1px solid ${BLUIColors.black[200]}`,
+                }) ?? {}),
+                fontFamily: '"Open Sans"',
+                fontSize: '14px',
+                fontStyle: 'normal',
+                fontWeight: 600,
+                lineHeight: 'normal',
+                '& .Mui-TableHeadCell-Content': {
+                    justifyContent:
+                        headerAlign === 'right' ? 'flex-end' : headerAlign === 'left' ? 'flex-start' : 'center',
+                },
+                '& .Mui-TableHeadCell-Content-Labels': {
+                    justifyContent:
+                        headerAlign === 'right' ? 'flex-end' : headerAlign === 'left' ? 'flex-start' : 'center',
+                    flex: 1,
+                },
                 ...(typeof originalProps.sx === 'function' ? originalProps.sx(t) : (originalProps.sx ?? {})),
             }),
         };

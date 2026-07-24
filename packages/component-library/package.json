@@ -1,6 +1,6 @@
 {
     "name": "@brightlayer-ui/react-components",
-    "version": "8.0.4",
+    "version": "8.0.5",
     "type": "module",
     "description": "React components for Brightlayer UI applications",
     "main": "index.js",
@@ -16,7 +16,8 @@
         "coverage": "pnpm test --coverage --watchAll=false",
         "test:artifacts": "cd scripts && bash ./buildTest.sh && cd ..",
         "publish:package": "cd dist && rm -f *.tgz && set npm_config_yes=true && npx -p @brightlayer-ui/publish blui-publish",
-        "tag:package": "npx -p @brightlayer-ui/tag blui-tag -s -blui-react-components"
+        "tag:package": "npx -p @brightlayer-ui/tag blui-tag -s -blui-react-components",
+        "figma:publish": "pnpm exec figma connect publish"
     },
     "prettier": "@brightlayer-ui/prettier-config",
     "dependencies": {
@@ -36,10 +37,10 @@
         "@babel/preset-typescript": "^7.27.1",
         "@brightlayer-ui/eslint-config": "^3.0.1",
         "@brightlayer-ui/prettier-config": "^1.0.3",
-        "@brightlayer-ui/react-components": "workspace:^",
         "@brightlayer-ui/react-themes": "workspace:^",
         "@emotion/react": "^11.14.0",
         "@emotion/styled": "^11.14.1",
+        "@figma/code-connect": "^1.4.4",
         "@mui/icons-material": "^7.3.5",
         "@mui/material": "^7.3.5",
         "@mui/system": "^7.1.1",
@@ -72,7 +73,7 @@
         "typescript": "^5.8.3"
     },
     "peerDependencies": {
-        "@brightlayer-ui/colors": "^3.1.0",
+        "@brightlayer-ui/colors": "^3.2.0",
         "@emotion/react": "^11.7.1",
         "@emotion/styled": "^11.6.0",
         "@mui/icons-material": "^7.1.1",
