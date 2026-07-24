@@ -4,8 +4,9 @@
 
 ### Added
 
-- Editable Table
-- Horizontal Stacked Bar component.
+- Data Table component
+- Horizontal Stacked Bar component
+- FileDragUpload component
 
 # v8.0.4 (April 21, 2026)
 
