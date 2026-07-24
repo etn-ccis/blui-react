@@ -102,7 +102,7 @@ importers:
   apps/demo:
     dependencies:
       '@brightlayer-ui/colors':
-        specifier: ^3.2.0-alpha.3
+        specifier: ^3.2.0
         version: 3.2.0
       '@brightlayer-ui/icons-mui':
         specifier: ^3.6.0
@@ -211,7 +211,7 @@ importers:
   apps/design-patterns:
     dependencies:
       '@brightlayer-ui/colors':
-        specifier: ^3.2.0-alpha.3
+        specifier: ^3.2.0
         version: 3.2.0
       '@brightlayer-ui/icons-mui':
         specifier: ^4.0.0
@@ -628,7 +628,7 @@ importers:
         version: 19.2.8(react@19.2.8)
     devDependencies:
       '@brightlayer-ui/colors':
-        specifier: ^3.2.0-alpha.3
+        specifier: ^3.2.0
         version: 3.2.0
       '@brightlayer-ui/react-components':
         specifier: workspace:^
