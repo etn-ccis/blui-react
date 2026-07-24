@@ -1,5 +1,12 @@
 # Changelog
 
+# v8.0.5 (July 24, 2026)
+
+### Added
+
+- Editable Table
+- Horizontal Stacked Bar component.
+
 # v8.0.4 (April 21, 2026)
 
 ### Removed
