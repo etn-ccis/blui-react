@@ -1255,8 +1255,8 @@ importers:
   docs:
     dependencies:
       '@brightlayer-ui/colors':
-        specifier: ^3.1.1
-        version: 3.1.1
+        specifier: ^3.2.0
+        version: 3.2.0
       '@brightlayer-ui/icons':
         specifier: ^2.3.0
         version: 2.5.0
@@ -1350,9 +1350,6 @@ importers:
       typewriter-effect:
         specifier: ^2.22.0
         version: 2.22.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      vite-plugin-prismjs:
-        specifier: ^0.0.11
-        version: 0.0.11(prismjs@1.30.0)
       web-vitals:
         specifier: ^2.1.4
         version: 2.1.4
@@ -7107,11 +7104,6 @@ packages:
     resolution: {integrity: sha512-M762rNHfSF1EV3SLtnCJXFoQbbIIz0OyRwnCmV0KPC7qosSfCO0QLTSuJX3ayAebubhE6oYBAYPrBA5ljowaZg==}
     peerDependencies:
       '@babel/core': ^7.4.0 || ^8.0.0-0 <8.0.0
-
-  babel-plugin-prismjs@2.1.0:
-    resolution: {integrity: sha512-ehzSKYfeAz4U78zi/sfwsjDPlq0LvDKxNefcZTJ/iKBu+plsHsLqZhUeGf1+82LAcA35UZGbU6ksEx2Utphc/g==}
-    peerDependencies:
-      prismjs: ^1.18.0
 
   babel-plugin-transform-react-remove-prop-types@0.4.24:
     resolution: {integrity: sha512-eqj0hVcJUR57/Ug2zE1Yswsw4LhuqqHhD+8v120T1cl3kjg76QwtyBrdIk4WVwK+lAhBJVYCd/v+4nc4y+8JsA==}
@@ -14243,10 +14235,6 @@ packages:
       vite:
         optional: true
 
-  vite-plugin-prismjs@0.0.11:
-    resolution: {integrity: sha512-20NBQxg/zH+3FTrlU6BQTob720xkuXNYtrx7psAQ4E6pMcRDeLEK77QU9kXURU587+f2To7ASH1JVTGbXVV/vQ==}
-    engines: {node: '>=12.0.0'}
-
   vite-tsconfig-paths@4.3.2:
     resolution: {integrity: sha512-0Vd/a6po6Q+86rPlntHye7F31zA2URZMbH8M3saAZ/xR9QoGN/L21bxEGfXdWmFdNkqPpRdxFT7nmNe12e9/uA==}
     peerDependencies:
@@ -16128,7 +16116,7 @@ snapshots:
 
   '@brightlayer-ui/react-themes@9.0.1(@mui/material@7.3.10(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))':
     dependencies:
-      '@brightlayer-ui/colors': 3.1.1
+      '@brightlayer-ui/colors': 3.2.0
       '@brightlayer-ui/types': 2.0.0
       '@fontsource/open-sans': 5.2.7
       '@mui/material': 7.3.10(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -20994,10 +20982,6 @@ snapshots:
       '@babel/helper-define-polyfill-provider': 0.6.8(@babel/core@7.29.0)
     transitivePeerDependencies:
       - supports-color
-
-  babel-plugin-prismjs@2.1.0(prismjs@1.30.0):
-    dependencies:
-      prismjs: 1.30.0
 
   babel-plugin-transform-react-remove-prop-types@0.4.24: {}
 
@@ -30697,14 +30681,6 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
       - rollup
-      - supports-color
-
-  vite-plugin-prismjs@0.0.11(prismjs@1.30.0):
-    dependencies:
-      '@babel/core': 7.29.0
-      babel-plugin-prismjs: 2.1.0(prismjs@1.30.0)
-    transitivePeerDependencies:
-      - prismjs
       - supports-color
 
   vite-tsconfig-paths@4.3.2(typescript@5.9.3)(vite@4.5.14(@types/node@22.13.0)(terser@5.46.1)):

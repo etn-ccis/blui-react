@@ -1,0 +1,46 @@
+import {
+    BasicDataTable,
+    ReadOnlyDataTable,
+    RowEditingDataTable,
+    CustomCellsDataTable,
+    ExternalToolbarDataTable,
+} from '../examples';
+
+## Data Table 
+
+The `<DataTable>` component provides inline cell editing with built-in validation, CRUD operations, and an unsaved-change indicator (blue dot) per cell.
+
+<BasicDataTable />
+
+## Read-Only Mode
+
+Use `editable={false}` when you want the table in read-only mode. This is useful for dashboards and detail pages where users should be able to view data but not modify rows.
+
+<ReadOnlyDataTable />
+
+## Row Editing Mode
+
+Use `editDisplayMode="row"` when you want full-row editing controls instead of single-cell editing. This mode is useful when edits should be reviewed and committed as a row-level action.
+
+<RowEditingDataTable />
+
+
+
+## Custom Cells and Cell Styling
+
+Use `Cell` to render any React element in a cell (e.g. a progress bar). Use `cellStyle` for conditional per-row MUI `sx` styles. Use `editVariant="select"` with `editSelectOptions` for dropdown editing.
+
+<CustomCellsDataTable />
+
+## External Toolbar with Save, Undo, Redo and Reset
+
+Use `enableUndoRedo` together with `onStateChange` to receive a `DataTableState` snapshot. Wire the stable callbacks (`undo`, `redo`, `save`, `reset`) and reactive flags (`canUndo`, `canRedo`, `hasPendingChanges`, `hasValidationErrors`, `canSave`) to your own toolbar controls placed anywhere in the page.
+
+When `save` or `reset` is triggered from an external toolbar, `DataTable` first closes any actively edited cell so the latest in-progress value is committed before the action runs.
+
+Notes shown in this example:
+- `canSave` may be `false` even when there are pending changes if validation fails on any pending row.
+- A newly added empty row does not make `canSave` true until at least one field is changed.
+- `Ctrl/Cmd+Z`, `Ctrl/Cmd+Shift+Z`, and `Ctrl/Cmd+Y` keyboard shortcuts are active when `enableUndoRedo` is enabled.
+
+<ExternalToolbarDataTable />
