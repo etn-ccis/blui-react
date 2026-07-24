@@ -1,6 +1,6 @@
 {
     "name": "@brightlayer-ui/react-components",
-    "version": "8.0.4",
+    "version": "8.0.5-alpha.0",
     "type": "module",
     "description": "React components for Brightlayer UI applications",
     "main": "index.js",
@@ -37,7 +37,6 @@
         "@babel/preset-typescript": "^7.27.1",
         "@brightlayer-ui/eslint-config": "^3.0.1",
         "@brightlayer-ui/prettier-config": "^1.0.3",
-        "@brightlayer-ui/react-components": "workspace:^",
         "@brightlayer-ui/react-themes": "workspace:^",
         "@emotion/react": "^11.14.0",
         "@emotion/styled": "^11.14.1",
