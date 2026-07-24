@@ -1857,7 +1857,7 @@ importers:
   packages/component-library:
     dependencies:
       '@brightlayer-ui/colors':
-        specifier: ^3.1.0
+        specifier: ^3.2.0
         version: 3.2.0
       '@emotion/css':
         specifier: ^11.13.5
