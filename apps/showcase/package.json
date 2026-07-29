@@ -18,9 +18,9 @@
     },
     "dependencies": {
         "@brightlayer-ui/colors": "^3.2.0",
-        "@brightlayer-ui/icons-mui": "^3.6.0",
+        "@brightlayer-ui/icons-mui": "^4.3.0",
         "@brightlayer-ui/react-components": "workspace:^",
-        "@brightlayer-ui/react-progress-icons": "^2.1.1",
+        "@brightlayer-ui/react-progress-icons": "^2.2.1",
         "@brightlayer-ui/react-themes": "workspace:^",
         "@date-io/date-fns": "^2.13.1",
         "@emotion/cache": "^11.14.0",
@@ -64,7 +64,7 @@
         ]
     },
     "devDependencies": {
-        "@brightlayer-ui/eslint-config": "^3.0.1",
+        "@brightlayer-ui/eslint-config": "^4.0.1",
         "@brightlayer-ui/prettier-config": "^1.0.3",
         "@testing-library/jest-dom": "^5.11.0",
         "@testing-library/react": "^13.0.0",

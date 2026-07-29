@@ -105,8 +105,8 @@ importers:
         specifier: ^3.2.0
         version: 3.2.0
       '@brightlayer-ui/icons-mui':
-        specifier: ^3.6.0
-        version: 3.6.1(@mui/icons-material@6.5.0(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))
+        specifier: ^4.3.0
+        version: 4.3.0(@mui/icons-material@6.5.0(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))
       '@brightlayer-ui/react-components':
         specifier: workspace:^
         version: link:../../packages/component-library
@@ -145,7 +145,7 @@ importers:
         version: 5.1.4(typescript@5.9.3)(vite@6.4.3(@types/node@22.13.0)(jiti@1.21.7)(terser@5.49.0)(yaml@2.9.0))
     devDependencies:
       '@brightlayer-ui/eslint-config':
-        specifier: ^4.0.0
+        specifier: ^4.0.1
         version: 4.0.1(@types/eslint@8.56.12)(jiti@1.21.7)(prettier@3.9.6)(typescript@5.9.3)
       '@brightlayer-ui/prettier-config':
         specifier: ^1.0.3
@@ -214,14 +214,14 @@ importers:
         specifier: ^3.2.0
         version: 3.2.0
       '@brightlayer-ui/icons-mui':
-        specifier: ^4.0.0
+        specifier: ^4.3.0
         version: 4.3.0(@mui/icons-material@7.3.11(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))
       '@brightlayer-ui/react-components':
         specifier: workspace:^
         version: link:../../packages/component-library
       '@brightlayer-ui/react-progress-icons':
-        specifier: ^2.1.1
-        version: 2.2.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        specifier: ^2.2.1
+        version: 2.2.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@brightlayer-ui/react-themes':
         specifier: workspace:^
         version: link:../../packages/themes
@@ -359,7 +359,7 @@ importers:
         version: 5.1.4(typescript@5.9.3)(vite@7.3.6(@types/node@24.3.0)(jiti@1.21.7)(terser@5.49.0)(yaml@2.9.0))
     devDependencies:
       '@brightlayer-ui/eslint-config':
-        specifier: ^4.0.0
+        specifier: ^4.0.1
         version: 4.0.1(@types/eslint@8.56.12)(jiti@1.21.7)(prettier@3.9.6)(typescript@5.9.3)
       '@brightlayer-ui/prettier-config':
         specifier: ^1.0.3
@@ -449,14 +449,14 @@ importers:
         specifier: ^3.2.0
         version: 3.2.0
       '@brightlayer-ui/icons-mui':
-        specifier: ^3.6.0
-        version: 3.6.1(@mui/icons-material@7.3.11(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))
+        specifier: ^4.3.0
+        version: 4.3.0(@mui/icons-material@7.3.11(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))
       '@brightlayer-ui/react-components':
         specifier: workspace:^
         version: link:../../packages/component-library
       '@brightlayer-ui/react-progress-icons':
-        specifier: ^2.1.1
-        version: 2.2.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        specifier: ^2.2.1
+        version: 2.2.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@brightlayer-ui/react-themes':
         specifier: workspace:^
         version: link:../../packages/themes
@@ -534,8 +534,8 @@ importers:
         version: 5.1.4(typescript@5.9.3)(vite@6.4.3(@types/node@22.13.0)(jiti@1.21.7)(terser@5.49.0)(yaml@2.9.0))
     devDependencies:
       '@brightlayer-ui/eslint-config':
-        specifier: ^3.0.1
-        version: 3.0.1(@typescript-eslint/eslint-plugin@6.21.0(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(typescript@5.9.3)
+        specifier: ^4.0.1
+        version: 4.0.1(@types/eslint@8.56.12)(jiti@1.21.7)(prettier@2.8.8)(typescript@5.9.3)
       '@brightlayer-ui/prettier-config':
         specifier: ^1.0.3
         version: 1.0.3(prettier@2.8.8)
@@ -618,7 +618,7 @@ importers:
   apps/storybook:
     dependencies:
       '@brightlayer-ui/icons-mui':
-        specifier: ^4.1.0
+        specifier: ^4.3.0
         version: 4.3.0(@mui/icons-material@7.3.11(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))
       react:
         specifier: ^19.1.0
@@ -694,14 +694,14 @@ importers:
         specifier: ^3.2.0
         version: 3.2.0
       '@brightlayer-ui/icons-mui':
-        specifier: ^3.6.0
-        version: 3.6.1(@mui/icons-material@7.3.11(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))
+        specifier: ^4.3.0
+        version: 4.3.0(@mui/icons-material@7.3.11(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))
       '@brightlayer-ui/react-components':
         specifier: workspace:^
         version: link:../../packages/component-library
       '@brightlayer-ui/react-progress-icons':
-        specifier: ^2.1.1
-        version: 2.2.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        specifier: ^2.2.1
+        version: 2.2.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@brightlayer-ui/react-themes':
         specifier: workspace:^
         version: link:../../packages/themes
@@ -812,8 +812,8 @@ importers:
         version: 4.3.2(typescript@5.9.3)(vite@6.4.3(@types/node@22.13.0)(jiti@1.21.7)(terser@5.49.0)(yaml@2.9.0))
     devDependencies:
       '@brightlayer-ui/eslint-config':
-        specifier: ^3.0.1
-        version: 3.0.1(@typescript-eslint/eslint-plugin@7.18.0(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(typescript@5.9.3)
+        specifier: ^4.0.1
+        version: 4.0.1(@types/eslint@8.56.12)(jiti@1.21.7)(prettier@2.8.8)(typescript@5.9.3)
       '@brightlayer-ui/prettier-config':
         specifier: ^1.0.3
         version: 1.0.3(prettier@2.8.8)
@@ -899,8 +899,8 @@ importers:
         specifier: ^3.2.0
         version: 3.2.0
       '@brightlayer-ui/icons-mui':
-        specifier: ^3.6.0
-        version: 3.6.1(@mui/icons-material@7.3.11(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))
+        specifier: ^4.3.0
+        version: 4.3.0(@mui/icons-material@7.3.11(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))
       '@brightlayer-ui/react-auth-workflow':
         specifier: workspace:^
         version: link:../../../packages/login-workflow
@@ -1098,8 +1098,8 @@ importers:
         version: 6.6.1(@types/babel__core@7.20.5)(webpack@5.109.0(postcss@8.5.22))
     devDependencies:
       '@brightlayer-ui/eslint-config':
-        specifier: ^3.0.0
-        version: 3.0.1(@typescript-eslint/eslint-plugin@5.62.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(typescript@5.9.3)
+        specifier: ^4.0.1
+        version: 4.0.1(@types/eslint@8.56.12)(jiti@1.21.7)(prettier@2.8.8)(typescript@5.9.3)
       '@brightlayer-ui/prettier-config':
         specifier: ^1.0.3
         version: 1.0.3(prettier@2.8.8)
@@ -1146,8 +1146,8 @@ importers:
         specifier: ^3.2.0
         version: 3.2.0
       '@brightlayer-ui/icons-mui':
-        specifier: ^3.3.0
-        version: 3.6.1(@mui/icons-material@7.3.11(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))
+        specifier: ^4.3.0
+        version: 4.3.0(@mui/icons-material@7.3.11(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))
       '@brightlayer-ui/react-auth-workflow':
         specifier: workspace:^
         version: link:../../../packages/login-workflow
@@ -1201,8 +1201,8 @@ importers:
         version: 5.9.3
     devDependencies:
       '@brightlayer-ui/eslint-config':
-        specifier: ^3.0.1
-        version: 3.0.1(@typescript-eslint/eslint-plugin@6.21.0(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(typescript@5.9.3)
+        specifier: ^4.0.1
+        version: 4.0.1(@types/eslint@8.56.12)(jiti@1.21.7)(prettier@3.9.6)(typescript@5.9.3)
       '@brightlayer-ui/prettier-config':
         specifier: ^1.0.3
         version: 1.0.3(prettier@3.9.6)
@@ -1273,10 +1273,10 @@ importers:
         specifier: ^3.2.0
         version: 3.2.0
       '@brightlayer-ui/icons':
-        specifier: ^2.3.0
+        specifier: ^2.6.0
         version: 2.6.0
       '@brightlayer-ui/icons-mui':
-        specifier: ^4.0.0
+        specifier: ^4.3.0
         version: 4.3.0(@mui/icons-material@7.3.11(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))
       '@brightlayer-ui/react-auth-workflow':
         specifier: workspace:^
@@ -1288,8 +1288,8 @@ importers:
         specifier: ^3.0.0-alpha.0
         version: 3.0.0-alpha.0(@brightlayer-ui/react-components@packages+component-library)(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@mui/icons-material@7.3.11(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(prismjs@1.30.0)(react@19.2.8)
       '@brightlayer-ui/react-progress-icons':
-        specifier: 2.2.0
-        version: 2.2.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        specifier: 2.2.1
+        version: 2.2.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@brightlayer-ui/react-themes':
         specifier: workspace:^
         version: link:../packages/themes
@@ -1370,7 +1370,7 @@ importers:
         version: 2.1.4
     devDependencies:
       '@brightlayer-ui/eslint-config':
-        specifier: ^4.0.0
+        specifier: ^4.0.1
         version: 4.0.1(@types/eslint@8.56.12)(jiti@1.21.7)(prettier@3.9.6)(typescript@5.9.3)
       '@brightlayer-ui/prettier-config':
         specifier: ^1.0.3
@@ -1500,16 +1500,16 @@ importers:
         specifier: ^3.2.0
         version: 3.2.0
       '@brightlayer-ui/icons-mui':
-        specifier: ^4.0.0
+        specifier: ^4.3.0
         version: 4.3.0(@mui/icons-material@7.3.11(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))
       '@brightlayer-ui/react-auth-workflow':
-        specifier: ^7.0.2
-        version: 7.0.3(8d3e149b68640d1170f0aa64e0a8ffad)
+        specifier: ^7.0.3
+        version: 7.0.3(5cdfa19f7c59879026224a3162aca529)
       '@brightlayer-ui/react-components':
-        specifier: ^8.0.1
-        version: 8.0.4(5725c7dcb839f5a094a8f1b06595a357)
+        specifier: ^8.0.5
+        version: 8.0.5(5725c7dcb839f5a094a8f1b06595a357)
       '@brightlayer-ui/react-themes':
-        specifier: ^9.0.1
+        specifier: ^9.1.0
         version: 9.1.0(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))
       '@emotion/react':
         specifier: ^11.7.1
@@ -1567,7 +1567,7 @@ importers:
         version: 5.1.4(typescript@5.9.3)(vite@7.3.6(@types/node@24.3.0)(jiti@1.21.7)(terser@5.49.0)(yaml@2.9.0))
     devDependencies:
       '@brightlayer-ui/eslint-config':
-        specifier: ^4.0.0
+        specifier: ^4.0.1
         version: 4.0.1(@types/eslint@8.56.12)(jiti@1.21.7)(prettier@3.9.6)(typescript@5.9.3)
       '@brightlayer-ui/prettier-config':
         specifier: ^1.0.3
@@ -1633,16 +1633,16 @@ importers:
   packages/cli-templates/templates/blank-typescript:
     dependencies:
       '@brightlayer-ui/colors':
-        specifier: ^4.0.0
-        version: 4.0.0
+        specifier: ^3.2.0
+        version: 3.2.0
       '@brightlayer-ui/icons-mui':
-        specifier: ^4.0.0
+        specifier: ^4.3.0
         version: 4.3.0(@mui/icons-material@7.3.11(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))
       '@brightlayer-ui/react-components':
-        specifier: ^8.0.1
-        version: 8.0.4(586a1a5f44b24dd00ed58b686a339b7b)
+        specifier: ^8.0.5
+        version: 8.0.5(5725c7dcb839f5a094a8f1b06595a357)
       '@brightlayer-ui/react-themes':
-        specifier: ^9.0.1
+        specifier: ^9.1.0
         version: 9.1.0(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))
       '@emotion/css':
         specifier: ^11.13.0
@@ -1670,7 +1670,7 @@ importers:
         version: 5.1.4(typescript@5.9.3)(vite@7.3.6(@types/node@22.20.1)(jiti@1.21.7)(terser@5.49.0)(yaml@2.9.0))
     devDependencies:
       '@brightlayer-ui/eslint-config':
-        specifier: ^4.0.0
+        specifier: ^4.0.1
         version: 4.0.1(@types/eslint@8.56.12)(jiti@1.21.7)(prettier@3.9.6)(typescript@5.9.3)
       '@brightlayer-ui/prettier-config':
         specifier: ^1.0.3
@@ -1739,16 +1739,16 @@ importers:
   packages/cli-templates/templates/routing-typescript:
     dependencies:
       '@brightlayer-ui/colors':
-        specifier: ^4.0.0
-        version: 4.0.0
+        specifier: ^3.2.0
+        version: 3.2.0
       '@brightlayer-ui/icons-mui':
-        specifier: ^4.0.0
+        specifier: ^4.3.0
         version: 4.3.0(@mui/icons-material@7.3.11(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))
       '@brightlayer-ui/react-components':
-        specifier: ^8.0.1
-        version: 8.0.4(586a1a5f44b24dd00ed58b686a339b7b)
+        specifier: ^8.0.5
+        version: 8.0.5(5725c7dcb839f5a094a8f1b06595a357)
       '@brightlayer-ui/react-themes':
-        specifier: ^9.0.1
+        specifier: ^9.1.0
         version: 9.1.0(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))
       '@emotion/css':
         specifier: ^11.13.0
@@ -1788,7 +1788,7 @@ importers:
         version: 5.1.4(typescript@5.9.3)(vite@7.3.6(@types/node@22.20.1)(jiti@1.21.7)(terser@5.49.0)(yaml@2.9.0))
     devDependencies:
       '@brightlayer-ui/eslint-config':
-        specifier: ^4.0.0
+        specifier: ^4.0.1
         version: 4.0.1(@types/eslint@8.56.12)(jiti@1.21.7)(prettier@3.9.6)(typescript@5.9.3)
       '@brightlayer-ui/prettier-config':
         specifier: ^1.0.3
@@ -1897,8 +1897,8 @@ importers:
         specifier: ^7.27.1
         version: 7.29.7(@babel/core@7.29.7)
       '@brightlayer-ui/eslint-config':
-        specifier: ^3.0.1
-        version: 3.0.1(@typescript-eslint/eslint-plugin@5.62.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(typescript@5.9.3)
+        specifier: ^4.0.1
+        version: 4.0.1(@types/eslint@8.56.12)(jiti@1.21.7)(prettier@2.8.8)(typescript@5.9.3)
       '@brightlayer-ui/prettier-config':
         specifier: ^1.0.3
         version: 1.0.3(prettier@2.8.8)
@@ -2036,8 +2036,8 @@ importers:
         specifier: ^7.14.5
         version: 7.29.7(@babel/core@7.29.7)
       '@brightlayer-ui/eslint-config':
-        specifier: ^3.0.0
-        version: 3.0.1(@typescript-eslint/eslint-plugin@6.21.0(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(typescript@5.9.3)
+        specifier: ^4.0.1
+        version: 4.0.1(@types/eslint@8.56.12)(jiti@1.21.7)(prettier@2.8.8)(typescript@5.9.3)
       '@brightlayer-ui/prettier-config':
         specifier: ^1.0.3
         version: 1.0.3(prettier@2.8.8)
@@ -2983,26 +2983,10 @@ packages:
   '@brightlayer-ui/colors@3.2.0':
     resolution: {integrity: sha512-tM1jFf0aIx/pKp85je+1HJQidwmlTbqDMTkl/9MnymwX3H8xMYuomXJOGS89cailDUQUiN5SR1vmRN9EFNhwXQ==}
 
-  '@brightlayer-ui/colors@4.0.0':
-    resolution: {integrity: sha512-fF7Ne7cz4yFCzR96HrP1RVBw55s+cWbqYkPallnpmmtYnPwNS/DyAbbHFEnl2bxziq3CvAR2S+D6AnjIeluOZA==}
-
-  '@brightlayer-ui/eslint-config@3.0.1':
-    resolution: {integrity: sha512-Oysfov3klmqidenOo8+ZFwfxEmyBDpKaB58pi/4dy5aJLMb4vDUfatf2rFrKmYJI9BOAXoIrBuSA+MKYCIp3AQ==}
-    peerDependencies:
-      '@typescript-eslint/eslint-plugin': ^5.9.0
-      eslint: '>= 8.6.0'
-      typescript: '>= 4.0.0'
-
   '@brightlayer-ui/eslint-config@4.0.1':
     resolution: {integrity: sha512-yVRd04BEzgLM/vTvUEVtcKoybeziMCD+f0z5L8IOIQ/dZ4IQ6EDvnSZG9ly8RywG3hONubKblPAY0fTV2mU55w==}
     peerDependencies:
       typescript: ^5.8.3
-
-  '@brightlayer-ui/icons-mui@3.6.1':
-    resolution: {integrity: sha512-l2LrAA9OccKoYb1hJnu9KZvHysCu5nZxM3lyYdxWXX5Nezyvl0SxYs/m3YH2mbMVu4qHHo/79izeuNUMK++wvw==}
-    peerDependencies:
-      '@mui/icons-material': ^5.0.0 || ^6.0.0
-      '@mui/material': ^5.0.0 || ^6.0.0
 
   '@brightlayer-ui/icons-mui@4.3.0':
     resolution: {integrity: sha512-b4OvCt+9nKHCOLkkJGEeOditHIOVDJ8lvmqU1no2u0grZTDZ/yTlcRBEEkUlrbKO6AfdD7iwbyl9joaDGP5aPA==}
@@ -3034,10 +3018,10 @@ packages:
       react-dom: ^19.1.0
       react-i18next: ^13.0.0
 
-  '@brightlayer-ui/react-components@8.0.4':
-    resolution: {integrity: sha512-Wzgu7hsmjL4oYp7k+CTdNVDJQQu9bGLJmzDHx4C7xLAccZE5a1Bg9avf+BZ0Dx6uht7hFEFSE7lNsALGqMd8kQ==}
+  '@brightlayer-ui/react-components@8.0.5':
+    resolution: {integrity: sha512-6VRkH3rldes1sYsinM5weW/9Vg48LbOuCkMOWuSPjTS2qPSYRHXR9rw5hpCmsc4mYl6fMkIe6yzbJQPA8+a1VA==}
     peerDependencies:
-      '@brightlayer-ui/colors': ^3.1.0
+      '@brightlayer-ui/colors': ^3.2.0
       '@emotion/react': ^11.7.1
       '@emotion/styled': ^11.6.0
       '@mui/icons-material': ^7.1.1
@@ -3056,8 +3040,8 @@ packages:
       prismjs: ^1.29.0
       react: ^19.1.0
 
-  '@brightlayer-ui/react-progress-icons@2.2.0':
-    resolution: {integrity: sha512-Unw2R7HTSH/RtM3vPhiuk31O/Y6IGnqJtEanKz81uyhVBjNLn1gF1BPCjLPQ5YhYGpAv+C08fZByRNHgFu74tQ==}
+  '@brightlayer-ui/react-progress-icons@2.2.1':
+    resolution: {integrity: sha512-W1CkJArgN8KfLjMCzT6lqUzcgWqu37TpNaeXMG3cKYHzzU+OvUgMavoHBW6eQl61ikSEztn3b/ty9LzXL1CdXA==}
     peerDependencies:
       react: '>=16.6.3'
       react-dom: '>=16.8.6'
@@ -10411,7 +10395,7 @@ packages:
     resolution: {integrity: sha512-3HrzSPuzm6Yt9aTYCDxYEG8x8/6C0+ag655Y7rhhWZM9PT4NpdnbqlzXhGZlDnkgR6MeSTnOt/VIyHLs9aSf+Q==}
 
   license-checker@https://codeload.github.com/mwittig/license-checker/tar.gz/d546e3f738e14c62e732346fa355162d46700893:
-    resolution: {gitHosted: true, tarball: https://codeload.github.com/mwittig/license-checker/tar.gz/d546e3f738e14c62e732346fa355162d46700893}
+    resolution: {gitHosted: true, integrity: sha512-bxjMfrd8Rrd6tbwo1bTD1oqaIKRx+uF/Uc7jTbyVy0KxsTnZQMjqlZXap/P51BZsoP4kcamIutppBD3nSiKHfg==, tarball: https://codeload.github.com/mwittig/license-checker/tar.gz/d546e3f738e14c62e732346fa355162d46700893}
     version: 1.0.0
     hasBin: true
 
@@ -15516,42 +15500,21 @@ snapshots:
     dependencies:
       '@brightlayer-ui/types': 2.0.0
 
-  '@brightlayer-ui/colors@4.0.0': {}
-
-  '@brightlayer-ui/eslint-config@3.0.1(@typescript-eslint/eslint-plugin@5.62.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(typescript@5.9.3)':
+  '@brightlayer-ui/eslint-config@4.0.1(@types/eslint@8.56.12)(jiti@1.21.7)(prettier@2.8.8)(typescript@5.9.3)':
     dependencies:
-      '@typescript-eslint/eslint-plugin': 5.62.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(typescript@5.9.3)
-      '@typescript-eslint/parser': 5.62.0(eslint@8.57.1)(typescript@5.9.3)
-      eslint: 8.57.1
-      eslint-config-prettier: 10.1.8(eslint@8.57.1)
+      '@eslint/js': 9.39.5
+      '@typescript-eslint/parser': 8.65.0(eslint@9.33.0(jiti@1.21.7))(typescript@5.9.3)
+      eslint: 9.33.0(jiti@1.21.7)
+      eslint-config-prettier: 9.1.2(eslint@9.33.0(jiti@1.21.7))
+      eslint-plugin-prettier: 5.2.1(@types/eslint@8.56.12)(eslint-config-prettier@9.1.2(eslint@9.33.0(jiti@1.21.7)))(eslint@9.33.0(jiti@1.21.7))(prettier@2.8.8)
       typescript: 5.9.3
+      typescript-eslint: 8.65.0(eslint@9.33.0(jiti@1.21.7))(typescript@5.9.3)
     optionalDependencies:
-      eslint-plugin-react: 7.37.5(eslint@8.57.1)
+      eslint-plugin-react: 7.37.5(eslint@9.33.0(jiti@1.21.7))
     transitivePeerDependencies:
-      - supports-color
-
-  '@brightlayer-ui/eslint-config@3.0.1(@typescript-eslint/eslint-plugin@6.21.0(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(typescript@5.9.3)':
-    dependencies:
-      '@typescript-eslint/eslint-plugin': 6.21.0(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(typescript@5.9.3)
-      '@typescript-eslint/parser': 5.62.0(eslint@8.57.1)(typescript@5.9.3)
-      eslint: 8.57.1
-      eslint-config-prettier: 10.1.8(eslint@8.57.1)
-      typescript: 5.9.3
-    optionalDependencies:
-      eslint-plugin-react: 7.37.5(eslint@8.57.1)
-    transitivePeerDependencies:
-      - supports-color
-
-  '@brightlayer-ui/eslint-config@3.0.1(@typescript-eslint/eslint-plugin@7.18.0(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(typescript@5.9.3)':
-    dependencies:
-      '@typescript-eslint/eslint-plugin': 7.18.0(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(typescript@5.9.3)
-      '@typescript-eslint/parser': 5.62.0(eslint@8.57.1)(typescript@5.9.3)
-      eslint: 8.57.1
-      eslint-config-prettier: 10.1.8(eslint@8.57.1)
-      typescript: 5.9.3
-    optionalDependencies:
-      eslint-plugin-react: 7.37.5(eslint@8.57.1)
-    transitivePeerDependencies:
+      - '@types/eslint'
+      - jiti
+      - prettier
       - supports-color
 
   '@brightlayer-ui/eslint-config@4.0.1(@types/eslint@8.56.12)(jiti@1.21.7)(prettier@3.9.6)(typescript@5.9.3)':
@@ -15588,15 +15551,10 @@ snapshots:
       - prettier
       - supports-color
 
-  '@brightlayer-ui/icons-mui@3.6.1(@mui/icons-material@6.5.0(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))':
+  '@brightlayer-ui/icons-mui@4.3.0(@mui/icons-material@6.5.0(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))':
     dependencies:
       '@mui/icons-material': 6.5.0(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.17)(react@19.2.8)
       '@mui/material': 6.5.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-
-  '@brightlayer-ui/icons-mui@3.6.1(@mui/icons-material@7.3.11(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))':
-    dependencies:
-      '@mui/icons-material': 7.3.11(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.17)(react@19.2.8)
-      '@mui/material': 7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
 
   '@brightlayer-ui/icons-mui@4.3.0(@mui/icons-material@7.3.11(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))':
     dependencies:
@@ -15613,9 +15571,9 @@ snapshots:
     dependencies:
       prettier: 3.9.6
 
-  '@brightlayer-ui/react-auth-workflow@7.0.3(8d3e149b68640d1170f0aa64e0a8ffad)':
+  '@brightlayer-ui/react-auth-workflow@7.0.3(5cdfa19f7c59879026224a3162aca529)':
     dependencies:
-      '@brightlayer-ui/react-components': 8.0.4(5725c7dcb839f5a094a8f1b06595a357)
+      '@brightlayer-ui/react-components': 8.0.5(5725c7dcb839f5a094a8f1b06595a357)
       '@emotion/react': 11.14.0(@types/react@19.2.17)(react@19.2.8)
       '@emotion/styled': 11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8)
       '@mui/icons-material': 7.3.11(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.17)(react@19.2.8)
@@ -15632,39 +15590,9 @@ snapshots:
     optionalDependencies:
       react-router-dom: 7.18.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
 
-  '@brightlayer-ui/react-components@8.0.4(5725c7dcb839f5a094a8f1b06595a357)':
+  '@brightlayer-ui/react-components@8.0.5(5725c7dcb839f5a094a8f1b06595a357)':
     dependencies:
       '@brightlayer-ui/colors': 3.2.0
-      '@emotion/css': 11.13.5
-      '@emotion/is-prop-valid': 1.4.0
-      '@emotion/react': 11.14.0(@types/react@19.2.17)(react@19.2.8)
-      '@emotion/styled': 11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8)
-      '@mui/icons-material': 7.3.11(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.17)(react@19.2.8)
-      '@mui/material': 7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      '@mui/x-date-pickers': 7.29.4(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@mui/system@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(date-fns@4.4.0)(moment@2.30.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      '@seznam/compose-react-refs': 1.0.6
-      clsx: 2.1.1
-      color: 4.2.3
-      loose-envify: 1.4.0
-      material-react-table: 3.2.1(c04042b0525f4a7cf2bba2e0c213c61d)
-      react: 19.2.8
-      react-dom: 19.2.8(react@19.2.8)
-      react-is: 16.13.1
-    transitivePeerDependencies:
-      - '@mui/system'
-      - '@types/react'
-      - date-fns
-      - date-fns-jalali
-      - dayjs
-      - luxon
-      - moment
-      - moment-hijri
-      - moment-jalaali
-      - supports-color
-
-  '@brightlayer-ui/react-components@8.0.4(586a1a5f44b24dd00ed58b686a339b7b)':
-    dependencies:
-      '@brightlayer-ui/colors': 4.0.0
       '@emotion/css': 11.13.5
       '@emotion/is-prop-valid': 1.4.0
       '@emotion/react': 11.14.0(@types/react@19.2.17)(react@19.2.8)
@@ -15705,7 +15633,7 @@ snapshots:
       prismjs: 1.30.0
       react: 19.2.8
 
-  '@brightlayer-ui/react-progress-icons@2.2.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+  '@brightlayer-ui/react-progress-icons@2.2.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
       clsx: 1.2.1
       color: 3.2.1
@@ -22259,6 +22187,16 @@ snapshots:
     optionalDependencies:
       '@types/eslint': 8.56.12
       eslint-config-prettier: 10.1.8(eslint@9.33.0(jiti@1.21.7))
+
+  eslint-plugin-prettier@5.2.1(@types/eslint@8.56.12)(eslint-config-prettier@9.1.2(eslint@9.33.0(jiti@1.21.7)))(eslint@9.33.0(jiti@1.21.7))(prettier@2.8.8):
+    dependencies:
+      eslint: 9.33.0(jiti@1.21.7)
+      prettier: 2.8.8
+      prettier-linter-helpers: 1.0.1
+      synckit: 0.9.3
+    optionalDependencies:
+      '@types/eslint': 8.56.12
+      eslint-config-prettier: 9.1.2(eslint@9.33.0(jiti@1.21.7))
 
   eslint-plugin-prettier@5.2.1(@types/eslint@8.56.12)(eslint-config-prettier@9.1.2(eslint@9.33.0(jiti@1.21.7)))(eslint@9.33.0(jiti@1.21.7))(prettier@3.9.6):
     dependencies:
