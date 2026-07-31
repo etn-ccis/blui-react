@@ -1,5 +1,11 @@
 # Changelog
 
+## v8.0.6 (Unreleased)
+
+### Changed
+
+- Upgraded to the latest @brightlayer-ui/eslint-config packages.
+
 # v8.0.5 (July 24, 2026)
 
 ### Added

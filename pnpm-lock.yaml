@@ -10353,7 +10353,7 @@ packages:
     resolution: {integrity: sha512-3HrzSPuzm6Yt9aTYCDxYEG8x8/6C0+ag655Y7rhhWZM9PT4NpdnbqlzXhGZlDnkgR6MeSTnOt/VIyHLs9aSf+Q==}
 
   license-checker@https://codeload.github.com/mwittig/license-checker/tar.gz/d546e3f738e14c62e732346fa355162d46700893:
-    resolution: {gitHosted: true, tarball: https://codeload.github.com/mwittig/license-checker/tar.gz/d546e3f738e14c62e732346fa355162d46700893}
+    resolution: {gitHosted: true, integrity: sha512-bxjMfrd8Rrd6tbwo1bTD1oqaIKRx+uF/Uc7jTbyVy0KxsTnZQMjqlZXap/P51BZsoP4kcamIutppBD3nSiKHfg==, tarball: https://codeload.github.com/mwittig/license-checker/tar.gz/d546e3f738e14c62e732346fa355162d46700893}
     version: 1.0.0
     hasBin: true
 

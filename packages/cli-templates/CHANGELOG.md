@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.0.3 (Unreleased)
+
+### Changed
+
+- Upgraded to the latest @brightlayer-ui packages.
+
 ## v2.0.2 (December 18, 2025)
 
 ### Fixed
