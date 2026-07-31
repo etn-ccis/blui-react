@@ -3,10 +3,10 @@
     "version": "1.0.0",
     "private": true,
     "dependencies": {
-        "@brightlayer-ui/colors": "^4.0.0",
-        "@brightlayer-ui/icons-mui": "^4.0.0",
-        "@brightlayer-ui/react-components": "^8.0.1",
-        "@brightlayer-ui/react-themes": "^9.0.1",
+        "@brightlayer-ui/colors": "^3.2.0",
+        "@brightlayer-ui/icons-mui": "^4.3.0",
+        "@brightlayer-ui/react-components": "^8.0.5",
+        "@brightlayer-ui/react-themes": "^9.1.0",
         "@emotion/css": "^11.13.0",
         "@emotion/react": "^11.14.0",
         "@emotion/styled": "^11.13.0",
@@ -34,7 +34,7 @@
         "extends": []
     },
     "devDependencies": {
-        "@brightlayer-ui/eslint-config": "^4.0.0",
+        "@brightlayer-ui/eslint-config": "^4.0.1",
         "@brightlayer-ui/prettier-config": "^1.0.3",
         "@testing-library/dom": "^10.4.0",
         "@testing-library/jest-dom": "^6.5.0",

@@ -15,10 +15,10 @@
     "eslintConfig": {},
     "dependencies": {
         "@brightlayer-ui/colors": "^3.2.0",
-        "@brightlayer-ui/icons-mui": "^4.0.0",
-        "@brightlayer-ui/react-auth-workflow": "^7.0.2",
-        "@brightlayer-ui/react-components": "^8.0.1",
-        "@brightlayer-ui/react-themes": "^9.0.1",
+        "@brightlayer-ui/icons-mui": "^4.3.0",
+        "@brightlayer-ui/react-auth-workflow": "^7.0.3",
+        "@brightlayer-ui/react-components": "^8.0.5",
+        "@brightlayer-ui/react-themes": "^9.1.0",
         "@emotion/react": "^11.7.1",
         "@emotion/styled": "^11.10.8",
         "@mui/base": "^5.0.0-beta.63",
@@ -39,7 +39,7 @@
         "vite-tsconfig-paths": "^5.1.4"
     },
     "devDependencies": {
-        "@brightlayer-ui/eslint-config": "^4.0.0",
+        "@brightlayer-ui/eslint-config": "^4.0.1",
         "@brightlayer-ui/prettier-config": "^1.0.3",
         "@emotion/css": "^11.11.2",
         "@testing-library/dom": "^10.4.0",
