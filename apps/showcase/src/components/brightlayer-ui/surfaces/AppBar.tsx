@@ -3,6 +3,9 @@ import Toolbar from '@mui/material/Toolbar';
 import { getBodyFiller } from '../../../utils/utils';
 import { AppBar, ThreeLiner } from '@brightlayer-ui/react-components';
 import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/icons-material/Menu';
 
 const containerStyles = {
     mb: 2,
@@ -39,6 +42,10 @@ const linerStyles = {
     position: 'relative',
 };
 
+const stickyAppBarStyles = {
+    zIndex: 0,
+};
+
 export const BLUIAppBarExample: React.FC = () => (
     <>
         <Box sx={containerStyles}>
@@ -46,6 +53,7 @@ export const BLUIAppBarExample: React.FC = () => (
                 classes={{ collapsed: 'collapsed', expanded: 'expanded' }}
                 scrollContainerId={'appbarBodyFiller1'}
                 position={'sticky'}
+                style={stickyAppBarStyles}
             >
                 <Toolbar>
                     <ThreeLiner
@@ -67,6 +75,7 @@ export const BLUIAppBarExample: React.FC = () => (
                 classes={{ collapsed: 'collapsed', expanded: 'expanded' }}
                 scrollContainerId={'appbarBodyFiller2'}
                 position={'sticky'}
+                style={stickyAppBarStyles}
             >
                 <Toolbar>
                     <ThreeLiner
@@ -81,6 +90,41 @@ export const BLUIAppBarExample: React.FC = () => (
                 </Toolbar>
             </AppBar>
             <Box id="appbarBodyFiller2" sx={{ height: 400, overflow: 'scroll' }}>
+                {getBodyFiller()}
+            </Box>
+        </Box>
+        <Box sx={{ ...containerStyles, position: 'relative', overflow: 'auto' }}>
+            <AppBar position="sticky" variant="collapsed" overlay style={stickyAppBarStyles}>
+                <Toolbar>
+                    <IconButton edge="start" color="inherit" aria-label="menu" size="large">
+                        <Menu />
+                    </IconButton>
+                    <Typography variant="h6">Transparent Overlay</Typography>
+                </Toolbar>
+            </AppBar>
+            {getBodyFiller()}
+        </Box>
+        <Box sx={{ ...containerStyles, position: 'relative' }}>
+            <Box id="appbarBodyFiller3" sx={{ height: 400, overflow: 'auto' }}>
+                <AppBar
+                    classes={{ collapsed: 'collapsed', expanded: 'expanded' }}
+                    position={'sticky'}
+                    overlay
+                    scrollContainerId={'appbarBodyFiller3'}
+                    style={stickyAppBarStyles}
+                >
+                    <Toolbar>
+                        <ThreeLiner
+                            sx={linerStyles}
+                            className={'liner'}
+                            classes={{ title: 'title', subtitle: 'subtitle', info: 'info' }}
+                            title={'Extended AppBar Overlay'}
+                            subtitle={'Subtitle'}
+                            info={'Info'}
+                            animationDuration={300}
+                        />
+                    </Toolbar>
+                </AppBar>
                 {getBodyFiller()}
             </Box>
         </Box>

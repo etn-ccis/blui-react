@@ -1,5 +1,11 @@
 # Changelog
 
+# v9.1.1 (Unreleased)
+
+### Added
+
+- Updated MuiAppBar styles to enable blur effect when `variant="overlay"` and `color="transparent"`.
+
 # v9.1.0 (July 22, 2026)
 
 ### Changed
