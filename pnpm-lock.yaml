@@ -22,7 +22,7 @@ overrides:
   form-data@>=3.0.0 <3.0.5: ^3.0.5
   form-data@>=4.0.0 <4.0.6: ^4.0.6
   hono: ^4.12.25
-  undici: ^7.28.0
+  undici: ^7.29.0
   vite@<=6.4.2: ^6.4.3
   vite@>=7.0.0 <=7.3.4: ^7.3.5
   vitest: ^3.2.6
@@ -37,7 +37,8 @@ overrides:
   react-router: ^7.15.0
   tar: ^7.5.19
   svgo: ^3.3.4
-  fast-uri: ^3.1.4
+  fast-uri: ^3.1.5
+  ip-address: ^10.3.1
   brace-expansion@>=2.0.0 <5.0.8: ^5.0.8
   minimatch@>=9.0.0: ^9.0.7
   dompurify: ^3.4.12
@@ -8574,8 +8575,8 @@ packages:
   fast-text-encoding@1.0.6:
     resolution: {integrity: sha512-VhXlQgj9ioXCqGstD37E/HBeqEGV/qOD/kmbVG8h5xKBYvM1L3lR1Zn4555cQ8GkYbJa8aJSipLPndE1k6zK2w==}
 
-  fast-uri@3.1.4:
-    resolution: {integrity: sha512-8JnbkQ4juDyvYs4mgFGQqg4yCYtFDtUtmp2QIQq11ZZe5CFQ5wcqm1rqDgAh/QdMySuBnPzMUiJUNZG5N/AiQw==}
+  fast-uri@3.1.5:
+    resolution: {integrity: sha512-gHwA1O9LDIcKunMKhObS/HimwtehO1nPUECKAu5TpKgaO19fcWEl4bliWe1jWxVFvIXztJjjQ4L8XQ1EU9f7Jw==}
 
   fastq@1.20.1:
     resolution: {integrity: sha512-GGToxJ/w1x32s/D2EKND7kTil4n8OVk/9mycTc4VDza13lOvpUZTGX3mFSCtV9ksdGBVzvsyAVLM6mHFThxXxw==}
@@ -9322,8 +9323,8 @@ packages:
   invariant@2.2.4:
     resolution: {integrity: sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==}
 
-  ip-address@10.2.0:
-    resolution: {integrity: sha512-/+S6j4E9AHvW9SWMSEY9Xfy66O5PWvVEJ08O0y5JGyEKQpojb0K0GKpz/v5HJ/G0vi3D2sjGK78119oXZeE0qA==}
+  ip-address@10.4.0:
+    resolution: {integrity: sha512-oSK96Grm3aP6OrS263xVxbNDGVL7rzBtYdpGqlDG8iQdoenDoTs/nkki+DflYbAEE8Xl6o5YxhxlrKvI3nqKXQ==}
     engines: {node: '>= 12'}
 
   ip-regex@2.1.0:
@@ -10353,7 +10354,7 @@ packages:
     resolution: {integrity: sha512-3HrzSPuzm6Yt9aTYCDxYEG8x8/6C0+ag655Y7rhhWZM9PT4NpdnbqlzXhGZlDnkgR6MeSTnOt/VIyHLs9aSf+Q==}
 
   license-checker@https://codeload.github.com/mwittig/license-checker/tar.gz/d546e3f738e14c62e732346fa355162d46700893:
-    resolution: {gitHosted: true, integrity: sha512-bxjMfrd8Rrd6tbwo1bTD1oqaIKRx+uF/Uc7jTbyVy0KxsTnZQMjqlZXap/P51BZsoP4kcamIutppBD3nSiKHfg==, tarball: https://codeload.github.com/mwittig/license-checker/tar.gz/d546e3f738e14c62e732346fa355162d46700893}
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/mwittig/license-checker/tar.gz/d546e3f738e14c62e732346fa355162d46700893}
     version: 1.0.0
     hasBin: true
 
@@ -13704,8 +13705,8 @@ packages:
   undici-types@7.10.0:
     resolution: {integrity: sha512-t5Fy/nfn+14LuOc2KNYg75vZqClpAiqscVvMygNnlsHBFpSXdJaYtXMcdNLpl/Qvc3P2cB3s6lOV51nqsFq4ag==}
 
-  undici@7.28.0:
-    resolution: {integrity: sha512-cRZYrTDwWznlnRiPjggAGxZXanty6M8RV1ff8Wm4LWXBp7/IG8v5DnOm74DtUBp9OONpK75YlPnIjQqX0dBDtA==}
+  undici@7.29.0:
+    resolution: {integrity: sha512-IDxfleLmmbSskfWSUATiN1nfn2rDuvnMOqb5CWR92iIfojA0Ud+ulOAAEQ57LPr9rWmsreUyf5lwyao+7GNNVw==}
     engines: {node: '>=20.18.1'}
 
   unicode-canonical-property-names-ecmascript@2.0.1:
@@ -16138,7 +16139,7 @@ snapshots:
       strip-ansi: 6.0.1
       ts-morph: 27.0.2
       typescript: 6.0.3
-      undici: 7.28.0
+      undici: 7.29.0
       zod: 3.25.58
       zod-validation-error: 3.5.4(zod@3.25.58)
     transitivePeerDependencies:
@@ -19927,14 +19928,14 @@ snapshots:
   ajv@8.18.0:
     dependencies:
       fast-deep-equal: 3.1.3
-      fast-uri: 3.1.4
+      fast-uri: 3.1.5
       json-schema-traverse: 1.0.0
       require-from-string: 2.0.2
 
   ajv@8.20.0:
     dependencies:
       fast-deep-equal: 3.1.3
-      fast-uri: 3.1.4
+      fast-uri: 3.1.5
       json-schema-traverse: 1.0.0
       require-from-string: 2.0.2
 
@@ -20676,7 +20677,7 @@ snapshots:
       parse5: 7.3.0
       parse5-htmlparser2-tree-adapter: 7.1.0
       parse5-parser-stream: 7.1.2
-      undici: 7.28.0
+      undici: 7.29.0
       whatwg-mimetype: 4.0.0
 
   chokidar@3.6.0:
@@ -22448,7 +22449,7 @@ snapshots:
     dependencies:
       debug: 4.4.3
       express: 5.2.1
-      ip-address: 10.2.0
+      ip-address: 10.4.0
     transitivePeerDependencies:
       - supports-color
 
@@ -22549,7 +22550,7 @@ snapshots:
 
   fast-text-encoding@1.0.6: {}
 
-  fast-uri@3.1.4: {}
+  fast-uri@3.1.5: {}
 
   fastq@1.20.1:
     dependencies:
@@ -22731,7 +22732,7 @@ snapshots:
       tcp-port-used: 1.0.3
       tmp: 0.2.7
       triple-beam: 1.4.1
-      undici: 7.28.0
+      undici: 7.29.0
       universal-analytics: 0.5.4
       update-notifier-cjs: 5.1.7
       winston: 3.19.0
@@ -22815,7 +22816,7 @@ snapshots:
       tcp-port-used: 1.0.3
       tmp: 0.2.7
       triple-beam: 1.4.1
-      undici: 7.28.0
+      undici: 7.29.0
       universal-analytics: 0.5.4
       update-notifier-cjs: 5.1.7
       winston: 3.19.0
@@ -23626,7 +23627,7 @@ snapshots:
     dependencies:
       loose-envify: 1.4.0
 
-  ip-address@10.2.0: {}
+  ip-address@10.4.0: {}
 
   ip-regex@2.1.0: {}
 
@@ -25300,7 +25301,7 @@ snapshots:
       saxes: 6.0.0
       symbol-tree: 3.2.4
       tough-cookie: 6.0.2
-      undici: 7.28.0
+      undici: 7.29.0
       w3c-xmlserializer: 5.0.0
       webidl-conversions: 8.0.1
       whatwg-mimetype: 5.0.0
@@ -26423,7 +26424,7 @@ snapshots:
       semver: 7.8.5
       tar: 7.5.21
       tinyglobby: 0.2.17
-      undici: 7.28.0
+      undici: 7.29.0
       which: 7.0.0
     optional: true
 
@@ -28544,7 +28545,7 @@ snapshots:
 
   socks@2.8.9:
     dependencies:
-      ip-address: 10.2.0
+      ip-address: 10.4.0
       smart-buffer: 4.2.0
 
   sort-object-keys@1.1.3: {}
@@ -29534,7 +29535,7 @@ snapshots:
 
   undici-types@7.10.0: {}
 
-  undici@7.28.0: {}
+  undici@7.29.0: {}
 
   unicode-canonical-property-names-ecmascript@2.0.1: {}
 
