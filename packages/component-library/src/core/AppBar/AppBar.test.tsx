@@ -140,6 +140,19 @@ describe('AppBar', () => {
         expect(screen.getByTestId('blui-appbar-root')).toBeInTheDocument();
     });
 
+    it('should apply overlay styles without changing the default snap height', () => {
+        render(
+            <ThemeProvider theme={theme}>
+                <AppBar overlay color="transparent" />
+            </ThemeProvider>
+        );
+
+        const appBar = screen.getByTestId('blui-appbar-root');
+        expect(appBar).toHaveClass('MuiAppBar-colorTransparent');
+        expect(appBar).toHaveStyle('overflow: visible');
+        expect(appBar).toHaveStyle('height: 200px');
+    });
+
     it('should apply correct classes based on variant', () => {
         const { rerender } = render(
             <ThemeProvider theme={theme}>

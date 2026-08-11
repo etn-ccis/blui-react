@@ -5,6 +5,7 @@
 ### Changed
 
 - Upgraded to the latest @brightlayer-ui/eslint-config packages.
+- Updated `<AppBar>` component to enable blur effect on transparent AppBar.
 
 # v8.0.5 (July 24, 2026)
 
