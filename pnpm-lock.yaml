@@ -445,8 +445,8 @@ importers:
   apps/showcase:
     dependencies:
       '@brightlayer-ui/colors':
-        specifier: ^3.2.0
-        version: 3.2.0
+        specifier: ^3.2.1-alpha.0
+        version: 3.2.1-alpha.0
       '@brightlayer-ui/icons-mui':
         specifier: ^4.3.0
         version: 4.3.0(@mui/icons-material@7.3.11(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))
@@ -2171,8 +2171,8 @@ importers:
   packages/themes:
     dependencies:
       '@brightlayer-ui/colors':
-        specifier: ^3.2.0
-        version: 3.2.0
+        specifier: ^3.2.1-alpha.0
+        version: 3.2.1-alpha.0
       '@brightlayer-ui/types':
         specifier: ^2.0.0
         version: 2.0.0
@@ -2984,6 +2984,9 @@ packages:
 
   '@brightlayer-ui/colors@3.2.0':
     resolution: {integrity: sha512-tM1jFf0aIx/pKp85je+1HJQidwmlTbqDMTkl/9MnymwX3H8xMYuomXJOGS89cailDUQUiN5SR1vmRN9EFNhwXQ==}
+
+  '@brightlayer-ui/colors@3.2.1-alpha.0':
+    resolution: {integrity: sha512-gGNfXC2Vqhs9idh+OKkhhRxSxgAwJIPEo8LM0ONNqcV3kXsFzktMSu6z6lNRdPUDxkaCcpHVkagaEsDq8KfsRg==}
 
   '@brightlayer-ui/eslint-config@4.0.1':
     resolution: {integrity: sha512-yVRd04BEzgLM/vTvUEVtcKoybeziMCD+f0z5L8IOIQ/dZ4IQ6EDvnSZG9ly8RywG3hONubKblPAY0fTV2mU55w==}
@@ -15456,6 +15459,10 @@ snapshots:
       css-tree: 3.2.1
 
   '@brightlayer-ui/colors@3.2.0':
+    dependencies:
+      '@brightlayer-ui/types': 2.0.0
+
+  '@brightlayer-ui/colors@3.2.1-alpha.0':
     dependencies:
       '@brightlayer-ui/types': 2.0.0
 

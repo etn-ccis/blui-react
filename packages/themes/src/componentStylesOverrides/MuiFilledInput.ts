@@ -64,17 +64,17 @@ export default {
                     borderBottomColor: theme.vars.palette.divider,
                 },
                 '&:after': {
-                    borderBottomColor: theme.vars.palette.primary.dark,
+                    borderBottomColor: theme.vars.palette.primary.main,
                 },
                 '&.Mui-error.Mui-focused:after': {
-                    borderBottomColor: theme.vars.palette.error.dark,
+                    borderBottomColor: BLUIColors.red[300],
                 },
                 '&.Mui-error:not(.Mui-focused):after': {
                     borderBottomWidth: 1,
-                    borderBottomColor: theme.vars.palette.error.dark,
+                    borderBottomColor: BLUIColors.red[300],
                 },
                 '&.Mui-error:not(.Mui-focused):hover:after': {
-                    borderBottomColor: theme.vars.palette.error.main,
+                    borderBottomColor: BLUIColors.red[300],
                 },
                 '&.Mui-disabled:before': {
                     borderBottomStyle: 'solid',

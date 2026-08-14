@@ -206,7 +206,7 @@ const DrawerNavItemRender: React.ForwardRefRenderFunction<HTMLElement, DrawerNav
     const {
         activeItemBackgroundColor = systemMode === 'light'
             ? `rgba(${(theme.vars || theme).palette.primary.mainChannel} / 0.05)`
-            : `rgba(${(theme.vars || theme).palette.primary.darkChannel} / 0.20)`,
+            : `rgba(${(theme.vars || theme).palette.primary.mainChannel} / 0.20)`,
 
         activeItemBackgroundShape = 'square',
         activeItemFontColor = (theme.vars || theme).palette.primary.main,

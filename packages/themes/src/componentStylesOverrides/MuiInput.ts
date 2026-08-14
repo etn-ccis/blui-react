@@ -30,17 +30,17 @@ export default {
                     borderBottomColor: BLUIColors.black[200],
                 },
                 '&:after': {
-                    borderBottomColor: theme.vars.palette.primary.dark,
+                    borderBottomColor: theme.vars.palette.primary.main,
                 },
                 '&.Mui-error.Mui-focused:after': {
-                    borderBottomColor: theme.vars.palette.error.dark,
+                    borderBottomColor: BLUIColors.red[300],
                 },
                 '&.Mui-error:not(.Mui-focused):after': {
                     borderBottomWidth: 1,
-                    borderBottomColor: theme.vars.palette.error.dark,
+                    borderBottomColor: BLUIColors.red[300],
                 },
                 '&.Mui-error:not(.Mui-focused):hover:after': {
-                    borderBottomColor: theme.vars.palette.error.main,
+                    borderBottomColor: BLUIColors.red[300],
                 },
                 '&.MuiInput-colorSecondary:not(.Mui-error):after': {
                     borderBottomColor: theme.vars.palette.secondary.dark,

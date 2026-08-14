@@ -201,8 +201,8 @@ const DropzoneBox = styled(Box, {
     };
 
     const getDarkBorderColor = (): string => {
-        if (isReject) return (theme.vars || theme).palette.error.dark;
-        if (isActive) return (theme.vars || theme).palette.primary.dark;
+        if (isReject) return (theme.vars || theme).palette.error.main;
+        if (isActive) return (theme.vars || theme).palette.primary.main;
         return (theme.vars || theme).palette.divider;
     };
 
@@ -226,7 +226,7 @@ const DropzoneBox = styled(Box, {
         ...theme.applyStyles('dark', {
             borderColor: getDarkBorderColor(),
             backgroundColor: isReject
-                ? `color-mix(in srgb, ${(theme.vars || theme).palette.error.dark} 20%, transparent)`
+                ? `color-mix(in srgb, ${(theme.vars || theme).palette.error.main} 20%, transparent)`
                 : isActive
                   ? (theme.vars || theme).palette.action.hover
                   : 'transparent',

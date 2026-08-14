@@ -1,5 +1,5 @@
 import Typography, { TypographyProps } from '@mui/material/Typography';
-import { styled, useColorScheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import React, { forwardRef } from 'react';
 import { unstable_composeClasses as composeClasses } from '@mui/material';
 import listItemTagClasses, { ListItemTagClassKey, getListItemTagUtilityClass } from './ListItemTagClasses';
@@ -40,15 +40,8 @@ export type ListItemTagProps = TypographyProps & {
 
 const Root = styled(Typography, {
     shouldForwardProp: (prop) => prop !== 'fontColor',
-})<Pick<ListItemTagProps, 'backgroundColor' | 'fontColor' | 'onClick' | 'variant'>>(({
-    backgroundColor,
-    fontColor,
-    onClick,
-    theme,
-}) => {
-    const colorScheme = useColorScheme();
-
-    return `
+})<Pick<ListItemTagProps, 'backgroundColor' | 'fontColor' | 'onClick' | 'variant'>>(
+    ({ backgroundColor, fontColor, onClick, theme }) => `
             border-radius: 0.125rem;
             padding: 0;
             /* @noflip */
@@ -59,17 +52,11 @@ const Root = styled(Typography, {
             display: inline-block;
             cursor: ${onClick ? 'pointer' : 'inherit'};
             background-color:
-                ${
-                    backgroundColor ||
-                    (colorScheme.mode === 'dark' ? theme.palette.primary.dark : theme.palette.primary.main)
-                };
+                ${backgroundColor || theme.palette.primary.main};
             color:
                 ${
                     fontColor ||
-                    theme.palette.getContrastText(
-                        convertColorNameToHex(backgroundColor) ||
-                            (colorScheme.mode === 'dark' ? theme.palette.primary.dark : theme.palette.primary.main)
-                    )
+                    theme.palette.getContrastText(convertColorNameToHex(backgroundColor) || theme.palette.primary.main)
                 };
             &.${listItemTagClasses.noVariant} {
                 font-weight: 700; // bold
@@ -77,8 +64,8 @@ const Root = styled(Typography, {
                 font-size: 0.625rem;
                 line-height: 1rem;
                 height: 1rem;
-            },`;
-});
+            },`
+);
 
 const ListItemTagRender: React.ForwardRefRenderFunction<unknown, ListItemTagProps> = (
     props: ListItemTagProps,

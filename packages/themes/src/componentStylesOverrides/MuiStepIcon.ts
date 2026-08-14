@@ -20,16 +20,16 @@ export default {
                 color: Color(BLUIColors.black[300]).alpha(0.36).string(),
                 zIndex: 1,
                 '&.Mui-active': {
-                    color: theme.vars.palette.primary.dark,
+                    color: theme.vars.palette.primary.main,
                     '& .MuiStepIcon-text': {
-                        fill: WhiteText,
+                        fill: BLUIColors.blue[900],
                         fontWeight: 600,
                     },
                 },
                 '&.Mui-completed': {
-                    color: theme.vars.palette.primary.dark,
+                    color: theme.vars.palette.primary.main,
                     '& .MuiStepIcon-text': {
-                        fill: WhiteText,
+                        fill: BLUIColors.blue[900],
                         fontWeight: 600,
                     },
                 },

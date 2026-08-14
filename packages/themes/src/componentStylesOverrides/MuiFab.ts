@@ -36,10 +36,10 @@ export default {
                 backgroundColor: BLUIColors.blue[300],
             },
             ...theme.applyStyles('dark', {
-                backgroundColor: theme.vars.palette.primary.dark,
-                color: WhiteText,
+                backgroundColor: theme.vars.palette.primary.main,
+                color: BLUIColors.blue[900],
                 '&:hover': {
-                    backgroundColor: BLUIColors.blue[300],
+                    backgroundColor: theme.vars.palette.primary.main,
                 },
             }),
         }),

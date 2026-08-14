@@ -27,7 +27,7 @@ export default {
                         right: '5%',
                         bottom: '5%',
                         left: '5%',
-                        backgroundColor: BLUIColors.white[50],
+                        backgroundColor: BLUIColors.blue[900],
                         borderRadius: '50%',
                     },
                 },
