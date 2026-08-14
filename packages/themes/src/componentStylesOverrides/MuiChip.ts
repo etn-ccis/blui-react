@@ -49,7 +49,7 @@ export default {
                 },
                 '& .MuiChip-avatarColorPrimary': {
                     backgroundColor: theme.vars.palette.primary.light,
-                    color: theme.vars.palette.primary.dark,
+                    color: BLUIColors.blue[900],
                 },
                 '& .MuiChip-avatarColorSecondary': {
                     backgroundColor: theme.vars.palette.primary.light,
@@ -97,7 +97,7 @@ export default {
                 },
                 '&.MuiChip-clickableColorPrimary': {
                     '&:hover': {
-                        backgroundColor: BLUIColors.blue[300],
+                        backgroundColor: BLUIColors.blue[200],
                     },
                 },
                 '&.MuiChip-clickableColorSecondary': {
@@ -116,8 +116,8 @@ export default {
                 opacity: 1,
             },
             ...theme.applyStyles('dark', {
-                color: WhiteText,
-                backgroundColor: theme.vars.palette.primary.dark,
+                color: BLUIColors.blue[900],
+                backgroundColor: theme.vars.palette.primary.main,
                 '&:not(.MuiChip-outlinedPrimary).Mui-disabled': {
                     backgroundColor: theme.vars.palette.divider,
                     color: BLUIColors.black[300],
@@ -174,9 +174,9 @@ export default {
                     color: theme.vars.palette.text.primary,
                 },
                 '&.MuiChip-deleteIconColorPrimary': {
-                    color: BLUIColors.blue[100],
+                    color: BLUIColors.blue[900],
                     '&:hover': {
-                        color: WhiteText,
+                        color: BLUIColors.blue[900],
                     },
                 },
                 '&.MuiChip-deleteIconColorSecondary': {
@@ -282,7 +282,7 @@ export default {
                 },
                 '& .MuiChip-avatarColorPrimary': {
                     backgroundColor: BLUIColors.blue[100],
-                    color: theme.vars.palette.primary.dark,
+                    color: BLUIColors.blue[900],
                 },
                 '& .MuiChip-avatarColorSecondary': {
                     backgroundColor: BLUIColors.blue[100],

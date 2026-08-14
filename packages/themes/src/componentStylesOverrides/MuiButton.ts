@@ -85,13 +85,13 @@ export default {
                 color: BLUIColors.blue[200],
             },
             ...theme.applyStyles('dark', {
-                backgroundColor: theme.vars.palette.primary.dark,
-                color: BLUIColors.white[50],
+                backgroundColor: theme.vars.palette.primary.main,
+                color: BLUIColors.blue[900],
                 '&:hover': {
-                    backgroundColor: BLUIColors.blue[300],
+                    backgroundColor: theme.vars.palette.primary.main,
                 },
                 '&:active': {
-                    backgroundColor: BLUIColors.blue[200],
+                    backgroundColor: theme.vars.palette.primary.main,
                 },
                 '&.Mui-disabled': {
                     borderWidth: 0,

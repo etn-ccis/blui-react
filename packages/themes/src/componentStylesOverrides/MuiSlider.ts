@@ -9,7 +9,7 @@ export default {
             color: BLUIColors.blue[300],
             ...theme.applyStyles('dark', {
                 height: 6,
-                color: BLUIColors.blue[300],
+                color: BLUIColors.blue[200],
             }),
             '&.Mui-disabled': {
                 color: theme.vars.palette.primary.main,
@@ -59,19 +59,19 @@ export default {
         mark: ({ theme }) => ({
             backgroundColor: BLUIColors.blue[200],
             ...theme.applyStyles('dark', {
-                backgroundColor: theme.vars.palette.primary.dark,
+                backgroundColor: theme.vars.palette.primary.main,
             }),
         }),
         markActive: ({ theme }) => ({
             backgroundColor: BLUIColors.blue[200],
             ...theme.applyStyles('dark', {
-                backgroundColor: theme.vars.palette.primary.dark,
+                backgroundColor: theme.vars.palette.primary.main,
             }),
         }),
         valueLabel: ({ theme }) => ({
             backgroundColor: BLUIColors.blue[300],
             ...theme.applyStyles('dark', {
-                backgroundColor: BLUIColors.blue[300],
+                backgroundColor: BLUIColors.blue[200],
                 color: Color(BLUIColors.darkBlack[900]).alpha(0.87).string(),
             }),
         }),

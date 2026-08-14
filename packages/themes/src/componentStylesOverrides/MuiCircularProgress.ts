@@ -4,7 +4,7 @@ export default {
     styleOverrides: {
         colorPrimary: ({ theme }) => ({
             ...theme.applyStyles('dark', {
-                color: theme.vars.palette.primary.dark,
+                color: theme.vars.palette.primary.main,
             }),
         }),
         colorSecondary: ({ theme }) => ({

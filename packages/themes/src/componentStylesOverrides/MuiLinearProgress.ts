@@ -6,7 +6,7 @@ export default {
         colorPrimary: ({ theme }) => ({
             backgroundColor: BLUIColors.blue[100],
             ...theme.applyStyles('dark', {
-                backgroundColor: `rgba(${theme.vars.palette.primary.dark} / 0.7)`,
+                backgroundColor: `rgba(${theme.vars.palette.primary.main} / 0.7)`,
             }),
         }),
         colorSecondary: ({ theme }) => ({
@@ -17,7 +17,7 @@ export default {
         }),
         dashedColorPrimary: ({ theme }) => ({
             ...theme.applyStyles('dark', {
-                backgroundImage: `radial-gradient(${`rgba(${theme.vars.palette.primary.dark} / 0.5)`} 0%, ${`rgba(${theme.vars.palette.primary.dark} / 0.7)`} 16%, transparent 42%)`,
+                backgroundImage: `radial-gradient(${`rgba(${theme.vars.palette.primary.main} / 0.5)`} 0%, ${`rgba(${theme.vars.palette.primary.main} / 0.7)`} 16%, transparent 42%)`,
             }),
         }),
         dashedColorSecondary: ({ theme }) => ({
@@ -27,7 +27,7 @@ export default {
         }),
         barColorPrimary: ({ theme }) => ({
             ...theme.applyStyles('dark', {
-                backgroundColor: theme.vars.palette.primary.dark,
+                backgroundColor: theme.vars.palette.primary.main,
             }),
         }),
         barColorSecondary: ({ theme }) => ({
