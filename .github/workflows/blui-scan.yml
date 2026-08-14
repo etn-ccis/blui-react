@@ -7,7 +7,7 @@ on:
     paths:
       - 'apps/design-patterns/**'
       # - 'apps/demo/**'
-      - 'apps/showcase/**'
+      # - 'apps/showcase/**'
       - 'apps/storybook/**'
       - 'apps/themeShowcase/**'
       - 'apps/workflow/example-vite/**'
