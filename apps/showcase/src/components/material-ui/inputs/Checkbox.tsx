@@ -13,6 +13,7 @@ export const CheckboxExample: React.FC = () => {
         checkedB: true,
         checkedF: true,
         checkedG: true,
+        checkedHighlight: true,
     });
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -30,6 +31,18 @@ export const CheckboxExample: React.FC = () => {
             <FormControlLabel
                 control={<Checkbox checked={state.checkedB} onChange={handleChange} name="checkedB" color="primary" />}
                 label="Primary"
+            />
+            <FormControlLabel
+                control={
+                    <Checkbox
+                        checked={state.checkedHighlight}
+                        className="MuiCheckbox-highlight"
+                        color="primary"
+                        name="checkedHighlight"
+                        onChange={handleChange}
+                    />
+                }
+                label="Highlight"
             />
             <FormControlLabel control={<Checkbox name="checkedC" />} label="Uncontrolled" />
             <FormControlLabel disabled control={<Checkbox name="checkedD" />} label="Disabled" />

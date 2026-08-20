@@ -12,12 +12,12 @@ export default {
             '&.Mui-checked': {
                 color: theme.vars.palette.primary.main,
                 '&.Mui-disabled': {
-                    color: theme.vars.palette.secondary.main,
+                    color: theme.vars.palette.primary.main,
                     opacity: 0.8,
                 },
                 '&.Mui-disabled + .MuiSwitch-track': {
                     opacity: 0.38,
-                    backgroundColor: theme.vars.palette.secondary.main,
+                    backgroundColor: theme.vars.palette.primary.main,
                 },
             },
             ...theme.applyStyles('dark', {
@@ -26,7 +26,7 @@ export default {
                     opacity: 0.38,
                 },
                 '&.Mui-checked': {
-                    color: theme.vars.palette.secondary.main,
+                    color: theme.vars.palette.primary.main,
                     '&.Mui-disabled': {
                         color: theme.vars.palette.primary.main,
                     },
