@@ -9,6 +9,9 @@ export default {
             '.MuiFormControlLabel-root &:hover': {
                 backgroundColor: 'transparent',
             },
+            '&.MuiCheckbox-highlight': {
+                backgroundColor: theme.vars.palette.action.highlight,
+            },
             ...theme.applyStyles('light', {
                 color: theme.vars.palette.action.active,
             }),

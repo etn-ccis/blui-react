@@ -32,14 +32,38 @@ export default {
         primary: ({ theme }) => ({
             backgroundColor: theme.vars.palette.primary.main,
             color: WhiteText,
+            '&:focus': {
+                backgroundColor: BLUIColors.onPrimaryPressed,
+            },
             '&:hover': {
-                backgroundColor: BLUIColors.blue[300],
+                backgroundColor: BLUIColors.onPrimaryHover,
+            },
+            '&.MuiFab-extended': {
+                backgroundColor: BLUIColors.blue[500],
+                '&:focus': {
+                    backgroundColor: BLUIColors.onPrimaryPressed,
+                },
+                '&:hover': {
+                    backgroundColor: BLUIColors.onPrimaryHover,
+                },
             },
             ...theme.applyStyles('dark', {
                 backgroundColor: theme.vars.palette.primary.main,
                 color: BLUIColors.blue[900],
+                '&:focus': {
+                    backgroundColor: BLUIColors.onPrimaryPressedDark,
+                },
                 '&:hover': {
+                    backgroundColor: BLUIColors.onPrimaryHoverDark,
+                },
+                '&.MuiFab-extended': {
                     backgroundColor: theme.vars.palette.primary.main,
+                    '&:focus': {
+                        backgroundColor: BLUIColors.onPrimaryPressedDark,
+                    },
+                    '&:hover': {
+                        backgroundColor: BLUIColors.onPrimaryHoverDark,
+                    },
                 },
             }),
         }),

@@ -63,5 +63,16 @@ export const FloatingActionButtonExample: React.FC = () => (
                 </Fab>
             </Box>
         </Box>
+        <Box sx={exampleRowStyles}>
+            <Box sx={ƒabContainerStyles}>
+                <Typography variant={'body2'} sx={labelStyles}>
+                    Extended Primary
+                </Typography>
+                <Fab color="primary" variant="extended">
+                    <Navigation sx={{ mr: 1 }} />
+                    Navigate
+                </Fab>
+            </Box>
+        </Box>
     </Box>
 );

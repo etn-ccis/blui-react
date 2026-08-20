@@ -32,6 +32,7 @@ export const RadioExample: React.FC = () => {
                 label="Disabled Secondary"
                 disabled
             />
+            <FormControlLabel control={<Radio defaultChecked className="MuiRadio-highlight" />} label="Highlight" />
         </FormControl>
     );
 };

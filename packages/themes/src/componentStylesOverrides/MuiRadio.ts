@@ -9,6 +9,9 @@ export default {
             '.MuiFormControlLabel-root &:hover': {
                 backgroundColor: 'transparent',
             },
+            '&.MuiRadio-highlight': {
+                backgroundColor: theme.vars.palette.action.highlight,
+            },
         }),
     },
 } as Components<Omit<Theme, 'components' | 'palette'> & CssVarsTheme>['MuiRadio'];

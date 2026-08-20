@@ -18,6 +18,9 @@ export default {
                     backgroundColor: theme.vars.palette.primary.main,
                 },
             },
+            '&.MuiPickersArrowSwitcher-button': {
+                color: theme.vars.palette.primary.main,
+            },
             '&.MuiMenuItem-root': {
                 '&.Mui-selected': {
                     backgroundColor: theme.vars.palette.action.hover,

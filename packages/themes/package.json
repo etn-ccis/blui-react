@@ -39,7 +39,7 @@
         "React"
     ],
     "dependencies": {
-        "@brightlayer-ui/colors": "^3.2.1-alpha.0",
+        "@brightlayer-ui/colors": "^3.3.0-alpha.1",
         "@brightlayer-ui/types": "^2.0.0",
         "@fontsource/open-sans": "^5.0.3",
         "color": "^4.2.3"

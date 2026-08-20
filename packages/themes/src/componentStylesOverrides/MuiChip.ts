@@ -76,11 +76,14 @@ export default {
                 backgroundColor: BLUIColors.gray[100],
             },
             '&:active': {
-                backgroundColor: BLUIColors.gray[50],
+                backgroundColor: Color(BLUIColors.pressed).alpha(0.16).string(),
             },
             '&.MuiChip-clickableColorPrimary': {
                 '&:hover': {
-                    backgroundColor: BLUIColors.blue[300],
+                    backgroundColor: BLUIColors.onPrimaryHover,
+                },
+                '&:active': {
+                    backgroundColor: BLUIColors.onPrimaryPressed,
                 },
             },
             '&.MuiChip-clickableColorSecondary': {
@@ -93,11 +96,14 @@ export default {
                     backgroundColor: BLUIColors.black[400],
                 },
                 '&:active': {
-                    backgroundColor: BLUIColors.gray[400],
+                    backgroundColor: Color(BLUIColors.pressedDark).alpha(0.16).string(),
                 },
                 '&.MuiChip-clickableColorPrimary': {
                     '&:hover': {
-                        backgroundColor: BLUIColors.blue[200],
+                        backgroundColor: BLUIColors.onPrimaryHoverDark,
+                    },
+                    '&:active': {
+                        backgroundColor: BLUIColors.onPrimaryPressedDark,
                     },
                 },
                 '&.MuiChip-clickableColorSecondary': {
@@ -201,10 +207,10 @@ export default {
             borderColor: Color(BlackBorder).alpha(0.12).string(),
             backgroundColor: 'transparent',
             '&.MuiChip-clickable:hover': {
-                backgroundColor: BLUIColors.white[200],
+                backgroundColor: Color(BLUIColors.colorHover).alpha(0.08).string(),
             },
             '&.MuiChip-clickable:active': {
-                backgroundColor: BLUIColors.white[200],
+                backgroundColor: Color(BLUIColors.pressed).alpha(0.16).string(),
             },
             '& .MuiChip-avatar': {
                 backgroundColor: BLUIColors.gray[500],
