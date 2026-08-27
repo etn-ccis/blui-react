@@ -6,10 +6,16 @@ export default {
         root: ({ theme }) => ({
             '&.Mui-disabled': {
                 color: theme.vars.palette.action.disabled,
+                '& .MuiSelect-icon, & .MuiSvgIcon-root': {
+                    color: theme.vars.palette.action.disabled,
+                },
             },
             ...theme.applyStyles('dark', {
                 '&.Mui-disabled': {
-                    color: theme.vars.palette.text.disabled,
+                    color: theme.vars.palette.action.disabled,
+                    '& .MuiSelect-icon, & .MuiSvgIcon-root': {
+                        color: theme.vars.palette.action.disabled,
+                    },
                 },
             }),
         }),

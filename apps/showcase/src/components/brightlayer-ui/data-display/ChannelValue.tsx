@@ -2,9 +2,9 @@ import React from 'react';
 import Typography from '@mui/material/Typography';
 import { ChannelValue } from '@brightlayer-ui/react-components';
 import TrendingUp from '@mui/icons-material/TrendingUp';
-import * as colors from '@brightlayer-ui/colors';
+import { useColorScheme, Box } from '@mui/material';
 import { useDirection } from '../../../contexts/AppContext';
-import { Box } from '@mui/material';
+import { getStatusColor } from '../../../utils/statusColors';
 
 const componentContainerStyles = {
     display: 'flex',
@@ -19,6 +19,8 @@ const sectionTitleStyles = {
 export const ChannelValueExample: React.FC = () => {
     const direction = useDirection();
     const rtl = direction === 'rtl';
+    const { mode } = useColorScheme();
+    const isDarkMode = mode === 'dark';
 
     return (
         <>
@@ -41,7 +43,12 @@ export const ChannelValueExample: React.FC = () => {
                 <ChannelValue
                     value={'123'}
                     units={'hz'}
-                    icon={<TrendingUp htmlColor={colors.red[500]} sx={rtl ? { transform: 'scaleX(-1)' } : {}} />}
+                    icon={
+                        <TrendingUp
+                            htmlColor={getStatusColor(isDarkMode, 'red')}
+                            sx={rtl ? { transform: 'scaleX(-1)' } : {}}
+                        />
+                    }
                 />
             </Box>
             <Box sx={componentContainerStyles}>
@@ -52,7 +59,12 @@ export const ChannelValueExample: React.FC = () => {
                     value={'123'}
                     units={'hz'}
                     fontSize={24}
-                    icon={<TrendingUp htmlColor={colors.red[500]} sx={rtl ? { transform: 'scaleX(-1)' } : {}} />}
+                    icon={
+                        <TrendingUp
+                            htmlColor={getStatusColor(isDarkMode, 'red')}
+                            sx={rtl ? { transform: 'scaleX(-1)' } : {}}
+                        />
+                    }
                 />
             </Box>
         </>

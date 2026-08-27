@@ -16,7 +16,7 @@ export default {
             ...theme.applyStyles('dark', {
                 color: theme.vars.palette.text.secondary,
                 '&.Mui-disabled': {
-                    color: theme.vars.palette.text.disabled,
+                    color: theme.vars.palette.action.disabled,
                 },
                 '&.MuiFormLabel-filled:not(.Mui-disabled):not(.Mui-focused):not(.Mui-error)': {
                     color: theme.vars.palette.text.primary,

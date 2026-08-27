@@ -1,10 +1,12 @@
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
+import { useColorScheme } from '@mui/material';
 import { InfoListItem, ListItemTag } from '@brightlayer-ui/react-components';
 import Card from '@mui/material/Card';
 import Notifications from '@mui/icons-material/Notifications';
 import NotificationsActive from '@mui/icons-material/NotificationsActive';
 import * as colors from '@brightlayer-ui/colors';
+import { getStatusColor } from '../../utils/statusColors';
 import { usePageTitle } from '../../hooks/usePageTitle';
 import Box from '@mui/material/Box';
 
@@ -20,6 +22,8 @@ export type AlarmItem = {
 
 export const Alarms: React.FC = () => {
     const theme = useTheme();
+    const { mode } = useColorScheme();
+    const isDarkMode = mode === 'dark';
     usePageTitle('Alarms');
 
     const getRandomDate = (): Date => {
@@ -131,22 +135,26 @@ export const Alarms: React.FC = () => {
     const getIconColor = (alarm: string): string => {
         switch (alarm) {
             case 'active':
-                return colors.white[50];
+                return isDarkMode ? colors.black[900] : colors.white[50];
             case 'inactive':
-                return colors.red[500];
+                return getStatusColor(isDarkMode, 'red');
             case 'cleared':
             default:
                 return colors.gray[500];
         }
     };
 
-    const getBadgeColor = (badge: string): string => {
+    const getBadgeColor = (badge: string): { backgroundColor: string; fontColor: string } => {
         switch (badge) {
             case 'active':
-                return theme.palette.error.main; // @TODO: Change it to (theme.vars || theme).palette.error.main
+                return isDarkMode
+                    ? { backgroundColor: colors.red[300], fontColor: colors.black[900] }
+                    : { backgroundColor: colors.red[500], fontColor: colors.white[50] };
             case 'new':
             default:
-                return theme.palette.primary.main;
+                return isDarkMode
+                    ? { backgroundColor: colors.blue[200], fontColor: colors.blue[900] }
+                    : { backgroundColor: colors.blue[500], fontColor: colors.white[50] };
         }
     };
 
@@ -181,12 +189,18 @@ export const Alarms: React.FC = () => {
                         iconAlign={'center'}
                         avatar={data.alarm === 'active'}
                         statusColor={
-                            data.alarm === 'active' || data.alarm === 'inactive' ? colors.red[500] : 'transparent'
+                            data.alarm === 'active' || data.alarm === 'inactive'
+                                ? getStatusColor(isDarkMode, 'red')
+                                : 'transparent'
                         }
                         rightComponent={
                             data.badge ? (
                                 <>
-                                    <ListItemTag label={data.badge} backgroundColor={getBadgeColor(data.badge)} />
+                                    <ListItemTag
+                                        label={data.badge}
+                                        backgroundColor={getBadgeColor(data.badge).backgroundColor}
+                                        fontColor={getBadgeColor(data.badge).fontColor}
+                                    />
                                 </>
                             ) : (
                                 <></>

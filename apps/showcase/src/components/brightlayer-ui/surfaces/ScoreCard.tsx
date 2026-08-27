@@ -13,6 +13,7 @@ import Notifications from '@mui/icons-material/Notifications';
 import Search from '@mui/icons-material/Search';
 import { GradeA, Moisture as Humidity, Temp } from '@brightlayer-ui/icons-mui';
 import { useDirection } from '../../../contexts/AppContext';
+import { getStatusColor } from '../../../utils/statusColors';
 import Box from '@mui/material/Box';
 import { useColorScheme } from '@mui/material';
 
@@ -57,7 +58,7 @@ export const ScoreCardExample: React.FC = () => {
         />,
         <Hero
             key={'hero2'}
-            icon={<Humidity fontSize={'inherit'} htmlColor={colors.blue[300]} />}
+            icon={<Humidity fontSize={'inherit'} htmlColor={isDarkMode ? colors.blue[200] : colors.blue[500]} />}
             label={'Humidity'}
             ChannelValueProps={{ value: 54, units: '%', fontSize: 'normal' }}
             iconSize={48}
@@ -148,7 +149,7 @@ export const ScoreCardExample: React.FC = () => {
                 badge={
                     <HeroBanner>
                         <Hero
-                            icon={<GradeA fontSize={'inherit'} htmlColor={colors.green[500]} />}
+                            icon={<GradeA fontSize={'inherit'} htmlColor={getStatusColor(isDarkMode, 'green')} />}
                             label={'Grade'}
                             iconSize={72}
                             iconBackgroundColor={isDarkMode ? colors.black[900] : colors.white[50]}
@@ -173,8 +174,8 @@ export const ScoreCardExample: React.FC = () => {
                     <InfoListItem
                         dense
                         sx={InfoListItemStyles}
-                        fontColor={isDarkMode ? colors.blue[300] : colors.blue[500]}
-                        iconColor={isDarkMode ? colors.blue[300] : colors.blue[500]}
+                        fontColor={isDarkMode ? colors.blue[200] : colors.blue[500]}
+                        iconColor={isDarkMode ? colors.blue[200] : colors.blue[500]}
                         title={'1 Event'}
                         icon={<ListAlt color={'inherit'} sx={rtl ? { transform: 'scaleX(-1)' } : {}} />}
                     />
