@@ -1,12 +1,15 @@
 import React from 'react';
 import { ChannelValue, ThreeLiner } from '@brightlayer-ui/react-components';
 import TrendingUp from '@mui/icons-material/TrendingUp';
-import * as colors from '@brightlayer-ui/colors';
+import { useColorScheme } from '@mui/material';
 import { useDirection } from '../../../contexts/AppContext';
+import { getStatusColor } from '../../../utils/statusColors';
 
 export const ThreeLinerExample: React.FC = () => {
     const direction = useDirection();
     const rtl = direction === 'rtl';
+    const { mode } = useColorScheme();
+    const isDarkMode = mode === 'dark';
 
     return (
         <>
@@ -19,7 +22,12 @@ export const ThreeLinerExample: React.FC = () => {
                     <ChannelValue
                         value={'123'}
                         units={'hz'}
-                        icon={<TrendingUp htmlColor={colors.red[500]} sx={rtl ? { transform: 'scaleX(-1)' } : {}} />}
+                        icon={
+                            <TrendingUp
+                                htmlColor={getStatusColor(isDarkMode, 'red')}
+                                sx={rtl ? { transform: 'scaleX(-1)' } : {}}
+                            />
+                        }
                     />
                 }
             />

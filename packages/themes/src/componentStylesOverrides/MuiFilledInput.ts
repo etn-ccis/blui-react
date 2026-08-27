@@ -19,8 +19,8 @@ export default {
                 backgroundColor: TextFieldContainerLight,
             },
             '&.Mui-disabled': {
-                color: `rgba(${theme.vars.palette.text.primary} / 0.3)`,
-                backgroundColor: BLUIColors.white[100],
+                color: theme.vars.palette.action.disabled,
+                backgroundColor: theme.vars.palette.action.disabledBackground,
                 pointerEvents: 'none',
             },
             ...theme.applyStyles('dark', {
@@ -32,17 +32,25 @@ export default {
                     backgroundColor: TextFieldContainerDark,
                 },
                 '&.Mui-disabled': {
-                    color: theme.vars.palette.text.disabled,
-                    backgroundColor: Color(BLUIColors.black[800]).alpha(0.5).string(),
+                    color: theme.vars.palette.action.disabled,
+                    backgroundColor: theme.vars.palette.action.disabledBackground,
                     pointerEvents: 'none',
                 },
             }),
         }),
         input: ({ theme }) => ({
+            '&.Mui-disabled': {
+                color: theme.vars.palette.action.disabled,
+                WebkitTextFillColor: theme.vars.palette.action.disabled,
+            },
             '&:-webkit-autofill': {
                 WebkitBoxShadow: `0 0 0 30px ${theme.vars.palette.background.default} inset`,
             },
             ...theme.applyStyles('dark', {
+                '&.Mui-disabled': {
+                    color: theme.vars.palette.action.disabled,
+                    WebkitTextFillColor: theme.vars.palette.action.disabled,
+                },
                 '&:-webkit-autofill': {
                     WebkitBoxShadow: `0 0 0 100px ${BLUIColors.black[800]} inset`,
                 },

@@ -3,6 +3,7 @@ import Typography from '@mui/material/Typography';
 import { InfoListItem, ListItemTag } from '@brightlayer-ui/react-components';
 import * as colors from '@brightlayer-ui/colors';
 import BrightnessMedium from '@mui/icons-material/BrightnessMedium';
+import { useColorScheme } from '@mui/material';
 import { useDirection } from '../../../contexts/AppContext';
 import Box from '@mui/material/Box';
 
@@ -20,6 +21,8 @@ const labelStyles = {
 export const ListItemTagExample: React.FC = () => {
     const direction = useDirection();
     const rtl = direction === 'rtl';
+    const { mode } = useColorScheme();
+    const isDarkMode = mode === 'dark';
 
     return (
         <>
@@ -34,13 +37,21 @@ export const ListItemTagExample: React.FC = () => {
                     <Typography sx={labelStyles} variant={'body2'}>
                         Basic Usage
                     </Typography>
-                    <ListItemTag label={'active'} />
+                    <ListItemTag
+                        label={'active'}
+                        backgroundColor={isDarkMode ? colors.blue[200] : undefined}
+                        fontColor={isDarkMode ? colors.blue[900] : undefined}
+                    />
                 </Box>
                 <Box sx={componentContainerStyles}>
                     <Typography sx={labelStyles} variant={'body2'}>
                         w/ Custom Colors
                     </Typography>
-                    <ListItemTag label={'active'} backgroundColor={colors.red['500']} fontColor={colors.white['50']} />
+                    <ListItemTag
+                        label={'active'}
+                        backgroundColor={isDarkMode ? colors.red[300] : colors.red['500']}
+                        fontColor={isDarkMode ? colors.black[900] : colors.white['50']}
+                    />
                 </Box>
             </Box>
             <Box sx={{ ...componentContainerStyles, mt: 6 }}>
@@ -55,8 +66,8 @@ export const ListItemTagExample: React.FC = () => {
                         <Box sx={{ display: 'flex' }}>
                             <ListItemTag
                                 label={'Build Passing'}
-                                backgroundColor={colors.green[300]}
-                                fontColor={colors.black[900]}
+                                backgroundColor={isDarkMode ? colors.green[300] : colors.green['500']}
+                                fontColor={isDarkMode ? colors.black[900] : colors.white['50']}
                                 sx={{
                                     mr: rtl ? 0 : 2,
                                     ml: rtl ? 2 : 0,
@@ -64,8 +75,8 @@ export const ListItemTagExample: React.FC = () => {
                             />
                             <ListItemTag
                                 label={'5 Bugs'}
-                                backgroundColor={colors.red[300]}
-                                fontColor={colors.black[900]}
+                                backgroundColor={isDarkMode ? colors.red[300] : colors.red['500']}
+                                fontColor={isDarkMode ? colors.black[900] : colors.white['50']}
                             />
                         </Box>
                     }

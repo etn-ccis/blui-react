@@ -5,6 +5,7 @@ import Card from '@mui/material/Card';
 import Button from '@mui/material/Button';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import { useColorScheme } from '@mui/material';
 import {
     Hero,
     HeroBanner,
@@ -27,6 +28,7 @@ import { Pie, Battery } from '@brightlayer-ui/react-progress-icons';
 import { GradeA, Leaf, CurrentCircled, VoltageCircled, Temp, Moisture as Humidity } from '@brightlayer-ui/icons-mui';
 import top from '../../assets/topology_40.png';
 import { usePageTitle } from '../../hooks/usePageTitle';
+import { getStatusColor } from '../../utils/statusColors';
 import Box from '@mui/material/Box';
 
 const scorecardStyles = {
@@ -42,6 +44,8 @@ const listTagStyles = {
 
 export const Dashboard: React.FC = () => {
     const theme = useTheme();
+    const { mode } = useColorScheme();
+    const isDarkMode = mode === 'dark';
     const rtl = theme.direction === 'rtl';
     const mdUp = useMediaQuery(theme.breakpoints.up('md'));
     usePageTitle('Dashboard');
@@ -76,7 +80,12 @@ export const Dashboard: React.FC = () => {
                                     ChannelValueProps={{ value: 98, units: '°F' }}
                                 />
                                 <Hero
-                                    icon={<Humidity fontSize={'inherit'} htmlColor={Colors.blue[300]} />}
+                                    icon={
+                                        <Humidity
+                                            fontSize={'inherit'}
+                                            htmlColor={isDarkMode ? Colors.blue[200] : Colors.blue[500]}
+                                        />
+                                    }
                                     label={'Humidity'}
                                     ChannelValueProps={{ value: 54, units: '%' }}
                                     iconSize={48}
@@ -91,16 +100,16 @@ export const Dashboard: React.FC = () => {
                             <InfoListItem
                                 dense
                                 sx={{ height: 36 }}
-                                fontColor={Colors.red[500]}
-                                iconColor={Colors.red[500]}
+                                fontColor={Colors.red[300]}
+                                iconColor={Colors.red[300]}
                                 title={'1 Alarm'}
                                 icon={<Leaf color={'inherit'} />}
                             />
                             <InfoListItem
                                 dense
                                 sx={{ height: 36 }}
-                                fontColor={Colors.blue[500]}
-                                iconColor={Colors.blue[500]}
+                                fontColor={isDarkMode ? Colors.blue[200] : Colors.blue[500]}
+                                iconColor={isDarkMode ? Colors.blue[200] : Colors.blue[500]}
                                 title={'1 Event'}
                                 icon={<Leaf color={'inherit'} />}
                             />
@@ -123,7 +132,9 @@ export const Dashboard: React.FC = () => {
                         badge={
                             <HeroBanner>
                                 <Hero
-                                    icon={<GradeA fontSize={'inherit'} htmlColor={Colors.green[500]} />}
+                                    icon={
+                                        <GradeA fontSize={'inherit'} htmlColor={getStatusColor(isDarkMode, 'green')} />
+                                    }
                                     iconBackgroundColor={(theme.vars || theme).palette.background.paper}
                                     label={'Health'}
                                     iconSize={72}
@@ -145,8 +156,8 @@ export const Dashboard: React.FC = () => {
                             <InfoListItem
                                 dense
                                 sx={{ height: 36 }}
-                                fontColor={Colors.blue[500]}
-                                iconColor={Colors.blue[500]}
+                                fontColor={isDarkMode ? Colors.blue[200] : Colors.blue[500]}
+                                iconColor={isDarkMode ? Colors.blue[200] : Colors.blue[500]}
                                 title={'1 Event'}
                                 icon={<Leaf color={'inherit'} />}
                             />
@@ -164,14 +175,20 @@ export const Dashboard: React.FC = () => {
                     <List sx={{ p: 0 }}>
                         <HeroBanner divider>
                             <Hero
-                                icon={<GradeA fontSize={'inherit'} color={'inherit'} htmlColor={Colors.green[500]} />}
+                                icon={
+                                    <GradeA
+                                        fontSize={'inherit'}
+                                        color={'inherit'}
+                                        htmlColor={getStatusColor(isDarkMode, 'green')}
+                                    />
+                                }
                                 label={'Healthy'}
                                 ChannelValueProps={{ value: 96, units: '/100' }}
                             />
                             <Hero
                                 icon={
                                     <Pie
-                                        color={Colors.blue[500]}
+                                        color={isDarkMode ? Colors.blue[200] : Colors.blue[500]}
                                         percent={65}
                                         size={36}
                                         // @ts-ignore until we publish the updated type definitions
@@ -185,7 +202,7 @@ export const Dashboard: React.FC = () => {
                                     fontSize={20}
                                     icon={
                                         <TrendingUp
-                                            htmlColor={Colors.red[500]}
+                                            htmlColor={getStatusColor(isDarkMode, 'red')}
                                             fontSize={'inherit'}
                                             sx={rtl ? { transform: 'scaleX(-1)' } : {}}
                                         />
@@ -199,7 +216,7 @@ export const Dashboard: React.FC = () => {
                             <Hero
                                 icon={
                                     <Battery
-                                        color={Colors.blue[500]}
+                                        color={isDarkMode ? Colors.blue[200] : Colors.blue[500]}
                                         percent={100}
                                         size={36}
                                         // @ts-ignore until we publish the updated type definitions
@@ -215,7 +232,7 @@ export const Dashboard: React.FC = () => {
                             dense
                             title={'Status'}
                             divider={'full'}
-                            statusColor={Colors.green[500]}
+                            statusColor={getStatusColor(isDarkMode, 'green')}
                             subtitleSeparator={'/'}
                             icon={<Leaf color={'inherit'} />}
                             iconAlign={'center'}
@@ -239,12 +256,19 @@ export const Dashboard: React.FC = () => {
                             title={'Output Voltage'}
                             divider={'full'}
                             avatar
-                            statusColor={Colors.red[500]}
-                            fontColor={Colors.red[500]}
+                            statusColor={getStatusColor(isDarkMode, 'red')}
+                            fontColor={getStatusColor(isDarkMode, 'red')}
+                            iconColor={isDarkMode ? Colors.black[900] : Colors.white[50]}
                             subtitle={['Phase A', 'Phase B', 'Phase C']}
                             icon={<VoltageCircled color={'inherit'} />}
                             rightComponent={
-                                <Box sx={{ display: 'flex', alignItems: 'center', color: Colors.red[500] }}>
+                                <Box
+                                    sx={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        color: getStatusColor(isDarkMode, 'red'),
+                                    }}
+                                >
                                     <ListItemTag label={'monitored'} sx={listTagStyles} />
                                     <ChannelValue fontSize={16} value={480} units={'V'} />,{' '}
                                     <ChannelValue fontSize={16} value={480} units={'V'} />,{' '}
@@ -276,22 +300,20 @@ export const Dashboard: React.FC = () => {
                                     <ListItemTag
                                         backgroundColor={(theme.vars || theme).palette.background.default}
                                         label={'active'}
-                                        fontColor={
-                                            (theme.applyStyles('dark', { color: Colors.green[500] }).color as string) ||
-                                            Colors.blue[700]
-                                        }
+                                        fontColor={isDarkMode ? getStatusColor(isDarkMode, 'green') : Colors.blue[700]}
                                         sx={listTagStyles}
                                     />
                                     <ListItemTag
                                         label={'OVERHEAT'}
-                                        backgroundColor={Colors.red['500']}
+                                        backgroundColor={getStatusColor(isDarkMode, 'red')}
+                                        fontColor={isDarkMode ? Colors.black[900] : Colors.white[50]}
                                         sx={listTagStyles}
                                     />
                                     <ChannelValue
                                         fontSize={16}
                                         icon={
                                             <TrendingUp
-                                                htmlColor={Colors.red[500]}
+                                                htmlColor={getStatusColor(isDarkMode, 'red')}
                                                 sx={rtl ? { transform: 'scaleX(-1)' } : {}}
                                             />
                                         }

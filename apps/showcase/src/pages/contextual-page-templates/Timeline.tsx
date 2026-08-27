@@ -1,11 +1,13 @@
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
+import { useColorScheme } from '@mui/material';
 import { InfoListItem, ListItemTag } from '@brightlayer-ui/react-components';
 import Card from '@mui/material/Card';
 import ChevronRight from '@mui/icons-material/ChevronRight';
 import Notifications from '@mui/icons-material/Notifications';
 import NotificationsActive from '@mui/icons-material/NotificationsActive';
 import * as colors from '@brightlayer-ui/colors';
+import { getStatusColor } from '../../utils/statusColors';
 import { usePageTitle } from '../../hooks/usePageTitle';
 import Box from '@mui/material/Box';
 
@@ -21,6 +23,8 @@ export type TimelineItem = {
 
 export const Timeline: React.FC = () => {
     const theme = useTheme();
+    const { mode } = useColorScheme();
+    const isDarkMode = mode === 'dark';
     usePageTitle('Timeline');
 
     const getRandomDate = (): Date => {
@@ -132,7 +136,7 @@ export const Timeline: React.FC = () => {
             case 'active':
                 return colors.white[50];
             case 'inactive':
-                return colors.red[500];
+                return getStatusColor(isDarkMode, 'red');
             case 'cleared':
             default:
                 return colors.gray[500];
@@ -172,7 +176,9 @@ export const Timeline: React.FC = () => {
                         iconAlign={'center'}
                         avatar={data.alarm === 'active'}
                         statusColor={
-                            data.alarm === 'active' || data.alarm === 'inactive' ? colors.red[500] : 'transparent'
+                            data.alarm === 'active' || data.alarm === 'inactive'
+                                ? getStatusColor(isDarkMode, 'red')
+                                : 'transparent'
                         }
                         rightComponent={
                             data.badge ? (

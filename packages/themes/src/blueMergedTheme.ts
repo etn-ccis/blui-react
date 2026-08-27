@@ -110,9 +110,15 @@ const LightThemeColors = {
 
 // Dark Theme Colors
 const DarkThemeColors = {
-    primary: createSimpleDarkPalette(BLUIColors.blue),
+    primary: {
+        ...createSimpleDarkPalette(BLUIColors.blue),
+        contrastText: BLUIColors.blue[900],
+    },
     secondary: createSimpleDarkPalette(BLUIColors.lightBlue),
-    error: createSimpleDarkPalette(BLUIColors.red),
+    error: {
+        ...createSimpleDarkPalette(BLUIColors.red),
+        contrastText: BLUIColors.black[900],
+    },
     success: createSimpleDarkPalette(BLUIColors.green),
     info: createSimpleDarkPalette(BLUIColors.lightBlue),
     divider: Color(BLUIColors.darkThemeDivider).alpha(0.1).string(),
@@ -136,7 +142,7 @@ const DarkThemeColors = {
         active: BLUIColors.black[200],
         disabled: Color(BLUIColors.colorDisabledDark).alpha(0.25).string(),
         disabledBackground: Color(BLUIColors.colorDisabledBackgroundDark).alpha(0.05).string(),
-        highlight: Color(BLUIColors.highlightBlue).alpha(0.2).string(),
+        highlight: Color(BLUIColors.highlightBlue).alpha(0.18).string(),
     },
 };
 

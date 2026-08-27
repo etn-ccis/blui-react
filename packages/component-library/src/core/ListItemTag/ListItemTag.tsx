@@ -40,8 +40,25 @@ export type ListItemTagProps = TypographyProps & {
 
 const Root = styled(Typography, {
     shouldForwardProp: (prop) => prop !== 'fontColor',
-})<Pick<ListItemTagProps, 'backgroundColor' | 'fontColor' | 'onClick' | 'variant'>>(
-    ({ backgroundColor, fontColor, onClick, theme }) => `
+})<Pick<ListItemTagProps, 'backgroundColor' | 'fontColor' | 'onClick' | 'variant'>>(({
+    backgroundColor,
+    fontColor,
+    onClick,
+    theme,
+}) => {
+    const primaryMain = (theme.vars || theme).palette.primary.main;
+    const primaryContrastText = (theme.vars || theme).palette.primary.contrastText;
+    const errorMain = (theme.vars || theme).palette.error.main;
+    const errorContrastText = (theme.vars || theme).palette.error.contrastText;
+    const resolvedFontColor =
+        fontColor ||
+        (!backgroundColor || backgroundColor === primaryMain || backgroundColor === errorMain
+            ? backgroundColor === errorMain
+                ? errorContrastText
+                : primaryContrastText
+            : theme.palette.getContrastText(convertColorNameToHex(backgroundColor) || backgroundColor));
+
+    return `
             border-radius: 0.125rem;
             padding: 0;
             /* @noflip */
@@ -52,20 +69,17 @@ const Root = styled(Typography, {
             display: inline-block;
             cursor: ${onClick ? 'pointer' : 'inherit'};
             background-color:
-                ${backgroundColor || theme.palette.primary.main};
+                ${backgroundColor || primaryMain};
             color:
-                ${
-                    fontColor ||
-                    theme.palette.getContrastText(convertColorNameToHex(backgroundColor) || theme.palette.primary.main)
-                };
+                ${resolvedFontColor};
             &.${listItemTagClasses.noVariant} {
                 font-weight: 700; // bold
                 letter-spacing: 1px;
                 font-size: 0.625rem;
                 line-height: 1rem;
                 height: 1rem;
-            },`
-);
+            },`;
+});
 
 const ListItemTagRender: React.ForwardRefRenderFunction<unknown, ListItemTagProps> = (
     props: ListItemTagProps,

@@ -3,12 +3,16 @@ import { ChannelValue, InfoListItem } from '@brightlayer-ui/react-components';
 import * as colors from '@brightlayer-ui/colors';
 import { Alarm } from '@mui/icons-material';
 import { Device, GradeA, Leaf, Temp } from '@brightlayer-ui/icons-mui';
+import { useColorScheme } from '@mui/material';
 import { useDirection } from '../../../contexts/AppContext';
+import { getStatusColor } from '../../../utils/statusColors';
 import Box from '@mui/material/Box';
 
 export const InfoListItemExample: React.FC = () => {
     const direction = useDirection();
     const rtl = direction === 'rtl';
+    const { mode } = useColorScheme();
+    const isDarkMode = mode === 'dark';
 
     return (
         <>
@@ -40,6 +44,7 @@ export const InfoListItemExample: React.FC = () => {
                 title={'Info List Item'}
                 subtitle={'with an avatar'}
                 statusColor={colors.green[700]}
+                iconColor={isDarkMode ? colors.black[900] : undefined}
                 icon={<GradeA />}
             />
             <InfoListItem
@@ -48,7 +53,7 @@ export const InfoListItemExample: React.FC = () => {
                 fontColor={colors.black[500]}
                 iconColor={colors.black[500]}
                 icon={<Leaf />}
-                backgroundColor={colors.yellow[500]}
+                backgroundColor={getStatusColor(isDarkMode, 'yellow')}
             />
             <InfoListItem
                 title={'Info List Item'}
@@ -81,7 +86,7 @@ export const InfoListItemExample: React.FC = () => {
                 subtitle={'with all properties'}
                 info={'more info...'}
                 icon={<Device />}
-                statusColor={colors.blue[500]}
+                statusColor={isDarkMode ? colors.blue[200] : colors.blue[500]}
                 iconColor={colors.black[500]}
                 fontColor={colors.black[500]}
                 backgroundColor={colors.black[50]}
