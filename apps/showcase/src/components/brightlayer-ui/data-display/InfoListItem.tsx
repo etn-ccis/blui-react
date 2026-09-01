@@ -43,15 +43,15 @@ export const InfoListItemExample: React.FC = () => {
                 avatar
                 title={'Info List Item'}
                 subtitle={'with an avatar'}
-                statusColor={colors.green[700]}
+                statusColor={isDarkMode ? colors.green[300] : colors.green[700]}
                 iconColor={isDarkMode ? colors.black[900] : undefined}
                 icon={<GradeA />}
             />
             <InfoListItem
                 title={'Info List Item'}
                 subtitle={'with a background color'}
-                fontColor={colors.black[500]}
-                iconColor={colors.black[500]}
+                fontColor={isDarkMode ? colors.black[900] : colors.black[500]}
+                iconColor={isDarkMode ? colors.black[900] : colors.black[500]}
                 icon={<Leaf />}
                 backgroundColor={getStatusColor(isDarkMode, 'yellow')}
             />

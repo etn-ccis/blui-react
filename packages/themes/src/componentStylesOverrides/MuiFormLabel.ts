@@ -7,6 +7,9 @@ export default {
             '&.Mui-disabled': {
                 color: theme.vars.palette.action.disabled,
             },
+            '&.Mui-error': {
+                color: theme.vars.palette.error.main,
+            },
             '&.MuiFormLabel-filled:not(.Mui-disabled):not(.Mui-focused):not(.Mui-error)': {
                 color: theme.vars.palette.text.primary,
             },
@@ -17,6 +20,9 @@ export default {
                 color: theme.vars.palette.text.secondary,
                 '&.Mui-disabled': {
                     color: theme.vars.palette.action.disabled,
+                },
+                '&.Mui-error': {
+                    color: theme.vars.palette.error.main,
                 },
                 '&.MuiFormLabel-filled:not(.Mui-disabled):not(.Mui-focused):not(.Mui-error)': {
                     color: theme.vars.palette.text.primary,

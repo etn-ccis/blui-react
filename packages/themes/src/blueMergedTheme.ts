@@ -117,6 +117,8 @@ const DarkThemeColors = {
     secondary: createSimpleDarkPalette(BLUIColors.lightBlue),
     error: {
         ...createSimpleDarkPalette(BLUIColors.red),
+        main: BLUIColors.red[300],
+        dark: BLUIColors.red[300],
         contrastText: BLUIColors.black[900],
     },
     success: createSimpleDarkPalette(BLUIColors.green),
