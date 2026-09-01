@@ -100,8 +100,8 @@ export const Dashboard: React.FC = () => {
                             <InfoListItem
                                 dense
                                 sx={{ height: 36 }}
-                                fontColor={Colors.red[300]}
-                                iconColor={Colors.red[300]}
+                                fontColor={getStatusColor(isDarkMode, 'red')}
+                                iconColor={getStatusColor(isDarkMode, 'red')}
                                 title={'1 Alarm'}
                                 icon={<Leaf color={'inherit'} />}
                             />

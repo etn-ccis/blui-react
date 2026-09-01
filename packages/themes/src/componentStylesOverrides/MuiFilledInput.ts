@@ -62,6 +62,10 @@ export default {
             },
             '&.Mui-error:not(.Mui-focused):after': {
                 borderBottomWidth: 1,
+                borderBottomColor: theme.vars.palette.error.main,
+            },
+            '&.Mui-error.Mui-focused:after': {
+                borderBottomColor: theme.vars.palette.error.main,
             },
             '&.Mui-disabled:before': {
                 borderBottomColor: theme.vars.palette.divider,
@@ -75,14 +79,14 @@ export default {
                     borderBottomColor: theme.vars.palette.primary.main,
                 },
                 '&.Mui-error.Mui-focused:after': {
-                    borderBottomColor: BLUIColors.red[300],
+                    borderBottomColor: theme.vars.palette.error.dark,
                 },
                 '&.Mui-error:not(.Mui-focused):after': {
                     borderBottomWidth: 1,
-                    borderBottomColor: BLUIColors.red[300],
+                    borderBottomColor: theme.vars.palette.error.dark,
                 },
                 '&.Mui-error:not(.Mui-focused):hover:after': {
-                    borderBottomColor: BLUIColors.red[300],
+                    borderBottomColor: theme.vars.palette.error.dark,
                 },
                 '&.Mui-disabled:before': {
                     borderBottomStyle: 'solid',

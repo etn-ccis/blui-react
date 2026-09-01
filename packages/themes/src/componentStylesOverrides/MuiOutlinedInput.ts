@@ -7,18 +7,21 @@ export default {
             '& .MuiOutlinedInput-notchedOutline': {
                 borderColor: theme.vars.palette.divider,
             },
+            '&.Mui-error .MuiOutlinedInput-notchedOutline': {
+                borderColor: theme.vars.palette.error.main,
+            },
             '&.Mui-error.MuiOutlinedInput-colorSecondary.Mui-focused .MuiOutlinedInput-notchedOutline': {
                 borderColor: theme.vars.palette.error.main,
             },
             '&.Mui-error:hover:not(.Mui-focused) .MuiOutlinedInput-notchedOutline': {
-                borderColor: theme.vars.palette.error.dark,
+                borderColor: theme.vars.palette.error.main,
             },
             '&.Mui-disabled .MuiOutlinedInput-notchedOutline': {
                 borderColor: theme.vars.palette.divider,
             },
             ...theme.applyStyles('dark', {
                 '&.Mui-error .MuiOutlinedInput-notchedOutline': {
-                    borderColor: BLUIColors.red[300],
+                    borderColor: theme.vars.palette.error.dark,
                 },
                 '&.Mui-disabled .MuiOutlinedInput-notchedOutline': {
                     borderColor: theme.vars.palette.divider,
@@ -27,7 +30,7 @@ export default {
                     borderColor: theme.vars.palette.error.dark,
                 },
                 '&.Mui-error:hover:not(.Mui-focused) .MuiOutlinedInput-notchedOutline': {
-                    borderColor: BLUIColors.red[300],
+                    borderColor: theme.vars.palette.error.dark,
                 },
                 '&.MuiInputBase-colorPrimary.Mui-focused .MuiOutlinedInput-notchedOutline': {
                     borderColor: BLUIColors.blue[200],
@@ -36,7 +39,7 @@ export default {
                     borderColor: BLUIColors.lightBlue[500],
                 },
                 '&.Mui-focused.Mui-error .MuiOutlinedInput-notchedOutline': {
-                    borderColor: BLUIColors.red[300],
+                    borderColor: theme.vars.palette.error.dark,
                 },
             }),
         }),

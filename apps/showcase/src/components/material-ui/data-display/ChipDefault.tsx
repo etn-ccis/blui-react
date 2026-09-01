@@ -118,7 +118,7 @@ export const DefaultChipExample: React.FC = () => (
 
         <Box sx={ContainerStyles}>
             <Typography variant={'body1'} sx={SectionTitleStyles}>
-                Primary
+                Selected
             </Typography>
             <Box sx={ExampleRowStyles}>
                 <Box sx={ChipContainerStyles}>
