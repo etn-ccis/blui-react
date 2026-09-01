@@ -79,14 +79,14 @@ export default {
                     borderBottomColor: theme.vars.palette.primary.main,
                 },
                 '&.Mui-error.Mui-focused:after': {
-                    borderBottomColor: theme.vars.palette.error.main,
+                    borderBottomColor: theme.vars.palette.error.dark,
                 },
                 '&.Mui-error:not(.Mui-focused):after': {
                     borderBottomWidth: 1,
-                    borderBottomColor: theme.vars.palette.error.main,
+                    borderBottomColor: theme.vars.palette.error.dark,
                 },
                 '&.Mui-error:not(.Mui-focused):hover:after': {
-                    borderBottomColor: theme.vars.palette.error.main,
+                    borderBottomColor: theme.vars.palette.error.dark,
                 },
                 '&.Mui-disabled:before': {
                     borderBottomStyle: 'solid',

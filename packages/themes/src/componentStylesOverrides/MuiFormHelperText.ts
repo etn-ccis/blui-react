@@ -9,6 +9,11 @@ export default {
             '&.Mui-error': {
                 color: theme.vars.palette.error.main,
             },
+            ...theme.applyStyles('dark', {
+                '&.Mui-error': {
+                    color: theme.vars.palette.error.dark,
+                },
+            }),
         }),
     },
 } as Components<Omit<Theme, 'components' | 'palette'> & CssVarsTheme>['MuiFormHelperText'];

@@ -21,16 +21,16 @@ export default {
             },
             ...theme.applyStyles('dark', {
                 '&.Mui-error .MuiOutlinedInput-notchedOutline': {
-                    borderColor: theme.vars.palette.error.main,
+                    borderColor: theme.vars.palette.error.dark,
                 },
                 '&.Mui-disabled .MuiOutlinedInput-notchedOutline': {
                     borderColor: theme.vars.palette.divider,
                 },
                 '&.Mui-error.MuiOutlinedInput-colorSecondary.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                    borderColor: theme.vars.palette.error.main,
+                    borderColor: theme.vars.palette.error.dark,
                 },
                 '&.Mui-error:hover:not(.Mui-focused) .MuiOutlinedInput-notchedOutline': {
-                    borderColor: theme.vars.palette.error.main,
+                    borderColor: theme.vars.palette.error.dark,
                 },
                 '&.MuiInputBase-colorPrimary.Mui-focused .MuiOutlinedInput-notchedOutline': {
                     borderColor: BLUIColors.blue[200],
@@ -39,7 +39,7 @@ export default {
                     borderColor: BLUIColors.lightBlue[500],
                 },
                 '&.Mui-focused.Mui-error .MuiOutlinedInput-notchedOutline': {
-                    borderColor: theme.vars.palette.error.main,
+                    borderColor: theme.vars.palette.error.dark,
                 },
             }),
         }),

@@ -22,13 +22,13 @@ export default {
                     color: theme.vars.palette.action.disabled,
                 },
                 '&.Mui-error': {
-                    color: theme.vars.palette.error.main,
+                    color: theme.vars.palette.error.dark,
                 },
                 '&.MuiFormLabel-filled:not(.Mui-disabled):not(.Mui-focused):not(.Mui-error)': {
                     color: theme.vars.palette.text.primary,
                 },
                 '&.Mui-error.MuiFormLabel-colorSecondary.Mui-focused': {
-                    color: theme.vars.palette.error.main,
+                    color: theme.vars.palette.error.dark,
                 },
             }),
         }),
