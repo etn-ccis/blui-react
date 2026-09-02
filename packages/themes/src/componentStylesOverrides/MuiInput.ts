@@ -29,6 +29,9 @@ export default {
                 '&:before': {
                     borderBottomColor: theme.vars.palette.divider,
                 },
+                '&.Mui-error:not(.Mui-disabled):before, &.Mui-error:not(.Mui-disabled):hover:before': {
+                    borderBottomColor: theme.vars.palette.error.dark,
+                },
                 '&:not(.Mui-disabled):not(.Mui-error):hover:before': {
                     borderBottomWidth: 1,
                     borderBottomColor: BLUIColors.black[200],
