@@ -75,6 +75,9 @@ export default {
                 '&:before': {
                     borderBottomColor: theme.vars.palette.divider,
                 },
+                '&.Mui-error:not(.Mui-disabled):before, &.Mui-error:not(.Mui-disabled):hover:before': {
+                    borderBottomColor: theme.vars.palette.error.dark,
+                },
                 '&:after': {
                     borderBottomColor: theme.vars.palette.primary.main,
                 },
