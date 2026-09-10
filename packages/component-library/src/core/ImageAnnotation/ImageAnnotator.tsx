@@ -48,7 +48,7 @@ export type ImageAnnotatorProps = {
     height?: string | number;
 
     /**
-     * `HotspotAnchor` instances
+     * `AnchorPoint` instances.
      */
     children?: ReactNode;
 

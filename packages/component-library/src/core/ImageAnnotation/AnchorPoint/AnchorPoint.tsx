@@ -7,7 +7,7 @@ import { AnchorPointClasses, AnchorPointClassKey, getAnchorPointUtilityClass } f
 export type AnchorPointVariant = 'marker' | 'label' | 'card';
 
 // Base props shared across all variants
-type AnchorPointProps = {
+export type AnchorPointProps = {
     /**
      * Horizontal anchor position as a percentage of the image width (0-100)
      */
@@ -29,7 +29,7 @@ type AnchorPointProps = {
     sx?: SxProps;
 
     /**
-     * `HotspotAnchor` instances
+     * Anchor content (e.g., `<Marker />`, `<Label />`, or `<Card />`).
      */
     children?: ReactNode;
 };
@@ -66,9 +66,8 @@ const AnchorPointRender: React.ForwardRefRenderFunction<HTMLDivElement, AnchorPo
     props: AnchorPointProps,
     ref: React.Ref<HTMLDivElement>
 ) => {
-    const { x, y, sx, children, ...otherProps } = props;
-
-    const generatedClasses = useUtilityClasses(props);
+    const { x, y, sx, children, classes = {}, ...otherProps } = props;
+    const generatedClasses = useUtilityClasses({ ...props, classes });
 
     return (
         <Root
@@ -89,7 +88,6 @@ const AnchorPointRender: React.ForwardRefRenderFunction<HTMLDivElement, AnchorPo
  * [AnchorPoint](https://brightlayer-ui-components.github.io/react/components/anchor-point) component
  *
  * Positioned at `x`/`y` percentage coordinates relative to its containing image (see `ImageAnnotator`).
- * The `variant` prop controls the visual appearance at the coordinate and whether a connector line is drawn.
  */
 export const AnchorPoint = forwardRef(AnchorPointRender);
 

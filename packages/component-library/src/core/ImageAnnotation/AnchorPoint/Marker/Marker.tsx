@@ -17,16 +17,21 @@ export type MarkerProps = {
 
 const Root = styled(Box, {
     shouldForwardProp: (prop) => prop !== 'iconSize',
-})(({ theme }) => ({
+})<Pick<MarkerProps, 'iconSize'>>(({ theme, iconSize = 24 }) => ({
     display: 'flex',
     width: '40px',
     height: '40px',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: '80px',
-    border: `1px solid ${theme.vars.palette.divider}`,
-    background: theme.vars.palette.background.paper,
-    boxShadow: theme.vars.palette.shadows.level1,
+    border: `1px solid ${theme.vars?.palette?.divider ?? theme.palette.divider}`,
+    backgroundColor: theme.vars?.palette?.background?.paper ?? theme.palette.background.paper,
+    boxShadow: theme.vars?.shadows?.[1] ?? theme.shadows[1],
+    '& .MuiSvgIcon-root': {
+        fontSize: iconSize,
+        width: iconSize,
+        height: iconSize,
+    },
 }));
 
 const MarkerRender: React.ForwardRefRenderFunction<HTMLDivElement, MarkerProps> = (
