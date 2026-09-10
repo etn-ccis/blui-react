@@ -95,9 +95,8 @@ const ImageAnnotatorRender: React.ForwardRefRenderFunction<HTMLDivElement, Image
     props: ImageAnnotatorProps,
     ref: React.Ref<HTMLDivElement>
 ) => {
-    const { src, alt = '', width = '100%', height = 'auto', children, sx, ...otherProps } = props;
-
-    const generatedClasses = useUtilityClasses(props);
+    const { src, alt = '', width = '100%', height = 'auto', children, classes, sx, ...otherProps } = props;
+    const generatedClasses = useUtilityClasses({ ...props, classes });
 
     return (
         <Root
