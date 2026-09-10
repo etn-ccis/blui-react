@@ -26,7 +26,7 @@ export const ImageAnnotationExample: React.FC = () => (
                     <Label label="Mountain" />
                 </AnchorPoint>
 
-                <AnchorPoint x={10} y={50}>
+                <AnchorPoint x={10} y={10}>
                     <Marker>
                         <DeviceThermostatOutlinedIcon />
                     </Marker>

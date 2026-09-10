@@ -24,8 +24,8 @@ const Root = styled(Box, {
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: '80px',
-    border: '1px solid rgba(255, 255, 255, 0.50)',
-    background: 'rgba(255, 255, 255, 0.72)',
+    border: `1px solid ${theme.vars.palette.divider}`,
+    background: theme.vars.palette.background.paper,
     boxShadow: theme.vars.palette.shadows.level1,
 }));
 
