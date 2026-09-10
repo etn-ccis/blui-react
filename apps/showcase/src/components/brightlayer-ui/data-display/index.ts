@@ -9,3 +9,4 @@ export * from './DrawerLiteExample';
 export * from './ThreeLiner';
 export * from './UserMenu';
 export * from './HorizontalStackedBar';
+export * from './ImageAnnotationExample';

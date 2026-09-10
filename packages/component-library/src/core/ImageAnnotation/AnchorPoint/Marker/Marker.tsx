@@ -1,12 +1,12 @@
 import React, { forwardRef, ReactNode } from 'react';
-import Box, { BoxProps } from '@mui/material/Box';
+import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 
-export type MarkerProps = BoxProps & {
+export type MarkerProps = {
     /**
      * Any icon element placed at the marker position.
      */
-    children: ReactNode;
+    children?: ReactNode;
 
     /**
      * Width and height of the icon bounding box in px.
@@ -17,23 +17,26 @@ export type MarkerProps = BoxProps & {
 
 const Root = styled(Box, {
     shouldForwardProp: (prop) => prop !== 'iconSize',
-})<Pick<MarkerProps, 'iconSize'>>(({ iconSize }) => ({
-    alignItems: 'center',
+})(({ theme }) => ({
     display: 'flex',
-    height: iconSize,
+    width: '40px',
+    height: '40px',
     justifyContent: 'center',
-    lineHeight: 1,
-    width: iconSize,
+    alignItems: 'center',
+    borderRadius: '80px',
+    border: '1px solid rgba(255, 255, 255, 0.50)',
+    background: 'rgba(255, 255, 255, 0.72)',
+    boxShadow: theme.vars.palette.shadows.level1,
 }));
 
 const MarkerRender: React.ForwardRefRenderFunction<HTMLDivElement, MarkerProps> = (
     props: MarkerProps,
     ref: React.Ref<HTMLDivElement>
 ) => {
-    const { children, iconSize = 24, ...otherProps } = props;
+    const { children, ...otherProps } = props;
 
     return (
-        <Root ref={ref} iconSize={iconSize} data-testid="blui-marker-root" {...otherProps}>
+        <Root ref={ref} data-testid="blui-marker-root" {...otherProps}>
             {children}
         </Root>
     );

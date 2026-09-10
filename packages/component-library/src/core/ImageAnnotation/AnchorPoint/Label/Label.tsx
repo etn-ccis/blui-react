@@ -10,13 +10,13 @@ export type LabelProps = TypographyProps & {
 
     /**
      * Background colour of the chip.
-     * @default theme.palette.primary.main
+     * @default rgba (255, 255, 255, 0.72)
      */
     labelBgColor?: string;
 
     /**
      * Text colour inside the chip.
-     * @default theme.palette.primary.contrastText
+     * @default #353c44
      */
     labelColor?: string;
 };
@@ -24,16 +24,21 @@ export type LabelProps = TypographyProps & {
 const Root = styled(Typography, {
     shouldForwardProp: (prop) => !['labelBgColor', 'labelColor'].includes(prop.toString()),
 })<Pick<LabelProps, 'labelBgColor' | 'labelColor'>>(({ labelBgColor, labelColor, theme }) => ({
-    alignItems: 'center',
-    backgroundColor: labelBgColor || (theme.vars || theme).palette.primary.main,
-    borderRadius: theme.shape.borderRadius,
-    color: labelColor || (theme.vars || theme).palette.primary.contrastText,
     display: 'inline-flex',
-    fontWeight: 600,
-    lineHeight: 1.2,
-    minHeight: '1.5rem',
-    padding: theme.spacing(0.25, 1),
-    whiteSpace: 'nowrap',
+    padding: '2px 8px',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    gap: '6px',
+    backgroundColor: labelBgColor ?? 'rgba(255, 255, 255, 0.72)',
+    color: labelColor ?? 'black',
+    borderRadius: '4px',
+    border: `1px solid ${theme.palette.divider}`,
+    backdropFilter: 'blur(2px)',
+    fontFamily: '"Open Sans", sans-serif',
+    fontSize: '14px',
+    fontStyle: 'normal',
+    fontWeight: 400,
+    lineHeight: 'normal',
 }));
 
 const LabelRender: React.ForwardRefRenderFunction<HTMLSpanElement, LabelProps> = (

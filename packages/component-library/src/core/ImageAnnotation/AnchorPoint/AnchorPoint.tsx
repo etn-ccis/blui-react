@@ -1,15 +1,13 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, ReactNode } from 'react';
 import { Box, SxProps, unstable_composeClasses as composeClasses } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { cx } from '@emotion/css';
 import { AnchorPointClasses, AnchorPointClassKey, getAnchorPointUtilityClass } from './AnchorPointClasses';
 
-export type AnchorPointVariant = 'marker' | 'label' | 'card' | 'callout';
+export type AnchorPointVariant = 'marker' | 'label' | 'card';
 
-/** Variants that render a connector line between the anchor marker and their content. */
-const CONNECTED_VARIANTS: AnchorPointVariant[] = ['card', 'callout'];
-
-export type AnchorPointProps = {
+// Base props shared across all variants
+type AnchorPointProps = {
     /**
      * Horizontal anchor position as a percentage of the image width (0-100)
      */
@@ -21,12 +19,6 @@ export type AnchorPointProps = {
     y: number;
 
     /**
-     * Selects the anchor UI mode; drives which other props are valid
-     * @default 'callout'
-     */
-    variant?: AnchorPointVariant;
-
-    /**
      * Style override slots
      */
     classes?: AnchorPointClasses;
@@ -35,6 +27,11 @@ export type AnchorPointProps = {
      * MUI sx override applied to the root wrapper
      */
     sx?: SxProps;
+
+    /**
+     * `HotspotAnchor` instances
+     */
+    children?: ReactNode;
 };
 
 const useUtilityClasses = (ownerState: AnchorPointProps): Record<AnchorPointClassKey, string> => {
@@ -50,31 +47,26 @@ const useUtilityClasses = (ownerState: AnchorPointProps): Record<AnchorPointClas
     return composeClasses(slots, getAnchorPointUtilityClass, classes);
 };
 
-type RootProps = Pick<AnchorPointProps, 'x' | 'y' | 'variant'>;
+type RootProps = Pick<AnchorPointProps, 'x' | 'y'>;
 
 const Root = styled(Box, {
-    shouldForwardProp: (prop) => !['x', 'y', 'variant'].includes(prop.toString()),
-})<RootProps>(({ x, y, variant }) => {
-    const connected = CONNECTED_VARIANTS.includes(variant ?? 'callout');
-
-    return {
-        position: 'absolute',
-        left: `${x}%`,
-        top: `${y}%`,
-        display: 'flex',
-        alignItems: 'center',
-        // `card`/`callout` stack their content above the marker; `marker`/`label` center on the point.
-        flexDirection: connected ? 'column-reverse' : 'row',
-        transform: connected ? 'translate(-50%, -100%)' : 'translate(-50%, -50%)',
-        zIndex: 1,
-    };
-});
+    shouldForwardProp: (prop) => !['x', 'y'].includes(prop.toString()),
+})<RootProps>(({ x, y }) => ({
+    position: 'absolute',
+    left: `${x}%`,
+    top: `${y}%`,
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'row',
+    transform: 'translate(-50%, -50%)',
+    zIndex: 1,
+}));
 
 const AnchorPointRender: React.ForwardRefRenderFunction<HTMLDivElement, AnchorPointProps> = (
     props: AnchorPointProps,
     ref: React.Ref<HTMLDivElement>
 ) => {
-    const { x, y, variant, sx, ...otherProps } = props;
+    const { x, y, sx, children, ...otherProps } = props;
 
     const generatedClasses = useUtilityClasses(props);
 
@@ -83,12 +75,13 @@ const AnchorPointRender: React.ForwardRefRenderFunction<HTMLDivElement, AnchorPo
             ref={ref}
             x={x}
             y={y}
-            variant={variant}
             className={cx(generatedClasses.root)}
             sx={sx}
             data-testid="blui-anchor-point-root"
             {...otherProps}
-        ></Root>
+        >
+            {children}
+        </Root>
     );
 };
 

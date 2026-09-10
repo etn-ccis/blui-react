@@ -9,7 +9,7 @@ export type CardProps = {
     /**
      * Any JSX rendered inside the card.
      */
-    children: ReactNode;
+    children?: ReactNode;
 
     /**
      * Card width in px, clamped between 80 and 400; height expands to fit content.
