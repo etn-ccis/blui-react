@@ -13,6 +13,7 @@ import {
     ThreeLinerExample,
     UserMenuExample,
     HorizontalStackedBarExample,
+    ImageAnnotationExample,
 } from '../../components';
 import { usePageTitle } from '../../hooks/usePageTitle';
 import Box from '@mui/material/Box';
@@ -22,6 +23,7 @@ import CardHeader from '@mui/material/CardHeader';
 
 export const BLUIDataDisplay: React.FC = () => {
     const examples: ComponentExample[] = [
+        { label: 'Image Annotator', component: <ImageAnnotationExample />, fullWidth: true },
         { label: 'Channel Value', component: <ChannelValueExample /> },
         { label: 'Empty State', component: <EmptyStateExample /> },
         { label: 'File Drag Upload', component: <FileDragUploadExample />, fullWidth: true },
