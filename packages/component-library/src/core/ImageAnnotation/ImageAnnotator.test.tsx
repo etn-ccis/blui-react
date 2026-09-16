@@ -46,6 +46,12 @@ describe('ImageAnnotator', () => {
         expect(screen.getByTestId('blui-image-annotator-root')).toHaveStyle({ width: '320px', height: '240px' });
     });
 
+    it('falls back to default dimensions when empty values are provided', () => {
+        render(<ImageAnnotator src="image.jpg" width="" height="" />);
+
+        expect(screen.getByTestId('blui-image-annotator-root')).toHaveStyle({ width: '100%', height: 'auto' });
+    });
+
     it('renders children inside the root container', () => {
         render(
             <ImageAnnotator src="image.jpg">

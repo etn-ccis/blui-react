@@ -1,7 +1,7 @@
 import React from 'react';
 import { cleanup, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { blueThemes as theme } from '@brightlayer-ui/react-themes';
 import { Label } from './Label';
 
@@ -33,6 +33,21 @@ describe('Label', () => {
         expect(screen.getByTestId('blui-label-root')).toHaveStyle({
             backgroundColor: '#123456',
             color: '#abcdef',
+        });
+    });
+
+    it('falls back to palette colors when theme variables are unavailable', () => {
+        const nonCssVarsTheme = createTheme();
+
+        render(
+            <ThemeProvider theme={nonCssVarsTheme}>
+                <Label label="Theme fallback label" />
+            </ThemeProvider>
+        );
+
+        expect(screen.getByTestId('blui-label-root')).toHaveStyle({
+            backgroundColor: nonCssVarsTheme.palette.background.paper,
+            color: nonCssVarsTheme.palette.text.primary,
         });
     });
 
