@@ -1,4 +1,4 @@
-import React, { ReactNode, forwardRef, useContext, createContext } from 'react';
+import React, { ReactNode, forwardRef } from 'react';
 import { Box, SxProps, unstable_composeClasses as composeClasses } from '@mui/material';
 import { cx } from '@emotion/css';
 import { styled } from '@mui/material/styles';
@@ -11,17 +11,17 @@ import {
 /**
  * Context for managing the global "only one card open at a time" policy
  */
-type ImageAnnotatorContextValue = {
-    activeId?: string;
-    setActiveId?: (id: string | undefined) => void;
-};
+// type ImageAnnotatorContextValue = {
+//     activeId?: string;
+//     setActiveId?: (id: string | undefined) => void;
+// };
 
-const ImageAnnotatorContext = createContext<ImageAnnotatorContextValue>({});
+// const ImageAnnotatorContext = createContext<ImageAnnotatorContextValue>({});
 
 /**
  * Hook to access the ImageAnnotator context
  */
-export const useImageAnnotatorContext = (): ImageAnnotatorContextValue => useContext(ImageAnnotatorContext);
+// export const useImageAnnotatorContext = (): ImageAnnotatorContextValue => useContext(ImageAnnotatorContext);
 
 export type ImageAnnotatorProps = {
     /**
