@@ -6,10 +6,8 @@ on:
     branches: [main, master, dev, feature/*]
     paths:
       - 'apps/design-patterns/**'
-      # - 'apps/demo/**'
       - 'apps/showcase/**'
       - 'apps/storybook/**'
-      # - 'apps/themeShowcase/**'
       - 'apps/workflow/example-vite/**'
       - 'apps/workflow/example/**'
       - 'packages/cli-templates/**'
@@ -20,10 +18,8 @@ on:
     branches: [main, master, dev]
     paths:
       - 'apps/design-patterns/**'
-      # - 'apps/demo/**'
       - 'apps/showcase/**'
       - 'apps/storybook/**'
-      # - 'apps/themeShowcase/**'
       - 'apps/workflow/example-vite/**'
       - 'apps/workflow/example/**'
       - 'packages/cli-templates/**'
