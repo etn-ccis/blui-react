@@ -47,6 +47,7 @@ jobs:
           - packages/component-library
           - packages/login-workflow
           - packages/themes
+          - packages/cli-templates
 
     defaults:
       run:
