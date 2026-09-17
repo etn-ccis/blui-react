@@ -291,7 +291,7 @@ importers:
         specifier: 24.3.0
         version: 24.3.0
       cheerio:
-        specifier: ^1.1.0
+        specifier: ^1.2.0
         version: 1.2.0
       clsx:
         specifier: ^2.0.0

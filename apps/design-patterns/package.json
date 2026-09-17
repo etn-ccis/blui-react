@@ -44,7 +44,7 @@
         "@types/enzyme-adapter-react-16": "^1.0.6",
         "@types/jest": "^30.0.0",
         "@types/node": "24.3.0",
-        "cheerio": "^1.1.0",
+        "cheerio": "^1.2.0",
         "clsx": "^2.0.0",
         "date-fns": "^4.1.0",
         "i18next": "^25.2.1",
