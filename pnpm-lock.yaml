@@ -5,7 +5,6 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  next: 15.5.21
   sharp: ^0.35.3
   autoprefixer: 10.4.5
   nth-check: ^2.1.1
@@ -13,7 +12,7 @@ overrides:
   serialize-javascript: ^7.0.5
   webpack-dev-server: ^5.2.5
   websocket-driver: 0.7.5
-  js-yaml: ^4.2.0
+  js-yaml: ^4.3.2
   lodash: ^4.18.0
   underscore: ^1.13.8
   semver@<5.7.2: ^5.7.2
@@ -34,10 +33,10 @@ overrides:
   tmp: ^0.2.6
   ws@>=7.0.0 <7.5.11: ^7.5.11
   ws@>=8.0.0 <8.21.0: ^8.21.0
-  react-router: ^7.15.0
+  react-router: ^7.18.2
   tar: ^7.5.19
-  svgo: ^3.3.4
-  fast-uri: ^3.1.5
+  svgo: ^3.3.5
+  fast-uri: ^3.1.6
   ip-address: ^10.3.1
   brace-expansion@>=2.0.0 <5.0.8: ^5.0.8
   minimatch@>=9.0.0: ^9.0.7
@@ -50,6 +49,7 @@ overrides:
   postcss: ^8.5.10
   uuid: ^11.1.1
   '@tootallnate/once': ^2.0.1
+  nanoid: ^3.3.18
 
 importers:
 
@@ -92,8 +92,8 @@ importers:
         specifier: ^19.1.0
         version: 19.2.8
       react-router:
-        specifier: ^7.15.0
-        version: 7.18.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        specifier: ^7.18.2
+        version: 7.18.4(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       typescript-eslint:
         specifier: ^8.32.0
         version: 8.65.0(eslint@9.33.0(jiti@1.21.7))(typescript@6.0.3)
@@ -1344,8 +1344,8 @@ importers:
         specifier: ^9.2.0
         version: 9.3.0(@types/react@19.2.17)(react@19.2.8)(redux@5.0.1)
       react-router:
-        specifier: ^7.15.0
-        version: 7.18.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        specifier: ^7.18.2
+        version: 7.18.4(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       react-router-dom:
         specifier: ^7.7.1
         version: 7.18.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -1771,8 +1771,8 @@ importers:
         specifier: ^19.1.0
         version: 19.2.8(react@19.2.8)
       react-router:
-        specifier: ^7.15.0
-        version: 7.18.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        specifier: ^7.18.2
+        version: 7.18.4(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       react-router-dom:
         specifier: ^7.7.0
         version: 7.18.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -2112,9 +2112,6 @@ importers:
       eslint-plugin-react-hooks:
         specifier: ^4.4.0
         version: 4.6.2(eslint@8.57.1)
-      firebase-tools:
-        specifier: ^15.30.1
-        version: 15.30.1(@types/node@22.13.0)
       i18next:
         specifier: ^25.3.1
         version: 25.10.10(typescript@5.9.3)
@@ -8376,8 +8373,8 @@ packages:
   fast-text-encoding@1.0.6:
     resolution: {integrity: sha512-VhXlQgj9ioXCqGstD37E/HBeqEGV/qOD/kmbVG8h5xKBYvM1L3lR1Zn4555cQ8GkYbJa8aJSipLPndE1k6zK2w==}
 
-  fast-uri@3.1.5:
-    resolution: {integrity: sha512-gHwA1O9LDIcKunMKhObS/HimwtehO1nPUECKAu5TpKgaO19fcWEl4bliWe1jWxVFvIXztJjjQ4L8XQ1EU9f7Jw==}
+  fast-uri@3.1.8:
+    resolution: {integrity: sha512-GZMtZUTNRpOVIECoXwLNZS5xUGE+mVNbTB8h/7Rwh2TFWcBQiPzTgyZi05BF9UMZKkLJv8XBRJTlU7zg8+ZfMg==}
 
   fastq@1.20.1:
     resolution: {integrity: sha512-GGToxJ/w1x32s/D2EKND7kTil4n8OVk/9mycTc4VDza13lOvpUZTGX3mFSCtV9ksdGBVzvsyAVLM6mHFThxXxw==}
@@ -8471,11 +8468,6 @@ packages:
 
   firebase-tools@15.24.0:
     resolution: {integrity: sha512-2P5qd3O3YD7a7AaA89lt/zgRIgR7FGS0Ye7fW9z/sNt9/b6cbmI1TtQtYDlmJDUOh9nMk+72ll/gu4MlN/qY7Q==}
-    engines: {node: '>=20.0.0 || >=22.0.0 || >=24.0.0'}
-    hasBin: true
-
-  firebase-tools@15.30.1:
-    resolution: {integrity: sha512-X8q33KzOfR4Xv1eNRCbediVzs/9OUNtF6jwyDZVfYbfnP53FrxMmklZe+Q1kUvnNFbgEf25LEeV53bPGQTEsFA==}
     engines: {node: '>=20.0.0 || >=22.0.0 || >=24.0.0'}
     hasBin: true
 
@@ -9919,8 +9911,8 @@ packages:
   js-tokens@9.0.1:
     resolution: {integrity: sha512-mxa9E9ITFOt0ban3j6L5MpjwegGz6lBQmM1IJkWeBZGcMxto50+eWdjC/52xDbS2vy0k7vIMK0Fe2wfL9OQSpQ==}
 
-  js-yaml@4.3.0:
-    resolution: {integrity: sha512-1td788aAnnZ5qs7V2QIRl1owjtYpbKt749Y3xauqQgwIIGF/xXWz1wMTEBx5O3LK3lXLVuqXPdPxj2BoFHaW9Q==}
+  js-yaml@4.3.2:
+    resolution: {integrity: sha512-SFNOvSJ+Dgf/9An904Yx+CgSlIPCkIpao4qo51lpee25TIRejdH3rhR4EZMGoNx3/TP3O+wzWuiTFl4sqbltzA==}
     hasBin: true
 
   jscodeshift-add-imports@1.0.11:
@@ -10721,8 +10713,8 @@ packages:
   nan@2.28.0:
     resolution: {integrity: sha512-fTsDz99OTq2sVePhGdp4qQhggZFtKr64ZNVyVajRKtMOkJxYekplBh577PiJB12v/D3s2E5cGtOI45LWp6rnLQ==}
 
-  nanoid@3.3.16:
-    resolution: {integrity: sha512-bzlKTyNJ7+LdGIIwy8ijFpIqEQIvafahV7eYykJ8Cvh42EdJeODoJ6gUJXpQJvej1BddH8OqTXZNE/KfbWAu8Q==}
+  nanoid@3.3.19:
+    resolution: {integrity: sha512-Y2tUNy4ouw6tq5oDSKeQYGOyhkUBhNOcGV/02KC+6kd9eDGqdZd++mjMiIDilrBYvjEnCYvVtsuHCuP+okSfug==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
@@ -12085,8 +12077,8 @@ packages:
       react: '>=18'
       react-dom: '>=18'
 
-  react-router@7.18.1:
-    resolution: {integrity: sha512-GDLgg3i3uM0aeJO3Fm+TCS+sDQ7gu12T6x0qdTEzcwqEfleci7JwugVNIF3U//0FWKnJT7ptG+20B2jfDqnZAg==}
+  react-router@7.18.4:
+    resolution: {integrity: sha512-PUPQcMhMGRAslLcvtlPz/kmzBEWPhLdgLFrL7pLNepBL6dX0lWj4WD2cUYVgYCuT3jxvghYFg81cDTj44DhetQ==}
     engines: {node: '>=20.0.0'}
     peerDependencies:
       react: '>=18'
@@ -12976,8 +12968,8 @@ packages:
   svg-parser@2.0.4:
     resolution: {integrity: sha512-e4hG1hRwoOdRb37cIMSgzNsxyzKfayW6VOflrwvR+/bzrkyxY/31WkbgnQpgtrNp1SdpJvpUAGTa/ZoiPNDuRQ==}
 
-  svgo@3.3.4:
-    resolution: {integrity: sha512-GsNRis4e8jxn2Y9ENz/8lbJ93CstG8svtMnuRaHbiF2LTJ5tK0/q3t/URPq9Zc7zVWBJnNnJMIp6bevK7bSmNg==}
+  svgo@3.3.5:
+    resolution: {integrity: sha512-8SQMzdrvWaD8deUmrnYB+ASyxBVgWUOilg+A75nE/76WdLpj6LopCwiAVvkzkcqy/9b7t2Mg7faFLjg0ZRcZ3w==}
     engines: {node: '>=14.0.0'}
     hasBin: true
 
@@ -14246,7 +14238,7 @@ snapshots:
       '@jsdevtools/ono': 7.1.3
       '@types/json-schema': 7.0.15
       call-me-maybe: 1.0.2
-      js-yaml: 4.3.0
+      js-yaml: 4.3.2
 
   '@apphosting/common@0.0.8': {}
 
@@ -15856,7 +15848,7 @@ snapshots:
       globals: 13.24.0
       ignore: 5.3.2
       import-fresh: 3.3.1
-      js-yaml: 4.3.0
+      js-yaml: 4.3.2
       minimatch: 3.1.5
       strip-json-comments: 3.1.1
     transitivePeerDependencies:
@@ -15870,7 +15862,7 @@ snapshots:
       globals: 14.0.0
       ignore: 5.3.2
       import-fresh: 3.3.1
-      js-yaml: 4.3.0
+      js-yaml: 4.3.2
       minimatch: 3.1.5
       strip-json-comments: 3.1.1
     transitivePeerDependencies:
@@ -16301,7 +16293,7 @@ snapshots:
       camelcase: 5.3.1
       find-up: 4.1.0
       get-package-type: 0.1.0
-      js-yaml: 4.3.0
+      js-yaml: 4.3.2
       resolve-from: 5.0.0
 
   '@istanbuljs/schema@0.1.6': {}
@@ -18171,7 +18163,7 @@ snapshots:
     dependencies:
       cosmiconfig: 7.1.0
       deepmerge: 4.3.1
-      svgo: 3.3.4
+      svgo: 3.3.5
 
   '@svgr/webpack@5.5.0':
     dependencies:
@@ -19617,14 +19609,14 @@ snapshots:
   ajv@8.18.0:
     dependencies:
       fast-deep-equal: 3.1.3
-      fast-uri: 3.1.5
+      fast-uri: 3.1.8
       json-schema-traverse: 1.0.0
       require-from-string: 2.0.2
 
   ajv@8.20.0:
     dependencies:
       fast-deep-equal: 3.1.3
-      fast-uri: 3.1.5
+      fast-uri: 3.1.8
       json-schema-traverse: 1.0.0
       require-from-string: 2.0.2
 
@@ -21910,7 +21902,7 @@ snapshots:
       imurmurhash: 0.1.4
       is-glob: 4.0.3
       is-path-inside: 3.0.3
-      js-yaml: 4.3.0
+      js-yaml: 4.3.2
       json-stable-stringify-without-jsonify: 1.0.1
       levn: 0.4.1
       lodash.merge: 4.6.2
@@ -22230,7 +22222,7 @@ snapshots:
 
   fast-text-encoding@1.0.6: {}
 
-  fast-uri@3.1.5: {}
+  fast-uri@3.1.8: {}
 
   fastq@1.20.1:
     dependencies:
@@ -22383,7 +22375,7 @@ snapshots:
       glob: 10.5.0
       google-auth-library: 9.15.1
       ignore: 7.0.6
-      js-yaml: 4.3.0
+      js-yaml: 4.3.2
       jsonwebtoken: 9.0.3
       libsodium-wrappers: 0.7.16
       lodash: 4.18.1
@@ -22467,7 +22459,7 @@ snapshots:
       glob: 10.5.0
       google-auth-library: 9.15.1
       ignore: 7.0.6
-      js-yaml: 4.3.0
+      js-yaml: 4.3.2
       jsonwebtoken: 9.0.3
       libsodium-wrappers: 0.7.16
       lodash: 4.18.1
@@ -22502,90 +22494,6 @@ snapshots:
       winston: 3.19.0
       winston-transport: 4.9.0
       ws: 7.5.13
-      yaml: 2.9.0
-      zod: 4.4.3
-    transitivePeerDependencies:
-      - '@cfworker/json-schema'
-      - '@types/node'
-      - bare-abort-controller
-      - bare-buffer
-      - bufferutil
-      - encoding
-      - pg-native
-      - react-native-b4a
-      - supports-color
-      - utf-8-validate
-
-  firebase-tools@15.30.1(@types/node@22.13.0):
-    dependencies:
-      '@apphosting/common': 0.0.8
-      '@electric-sql/pglite': 0.3.16
-      '@electric-sql/pglite-tools': 0.2.21(@electric-sql/pglite@0.3.16)
-      '@google-cloud/cloud-sql-connector': 1.11.2
-      '@google-cloud/pubsub': 5.3.1
-      '@inquirer/prompts': 7.10.1(@types/node@22.13.0)
-      '@modelcontextprotocol/sdk': 1.29.0(zod@4.4.3)
-      abort-controller: 3.0.0
-      ajv: 8.20.0
-      ajv-formats: 3.0.1(ajv@8.20.0)
-      archiver: 7.0.1
-      async-lock: 1.4.1
-      body-parser: 1.20.6
-      chokidar: 3.6.0
-      cjson: 0.3.3
-      cli-table3: 0.6.5
-      colorette: 2.0.20
-      commander: 5.1.0
-      configstore: 5.0.1
-      cors: 2.8.6
-      cross-env: 7.0.3
-      cross-spawn: 7.0.6
-      csv-parse: 5.6.0
-      exegesis: 4.3.0
-      exegesis-express: 4.0.0
-      express: 4.22.2
-      form-data: 4.0.6
-      fs-extra: 10.1.0
-      fuzzy: 0.1.3
-      gaxios: 6.7.1
-      glob: 10.5.0
-      google-auth-library: 9.15.1
-      ignore: 7.0.6
-      js-yaml: 4.3.0
-      jsonwebtoken: 9.0.3
-      libsodium-wrappers: 0.7.16
-      lodash: 4.18.1
-      lsofi: 2.0.0
-      marked: 13.0.3
-      marked-terminal: 7.3.0(marked@13.0.3)
-      mime: 2.6.0
-      minimatch: 3.1.5
-      morgan: 1.11.0
-      node-fetch: 2.7.0
-      open: 6.4.0
-      ora: 5.4.1
-      pg: 8.22.0
-      pg-gateway: 0.3.0-beta.4
-      pglite-2: '@electric-sql/pglite@0.2.17'
-      portfinder: 1.0.38
-      progress: 2.0.3
-      proxy-agent: 6.5.0
-      retry: 0.13.1
-      semver: 7.8.5
-      sql-formatter: 15.8.2
-      stream-chain: 2.2.5
-      stream-json: 1.9.1
-      superstatic: 10.0.0
-      tar: 7.5.21
-      tcp-port-used: 1.0.3
-      tmp: 0.2.7
-      triple-beam: 1.4.1
-      undici: 7.29.0
-      universal-analytics: 0.5.4
-      update-notifier-cjs: 5.1.7
-      winston: 3.19.0
-      winston-transport: 4.9.0
-      ws: 8.21.1
       yaml: 2.9.0
       zod: 4.4.3
     transitivePeerDependencies:
@@ -24857,7 +24765,7 @@ snapshots:
 
   js-tokens@9.0.1: {}
 
-  js-yaml@4.3.0:
+  js-yaml@4.3.2:
     dependencies:
       argparse: 2.0.1
 
@@ -26073,7 +25981,7 @@ snapshots:
   nan@2.28.0:
     optional: true
 
-  nanoid@3.3.16: {}
+  nanoid@3.3.19: {}
 
   napi-postinstall@0.3.4: {}
 
@@ -27050,7 +26958,7 @@ snapshots:
     dependencies:
       postcss: 8.5.22
       postcss-value-parser: 4.2.0
-      svgo: 3.3.4
+      svgo: 3.3.5
 
   postcss-unique-selectors@5.1.1(postcss@8.5.22):
     dependencies:
@@ -27061,7 +26969,7 @@ snapshots:
 
   postcss@8.5.22:
     dependencies:
-      nanoid: 3.3.16
+      nanoid: 3.3.19
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
@@ -27444,9 +27352,9 @@ snapshots:
     dependencies:
       react: 19.2.8
       react-dom: 19.2.8(react@19.2.8)
-      react-router: 7.18.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      react-router: 7.18.4(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
 
-  react-router@7.18.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8):
+  react-router@7.18.4(react-dom@19.2.8(react@19.2.8))(react@19.2.8):
     dependencies:
       cookie: 1.1.1
       react: 19.2.8
@@ -28630,7 +28538,7 @@ snapshots:
 
   svg-parser@2.0.4: {}
 
-  svgo@3.3.4:
+  svgo@3.3.5:
     dependencies:
       commander: 7.2.0
       css-select: 5.2.2
@@ -30379,7 +30287,7 @@ snapshots:
       commander: 12.1.0
       fast-glob: 3.3.3
       fs-extra: 11.4.0
-      js-yaml: 4.3.0
+      js-yaml: 4.3.2
       lodash-es: 4.18.1
       semver: 7.8.5
       synp: 1.9.14
