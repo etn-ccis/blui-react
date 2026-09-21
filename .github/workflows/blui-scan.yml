@@ -37,6 +37,7 @@ jobs:
       issues: write
       pull-requests: write
     strategy:
+      fail-fast: false
       matrix:
         app:
           - apps/design-patterns
