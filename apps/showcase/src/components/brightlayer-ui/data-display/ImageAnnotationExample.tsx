@@ -1,7 +1,7 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { AnchorPoint, Card, ImageAnnotator, Marker, Label } from '@brightlayer-ui/react-components';
+import { ImageAnnotator, Marker } from '@brightlayer-ui/react-components';
 import farmImage from '../../../assets/farm.jpg';
 import DeviceThermostatOutlinedIcon from '@mui/icons-material/DeviceThermostatOutlined';
 
@@ -22,24 +22,19 @@ export const ImageAnnotationExample: React.FC = () => (
                 Marker and Label Anchors
             </Typography>
             <ImageAnnotator src={farmImage} alt="Aerial view of a farm" sx={imageStyles}>
-                <AnchorPoint x={80} y={10}>
-                    <Label label="Mountain" />
-                </AnchorPoint>
-
-                <AnchorPoint x={10} y={10}>
-                    <Marker>
-                        <DeviceThermostatOutlinedIcon />
-                    </Marker>
-                </AnchorPoint>
-
-                <AnchorPoint x={80} y={50}>
-                    <Card>
-                        <Typography variant="subtitle2">North field</Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            Moisture level: 64%
-                        </Typography>
-                    </Card>
-                </AnchorPoint>
+                <Marker
+                    x={20}
+                    y={10}
+                    icon={<DeviceThermostatOutlinedIcon />}
+                    callout
+                    direction="right"
+                    lineLength={60}
+                />
+                {/* <Label x={70} y={40} label="Temperature Sensor" /> 
+                <Card x={50} y={50} cardWidth={150}>
+                    <Typography variant='body1'>Card Content</Typography>
+                    <Typography variant="body2">Content</Typography>
+                </Card> */}
             </ImageAnnotator>
         </Box>
     </Box>

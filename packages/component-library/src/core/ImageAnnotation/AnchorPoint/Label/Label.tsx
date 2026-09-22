@@ -1,27 +1,29 @@
 import React, { forwardRef } from 'react';
 import Typography, { TypographyProps } from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
+import { AnchorPoint, AnchorPointProps } from '../AnchorPoint';
 
-export type LabelProps = TypographyProps & {
-    /**
-     * Text string shown inside the chip.
-     */
-    label: string;
+export type LabelProps = AnchorPointProps &
+    TypographyProps & {
+        /**
+         * Text string shown inside the chip.
+         */
+        label: string;
 
-    /**
-     * Background colour of the chip.
-     * @default rgba (255, 255, 255, 0.72)
-     */
-    labelBgColor?: string;
+        /**
+         * Background colour of the chip.
+         * @default rgba (255, 255, 255, 0.72)
+         */
+        labelBgColor?: string;
 
-    /**
-     * Text colour inside the chip.
-     * @default #353c44
-     */
-    labelColor?: string;
-};
+        /**
+         * Text colour inside the chip.
+         * @default #353c44
+         */
+        labelColor?: string;
+    };
 
-const Root = styled(Typography, {
+const StyledLabel = styled(Typography, {
     shouldForwardProp: (prop) => !['labelBgColor', 'labelColor'].includes(prop.toString()),
 })<Pick<LabelProps, 'labelBgColor' | 'labelColor'>>(({ labelBgColor, labelColor, theme }) => ({
     display: 'inline-flex',
@@ -45,20 +47,21 @@ const LabelRender: React.ForwardRefRenderFunction<HTMLSpanElement, LabelProps> =
     props: LabelProps,
     ref: React.Ref<HTMLSpanElement>
 ) => {
-    const { label, labelBgColor, labelColor, variant = 'caption', ...otherProps } = props;
+    const { label, labelBgColor, labelColor, ...otherProps } = props;
 
     return (
-        <Root
-            ref={ref}
-            component="span"
-            variant={variant}
-            labelBgColor={labelBgColor}
-            labelColor={labelColor}
-            data-testid="blui-label-root"
-            {...otherProps}
-        >
-            {label}
-        </Root>
+        <AnchorPoint {...(otherProps as AnchorPointProps)}>
+            <StyledLabel
+                ref={ref}
+                component="span"
+                labelBgColor={labelBgColor}
+                labelColor={labelColor}
+                data-testid="blui-label-root"
+                {...otherProps}
+            >
+                {label}
+            </StyledLabel>
+        </AnchorPoint>
     );
 };
 

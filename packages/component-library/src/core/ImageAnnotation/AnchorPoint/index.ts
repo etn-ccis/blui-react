@@ -1,4 +1,3 @@
-export * from './AnchorPoint';
-export * from './Label';
 export * from './Marker';
+export * from './Label';
 export * from './Card';

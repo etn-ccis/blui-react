@@ -32,6 +32,16 @@ export type AnchorPointProps = {
      * Anchor content (e.g., `<Marker />`, `<Label />`, or `<Card />`).
      */
     children?: ReactNode;
+
+    /**
+     * Optional callout boolean associated with the anchor point.
+     */
+    callout?: boolean;
+    direction?: 'top' | 'down' | 'left' | 'right';
+    lineLength?: number;
+    lineColor?: string | [string, string];
+    lineWidth?: number;
+    autoFlip?: boolean;
 };
 
 const useUtilityClasses = (ownerState: AnchorPointProps): Record<AnchorPointClassKey, string> => {
@@ -60,13 +70,58 @@ const Root = styled(Box, {
     flexDirection: 'row',
     transform: 'translate(-50%, -50%)',
     zIndex: 1,
+    gap: '4px',
 }));
+
+const Dot = styled(Box)(() => ({
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '18px',
+    height: '18px',
+    flexShrink: 0,
+    borderRadius: '50%',
+    backgroundColor: '#353c44',
+    border: '1px solid rgba(255, 255, 255, 0.72)',
+    boxShadow: '0 0 2px rgba(0, 0, 0, 0.24), 0 1px 4px rgba(0, 0, 0, 0.32)',
+    filter: 'blur(1px)',
+}));
+
+const Connector = styled(Box)(
+    ({
+        lineLength = 120,
+        lineColor,
+        lineWidth = 1,
+    }: {
+        lineLength?: number;
+        lineColor?: string | [string, string];
+        lineWidth?: number;
+    }) => ({
+        width: `${lineLength}px`,
+        height: `${lineWidth}px`,
+        backgroundColor: lineColor ?? '#fff',
+        filter: 'drop-shadow(0 0 4px rgba(0, 0, 0, 0.40))',
+    })
+);
 
 const AnchorPointRender: React.ForwardRefRenderFunction<HTMLDivElement, AnchorPointProps> = (
     props: AnchorPointProps,
     ref: React.Ref<HTMLDivElement>
 ) => {
-    const { x, y, sx, children, classes = {}, ...otherProps } = props;
+    const {
+        x,
+        y,
+        sx,
+        children,
+        classes = {},
+        callout = false,
+        // direction = 'right',
+        lineLength = 120,
+        lineColor,
+        lineWidth,
+        // autoFlip,
+        ...otherProps
+    } = props;
     const generatedClasses = useUtilityClasses({ ...props, classes });
 
     return (
@@ -79,7 +134,17 @@ const AnchorPointRender: React.ForwardRefRenderFunction<HTMLDivElement, AnchorPo
             data-testid="blui-anchor-point-root"
             {...otherProps}
         >
-            {children}
+            {callout ? (
+                <>
+                    <Dot>
+                        <Box sx={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#fff' }} />
+                    </Dot>
+                    <Connector lineLength={lineLength} lineColor={lineColor} lineWidth={lineWidth} />
+                    {children}
+                </>
+            ) : (
+                children
+            )}
         </Root>
     );
 };
