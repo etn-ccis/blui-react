@@ -43,10 +43,7 @@ const StyledLabel = styled(Typography, {
     lineHeight: 'normal',
 }));
 
-const LabelRender: React.ForwardRefRenderFunction<HTMLSpanElement, LabelProps> = (
-    props: LabelProps,
-    ref: React.Ref<HTMLSpanElement>
-) => {
+const LabelRender: React.ForwardRefRenderFunction<unknown, LabelProps> = (props: LabelProps, ref: any) => {
     const { label, labelBgColor, labelColor, ...otherProps } = props;
 
     return (

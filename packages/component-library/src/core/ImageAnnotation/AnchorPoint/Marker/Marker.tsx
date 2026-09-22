@@ -64,17 +64,14 @@ const Icon = styled(Box, {
     borderRadius: '80px',
     border: `1px solid ${theme.vars?.palette?.divider ?? theme.palette.divider}`,
     backgroundColor: getBackgroundColor(color, theme),
-    boxShadow: theme.vars?.shadows?.[1] ?? theme.shadows[1],
+    boxShadow: theme.vars?.palette.shadows.level1 ?? theme.shadows[1],
     color: getIconColor(color, theme),
     '& .MuiSvgIcon-root': {
         fontSize: iconSize,
     },
 }));
 
-const MarkerRender: React.ForwardRefRenderFunction<HTMLDivElement, MarkerProps> = (
-    props: MarkerProps,
-    ref: React.Ref<HTMLDivElement>
-) => {
+const MarkerRender: React.ForwardRefRenderFunction<unknown, MarkerProps> = (props: MarkerProps, ref: any) => {
     const { icon, iconSize, color, ...otherProps } = props;
 
     return (

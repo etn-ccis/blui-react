@@ -28,10 +28,7 @@ const StyledCard = styled(MuiCard, {
     width: cardWidth,
 }));
 
-const CardRender: React.ForwardRefRenderFunction<HTMLDivElement, CardProps> = (
-    props: CardProps,
-    ref: React.Ref<HTMLDivElement>
-) => {
+const CardRender: React.ForwardRefRenderFunction<unknown, CardProps> = (props: CardProps, ref: any) => {
     const { children, cardWidth = 160, ...otherProps } = props;
 
     const clampedWidth = Math.min(Math.max(cardWidth, MIN_CARD_WIDTH), MAX_CARD_WIDTH);

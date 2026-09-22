@@ -1,6 +1,7 @@
 import React from 'react';
 import { cleanup, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import { AnchorDot } from './AnchorDot';
 import { AnchorPoint } from './AnchorPoint';
 
 afterEach(cleanup);
@@ -69,5 +70,40 @@ describe('AnchorPoint', () => {
         render(<AnchorPoint ref={ref} x={50} y={50} />);
 
         expect(ref.current).toBe(screen.getByTestId('blui-anchor-point-root'));
+    });
+
+    it('renders the default anchor dot with a custom color', () => {
+        const { container } = render(<AnchorDot color="#123456" data-testid="anchor-dot" />);
+
+        expect(screen.getByTestId('anchor-dot')).toBeInTheDocument();
+        expect(container.querySelector('circle[r="8"]')).toHaveAttribute('stroke', '#123456');
+        expect(container.querySelector('circle[r="4"]')).toHaveAttribute('fill', '#123456');
+    });
+
+    it('renders the blue anchor dot variant with a custom color', () => {
+        const { container } = render(<AnchorDot variant="blue" color="#123456" data-testid="anchor-dot" />);
+
+        expect(screen.getByTestId('anchor-dot')).toBeInTheDocument();
+        expect(container.querySelector('circle[r="8.5"]')).toHaveAttribute('stroke', '#123456');
+        expect(container.querySelector('circle[r="5"]')).toHaveAttribute('fill', '#123456');
+    });
+
+    it.each([
+        ['right', 'row', '100%', undefined],
+        ['left', 'row-reverse', undefined, '100%'],
+        ['top', 'column-reverse', undefined, undefined],
+        ['bottom', 'column', undefined, undefined],
+    ])('positions callout content to the %s', (direction, flexDirection, left, right) => {
+        render(
+            <AnchorPoint x={50} y={50} callout direction={direction as 'top' | 'bottom' | 'left' | 'right'}>
+                <span>Details</span>
+            </AnchorPoint>
+        );
+
+        const content = screen.getByText('Details').parentElement;
+
+        expect(content).toHaveStyle({ flexDirection });
+        if (left) expect(content).toHaveStyle({ left });
+        if (right) expect(content).toHaveStyle({ right });
     });
 });

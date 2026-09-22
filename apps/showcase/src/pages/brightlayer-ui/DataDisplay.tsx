@@ -38,6 +38,14 @@ export const BLUIDataDisplay: React.FC = () => {
 
     return (
         <>
+            <Box sx={{ m: 2 }}>
+                <Card sx={{ width: '100%' }}>
+                    <CardHeader title="Image Annotator" />
+                    <CardContent>
+                        <ImageAnnotationExample />
+                    </CardContent>
+                </Card>
+            </Box>
             <ExampleCardList examples={examples} />
             <Box sx={{ m: 2 }}>
                 <Card sx={{ width: '100%' }}>
