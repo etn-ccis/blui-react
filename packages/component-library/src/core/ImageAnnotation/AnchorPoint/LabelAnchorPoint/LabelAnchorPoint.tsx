@@ -67,6 +67,6 @@ const LabelRender: React.ForwardRefRenderFunction<unknown, LabelProps> = (props:
  *
  * Renders an always-visible text chip at an anchor coordinate.
  */
-export const Label = forwardRef(LabelRender);
+export const LabelAnchorPoint = forwardRef(LabelRender);
 
-Label.displayName = 'Label';
+LabelAnchorPoint.displayName = 'LabelAnchorPoint';

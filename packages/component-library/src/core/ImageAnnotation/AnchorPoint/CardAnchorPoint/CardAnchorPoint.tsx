@@ -47,6 +47,6 @@ const CardRender: React.ForwardRefRenderFunction<unknown, CardProps> = (props: C
  *
  * Renders an always-visible card pinned directly at the anchor coordinate.
  */
-export const Card = forwardRef(CardRender);
+export const CardAnchorPoint = forwardRef(CardRender);
 
-Card.displayName = 'Card';
+CardAnchorPoint.displayName = 'CardAnchorPoint';

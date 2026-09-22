@@ -88,6 +88,6 @@ const MarkerRender: React.ForwardRefRenderFunction<unknown, MarkerProps> = (prop
  *
  * Renders an icon inside a fixed-size bounding box for placement in a scene annotation.
  */
-export const Marker = forwardRef(MarkerRender);
+export const MarkerAnchorPoint = forwardRef(MarkerRender);
 
-Marker.displayName = 'Marker';
+MarkerAnchorPoint.displayName = 'MarkerAnchorPoint';
