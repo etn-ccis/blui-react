@@ -72,6 +72,20 @@ describe('AnchorPoint', () => {
         expect(ref.current).toBe(screen.getByTestId('blui-anchor-point-root'));
     });
 
+    it('applies a gradient to the connector when given two line colors', () => {
+        render(
+            <AnchorPoint x={50} y={50} callout direction="right" lineColor={['#111111', '#eeeeee']}>
+                <span>Details</span>
+            </AnchorPoint>
+        );
+
+        const connector = screen.getByText('Details').parentElement?.firstElementChild;
+
+        expect(connector).toHaveStyle({
+            background: 'linear-gradient(to right, #111111, #eeeeee)',
+        });
+    });
+
     it('renders the default anchor dot with a custom color', () => {
         const { container } = render(<AnchorDot color="#123456" data-testid="anchor-dot" />);
 
@@ -89,11 +103,11 @@ describe('AnchorPoint', () => {
     });
 
     it.each([
-        ['right', 'row', '100%', undefined],
-        ['left', 'row-reverse', undefined, '100%'],
-        ['top', 'column-reverse', undefined, undefined],
-        ['bottom', 'column', undefined, undefined],
-    ])('positions callout content to the %s', (direction, flexDirection, left, right) => {
+        ['right', 'row', 'calc(100% + 4px)', undefined, undefined, undefined],
+        ['left', 'row-reverse', undefined, 'calc(100% + 4px)', undefined, undefined],
+        ['top', 'column-reverse', undefined, undefined, undefined, 'calc(100% + 4px)'],
+        ['bottom', 'column', undefined, undefined, 'calc(100% + 4px)', undefined],
+    ])('positions callout content to the %s', (direction, flexDirection, left, right, top, bottom) => {
         render(
             <AnchorPoint x={50} y={50} callout direction={direction as 'top' | 'bottom' | 'left' | 'right'}>
                 <span>Details</span>
@@ -105,5 +119,7 @@ describe('AnchorPoint', () => {
         expect(content).toHaveStyle({ flexDirection });
         if (left) expect(content).toHaveStyle({ left });
         if (right) expect(content).toHaveStyle({ right });
+        if (top) expect(content).toHaveStyle({ top });
+        if (bottom) expect(content).toHaveStyle({ bottom });
     });
 });

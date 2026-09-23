@@ -30,17 +30,19 @@ const StyledLabel = styled(Typography, {
     padding: '2px 8px',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    gap: '6px',
-    backgroundColor: labelBgColor ?? theme.vars?.palette?.background?.paper ?? theme.palette.background.paper,
-    color: labelColor ?? theme.vars?.palette?.text?.primary ?? theme.palette.text.primary,
+    backgroundColor: labelBgColor ?? theme.vars.palette.background.default,
+    color: labelColor ?? theme.vars.palette.text.primary,
     borderRadius: '4px',
-    border: `1px solid ${theme.vars?.palette?.divider ?? theme.palette.divider}`,
+    border: '1px solid rgba(77, 92, 106, 0.12)',
     backdropFilter: 'blur(2px)',
     fontFamily: '"Open Sans", sans-serif',
     fontSize: '14px',
     fontStyle: 'normal',
     fontWeight: 400,
     lineHeight: 'normal',
+    maxWidth: '180px',
+    whiteSpace: 'nowrap',
+    boxShadow: '0 1px 12px 0 rgba(0, 0, 0, 0.12)',
 }));
 
 const LabelRender: React.ForwardRefRenderFunction<unknown, LabelProps> = (props: LabelProps, ref: any) => {

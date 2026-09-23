@@ -1,4 +1,4 @@
-import React, { forwardRef, ReactNode } from 'react';
+import React, { forwardRef, ReactNode, useLayoutEffect, useRef, useState } from 'react';
 import { Box, SxProps, unstable_composeClasses as composeClasses } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { cx } from '@emotion/css';
@@ -36,6 +36,14 @@ type AnchorPointBaseProps = {
 };
 
 type AnchorPointDirection = 'top' | 'bottom' | 'down' | 'left' | 'right';
+
+const oppositeDirection: Record<AnchorPointDirection, AnchorPointDirection> = {
+    top: 'bottom',
+    bottom: 'top',
+    down: 'top',
+    left: 'right',
+    right: 'left',
+};
 
 type AnchorPointCalloutProps = {
     /**
@@ -87,7 +95,6 @@ const Root = styled(Box, {
     flexDirection: 'row',
     transform: 'translate(-50%, -50%)',
     zIndex: 1,
-    gap: '4px',
     ...(callout && { width: '18px', height: '18px' }),
 }));
 
@@ -113,7 +120,11 @@ const Connector = styled(Box, {
     }) => ({
         width: direction === 'left' || direction === 'right' ? `${lineLength}px` : `${lineWidth}px`,
         height: direction === 'left' || direction === 'right' ? `${lineWidth}px` : `${lineLength}px`,
-        backgroundColor: lineColor ?? '#fff',
+        ...(Array.isArray(lineColor)
+            ? {
+                  background: `linear-gradient(to ${direction === 'down' ? 'bottom' : direction}, ${lineColor[0]}, ${lineColor[1]})`,
+              }
+            : { backgroundColor: lineColor ?? '#fff' }),
         filter: 'drop-shadow(0 0 4px rgba(0, 0, 0, 0.40))',
         flexShrink: 0,
     })
@@ -127,25 +138,25 @@ const CalloutContent = styled(Box, {
     alignItems: 'center',
     gap: '4px',
     ...(direction === 'right' && {
-        left: '100%',
+        left: 'calc(100% + 4px)',
         top: '50%',
         transform: 'translateY(-50%)',
         flexDirection: 'row',
     }),
     ...(direction === 'left' && {
-        right: '100%',
+        right: 'calc(100% + 4px)',
         top: '50%',
         transform: 'translateY(-50%)',
         flexDirection: 'row-reverse',
     }),
     ...(direction === 'top' && {
-        bottom: '100%',
+        bottom: 'calc(100% + 4px)',
         left: '50%',
         transform: 'translateX(-50%)',
         flexDirection: 'column-reverse',
     }),
     ...((direction === 'bottom' || direction === 'down') && {
-        top: '100%',
+        top: 'calc(100% + 4px)',
         left: '50%',
         transform: 'translateX(-50%)',
         flexDirection: 'column',
@@ -167,10 +178,77 @@ const AnchorPointRender: React.ForwardRefRenderFunction<HTMLDivElement, AnchorPo
         lineLength = 120,
         lineColor,
         lineWidth,
-        // autoFlip,
+        autoFlip = true,
         ...otherProps
     } = props;
     const generatedClasses = useUtilityClasses({ ...props, classes });
+
+    const contentRef = useRef<HTMLDivElement>(null);
+    const [effectiveDirection, setEffectiveDirection] = useState<AnchorPointDirection>(direction);
+
+    useLayoutEffect((): (() => void) | undefined => {
+        if (!callout || !autoFlip) {
+            setEffectiveDirection(direction);
+            return undefined;
+        }
+
+        const isHorizontal = direction === 'left' || direction === 'right';
+
+        const checkOverflow = (): void => {
+            const contentEl = contentRef.current;
+            // the anchor root (dot + content) is the content's parent, sized independently of the callout direction
+            const anchorRootEl = contentEl?.parentElement;
+            const container = anchorRootEl?.closest('[data-testid="blui-image-annotator-root"]');
+            if (!contentEl || !anchorRootEl || !container) return;
+
+            const contentRect = contentEl.getBoundingClientRect();
+            const anchorRect = anchorRootEl.getBoundingClientRect();
+            const containerRect = container.getBoundingClientRect();
+
+            // content size doesn't change when flipping to the opposite side, only its position does
+            if (isHorizontal) {
+                const anchorCenterX = anchorRect.left + anchorRect.width / 2;
+                const spaceRight = containerRect.right - anchorCenterX;
+                const spaceLeft = anchorCenterX - containerRect.left;
+                const fitsPreferred =
+                    direction === 'right' ? contentRect.width <= spaceRight : contentRect.width <= spaceLeft;
+                const fitsOpposite =
+                    direction === 'right' ? contentRect.width <= spaceLeft : contentRect.width <= spaceRight;
+
+                if (fitsPreferred) setEffectiveDirection(direction);
+                else if (fitsOpposite) setEffectiveDirection(oppositeDirection[direction]);
+                // neither side fits: keep whichever side has more room to minimize overflow
+                else setEffectiveDirection(spaceRight >= spaceLeft ? 'right' : 'left');
+            } else {
+                const anchorCenterY = anchorRect.top + anchorRect.height / 2;
+                const spaceBottom = containerRect.bottom - anchorCenterY;
+                const spaceTop = anchorCenterY - containerRect.top;
+                const isBottomLike = direction === 'bottom' || direction === 'down';
+                const fitsPreferred = isBottomLike ? contentRect.height <= spaceBottom : contentRect.height <= spaceTop;
+                const fitsOpposite = isBottomLike ? contentRect.height <= spaceTop : contentRect.height <= spaceBottom;
+
+                if (fitsPreferred) setEffectiveDirection(direction);
+                else if (fitsOpposite) setEffectiveDirection(oppositeDirection[direction]);
+                else
+                    setEffectiveDirection(spaceBottom >= spaceTop ? (direction === 'down' ? 'down' : 'bottom') : 'top');
+            }
+        };
+
+        checkOverflow();
+
+        const anchorRootEl = contentRef.current?.parentElement;
+        const container = anchorRootEl?.closest('[data-testid="blui-image-annotator-root"]');
+        // ResizeObserver also catches container size changes from async image loads, not just window resizes
+        const resizeObserver = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(checkOverflow) : undefined;
+        if (container) resizeObserver?.observe(container);
+        if (anchorRootEl) resizeObserver?.observe(anchorRootEl);
+        window.addEventListener('resize', checkOverflow);
+
+        return () => {
+            resizeObserver?.disconnect();
+            window.removeEventListener('resize', checkOverflow);
+        };
+    }, [callout, autoFlip, direction, x, y]);
 
     return (
         <Root
@@ -186,9 +264,9 @@ const AnchorPointRender: React.ForwardRefRenderFunction<HTMLDivElement, AnchorPo
             {callout ? (
                 <>
                     <Dot />
-                    <CalloutContent direction={direction}>
+                    <CalloutContent ref={contentRef} direction={effectiveDirection}>
                         <Connector
-                            direction={direction}
+                            direction={effectiveDirection}
                             lineLength={lineLength}
                             lineColor={lineColor}
                             lineWidth={lineWidth}
