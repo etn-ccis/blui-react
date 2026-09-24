@@ -13,6 +13,7 @@ import { Theme } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { RootState } from '../redux/store';
 import { closeDrawer, toggleDrawer } from '../redux/appState';
+import { VersionMenu } from './VersionMenu';
 
 import cubesImage from '../assets/cubes_tile.png';
 const linearGradientOverlayImage = `linear-gradient(to right, rgba(0, 123, 193, 1) 22.4%, rgba(0, 123, 193, 0.2) 100%), url(${cubesImage})`;
@@ -159,6 +160,7 @@ export const NavigationDrawer: React.FC = () => {
                 }}
             />
             <DrawerBody hidePadding sx={styles.denseDrawerItem}>
+                <VersionMenu />
                 {pageDefinitions.map(
                     (navGroup, navGroupIndex) =>
                         !navGroup.hidden && (
