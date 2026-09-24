@@ -2,7 +2,14 @@ import React, { useCallback } from 'react';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useNavigate, useLocation } from 'react-router';
-import { Drawer, DrawerBody, DrawerHeader, DrawerNavGroup, NavItem } from '@brightlayer-ui/react-components';
+import {
+    Drawer,
+    DrawerBody,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerNavGroup,
+    NavItem,
+} from '@brightlayer-ui/react-components';
 import { externalLinkDefinitions, pageDefinitions, RouteConfig } from '../__configuration__/navigationMenu/navigation';
 import Chip from '@mui/material/Chip';
 import Typography from '@mui/material/Typography';
@@ -160,7 +167,6 @@ export const NavigationDrawer: React.FC = () => {
                 }}
             />
             <DrawerBody hidePadding sx={styles.denseDrawerItem}>
-                <VersionMenu />
                 {pageDefinitions.map(
                     (navGroup, navGroupIndex) =>
                         !navGroup.hidden && (
@@ -189,6 +195,11 @@ export const NavigationDrawer: React.FC = () => {
                     sx={styles.navGroupTopDivider}
                 />
             </DrawerBody>
+            <DrawerFooter
+                sx={{ borderTop: (footerTheme: Theme): string => `1px solid ${footerTheme.vars.palette.divider}` }}
+            >
+                <VersionMenu />
+            </DrawerFooter>
         </Drawer>
     );
 };
