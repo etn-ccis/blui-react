@@ -4,9 +4,70 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
-In the project directory, you can run:
+This Vite application supports frozen documentation snapshots for each published release. The current documentation is deployed at the root of the hosting repository; snapshots are deployed to version folders and remain available from the version menu.
 
-### `npm start`
+## URLs
+
+| Environment | Current docs | Version snapshot |
+| --- | --- | --- |
+| Dev | `/react-dev/` | `/react-dev/vN/` |
+| Production | `/react/` | `/react/vN/` |
+
+`N` is the numeric value of `docsVersion` in `package.json`.
+
+## Release Metadata
+
+Before creating a snapshot, update these files:
+
+1. In `docs/package.json`, set the next release number without the `v` prefix:
+
+   ```json
+   "docsVersion": "2"
+   ```
+
+2. In `src/__configuration__/navigationMenu/versionHistory.ts`, update the menu entries in newest-to-oldest order.
+
+   - The newest release represents the current root deployment and uses `url: ''`.
+   - Previous releases use their deployed folder, such as `url: '/v1'`.
+   - Enter the package versions manually; use the published stable versions rather than alpha or beta qualifiers.
+
+   ```ts
+   export const versionHistory: VersionHistoryItem[] = [
+	   {
+		   date: 'October 2026',
+		   url: '',
+		   packages: [
+			   { name: '@brightlayer-ui/react-components', version: '8.0.6' },
+			   { name: '@brightlayer-ui/react-themes', version: '9.1.1' },
+			   { name: '@brightlayer-ui/react-auth-workflow', version: '7.0.4' },
+		   ],
+	   },
+	   {
+		   date: 'Previous release month',
+		   url: '/v1',
+		   packages: [],
+	   },
+   ];
+   ```
+
+Do not add a historical entry until its snapshot has been deployed successfully.
+
+## Publish A Snapshot
+
+1. Commit and push the release metadata.
+2. In GitHub Actions, run **Deploy React Docs Release Snapshot** with `environment: dev`.
+3. Verify the snapshot and a deep link, for example `/react-dev/v2/` and `/react-dev/v2/components/app-bar/examples`.
+4. Run the normal dev deployment to update `/react-dev/`.
+5. Run **Deploy React Docs Release Snapshot** with `environment: prod`.
+6. Verify `/react/` and `/react/v2/`.
+
+The snapshot workflow builds the workspace component package before building the docs, so no tarball installation is required.
+
+## Retention
+
+The snapshot workflow keeps the three highest `vN` folders in each hosting repository. When a fourth snapshot is published, the oldest snapshot folder is removed. Remove its corresponding entry from `versionHistory.ts` when this happens.
+
+Historical snapshots are frozen builds. A menu change made after a snapshot has been deployed does not update that already-deployed snapshot.
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
