@@ -23,7 +23,7 @@ import CardHeader from '@mui/material/CardHeader';
 
 export const BLUIDataDisplay: React.FC = () => {
     const examples: ComponentExample[] = [
-        { label: 'Image Annotator', component: <ImageAnnotationExample />, fullWidth: true },
+        // { label: 'Image Annotator', component: <ImageAnnotationExample />, fullWidth: true },
         { label: 'Channel Value', component: <ChannelValueExample /> },
         { label: 'Empty State', component: <EmptyStateExample /> },
         { label: 'File Drag Upload', component: <FileDragUploadExample />, fullWidth: true },
@@ -38,6 +38,14 @@ export const BLUIDataDisplay: React.FC = () => {
 
     return (
         <>
+            <Box sx={{ m: 2 }}>
+                <Card sx={{ width: '100%' }}>
+                    <CardHeader title="Image Annotator" />
+                    <CardContent>
+                        <ImageAnnotationExample />
+                    </CardContent>
+                </Card>
+            </Box>
             <ExampleCardList examples={examples} />
             <Box sx={{ m: 2 }}>
                 <Card sx={{ width: '100%' }}>
