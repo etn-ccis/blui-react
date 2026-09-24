@@ -50,6 +50,7 @@ jobs:
 
             - name: Read docs version
               id: docs-version
+              working-directory: docs
               run: |
                   docs_version=$(node -p "require('./package.json').docsVersion")
                   echo "version=v${docs_version}" >> "$GITHUB_OUTPUT"
