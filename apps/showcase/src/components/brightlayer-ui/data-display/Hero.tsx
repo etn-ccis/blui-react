@@ -1,9 +1,7 @@
 import React from 'react';
 import Typography from '@mui/material/Typography';
 import { ChannelValue, Hero, HeroBanner } from '@brightlayer-ui/react-components';
-import GradeA from '@brightlayer-ui/icons-mui/GradeA';
-import GradeB from '@brightlayer-ui/icons-mui/GradeB';
-import Temp from '@brightlayer-ui/icons-mui/Temp';
+import { GradeA, GradeB, Temp } from '@brightlayer-ui/icons-mui';
 import Schedule from '@mui/icons-material/Schedule';
 import * as colors from '@brightlayer-ui/colors';
 import { useColorScheme } from '@mui/material';

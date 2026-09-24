@@ -2,7 +2,7 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import nightView from '../../../assets/night_view.jpeg';
-// import dayView from '../../../assets/day_view.png';
+import dayView from '../../../assets/day_view.png';
 import DeviceThermostatOutlinedIcon from '@mui/icons-material/DeviceThermostatOutlined';
 import { ImageAnnotator, CardAnchorPoint, LabelAnchorPoint, MarkerAnchorPoint } from '@brightlayer-ui/react-components';
 import { Divider } from '@mui/material';
@@ -47,18 +47,50 @@ export const ImageAnnotationExample: React.FC = () => (
             <ImageAnnotator src={nightView} alt="Night view of a city" sx={imageStyles}>
                 <MarkerAnchorPoint x={83} y={10} icon={<DeviceThermostatOutlinedIcon />} callout />
                 <LabelAnchorPoint x={70} y={20} label="Vaccum cleaner #1" callout />
-                <CardAnchorPoint x={50} y={50} cardWidth={150} callout={true}>
+                <CardAnchorPoint x={50} y={50} cardWidth={150} callout={true} lineColor={['#d4dd3a', 'blue']}>
+                    {cardContent}
+                </CardAnchorPoint>
+
+                <MarkerAnchorPoint
+                    x={13}
+                    y={90}
+                    icon={<DeviceThermostatOutlinedIcon />}
+                    color="primary"
+                    anchorDotProps={{ anchorColor: 'blue' }}
+                />
+                <LabelAnchorPoint
+                    x={35}
+                    y={76}
+                    label="Vaccum cleaner #2"
+                    labelBgColor="#d4dd3a"
+                    labelColor="#000"
+                    anchorDotProps={{ anchorColor: 'blue' }}
+                />
+                <CardAnchorPoint x={15} y={60} cardWidth={150}>
                     {cardContent}
                 </CardAnchorPoint>
             </ImageAnnotator>
 
-            {/* <ImageAnnotator src={dayView} alt="Day view of a city" sx={imageStyles}>
-                <MarkerAnchorPoint x={20} y={10} icon={<DeviceThermostatOutlinedIcon />} callout />
-                <LabelAnchorPoint x={80} y={20} label="Temperature Sensor #2" callout />
-                <CardAnchorPoint x={50} y={50} cardWidth={150} callout={true}>
+            <ImageAnnotator src={dayView} alt="Day view of a city" sx={imageStyles}>
+                <MarkerAnchorPoint
+                    x={20}
+                    y={90}
+                    icon={<DeviceThermostatOutlinedIcon />}
+                    callout
+                    lineColor={['#428bea', '#e4f26a']}
+                    anchorDotProps={{ anchorColor: 'blue' }}
+                />
+                <LabelAnchorPoint
+                    x={80}
+                    y={20}
+                    label="Temperature Sensor #2"
+                    callout
+                    anchorDotProps={{ anchorColor: 'blue' }}
+                />
+                <CardAnchorPoint x={50} y={50} cardWidth={150} callout={true} anchorDotProps={{ anchorColor: 'blue' }}>
                     {cardContent}
                 </CardAnchorPoint>
-            </ImageAnnotator> */}
+            </ImageAnnotator>
         </Box>
     </Box>
 );

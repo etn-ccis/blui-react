@@ -2,7 +2,7 @@ import React, { forwardRef, ReactNode, useLayoutEffect, useRef, useState } from 
 import { Box, SxProps, unstable_composeClasses as composeClasses } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { cx } from '@emotion/css';
-import { AnchorDot } from './AnchorDot';
+import { AnchorDot, AnchorDotProps } from './AnchorDot';
 import { AnchorPointClasses, AnchorPointClassKey, getAnchorPointUtilityClass } from './AnchorPointClasses';
 
 export type AnchorPointVariant = 'marker' | 'label' | 'card';
@@ -33,6 +33,11 @@ type AnchorPointBaseProps = {
      * Anchor content (e.g., `<Marker />`, `<Label />`, or `<Card />`).
      */
     children?: ReactNode;
+
+    /**
+     * Props passed through to the underlying `AnchorDot` component.
+     */
+    anchorDotProps?: AnchorDotProps;
 };
 
 type AnchorPointDirection = 'top' | 'bottom' | 'down' | 'left' | 'right';
@@ -179,6 +184,7 @@ const AnchorPointRender: React.ForwardRefRenderFunction<HTMLDivElement, AnchorPo
         lineColor,
         lineWidth,
         autoFlip = true,
+        anchorDotProps,
         ...otherProps
     } = props;
     const generatedClasses = useUtilityClasses({ ...props, classes });
@@ -263,7 +269,7 @@ const AnchorPointRender: React.ForwardRefRenderFunction<HTMLDivElement, AnchorPo
         >
             {callout ? (
                 <>
-                    <Dot />
+                    <Dot {...anchorDotProps} />
                     <CalloutContent ref={contentRef} direction={effectiveDirection}>
                         <Connector
                             direction={effectiveDirection}
