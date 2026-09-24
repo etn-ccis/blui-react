@@ -7,17 +7,20 @@ export type AnchorDotProps = Omit<React.SVGProps<SVGSVGElement>, 'color'> & {
      * @default default
      */
     anchorColor?: 'default' | 'blue';
+    fillColor?: string;
 };
 
-export const AnchorDot = ({ anchorColor = 'default', ...svgProps }: AnchorDotProps): React.JSX.Element => {
+export const AnchorDot = ({ anchorColor, fillColor, ...svgProps }: AnchorDotProps): React.JSX.Element => {
     const id = useId().replace(/:/g, '');
     const defaultBlurId = `anchor-dot-blur-${id}`;
     const defaultShadowId = `anchor-dot-shadow-${id}`;
     const blueBlurId = `anchor-dot-blue-blur-${id}`;
     const theme = useTheme();
-    const dotColor = anchorColor === 'blue' ? theme.palette.primary.main : theme.palette.background.paper;
+    const colorVariant = anchorColor ?? 'default';
+    const dotColor =
+        fillColor ?? (colorVariant === 'blue' ? theme.vars.palette.primary.main : theme.palette.background.paper);
 
-    if (anchorColor === 'blue') {
+    if (colorVariant === 'blue') {
         return (
             <svg
                 xmlns="http://www.w3.org/2000/svg"

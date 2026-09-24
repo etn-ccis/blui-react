@@ -30,7 +30,7 @@ const StyledCard = styled(MuiCard, {
     gap: theme.spacing(1),
     padding: `${theme.spacing(1.25)} ${theme.spacing(1.5)}`,
     width: cardWidth,
-    backgroundColor: theme.vars.palette.background.default,
+    backgroundColor: theme.vars?.palette?.background?.default ?? theme.palette.background.default,
     border: '1px solid rgba(77, 92, 106, 0.12)',
     borderRadius: theme.spacing(1),
     boxShadow: '0 1px 12px 0 rgba(0, 0, 0, 0.12)',

@@ -51,6 +51,7 @@ overrides:
   '@tootallnate/once': ^2.0.1
   nanoid: ^3.3.18
   esbuild: ^0.28.2
+  esbuild-wasm: ^0.28.2
 
 importers:
 
@@ -7989,8 +7990,8 @@ packages:
     peerDependencies:
       esbuild: ^0.28.2
 
-  esbuild-wasm@0.27.3:
-    resolution: {integrity: sha512-AUXuOxZ145/5Az+lIqk6TdJbxKTyDGkXMJpTExmBdbnHR6n6qAFx+F4oG9ORpVYJ9dQYeQAqzv51TO4DFKsbXw==}
+  esbuild-wasm@0.28.2:
+    resolution: {integrity: sha512-GccVwhv3mmOUVQHCQm2Ox/rby8n/EqUwvZxE6Pjfikrq/lWw9g9WX/u9EykWnpot3Ko6j426DgQdea2xWKIAQA==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -16008,7 +16009,7 @@ snapshots:
       compare-versions: 6.1.1
       cross-spawn: 7.0.6
       dotenv: 16.6.1
-      esbuild-wasm: 0.27.3
+      esbuild-wasm: 0.28.2
       fast-fuzzy: 1.12.0
       find-up: 5.0.0
       glob: 11.1.0
@@ -21575,7 +21576,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  esbuild-wasm@0.27.3: {}
+  esbuild-wasm@0.28.2: {}
 
   esbuild@0.28.2:
     optionalDependencies:

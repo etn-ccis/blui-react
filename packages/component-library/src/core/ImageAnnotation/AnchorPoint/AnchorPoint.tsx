@@ -109,13 +109,16 @@ const Dot = styled(AnchorDot)(() => ({
     flexShrink: 0,
 }));
 
+// fades from opaque near the anchor dot to translucent near the callout content, per Figma
+const defaultLineColor: [string, string] = ['rgba(255, 255, 255, 1)', 'rgba(255, 255, 255, 0.24)'];
+
 const Connector = styled(Box, {
     shouldForwardProp: (prop) => !['direction', 'lineLength', 'lineColor', 'lineWidth'].includes(prop.toString()),
 })(
     ({
         direction,
         lineLength = 120,
-        lineColor,
+        lineColor = defaultLineColor,
         lineWidth = 2,
     }: {
         direction: AnchorPointDirection;
@@ -129,7 +132,7 @@ const Connector = styled(Box, {
             ? {
                   background: `linear-gradient(to ${direction === 'down' ? 'bottom' : direction}, ${lineColor[0]}, ${lineColor[1]})`,
               }
-            : { backgroundColor: lineColor ?? '#fff' }),
+            : { backgroundColor: lineColor }),
         filter: 'drop-shadow(0 0 4px rgba(0, 0, 0, 0.40))',
         flexShrink: 0,
     })
@@ -242,12 +245,15 @@ const AnchorPointRender: React.ForwardRefRenderFunction<HTMLDivElement, AnchorPo
 
         checkOverflow();
 
-        const anchorRootEl = contentRef.current?.parentElement;
+        const contentEl = contentRef.current;
+        const anchorRootEl = contentEl?.parentElement;
         const container = anchorRootEl?.closest('[data-testid="blui-image-annotator-root"]');
         // ResizeObserver also catches container size changes from async image loads, not just window resizes
         const resizeObserver = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(checkOverflow) : undefined;
         if (container) resizeObserver?.observe(container);
         if (anchorRootEl) resizeObserver?.observe(anchorRootEl);
+        // re-evaluate if the callout content itself resizes (e.g., label/card content changes post-mount)
+        if (contentEl) resizeObserver?.observe(contentEl);
         window.addEventListener('resize', checkOverflow);
 
         return () => {

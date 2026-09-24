@@ -64,7 +64,7 @@ const Icon = styled(Box, {
     borderRadius: '80px',
     border: `1px solid ${theme.vars?.palette?.divider ?? theme.palette.divider}`,
     backgroundColor: getBackgroundColor(color, theme),
-    boxShadow: theme.vars?.palette.shadows.level1 ?? theme.shadows[1],
+    boxShadow: theme.vars?.palette?.shadows?.level1 ?? theme.palette.shadows.level1,
     color: getIconColor(color, theme),
     '& .MuiSvgIcon-root': {
         fontSize: iconSize,
@@ -75,7 +75,7 @@ const MarkerRender: React.ForwardRefRenderFunction<unknown, MarkerProps> = (prop
     const { icon, iconSize, color, ...otherProps } = props;
 
     return (
-        <AnchorPoint {...props}>
+        <AnchorPoint {...otherProps}>
             <Icon ref={ref} data-testid="blui-marker-root" iconSize={iconSize} color={color} {...otherProps}>
                 {icon}
             </Icon>
