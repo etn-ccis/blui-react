@@ -27,6 +27,7 @@ import SpacerAPIDocs from '../../componentDocs/Spacer/markdown/SpacerAPIDocs.mdx
 import ScoreCardAPIDocs from '../../componentDocs/ScoreCard/markdown/ScoreCardAPIDocs.mdx';
 import ToolbarMenuAPIDocs from '../../componentDocs/ToolbarMenu/markdown/ToolbarMenuAPIDocs.mdx';
 import ProgressIconAPIDocs from '../../componentDocs/ProgressIcon/markdown/ProgressIconAPIDocs.mdx';
+import TwoToneIconAPIDocs from '../../componentDocs/TwoToneIcon/markdown/TwoToneIconAPIDocs.mdx';
 
 // workflow docs
 import WorkflowOverview from '../../markdownDocs/workflowDocs/Overview/overview.mdx';
@@ -89,6 +90,7 @@ import ThreeLinerExamples from '../../componentDocs/ThreeLiner/markdown/ThreeLin
 import HorizontalStackedBarExamples from '../../componentDocs/HorizontalStackedBar/markdown/HorizontalStackedBarExamples.mdx';
 import DrawerRailItemExamples from '../../componentDocs/DrawerRailItem/markdown/DrawerRailItemExamples.mdx';
 import ProgressIconExamples from '../../componentDocs/ProgressIcon/markdown/ProgressIconExamples.mdx';
+import TwoToneIconExamples from '../../componentDocs/TwoToneIcon/markdown/TwoToneIconExamples.mdx';
 
 // Playground components
 import { AppBarPlaygroundComponent } from '../../componentDocs/AppBar/playground/PlaygroundPage';
@@ -119,6 +121,7 @@ import { ListItemTag, NavItem } from '@brightlayer-ui/react-components';
 // Site markdown docs
 import * as markdownDocs from '../../markdownDocs/';
 import { ProgressIconPlaygroundComponent } from '../../componentDocs/ProgressIcon/playground';
+import { TwoToneIconPlaygroundComponent } from '../../componentDocs/TwoToneIcon/playground';
 
 export type RouteConfig = Omit<RouteProps, 'children'> & {
     title: string;
@@ -900,6 +903,28 @@ export const pageDefinitions: RouteConfig[] = [
                     },
                 ],
             },
+            {
+                title: 'Two Tone Icon',
+                path: 'two-tone-icon/',
+                element: <ComponentPreviewPage title={'Two Tone Icon'} />,
+                children: [
+                    {
+                        title: 'examples',
+                        path: 'examples',
+                        element: <TwoToneIconExamples />,
+                    },
+                    {
+                        title: 'API Docs',
+                        path: 'api-docs',
+                        element: <TwoToneIconAPIDocs />,
+                    },
+                    {
+                        title: 'playground',
+                        path: 'playground',
+                        element: <TwoToneIconPlaygroundComponent />,
+                    },
+                ],
+            },
         ],
     },
 ];
@@ -916,6 +941,10 @@ export const externalLinkDefinitions: NavItem[] = [
             {
                 title: 'Progress Icons',
                 itemID: '/icons/progress-icons',
+            },
+            {
+                title: 'Two Tone Icon',
+                itemID: '/icons/two-tone-icon',
             },
         ],
     },
