@@ -1270,8 +1270,8 @@ importers:
         specifier: ^2.6.0
         version: 2.6.0
       '@brightlayer-ui/icons-mui':
-        specifier: ^4.3.0
-        version: 4.3.0(@mui/icons-material@7.3.11(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))
+        specifier: 4.4.0-alpha.1
+        version: 4.4.0-alpha.1(@mui/icons-material@7.3.11(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))
       '@brightlayer-ui/react-auth-workflow':
         specifier: workspace:^
         version: link:../packages/login-workflow
@@ -2984,6 +2984,12 @@ packages:
 
   '@brightlayer-ui/icons-mui@4.3.0':
     resolution: {integrity: sha512-b4OvCt+9nKHCOLkkJGEeOditHIOVDJ8lvmqU1no2u0grZTDZ/yTlcRBEEkUlrbKO6AfdD7iwbyl9joaDGP5aPA==}
+    peerDependencies:
+      '@mui/icons-material': ^7.1.1
+      '@mui/material': ^7.1.1
+
+  '@brightlayer-ui/icons-mui@4.4.0-alpha.1':
+    resolution: {integrity: sha512-pgltF26ESYchAMeHJH3giUSbW86x/88ooimqdgkoohcx/JefkZscbv1qXp1yjENbzKiRagZKLPxCtK9uRqDpRQ==}
     peerDependencies:
       '@mui/icons-material': ^7.1.1
       '@mui/material': ^7.1.1
@@ -15370,6 +15376,11 @@ snapshots:
       '@mui/material': 6.5.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
 
   '@brightlayer-ui/icons-mui@4.3.0(@mui/icons-material@7.3.11(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))':
+    dependencies:
+      '@mui/icons-material': 7.3.11(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.17)(react@19.2.8)
+      '@mui/material': 7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+
+  '@brightlayer-ui/icons-mui@4.4.0-alpha.1(@mui/icons-material@7.3.11(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))':
     dependencies:
       '@mui/icons-material': 7.3.11(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.17)(react@19.2.8)
       '@mui/material': 7.3.11(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react@19.2.8))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
