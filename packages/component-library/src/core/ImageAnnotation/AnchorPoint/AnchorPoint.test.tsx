@@ -120,7 +120,7 @@ describe('AnchorPoint', () => {
     });
 
     it('renders the blue anchor dot variant with a custom color', () => {
-        const { container } = render(<AnchorDot variant="blue" fillColor="#123456" data-testid="anchor-dot" />);
+        const { container } = render(<AnchorDot anchorColor="blue" fillColor="#123456" data-testid="anchor-dot" />);
 
         expect(screen.getByTestId('anchor-dot')).toBeInTheDocument();
         expect(container.querySelector('circle[r="8.5"]')).toHaveAttribute('stroke', '#123456');

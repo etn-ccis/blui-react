@@ -2,7 +2,7 @@ import React, { createRef } from 'react';
 import { render, screen, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { LabelAnchorPoint, LabelProps } from './LabelAnchorPoint';
-import { ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { blueThemes as theme } from '@brightlayer-ui/react-themes';
 
 afterEach(cleanup);
@@ -63,6 +63,17 @@ describe('LabelAnchorPoint', () => {
         // Verify the element exists and has the default styling applied
         expect(labelElement).toHaveStyle('display: inline-flex');
         expect(labelElement).toHaveStyle('font-size: 14px');
+    });
+
+    it('uses theme palette fallbacks when CSS variables are unavailable', () => {
+        render(
+            <ThemeProvider theme={createTheme()}>
+                <LabelAnchorPoint {...defaultProps} />
+            </ThemeProvider>
+        );
+
+        const labelElement = screen.getByTestId('blui-label-root');
+        expect(labelElement).toBeInTheDocument();
     });
 
     it('applies default styling classes', () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { cleanup, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { blueThemes as theme } from '@brightlayer-ui/react-themes';
 import { CardAnchorPoint } from './CardAnchorPoint';
 
@@ -223,6 +223,16 @@ describe('CardAnchorPoint', () => {
     });
 
     describe('Card Styling', () => {
+        it('uses the theme background fallback when CSS variables are unavailable', () => {
+            render(
+                <ThemeProvider theme={createTheme()}>
+                    <CardAnchorPoint x={50} y={50} />
+                </ThemeProvider>
+            );
+
+            expect(screen.getByTestId('blui-card-root')).toBeInTheDocument();
+        });
+
         it('applies flex display to card', () => {
             renderWithTheme(<CardAnchorPoint x={50} y={50} />);
 
