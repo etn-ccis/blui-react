@@ -18,7 +18,7 @@ Before creating a snapshot, update these files:
 1. In `docs/package.json`, set the next release number without the `v` prefix:
 
    ```json
-   "docsVersion": "2"
+   "docsVersion": "1"
    ```
 
 2. In `public/version-history.json`, update the menu entries in newest-to-oldest order.
