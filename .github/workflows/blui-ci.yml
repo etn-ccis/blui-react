@@ -730,6 +730,7 @@ jobs:
                   clean-exclude: |
                       .nojekyll
                       CNAME
+                      v*
 
     deploy_react_doc_prod:
         name: Deploy react docs on master
@@ -766,6 +767,7 @@ jobs:
                   clean-exclude: |
                       .nojekyll
                       CNAME
+                      v*
 
     deploy_showcase_preview:
         name: Deploy Showcase Firebase Preview
