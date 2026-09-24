@@ -44,17 +44,8 @@ jobs:
             - name: Build component package
               run: pnpm --filter @brightlayer-ui/react-components build
 
-            - name: Pack component package
-              run: pnpm --filter @brightlayer-ui/react-components pack --pack-destination ../../docs/tarball
-
             - name: Install docs dependencies
               run: pnpm install --frozen-lockfile
-              working-directory: docs
-
-            - name: Install packed component package
-              run: |
-                  PACKAGED_VERSION=$(node -p "require('../packages/component-library/package.json').version")
-                  pnpm add ./tarball/brightlayer-ui-react-components-$PACKAGED_VERSION.tgz
               working-directory: docs
 
             - name: Read docs version
