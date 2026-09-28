@@ -3,22 +3,25 @@ import { useTheme } from '@mui/material/styles';
 
 export type AnchorDotProps = Omit<React.SVGProps<SVGSVGElement>, 'color'> & {
     /**
-     * Visual treatment for the anchor dot.
+     * Anchor dot color. Accepts `default`, `blue`, or any CSS color string.
      * @default default
      */
-    anchorColor?: 'default' | 'blue';
-    fillColor?: string;
+    anchorDotColor?: 'default' | 'blue' | string;
 };
 
-export const AnchorDot = ({ anchorColor, fillColor, ...svgProps }: AnchorDotProps): React.JSX.Element => {
+export const AnchorDot = ({ anchorDotColor, ...svgProps }: AnchorDotProps): React.JSX.Element => {
     const id = useId().replace(/:/g, '');
     const defaultBlurId = `anchor-dot-blur-${id}`;
     const defaultShadowId = `anchor-dot-shadow-${id}`;
     const blueBlurId = `anchor-dot-blue-blur-${id}`;
     const theme = useTheme();
-    const colorVariant = anchorColor ?? 'default';
+    const colorVariant = anchorDotColor ?? 'default';
     const dotColor =
-        fillColor ?? (colorVariant === 'blue' ? theme.vars.palette.primary.main : theme.palette.background.paper);
+        colorVariant === 'blue'
+            ? theme.vars.palette.primary.main
+            : colorVariant === 'default'
+              ? theme.palette.background.paper
+              : colorVariant;
 
     if (colorVariant === 'blue') {
         return (

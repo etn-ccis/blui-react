@@ -98,24 +98,36 @@ export const ImageAnnotationExample: React.FC = () => (
                     color="error"
                     callout
                     direction="bottom"
-                    lineLength={30}
-                    anchorDotProps={{ anchorColor: 'blue' }}
+                    connectorLength={30}
+                    anchorDotProps={{ anchorDotColor: 'blue' }}
                 />
 
-                <LabelAnchorPoint x={65} y={10} label="Vaccum cleaner #1" callout direction="left" lineLength={90} />
-
                 <LabelAnchorPoint
-                    x={68}
+                    x={80}
+                    y={10}
+                    label="Vaccum cleaner #1"
+                    callout
+                    direction="left"
+                    connectorLength={90}
+                />
+                <LabelAnchorPoint
+                    x={89}
                     y={5}
                     label="Vaccum cleaner #2"
                     callout
                     direction="bottom"
-                    anchorDotProps={{ anchorColor: 'blue' }}
+                    anchorDotProps={{ anchorDotColor: 'blue' }}
                 />
-                <CardAnchorPoint x={70} y={50} cardWidth={150} callout={true} anchorDotProps={{ anchorColor: 'blue' }}>
+                <CardAnchorPoint
+                    x={70}
+                    y={50}
+                    cardWidth={150}
+                    callout={true}
+                    anchorDotProps={{ anchorDotColor: 'blue' }}
+                >
                     {cardContent}
                 </CardAnchorPoint>
-                <CardAnchorPoint x={70} y={60} cardWidth={150} callout={true} direction="bottom" lineLength={30}>
+                <CardAnchorPoint x={70} y={68} cardWidth={150} callout={true} direction="bottom" connectorLength={20}>
                     {cardContent}
                 </CardAnchorPoint>
             </ImageAnnotator>
@@ -127,9 +139,9 @@ export const ImageAnnotationExample: React.FC = () => (
                     y={7}
                     icon={<DeviceThermostatOutlinedIcon />}
                     callout
-                    lineColor={['#428bea', '#e4f26a']}
-                    anchorDotProps={{ fillColor: 'red' }}
-                    lineLength={60}
+                    connectorColor={['#428bea', '#e4f26a']}
+                    anchorDotProps={{ anchorDotColor: 'red' }}
+                    connectorLength={60}
                 />
                 <LabelAnchorPoint
                     x={74}
@@ -138,15 +150,15 @@ export const ImageAnnotationExample: React.FC = () => (
                     labelBgColor="#e4f26a"
                     labelColor="#5409ea"
                     callout
-                    lineColor={['#428bea', '#e4f26a']}
-                    anchorDotProps={{ fillColor: 'green' }}
+                    connectorColor={['#428bea', '#e4f26a']}
+                    anchorDotProps={{ anchorDotColor: 'green' }}
                 />
                 <CardAnchorPoint
                     x={50}
                     y={50}
                     cardWidth={150}
                     callout={true}
-                    lineColor={['#d942ea', '#91f26a']}
+                    connectorColor={['#d942ea', '#91f26a']}
                     elevation={24}
                 >
                     {coloredCardContent}

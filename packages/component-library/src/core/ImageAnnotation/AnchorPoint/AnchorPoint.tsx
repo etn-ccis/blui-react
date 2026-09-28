@@ -1,8 +1,8 @@
+import { cx } from '@emotion/css';
+import { styled } from '@mui/material/styles';
+import { AnchorDot, AnchorDotProps } from './AnchorDot';
 import React, { forwardRef, ReactNode, useLayoutEffect, useRef, useState } from 'react';
 import { Box, SxProps, unstable_composeClasses as composeClasses } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import { cx } from '@emotion/css';
-import { AnchorDot, AnchorDotProps } from './AnchorDot';
 import { AnchorPointClasses, AnchorPointClassKey, getAnchorPointUtilityClass } from './AnchorPointClasses';
 
 export type AnchorPointVariant = 'marker' | 'label' | 'card';
@@ -55,10 +55,30 @@ type AnchorPointCalloutProps = {
      * Enables the connector between the anchor point and its content.
      */
     callout: true;
+
+    /**
+     * Direction of the callout relative to the anchor point.
+     */
     direction?: AnchorPointDirection;
-    lineLength?: number;
-    lineColor?: string | [string, string];
-    lineWidth?: number;
+
+    /**
+     * Length of the callout connector line in pixels.
+     */
+    connectorLength?: number;
+
+    /**
+     * Color of the callout connector line. Can be a single color or a gradient defined by two colors.
+     */
+    connectorColor?: string | [string, string];
+
+    /**
+     * Width of the callout connector line in pixels.
+     */
+    connectorWidth?: number;
+
+    /**
+     * Automatically flips the callout to the opposite direction if it would overflow the image boundaries.
+     */
     autoFlip?: boolean;
 };
 
@@ -67,10 +87,14 @@ type AnchorPointWithoutCalloutProps = {
      * Optional callout boolean associated with the anchor point.
      */
     callout?: false;
+
+    /**
+     * These props cannot be passed when callout is false.
+     */
     direction?: never;
-    lineLength?: never;
-    lineColor?: never;
-    lineWidth?: never;
+    connectorLength?: never;
+    connectorColor?: never;
+    connectorWidth?: never;
     autoFlip?: never;
 };
 
@@ -113,26 +137,27 @@ const Dot = styled(AnchorDot)(() => ({
 const defaultLineColor: [string, string] = ['rgba(255, 255, 255, 1)', 'rgba(255, 255, 255, 0.24)'];
 
 const Connector = styled(Box, {
-    shouldForwardProp: (prop) => !['direction', 'lineLength', 'lineColor', 'lineWidth'].includes(prop.toString()),
+    shouldForwardProp: (prop) =>
+        !['direction', 'connectorLength', 'connectorColor', 'connectorWidth'].includes(prop.toString()),
 })(
     ({
         direction,
-        lineLength = 120,
-        lineColor = defaultLineColor,
-        lineWidth = 2,
+        connectorLength = 120,
+        connectorColor = defaultLineColor,
+        connectorWidth = 2,
     }: {
         direction: AnchorPointDirection;
-        lineLength?: number;
-        lineColor?: string | [string, string];
-        lineWidth?: number;
+        connectorLength?: number;
+        connectorColor?: string | [string, string];
+        connectorWidth?: number;
     }) => ({
-        width: direction === 'left' || direction === 'right' ? `${lineLength}px` : `${lineWidth}px`,
-        height: direction === 'left' || direction === 'right' ? `${lineWidth}px` : `${lineLength}px`,
-        ...(Array.isArray(lineColor)
+        width: direction === 'left' || direction === 'right' ? `${connectorLength}px` : `${connectorWidth}px`,
+        height: direction === 'left' || direction === 'right' ? `${connectorWidth}px` : `${connectorLength}px`,
+        ...(Array.isArray(connectorColor)
             ? {
-                  background: `linear-gradient(to ${direction === 'down' ? 'bottom' : direction}, ${lineColor[0]}, ${lineColor[1]})`,
+                  background: `linear-gradient(to ${direction === 'down' ? 'bottom' : direction}, ${connectorColor[0]}, ${connectorColor[1]})`,
               }
-            : { backgroundColor: lineColor }),
+            : { backgroundColor: connectorColor }),
         filter: 'drop-shadow(0 0 4px rgba(0, 0, 0, 0.40))',
         flexShrink: 0,
     })
@@ -183,9 +208,9 @@ const AnchorPointRender: React.ForwardRefRenderFunction<HTMLDivElement, AnchorPo
         classes = {},
         callout = false,
         direction = 'right',
-        lineLength = 120,
-        lineColor,
-        lineWidth,
+        connectorLength = 120,
+        connectorColor,
+        connectorWidth,
         autoFlip = true,
         anchorDotProps,
         ...otherProps
@@ -279,9 +304,9 @@ const AnchorPointRender: React.ForwardRefRenderFunction<HTMLDivElement, AnchorPo
                     <CalloutContent ref={contentRef} direction={effectiveDirection}>
                         <Connector
                             direction={effectiveDirection}
-                            lineLength={lineLength}
-                            lineColor={lineColor}
-                            lineWidth={lineWidth}
+                            connectorLength={connectorLength}
+                            connectorColor={connectorColor}
+                            connectorWidth={connectorWidth}
                         />
                         {children}
                     </CalloutContent>
