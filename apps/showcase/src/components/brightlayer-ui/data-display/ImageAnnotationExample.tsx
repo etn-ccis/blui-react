@@ -4,10 +4,9 @@ import Typography from '@mui/material/Typography';
 import nightView from '../../../assets/night_view.jpeg';
 import dayView from '../../../assets/day_view.png';
 import DeviceThermostatOutlinedIcon from '@mui/icons-material/DeviceThermostatOutlined';
-import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined';
 import { ImageAnnotator, CardAnchorPoint, LabelAnchorPoint, MarkerAnchorPoint } from '@brightlayer-ui/react-components';
 import { Divider } from '@mui/material';
-import { Output, Person } from '@mui/icons-material';
+import { Output } from '@mui/icons-material';
 
 const containerStyles = {
     display: 'flex',
@@ -72,10 +71,12 @@ export const ImageAnnotationExample: React.FC = () => (
             <Typography variant="h6">Anchor Points with Defaults</Typography>
             <ImageAnnotator src={nightView} alt="Night view of a city" sx={imageStyles}>
                 <MarkerAnchorPoint x={5} y={5} icon={<DeviceThermostatOutlinedIcon />} color="neutral" />
-                <MarkerAnchorPoint x={5} y={20} icon={<CameraAltOutlinedIcon />} color="primary" />
-                <MarkerAnchorPoint x={5} y={35} icon={<Output />} color="error" />
-                <MarkerAnchorPoint x={5} y={50} icon={<Person />} color="success" />
+                <MarkerAnchorPoint x={5} y={20} icon={<DeviceThermostatOutlinedIcon />} color="primary" />
+                <MarkerAnchorPoint x={5} y={35} icon={<DeviceThermostatOutlinedIcon />} color="error" />
+                <MarkerAnchorPoint x={5} y={50} icon={<DeviceThermostatOutlinedIcon />} color="success" />
                 <MarkerAnchorPoint x={5} y={65} icon={<DeviceThermostatOutlinedIcon />} color="warning" />
+                <MarkerAnchorPoint x={5} y={80} icon={<DeviceThermostatOutlinedIcon />} color="orange" />
+                <MarkerAnchorPoint x={5} y={95} icon={<DeviceThermostatOutlinedIcon />} color="purple" />
 
                 <LabelAnchorPoint x={20} y={20} label="Vaccum cleaner #2" />
 

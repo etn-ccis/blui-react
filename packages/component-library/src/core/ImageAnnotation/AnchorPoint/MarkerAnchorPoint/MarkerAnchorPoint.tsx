@@ -2,6 +2,7 @@ import React, { forwardRef } from 'react';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import { AnchorPoint, AnchorPointProps } from '../AnchorPoint';
+import { BLUIColors } from '@brightlayer-ui/colors';
 
 export type MarkerProps = AnchorPointProps & {
     /**
@@ -18,7 +19,7 @@ export type MarkerProps = AnchorPointProps & {
     /**
      * Color of the marker icon container.
      */
-    color?: 'neutral' | 'primary' | 'success' | 'error' | 'warning';
+    color?: 'neutral' | 'primary' | 'success' | 'error' | 'warning' | 'orange' | 'purple';
 };
 
 const getBackgroundColor = (color?: MarkerProps['color'], theme?: any): string => {
@@ -31,6 +32,10 @@ const getBackgroundColor = (color?: MarkerProps['color'], theme?: any): string =
             return theme.vars?.palette?.error?.main ?? theme.palette.error.main;
         case 'warning':
             return theme.vars?.palette?.warning?.main ?? theme.palette.warning.main;
+        case 'orange':
+            return BLUIColors.orange[500];
+        case 'purple':
+            return BLUIColors.purple[500];
         case 'neutral':
         default:
             return theme.vars?.palette?.background?.paper ?? theme.palette.background.paper;
@@ -42,11 +47,15 @@ const getIconColor = (color?: MarkerProps['color'], theme?: any): string => {
         case 'primary':
             return theme.vars?.palette?.primary?.contrastText ?? theme.palette.primary.contrastText;
         case 'success':
-            return theme.vars?.palette?.success?.contrastText ?? theme.palette.success.contrastText;
+            return theme.vars?.palette?.primary?.contrastText ?? theme.palette.primary.contrastText;
         case 'error':
             return theme.vars?.palette?.error?.contrastText ?? theme.palette.error.contrastText;
         case 'warning':
             return theme.vars?.palette?.warning?.contrastText ?? theme.palette.warning.contrastText;
+        case 'orange':
+            return BLUIColors.black[900];
+        case 'purple':
+            return theme.vars?.palette?.background?.default ?? theme.palette.background.default;
         case 'neutral':
         default:
             return theme.vars?.palette?.text?.primary ?? theme.palette.text.primary;
