@@ -1,6 +1,7 @@
 import React from 'react';
 import { act, cleanup, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { AnchorDot } from './AnchorDot';
 import { AnchorPoint } from './AnchorPoint';
 
@@ -97,9 +98,16 @@ describe('AnchorPoint', () => {
         expect(ref.current).toBe(screen.getByTestId('blui-anchor-point-root'));
     });
 
+    it('passes a direct anchor dot color through to the callout dot', () => {
+        const { container } = render(<AnchorPoint x={50} y={50} callout anchorDotColor="#123456" />);
+
+        expect(container.querySelector('circle[r="8"]')).toHaveAttribute('stroke', '#123456');
+        expect(container.querySelector('circle[r="4"]')).toHaveAttribute('fill', '#123456');
+    });
+
     it('applies a gradient to the connector when given two line colors', () => {
         render(
-            <AnchorPoint x={50} y={50} callout direction="right" lineColor={['#111111', '#eeeeee']}>
+            <AnchorPoint x={50} y={50} callout direction="right" connectorColor={['#111111', '#eeeeee']}>
                 <span>Details</span>
             </AnchorPoint>
         );
@@ -112,19 +120,24 @@ describe('AnchorPoint', () => {
     });
 
     it('renders the default anchor dot with a custom color', () => {
-        const { container } = render(<AnchorDot fillColor="#123456" data-testid="anchor-dot" />);
+        const { container } = render(<AnchorDot anchorDotColor="#123456" data-testid="anchor-dot" />);
 
         expect(screen.getByTestId('anchor-dot')).toBeInTheDocument();
         expect(container.querySelector('circle[r="8"]')).toHaveAttribute('stroke', '#123456');
         expect(container.querySelector('circle[r="4"]')).toHaveAttribute('fill', '#123456');
     });
 
-    it('renders the blue anchor dot variant with a custom color', () => {
-        const { container } = render(<AnchorDot anchorColor="blue" fillColor="#123456" data-testid="anchor-dot" />);
+    it('renders the blue anchor dot variant with the theme primary color', () => {
+        const theme = createTheme({ cssVariables: true });
+        const { container } = render(
+            <ThemeProvider theme={theme}>
+                <AnchorDot anchorDotColor="blue" data-testid="anchor-dot" />
+            </ThemeProvider>
+        );
 
         expect(screen.getByTestId('anchor-dot')).toBeInTheDocument();
-        expect(container.querySelector('circle[r="8.5"]')).toHaveAttribute('stroke', '#123456');
-        expect(container.querySelector('circle[r="5"]')).toHaveAttribute('fill', '#123456');
+        expect(container.querySelector('circle[r="8.5"]')).toHaveAttribute('stroke', 'var(--mui-palette-primary-main)');
+        expect(container.querySelector('circle[r="5"]')).toHaveAttribute('fill', 'var(--mui-palette-primary-main)');
     });
 
     it.each([
@@ -220,7 +233,7 @@ describe('AnchorPoint', () => {
             y: 50,
             callout: true,
             direction: 'down',
-            lineColor: ['#111111', '#eeeeee'],
+            connectorColor: ['#111111', '#eeeeee'],
         });
 
         const container = screen.getByTestId('blui-image-annotator-root');

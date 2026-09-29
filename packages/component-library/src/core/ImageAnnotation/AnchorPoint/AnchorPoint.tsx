@@ -35,9 +35,9 @@ type AnchorPointBaseProps = {
     children?: ReactNode;
 
     /**
-     * Props passed through to the underlying `AnchorDot` component.
+     * Color of the anchor dot. Accepts `default`, `blue`, or any CSS color string.
      */
-    anchorDotProps?: AnchorDotProps;
+    anchorDotColor?: AnchorDotProps['anchorDotColor'];
 };
 
 type AnchorPointDirection = 'top' | 'bottom' | 'down' | 'left' | 'right';
@@ -74,7 +74,7 @@ type AnchorPointCalloutProps = {
     /**
      * Width of the callout connector line in pixels.
      */
-    connectorWidth?: number;
+    connectorThickness?: number;
 
     /**
      * Automatically flips the callout to the opposite direction if it would overflow the image boundaries.
@@ -94,7 +94,7 @@ type AnchorPointWithoutCalloutProps = {
     direction?: never;
     connectorLength?: never;
     connectorColor?: never;
-    connectorWidth?: never;
+    connectorThickness?: never;
     autoFlip?: never;
 };
 
@@ -138,21 +138,21 @@ const defaultLineColor: [string, string] = ['rgba(255, 255, 255, 1)', 'rgba(255,
 
 const Connector = styled(Box, {
     shouldForwardProp: (prop) =>
-        !['direction', 'connectorLength', 'connectorColor', 'connectorWidth'].includes(prop.toString()),
+        !['direction', 'connectorLength', 'connectorColor', 'connectorThickness'].includes(prop.toString()),
 })(
     ({
         direction,
         connectorLength = 120,
         connectorColor = defaultLineColor,
-        connectorWidth = 2,
+        connectorThickness = 2,
     }: {
         direction: AnchorPointDirection;
         connectorLength?: number;
         connectorColor?: string | [string, string];
-        connectorWidth?: number;
+        connectorThickness?: number;
     }) => ({
-        width: direction === 'left' || direction === 'right' ? `${connectorLength}px` : `${connectorWidth}px`,
-        height: direction === 'left' || direction === 'right' ? `${connectorWidth}px` : `${connectorLength}px`,
+        width: direction === 'left' || direction === 'right' ? `${connectorLength}px` : `${connectorThickness}px`,
+        height: direction === 'left' || direction === 'right' ? `${connectorThickness}px` : `${connectorLength}px`,
         ...(Array.isArray(connectorColor)
             ? {
                   background: `linear-gradient(to ${direction === 'down' ? 'bottom' : direction}, ${connectorColor[0]}, ${connectorColor[1]})`,
@@ -210,9 +210,9 @@ const AnchorPointRender: React.ForwardRefRenderFunction<HTMLDivElement, AnchorPo
         direction = 'right',
         connectorLength = 120,
         connectorColor,
-        connectorWidth,
+        connectorThickness,
         autoFlip = true,
-        anchorDotProps,
+        anchorDotColor,
         ...otherProps
     } = props;
     const generatedClasses = useUtilityClasses({ ...props, classes });
@@ -300,13 +300,13 @@ const AnchorPointRender: React.ForwardRefRenderFunction<HTMLDivElement, AnchorPo
         >
             {callout ? (
                 <>
-                    <Dot {...anchorDotProps} />
+                    <Dot anchorDotColor={anchorDotColor} />
                     <CalloutContent ref={contentRef} direction={effectiveDirection}>
                         <Connector
                             direction={effectiveDirection}
                             connectorLength={connectorLength}
                             connectorColor={connectorColor}
-                            connectorWidth={connectorWidth}
+                            connectorThickness={connectorThickness}
                         />
                         {children}
                     </CalloutContent>

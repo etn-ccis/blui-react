@@ -99,7 +99,7 @@ export const ImageAnnotationExample: React.FC = () => (
                     callout
                     direction="bottom"
                     connectorLength={30}
-                    anchorDotProps={{ anchorDotColor: 'blue' }}
+                    anchorDotColor={'blue'}
                 />
 
                 <LabelAnchorPoint
@@ -116,15 +116,9 @@ export const ImageAnnotationExample: React.FC = () => (
                     label="Vaccum cleaner #2"
                     callout
                     direction="bottom"
-                    anchorDotProps={{ anchorDotColor: 'blue' }}
+                    anchorDotColor={'blue'}
                 />
-                <CardAnchorPoint
-                    x={70}
-                    y={50}
-                    cardWidth={150}
-                    callout={true}
-                    anchorDotProps={{ anchorDotColor: 'blue' }}
-                >
+                <CardAnchorPoint x={70} y={50} cardWidth={150} callout={true} anchorDotColor={'blue'}>
                     {cardContent}
                 </CardAnchorPoint>
                 <CardAnchorPoint x={70} y={68} cardWidth={150} callout={true} direction="bottom" connectorLength={20}>
@@ -140,7 +134,7 @@ export const ImageAnnotationExample: React.FC = () => (
                     icon={<DeviceThermostatOutlinedIcon />}
                     callout
                     connectorColor={['#428bea', '#e4f26a']}
-                    anchorDotProps={{ anchorDotColor: 'red' }}
+                    anchorDotColor={'red'}
                     connectorLength={60}
                 />
                 <LabelAnchorPoint
@@ -151,7 +145,7 @@ export const ImageAnnotationExample: React.FC = () => (
                     labelColor="#5409ea"
                     callout
                     connectorColor={['#428bea', '#e4f26a']}
-                    anchorDotProps={{ anchorDotColor: 'green' }}
+                    anchorDotColor={'green'}
                 />
                 <CardAnchorPoint
                     x={50}
