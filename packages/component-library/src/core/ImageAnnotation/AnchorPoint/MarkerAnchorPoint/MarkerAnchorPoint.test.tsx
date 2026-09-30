@@ -213,7 +213,14 @@ describe('MarkerAnchorPoint', () => {
     it('passes AnchorPoint props through', () => {
         render(
             <ThemeWrapper>
-                <MarkerAnchorPoint x={25} y={75} icon={<StarIcon />} callout direction="right" lineColor="#ff0000" />
+                <MarkerAnchorPoint
+                    x={25}
+                    y={75}
+                    icon={<StarIcon />}
+                    callout
+                    direction="right"
+                    connectorColor="#ff0000"
+                />
             </ThemeWrapper>
         );
 
