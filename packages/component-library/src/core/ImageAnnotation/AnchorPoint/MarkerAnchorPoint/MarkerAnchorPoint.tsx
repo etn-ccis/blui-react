@@ -22,6 +22,11 @@ export type MarkerProps = AnchorPointProps & {
     color?: 'neutral' | 'primary' | 'success' | 'error' | 'warning' | 'orange' | 'purple';
 };
 
+const NEUTRAL_BACKGROUND_LIGHT = 'rgba(255, 255, 255, 0.72)';
+const NEUTRAL_BACKGROUND_DARK = 'rgba(14, 18, 24, 0.64)';
+const BORDER_COLOR_LIGHT = 'rgba(255, 255, 255, 0.50)';
+const BORDER_COLOR_DARK = 'rgba(0, 0, 0, 0.32)';
+
 const getBackgroundColor = (color?: MarkerProps['color'], theme?: any): string => {
     switch (color) {
         case 'primary':
@@ -38,7 +43,7 @@ const getBackgroundColor = (color?: MarkerProps['color'], theme?: any): string =
             return BLUIColors.purple[500];
         case 'neutral':
         default:
-            return theme.vars?.palette?.background?.paper ?? theme.palette.background.paper;
+            return NEUTRAL_BACKGROUND_LIGHT;
     }
 };
 
@@ -71,13 +76,16 @@ const Icon = styled(Box, {
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: '80px',
-    border: `1px solid ${theme.vars?.palette?.divider ?? theme.palette.divider}`,
-    backgroundColor: getBackgroundColor(color, theme),
+    border: `1px solid ${BORDER_COLOR_LIGHT}`,
+    background: getBackgroundColor(color, theme),
     boxShadow: theme.vars?.palette?.shadows?.level1 ?? theme.palette.shadows.level1,
     color: getIconColor(color, theme),
     '& .MuiSvgIcon-root': {
         fontSize: iconSize,
     },
+    // CSS-variables themes resolve styles once, so the dark neutral value must come from a color-scheme selector
+    ...(!color || color === 'neutral' ? theme.applyStyles('dark', { background: NEUTRAL_BACKGROUND_DARK }) : {}),
+    ...theme.applyStyles('dark', { borderColor: BORDER_COLOR_DARK }),
 }));
 
 const MarkerRender: React.ForwardRefRenderFunction<unknown, MarkerProps> = (props: MarkerProps, ref: any) => {
