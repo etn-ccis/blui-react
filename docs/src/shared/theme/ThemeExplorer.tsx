@@ -17,6 +17,7 @@ import {
 } from '@mui/material';
 import { componentNameList, componentList } from './componentList';
 import { SystemStyleObject } from '@mui/system';
+
 const darkTheme = createTheme({
     cssVariables: { colorSchemeSelector: 'class' },
     components: theme.components,
@@ -45,6 +46,7 @@ const darkTheme = createTheme({
             secondary: BLUIColors.black[200],
             disabled: BLUIColors.black[300],
         },
+        shadows: theme.colorSchemes.dark!.palette.shadows,
     },
 });
 const lightTheme = createTheme({
@@ -70,6 +72,7 @@ const lightTheme = createTheme({
             primary: BLUIColors.black[500],
             secondary: BLUIColors.gray[500],
         },
+        shadows: theme.colorSchemes.light!.palette.shadows,
     },
     components: theme.components,
     defaultColorScheme: 'light',
