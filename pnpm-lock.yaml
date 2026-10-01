@@ -16,7 +16,6 @@ overrides:
   lodash: ^4.18.0
   underscore: ^1.13.8
   semver@<5.7.2: ^5.7.2
-  minimatch@>=9.0.0 <9.0.7: ^9.0.7
   protobufjs: ^7.6.1
   form-data@>=3.0.0 <3.0.5: ^3.0.5
   form-data@>=4.0.0 <4.0.6: ^4.0.6
@@ -25,7 +24,7 @@ overrides:
   vite@<=6.4.2: ^6.4.3
   vite@>=7.0.0 <=7.3.4: ^7.3.5
   vitest: ^3.2.6
-  shell-quote: ^1.8.4
+  shell-quote: ^1.11.0
   basic-ftp: ^5.3.1
   '@babel/plugin-transform-modules-systemjs': ^7.29.4
   '@grpc/grpc-js': ^1.14.4
@@ -38,8 +37,9 @@ overrides:
   svgo: ^3.3.5
   fast-uri: ^3.1.6
   ip-address: ^10.3.1
-  brace-expansion@>=2.0.0 <5.0.8: ^5.0.8
-  minimatch@>=9.0.0: ^9.0.7
+  brace-expansion@>=2.0.0 <5.0.12: ^5.0.12
+  minimatch@>=5.0.0 <9.0.0: ^10.2.6
+  minimatch@>=9.0.0: ^10.2.6
   dompurify: ^3.4.15
   http-proxy-middleware: ^2.0.10
   morgan: ^1.11.0
@@ -408,8 +408,8 @@ importers:
         specifier: ^0.4.3
         version: 0.4.26(eslint@9.33.0(jiti@1.21.7))
       firebase-tools:
-        specifier: ^15.30.1
-        version: 15.31.0(@types/node@24.3.0)
+        specifier: ^15.32.0
+        version: 15.32.0(@types/node@24.3.0)
       identity-obj-proxy:
         specifier: ^3.0.0
         version: 3.0.0
@@ -580,8 +580,8 @@ importers:
         specifier: ^0.4.3
         version: 0.4.26(eslint@9.33.0(jiti@1.21.7))
       firebase-tools:
-        specifier: ^15.30.1
-        version: 15.31.0(@types/node@22.13.0)
+        specifier: ^15.32.0
+        version: 15.32.0(@types/node@22.13.0)
       identity-obj-proxy:
         specifier: ^3.0.0
         version: 3.0.0
@@ -858,8 +858,8 @@ importers:
         specifier: ^0.4.3
         version: 0.4.26(eslint@9.33.0(jiti@1.21.7))
       firebase-tools:
-        specifier: ^15.30.1
-        version: 15.31.0(@types/node@22.13.0)
+        specifier: ^15.32.0
+        version: 15.32.0(@types/node@22.13.0)
       identity-obj-proxy:
         specifier: ^3.0.0
         version: 3.0.0
@@ -8512,8 +8512,8 @@ packages:
     resolution: {integrity: sha512-YyZM99iHrqLKjmt4LJDj58KI+fYyufRLBSYcqycxf//KpBk9FoewoGX0450m9nB44qrZnovzC2oeP5hUibxc/g==}
     engines: {node: '>=18'}
 
-  firebase-tools@15.31.0:
-    resolution: {integrity: sha512-n0bsjrKsKxMweyGtuOtrZPe34JNrVZaD7iZTa3YhOSXwFSsCPZ6tV/Inn4CGM62at7773iT5visGbVbPKtG9jQ==}
+  firebase-tools@15.32.0:
+    resolution: {integrity: sha512-yp0SOQFALo3q2K2/pBmWTrAM4C0503zK3UJ5IDQzr4o7i+5RKh3ZPX4RTkumCFt3STtI7EuR61M8tDJjNZmTYg==}
     engines: {node: '>=20.0.0 || >=22.0.0 || >=24.0.0'}
     hasBin: true
 
@@ -10735,20 +10735,12 @@ packages:
   minimalistic-assert@1.0.1:
     resolution: {integrity: sha512-UtJcAD4yEaGtjPezWuO9wC4nwUnVH/8/Im3yEHQP4b67cXlD/Qr9hdITCU1xDbSEXg2XKNaP8jsReV7vQd00/A==}
 
+  minimatch@10.2.6:
+    resolution: {integrity: sha512-vpLQEs+VLCr1nU0BXS07maYoFwlDAH0gngQuuttxIwutDFEMHq2blX+8vpgxDdK3J1PwjCJiep77OitTZ4Ll1A==}
+    engines: {node: 18 || 20 || >=22}
+
   minimatch@3.1.5:
     resolution: {integrity: sha512-VgjWUsnnT6n+NUk6eZq77zeFdpW2LWDzP6zFGrCbHXiYNul5Dzqk2HHQ5uFH2DNW5Xbp8+jVzaeNt94ssEEl4w==}
-
-  minimatch@5.1.9:
-    resolution: {integrity: sha512-7o1wEA2RyMP7Iu7GNba9vc0RWWGACJOCZBJX2GJWip0ikV+wcOsgVuY9uE8CPiyQhkGFSlhuSkZPavN7u1c2Fw==}
-    engines: {node: '>=10'}
-
-  minimatch@6.2.3:
-    resolution: {integrity: sha512-5rvZbDy5y2k40rre/0OBbYnl03en25XPU3gOVO7532beGMjAipq88VdS9OeLOZNrD+Tb0lDhBJHZ7Gcd8qKlPg==}
-    engines: {node: '>=10'}
-
-  minimatch@9.0.9:
-    resolution: {integrity: sha512-OBwBN9AL4dqmETlpS2zasx+vTeWclWzkblfZk7KTA5j3jeOONz/tRCnZomUyvNg83wL5Zv9Ss6HMJXAgL8R2Yg==}
-    engines: {node: '>=16 || 14 >=14.17'}
 
   minimist@1.2.8:
     resolution: {integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==}
@@ -12719,8 +12711,8 @@ packages:
     resolution: {integrity: sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==}
     engines: {node: '>=8'}
 
-  shell-quote@1.10.0:
-    resolution: {integrity: sha512-w1aiOKwKuRgtwAReIIj89puqg+I7GvX4IbLrvmhXbzQsj1+Zwi4VO3+fa6ZF91TWSjIxoEkKnMeHcLEODK5ZXA==}
+  shell-quote@1.11.0:
+    resolution: {integrity: sha512-JdxDPD0DBTyu08pq0kPC0xSNet/qsU07qT6IsX1AS8oO2ICNRY4ldNa8OAI6PuwAH8tG3lxEhbqmyp4Dw4036g==}
     engines: {node: '>= 0.4'}
 
   side-channel-list@1.0.1:
@@ -16026,7 +16018,7 @@ snapshots:
       glob: 11.1.0
       jsdom: 24.1.3
       lodash: 4.18.1
-      minimatch: 9.0.9
+      minimatch: 10.2.6
       ora: 5.4.1
       parse5: 7.3.0
       prettier: 2.8.8
@@ -17201,7 +17193,7 @@ snapshots:
       '@rushstack/terminal': 0.24.5(@types/node@22.13.0)
       '@rushstack/ts-command-line': 5.3.15(@types/node@22.13.0)
       diff: 8.0.4
-      minimatch: 9.0.9
+      minimatch: 10.2.6
       resolve: 1.22.12
       semver: 7.7.4
       source-map: 0.6.1
@@ -18444,7 +18436,7 @@ snapshots:
 
   '@ts-morph/common@0.28.1':
     dependencies:
-      minimatch: 9.0.9
+      minimatch: 10.2.6
       path-browserify: 1.0.1
       tinyglobby: 0.2.17
 
@@ -19173,7 +19165,7 @@ snapshots:
       debug: 4.4.3
       globby: 11.1.0
       is-glob: 4.0.3
-      minimatch: 9.0.9
+      minimatch: 10.2.6
       semver: 7.8.5
       ts-api-utils: 1.4.3(typescript@5.9.3)
     optionalDependencies:
@@ -19188,7 +19180,7 @@ snapshots:
       '@typescript-eslint/types': 8.70.1
       '@typescript-eslint/visitor-keys': 8.70.1
       debug: 4.4.3
-      minimatch: 9.0.9
+      minimatch: 10.2.6
       semver: 7.8.5
       tinyglobby: 0.2.17
       ts-api-utils: 2.5.0(typescript@5.8.3)
@@ -19203,7 +19195,7 @@ snapshots:
       '@typescript-eslint/types': 8.70.1
       '@typescript-eslint/visitor-keys': 8.70.1
       debug: 4.4.3
-      minimatch: 9.0.9
+      minimatch: 10.2.6
       semver: 7.8.5
       tinyglobby: 0.2.17
       ts-api-utils: 2.5.0(typescript@5.9.3)
@@ -19218,7 +19210,7 @@ snapshots:
       '@typescript-eslint/types': 8.70.1
       '@typescript-eslint/visitor-keys': 8.70.1
       debug: 4.4.3
-      minimatch: 9.0.9
+      minimatch: 10.2.6
       semver: 7.8.5
       tinyglobby: 0.2.17
       ts-api-utils: 2.5.0(typescript@6.0.3)
@@ -19593,7 +19585,7 @@ snapshots:
       '@vue/compiler-vue2': 2.7.16
       '@vue/shared': 3.5.43
       alien-signals: 0.4.14
-      minimatch: 9.0.9
+      minimatch: 10.2.6
       muggle-string: 0.4.1
       path-browserify: 1.0.1
     optionalDependencies:
@@ -22456,7 +22448,7 @@ snapshots:
 
   filelist@1.0.6:
     dependencies:
-      minimatch: 5.1.9
+      minimatch: 10.2.6
 
   filesize@8.0.7: {}
 
@@ -22533,7 +22525,7 @@ snapshots:
       path-exists: 5.0.0
       unicorn-magic: 0.1.0
 
-  firebase-tools@15.31.0(@types/node@22.13.0):
+  firebase-tools@15.32.0(@types/node@22.13.0):
     dependencies:
       '@apphosting/common': 0.0.8
       '@electric-sql/pglite': 0.3.16
@@ -22617,7 +22609,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  firebase-tools@15.31.0(@types/node@24.3.0):
+  firebase-tools@15.32.0(@types/node@24.3.0):
     dependencies:
       '@apphosting/common': 0.0.8
       '@electric-sql/pglite': 0.3.16
@@ -22972,7 +22964,7 @@ snapshots:
     dependencies:
       foreground-child: 3.3.1
       jackspeak: 3.4.3
-      minimatch: 9.0.9
+      minimatch: 10.2.6
       minipass: 7.1.3
       package-json-from-dist: 1.0.1
       path-scurry: 1.11.1
@@ -22981,14 +22973,14 @@ snapshots:
     dependencies:
       foreground-child: 3.3.1
       jackspeak: 4.2.3
-      minimatch: 9.0.9
+      minimatch: 10.2.6
       minipass: 7.1.3
       package-json-from-dist: 1.0.1
       path-scurry: 2.0.2
 
   glob@13.0.6:
     dependencies:
-      minimatch: 9.0.9
+      minimatch: 10.2.6
       minipass: 7.1.3
       path-scurry: 2.0.2
 
@@ -25403,7 +25395,7 @@ snapshots:
   launch-editor@2.14.1:
     dependencies:
       picocolors: 1.1.1
-      shell-quote: 1.10.0
+      shell-quote: 1.11.0
 
   lazystream@1.0.1:
     dependencies:
@@ -26157,21 +26149,13 @@ snapshots:
 
   minimalistic-assert@1.0.1: {}
 
+  minimatch@10.2.6:
+    dependencies:
+      brace-expansion: 5.0.12
+
   minimatch@3.1.5:
     dependencies:
       brace-expansion: 1.1.21
-
-  minimatch@5.1.9:
-    dependencies:
-      brace-expansion: 5.0.12
-
-  minimatch@6.2.3:
-    dependencies:
-      brace-expansion: 5.0.12
-
-  minimatch@9.0.9:
-    dependencies:
-      brace-expansion: 5.0.12
 
   minimist@1.2.8: {}
 
@@ -27482,7 +27466,7 @@ snapshots:
       prompts: 2.4.2
       react-error-overlay: 6.1.0-next.26
       recursive-readdir: 2.2.3
-      shell-quote: 1.10.0
+      shell-quote: 1.11.0
       strip-ansi: 6.0.1
       text-table: 0.2.0
     transitivePeerDependencies:
@@ -27777,7 +27761,7 @@ snapshots:
 
   readdir-glob@1.1.3:
     dependencies:
-      minimatch: 5.1.9
+      minimatch: 10.2.6
 
   readdir-scoped-modules@1.1.0:
     dependencies:
@@ -28340,7 +28324,7 @@ snapshots:
 
   shebang-regex@3.0.0: {}
 
-  shell-quote@1.10.0: {}
+  shell-quote@1.11.0: {}
 
   side-channel-list@1.0.1:
     dependencies:
@@ -28781,7 +28765,7 @@ snapshots:
       join-path: 1.1.1
       lodash: 4.18.1
       mime-types: 2.1.35
-      minimatch: 6.2.3
+      minimatch: 10.2.6
       morgan: 1.12.1
       on-finished: 2.4.1
       on-headers: 1.1.0
@@ -28978,7 +28962,7 @@ snapshots:
     dependencies:
       '@istanbuljs/schema': 0.1.6
       glob: 10.5.0
-      minimatch: 9.0.9
+      minimatch: 10.2.6
 
   text-decoder@1.2.7:
     dependencies:
