@@ -6,6 +6,7 @@
 
 - Upgraded to the latest @brightlayer-ui/eslint-config packages.
 - Updated `<AppBar>` component to enable blur effect on transparent AppBar.
+- Declared the BSD-3-Clause license in package metadata so npm displays the correct license.
 
 # v8.0.5 (July 24, 2026)
 
