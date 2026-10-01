@@ -1,0 +1,23 @@
+import { MarkerAnchorPoint, LabelAnchorPoint, CardAnchorPoint } from '../examples';
+
+## Image Annotator
+
+Use `<ImageAnnotator>` to place interactive or informational annotations over an image. Add one or more anchor point components as children and position each one with `x` and `y` percentage coordinates relative to the image. Set `callout` when the annotation should be connected to its anchor with a directional line.
+
+## Marker Anchor Point
+
+Use `<MarkerAnchorPoint>` for compact, icon-based annotations such as device status, alarms, or points of interest. Set `icon` to the symbol you want to display and use `color` to communicate the marker state.
+
+<MarkerAnchorPoint />
+
+## Label Anchor Point
+
+Use `<LabelAnchorPoint>` for short text annotations that should remain visible on the image. Pass the annotation text through the `label` prop. A callout can move longer labels away from a busy image area.
+
+<LabelAnchorPoint />
+
+## Card Anchor Point
+
+Use `<CardAnchorPoint>` when an annotation needs multiple pieces of information or custom content. Place any React content inside the card and use `cardWidth` to control its width. The card can also use a callout when it needs to sit away from the anchored location.
+
+<CardAnchorPoint />

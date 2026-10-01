@@ -28,6 +28,7 @@ import ScoreCardAPIDocs from '../../componentDocs/ScoreCard/markdown/ScoreCardAP
 import ToolbarMenuAPIDocs from '../../componentDocs/ToolbarMenu/markdown/ToolbarMenuAPIDocs.mdx';
 import ProgressIconAPIDocs from '../../componentDocs/ProgressIcon/markdown/ProgressIconAPIDocs.mdx';
 import TwoToneIconAPIDocs from '../../componentDocs/TwoToneIcon/markdown/TwoToneIconAPIDocs.mdx';
+import ImageAnnotatorAPIDocs from '../../componentDocs/ImageAnnotator/markdown/ImageAnnotatorAPIDocs.mdx';
 
 // workflow docs
 import WorkflowOverview from '../../markdownDocs/workflowDocs/Overview/overview.mdx';
@@ -91,6 +92,7 @@ import HorizontalStackedBarExamples from '../../componentDocs/HorizontalStackedB
 import DrawerRailItemExamples from '../../componentDocs/DrawerRailItem/markdown/DrawerRailItemExamples.mdx';
 import ProgressIconExamples from '../../componentDocs/ProgressIcon/markdown/ProgressIconExamples.mdx';
 import TwoToneIconExamples from '../../componentDocs/TwoToneIcon/markdown/TwoToneIconExamples.mdx';
+import ImageAnnotatorExamples from '../../componentDocs/ImageAnnotator/markdown/ImageAnnotatorExamples.mdx';
 
 // Playground components
 import { AppBarPlaygroundComponent } from '../../componentDocs/AppBar/playground/PlaygroundPage';
@@ -113,6 +115,7 @@ import { ThreeLinerPlaygroundComponent } from '../../componentDocs/ThreeLiner/pl
 import { ToolbarMenuPlaygroundComponent } from '../../componentDocs/ToolbarMenu/playground';
 import { UserMenuPlaygroundComponent } from '../../componentDocs/UserMenu/playground';
 import { HorizontalStackedBarPlaygroundComponent } from '../../componentDocs/HorizontalStackedBar/playground/PlaygroundPage';
+import { ImageAnnotatorPlaygroundComponent } from '../../componentDocs/ImageAnnotator/playground/PlaygroundPage';
 import { Outlet, RouteProps } from 'react-router';
 import { OpenInNew } from '@mui/icons-material';
 import { Box } from '@mui/material';
@@ -535,6 +538,28 @@ export const pageDefinitions: RouteConfig[] = [
                         title: 'playground',
                         path: 'playground',
                         element: <HorizontalStackedBarPlaygroundComponent />,
+                    },
+                ],
+            },
+            {
+                title: 'Image Annotator',
+                path: 'image-annotator/',
+                element: <ComponentPreviewPage title={'Image Annotator'} />,
+                children: [
+                    {
+                        title: 'examples',
+                        path: 'examples',
+                        element: <ImageAnnotatorExamples />,
+                    },
+                    {
+                        title: 'API Docs',
+                        path: 'api-docs',
+                        element: <ImageAnnotatorAPIDocs />,
+                    },
+                    {
+                        title: 'playground',
+                        path: 'playground',
+                        element: <ImageAnnotatorPlaygroundComponent />,
                     },
                 ],
             },
