@@ -3,19 +3,16 @@ import Box from '@mui/material/Box';
 import { CodeBlock, CodeBlockActionButtonRow } from '../../../shared';
 import { MarkerAnchorPointExample } from './MarkerAnchorPointExample';
 
-const codeSnippet = `<ImageAnnotator src="entrance.png" alt="Cleanroom entrance">
+const codeSnippet = `<ImageAnnotator src={isDarkMode ? partsDark : partsLight} alt="Factory floor parts" sx={imageStyles}>
+	<MarkerAnchorPoint x={8} y={35} icon={<RoomIcon />} color="primary" />
+	<MarkerAnchorPoint x={42} y={14} icon={<DeviceThermostatOutlinedIcon />} color="orange" />
 	<MarkerAnchorPoint
-		x={8}
-		y={35}
-		icon={<DeviceThermostatOutlinedIcon />}
-		color="orange"
-	/>
-	<MarkerAnchorPoint
-		x={72}
-		y={42}
+		x={71}
+		y={50}
 		icon={<DeviceThermostatOutlinedIcon />}
 		color="error"
 		callout
+		connectorLength={30}
 		direction="right"
 	/>
 </ImageAnnotator>`;

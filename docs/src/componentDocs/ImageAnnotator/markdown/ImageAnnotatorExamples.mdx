@@ -1,4 +1,4 @@
-import { MarkerAnchorPoint, LabelAnchorPoint, CardAnchorPoint } from '../examples';
+import { MarkerAnchorPoint, LabelAnchorPoint, CardAnchorPoint, CustomAnchorPoints } from '../examples';
 
 ## Image Annotator
 
@@ -21,3 +21,9 @@ Use `<LabelAnchorPoint>` for short text annotations that should remain visible o
 Use `<CardAnchorPoint>` when an annotation needs multiple pieces of information or custom content. Place any React content inside the card and use `cardWidth` to control its width. The card can also use a callout when it needs to sit away from the anchored location.
 
 <CardAnchorPoint />
+
+## Custom Anchor Point Properties
+
+Combine all three anchor point types on one image. Customize marker size and color, label colors, and the card's callout connector and anchor dot.
+
+<CustomAnchorPoints />
