@@ -25,7 +25,7 @@ overrides:
   vite@>=7.0.0 <=7.3.4: ^7.3.5
   vitest: ^3.2.6
   shell-quote: ^1.11.0
-  basic-ftp: ^5.3.1
+  basic-ftp: ^6.2.2
   '@babel/plugin-transform-modules-systemjs': ^7.29.4
   '@grpc/grpc-js': ^1.14.4
   js-cookie: ^3.0.7
@@ -6785,8 +6785,8 @@ packages:
     resolution: {integrity: sha512-NF+epuEdnUYVlGuhaxbbq+dvJttwLnGY+YixlXlME5KpQ5W3CnXA5cVTneY3SPbPDRkcjMbifrwmFYcClgOZeg==}
     engines: {node: '>= 0.8'}
 
-  basic-ftp@5.3.1:
-    resolution: {integrity: sha512-bopVNp6ugyA150DDuZfPFdt1KZ5a94ZDiwX4hMgZDzF+GttD80lEy8kj98kbyhLXnPvhtIo93mdnLIjpCAeeOw==}
+  basic-ftp@6.2.2:
+    resolution: {integrity: sha512-LIkJcf/F6bTTfvE3k2YcTxrJsLKKVXiEpHZYkQP6JoqTb7khng7c13ckRTDQbqRh5IkehVH3F00sSlAa2F6DwA==}
     engines: {node: '>=10.0.0'}
 
   batch@0.6.1:
@@ -20279,7 +20279,7 @@ snapshots:
     dependencies:
       safe-buffer: 5.1.2
 
-  basic-ftp@5.3.1: {}
+  basic-ftp@6.2.2: {}
 
   batch@0.6.1: {}
 
@@ -22939,7 +22939,7 @@ snapshots:
 
   get-uri@6.0.5:
     dependencies:
-      basic-ftp: 5.3.1
+      basic-ftp: 6.2.2
       data-uri-to-buffer: 6.0.2
       debug: 4.4.3
     transitivePeerDependencies:
