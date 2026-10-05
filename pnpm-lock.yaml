@@ -1273,6 +1273,9 @@ importers:
       '@brightlayer-ui/icons-mui':
         specifier: 4.4.0-alpha.1
         version: 4.4.0-alpha.1(@mui/icons-material@7.3.11(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.3.0)(react@19.3.0))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.3.0)(react@19.3.0))(@types/react@19.3.0)(react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(@types/react@19.3.0)(react@19.3.0))(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.3.0)(react@19.3.0))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.3.0)(react@19.3.0))(@types/react@19.3.0)(react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))
+      '@brightlayer-ui/icons-svg':
+        specifier: ^1.18.0
+        version: 1.18.0
       '@brightlayer-ui/react-auth-workflow':
         specifier: workspace:^
         version: link:../packages/login-workflow
@@ -2994,6 +2997,10 @@ packages:
     peerDependencies:
       '@mui/icons-material': ^7.1.1
       '@mui/material': ^7.1.1
+
+  '@brightlayer-ui/icons-svg@1.18.0':
+    resolution: {integrity: sha512-xUgQYBJjT2/Bp1jWm20By2fm45nOSNnhMvdXg5ii8kCD48kHHh4rIaTRKiN/5wGYnze7jBvSAHOVQ+/D4h0YJA==}
+    engines: {node: '>=20.0.0'}
 
   '@brightlayer-ui/icons@2.6.0':
     resolution: {integrity: sha512-YUgrRpZaGPFwJhmkMV0Rp1h23iC9yGjSqSuxG+O/cnf9qAsX6sNiSWtgNU/SZbjd6OUgXyXwNxOcnUBcOhno7A==}
@@ -15476,6 +15483,8 @@ snapshots:
     dependencies:
       '@mui/icons-material': 7.3.11(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.3.0)(react@19.3.0))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.3.0)(react@19.3.0))(@types/react@19.3.0)(react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(@types/react@19.3.0)(react@19.3.0)
       '@mui/material': 7.3.11(@emotion/react@11.14.0(@types/react@19.3.0)(react@19.3.0))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.3.0)(react@19.3.0))(@types/react@19.3.0)(react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+
+  '@brightlayer-ui/icons-svg@1.18.0': {}
 
   '@brightlayer-ui/icons@2.6.0': {}
 
