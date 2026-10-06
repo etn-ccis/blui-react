@@ -329,13 +329,13 @@ const generateSnippet: CodeSnippetFunction = (data) => {
     const { annotationType, src, icon, markerColor, label, labelBgColor, labelColor, cardTitle, cardBody, ...props } =
         data as Record<string, any>;
     const imageName = src === 'parts' ? 'parts' : src === 'cabinet' ? 'cabinet' : 'entrance';
-    const imageProps = `src={isDarkMode ? ${imageName}Dark : ${imageName}Light} alt="${props.alt}" width={${props.width}}${props.height ? ` height={${props.height}}` : ''}`;
+    const imageProps = `src={isDarkMode ? ${imageName}Dark : ${imageName}Light} alt={${JSON.stringify(props.alt)}} width={${props.width}}${props.height ? ` height={${props.height}}` : ''}`;
     const annotationProps = ` x={${props.x}} y={${props.y}}${props.callout ? ` callout direction="${props.direction}" connectorLength={${props.connectorLength}} connectorColor="${props.connectorColor}" connectorThickness={${props.connectorThickness}} autoFlip={${props.autoFlip}}` : ''} anchorDotColor="${props.anchorDotColor}"`;
     const annotation =
         annotationType === 'label'
-            ? `<LabelAnchorPoint${annotationProps} label="${label}" labelBgColor="${labelBgColor}" labelColor="${labelColor}" />`
+            ? `<LabelAnchorPoint${annotationProps} label={${JSON.stringify(label)}} labelBgColor="${labelBgColor}" labelColor="${labelColor}" />`
             : annotationType === 'card'
-              ? `<CardAnchorPoint${annotationProps} cardWidth={${props.cardWidth}}>\n\t\t<Typography variant="subtitle2">${cardTitle}</Typography>\n\t\t<Typography variant="body2">${cardBody}</Typography>\n\t</CardAnchorPoint>`
+              ? `<CardAnchorPoint${annotationProps} cardWidth={${props.cardWidth}}>\n\t\t<Typography variant="subtitle2">{${JSON.stringify(cardTitle)}}</Typography>\n\t\t<Typography variant="body2">{${JSON.stringify(cardBody)}}</Typography>\n\t</CardAnchorPoint>`
               : `<MarkerAnchorPoint${annotationProps} icon={<${icon === 'thermostat' ? 'DeviceThermostatOutlinedIcon' : 'RoomIcon'} />} iconSize={${props.iconSize}} color="${markerColor}" />`;
 
     return `<ImageAnnotator ${imageProps}>\n\t${annotation}\n</ImageAnnotator>`;

@@ -31,7 +31,7 @@ const StyledLabel = styled(Typography, {
     flexDirection: 'column',
     alignItems: 'flex-start',
     background: labelBgColor ?? 'rgba(255, 255, 255, 0.72)',
-    ...theme.applyStyles('dark', { background: 'rgba(14, 18, 24, 0.64)' }),
+    ...(labelBgColor === undefined ? theme.applyStyles('dark', { background: 'rgba(14, 18, 24, 0.64)' }) : {}),
     color: labelColor ?? theme.vars?.palette?.text?.primary ?? theme.palette.text.primary,
     borderRadius: '4px',
     border: '1px solid rgba(77, 92, 106, 0.12)',
