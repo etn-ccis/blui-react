@@ -11,6 +11,8 @@ This Vite application supports versioned documentation snapshots. The current do
 
 `N` is the numeric value of `docsVersion` in `docs/package.json`.
 
+If a requested `/vN/` snapshot is unavailable, the GitHub Pages 404 handler redirects to the current documentation root. Available snapshots retain deep-link routing, query parameters, and fragments.
+
 ## Release Metadata
 
 Before creating a snapshot, update these files:
