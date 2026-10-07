@@ -29,6 +29,7 @@ import ToolbarMenuAPIDocs from '../../componentDocs/ToolbarMenu/markdown/Toolbar
 import ProgressIconAPIDocs from '../../componentDocs/ProgressIcon/markdown/ProgressIconAPIDocs.mdx';
 import TwoToneIconAPIDocs from '../../componentDocs/TwoToneIcon/markdown/TwoToneIconAPIDocs.mdx';
 import ImageAnnotatorAPIDocs from '../../componentDocs/ImageAnnotator/markdown/ImageAnnotatorAPIDocs.mdx';
+import SlashedIconAPIDocs from '../../componentDocs/SlashedIcon/markdown/SlashedIconAPIDocs.mdx';
 
 // workflow docs
 import WorkflowOverview from '../../markdownDocs/workflowDocs/Overview/overview.mdx';
@@ -93,6 +94,7 @@ import DrawerRailItemExamples from '../../componentDocs/DrawerRailItem/markdown/
 import ProgressIconExamples from '../../componentDocs/ProgressIcon/markdown/ProgressIconExamples.mdx';
 import TwoToneIconExamples from '../../componentDocs/TwoToneIcon/markdown/TwoToneIconExamples.mdx';
 import ImageAnnotatorExamples from '../../componentDocs/ImageAnnotator/markdown/ImageAnnotatorExamples.mdx';
+import SlashedIconExamples from '../../componentDocs/SlashedIcon/markdown/SlashedIconExamples.mdx';
 
 // Playground components
 import { AppBarPlaygroundComponent } from '../../componentDocs/AppBar/playground/PlaygroundPage';
@@ -125,6 +127,7 @@ import { ListItemTag, NavItem } from '@brightlayer-ui/react-components';
 import * as markdownDocs from '../../markdownDocs/';
 import { ProgressIconPlaygroundComponent } from '../../componentDocs/ProgressIcon/playground';
 import { TwoToneIconPlaygroundComponent } from '../../componentDocs/TwoToneIcon/playground';
+import { SlashedIconPlaygroundComponent } from '../../componentDocs/SlashedIcon/playground';
 
 export type RouteConfig = Omit<RouteProps, 'children'> & {
     title: string;
@@ -950,6 +953,28 @@ export const pageDefinitions: RouteConfig[] = [
                     },
                 ],
             },
+            {
+                title: 'Slashed Icon',
+                path: 'slashed-icon/',
+                element: <ComponentPreviewPage title={'Slashed Icon'} />,
+                children: [
+                    {
+                        title: 'examples',
+                        path: 'examples',
+                        element: <SlashedIconExamples />,
+                    },
+                    {
+                        title: 'API Docs',
+                        path: 'api-docs',
+                        element: <SlashedIconAPIDocs />,
+                    },
+                    {
+                        title: 'playground',
+                        path: 'playground',
+                        element: <SlashedIconPlaygroundComponent />,
+                    },
+                ],
+            },
         ],
     },
 ];
@@ -970,6 +995,10 @@ export const externalLinkDefinitions: NavItem[] = [
             {
                 title: 'Two Tone Icon',
                 itemID: '/icons/two-tone-icon',
+            },
+            {
+                title: 'Slashed Icon',
+                itemID: '/icons/slashed-icon',
             },
         ],
     },
