@@ -1,6 +1,6 @@
 {
     "name": "@brightlayer-ui/react-components",
-    "version": "8.0.6-alpha.1",
+    "version": "8.0.6-alpha.2",
     "type": "module",
     "description": "React components for Brightlayer UI applications",
     "license": "BSD-3-Clause",
