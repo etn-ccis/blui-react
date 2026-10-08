@@ -91,7 +91,8 @@
       "@tootallnate/once": "^2.0.1",
       "nanoid": "^3.3.18",
       "esbuild": "^0.28.2",
-      "esbuild-wasm": "^0.28.2"
+      "esbuild-wasm": "^0.28.2",
+      "firebase-tools": "^15.32.1"
     }
   }
 }

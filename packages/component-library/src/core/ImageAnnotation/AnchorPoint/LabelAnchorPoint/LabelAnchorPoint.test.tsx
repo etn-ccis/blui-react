@@ -33,6 +33,24 @@ describe('LabelAnchorPoint', () => {
         expect(labelElement).toHaveStyle('background-color: rgb(255, 0, 0)');
     });
 
+    it('preserves custom labelBgColor in dark mode', () => {
+        render(
+            <ThemeProvider theme={createTheme({ palette: { mode: 'dark' } })}>
+                <LabelAnchorPoint {...defaultProps} labelBgColor="rgb(255, 0, 0)" />
+            </ThemeProvider>
+        );
+        expect(screen.getByTestId('blui-label-root')).toHaveStyle('background-color: rgb(255, 0, 0)');
+    });
+
+    it('applies the dark default background when labelBgColor is not provided', () => {
+        render(
+            <ThemeProvider theme={createTheme({ palette: { mode: 'dark' } })}>
+                <LabelAnchorPoint {...defaultProps} />
+            </ThemeProvider>
+        );
+        expect(screen.getByTestId('blui-label-root')).toHaveStyle('background-color: rgba(14, 18, 24, 0.64)');
+    });
+
     it('applies custom labelColor', () => {
         renderWithTheme(<LabelAnchorPoint {...defaultProps} labelColor="rgb(0, 0, 255)" />);
         const labelElement = screen.getByTestId('blui-label-root');

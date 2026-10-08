@@ -1,0 +1,104 @@
+# Image Annotator
+
+import Box from '@mui/material/Box';
+import { ForMoreDetailsOnStylingOptions } from '../../../shared';
+
+The `<ImageAnnotator>` component displays an image and provides a positioning context for its anchor point children. Use `x` and `y` percentages to position each annotation relative to the image.
+
+### ImageAnnotator API
+
+<Box>
+
+| Prop Name | Description                                       | Type                     | Required | Default  |
+| --------- | ------------------------------------------------- | ------------------------ | -------- | -------- |
+| src       | Image source URL                                  | `string`                 | yes      |          |
+| alt       | Alternative text for the image                    | `string`                 | no       | `''`     |
+| width     | Container width                                   | `string \| number`       | no       | `'100%'` |
+| height    | Container height                                  | `string \| number`       | no       | `'auto'` |
+| children  | Anchor point components rendered over the image   | `ReactNode`              | no       |          |
+| classes   | Class name overrides for the root and image slots | `ImageAnnotationClasses` | no       |          |
+| sx        | MUI system styles applied to the container        | `SxProps`                | no       |          |
+
+</Box>
+
+### Shared AnchorPoint API
+
+All three anchor point components accept the following positioning and callout props. A callout is disabled by default; callout-specific props can only be used when `callout` is `true`.
+
+<Box>
+
+| Prop Name          | Description                                                    | Type                                               | Required | Default                             |
+| ------------------ | -------------------------------------------------------------- | -------------------------------------------------- | -------- | ----------------------------------- |
+| x                  | Horizontal position as a percentage of the image width (0-100) | `number`                                           | yes      |                                     |
+| y                  | Vertical position as a percentage of the image height (0-100)  | `number`                                           | yes      |                                     |
+| callout            | Connects the anchor to its content with a line                 | `boolean`                                          | no       | `false`                             |
+| direction          | Callout content direction                                      | `'top' \| 'bottom' \| 'down' \| 'left' \| 'right'` | no       | `'right'`                           |
+| connectorLength    | Connector line length in pixels                                | `number`                                           | no       | `120`                               |
+| connectorColor     | Connector color or a two-color gradient tuple                  | `string \| [string, string]`                       | no       | White-to-transparent white gradient |
+| connectorThickness | Connector line width in pixels                                 | `number`                                           | no       | `2`                                 |
+| autoFlip           | Flips the callout when it would overflow the image boundaries  | `boolean`                                          | no       | `true`                              |
+| anchorDotColor     | Anchor dot color: `default`, `blue`, or any CSS color string   | `string`                                           | no       | `'default'`                         |
+| classes            | Class name overrides for anchor point slots                    | `AnchorPointClasses`                               | no       |                                     |
+| sx                 | MUI system styles applied to the anchor wrapper                | `SxProps`                                          | no       |                                     |
+| children           | Content displayed at the anchor position                       | `ReactNode`                                        | no       |                                     |
+
+</Box>
+
+When `callout` is `false`, `direction`, `connectorLength`, `connectorColor`, `connectorThickness`, and `autoFlip` are not accepted. `direction` and `autoFlip` control the callout layout and are not applied when callouts are disabled.
+
+### MarkerAnchorPoint API
+
+`<MarkerAnchorPoint>` renders an icon in a circular marker. It also accepts all [shared anchor point props](#shared-anchorpoint-api).
+
+<Box>
+
+| Prop Name | Description                                      | Type                                                                                  | Required | Default     |
+| --------- | ------------------------------------------------ | ------------------------------------------------------------------------------------- | -------- | ----------- |
+| icon      | Icon element displayed inside the marker         | `React.JSX.Element`                                                                   | yes      |             |
+| iconSize  | Width and height of the icon container in pixels | `number`                                                                              | no       | `40`        |
+| color     | Preset marker color                              | `'neutral' \| 'primary' \| 'success' \| 'error' \| 'warning' \| 'orange' \| 'purple'` | no       | `'neutral'` |
+
+</Box>
+
+### LabelAnchorPoint API
+
+`<LabelAnchorPoint>` renders an always-visible text chip and accepts all [shared anchor point props](#shared-anchorpoint-api), plus [MUI Typography props](https://mui.com/material-ui/api/typography/).
+
+<Box>
+
+| Prop Name    | Description                | Type     | Required | Default                                 |
+| ------------ | -------------------------- | -------- | -------- | --------------------------------------- |
+| label        | Text displayed in the chip | `string` | yes      |                                         |
+| labelBgColor | Chip background color      | `string` | no       | `'rgba(255, 255, 255, 0.72)'`           |
+| labelColor   | Chip text color            | `string` | no       | Theme text color (`#353c44` by default) |
+
+</Box>
+
+### CardAnchorPoint API
+
+`<CardAnchorPoint>` renders an always-visible card and accepts all [shared anchor point props](#shared-anchorpoint-api), plus [MUI Card props](https://mui.com/material-ui/api/card/).
+
+<Box>
+
+| Prop Name | Description                                                                   | Type        | Required | Default |
+| --------- | ----------------------------------------------------------------------------- | ----------- | -------- | ------- |
+| children  | React content rendered inside the card                                        | `ReactNode` | no       |         |
+| cardWidth | Card width in pixels, clamped between 80 and 400; height grows to fit content | `number`    | no       | `160`   |
+
+</Box>
+
+### Style Overrides
+
+Use the `sx` prop, the `classes` prop, or global CSS classes to customize the component styles.
+
+<ForMoreDetailsOnStylingOptions />
+
+<Box>
+
+| Component      | Slot  | Global CSS Class            | Description                                               |
+| -------------- | ----- | --------------------------- | --------------------------------------------------------- |
+| ImageAnnotator | root  | `.BluiImageAnnotator-root`  | Container positioned around the image and its annotations |
+| ImageAnnotator | image | `.BluiImageAnnotator-image` | Image element                                             |
+| AnchorPoint    | root  | `.BluiAnchorPoint-root`     | Anchor wrapper                                            |
+
+</Box>
