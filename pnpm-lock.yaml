@@ -408,7 +408,7 @@ importers:
         specifier: ^0.4.3
         version: 0.4.26(eslint@9.33.0(jiti@1.21.7))
       firebase-tools:
-        specifier: ^15.32.1
+        specifier: ^15.33.0
         version: 15.33.0(@types/node@24.3.0)
       identity-obj-proxy:
         specifier: ^3.0.0
@@ -580,7 +580,7 @@ importers:
         specifier: ^0.4.3
         version: 0.4.26(eslint@9.33.0(jiti@1.21.7))
       firebase-tools:
-        specifier: ^15.32.1
+        specifier: ^15.33.0
         version: 15.33.0(@types/node@22.13.0)
       identity-obj-proxy:
         specifier: ^3.0.0
@@ -858,7 +858,7 @@ importers:
         specifier: ^0.4.3
         version: 0.4.26(eslint@9.33.0(jiti@1.21.7))
       firebase-tools:
-        specifier: ^15.32.1
+        specifier: ^15.33.0
         version: 15.33.0(@types/node@22.13.0)
       identity-obj-proxy:
         specifier: ^3.0.0
