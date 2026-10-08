@@ -107,10 +107,10 @@ const Root = styled(MUIDrawer, {
         borderWidth: 0,
     },
     [`& .${drawerClasses.content}`]: {
-        boxShadow: sideBorder ? 'none' : theme.vars.palette.shadows.level2,
+        boxShadow: sideBorder ? 'none' : (theme.vars || theme).palette.shadows.level2,
     },
     [`& .${drawerClasses.content} > div > .BluiDrawerBody-root`]: {
-        borderRight: sideBorder ? `1px solid ${theme.vars.palette.divider}` : 0,
+        borderRight: sideBorder ? `1px solid ${(theme.vars || theme).palette.divider}` : 0,
     },
 }));
 
