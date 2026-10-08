@@ -2,11 +2,16 @@
 
 ## v8.0.6 (Unreleased)
 
+### Fixed 
+
+- drawer sideBorder not working in playground. ([#301](https://github.com/etn-ccis/blui-react/issues/301))
+- Declared the BSD-3-Clause license in package metadata so npm displays the correct license. ([#310](https://github.com/etn-ccis/blui-react/issues/310))
+
 ### Changed
 
 - Upgraded to the latest @brightlayer-ui/eslint-config packages.
 - Updated `<AppBar>` component to enable blur effect on transparent AppBar.
-- Declared the BSD-3-Clause license in package metadata so npm displays the correct license.
+
 
 # v8.0.5 (July 24, 2026)
 
