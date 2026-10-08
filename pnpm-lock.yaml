@@ -408,8 +408,8 @@ importers:
         specifier: ^0.4.3
         version: 0.4.26(eslint@9.33.0(jiti@1.21.7))
       firebase-tools:
-        specifier: ^15.32.0
-        version: 15.32.0(@types/node@24.3.0)
+        specifier: ^15.32.1
+        version: 15.33.0(@types/node@24.3.0)
       identity-obj-proxy:
         specifier: ^3.0.0
         version: 3.0.0
@@ -580,8 +580,8 @@ importers:
         specifier: ^0.4.3
         version: 0.4.26(eslint@9.33.0(jiti@1.21.7))
       firebase-tools:
-        specifier: ^15.32.0
-        version: 15.32.0(@types/node@22.13.0)
+        specifier: ^15.32.1
+        version: 15.33.0(@types/node@22.13.0)
       identity-obj-proxy:
         specifier: ^3.0.0
         version: 3.0.0
@@ -858,8 +858,8 @@ importers:
         specifier: ^0.4.3
         version: 0.4.26(eslint@9.33.0(jiti@1.21.7))
       firebase-tools:
-        specifier: ^15.32.0
-        version: 15.32.0(@types/node@22.13.0)
+        specifier: ^15.32.1
+        version: 15.33.0(@types/node@22.13.0)
       identity-obj-proxy:
         specifier: ^3.0.0
         version: 3.0.0
@@ -8512,8 +8512,8 @@ packages:
     resolution: {integrity: sha512-YyZM99iHrqLKjmt4LJDj58KI+fYyufRLBSYcqycxf//KpBk9FoewoGX0450m9nB44qrZnovzC2oeP5hUibxc/g==}
     engines: {node: '>=18'}
 
-  firebase-tools@15.32.0:
-    resolution: {integrity: sha512-yp0SOQFALo3q2K2/pBmWTrAM4C0503zK3UJ5IDQzr4o7i+5RKh3ZPX4RTkumCFt3STtI7EuR61M8tDJjNZmTYg==}
+  firebase-tools@15.33.0:
+    resolution: {integrity: sha512-ln0MPfXeTn8lXwKDkbtd8d7BvRkzscDmxP1RxO2I4Auq4l8WODzl746eQWaVJAY5EFuuFzikcok0JN04qmEz9Q==}
     engines: {node: '>=20.0.0 || >=22.0.0 || >=24.0.0'}
     hasBin: true
 
@@ -22525,7 +22525,7 @@ snapshots:
       path-exists: 5.0.0
       unicorn-magic: 0.1.0
 
-  firebase-tools@15.32.0(@types/node@22.13.0):
+  firebase-tools@15.33.0(@types/node@22.13.0):
     dependencies:
       '@apphosting/common': 0.0.8
       '@electric-sql/pglite': 0.3.16
@@ -22609,7 +22609,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  firebase-tools@15.32.0(@types/node@24.3.0):
+  firebase-tools@15.33.0(@types/node@24.3.0):
     dependencies:
       '@apphosting/common': 0.0.8
       '@electric-sql/pglite': 0.3.16
