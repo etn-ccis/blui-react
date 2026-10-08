@@ -185,9 +185,9 @@ describe('CardAnchorPoint', () => {
                     y={50}
                     callout
                     direction="bottom"
-                    lineLength={25}
-                    lineWidth={2}
-                    lineColor="#333333"
+                    connectorLength={25}
+                    connectorThickness={2}
+                    connectorColor="#333333"
                     autoFlip
                 >
                     Content

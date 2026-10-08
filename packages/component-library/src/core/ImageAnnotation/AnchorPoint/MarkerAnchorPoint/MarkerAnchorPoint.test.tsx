@@ -8,6 +8,7 @@ import WarningIcon from '@mui/icons-material/Warning';
 import InfoIcon from '@mui/icons-material/Info';
 import '@testing-library/jest-dom';
 import { theme } from '@brightlayer-ui/react-themes';
+import { BLUIColors } from '@brightlayer-ui/colors';
 import { MarkerAnchorPoint } from './MarkerAnchorPoint';
 
 afterEach(cleanup);
@@ -166,6 +167,26 @@ describe('MarkerAnchorPoint', () => {
         expect(marker).toBeInTheDocument();
     });
 
+    it.each([
+        { color: 'orange' as const, backgroundColor: BLUIColors.orange[500], iconColor: BLUIColors.black[900] },
+        {
+            color: 'purple' as const,
+            backgroundColor: BLUIColors.purple[500],
+            iconColor: fallbackTheme.palette.background.default,
+        },
+    ])('applies the background and icon colors for $color markers', ({ color, backgroundColor, iconColor }) => {
+        render(
+            <FallbackThemeWrapper>
+                <MarkerAnchorPoint x={50} y={50} icon={<StarIcon />} color={color} />
+            </FallbackThemeWrapper>
+        );
+
+        expect(screen.getByTestId('blui-marker-root')).toHaveStyle({
+            backgroundColor,
+            color: iconColor,
+        });
+    });
+
     it.each(['neutral', 'primary', 'success', 'error', 'warning'] as const)(
         'uses palette fallbacks when CSS variables are unavailable for %s markers',
         (color) => {
@@ -213,7 +234,14 @@ describe('MarkerAnchorPoint', () => {
     it('passes AnchorPoint props through', () => {
         render(
             <ThemeWrapper>
-                <MarkerAnchorPoint x={25} y={75} icon={<StarIcon />} callout direction="right" lineColor="#ff0000" />
+                <MarkerAnchorPoint
+                    x={25}
+                    y={75}
+                    icon={<StarIcon />}
+                    callout
+                    direction="right"
+                    connectorColor="#ff0000"
+                />
             </ThemeWrapper>
         );
 
