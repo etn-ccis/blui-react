@@ -115,7 +115,7 @@ const inputConfig: InputConfig = [
         description: 'Callout content direction',
         required: false,
         initialValue: 'right',
-        options: ['top', 'bottom', 'down', 'left', 'right'],
+        options: ['top', 'bottom', 'left', 'right'],
         category: 'Shared AnchorPoint Props',
     },
     {
