@@ -335,10 +335,12 @@ const generateSnippet: CodeSnippetFunction = (data) => {
         annotationType === 'label'
             ? `<LabelAnchorPoint${annotationProps} label={${JSON.stringify(label)}} labelBgColor="${labelBgColor}" labelColor="${labelColor}" />`
             : annotationType === 'card'
-              ? `<CardAnchorPoint${annotationProps} cardWidth={${props.cardWidth}}>\n\t\t<Typography variant="subtitle2">{${JSON.stringify(cardTitle)}}</Typography>\n\t\t<Typography variant="body2">{${JSON.stringify(cardBody)}}</Typography>\n\t</CardAnchorPoint>`
+              ? `<CardAnchorPoint${annotationProps} cardWidth={${props.cardWidth}}>\n        <Typography variant="subtitle2">{${JSON.stringify(cardTitle)}}</Typography>\n        <Typography variant="body2">{${JSON.stringify(cardBody)}}</Typography>\n    </CardAnchorPoint>`
               : `<MarkerAnchorPoint${annotationProps} icon={<${icon === 'thermostat' ? 'DeviceThermostatOutlinedIcon' : 'RoomIcon'} />} iconSize={${props.iconSize}} color="${markerColor}" />`;
 
-    return `<ImageAnnotator ${imageProps}>\n\t${annotation}\n</ImageAnnotator>`;
+    return `<ImageAnnotator ${imageProps}>\n    ${annotation}\n</ImageAnnotator>`
+        .replace(/^\s*$(?:\r\n?|\n)/gm, '')
+        .replace(/(?:^|)( {4}|\t)/gm, '    ');
 };
 
 export const ImageAnnotatorPlaygroundComponent = (): React.JSX.Element => (
