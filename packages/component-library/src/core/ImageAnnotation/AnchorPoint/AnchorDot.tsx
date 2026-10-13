@@ -6,24 +6,24 @@ export type AnchorDotProps = Omit<React.SVGProps<SVGSVGElement>, 'color'> & {
      * Anchor dot color. Accepts `default`, `blue`, or any CSS color string.
      * @default default
      */
-    anchorDotColor?: 'default' | 'blue' | string;
+    anchorDotColor?: 'neutral' | 'primary' | string;
 };
 
 export const AnchorDot = ({ anchorDotColor, ...svgProps }: AnchorDotProps): React.JSX.Element => {
     const id = useId().replace(/:/g, '');
     const defaultBlurId = `anchor-dot-blur-${id}`;
     const defaultShadowId = `anchor-dot-shadow-${id}`;
-    const blueBlurId = `anchor-dot-blue-blur-${id}`;
+    const primaryBlurId = `anchor-dot-primary-blur-${id}`;
     const theme = useTheme();
-    const colorVariant = anchorDotColor ?? 'default';
+    const colorVariant = anchorDotColor ?? 'neutral';
     const dotColor =
-        colorVariant === 'blue'
+        colorVariant === 'primary'
             ? theme.vars.palette.primary.main
-            : colorVariant === 'default'
+            : colorVariant === 'neutral'
               ? theme.palette.background.paper
               : colorVariant;
 
-    if (colorVariant === 'blue') {
+    if (colorVariant === 'primary') {
         return (
             <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -33,13 +33,13 @@ export const AnchorDot = ({ anchorDotColor, ...svgProps }: AnchorDotProps): Reac
                 fill="none"
                 {...svgProps}
             >
-                <g opacity="0.4" filter={`url(#${blueBlurId})`}>
+                <g opacity="0.4" filter={`url(#${primaryBlurId})`}>
                     <circle cx="11" cy="11" r="8.5" stroke={dotColor} />
                 </g>
                 <circle cx="11" cy="11" r="5" fill={dotColor} stroke="white" strokeWidth="2" />
                 <defs>
                     <filter
-                        id={blueBlurId}
+                        id={primaryBlurId}
                         x="0"
                         y="0"
                         width="22"

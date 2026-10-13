@@ -71,8 +71,9 @@ const Icon = styled(Box, {
     shouldForwardProp: (prop) => prop !== 'iconSize',
 })<Pick<MarkerProps, 'iconSize' | 'color'>>(({ theme, iconSize, color }) => ({
     display: 'flex',
-    width: iconSize ?? 40,
-    height: iconSize ?? 40,
+    width: 40,
+    height: 40,
+    padding: iconSize - 12,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: '80px',
@@ -89,7 +90,7 @@ const Icon = styled(Box, {
 }));
 
 const MarkerRender: React.ForwardRefRenderFunction<unknown, MarkerProps> = (props: MarkerProps, ref: any) => {
-    const { icon, iconSize, color, ...otherProps } = props;
+    const { icon, iconSize = 24, color, ...otherProps } = props;
 
     return (
         <AnchorPoint {...otherProps}>
