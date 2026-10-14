@@ -142,7 +142,7 @@ const inputConfig: InputConfig = [
         type: 'number',
         description: 'Callout connector width in pixels',
         required: false,
-        initialValue: 2,
+        initialValue: 1,
         minValue: 1,
         maxValue: 12,
         valueStep: 1,

@@ -22,7 +22,7 @@ export const CardAnchorPointExample = (): React.JSX.Element => {
                     <Typography variant="subtitle2">Cabinet 1</Typography>
                     <Typography variant="body2">Health: Good</Typography>
                 </CardAnchorPoint>
-                <CardAnchorPoint x={90} y={34} cardWidth={160} callout direction="left" connectorLength={30}>
+                <CardAnchorPoint x={90} y={34} cardWidth={160} callout direction="left" connectorLength={120}>
                     <Typography variant="subtitle2">Cabinet 4</Typography>
                     <Typography variant="body2">Load rate: 56%</Typography>
                 </CardAnchorPoint>

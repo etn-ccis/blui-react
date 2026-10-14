@@ -1,9 +1,10 @@
 import React, { createRef } from 'react';
-import { render, screen, cleanup } from '@testing-library/react';
+import { act, render, screen, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { LabelAnchorPoint, LabelProps } from './LabelAnchorPoint';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { blueThemes as theme } from '@brightlayer-ui/react-themes';
+import { ImageAnnotator } from '../../ImageAnnotator';
 
 afterEach(cleanup);
 
@@ -131,14 +132,150 @@ describe('LabelAnchorPoint', () => {
         expect(labelElement.textContent).toBe('');
     });
 
-    it('handles long label text with truncation styles', () => {
-        const longLabel = 'This is a very long label that should truncate';
+    it('wraps long label text and allows the label height to grow', () => {
+        const longLabel = 'This is a very long label that should wrap';
         renderWithTheme(<LabelAnchorPoint {...defaultProps} label={longLabel} />);
         const labelElement = screen.getByTestId('blui-label-root');
 
-        // Check that truncation styles are applied
+        expect(labelElement).toHaveTextContent(longLabel);
         expect(labelElement).toHaveStyle('max-width: 180px');
-        expect(labelElement).toHaveStyle('white-space: nowrap');
+        expect(labelElement).toHaveStyle('white-space: normal');
+        expect(labelElement).toHaveStyle('overflow-wrap: anywhere');
+        expect(labelElement).toHaveStyle('height: auto');
+        expect(labelElement).toHaveStyle('box-sizing: border-box');
+        expect(labelElement).toHaveStyle('overflow: auto');
+    });
+
+    it('wraps long strings without spaces within the label width', () => {
+        const longLabel = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.repeat(10);
+        renderWithTheme(<LabelAnchorPoint {...defaultProps} label={longLabel} />);
+        const labelElement = screen.getByTestId('blui-label-root');
+
+        expect(labelElement).toHaveTextContent(longLabel);
+        expect(labelElement).toHaveStyle({
+            maxWidth: '180px',
+            minWidth: '0',
+            whiteSpace: 'normal',
+            overflowWrap: 'anywhere',
+            boxSizing: 'border-box',
+            height: 'auto',
+        });
+    });
+
+    it.each(['left', 'right', 'top', 'bottom'] as const)(
+        'preserves the label width in a %s callout instead of squeezing text into a column',
+        (direction) => {
+            renderWithTheme(
+                <LabelAnchorPoint
+                    {...defaultProps}
+                    label="A long label that should wrap into normal horizontal lines"
+                    callout
+                    direction={direction}
+                />
+            );
+
+            expect(screen.getByTestId('blui-label-root')).toHaveStyle({
+                width: 'max-content',
+                maxWidth: '180px',
+                flexShrink: '0',
+                whiteSpace: 'normal',
+                overflowWrap: 'anywhere',
+            });
+        }
+    );
+
+    it.each([
+        [false, 0, 0, -90, -20, '90px 20px'],
+        [false, 100, 100, 210, 180, '-90px -20px'],
+        [false, 50, 50, 60, 80, '0px 0px'],
+        [true, 0, 0, -90, -20, '90px 20px'],
+        [true, 100, 100, 210, 180, '-90px -20px'],
+        [true, 50, 50, 60, 80, '0px 0px'],
+    ])('keeps labels inside the image with callout=%s at (%s, %s)', (callout, x, y, left, top, translate) => {
+        const rectSpy = jest.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockImplementation(function (
+            this: HTMLElement
+        ): DOMRect {
+            const isLabel = this.getAttribute('data-testid') === 'blui-label-root';
+            const width = isLabel ? 180 : 300;
+            const height = isLabel ? 40 : 200;
+            const rectLeft = isLabel ? left : 0;
+            const rectTop = isLabel ? top : 0;
+            return {
+                x: rectLeft,
+                y: rectTop,
+                left: rectLeft,
+                top: rectTop,
+                width,
+                height,
+                right: rectLeft + width,
+                bottom: rectTop + height,
+                toJSON: (): object => ({}),
+            };
+        });
+        try {
+            renderWithTheme(
+                <ImageAnnotator src="test.png">
+                    <LabelAnchorPoint
+                        {...defaultProps}
+                        x={x}
+                        y={y}
+                        {...(callout ? { callout: true, autoFlip: false } : { callout: false })}
+                    />
+                </ImageAnnotator>
+            );
+            const labelElement = screen.getByTestId('blui-label-root');
+            expect(labelElement.style.translate).toBe(translate);
+            const [offsetX, offsetY] = translate.split(' ').map(parseFloat);
+            expect(left + offsetX).toBeGreaterThanOrEqual(0);
+            expect(left + offsetX + 180).toBeLessThanOrEqual(300);
+            expect(top + offsetY).toBeGreaterThanOrEqual(0);
+            expect(top + offsetY + 40).toBeLessThanOrEqual(200);
+            void act(() => window.dispatchEvent(new Event('resize')));
+            expect(labelElement.style.translate).toBe(translate);
+            expect(screen.getByTestId('blui-anchor-point-root')).toHaveStyle({ left: `${x}%`, top: `${y}%` });
+        } finally {
+            rectSpy.mockRestore();
+        }
+    });
+
+    it('shrinks labels to fit small images and updates after resizing', () => {
+        renderWithTheme(
+            <ImageAnnotator src="test.png">
+                <LabelAnchorPoint {...defaultProps} />
+            </ImageAnnotator>
+        );
+        const container = screen.getByTestId('blui-image-annotator-root');
+        const labelElement = screen.getByTestId('blui-label-root');
+        const rectSpy = jest.spyOn(container, 'getBoundingClientRect').mockReturnValue({
+            x: 0,
+            y: 0,
+            left: 0,
+            top: 0,
+            right: 60,
+            bottom: 30,
+            width: 60,
+            height: 30,
+            toJSON: () => ({}),
+        });
+        try {
+            void act(() => window.dispatchEvent(new Event('resize')));
+            expect(labelElement).toHaveStyle({ minWidth: '60px', maxWidth: '60px', maxHeight: '30px' });
+            rectSpy.mockReturnValue({
+                x: 0,
+                y: 0,
+                left: 0,
+                top: 0,
+                right: 300,
+                bottom: 200,
+                width: 300,
+                height: 200,
+                toJSON: () => ({}),
+            });
+            void act(() => window.dispatchEvent(new Event('resize')));
+            expect(labelElement).toHaveStyle({ minWidth: '100px', maxWidth: '180px', maxHeight: '200px' });
+        } finally {
+            rectSpy.mockRestore();
+        }
     });
 
     it('applies additional Typography props', () => {

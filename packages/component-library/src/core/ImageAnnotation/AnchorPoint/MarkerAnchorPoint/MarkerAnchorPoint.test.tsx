@@ -128,6 +128,34 @@ describe('MarkerAnchorPoint', () => {
         expect(marker).toBeInTheDocument();
     });
 
+    it.each([undefined, 'neutral', 'primary'] as const)(
+        'preserves the dark background and border styles for %s markers',
+        (color) => {
+            render(
+                <ThemeWrapper>
+                    <MarkerAnchorPoint x={50} y={50} icon={<StarIcon />} color={color} />
+                </ThemeWrapper>
+            );
+
+            const marker = screen.getByTestId('blui-marker-root');
+            const markerClasses = marker.className.split(' ');
+            const darkRules = Array.from(document.styleSheets)
+                .flatMap((sheet) => Array.from(sheet.cssRules))
+                .filter(
+                    (rule): rule is CSSStyleRule =>
+                        rule instanceof CSSStyleRule &&
+                        rule.selectorText.includes('.dark') &&
+                        markerClasses.some((className) => rule.selectorText.includes(`.${className}`))
+                );
+
+            expect(darkRules).toHaveLength(1);
+            expect(darkRules[0].style.getPropertyValue('border-color')).toBe('rgba(0, 0, 0, 0.32)');
+            expect(darkRules[0].style.getPropertyValue('background')).toBe(
+                !color || color === 'neutral' ? 'rgba(14, 18, 24, 0.64)' : ''
+            );
+        }
+    );
+
     it('applies success color variant', () => {
         render(
             <ThemeWrapper>

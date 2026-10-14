@@ -84,9 +84,10 @@ const Icon = styled(Box, {
     '& .MuiSvgIcon-root': {
         fontSize: iconSize,
     },
-    // CSS-variables themes resolve styles once, so the dark neutral value must come from a color-scheme selector
-    ...(!color || color === 'neutral' ? theme.applyStyles('dark', { background: NEUTRAL_BACKGROUND_DARK }) : {}),
-    ...theme.applyStyles('dark', { borderColor: BORDER_COLOR_DARK }),
+    ...theme.applyStyles('dark', {
+        ...(!color || color === 'neutral' ? { background: NEUTRAL_BACKGROUND_DARK } : {}),
+        borderColor: BORDER_COLOR_DARK,
+    }),
 }));
 
 const MarkerRender: React.ForwardRefRenderFunction<unknown, MarkerProps> = (props: MarkerProps, ref: any) => {
@@ -94,7 +95,7 @@ const MarkerRender: React.ForwardRefRenderFunction<unknown, MarkerProps> = (prop
 
     return (
         <AnchorPoint {...otherProps}>
-            <Icon ref={ref} data-testid="blui-marker-root" iconSize={iconSize} color={color} {...otherProps}>
+            <Icon ref={ref} data-testid="blui-marker-root" iconSize={iconSize} color={color}>
                 {icon}
             </Icon>
         </AnchorPoint>

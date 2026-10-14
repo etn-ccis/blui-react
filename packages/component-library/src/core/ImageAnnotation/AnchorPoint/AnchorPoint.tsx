@@ -144,7 +144,7 @@ const Connector = styled(Box, {
         direction,
         connectorLength = 120,
         connectorColor = defaultLineColor,
-        connectorThickness = 1,
+        connectorThickness = 1.4,
     }: {
         direction: AnchorPointDirection;
         connectorLength?: number;
