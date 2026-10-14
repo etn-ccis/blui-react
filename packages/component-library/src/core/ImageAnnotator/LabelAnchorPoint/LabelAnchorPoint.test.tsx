@@ -4,7 +4,7 @@ import '@testing-library/jest-dom';
 import { LabelAnchorPoint, LabelProps } from './LabelAnchorPoint';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { blueThemes as theme } from '@brightlayer-ui/react-themes';
-import { ImageAnnotator } from '../../ImageAnnotator';
+import { ImageAnnotator } from '..';
 
 afterEach(cleanup);
 

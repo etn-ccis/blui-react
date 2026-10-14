@@ -16,4 +16,4 @@ export * from './ThreeLiner';
 export * from './ToolbarMenu';
 export * from './DrawerLite';
 export * from './HorizontalStackedBar';
-export * from './ImageAnnotation';
+export * from './ImageAnnotator';
