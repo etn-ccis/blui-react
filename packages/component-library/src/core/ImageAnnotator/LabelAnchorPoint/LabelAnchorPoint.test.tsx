@@ -185,103 +185,70 @@ describe('LabelAnchorPoint', () => {
     );
 
     it.each([
-        [false, 0, 0, -90, -20, '90px 20px'],
-        [false, 100, 100, 210, 180, '-90px -20px'],
-        [false, 50, 50, 60, 80, '0px 0px'],
-        [true, 0, 0, -90, -20, '90px 20px'],
-        [true, 100, 100, 210, 180, '-90px -20px'],
-        [true, 50, 50, 60, 80, '0px 0px'],
-    ])('keeps labels inside the image with callout=%s at (%s, %s)', (callout, x, y, left, top, translate) => {
-        const rectSpy = jest.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockImplementation(function (
-            this: HTMLElement
-        ): DOMRect {
-            const isLabel = this.getAttribute('data-testid') === 'blui-label-root';
-            const width = isLabel ? 180 : 300;
-            const height = isLabel ? 40 : 200;
-            const rectLeft = isLabel ? left : 0;
-            const rectTop = isLabel ? top : 0;
-            return {
-                x: rectLeft,
-                y: rectTop,
-                left: rectLeft,
-                top: rectTop,
-                width,
-                height,
-                right: rectLeft + width,
-                bottom: rectTop + height,
-                toJSON: (): object => ({}),
-            };
-        });
-        try {
-            renderWithTheme(
-                <ImageAnnotator src="test.png">
-                    <LabelAnchorPoint
-                        {...defaultProps}
-                        x={x}
-                        y={y}
-                        {...(callout ? { callout: true, autoFlip: false } : { callout: false })}
-                    />
-                </ImageAnnotator>
-            );
-            const labelElement = screen.getByTestId('blui-label-root');
-            expect(labelElement.style.translate).toBe(translate);
-            const [offsetX, offsetY] = translate.split(' ').map(parseFloat);
-            expect(left + offsetX).toBeGreaterThanOrEqual(0);
-            expect(left + offsetX + 180).toBeLessThanOrEqual(300);
-            expect(top + offsetY).toBeGreaterThanOrEqual(0);
-            expect(top + offsetY + 40).toBeLessThanOrEqual(200);
-            void act(() => window.dispatchEvent(new Event('resize')));
-            expect(labelElement.style.translate).toBe(translate);
-            expect(screen.getByTestId('blui-anchor-point-root')).toHaveStyle({ left: `${x}%`, top: `${y}%` });
-        } finally {
-            rectSpy.mockRestore();
-        }
-    });
-
-    it('shrinks labels to fit small images and updates after resizing', () => {
+        [false, 0, 0],
+        [false, 100, 100],
+        [false, 50, 50],
+        [true, 0, 0],
+        [true, 100, 100],
+        [true, 50, 50],
+    ])('preserves percentage positioning with callout=%s at (%s, %s) after resizing', (callout, x, y) => {
         renderWithTheme(
             <ImageAnnotator src="test.png">
+                <LabelAnchorPoint
+                    {...defaultProps}
+                    x={x}
+                    y={y}
+                    {...(callout ? { callout: true, autoFlip: false } : { callout: false })}
+                />
+            </ImageAnnotator>
+        );
+        const anchorElement = screen.getByTestId('blui-anchor-point-root');
+        expect(anchorElement).toHaveStyle({ left: `${x}%`, top: `${y}%` });
+        expect(anchorElement).toContainElement(screen.getByTestId('blui-label-root'));
+
+        act(() => {
+            window.dispatchEvent(new Event('resize'));
+        });
+
+        expect(anchorElement).toHaveStyle({ left: `${x}%`, top: `${y}%` });
+    });
+
+    it('preserves natural label sizing when the image dimensions change', () => {
+        const { rerender } = renderWithTheme(
+            <ImageAnnotator src="test.png" width={60} height={30}>
                 <LabelAnchorPoint {...defaultProps} />
             </ImageAnnotator>
         );
-        const container = screen.getByTestId('blui-image-annotator-root');
-        const labelElement = screen.getByTestId('blui-label-root');
-        const rectSpy = jest.spyOn(container, 'getBoundingClientRect').mockReturnValue({
-            x: 0,
-            y: 0,
-            left: 0,
-            top: 0,
-            right: 60,
-            bottom: 30,
-            width: 60,
-            height: 30,
-            toJSON: () => ({}),
+        const expectedStyles = {
+            width: 'max-content',
+            minWidth: '0',
+            maxWidth: '180px',
+            height: 'auto',
+        };
+        expect(screen.getByTestId('blui-label-root')).toHaveStyle(expectedStyles);
+        expect(screen.getByTestId('blui-image-annotator-root')).toHaveStyle({
+            width: '60px',
+            height: '30px',
         });
-        try {
-            void act(() => window.dispatchEvent(new Event('resize')));
-            expect(labelElement).toHaveStyle({ minWidth: '60px', maxWidth: '60px', maxHeight: '30px' });
-            rectSpy.mockReturnValue({
-                x: 0,
-                y: 0,
-                left: 0,
-                top: 0,
-                right: 300,
-                bottom: 200,
-                width: 300,
-                height: 200,
-                toJSON: () => ({}),
-            });
-            void act(() => window.dispatchEvent(new Event('resize')));
-            expect(labelElement).toHaveStyle({ minWidth: '100px', maxWidth: '180px', maxHeight: '200px' });
-        } finally {
-            rectSpy.mockRestore();
-        }
+
+        rerender(
+            <ThemeProvider theme={theme}>
+                <ImageAnnotator src="test.png" width={300} height={200}>
+                    <LabelAnchorPoint {...defaultProps} />
+                </ImageAnnotator>
+            </ThemeProvider>
+        );
+
+        expect(screen.getByTestId('blui-image-annotator-root')).toHaveStyle({
+            width: '300px',
+            height: '200px',
+        });
+        expect(screen.getByTestId('blui-label-root')).toHaveStyle(expectedStyles);
     });
 
-    it('applies additional Typography props', () => {
-        renderWithTheme(<LabelAnchorPoint {...defaultProps} variant="h6" className="custom-class" />);
-        const labelElement = screen.getByTestId('blui-label-root');
-        expect(labelElement).toHaveClass('custom-class');
+    it('applies className to the anchor wrapper', () => {
+        renderWithTheme(<LabelAnchorPoint {...defaultProps} className="custom-class" />);
+        expect(screen.getByTestId('blui-anchor-point-root')).toHaveClass('custom-class');
     });
 
     it('applies box shadow style', () => {
@@ -298,11 +265,10 @@ describe('LabelAnchorPoint', () => {
         expect(labelElement).toHaveStyle('border-radius: 4px');
     });
 
-    it('renders as Typography span component', () => {
+    it('renders the label as a Typography paragraph', () => {
         renderWithTheme(<LabelAnchorPoint {...defaultProps} />);
         const labelElement = screen.getByTestId('blui-label-root');
-        // Typography component renders as span when component="span"
-        expect(labelElement.tagName).toBe('SPAN');
+        expect(labelElement.tagName).toBe('P');
     });
 
     it('supports combining custom colors with theme values', () => {

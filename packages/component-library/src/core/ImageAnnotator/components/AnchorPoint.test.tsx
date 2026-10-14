@@ -127,11 +127,11 @@ describe('AnchorPoint', () => {
         expect(container.querySelector('circle[r="4"]')).toHaveAttribute('fill', '#123456');
     });
 
-    it('renders the blue anchor dot variant with the theme primary color', () => {
+    it('renders the primary anchor dot variant with the theme primary color', () => {
         const theme = createTheme({ cssVariables: true });
         const { container } = render(
             <ThemeProvider theme={theme}>
-                <AnchorDot anchorDotColor="blue" data-testid="anchor-dot" />
+                <AnchorDot anchorDotColor="primary" data-testid="anchor-dot" />
             </ThemeProvider>
         );
 

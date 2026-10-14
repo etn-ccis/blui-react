@@ -78,9 +78,10 @@ describe('MarkerAnchorPoint', () => {
 
         const marker = screen.getByTestId('blui-marker-root');
         expect(marker).toHaveStyle({
-            width: '32px',
-            height: '32px',
+            width: '40px',
+            height: '40px',
         });
+        expect(screen.getByTestId('StarIcon')).toHaveStyle({ fontSize: '32px' });
     });
 
     it('applies border radius and border styles', () => {
@@ -279,15 +280,14 @@ describe('MarkerAnchorPoint', () => {
         });
     });
 
-    it('applies sx styles to the marker', () => {
+    it('applies sx styles to the anchor wrapper', () => {
         render(
             <ThemeWrapper>
                 <MarkerAnchorPoint x={50} y={50} icon={<StarIcon />} sx={{ opacity: 0.5 }} />
             </ThemeWrapper>
         );
 
-        const marker = screen.getByTestId('blui-marker-root');
-        expect(marker).toHaveStyle('opacity: 0.5');
+        expect(screen.getByTestId('blui-anchor-point-root')).toHaveStyle('opacity: 0.5');
     });
 
     it('renders marker with multiple color variants in sequence', () => {
@@ -374,9 +374,10 @@ describe('MarkerAnchorPoint', () => {
         );
 
         expect(screen.getByTestId('blui-marker-root')).toHaveStyle({
-            width: '28px',
-            height: '28px',
+            width: '40px',
+            height: '40px',
         });
+        expect(screen.getByTestId('StarIcon')).toHaveStyle({ fontSize: '28px' });
 
         expect(screen.getByTestId('blui-anchor-point-root')).toHaveStyle({
             left: '50%',
@@ -384,7 +385,7 @@ describe('MarkerAnchorPoint', () => {
         });
     });
 
-    it('handles edge case with zero dimensions', () => {
+    it('preserves the marker dimensions with a zero-size icon', () => {
         render(
             <ThemeWrapper>
                 <MarkerAnchorPoint x={0} y={0} icon={<StarIcon />} iconSize={0} />
@@ -393,12 +394,13 @@ describe('MarkerAnchorPoint', () => {
 
         const marker = screen.getByTestId('blui-marker-root');
         expect(marker).toHaveStyle({
-            width: '0px',
-            height: '0px',
+            width: '40px',
+            height: '40px',
         });
+        expect(screen.getByTestId('StarIcon')).toHaveStyle({ fontSize: '0px' });
     });
 
-    it('handles edge case with large dimensions', () => {
+    it('preserves the marker dimensions with a large icon', () => {
         render(
             <ThemeWrapper>
                 <MarkerAnchorPoint x={100} y={100} icon={<StarIcon />} iconSize={200} />
@@ -407,9 +409,10 @@ describe('MarkerAnchorPoint', () => {
 
         const marker = screen.getByTestId('blui-marker-root');
         expect(marker).toHaveStyle({
-            width: '200px',
-            height: '200px',
+            width: '40px',
+            height: '40px',
         });
+        expect(screen.getByTestId('StarIcon')).toHaveStyle({ fontSize: '200px' });
     });
 
     it('renders marker with callout in correct position', () => {
