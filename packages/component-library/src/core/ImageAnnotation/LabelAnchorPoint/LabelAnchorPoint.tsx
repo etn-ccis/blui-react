@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import Typography, { TypographyProps } from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
-import { AnchorPoint, AnchorPointProps } from '../AnchorPoint';
+import { AnchorPoint, AnchorPointProps } from '../components';
 
 export type LabelProps = AnchorPointProps &
     TypographyProps & {

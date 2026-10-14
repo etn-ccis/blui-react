@@ -1,7 +1,7 @@
 import React, { forwardRef, ReactNode } from 'react';
 import MuiCard, { CardProps as MuiCardProps } from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
-import { AnchorPoint, AnchorPointProps } from '../AnchorPoint';
+import { AnchorPoint, AnchorPointProps } from '../components';
 
 const MIN_CARD_WIDTH = 80;
 const MAX_CARD_WIDTH = 400;

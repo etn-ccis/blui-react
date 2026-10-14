@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
-import { AnchorPoint, AnchorPointProps } from '../AnchorPoint';
+import { AnchorPoint, AnchorPointProps } from '../components';
 import { BLUIColors } from '@brightlayer-ui/colors';
 
 export type MarkerProps = AnchorPointProps & {

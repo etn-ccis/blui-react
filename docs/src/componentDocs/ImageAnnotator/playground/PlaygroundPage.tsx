@@ -182,7 +182,7 @@ const inputConfig: InputConfig = [
         type: 'number',
         description: 'Marker icon size in pixels',
         required: false,
-        initialValue: 40,
+        initialValue: 24,
         minValue: 16,
         maxValue: 80,
         valueStep: 2,
