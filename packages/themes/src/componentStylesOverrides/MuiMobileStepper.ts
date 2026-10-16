@@ -15,7 +15,7 @@ export default {
         dotActive: ({ theme }) => ({
             backgroundColor: theme.vars.palette.primary.main,
             ...theme.applyStyles('dark', {
-                backgroundColor: theme.vars.palette.primary.dark,
+                backgroundColor: theme.vars.palette.primary.main,
             }),
         }),
     },

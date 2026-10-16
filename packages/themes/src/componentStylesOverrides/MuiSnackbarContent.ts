@@ -17,10 +17,10 @@ export default {
                 color: BLUIColors.black[500],
                 backgroundColor: BLUIColors.black[50],
                 '& .MuiButton-textPrimary': {
-                    color: theme.vars.palette.primary.dark,
+                    color: theme.vars.palette.primary.main,
                 },
                 '& .MuiButton-textSecondary': {
-                    color: BLUIColors.lightBlue[500],
+                    color: theme.vars.palette.secondary.main,
                 },
             }),
         }),

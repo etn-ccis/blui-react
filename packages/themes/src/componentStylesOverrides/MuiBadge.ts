@@ -5,14 +5,14 @@ export default {
     styleOverrides: {
         colorError: ({ theme }) => ({
             ...theme.applyStyles('dark', {
-                backgroundColor: theme.vars.palette.error.dark,
-                color: BLUIColors.white[50],
+                backgroundColor: BLUIColors.red[300],
+                color: BLUIColors.black[900],
             }),
         }),
         colorPrimary: ({ theme }) => ({
             ...theme.applyStyles('dark', {
-                backgroundColor: theme.vars.palette.primary.dark,
-                color: BLUIColors.white[50],
+                backgroundColor: theme.vars.palette.primary.main,
+                color: BLUIColors.blue[900],
             }),
         }),
         colorSecondary: ({ theme }) => ({

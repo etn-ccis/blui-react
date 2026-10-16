@@ -7,7 +7,7 @@ export default {
             '&:before': {
                 borderBottomColor: theme.vars.palette.divider,
             },
-            '&:not(.Mui-disabled):hover:before': {
+            '&:not(.Mui-disabled):not(.Mui-error):hover:before': {
                 borderBottomWidth: 1,
                 borderBottomColor: BLUIColors.black[500],
             },
@@ -17,20 +17,27 @@ export default {
             },
             '&.Mui-error:not(.Mui-focused):after': {
                 borderBottomWidth: 1,
+                borderBottomColor: theme.vars.palette.error.main,
+            },
+            '&.Mui-error.Mui-focused:after': {
+                borderBottomColor: theme.vars.palette.error.main,
             },
             '&.Mui-error:not(.Mui-focused)&:hover:after': {
-                borderBottomColor: theme.vars.palette.error.dark,
+                borderBottomColor: theme.vars.palette.error.main,
             },
             ...theme.applyStyles('dark', {
                 '&:before': {
                     borderBottomColor: theme.vars.palette.divider,
                 },
-                '&:not(.Mui-disabled):hover:before': {
+                '&.Mui-error:not(.Mui-disabled):before, &.Mui-error:not(.Mui-disabled):hover:before': {
+                    borderBottomColor: theme.vars.palette.error.dark,
+                },
+                '&:not(.Mui-disabled):not(.Mui-error):hover:before': {
                     borderBottomWidth: 1,
                     borderBottomColor: BLUIColors.black[200],
                 },
                 '&:after': {
-                    borderBottomColor: theme.vars.palette.primary.dark,
+                    borderBottomColor: theme.vars.palette.primary.main,
                 },
                 '&.Mui-error.Mui-focused:after': {
                     borderBottomColor: theme.vars.palette.error.dark,
@@ -40,7 +47,7 @@ export default {
                     borderBottomColor: theme.vars.palette.error.dark,
                 },
                 '&.Mui-error:not(.Mui-focused):hover:after': {
-                    borderBottomColor: theme.vars.palette.error.main,
+                    borderBottomColor: theme.vars.palette.error.dark,
                 },
                 '&.MuiInput-colorSecondary:not(.Mui-error):after': {
                     borderBottomColor: theme.vars.palette.secondary.dark,

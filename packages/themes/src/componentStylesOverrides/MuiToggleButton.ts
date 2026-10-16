@@ -23,7 +23,7 @@ export default {
                 color: BLUIColors.gray[500],
                 borderColor: Color(BLUIColors.black[200]).alpha(0.32).string(),
                 '&.Mui-selected': {
-                    backgroundColor: `rgba(${theme.vars.palette.primary.dark} / 0.36)`,
+                    backgroundColor: `rgba(${theme.vars.palette.primary.main} / 0.36)`,
                     color: theme.vars.palette.primary.main,
                     '&:hover': {
                         backgroundColor: `rgba(${theme.vars.palette.primary.main} / 0.36)`,

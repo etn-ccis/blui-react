@@ -25,11 +25,11 @@ export default {
                     backgroundColor: Color(BLUIColors.darkBlack[300]).mix(Color(MediumBlackBackground), 0.5).string(),
                 },
                 '&.Mui-selected': {
-                    backgroundColor: `rgba(${theme.vars.palette.primary.dark} / 0.2)`,
+                    backgroundColor: `rgba(${theme.vars.palette.primary.main} / 0.2)`,
                     '&.MuiTableRow-hover:hover': {
-                        backgroundColor: `rgba(${theme.vars.palette.primary.dark} / 0.2)`,
+                        backgroundColor: `rgba(${theme.vars.palette.primary.main} / 0.2)`,
                         '&.MuiTableRow-hover:hover': {
-                            backgroundColor: `rgba(${theme.vars.palette.primary.dark} / 0.3)`,
+                            backgroundColor: `rgba(${theme.vars.palette.primary.main} / 0.3)`,
                         },
                     },
                 },
