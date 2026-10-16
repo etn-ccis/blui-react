@@ -1,6 +1,17 @@
 # Changelog
 
-# v9.1.0 (July 23, 2026)
+# v9.1.1 (October 16, 2026)
+
+### Changed
+
+- Refined interactive state styling for buttons, chips, switches, checkboxes, and radio buttons.
+- Updated primary color styling across components in the dark theme.
+
+### Added
+
+- Updated MuiAppBar styles to enable blur effect when `variant="overlay"` and `color="transparent"`.
+
+# v9.1.0 (July 22, 2026)
 
 ### Changed
 

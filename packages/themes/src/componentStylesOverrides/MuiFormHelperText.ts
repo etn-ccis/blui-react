@@ -3,9 +3,15 @@ import { Components, Theme, CssVarsTheme } from '@mui/material/styles';
 export default {
     styleOverrides: {
         root: ({ theme }) => ({
-            ...theme.applyStyles('light', {
-                '&.Mui-disabled': {
-                    color: theme.vars.palette.action.disabled,
+            '&.Mui-disabled': {
+                color: theme.vars.palette.action.disabled,
+            },
+            '&.Mui-error': {
+                color: theme.vars.palette.error.main,
+            },
+            ...theme.applyStyles('dark', {
+                '&.Mui-error': {
+                    color: theme.vars.palette.error.dark,
                 },
             }),
         }),

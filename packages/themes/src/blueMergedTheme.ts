@@ -51,6 +51,13 @@ import MuiRadio from './componentStylesOverrides/MuiRadio';
 import MuiFormControlLabel from './componentStylesOverrides/MuiFormControlLabel';
 import MuiAccordion from './componentStylesOverrides/MuiAccordion';
 
+declare module '@mui/material/styles/createPalette' {
+    // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+    interface TypeAction {
+        highlight: string;
+    }
+}
+
 declare module '@mui/material/styles' {
     // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
     interface Palette {
@@ -93,17 +100,26 @@ const LightThemeColors = {
         hint: BLUIColors.gray[500],
     },
     action: {
-        hover: Color(BLUIColors.highlight).alpha(0.08).string(),
+        hover: Color(BLUIColors.colorHover).alpha(0.08).string(),
         active: BLUIColors.gray[500],
-        disabled: Color(BLUIColors.black[500]).alpha(0.3).string(),
+        disabled: Color(BLUIColors.colorDisabled).alpha(0.25).string(),
+        disabledBackground: Color(BLUIColors.colorDisabledBackground).alpha(0.05).string(),
+        highlight: Color(BLUIColors.highlight).alpha(0.08).string(),
     },
 };
 
 // Dark Theme Colors
 const DarkThemeColors = {
-    primary: createSimpleDarkPalette(BLUIColors.blue),
+    primary: {
+        ...createSimpleDarkPalette(BLUIColors.blue),
+        contrastText: BLUIColors.blue[900],
+    },
     secondary: createSimpleDarkPalette(BLUIColors.lightBlue),
-    error: createSimpleDarkPalette(BLUIColors.red),
+    error: {
+        ...createSimpleDarkPalette(BLUIColors.red),
+        dark: BLUIColors.red[300],
+        contrastText: BLUIColors.black[900],
+    },
     success: createSimpleDarkPalette(BLUIColors.green),
     info: createSimpleDarkPalette(BLUIColors.lightBlue),
     divider: Color(BLUIColors.darkThemeDivider).alpha(0.1).string(),
@@ -123,10 +139,11 @@ const DarkThemeColors = {
         hint: Color(BLUIColors.black[300]).alpha(0.36).string(),
     },
     action: {
-        hover: Color(BLUIColors.highlightBlue).alpha(0.2).string(),
+        hover: Color(BLUIColors.colorHoverDark).alpha(0.08).string(),
         active: BLUIColors.black[200],
-        disabled: Color(BLUIColors.black[300]).alpha(0.36).string(),
-        disabledBackground: Color(BLUIColors.black[200]).alpha(0.24).string(),
+        disabled: Color(BLUIColors.colorDisabledDark).alpha(0.25).string(),
+        disabledBackground: Color(BLUIColors.colorDisabledBackgroundDark).alpha(0.05).string(),
+        highlight: Color(BLUIColors.highlightBlue).alpha(0.18).string(),
     },
 };
 

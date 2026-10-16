@@ -19,8 +19,8 @@ export default {
                 backgroundColor: TextFieldContainerLight,
             },
             '&.Mui-disabled': {
-                color: `rgba(${theme.vars.palette.text.primary} / 0.3)`,
-                backgroundColor: BLUIColors.white[100],
+                color: theme.vars.palette.action.disabled,
+                backgroundColor: theme.vars.palette.action.disabledBackground,
                 pointerEvents: 'none',
             },
             ...theme.applyStyles('dark', {
@@ -32,17 +32,25 @@ export default {
                     backgroundColor: TextFieldContainerDark,
                 },
                 '&.Mui-disabled': {
-                    color: theme.vars.palette.text.disabled,
-                    backgroundColor: Color(BLUIColors.black[800]).alpha(0.5).string(),
+                    color: theme.vars.palette.action.disabled,
+                    backgroundColor: theme.vars.palette.action.disabledBackground,
                     pointerEvents: 'none',
                 },
             }),
         }),
         input: ({ theme }) => ({
+            '&.Mui-disabled': {
+                color: theme.vars.palette.action.disabled,
+                WebkitTextFillColor: theme.vars.palette.action.disabled,
+            },
             '&:-webkit-autofill': {
                 WebkitBoxShadow: `0 0 0 30px ${theme.vars.palette.background.default} inset`,
             },
             ...theme.applyStyles('dark', {
+                '&.Mui-disabled': {
+                    color: theme.vars.palette.action.disabled,
+                    WebkitTextFillColor: theme.vars.palette.action.disabled,
+                },
                 '&:-webkit-autofill': {
                     WebkitBoxShadow: `0 0 0 100px ${BLUIColors.black[800]} inset`,
                 },
@@ -54,6 +62,10 @@ export default {
             },
             '&.Mui-error:not(.Mui-focused):after': {
                 borderBottomWidth: 1,
+                borderBottomColor: theme.vars.palette.error.main,
+            },
+            '&.Mui-error.Mui-focused:after': {
+                borderBottomColor: theme.vars.palette.error.main,
             },
             '&.Mui-disabled:before': {
                 borderBottomColor: theme.vars.palette.divider,
@@ -63,8 +75,11 @@ export default {
                 '&:before': {
                     borderBottomColor: theme.vars.palette.divider,
                 },
+                '&.Mui-error:not(.Mui-disabled):before, &.Mui-error:not(.Mui-disabled):hover:before': {
+                    borderBottomColor: theme.vars.palette.error.dark,
+                },
                 '&:after': {
-                    borderBottomColor: theme.vars.palette.primary.dark,
+                    borderBottomColor: theme.vars.palette.primary.main,
                 },
                 '&.Mui-error.Mui-focused:after': {
                     borderBottomColor: theme.vars.palette.error.dark,
@@ -74,7 +89,7 @@ export default {
                     borderBottomColor: theme.vars.palette.error.dark,
                 },
                 '&.Mui-error:not(.Mui-focused):hover:after': {
-                    borderBottomColor: theme.vars.palette.error.main,
+                    borderBottomColor: theme.vars.palette.error.dark,
                 },
                 '&.Mui-disabled:before': {
                     borderBottomStyle: 'solid',

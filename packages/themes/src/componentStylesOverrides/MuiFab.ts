@@ -3,6 +3,10 @@ import { Components, Theme, CssVarsTheme } from '@mui/material/styles';
 import Color from 'color';
 
 const WhiteText = BLUIColors.white[50];
+const FabHoverLight = Color(BLUIColors.colorHover).alpha(0.08).string();
+const FabPressedLight = Color(BLUIColors.pressed).alpha(0.16).string();
+const FabHoverDark = Color(BLUIColors.colorHoverDark).alpha(0.08).string();
+const FabPressedDark = Color(BLUIColors.pressedDark).alpha(0.16).string();
 
 export default {
     styleOverrides: {
@@ -13,11 +17,14 @@ export default {
             boxShadow: theme.vars.palette.shadows.level3,
             border: `1px solid ${Color(BLUIColors.gray[900]).alpha(0.12).string()}`,
             '&:hover': {
-                backgroundColor: Color(BLUIColors.black[500]).alpha(0.05).string(),
+                backgroundColor: FabHoverLight,
+            },
+            '&:active': {
+                backgroundColor: FabPressedLight,
             },
             '&.Mui-disabled': {
-                backgroundColor: theme.vars.palette.background.paper,
-                border: `1px solid ${Color(BLUIColors.black[500]).alpha(0.12).string()}`,
+                backgroundColor: theme.vars.palette.action.disabledBackground,
+                border: `1px solid ${theme.vars.palette.action.disabled}`,
                 color: theme.vars.palette.action.disabled,
             },
             ...theme.applyStyles('dark', {
@@ -25,21 +32,65 @@ export default {
                 backgroundColor: BLUIColors.black[500],
                 color: WhiteText,
                 '&:hover': {
-                    backgroundColor: BLUIColors.black[300],
+                    backgroundColor: FabHoverDark,
+                },
+                '&:active': {
+                    backgroundColor: FabPressedDark,
+                },
+                '&.Mui-disabled': {
+                    backgroundColor: theme.vars.palette.action.disabledBackground,
+                    border: `1px solid ${theme.vars.palette.action.disabled}`,
+                    color: theme.vars.palette.action.disabled,
                 },
             }),
         }),
         primary: ({ theme }) => ({
             backgroundColor: theme.vars.palette.primary.main,
             color: WhiteText,
+            '&:focus-visible': {
+                boxShadow: theme.vars.palette.shadows.level3,
+            },
+            '&:active': {
+                backgroundColor: BLUIColors.onPrimaryPressed,
+            },
             '&:hover': {
-                backgroundColor: BLUIColors.blue[300],
+                backgroundColor: BLUIColors.onPrimaryHover,
+            },
+            '&.MuiFab-extended': {
+                backgroundColor: BLUIColors.blue[500],
+                '&:focus-visible': {
+                    boxShadow: theme.vars.palette.shadows.level3,
+                },
+                '&:active': {
+                    backgroundColor: BLUIColors.onPrimaryPressed,
+                },
+                '&:hover': {
+                    backgroundColor: BLUIColors.onPrimaryHover,
+                },
             },
             ...theme.applyStyles('dark', {
-                backgroundColor: theme.vars.palette.primary.dark,
-                color: WhiteText,
+                backgroundColor: theme.vars.palette.primary.main,
+                color: BLUIColors.blue[900],
+                '&:focus-visible': {
+                    boxShadow: theme.vars.palette.shadows.level3,
+                },
+                '&:active': {
+                    backgroundColor: BLUIColors.onPrimaryPressedDark,
+                },
                 '&:hover': {
-                    backgroundColor: BLUIColors.blue[300],
+                    backgroundColor: BLUIColors.onPrimaryHoverDark,
+                },
+                '&.MuiFab-extended': {
+                    backgroundColor: theme.vars.palette.primary.main,
+                    '&:focus-visible': {
+                        boxShadow: theme.vars.palette.shadows.level3,
+                    },
+                    '&:active': {
+                        backgroundColor: BLUIColors.onPrimaryPressedDark,
+                    },
+                    '&:hover': {
+                        backgroundColor: BLUIColors.onPrimaryHoverDark,
+                    },
                 },
             }),
         }),

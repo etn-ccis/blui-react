@@ -7,11 +7,14 @@ export default {
             '& .MuiOutlinedInput-notchedOutline': {
                 borderColor: theme.vars.palette.divider,
             },
+            '&.Mui-error .MuiOutlinedInput-notchedOutline': {
+                borderColor: theme.vars.palette.error.main,
+            },
             '&.Mui-error.MuiOutlinedInput-colorSecondary.Mui-focused .MuiOutlinedInput-notchedOutline': {
                 borderColor: theme.vars.palette.error.main,
             },
             '&.Mui-error:hover:not(.Mui-focused) .MuiOutlinedInput-notchedOutline': {
-                borderColor: theme.vars.palette.error.dark,
+                borderColor: theme.vars.palette.error.main,
             },
             '&.Mui-disabled .MuiOutlinedInput-notchedOutline': {
                 borderColor: theme.vars.palette.divider,
@@ -27,10 +30,10 @@ export default {
                     borderColor: theme.vars.palette.error.dark,
                 },
                 '&.Mui-error:hover:not(.Mui-focused) .MuiOutlinedInput-notchedOutline': {
-                    borderColor: theme.vars.palette.error.main,
+                    borderColor: theme.vars.palette.error.dark,
                 },
                 '&.MuiInputBase-colorPrimary.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                    borderColor: BLUIColors.blue[500],
+                    borderColor: BLUIColors.blue[200],
                 },
                 '&.MuiInputBase-colorSecondary.Mui-focused .MuiOutlinedInput-notchedOutline': {
                     borderColor: BLUIColors.lightBlue[500],

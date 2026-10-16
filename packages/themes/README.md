@@ -7,8 +7,8 @@ This package provides theming support for Eaton applications using the Brightlay
 
 For other frameworks, check out our related packages:
 
--   [@brightlayer-ui/angular-themes](https://www.npmjs.com/package/@brightlayer-ui/angular-themes)
--   [@brightlayer-ui/react-native-themes](https://www.npmjs.com/package/@brightlayer-ui/react-native-themes)
+- [@brightlayer-ui/angular-themes](https://www.npmjs.com/package/@brightlayer-ui/angular-themes)
+- [@brightlayer-ui/react-native-themes](https://www.npmjs.com/package/@brightlayer-ui/react-native-themes)
 
 ## Installation
 
@@ -29,8 +29,8 @@ yarn add @brightlayer-ui/react-themes
 To use these themes in your application, simply wrap the app in a `ThemeProvider` and pass in the theme:
 
 ```tsx
-import { ThemeProvider } from "@mui/material/styles";
-import { theme } from "@brightlayer-ui/react-themes";
+import { ThemeProvider } from '@mui/material/styles';
+import { theme } from '@brightlayer-ui/react-themes';
 
 <ThemeProvider theme={theme}>
     <App />
@@ -44,7 +44,7 @@ The theme will default to light/dark mode based on the user's system preference.
 If you do not want to use the system setting as the default, you can set the `defaultMode` on the `ThemeProvider`:
 
 ```tsx
-<ThemeProvider theme={theme} defaultMode={"dark" /* or 'light' */}></ThemeProvider>
+<ThemeProvider theme={theme} defaultMode={'dark' /* or 'light' */}></ThemeProvider>
 ```
 
 ## Manually toggling the mode
@@ -52,19 +52,19 @@ If you do not want to use the system setting as the default, you can set the `de
 You can manually toggle the theme mode using the `useColorScheme` hook:
 
 ```tsx
-import { useColorScheme } from "@mui/material/styles";
-import InvertColors from "@mui/icons-material/InvertColors";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
+import { useColorScheme } from '@mui/material/styles';
+import InvertColors from '@mui/icons-material/InvertColors';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
 
 const ToggleComponent = () => {
     const { mode, setMode } = useColorScheme();
 
     return (
-        <Tooltip title={"Toggle Theme"}>
+        <Tooltip title={'Toggle Theme'}>
             <IconButton
                 onClick={() => {
-                    setMode(mode === "light" ? "dark" : "light");
+                    setMode(mode === 'light' ? 'dark' : 'light');
                 }}
             >
                 <InvertColors />
