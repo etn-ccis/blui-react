@@ -1,6 +1,11 @@
 # Changelog
 
-# v9.1.1 (Unreleased)
+# v9.1.1 (October 16, 2026)
+
+### Changed
+
+- Refined interactive state styling for buttons, chips, switches, checkboxes, and radio buttons.
+- Updated primary color styling across components in the dark theme.
 
 ### Added
 
