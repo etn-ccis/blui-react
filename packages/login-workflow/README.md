@@ -43,7 +43,7 @@ yarn add @mui/material @emotion/react @emotion/styled @mui/icons-material @brigh
 
 # Usage
 
-To use the package, read our [Integration](https://github.com/etn-ccis/blui-react-workflows/tree/master/login-workflow/docs/integration.md) instructions. Even if you are starting from scratch, it may be useful for you to refer to the [Example](https://github.com/etn-ccis/blui-react-workflows/tree/master/login-workflow/example) project while getting started.
+To use the package, read our [Integration](https://github.com/etn-ccis/blui-react/tree/master/packages/login-workflow/docs/integration.md) instructions. Even if you are starting from scratch, it may be useful for you to refer to the [Example](https://github.com/etn-ccis/blui-react-workflows/tree/master/login-workflow/example) project while getting started.
 
 In short, you will need to:
 
@@ -57,14 +57,14 @@ In short, you will need to:
 
 ## Learn More
 
--   [Setting Up Routing](https://github.com/etn-ccis/blui-react-workflows/tree/master/login-workflow/docs/routing.md)
--   [Language Support](https://github.com/etn-ccis/blui-react-workflows/tree/master/login-workflow/docs/language-support.md)
--   [Adding an Authentication/Login Workflow](https://github.com/etn-ccis/blui-react-workflows/tree/master/login-workflow/docs/authentication-workflow.md)
--   [Adding a Registration Workflow](https://github.com/etn-ccis/blui-react-workflows/tree/master/login-workflow/docs/registration-workflow.md)
--   [Handling Errors](https://github.com/etn-ccis/blui-react-workflows/tree/master/login-workflow/docs/error-management.md)
--   [Customizing Workflows](https://github.com/etn-ccis/blui-react-workflows/tree/master/login-workflow/docs/customization.md)
--   [Components & APIs](https://github.com/etn-ccis/blui-react-workflows/tree/master/login-workflow/docs/components/README.md)
--   [Screens](https://github.com/etn-ccis/blui-react-workflows/tree/master/login-workflow/docs/screens/README.md)
+-   [Setting Up Routing](https://github.com/etn-ccis/blui-react/tree/master/packages/login-workflow/docs/routing.md)
+-   [Language Support](https://github.com/etn-ccis/blui-react/tree/master/packages/login-workflow/docs/language-support.md)
+-   [Adding an Authentication/Login Workflow](https://github.com/etn-ccis/blui-react/tree/master/packages/login-workflow/docs/authentication-workflow.md)
+-   [Adding a Registration Workflow](https://github.com/etn-ccis/blui-react/tree/master/packages/login-workflow/docs/registration-workflow.md)
+-   [Handling Errors](https://github.com/etn-ccis/blui-react/tree/master/packages/login-workflow/docs/error-management.md)
+-   [Customizing Workflows](https://github.com/etn-ccis/blui-react/tree/master/packages/login-workflow/docs/customization.md)
+-   [Components & APIs](https://github.com/etn-ccis/blui-react/tree/master/packages/login-workflow/docs/components/README.md)
+-   [Screens](https://github.com/etn-ccis/blui-react/tree/master/packages/login-workflow/docs/screens/README.md)
 
 # Migrating from v6 => v7
 
@@ -108,7 +108,7 @@ Some notable changes include:
 -   Greater customization of screens through props (and moving customization properties to the screens they affect instead of handling all customizations through a monolithic wrapper component)
 -   Improved error management mechanism (customizable)
 
-Learn more about upgrading your existing application by reading our [Migrating Guide](https://github.com/etn-ccis/blui-react-workflows/tree/master/login-workflow/docs/migration-guide-3-4.md)
+Learn more about upgrading your existing application by reading our [Migrating Guide](https://github.com/etn-ccis/blui-react/tree/master/packages/login-workflow/docs/migration-guide-3-4.md)
 
 # Contributors
 
