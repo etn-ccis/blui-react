@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import Typography, { TypographyProps } from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
-import { AnchorPoint, AnchorPointProps } from '../AnchorPoint';
+import { AnchorPoint, AnchorPointProps } from '../components';
 
 export type LabelProps = AnchorPointProps &
     TypographyProps & {
@@ -31,34 +31,43 @@ const StyledLabel = styled(Typography, {
     flexDirection: 'column',
     alignItems: 'flex-start',
     background: labelBgColor ?? 'rgba(255, 255, 255, 0.72)',
-    ...(labelBgColor === undefined ? theme.applyStyles('dark', { background: 'rgba(14, 18, 24, 0.64)' }) : {}),
+    border: '1px solid rgba(77, 92, 106, 0.12)',
+    textShadow: '0 0 20px #FFF, 0 0 12px #FFF, 0 0 8px #FFF, 0 0 6px #FFF',
+    ...theme.applyStyles('dark', {
+        background: labelBgColor ?? 'rgba(14, 18, 24, 0.64)',
+        border: '1px solid rgba(245, 250, 255, 0.10)',
+        textShadow:
+            '0 0 20px rgba(0, 0, 0, 0.64), 0 0 12px rgba(0, 0, 0, 0.64), 0 0 8px rgba(0, 0, 0, 0.64), 0 0 6px rgba(0, 0, 0, 0.64)',
+    }),
     color: labelColor ?? theme.vars?.palette?.text?.primary ?? theme.palette.text.primary,
     borderRadius: '4px',
-    border: '1px solid rgba(77, 92, 106, 0.12)',
     backdropFilter: 'blur(2px)',
     fontFamily: '"Open Sans", sans-serif',
     fontSize: '14px',
     fontStyle: 'normal',
     fontWeight: 400,
     lineHeight: 'normal',
+    width: 'max-content',
     maxWidth: '180px',
-    whiteSpace: 'nowrap',
+    minWidth: 0,
+    flexShrink: 0,
+    height: 'auto',
+    boxSizing: 'border-box',
+    whiteSpace: 'normal',
+    overflowWrap: 'anywhere',
+    overflow: 'auto',
     boxShadow: '0 1px 12px 0 rgba(0, 0, 0, 0.12)',
 }));
 
 const LabelRender: React.ForwardRefRenderFunction<unknown, LabelProps> = (props: LabelProps, ref: any) => {
-    const { label, labelBgColor, labelColor, ...otherProps } = props;
+    const { label, labelBgColor, labelColor, sx, ...otherProps } = props;
 
     return (
-        <AnchorPoint {...(otherProps as AnchorPointProps)}>
-            <StyledLabel
-                ref={ref}
-                component="span"
-                labelBgColor={labelBgColor}
-                labelColor={labelColor}
-                data-testid="blui-label-root"
-                {...otherProps}
-            >
+        <AnchorPoint
+            {...(otherProps as AnchorPointProps)}
+            sx={[...(!otherProps.callout ? [{ width: 'max-content' }] : []), ...(Array.isArray(sx) ? sx : [sx])]}
+        >
+            <StyledLabel ref={ref} labelBgColor={labelBgColor} labelColor={labelColor} data-testid="blui-label-root">
                 {label}
             </StyledLabel>
         </AnchorPoint>

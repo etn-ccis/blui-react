@@ -1,9 +1,10 @@
 import React, { createRef } from 'react';
-import { render, screen, cleanup } from '@testing-library/react';
+import { act, render, screen, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { LabelAnchorPoint, LabelProps } from './LabelAnchorPoint';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { blueThemes as theme } from '@brightlayer-ui/react-themes';
+import { ImageAnnotator } from '..';
 
 afterEach(cleanup);
 
@@ -131,20 +132,154 @@ describe('LabelAnchorPoint', () => {
         expect(labelElement.textContent).toBe('');
     });
 
-    it('handles long label text with truncation styles', () => {
-        const longLabel = 'This is a very long label that should truncate';
+    it('wraps long label text and allows the label height to grow', () => {
+        const longLabel = 'This is a very long label that should wrap';
         renderWithTheme(<LabelAnchorPoint {...defaultProps} label={longLabel} />);
         const labelElement = screen.getByTestId('blui-label-root');
 
-        // Check that truncation styles are applied
+        expect(labelElement).toHaveTextContent(longLabel);
         expect(labelElement).toHaveStyle('max-width: 180px');
-        expect(labelElement).toHaveStyle('white-space: nowrap');
+        expect(labelElement).toHaveStyle('white-space: normal');
+        expect(labelElement).toHaveStyle('overflow-wrap: anywhere');
+        expect(labelElement).toHaveStyle('height: auto');
+        expect(labelElement).toHaveStyle('box-sizing: border-box');
+        expect(labelElement).toHaveStyle('overflow: auto');
     });
 
-    it('applies additional Typography props', () => {
-        renderWithTheme(<LabelAnchorPoint {...defaultProps} variant="h6" className="custom-class" />);
+    it.each([0, 50, 95, 100])('centers long labels on the anchor at x=%s without shrinking the wrapper', (x) => {
+        renderWithTheme(
+            <ImageAnnotator src="test.png" width={300}>
+                <LabelAnchorPoint {...defaultProps} x={x} label={'Long label content '.repeat(20)} />
+            </ImageAnnotator>
+        );
+
+        expect(screen.getByTestId('blui-anchor-point-root')).toHaveStyle({
+            left: `${x}%`,
+            width: 'max-content',
+            transform: 'translate(-50%, -50%)',
+        });
+        expect(screen.getByTestId('blui-label-root')).toHaveStyle({
+            maxWidth: '180px',
+            height: 'auto',
+            overflowWrap: 'anywhere',
+        });
+    });
+
+    it('retains the fixed anchor dot size for callout labels', () => {
+        renderWithTheme(<LabelAnchorPoint {...defaultProps} callout />);
+
+        expect(screen.getByTestId('blui-anchor-point-root')).toHaveStyle({ width: '18px', height: '18px' });
+    });
+
+    it('preserves caller sx overrides', () => {
+        renderWithTheme(<LabelAnchorPoint {...defaultProps} sx={[{ width: 140 }, { marginTop: '2px' }]} />);
+
+        expect(screen.getByTestId('blui-anchor-point-root')).toHaveStyle({ width: '140px', marginTop: '2px' });
+    });
+
+    it('wraps long strings without spaces within the label width', () => {
+        const longLabel = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.repeat(10);
+        renderWithTheme(<LabelAnchorPoint {...defaultProps} label={longLabel} />);
         const labelElement = screen.getByTestId('blui-label-root');
-        expect(labelElement).toHaveClass('custom-class');
+
+        expect(labelElement).toHaveTextContent(longLabel);
+        expect(labelElement).toHaveStyle({
+            maxWidth: '180px',
+            minWidth: '0',
+            whiteSpace: 'normal',
+            overflowWrap: 'anywhere',
+            boxSizing: 'border-box',
+            height: 'auto',
+        });
+    });
+
+    it.each(['left', 'right', 'top', 'bottom'] as const)(
+        'preserves the label width in a %s callout instead of squeezing text into a column',
+        (direction) => {
+            renderWithTheme(
+                <LabelAnchorPoint
+                    {...defaultProps}
+                    label="A long label that should wrap into normal horizontal lines"
+                    callout
+                    direction={direction}
+                />
+            );
+
+            expect(screen.getByTestId('blui-label-root')).toHaveStyle({
+                width: 'max-content',
+                maxWidth: '180px',
+                flexShrink: '0',
+                whiteSpace: 'normal',
+                overflowWrap: 'anywhere',
+            });
+        }
+    );
+
+    it.each([
+        [false, 0, 0],
+        [false, 100, 100],
+        [false, 50, 50],
+        [true, 0, 0],
+        [true, 100, 100],
+        [true, 50, 50],
+    ])('preserves percentage positioning with callout=%s at (%s, %s) after resizing', (callout, x, y) => {
+        renderWithTheme(
+            <ImageAnnotator src="test.png">
+                <LabelAnchorPoint
+                    {...defaultProps}
+                    x={x}
+                    y={y}
+                    {...(callout ? { callout: true, autoFlip: false } : { callout: false })}
+                />
+            </ImageAnnotator>
+        );
+        const anchorElement = screen.getByTestId('blui-anchor-point-root');
+        expect(anchorElement).toHaveStyle({ left: `${x}%`, top: `${y}%` });
+        expect(anchorElement).toContainElement(screen.getByTestId('blui-label-root'));
+
+        act(() => {
+            window.dispatchEvent(new Event('resize'));
+        });
+
+        expect(anchorElement).toHaveStyle({ left: `${x}%`, top: `${y}%` });
+    });
+
+    it('preserves natural label sizing when the image dimensions change', () => {
+        const { rerender } = renderWithTheme(
+            <ImageAnnotator src="test.png" width={60} height={30}>
+                <LabelAnchorPoint {...defaultProps} />
+            </ImageAnnotator>
+        );
+        const expectedStyles = {
+            width: 'max-content',
+            minWidth: '0',
+            maxWidth: '180px',
+            height: 'auto',
+        };
+        expect(screen.getByTestId('blui-label-root')).toHaveStyle(expectedStyles);
+        expect(screen.getByTestId('blui-image-annotator-root')).toHaveStyle({
+            width: '60px',
+            height: '30px',
+        });
+
+        rerender(
+            <ThemeProvider theme={theme}>
+                <ImageAnnotator src="test.png" width={300} height={200}>
+                    <LabelAnchorPoint {...defaultProps} />
+                </ImageAnnotator>
+            </ThemeProvider>
+        );
+
+        expect(screen.getByTestId('blui-image-annotator-root')).toHaveStyle({
+            width: '300px',
+            height: '200px',
+        });
+        expect(screen.getByTestId('blui-label-root')).toHaveStyle(expectedStyles);
+    });
+
+    it('applies className to the anchor wrapper', () => {
+        renderWithTheme(<LabelAnchorPoint {...defaultProps} className="custom-class" />);
+        expect(screen.getByTestId('blui-anchor-point-root')).toHaveClass('custom-class');
     });
 
     it('applies box shadow style', () => {
@@ -161,11 +296,10 @@ describe('LabelAnchorPoint', () => {
         expect(labelElement).toHaveStyle('border-radius: 4px');
     });
 
-    it('renders as Typography span component', () => {
+    it('renders the label as a Typography paragraph', () => {
         renderWithTheme(<LabelAnchorPoint {...defaultProps} />);
         const labelElement = screen.getByTestId('blui-label-root');
-        // Typography component renders as span when component="span"
-        expect(labelElement.tagName).toBe('SPAN');
+        expect(labelElement.tagName).toBe('P');
     });
 
     it('supports combining custom colors with theme values', () => {

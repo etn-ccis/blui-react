@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
-import { AnchorPoint, AnchorPointProps } from '../AnchorPoint';
+import { AnchorPoint, AnchorPointProps } from '../components';
 import { BLUIColors } from '@brightlayer-ui/colors';
 
 export type MarkerProps = AnchorPointProps & {
@@ -71,8 +71,9 @@ const Icon = styled(Box, {
     shouldForwardProp: (prop) => prop !== 'iconSize',
 })<Pick<MarkerProps, 'iconSize' | 'color'>>(({ theme, iconSize, color }) => ({
     display: 'flex',
-    width: iconSize ?? 40,
-    height: iconSize ?? 40,
+    width: 40,
+    height: 40,
+    padding: iconSize - 12,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: '80px',
@@ -83,17 +84,18 @@ const Icon = styled(Box, {
     '& .MuiSvgIcon-root': {
         fontSize: iconSize,
     },
-    // CSS-variables themes resolve styles once, so the dark neutral value must come from a color-scheme selector
-    ...(!color || color === 'neutral' ? theme.applyStyles('dark', { background: NEUTRAL_BACKGROUND_DARK }) : {}),
-    ...theme.applyStyles('dark', { borderColor: BORDER_COLOR_DARK }),
+    ...theme.applyStyles('dark', {
+        ...(!color || color === 'neutral' ? { background: NEUTRAL_BACKGROUND_DARK } : {}),
+        borderColor: BORDER_COLOR_DARK,
+    }),
 }));
 
 const MarkerRender: React.ForwardRefRenderFunction<unknown, MarkerProps> = (props: MarkerProps, ref: any) => {
-    const { icon, iconSize, color, ...otherProps } = props;
+    const { icon, iconSize = 24, color, ...otherProps } = props;
 
     return (
         <AnchorPoint {...otherProps}>
-            <Icon ref={ref} data-testid="blui-marker-root" iconSize={iconSize} color={color} {...otherProps}>
+            <Icon ref={ref} data-testid="blui-marker-root" iconSize={iconSize} color={color}>
                 {icon}
             </Icon>
         </AnchorPoint>
