@@ -60,10 +60,13 @@ const StyledLabel = styled(Typography, {
 }));
 
 const LabelRender: React.ForwardRefRenderFunction<unknown, LabelProps> = (props: LabelProps, ref: any) => {
-    const { label, labelBgColor, labelColor, ...otherProps } = props;
+    const { label, labelBgColor, labelColor, sx, ...otherProps } = props;
 
     return (
-        <AnchorPoint {...(otherProps as AnchorPointProps)}>
+        <AnchorPoint
+            {...(otherProps as AnchorPointProps)}
+            sx={[...(!otherProps.callout ? [{ width: 'max-content' }] : []), ...(Array.isArray(sx) ? sx : [sx])]}
+        >
             <StyledLabel ref={ref} labelBgColor={labelBgColor} labelColor={labelColor} data-testid="blui-label-root">
                 {label}
             </StyledLabel>

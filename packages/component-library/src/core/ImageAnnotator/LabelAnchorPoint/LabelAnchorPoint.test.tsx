@@ -146,6 +146,37 @@ describe('LabelAnchorPoint', () => {
         expect(labelElement).toHaveStyle('overflow: auto');
     });
 
+    it.each([0, 50, 95, 100])('centers long labels on the anchor at x=%s without shrinking the wrapper', (x) => {
+        renderWithTheme(
+            <ImageAnnotator src="test.png" width={300}>
+                <LabelAnchorPoint {...defaultProps} x={x} label={'Long label content '.repeat(20)} />
+            </ImageAnnotator>
+        );
+
+        expect(screen.getByTestId('blui-anchor-point-root')).toHaveStyle({
+            left: `${x}%`,
+            width: 'max-content',
+            transform: 'translate(-50%, -50%)',
+        });
+        expect(screen.getByTestId('blui-label-root')).toHaveStyle({
+            maxWidth: '180px',
+            height: 'auto',
+            overflowWrap: 'anywhere',
+        });
+    });
+
+    it('retains the fixed anchor dot size for callout labels', () => {
+        renderWithTheme(<LabelAnchorPoint {...defaultProps} callout />);
+
+        expect(screen.getByTestId('blui-anchor-point-root')).toHaveStyle({ width: '18px', height: '18px' });
+    });
+
+    it('preserves caller sx overrides', () => {
+        renderWithTheme(<LabelAnchorPoint {...defaultProps} sx={[{ width: 140 }, { marginTop: '2px' }]} />);
+
+        expect(screen.getByTestId('blui-anchor-point-root')).toHaveStyle({ width: '140px', marginTop: '2px' });
+    });
+
     it('wraps long strings without spaces within the label width', () => {
         const longLabel = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.repeat(10);
         renderWithTheme(<LabelAnchorPoint {...defaultProps} label={longLabel} />);

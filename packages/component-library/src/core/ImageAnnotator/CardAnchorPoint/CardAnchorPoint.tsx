@@ -5,6 +5,29 @@ import { AnchorPoint, AnchorPointProps } from '../components';
 
 const MIN_CARD_WIDTH = 80;
 const MAX_CARD_WIDTH = 400;
+const blurSteps = [4, 8, 16, 24, 32];
+
+const FrostedBackdrop = styled('span')({
+    position: 'absolute',
+    inset: 0,
+    borderRadius: 'inherit',
+    overflow: 'hidden',
+    pointerEvents: 'none',
+    zIndex: -1,
+});
+
+const BlurLayer = styled('span', {
+    shouldForwardProp: (prop) => prop !== 'step',
+})<{ step: number }>(({ step }) => ({
+    position: 'absolute',
+    inset: 0,
+    backdropFilter: `blur(${blurSteps[step]}px)`,
+    WebkitBackdropFilter: `blur(${blurSteps[step]}px)`,
+    ...(step > 0 && {
+        maskImage: `linear-gradient(to bottom, black ${(4 - step) * 25}%, transparent ${(5 - step) * 25}%)`,
+        WebkitMaskImage: `linear-gradient(to bottom, black ${(4 - step) * 25}%, transparent ${(5 - step) * 25}%)`,
+    }),
+}));
 
 export type CardProps = MuiCardProps &
     AnchorPointProps & {
@@ -30,12 +53,22 @@ const StyledCard = styled(MuiCard, {
     gap: theme.spacing(1),
     padding: `${theme.spacing(1.25)} ${theme.spacing(1.5)}`,
     width: cardWidth,
-    background: 'rgba(255, 255, 255, 0.72)',
-    ...theme.applyStyles('dark', { background: 'rgba(14, 18, 24, 0.64)' }),
+    position: 'relative',
+    zIndex: 0,
+    background: 'transparent',
+    '&::after': {
+        content: '""',
+        position: 'absolute',
+        inset: 0,
+        borderRadius: 'inherit',
+        pointerEvents: 'none',
+        zIndex: -1,
+        background: 'rgba(255, 255, 255, 0.72)',
+        ...theme.applyStyles('dark', { background: 'rgba(14, 18, 24, 0.64)' }),
+    },
     border: '1px solid rgba(77, 92, 106, 0.12)',
     borderRadius: theme.spacing(1),
     boxShadow: '0 1px 12px 0 rgba(0, 0, 0, 0.12)',
-    backdropFilter: 'blur(2px)',
 }));
 
 const CardRender: React.ForwardRefRenderFunction<unknown, CardProps> = (props: CardProps, ref: any) => {
@@ -46,6 +79,11 @@ const CardRender: React.ForwardRefRenderFunction<unknown, CardProps> = (props: C
     return (
         <AnchorPoint {...otherProps}>
             <StyledCard ref={ref} cardWidth={clampedWidth} data-testid="blui-card-root" {...otherProps}>
+                <FrostedBackdrop aria-hidden="true" data-testid="blui-card-backdrop">
+                    {blurSteps.map((blur, step) => (
+                        <BlurLayer key={blur} step={step} />
+                    ))}
+                </FrostedBackdrop>
                 {children}
             </StyledCard>
         </AnchorPoint>
