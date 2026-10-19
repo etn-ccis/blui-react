@@ -129,33 +129,37 @@ describe('MarkerAnchorPoint', () => {
         expect(marker).toBeInTheDocument();
     });
 
-    it.each([undefined, 'neutral', 'primary'] as const)(
-        'preserves the dark background and border styles for %s markers',
-        (color) => {
-            render(
-                <ThemeWrapper>
-                    <MarkerAnchorPoint x={50} y={50} icon={<StarIcon />} color={color} />
-                </ThemeWrapper>
+    it.each([
+        { color: undefined, background: 'rgba(14, 18, 24, 0.64)' },
+        { color: 'neutral' as const, background: 'rgba(14, 18, 24, 0.64)' },
+        { color: 'primary' as const, background: 'var(--mui-palette-primary-main)' },
+        { color: 'success' as const, background: BLUIColors.green[300] },
+        { color: 'error' as const, background: BLUIColors.red[300] },
+        { color: 'warning' as const, background: BLUIColors.yellow[800] },
+        { color: 'orange' as const, background: BLUIColors.orange[200] },
+        { color: 'purple' as const, background: BLUIColors.purple[200] },
+    ])('applies dark background and border styles for $color markers', ({ color, background }) => {
+        render(
+            <ThemeWrapper>
+                <MarkerAnchorPoint x={50} y={50} icon={<StarIcon />} color={color} />
+            </ThemeWrapper>
+        );
+
+        const marker = screen.getByTestId('blui-marker-root');
+        const markerClasses = marker.className.split(' ');
+        const darkRules = Array.from(document.styleSheets)
+            .flatMap((sheet) => Array.from(sheet.cssRules))
+            .filter(
+                (rule): rule is CSSStyleRule =>
+                    rule instanceof CSSStyleRule &&
+                    rule.selectorText.includes('.dark') &&
+                    markerClasses.some((className) => rule.selectorText.includes(`.${className}`))
             );
 
-            const marker = screen.getByTestId('blui-marker-root');
-            const markerClasses = marker.className.split(' ');
-            const darkRules = Array.from(document.styleSheets)
-                .flatMap((sheet) => Array.from(sheet.cssRules))
-                .filter(
-                    (rule): rule is CSSStyleRule =>
-                        rule instanceof CSSStyleRule &&
-                        rule.selectorText.includes('.dark') &&
-                        markerClasses.some((className) => rule.selectorText.includes(`.${className}`))
-                );
-
-            expect(darkRules).toHaveLength(1);
-            expect(darkRules[0].style.getPropertyValue('border-color')).toBe('rgba(0, 0, 0, 0.32)');
-            expect(darkRules[0].style.getPropertyValue('background')).toBe(
-                !color || color === 'neutral' ? 'rgba(14, 18, 24, 0.64)' : ''
-            );
-        }
-    );
+        expect(darkRules).toHaveLength(1);
+        expect(darkRules[0].style.getPropertyValue('border-color')).toBe('rgba(0, 0, 0, 0.32)');
+        expect(darkRules[0].style.getPropertyValue('background')).toBe(background);
+    });
 
     it('applies success color variant', () => {
         render(
@@ -197,7 +201,32 @@ describe('MarkerAnchorPoint', () => {
     });
 
     it.each([
-        { color: 'orange' as const, backgroundColor: BLUIColors.orange[500], iconColor: BLUIColors.black[900] },
+        {
+            color: 'neutral' as const,
+            backgroundColor: 'rgba(255, 255, 255, 0.72)',
+            iconColor: fallbackTheme.palette.text.primary,
+        },
+        {
+            color: 'primary' as const,
+            backgroundColor: fallbackTheme.palette.primary.main,
+            iconColor: fallbackTheme.palette.primary.contrastText,
+        },
+        {
+            color: 'success' as const,
+            backgroundColor: BLUIColors.green[900],
+            iconColor: fallbackTheme.palette.primary.contrastText,
+        },
+        {
+            color: 'error' as const,
+            backgroundColor: BLUIColors.red[500],
+            iconColor: fallbackTheme.palette.error.contrastText,
+        },
+        {
+            color: 'warning' as const,
+            backgroundColor: BLUIColors.yellow[500],
+            iconColor: fallbackTheme.palette.warning.contrastText,
+        },
+        { color: 'orange' as const, backgroundColor: BLUIColors.orange[400], iconColor: BLUIColors.black[900] },
         {
             color: 'purple' as const,
             backgroundColor: BLUIColors.purple[500],

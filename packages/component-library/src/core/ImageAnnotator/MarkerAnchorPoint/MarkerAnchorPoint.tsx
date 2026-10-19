@@ -24,26 +24,37 @@ export type MarkerProps = AnchorPointProps & {
 
 const NEUTRAL_BACKGROUND_LIGHT = 'rgba(255, 255, 255, 0.72)';
 const NEUTRAL_BACKGROUND_DARK = 'rgba(14, 18, 24, 0.64)';
+const SUCCESS_BACKGROUND_LIGHT = BLUIColors.green[900];
+const SUCCESS_BACKGROUND_DARK = BLUIColors.green[300];
+const ERROR_BACKGROUND_LIGHT = BLUIColors.red[500];
+const ERROR_BACKGROUND_DARK = BLUIColors.red[300];
+const WARNING_BACKGROUND_LIGHT = BLUIColors.yellow[500];
+const WARNING_BACKGROUND_DARK = BLUIColors.yellow[800];
+const ORANGE_BACKGROUND_LIGHT = BLUIColors.orange[400];
+const ORANGE_BACKGROUND_DARK = BLUIColors.orange[200];
+const PURPLE_BACKGROUND_LIGHT = BLUIColors.purple[500];
+const PURPLE_BACKGROUND_DARK = BLUIColors.purple[200];
+
 const BORDER_COLOR_LIGHT = 'rgba(255, 255, 255, 0.50)';
 const BORDER_COLOR_DARK = 'rgba(0, 0, 0, 0.32)';
 
-const getBackgroundColor = (color?: MarkerProps['color'], theme?: any): string => {
+const getBackgroundColor = (color: MarkerProps['color'], theme: any, isDark = false): string => {
     switch (color) {
         case 'primary':
             return theme.vars?.palette?.primary?.main ?? theme.palette.primary.main;
         case 'success':
-            return theme.vars?.palette?.success?.main ?? theme.palette.success.main;
+            return isDark ? SUCCESS_BACKGROUND_DARK : SUCCESS_BACKGROUND_LIGHT;
         case 'error':
-            return theme.vars?.palette?.error?.main ?? theme.palette.error.main;
+            return isDark ? ERROR_BACKGROUND_DARK : ERROR_BACKGROUND_LIGHT;
         case 'warning':
-            return theme.vars?.palette?.warning?.main ?? theme.palette.warning.main;
+            return isDark ? WARNING_BACKGROUND_DARK : WARNING_BACKGROUND_LIGHT;
         case 'orange':
-            return BLUIColors.orange[500];
+            return isDark ? ORANGE_BACKGROUND_DARK : ORANGE_BACKGROUND_LIGHT;
         case 'purple':
-            return BLUIColors.purple[500];
+            return isDark ? PURPLE_BACKGROUND_DARK : PURPLE_BACKGROUND_LIGHT;
         case 'neutral':
         default:
-            return NEUTRAL_BACKGROUND_LIGHT;
+            return isDark ? NEUTRAL_BACKGROUND_DARK : NEUTRAL_BACKGROUND_LIGHT;
     }
 };
 
@@ -85,7 +96,7 @@ const Icon = styled(Box, {
         fontSize: iconSize,
     },
     ...theme.applyStyles('dark', {
-        ...(!color || color === 'neutral' ? { background: NEUTRAL_BACKGROUND_DARK } : {}),
+        background: getBackgroundColor(color, theme, true),
         borderColor: BORDER_COLOR_DARK,
     }),
 }));
