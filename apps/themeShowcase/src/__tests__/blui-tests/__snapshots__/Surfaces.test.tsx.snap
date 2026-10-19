@@ -1,98 +1,74 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Component: BLUIAppBarExample BLUIAppBarExample renders examples correctly 1`] = `
-[
+<DocumentFragment>
   <div
-    className="MuiBox-root cssltr-fvxjzt"
+    class="MuiBox-root cssltr-fvxjzt"
   >
     <header
-      className="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionSticky BluiAppBar-root Mui-expanded expanded cssltr-nx5hj5-MuiPaper-root-MuiAppBar-root"
+      class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionSticky BluiAppBar-root Mui-expanded expanded cssltr-qcmtw7-MuiPaper-root-MuiAppBar-root"
       data-testid="blui-appbar-root"
-      style={
-        {
-          "--Paper-overlay": "var(--mui-overlays-4)",
-          "--Paper-shadow": "var(--mui-shadows-4)",
-          "height": 200,
-          "overflow": "hidden",
-        }
-      }
+      style="--Paper-shadow: var(--mui-shadows-4); --Paper-overlay: var(--mui-overlays-4); height: 200px; overflow: hidden;"
     >
       <div
-        className="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular cssltr-1bmc26r-MuiToolbar-root"
+        class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular cssltr-1bmc26r-MuiToolbar-root"
       >
         <div
-          className="BluiThreeLiner-root liner MuiBox-root cssltr-uqb9nc"
-          classes={
-            {
-              "title": "title",
-            }
-          }
+          class="BluiThreeLiner-root liner MuiBox-root cssltr-uqb9nc"
+          classes="[object Object]"
         >
           <div
-            className="BluiThreeLiner-title title MuiBox-root cssltr-e9ah7v"
+            class="BluiThreeLiner-title title MuiBox-root cssltr-e9ah7v"
           >
             Title
           </div>
           <div
-            className="BluiThreeLiner-subtitle MuiBox-root cssltr-1666yuc"
+            class="BluiThreeLiner-subtitle MuiBox-root cssltr-1666yuc"
           />
           <div
-            className="BluiThreeLiner-info MuiBox-root cssltr-9q8ecb"
+            class="BluiThreeLiner-info MuiBox-root cssltr-9q8ecb"
           />
         </div>
       </div>
     </header>
     <div
-      className="MuiBox-root cssltr-dow2q7"
+      class="MuiBox-root cssltr-dow2q7"
       id="appbarBodyFiller1"
     >
       <div
-        className="MuiBox-root cssltr-1ji9znz"
+        class="MuiBox-root cssltr-1ji9znz"
       >
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis vulputate arcu, quis vulputate mauris aliquet in. Praesent sollicitudin erat at augue cursus, a scelerisque odio tristique. Aenean quis dui in nisi condimentum viverra eleifend sed odio. Vestibulum a lacinia leo. Proin congue purus vulputate metus vestibulum eleifend. Suspendisse sit amet orci magna. Suspendisse eu odio ut purus ultrices ornare id eu dolor. Cras porttitor semper feugiat. Sed vel ultricies risus, vel dignissim arcu. Vestibulum quis interdum sem. Morbi bibendum tortor ligula, non pellentesque ante ullamcorper sed. Duis ornare felis eget justo faucibus, id tristique felis dignissim. Nullam sapien metus, feugiat egestas convallis eu, vehicula et turpis. Phasellus interdum, justo sit amet maximus pellentesque, eros orci dictum diam, id bibendum risus neque non risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis vulputate arcu, quis vulputate mauris aliquet in. Praesent sollicitudin erat at augue cursus, a scelerisque odio tristique. Aenean quis dui in nisi condimentum viverra eleifend sed odio. Vestibulum a lacinia leo. Proin congue purus vulputate metus vestibulum eleifend. Suspendisse sit amet orci magna. Suspendisse eu odio ut purus ultrices ornare id eu dolor. Cras porttitor semper feugiat. Sed vel ultricies risus, vel dignissim arcu. Vestibulum quis interdum sem. Morbi bibendum tortor ligula, non pellentesque ante ullamcorper sed. Duis ornare felis eget justo faucibus, id tristique felis dignissim. Nullam sapien metus, feugiat egestas convallis eu, vehicula et turpis. Phasellus interdum, justo sit amet maximus pellentesque, eros orci dictum diam, id bibendum risus neque non risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis vulputate arcu, quis vulputate mauris aliquet in. Praesent sollicitudin erat at augue cursus, a scelerisque odio tristique. Aenean quis dui in nisi condimentum viverra eleifend sed odio. Vestibulum a lacinia leo. Proin congue purus vulputate metus vestibulum eleifend. Suspendisse sit amet orci magna. Suspendisse eu odio ut purus ultrices ornare id eu dolor. Cras porttitor semper feugiat. Sed vel ultricies risus, vel dignissim arcu. Vestibulum quis interdum sem. Morbi bibendum tortor ligula, non pellentesque ante ullamcorper sed. Duis ornare felis eget justo faucibus, id tristique felis dignissim. Nullam sapien metus, feugiat egestas convallis eu, vehicula et turpis. Phasellus interdum, justo sit amet maximus pellentesque, eros orci dictum diam, id bibendum risus neque non risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis vulputate arcu, quis vulputate mauris aliquet in. Praesent sollicitudin erat at augue cursus, a scelerisque odio tristique. Aenean quis dui in nisi condimentum viverra eleifend sed odio. Vestibulum a lacinia leo. Proin congue purus vulputate metus vestibulum eleifend. Suspendisse sit amet orci magna. Suspendisse eu odio ut purus ultrices ornare id eu dolor. Cras porttitor semper feugiat. Sed vel ultricies risus, vel dignissim arcu. Vestibulum quis interdum sem. Morbi bibendum tortor ligula, non pellentesque ante ullamcorper sed. Duis ornare felis eget justo faucibus, id tristique felis dignissim. Nullam sapien metus, feugiat egestas convallis eu, vehicula et turpis. Phasellus interdum, justo sit amet maximus pellentesque, eros orci dictum diam, id bibendum risus neque non risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis vulputate arcu, quis vulputate mauris aliquet in. Praesent sollicitudin erat at augue cursus, a scelerisque odio tristique. Aenean quis dui in nisi condimentum viverra eleifend sed odio. Vestibulum a lacinia leo. Proin congue purus vulputate metus vestibulum eleifend. Suspendisse sit amet orci magna. Suspendisse eu odio ut purus ultrices ornare id eu dolor. Cras porttitor semper feugiat. Sed vel ultricies risus, vel dignissim arcu. Vestibulum quis interdum sem. Morbi bibendum tortor ligula, non pellentesque ante ullamcorper sed. Duis ornare felis eget justo faucibus, id tristique felis dignissim. Nullam sapien metus, feugiat egestas convallis eu, vehicula et turpis. Phasellus interdum, justo sit amet maximus pellentesque, eros orci dictum diam, id bibendum risus neque non risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis vulputate arcu, quis vulputate mauris aliquet in. Praesent sollicitudin erat at augue cursus, a scelerisque odio tristique. Aenean quis dui in nisi condimentum viverra eleifend sed odio. Vestibulum a lacinia leo. Proin congue purus vulputate metus vestibulum eleifend. Suspendisse sit amet orci magna. Suspendisse eu odio ut purus ultrices ornare id eu dolor. Cras porttitor semper feugiat. Sed vel ultricies risus, vel dignissim arcu. Vestibulum quis interdum sem. Morbi bibendum tortor ligula, non pellentesque ante ullamcorper sed. Duis ornare felis eget justo faucibus, id tristique felis dignissim. Nullam sapien metus, feugiat egestas convallis eu, vehicula et turpis. Phasellus interdum, justo sit amet maximus pellentesque, eros orci dictum diam, id bibendum risus neque non risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis vulputate arcu, quis vulputate mauris aliquet in. Praesent sollicitudin erat at augue cursus, a scelerisque odio tristique. Aenean quis dui in nisi condimentum viverra eleifend sed odio. Vestibulum a lacinia leo. Proin congue purus vulputate metus vestibulum eleifend. Suspendisse sit amet orci magna. Suspendisse eu odio ut purus ultrices ornare id eu dolor. Cras porttitor semper feugiat. Sed vel ultricies risus, vel dignissim arcu. Vestibulum quis interdum sem. Morbi bibendum tortor ligula, non pellentesque ante ullamcorper sed. Duis ornare felis eget justo faucibus, id tristique felis dignissim. Nullam sapien metus, feugiat egestas convallis eu, vehicula et turpis. Phasellus interdum, justo sit amet maximus pellentesque, eros orci dictum diam, id bibendum risus neque non risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis vulputate arcu, quis vulputate mauris aliquet in. Praesent sollicitudin erat at augue cursus, a scelerisque odio tristique. Aenean quis dui in nisi condimentum viverra eleifend sed odio. Vestibulum a lacinia leo. Proin congue purus vulputate metus vestibulum eleifend. Suspendisse sit amet orci magna. Suspendisse eu odio ut purus ultrices ornare id eu dolor. Cras porttitor semper feugiat. Sed vel ultricies risus, vel dignissim arcu. Vestibulum quis interdum sem. Morbi bibendum tortor ligula, non pellentesque ante ullamcorper sed. Duis ornare felis eget justo faucibus, id tristique felis dignissim. Nullam sapien metus, feugiat egestas convallis eu, vehicula et turpis. Phasellus interdum, justo sit amet maximus pellentesque, eros orci dictum diam, id bibendum risus neque non risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis vulputate arcu, quis vulputate mauris aliquet in. Praesent sollicitudin erat at augue cursus, a scelerisque odio tristique. Aenean quis dui in nisi condimentum viverra eleifend sed odio. Vestibulum a lacinia leo. Proin congue purus vulputate metus vestibulum eleifend. Suspendisse sit amet orci magna. Suspendisse eu odio ut purus ultrices ornare id eu dolor. Cras porttitor semper feugiat. Sed vel ultricies risus, vel dignissim arcu. Vestibulum quis interdum sem. Morbi bibendum tortor ligula, non pellentesque ante ullamcorper sed. Duis ornare felis eget justo faucibus, id tristique felis dignissim. Nullam sapien metus, feugiat egestas convallis eu, vehicula et turpis. Phasellus interdum, justo sit amet maximus pellentesque, eros orci dictum diam, id bibendum risus neque non risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis vulputate arcu, quis vulputate mauris aliquet in. Praesent sollicitudin erat at augue cursus, a scelerisque odio tristique. Aenean quis dui in nisi condimentum viverra eleifend sed odio. Vestibulum a lacinia leo. Proin congue purus vulputate metus vestibulum eleifend. Suspendisse sit amet orci magna. Suspendisse eu odio ut purus ultrices ornare id eu dolor. Cras porttitor semper feugiat. Sed vel ultricies risus, vel dignissim arcu. Vestibulum quis interdum sem. Morbi bibendum tortor ligula, non pellentesque ante ullamcorper sed. Duis ornare felis eget justo faucibus, id tristique felis dignissim. Nullam sapien metus, feugiat egestas convallis eu, vehicula et turpis. Phasellus interdum, justo sit amet maximus pellentesque, eros orci dictum diam, id bibendum risus neque non risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis vulputate arcu, quis vulputate mauris aliquet in. Praesent sollicitudin erat at augue cursus, a scelerisque odio tristique. Aenean quis dui in nisi condimentum viverra eleifend sed odio. Vestibulum a lacinia leo. Proin congue purus vulputate metus vestibulum eleifend. Suspendisse sit amet orci magna. Suspendisse eu odio ut purus ultrices ornare id eu dolor. Cras porttitor semper feugiat. Sed vel ultricies risus, vel dignissim arcu. Vestibulum quis interdum sem. Morbi bibendum tortor ligula, non pellentesque ante ullamcorper sed. Duis ornare felis eget justo faucibus, id tristique felis dignissim. Nullam sapien metus, feugiat egestas convallis eu, vehicula et turpis. Phasellus interdum, justo sit amet maximus pellentesque, eros orci dictum diam, id bibendum risus neque non risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis vulputate arcu, quis vulputate mauris aliquet in. Praesent sollicitudin erat at augue cursus, a scelerisque odio tristique. Aenean quis dui in nisi condimentum viverra eleifend sed odio. Vestibulum a lacinia leo. Proin congue purus vulputate metus vestibulum eleifend. Suspendisse sit amet orci magna. Suspendisse eu odio ut purus ultrices ornare id eu dolor. Cras porttitor semper feugiat. Sed vel ultricies risus, vel dignissim arcu. Vestibulum quis interdum sem. Morbi bibendum tortor ligula, non pellentesque ante ullamcorper sed. Duis ornare felis eget justo faucibus, id tristique felis dignissim. Nullam sapien metus, feugiat egestas convallis eu, vehicula et turpis. Phasellus interdum, justo sit amet maximus pellentesque, eros orci dictum diam, id bibendum risus neque non risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis vulputate arcu, quis vulputate mauris aliquet in. Praesent sollicitudin erat at augue cursus, a scelerisque odio tristique. Aenean quis dui in nisi condimentum viverra eleifend sed odio. Vestibulum a lacinia leo. Proin congue purus vulputate metus vestibulum eleifend. Suspendisse sit amet orci magna. Suspendisse eu odio ut purus ultrices ornare id eu dolor. Cras porttitor semper feugiat. Sed vel ultricies risus, vel dignissim arcu. Vestibulum quis interdum sem. Morbi bibendum tortor ligula, non pellentesque ante ullamcorper sed. Duis ornare felis eget justo faucibus, id tristique felis dignissim. Nullam sapien metus, feugiat egestas convallis eu, vehicula et turpis. Phasellus interdum, justo sit amet maximus pellentesque, eros orci dictum diam, id bibendum risus neque non risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis vulputate arcu, quis vulputate mauris aliquet in. Praesent sollicitudin erat at augue cursus, a scelerisque odio tristique. Aenean quis dui in nisi condimentum viverra eleifend sed odio. Vestibulum a lacinia leo. Proin congue purus vulputate metus vestibulum eleifend. Suspendisse sit amet orci magna. Suspendisse eu odio ut purus ultrices ornare id eu dolor. Cras porttitor semper feugiat. Sed vel ultricies risus, vel dignissim arcu. Vestibulum quis interdum sem. Morbi bibendum tortor ligula, non pellentesque ante ullamcorper sed. Duis ornare felis eget justo faucibus, id tristique felis dignissim. Nullam sapien metus, feugiat egestas convallis eu, vehicula et turpis. Phasellus interdum, justo sit amet maximus pellentesque, eros orci dictum diam, id bibendum risus neque non risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis vulputate arcu, quis vulputate mauris aliquet in. Praesent sollicitudin erat at augue cursus, a scelerisque odio tristique. Aenean quis dui in nisi condimentum viverra eleifend sed odio. Vestibulum a lacinia leo. Proin congue purus vulputate metus vestibulum eleifend. Suspendisse sit amet orci magna. Suspendisse eu odio ut purus ultrices ornare id eu dolor. Cras porttitor semper feugiat. Sed vel ultricies risus, vel dignissim arcu. Vestibulum quis interdum sem. Morbi bibendum tortor ligula, non pellentesque ante ullamcorper sed. Duis ornare felis eget justo faucibus, id tristique felis dignissim. Nullam sapien metus, feugiat egestas convallis eu, vehicula et turpis. Phasellus interdum, justo sit amet maximus pellentesque, eros orci dictum diam, id bibendum risus neque non risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis vulputate arcu, quis vulputate mauris aliquet in. Praesent sollicitudin erat at augue cursus, a scelerisque odio tristique. Aenean quis dui in nisi condimentum viverra eleifend sed odio. Vestibulum a lacinia leo. Proin congue purus vulputate metus vestibulum eleifend. Suspendisse sit amet orci magna. Suspendisse eu odio ut purus ultrices ornare id eu dolor. Cras porttitor semper feugiat. Sed vel ultricies risus, vel dignissim arcu. Vestibulum quis interdum sem. Morbi bibendum tortor ligula, non pellentesque ante ullamcorper sed. Duis ornare felis eget justo faucibus, id tristique felis dignissim. Nullam sapien metus, feugiat egestas convallis eu, vehicula et turpis. Phasellus interdum, justo sit amet maximus pellentesque, eros orci dictum diam, id bibendum risus neque non risus.
       </div>
     </div>
-  </div>,
+  </div>
   <div
-    className="MuiBox-root cssltr-fvxjzt"
+    class="MuiBox-root cssltr-fvxjzt"
   >
     <header
-      className="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionSticky BluiAppBar-root Mui-expanded expanded cssltr-nx5hj5-MuiPaper-root-MuiAppBar-root"
+      class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionSticky BluiAppBar-root Mui-expanded expanded cssltr-qcmtw7-MuiPaper-root-MuiAppBar-root"
       data-testid="blui-appbar-root"
-      style={
-        {
-          "--Paper-overlay": "var(--mui-overlays-4)",
-          "--Paper-shadow": "var(--mui-shadows-4)",
-          "height": 200,
-          "overflow": "hidden",
-        }
-      }
+      style="--Paper-shadow: var(--mui-shadows-4); --Paper-overlay: var(--mui-overlays-4); height: 200px; overflow: hidden;"
     >
       <div
-        className="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular cssltr-1bmc26r-MuiToolbar-root"
+        class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular cssltr-1bmc26r-MuiToolbar-root"
       >
         <div
-          className="BluiThreeLiner-root liner MuiBox-root cssltr-uqb9nc"
-          classes={
-            {
-              "info": "info",
-              "subtitle": "subtitle",
-              "title": "title",
-            }
-          }
+          class="BluiThreeLiner-root liner MuiBox-root cssltr-uqb9nc"
+          classes="[object Object]"
         >
           <div
-            className="BluiThreeLiner-title title MuiBox-root cssltr-e9ah7v"
+            class="BluiThreeLiner-title title MuiBox-root cssltr-e9ah7v"
           >
             W/ Dynamic Content
           </div>
           <div
-            className="BluiThreeLiner-subtitle subtitle MuiBox-root cssltr-1666yuc"
+            class="BluiThreeLiner-subtitle subtitle MuiBox-root cssltr-1666yuc"
           >
             Subtitle
           </div>
           <div
-            className="BluiThreeLiner-info info MuiBox-root cssltr-9q8ecb"
+            class="BluiThreeLiner-info info MuiBox-root cssltr-9q8ecb"
           >
             Info
           </div>
@@ -100,47 +76,41 @@ exports[`Component: BLUIAppBarExample BLUIAppBarExample renders examples correct
       </div>
     </header>
     <div
-      className="MuiBox-root cssltr-dow2q7"
+      class="MuiBox-root cssltr-dow2q7"
       id="appbarBodyFiller2"
     >
       <div
-        className="MuiBox-root cssltr-1ji9znz"
+        class="MuiBox-root cssltr-1ji9znz"
       >
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis vulputate arcu, quis vulputate mauris aliquet in. Praesent sollicitudin erat at augue cursus, a scelerisque odio tristique. Aenean quis dui in nisi condimentum viverra eleifend sed odio. Vestibulum a lacinia leo. Proin congue purus vulputate metus vestibulum eleifend. Suspendisse sit amet orci magna. Suspendisse eu odio ut purus ultrices ornare id eu dolor. Cras porttitor semper feugiat. Sed vel ultricies risus, vel dignissim arcu. Vestibulum quis interdum sem. Morbi bibendum tortor ligula, non pellentesque ante ullamcorper sed. Duis ornare felis eget justo faucibus, id tristique felis dignissim. Nullam sapien metus, feugiat egestas convallis eu, vehicula et turpis. Phasellus interdum, justo sit amet maximus pellentesque, eros orci dictum diam, id bibendum risus neque non risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis vulputate arcu, quis vulputate mauris aliquet in. Praesent sollicitudin erat at augue cursus, a scelerisque odio tristique. Aenean quis dui in nisi condimentum viverra eleifend sed odio. Vestibulum a lacinia leo. Proin congue purus vulputate metus vestibulum eleifend. Suspendisse sit amet orci magna. Suspendisse eu odio ut purus ultrices ornare id eu dolor. Cras porttitor semper feugiat. Sed vel ultricies risus, vel dignissim arcu. Vestibulum quis interdum sem. Morbi bibendum tortor ligula, non pellentesque ante ullamcorper sed. Duis ornare felis eget justo faucibus, id tristique felis dignissim. Nullam sapien metus, feugiat egestas convallis eu, vehicula et turpis. Phasellus interdum, justo sit amet maximus pellentesque, eros orci dictum diam, id bibendum risus neque non risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis vulputate arcu, quis vulputate mauris aliquet in. Praesent sollicitudin erat at augue cursus, a scelerisque odio tristique. Aenean quis dui in nisi condimentum viverra eleifend sed odio. Vestibulum a lacinia leo. Proin congue purus vulputate metus vestibulum eleifend. Suspendisse sit amet orci magna. Suspendisse eu odio ut purus ultrices ornare id eu dolor. Cras porttitor semper feugiat. Sed vel ultricies risus, vel dignissim arcu. Vestibulum quis interdum sem. Morbi bibendum tortor ligula, non pellentesque ante ullamcorper sed. Duis ornare felis eget justo faucibus, id tristique felis dignissim. Nullam sapien metus, feugiat egestas convallis eu, vehicula et turpis. Phasellus interdum, justo sit amet maximus pellentesque, eros orci dictum diam, id bibendum risus neque non risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis vulputate arcu, quis vulputate mauris aliquet in. Praesent sollicitudin erat at augue cursus, a scelerisque odio tristique. Aenean quis dui in nisi condimentum viverra eleifend sed odio. Vestibulum a lacinia leo. Proin congue purus vulputate metus vestibulum eleifend. Suspendisse sit amet orci magna. Suspendisse eu odio ut purus ultrices ornare id eu dolor. Cras porttitor semper feugiat. Sed vel ultricies risus, vel dignissim arcu. Vestibulum quis interdum sem. Morbi bibendum tortor ligula, non pellentesque ante ullamcorper sed. Duis ornare felis eget justo faucibus, id tristique felis dignissim. Nullam sapien metus, feugiat egestas convallis eu, vehicula et turpis. Phasellus interdum, justo sit amet maximus pellentesque, eros orci dictum diam, id bibendum risus neque non risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis vulputate arcu, quis vulputate mauris aliquet in. Praesent sollicitudin erat at augue cursus, a scelerisque odio tristique. Aenean quis dui in nisi condimentum viverra eleifend sed odio. Vestibulum a lacinia leo. Proin congue purus vulputate metus vestibulum eleifend. Suspendisse sit amet orci magna. Suspendisse eu odio ut purus ultrices ornare id eu dolor. Cras porttitor semper feugiat. Sed vel ultricies risus, vel dignissim arcu. Vestibulum quis interdum sem. Morbi bibendum tortor ligula, non pellentesque ante ullamcorper sed. Duis ornare felis eget justo faucibus, id tristique felis dignissim. Nullam sapien metus, feugiat egestas convallis eu, vehicula et turpis. Phasellus interdum, justo sit amet maximus pellentesque, eros orci dictum diam, id bibendum risus neque non risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis vulputate arcu, quis vulputate mauris aliquet in. Praesent sollicitudin erat at augue cursus, a scelerisque odio tristique. Aenean quis dui in nisi condimentum viverra eleifend sed odio. Vestibulum a lacinia leo. Proin congue purus vulputate metus vestibulum eleifend. Suspendisse sit amet orci magna. Suspendisse eu odio ut purus ultrices ornare id eu dolor. Cras porttitor semper feugiat. Sed vel ultricies risus, vel dignissim arcu. Vestibulum quis interdum sem. Morbi bibendum tortor ligula, non pellentesque ante ullamcorper sed. Duis ornare felis eget justo faucibus, id tristique felis dignissim. Nullam sapien metus, feugiat egestas convallis eu, vehicula et turpis. Phasellus interdum, justo sit amet maximus pellentesque, eros orci dictum diam, id bibendum risus neque non risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis vulputate arcu, quis vulputate mauris aliquet in. Praesent sollicitudin erat at augue cursus, a scelerisque odio tristique. Aenean quis dui in nisi condimentum viverra eleifend sed odio. Vestibulum a lacinia leo. Proin congue purus vulputate metus vestibulum eleifend. Suspendisse sit amet orci magna. Suspendisse eu odio ut purus ultrices ornare id eu dolor. Cras porttitor semper feugiat. Sed vel ultricies risus, vel dignissim arcu. Vestibulum quis interdum sem. Morbi bibendum tortor ligula, non pellentesque ante ullamcorper sed. Duis ornare felis eget justo faucibus, id tristique felis dignissim. Nullam sapien metus, feugiat egestas convallis eu, vehicula et turpis. Phasellus interdum, justo sit amet maximus pellentesque, eros orci dictum diam, id bibendum risus neque non risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis vulputate arcu, quis vulputate mauris aliquet in. Praesent sollicitudin erat at augue cursus, a scelerisque odio tristique. Aenean quis dui in nisi condimentum viverra eleifend sed odio. Vestibulum a lacinia leo. Proin congue purus vulputate metus vestibulum eleifend. Suspendisse sit amet orci magna. Suspendisse eu odio ut purus ultrices ornare id eu dolor. Cras porttitor semper feugiat. Sed vel ultricies risus, vel dignissim arcu. Vestibulum quis interdum sem. Morbi bibendum tortor ligula, non pellentesque ante ullamcorper sed. Duis ornare felis eget justo faucibus, id tristique felis dignissim. Nullam sapien metus, feugiat egestas convallis eu, vehicula et turpis. Phasellus interdum, justo sit amet maximus pellentesque, eros orci dictum diam, id bibendum risus neque non risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis vulputate arcu, quis vulputate mauris aliquet in. Praesent sollicitudin erat at augue cursus, a scelerisque odio tristique. Aenean quis dui in nisi condimentum viverra eleifend sed odio. Vestibulum a lacinia leo. Proin congue purus vulputate metus vestibulum eleifend. Suspendisse sit amet orci magna. Suspendisse eu odio ut purus ultrices ornare id eu dolor. Cras porttitor semper feugiat. Sed vel ultricies risus, vel dignissim arcu. Vestibulum quis interdum sem. Morbi bibendum tortor ligula, non pellentesque ante ullamcorper sed. Duis ornare felis eget justo faucibus, id tristique felis dignissim. Nullam sapien metus, feugiat egestas convallis eu, vehicula et turpis. Phasellus interdum, justo sit amet maximus pellentesque, eros orci dictum diam, id bibendum risus neque non risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis vulputate arcu, quis vulputate mauris aliquet in. Praesent sollicitudin erat at augue cursus, a scelerisque odio tristique. Aenean quis dui in nisi condimentum viverra eleifend sed odio. Vestibulum a lacinia leo. Proin congue purus vulputate metus vestibulum eleifend. Suspendisse sit amet orci magna. Suspendisse eu odio ut purus ultrices ornare id eu dolor. Cras porttitor semper feugiat. Sed vel ultricies risus, vel dignissim arcu. Vestibulum quis interdum sem. Morbi bibendum tortor ligula, non pellentesque ante ullamcorper sed. Duis ornare felis eget justo faucibus, id tristique felis dignissim. Nullam sapien metus, feugiat egestas convallis eu, vehicula et turpis. Phasellus interdum, justo sit amet maximus pellentesque, eros orci dictum diam, id bibendum risus neque non risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis vulputate arcu, quis vulputate mauris aliquet in. Praesent sollicitudin erat at augue cursus, a scelerisque odio tristique. Aenean quis dui in nisi condimentum viverra eleifend sed odio. Vestibulum a lacinia leo. Proin congue purus vulputate metus vestibulum eleifend. Suspendisse sit amet orci magna. Suspendisse eu odio ut purus ultrices ornare id eu dolor. Cras porttitor semper feugiat. Sed vel ultricies risus, vel dignissim arcu. Vestibulum quis interdum sem. Morbi bibendum tortor ligula, non pellentesque ante ullamcorper sed. Duis ornare felis eget justo faucibus, id tristique felis dignissim. Nullam sapien metus, feugiat egestas convallis eu, vehicula et turpis. Phasellus interdum, justo sit amet maximus pellentesque, eros orci dictum diam, id bibendum risus neque non risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis vulputate arcu, quis vulputate mauris aliquet in. Praesent sollicitudin erat at augue cursus, a scelerisque odio tristique. Aenean quis dui in nisi condimentum viverra eleifend sed odio. Vestibulum a lacinia leo. Proin congue purus vulputate metus vestibulum eleifend. Suspendisse sit amet orci magna. Suspendisse eu odio ut purus ultrices ornare id eu dolor. Cras porttitor semper feugiat. Sed vel ultricies risus, vel dignissim arcu. Vestibulum quis interdum sem. Morbi bibendum tortor ligula, non pellentesque ante ullamcorper sed. Duis ornare felis eget justo faucibus, id tristique felis dignissim. Nullam sapien metus, feugiat egestas convallis eu, vehicula et turpis. Phasellus interdum, justo sit amet maximus pellentesque, eros orci dictum diam, id bibendum risus neque non risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis vulputate arcu, quis vulputate mauris aliquet in. Praesent sollicitudin erat at augue cursus, a scelerisque odio tristique. Aenean quis dui in nisi condimentum viverra eleifend sed odio. Vestibulum a lacinia leo. Proin congue purus vulputate metus vestibulum eleifend. Suspendisse sit amet orci magna. Suspendisse eu odio ut purus ultrices ornare id eu dolor. Cras porttitor semper feugiat. Sed vel ultricies risus, vel dignissim arcu. Vestibulum quis interdum sem. Morbi bibendum tortor ligula, non pellentesque ante ullamcorper sed. Duis ornare felis eget justo faucibus, id tristique felis dignissim. Nullam sapien metus, feugiat egestas convallis eu, vehicula et turpis. Phasellus interdum, justo sit amet maximus pellentesque, eros orci dictum diam, id bibendum risus neque non risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis vulputate arcu, quis vulputate mauris aliquet in. Praesent sollicitudin erat at augue cursus, a scelerisque odio tristique. Aenean quis dui in nisi condimentum viverra eleifend sed odio. Vestibulum a lacinia leo. Proin congue purus vulputate metus vestibulum eleifend. Suspendisse sit amet orci magna. Suspendisse eu odio ut purus ultrices ornare id eu dolor. Cras porttitor semper feugiat. Sed vel ultricies risus, vel dignissim arcu. Vestibulum quis interdum sem. Morbi bibendum tortor ligula, non pellentesque ante ullamcorper sed. Duis ornare felis eget justo faucibus, id tristique felis dignissim. Nullam sapien metus, feugiat egestas convallis eu, vehicula et turpis. Phasellus interdum, justo sit amet maximus pellentesque, eros orci dictum diam, id bibendum risus neque non risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis vulputate arcu, quis vulputate mauris aliquet in. Praesent sollicitudin erat at augue cursus, a scelerisque odio tristique. Aenean quis dui in nisi condimentum viverra eleifend sed odio. Vestibulum a lacinia leo. Proin congue purus vulputate metus vestibulum eleifend. Suspendisse sit amet orci magna. Suspendisse eu odio ut purus ultrices ornare id eu dolor. Cras porttitor semper feugiat. Sed vel ultricies risus, vel dignissim arcu. Vestibulum quis interdum sem. Morbi bibendum tortor ligula, non pellentesque ante ullamcorper sed. Duis ornare felis eget justo faucibus, id tristique felis dignissim. Nullam sapien metus, feugiat egestas convallis eu, vehicula et turpis. Phasellus interdum, justo sit amet maximus pellentesque, eros orci dictum diam, id bibendum risus neque non risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis vulputate arcu, quis vulputate mauris aliquet in. Praesent sollicitudin erat at augue cursus, a scelerisque odio tristique. Aenean quis dui in nisi condimentum viverra eleifend sed odio. Vestibulum a lacinia leo. Proin congue purus vulputate metus vestibulum eleifend. Suspendisse sit amet orci magna. Suspendisse eu odio ut purus ultrices ornare id eu dolor. Cras porttitor semper feugiat. Sed vel ultricies risus, vel dignissim arcu. Vestibulum quis interdum sem. Morbi bibendum tortor ligula, non pellentesque ante ullamcorper sed. Duis ornare felis eget justo faucibus, id tristique felis dignissim. Nullam sapien metus, feugiat egestas convallis eu, vehicula et turpis. Phasellus interdum, justo sit amet maximus pellentesque, eros orci dictum diam, id bibendum risus neque non risus.
       </div>
     </div>
-  </div>,
-]
+  </div>
+</DocumentFragment>
 `;
 
 exports[`Component: ScoreCardExample ScoreCardExample renders examples correctly 1`] = `
-[
+<DocumentFragment>
   <div
-    className="MuiBox-root cssltr-1enmsz8"
+    class="MuiBox-root cssltr-1enmsz8"
   >
     <div
-      className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root BluiScoreCard-root cssltr-1krd3ju-MuiPaper-root-MuiCard-root"
+      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root BluiScoreCard-root cssltr-1du0gj5-MuiPaper-root-MuiCard-root"
       data-testid="blui-score-card-root"
-      style={
-        {
-          "--Paper-overlay": "var(--mui-overlays-1)",
-          "--Paper-shadow": "var(--mui-shadows-1)",
-        }
-      }
+      style="--Paper-shadow: var(--mui-shadows-1); --Paper-overlay: var(--mui-overlays-1);"
     >
       <div
-        className="BluiScoreCard-header MuiBox-root cssltr-1vm5ien"
+        class="BluiScoreCard-header MuiBox-root cssltr-1vm5ien"
         data-testid="blui-score-card-header"
       >
         <div
-          className="BluiScoreCard-headerContent MuiBox-root cssltr-1bc9l66"
+          class="BluiScoreCard-headerContent MuiBox-root cssltr-1bc9l66"
         >
           <div
-            className="MuiBox-root cssltr-8rip90"
+            class="MuiBox-root cssltr-8rip90"
           >
             <h6
-              className="MuiTypography-root MuiTypography-h6 MuiTypography-noWrap BluiScoreCard-headerTitle cssltr-d5mx6c-MuiTypography-root"
-              style={{}}
+              class="MuiTypography-root MuiTypography-h6 MuiTypography-noWrap BluiScoreCard-headerTitle cssltr-d5mx6c-MuiTypography-root"
             >
               Basic Usage
             </h6>
@@ -148,25 +118,24 @@ exports[`Component: ScoreCardExample ScoreCardExample renders examples correctly
         </div>
       </div>
       <div
-        className="BluiScoreCard-content MuiBox-root cssltr-4zlbsc"
+        class="BluiScoreCard-content MuiBox-root cssltr-4zlbsc"
         data-testid="blui-body-content"
       >
         <div
-          className="BluiScoreCard-bodyWrapper MuiBox-root cssltr-1weqv4q"
+          class="BluiScoreCard-bodyWrapper MuiBox-root cssltr-1weqv4q"
           data-testid="blui-body-wrapper"
         >
           <ul
-            className="MuiList-root MuiList-padding cssltr-b7dj7n-MuiList-root"
+            class="MuiList-root MuiList-padding cssltr-b7dj7n-MuiList-root"
           >
             <li
-              className="MuiListItem-root MuiListItem-gutters MuiListItem-padding cssltr-1xzpna2-MuiListItem-root"
+              class="MuiListItem-root MuiListItem-gutters MuiListItem-padding cssltr-1xzpna2-MuiListItem-root"
             >
               <div
-                className="MuiListItemText-root cssltr-cfq8qh-MuiListItemText-root"
+                class="MuiListItemText-root cssltr-cfq8qh-MuiListItemText-root"
               >
                 <span
-                  className="MuiTypography-root MuiTypography-body1 MuiListItemText-primary cssltr-10wdkoh-MuiTypography-root"
-                  style={{}}
+                  class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary cssltr-10wdkoh-MuiTypography-root"
                 >
                   Body Content
                 </span>
@@ -176,48 +145,40 @@ exports[`Component: ScoreCardExample ScoreCardExample renders examples correctly
         </div>
       </div>
     </div>
-  </div>,
+  </div>
   <div
-    className="MuiBox-root cssltr-1enmsz8"
+    class="MuiBox-root cssltr-1enmsz8"
   >
     <div
-      className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root BluiScoreCard-root cssltr-1krd3ju-MuiPaper-root-MuiCard-root"
+      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root BluiScoreCard-root cssltr-1du0gj5-MuiPaper-root-MuiCard-root"
       data-testid="blui-score-card-root"
-      style={
-        {
-          "--Paper-overlay": "var(--mui-overlays-1)",
-          "--Paper-shadow": "var(--mui-shadows-1)",
-        }
-      }
+      style="--Paper-shadow: var(--mui-shadows-1); --Paper-overlay: var(--mui-overlays-1);"
     >
       <div
-        className="BluiScoreCard-header MuiBox-root cssltr-mam46"
+        class="BluiScoreCard-header MuiBox-root cssltr-1nrrfs1"
         data-testid="blui-score-card-header"
       >
         <div
-          className="BluiScoreCard-headerBackground MuiBox-root cssltr-q17cf5"
+          class="BluiScoreCard-headerBackground MuiBox-root cssltr-q17cf5"
         />
         <div
-          className="BluiScoreCard-headerContent MuiBox-root cssltr-1bc9l66"
+          class="BluiScoreCard-headerContent MuiBox-root cssltr-1bc9l66"
         >
           <div
-            className="MuiBox-root cssltr-8rip90"
+            class="MuiBox-root cssltr-8rip90"
           >
             <h6
-              className="MuiTypography-root MuiTypography-h6 MuiTypography-noWrap BluiScoreCard-headerTitle cssltr-d5mx6c-MuiTypography-root"
-              style={{}}
+              class="MuiTypography-root MuiTypography-h6 MuiTypography-noWrap BluiScoreCard-headerTitle cssltr-d5mx6c-MuiTypography-root"
             >
               Custom Header
             </h6>
             <p
-              className="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap BluiScoreCard-headerSubtitle cssltr-1izar4j-MuiTypography-root"
-              style={{}}
+              class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap BluiScoreCard-headerSubtitle cssltr-1izar4j-MuiTypography-root"
             >
               Subtitle
             </p>
             <p
-              className="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap BluiScoreCard-headerInfo cssltr-1zuibq-MuiTypography-root"
-              style={{}}
+              class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap BluiScoreCard-headerInfo cssltr-1zuibq-MuiTypography-root"
             >
               4 Devices
             </p>
@@ -225,25 +186,24 @@ exports[`Component: ScoreCardExample ScoreCardExample renders examples correctly
         </div>
       </div>
       <div
-        className="BluiScoreCard-content MuiBox-root cssltr-4zlbsc"
+        class="BluiScoreCard-content MuiBox-root cssltr-4zlbsc"
         data-testid="blui-body-content"
       >
         <div
-          className="BluiScoreCard-bodyWrapper MuiBox-root cssltr-1weqv4q"
+          class="BluiScoreCard-bodyWrapper MuiBox-root cssltr-1weqv4q"
           data-testid="blui-body-wrapper"
         >
           <ul
-            className="MuiList-root MuiList-padding cssltr-b7dj7n-MuiList-root"
+            class="MuiList-root MuiList-padding cssltr-b7dj7n-MuiList-root"
           >
             <li
-              className="MuiListItem-root MuiListItem-gutters MuiListItem-padding cssltr-1xzpna2-MuiListItem-root"
+              class="MuiListItem-root MuiListItem-gutters MuiListItem-padding cssltr-1xzpna2-MuiListItem-root"
             >
               <div
-                className="MuiListItemText-root cssltr-cfq8qh-MuiListItemText-root"
+                class="MuiListItemText-root cssltr-cfq8qh-MuiListItemText-root"
               >
                 <span
-                  className="MuiTypography-root MuiTypography-body1 MuiListItemText-primary cssltr-10wdkoh-MuiTypography-root"
-                  style={{}}
+                  class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary cssltr-10wdkoh-MuiTypography-root"
                 >
                   Body Content
                 </span>
@@ -253,62 +213,53 @@ exports[`Component: ScoreCardExample ScoreCardExample renders examples correctly
         </div>
       </div>
     </div>
-  </div>,
+  </div>
   <div
-    className="MuiBox-root cssltr-1enmsz8"
+    class="MuiBox-root cssltr-1enmsz8"
   >
     <div
-      className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root BluiScoreCard-root cssltr-1krd3ju-MuiPaper-root-MuiCard-root"
+      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root BluiScoreCard-root cssltr-1du0gj5-MuiPaper-root-MuiCard-root"
       data-testid="blui-score-card-root"
-      style={
-        {
-          "--Paper-overlay": "var(--mui-overlays-1)",
-          "--Paper-shadow": "var(--mui-shadows-1)",
-        }
-      }
+      style="--Paper-shadow: var(--mui-shadows-1); --Paper-overlay: var(--mui-overlays-1);"
     >
       <div
-        className="BluiScoreCard-header MuiBox-root cssltr-mam46"
+        class="BluiScoreCard-header MuiBox-root cssltr-1nrrfs1"
         data-testid="blui-score-card-header"
       >
         <div
-          className="BluiScoreCard-headerBackground MuiBox-root cssltr-q17cf5"
+          class="BluiScoreCard-headerBackground MuiBox-root cssltr-q17cf5"
         />
         <div
-          className="BluiScoreCard-headerContent MuiBox-root cssltr-1bc9l66"
+          class="BluiScoreCard-headerContent MuiBox-root cssltr-1bc9l66"
         >
           <div
-            className="MuiBox-root cssltr-8rip90"
+            class="MuiBox-root cssltr-8rip90"
           >
             <h6
-              className="MuiTypography-root MuiTypography-h6 MuiTypography-noWrap BluiScoreCard-headerTitle cssltr-d5mx6c-MuiTypography-root"
-              style={{}}
+              class="MuiTypography-root MuiTypography-h6 MuiTypography-noWrap BluiScoreCard-headerTitle cssltr-d5mx6c-MuiTypography-root"
             >
               w/ Actions
             </h6>
             <p
-              className="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap BluiScoreCard-headerSubtitle cssltr-1izar4j-MuiTypography-root"
-              style={{}}
+              class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap BluiScoreCard-headerSubtitle cssltr-1izar4j-MuiTypography-root"
             >
               High Humidity Alarm
             </p>
             <p
-              className="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap BluiScoreCard-headerInfo cssltr-1zuibq-MuiTypography-root"
-              style={{}}
+              class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap BluiScoreCard-headerInfo cssltr-1zuibq-MuiTypography-root"
             >
               4 Devices
             </p>
           </div>
           <div
-            className="BluiScoreCard-actionItems MuiBox-root cssltr-1tkd7ou"
+            class="BluiScoreCard-actionItems MuiBox-root cssltr-1tkd7ou"
             data-testid="blui-action-item"
           >
             <svg
-              aria-hidden={true}
-              className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium cssltr-4uxqju-MuiSvgIcon-root"
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium cssltr-4uxqju-MuiSvgIcon-root"
               data-testid="SearchIcon"
               focusable="false"
-              onClick={[Function]}
               viewBox="0 0 24 24"
             >
               <path
@@ -317,15 +268,14 @@ exports[`Component: ScoreCardExample ScoreCardExample renders examples correctly
             </svg>
           </div>
           <div
-            className="BluiScoreCard-actionItems MuiBox-root cssltr-1tkd7ou"
+            class="BluiScoreCard-actionItems MuiBox-root cssltr-1tkd7ou"
             data-testid="blui-action-item"
           >
             <svg
-              aria-hidden={true}
-              className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium cssltr-4uxqju-MuiSvgIcon-root"
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium cssltr-4uxqju-MuiSvgIcon-root"
               data-testid="MailIcon"
               focusable="false"
-              onClick={[Function]}
               viewBox="0 0 24 24"
             >
               <path
@@ -334,15 +284,14 @@ exports[`Component: ScoreCardExample ScoreCardExample renders examples correctly
             </svg>
           </div>
           <div
-            className="BluiScoreCard-actionItems MuiBox-root cssltr-1tkd7ou"
+            class="BluiScoreCard-actionItems MuiBox-root cssltr-1tkd7ou"
             data-testid="blui-action-item"
           >
             <svg
-              aria-hidden={true}
-              className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium cssltr-4uxqju-MuiSvgIcon-root"
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium cssltr-4uxqju-MuiSvgIcon-root"
               data-testid="NotificationsIcon"
               focusable="false"
-              onClick={[Function]}
               viewBox="0 0 24 24"
             >
               <path
@@ -353,25 +302,24 @@ exports[`Component: ScoreCardExample ScoreCardExample renders examples correctly
         </div>
       </div>
       <div
-        className="BluiScoreCard-content MuiBox-root cssltr-4zlbsc"
+        class="BluiScoreCard-content MuiBox-root cssltr-4zlbsc"
         data-testid="blui-body-content"
       >
         <div
-          className="BluiScoreCard-bodyWrapper MuiBox-root cssltr-1weqv4q"
+          class="BluiScoreCard-bodyWrapper MuiBox-root cssltr-1weqv4q"
           data-testid="blui-body-wrapper"
         >
           <ul
-            className="MuiList-root MuiList-padding cssltr-b7dj7n-MuiList-root"
+            class="MuiList-root MuiList-padding cssltr-b7dj7n-MuiList-root"
           >
             <li
-              className="MuiListItem-root MuiListItem-gutters MuiListItem-padding cssltr-1xzpna2-MuiListItem-root"
+              class="MuiListItem-root MuiListItem-gutters MuiListItem-padding cssltr-1xzpna2-MuiListItem-root"
             >
               <div
-                className="MuiListItemText-root cssltr-cfq8qh-MuiListItemText-root"
+                class="MuiListItemText-root cssltr-cfq8qh-MuiListItemText-root"
               >
                 <span
-                  className="MuiTypography-root MuiTypography-body1 MuiListItemText-primary cssltr-10wdkoh-MuiTypography-root"
-                  style={{}}
+                  class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary cssltr-10wdkoh-MuiTypography-root"
                 >
                   Body Content
                 </span>
@@ -381,32 +329,30 @@ exports[`Component: ScoreCardExample ScoreCardExample renders examples correctly
         </div>
       </div>
       <hr
-        className="MuiDivider-root MuiDivider-fullWidth cssltr-ove2lz-MuiDivider-root"
+        class="MuiDivider-root MuiDivider-fullWidth cssltr-ove2lz-MuiDivider-root"
       />
       <ul
-        className="MuiList-root MuiList-padding cssltr-12kkqz5-MuiList-root"
+        class="MuiList-root MuiList-padding cssltr-1cuxg9i-MuiList-root"
       >
         <li
-          className="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding BluiInfoListItem-root cssltr-1fmyo93-MuiListItem-root"
-          onClick={[Function]}
+          class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding BluiInfoListItem-root cssltr-1b0lx1z-MuiListItem-root"
         >
           <div
-            className="BluiInfoListItem-statusStripe MuiBox-root cssltr-flm5nj"
+            class="BluiInfoListItem-statusStripe MuiBox-root cssltr-flm5nj"
             data-testid="blui-status-stripe"
           />
           <div
-            className="MuiListItemText-root MuiListItemText-dense BluiInfoListItem-listItemText cssltr-xwie0g-MuiListItemText-root"
+            class="MuiListItemText-root MuiListItemText-dense BluiInfoListItem-listItemText cssltr-xwie0g-MuiListItemText-root"
           >
             <div
-              className="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap BluiInfoListItem-title cssltr-mz6b5d-MuiTypography-root"
-              style={{}}
+              class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap MuiListItemText-primary BluiInfoListItem-title cssltr-mz6b5d-MuiTypography-root"
             >
               View Location
             </div>
           </div>
           <svg
-            aria-hidden={true}
-            className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium BluiInfoListItem-chevron cssltr-1jm4sjb-MuiSvgIcon-root"
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium BluiInfoListItem-chevron cssltr-1jm4sjb-MuiSvgIcon-root"
             data-testid="ChevronRightIcon"
             focusable="false"
             role="button"
@@ -419,62 +365,53 @@ exports[`Component: ScoreCardExample ScoreCardExample renders examples correctly
         </li>
       </ul>
     </div>
-  </div>,
+  </div>
   <div
-    className="MuiBox-root cssltr-1enmsz8"
+    class="MuiBox-root cssltr-1enmsz8"
   >
     <div
-      className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root BluiScoreCard-root cssltr-1krd3ju-MuiPaper-root-MuiCard-root"
+      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root BluiScoreCard-root cssltr-1du0gj5-MuiPaper-root-MuiCard-root"
       data-testid="blui-score-card-root"
-      style={
-        {
-          "--Paper-overlay": "var(--mui-overlays-1)",
-          "--Paper-shadow": "var(--mui-shadows-1)",
-        }
-      }
+      style="--Paper-shadow: var(--mui-shadows-1); --Paper-overlay: var(--mui-overlays-1);"
     >
       <div
-        className="BluiScoreCard-header MuiBox-root cssltr-mam46"
+        class="BluiScoreCard-header MuiBox-root cssltr-1nrrfs1"
         data-testid="blui-score-card-header"
       >
         <div
-          className="BluiScoreCard-headerBackground MuiBox-root cssltr-q17cf5"
+          class="BluiScoreCard-headerBackground MuiBox-root cssltr-q17cf5"
         />
         <div
-          className="BluiScoreCard-headerContent MuiBox-root cssltr-1bc9l66"
+          class="BluiScoreCard-headerContent MuiBox-root cssltr-1bc9l66"
         >
           <div
-            className="MuiBox-root cssltr-8rip90"
+            class="MuiBox-root cssltr-8rip90"
           >
             <h6
-              className="MuiTypography-root MuiTypography-h6 MuiTypography-noWrap BluiScoreCard-headerTitle cssltr-d5mx6c-MuiTypography-root"
-              style={{}}
+              class="MuiTypography-root MuiTypography-h6 MuiTypography-noWrap BluiScoreCard-headerTitle cssltr-d5mx6c-MuiTypography-root"
             >
               Substation 3
             </h6>
             <p
-              className="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap BluiScoreCard-headerSubtitle cssltr-1izar4j-MuiTypography-root"
-              style={{}}
+              class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap BluiScoreCard-headerSubtitle cssltr-1izar4j-MuiTypography-root"
             >
               High Humidity Alarm
             </p>
             <p
-              className="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap BluiScoreCard-headerInfo cssltr-1zuibq-MuiTypography-root"
-              style={{}}
+              class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap BluiScoreCard-headerInfo cssltr-1zuibq-MuiTypography-root"
             >
               4 Devices
             </p>
           </div>
           <div
-            className="BluiScoreCard-actionItems MuiBox-root cssltr-1tkd7ou"
+            class="BluiScoreCard-actionItems MuiBox-root cssltr-1tkd7ou"
             data-testid="blui-action-item"
           >
             <svg
-              aria-hidden={true}
-              className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium cssltr-4uxqju-MuiSvgIcon-root"
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium cssltr-4uxqju-MuiSvgIcon-root"
               data-testid="MoreVertIcon"
               focusable="false"
-              onClick={[Function]}
               viewBox="0 0 24 24"
             >
               <path
@@ -485,25 +422,24 @@ exports[`Component: ScoreCardExample ScoreCardExample renders examples correctly
         </div>
       </div>
       <div
-        className="BluiScoreCard-content MuiBox-root cssltr-4zlbsc"
+        class="BluiScoreCard-content MuiBox-root cssltr-4zlbsc"
         data-testid="blui-body-content"
       >
         <div
-          className="BluiScoreCard-bodyWrapper MuiBox-root cssltr-1weqv4q"
+          class="BluiScoreCard-bodyWrapper MuiBox-root cssltr-1weqv4q"
           data-testid="blui-body-wrapper"
         >
           <ul
-            className="MuiList-root MuiList-padding cssltr-b7dj7n-MuiList-root"
+            class="MuiList-root MuiList-padding cssltr-b7dj7n-MuiList-root"
           >
             <li
-              className="MuiListItem-root MuiListItem-gutters MuiListItem-padding cssltr-1xzpna2-MuiListItem-root"
+              class="MuiListItem-root MuiListItem-gutters MuiListItem-padding cssltr-1xzpna2-MuiListItem-root"
             >
               <div
-                className="MuiListItemText-root cssltr-cfq8qh-MuiListItemText-root"
+                class="MuiListItemText-root cssltr-cfq8qh-MuiListItemText-root"
               >
                 <span
-                  className="MuiTypography-root MuiTypography-body1 MuiListItemText-primary cssltr-10wdkoh-MuiTypography-root"
-                  style={{}}
+                  class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary cssltr-10wdkoh-MuiTypography-root"
                 >
                   Body Content
                 </span>
@@ -512,26 +448,24 @@ exports[`Component: ScoreCardExample ScoreCardExample renders examples correctly
           </ul>
         </div>
         <div
-          className="BluiScoreCard-badgeWrapper MuiBox-root cssltr-q3j0z4"
+          class="BluiScoreCard-badgeWrapper MuiBox-root cssltr-q3j0z4"
           data-testid="blui-badge-wrapper"
         >
           <div
-            className="BluiHeroBanner-root MuiBox-root cssltr-srjk1z"
-            classes={{}}
+            class="BluiHeroBanner-root MuiBox-root cssltr-srjk1z"
             data-testid="blui-hero-banner-root"
           >
             <div
-              className="BluiHero-root MuiBox-root cssltr-2a12sz"
-              classes={{}}
+              class="BluiHero-root MuiBox-root cssltr-58adgw"
               data-testid="blui-hero-root"
             >
               <div
-                className="BluiHero-icon MuiBox-root cssltr-1tmkfrg"
+                class="BluiHero-icon MuiBox-root cssltr-1tmkfrg"
               >
                 <svg
-                  aria-hidden={true}
-                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit cssltr-8hoymy-MuiSvgIcon-root"
-                  color="#424e54"
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit cssltr-8hoymy-MuiSvgIcon-root"
+                  color="#353c44"
                   data-testid="SvgTempIcon"
                   focusable="false"
                   viewBox="0 0 24 24"
@@ -546,49 +480,45 @@ exports[`Component: ScoreCardExample ScoreCardExample renders examples correctly
                 </svg>
               </div>
               <span
-                className="BluiHero-values cssltr-v1bge9"
+                class="BluiHero-values cssltr-v1bge9"
               >
                 <span
-                  className="BluiChannelValue-root cssltr-v74076"
+                  class="BluiChannelValue-root cssltr-v74076"
                   color="inherit"
                   data-testid="blui-channel-value-root-test"
-                  fontSize="normal"
+                  font-size="normal"
                 >
                   <h6
-                    className="MuiTypography-root MuiTypography-h6 BluiChannelValue-text BluiChannelValue-value cssltr-l646db-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-h6 BluiChannelValue-text BluiChannelValue-value cssltr-l646db-MuiTypography-root"
                     data-testid="blui-channel-value-value"
-                    style={{}}
                   >
                     98
                   </h6>
                   <h6
-                    className="MuiTypography-root MuiTypography-h6 BluiChannelValue-text BluiChannelValue-units cssltr-bjtx5z-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-h6 BluiChannelValue-text BluiChannelValue-units cssltr-bjtx5z-MuiTypography-root"
                     data-testid="blui-channel-value-units"
-                    style={{}}
                   >
                     °F
                   </h6>
                 </span>
               </span>
               <p
-                className="MuiTypography-root MuiTypography-body1 BluiHero-label cssltr-1pn5hg5-MuiTypography-root"
-                style={{}}
+                class="MuiTypography-root MuiTypography-body1 BluiHero-label cssltr-1pn5hg5-MuiTypography-root"
               >
                 Temperature
               </p>
             </div>
             <div
-              className="BluiHero-root MuiBox-root cssltr-2a12sz"
-              classes={{}}
+              class="BluiHero-root MuiBox-root cssltr-58adgw"
               data-testid="blui-hero-root"
             >
               <div
-                className="BluiHero-icon MuiBox-root cssltr-1tmkfrg"
+                class="BluiHero-icon MuiBox-root cssltr-1tmkfrg"
               >
                 <svg
-                  aria-hidden={true}
-                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit cssltr-8hoymy-MuiSvgIcon-root"
-                  color="#4da3d4"
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit cssltr-8hoymy-MuiSvgIcon-root"
+                  color="#5590ef"
                   data-testid="SvgMoistureIcon"
                   focusable="false"
                   viewBox="0 0 24 24"
@@ -603,33 +533,30 @@ exports[`Component: ScoreCardExample ScoreCardExample renders examples correctly
                 </svg>
               </div>
               <span
-                className="BluiHero-values cssltr-v1bge9"
+                class="BluiHero-values cssltr-v1bge9"
               >
                 <span
-                  className="BluiChannelValue-root cssltr-v74076"
+                  class="BluiChannelValue-root cssltr-v74076"
                   color="inherit"
                   data-testid="blui-channel-value-root-test"
-                  fontSize="normal"
+                  font-size="normal"
                 >
                   <h6
-                    className="MuiTypography-root MuiTypography-h6 BluiChannelValue-text BluiChannelValue-value cssltr-l646db-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-h6 BluiChannelValue-text BluiChannelValue-value cssltr-l646db-MuiTypography-root"
                     data-testid="blui-channel-value-value"
-                    style={{}}
                   >
                     54
                   </h6>
                   <h6
-                    className="MuiTypography-root MuiTypography-h6 BluiChannelValue-text BluiChannelValue-units cssltr-bjtx5z-MuiTypography-root"
+                    class="MuiTypography-root MuiTypography-h6 BluiChannelValue-text BluiChannelValue-units cssltr-bjtx5z-MuiTypography-root"
                     data-testid="blui-channel-value-units"
-                    style={{}}
                   >
                     %
                   </h6>
                 </span>
               </span>
               <p
-                className="MuiTypography-root MuiTypography-body1 BluiHero-label cssltr-1pn5hg5-MuiTypography-root"
-                style={{}}
+                class="MuiTypography-root MuiTypography-body1 BluiHero-label cssltr-1pn5hg5-MuiTypography-root"
               >
                 Humidity
               </p>
@@ -638,32 +565,30 @@ exports[`Component: ScoreCardExample ScoreCardExample renders examples correctly
         </div>
       </div>
       <hr
-        className="MuiDivider-root MuiDivider-fullWidth cssltr-ove2lz-MuiDivider-root"
+        class="MuiDivider-root MuiDivider-fullWidth cssltr-ove2lz-MuiDivider-root"
       />
       <ul
-        className="MuiList-root MuiList-padding cssltr-12kkqz5-MuiList-root"
+        class="MuiList-root MuiList-padding cssltr-1cuxg9i-MuiList-root"
       >
         <li
-          className="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding BluiInfoListItem-root cssltr-1fmyo93-MuiListItem-root"
-          onClick={[Function]}
+          class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding BluiInfoListItem-root cssltr-1b0lx1z-MuiListItem-root"
         >
           <div
-            className="BluiInfoListItem-statusStripe MuiBox-root cssltr-flm5nj"
+            class="BluiInfoListItem-statusStripe MuiBox-root cssltr-flm5nj"
             data-testid="blui-status-stripe"
           />
           <div
-            className="MuiListItemText-root MuiListItemText-dense BluiInfoListItem-listItemText cssltr-xwie0g-MuiListItemText-root"
+            class="MuiListItemText-root MuiListItemText-dense BluiInfoListItem-listItemText cssltr-xwie0g-MuiListItemText-root"
           >
             <div
-              className="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap BluiInfoListItem-title cssltr-mz6b5d-MuiTypography-root"
-              style={{}}
+              class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap MuiListItemText-primary BluiInfoListItem-title cssltr-mz6b5d-MuiTypography-root"
             >
               View Location
             </div>
           </div>
           <svg
-            aria-hidden={true}
-            className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium BluiInfoListItem-chevron cssltr-1jm4sjb-MuiSvgIcon-root"
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium BluiInfoListItem-chevron cssltr-1jm4sjb-MuiSvgIcon-root"
             data-testid="ChevronRightIcon"
             focusable="false"
             role="button"
@@ -676,59 +601,50 @@ exports[`Component: ScoreCardExample ScoreCardExample renders examples correctly
         </li>
       </ul>
     </div>
-  </div>,
+  </div>
   <div
-    className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root BluiScoreCard-root cssltr-1krd3ju-MuiPaper-root-MuiCard-root"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root BluiScoreCard-root cssltr-1du0gj5-MuiPaper-root-MuiCard-root"
     data-testid="blui-score-card-root"
-    style={
-      {
-        "--Paper-overlay": "var(--mui-overlays-1)",
-        "--Paper-shadow": "var(--mui-shadows-1)",
-      }
-    }
+    style="--Paper-shadow: var(--mui-shadows-1); --Paper-overlay: var(--mui-overlays-1);"
   >
     <div
-      className="BluiScoreCard-header MuiBox-root cssltr-1vm5ien"
+      class="BluiScoreCard-header MuiBox-root cssltr-1vm5ien"
       data-testid="blui-score-card-header"
     >
       <div
-        className="BluiScoreCard-headerBackground MuiBox-root cssltr-q17cf5"
+        class="BluiScoreCard-headerBackground MuiBox-root cssltr-q17cf5"
       />
       <div
-        className="BluiScoreCard-headerContent MuiBox-root cssltr-1bc9l66"
+        class="BluiScoreCard-headerContent MuiBox-root cssltr-1bc9l66"
       >
         <div
-          className="MuiBox-root cssltr-8rip90"
+          class="MuiBox-root cssltr-8rip90"
         >
           <h6
-            className="MuiTypography-root MuiTypography-h6 MuiTypography-noWrap BluiScoreCard-headerTitle cssltr-d5mx6c-MuiTypography-root"
-            style={{}}
+            class="MuiTypography-root MuiTypography-h6 MuiTypography-noWrap BluiScoreCard-headerTitle cssltr-d5mx6c-MuiTypography-root"
           >
             Substation 3
           </h6>
           <p
-            className="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap BluiScoreCard-headerSubtitle cssltr-1izar4j-MuiTypography-root"
-            style={{}}
+            class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap BluiScoreCard-headerSubtitle cssltr-1izar4j-MuiTypography-root"
           >
             Normal
           </p>
           <p
-            className="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap BluiScoreCard-headerInfo cssltr-1zuibq-MuiTypography-root"
-            style={{}}
+            class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap BluiScoreCard-headerInfo cssltr-1zuibq-MuiTypography-root"
           >
             4 Devices
           </p>
         </div>
         <div
-          className="BluiScoreCard-actionItems MuiBox-root cssltr-1tkd7ou"
+          class="BluiScoreCard-actionItems MuiBox-root cssltr-1tkd7ou"
           data-testid="blui-action-item"
         >
           <svg
-            aria-hidden={true}
-            className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium cssltr-4uxqju-MuiSvgIcon-root"
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium cssltr-4uxqju-MuiSvgIcon-root"
             data-testid="MoreVertIcon"
             focusable="false"
-            onClick={[Function]}
             viewBox="0 0 24 24"
           >
             <path
@@ -739,37 +655,33 @@ exports[`Component: ScoreCardExample ScoreCardExample renders examples correctly
       </div>
     </div>
     <div
-      className="BluiScoreCard-content MuiBox-root cssltr-4zlbsc"
+      class="BluiScoreCard-content MuiBox-root cssltr-4zlbsc"
       data-testid="blui-body-content"
     >
       <div
-        className="BluiScoreCard-bodyWrapper MuiBox-root cssltr-1weqv4q"
+        class="BluiScoreCard-bodyWrapper MuiBox-root cssltr-1weqv4q"
         data-testid="blui-body-wrapper"
       >
         <ul
-          className="MuiList-root MuiList-padding cssltr-ib84f1-MuiList-root"
+          class="MuiList-root MuiList-padding cssltr-ib84f1-MuiList-root"
         >
           <li
-            className="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding BluiInfoListItem-root cssltr-w2v258-MuiListItem-root"
+            class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding BluiInfoListItem-root cssltr-gygx9h-MuiListItem-root"
           >
             <div
-              className="BluiInfoListItem-statusStripe MuiBox-root cssltr-flm5nj"
+              class="BluiInfoListItem-statusStripe MuiBox-root cssltr-flm5nj"
               data-testid="blui-status-stripe"
             />
             <div
-              className="MuiListItemAvatar-root cssltr-1ulznza-MuiListItemAvatar-root"
-              style={
-                {
-                  "minWidth": "unset",
-                }
-              }
+              class="MuiListItemAvatar-root cssltr-1ulznza-MuiListItemAvatar-root"
+              style="min-width: unset;"
             >
               <div
-                className="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault BluiInfoListItem-icon cssltr-1t134mf-MuiAvatar-root"
+                class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault BluiInfoListItem-icon cssltr-1bqii0e-MuiAvatar-root"
               >
                 <svg
-                  aria-hidden={true}
-                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium cssltr-4uxqju-MuiSvgIcon-root"
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium cssltr-4uxqju-MuiSvgIcon-root"
                   data-testid="NotificationsIcon"
                   focusable="false"
                   viewBox="0 0 24 24"
@@ -781,37 +693,32 @@ exports[`Component: ScoreCardExample ScoreCardExample renders examples correctly
               </div>
             </div>
             <div
-              className="MuiListItemText-root MuiListItemText-dense BluiInfoListItem-listItemText cssltr-xwie0g-MuiListItemText-root"
+              class="MuiListItemText-root MuiListItemText-dense BluiInfoListItem-listItemText cssltr-xwie0g-MuiListItemText-root"
             >
               <div
-                className="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap BluiInfoListItem-title cssltr-mz6b5d-MuiTypography-root"
-                style={{}}
+                class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap MuiListItemText-primary BluiInfoListItem-title cssltr-mz6b5d-MuiTypography-root"
               >
                 0 Alarms
               </div>
             </div>
           </li>
           <li
-            className="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding BluiInfoListItem-root cssltr-irw3n2-MuiListItem-root"
+            class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding BluiInfoListItem-root cssltr-lfn50j-MuiListItem-root"
           >
             <div
-              className="BluiInfoListItem-statusStripe MuiBox-root cssltr-flm5nj"
+              class="BluiInfoListItem-statusStripe MuiBox-root cssltr-flm5nj"
               data-testid="blui-status-stripe"
             />
             <div
-              className="MuiListItemAvatar-root cssltr-1ulznza-MuiListItemAvatar-root"
-              style={
-                {
-                  "minWidth": "unset",
-                }
-              }
+              class="MuiListItemAvatar-root cssltr-1ulznza-MuiListItemAvatar-root"
+              style="min-width: unset;"
             >
               <div
-                className="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault BluiInfoListItem-icon cssltr-8t0ze0-MuiAvatar-root"
+                class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault BluiInfoListItem-icon cssltr-1099shi-MuiAvatar-root"
               >
                 <svg
-                  aria-hidden={true}
-                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium cssltr-4uxqju-MuiSvgIcon-root"
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium cssltr-4uxqju-MuiSvgIcon-root"
                   data-testid="ListAltIcon"
                   focusable="false"
                   viewBox="0 0 24 24"
@@ -823,37 +730,32 @@ exports[`Component: ScoreCardExample ScoreCardExample renders examples correctly
               </div>
             </div>
             <div
-              className="MuiListItemText-root MuiListItemText-dense BluiInfoListItem-listItemText cssltr-xwie0g-MuiListItemText-root"
+              class="MuiListItemText-root MuiListItemText-dense BluiInfoListItem-listItemText cssltr-xwie0g-MuiListItemText-root"
             >
               <div
-                className="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap BluiInfoListItem-title cssltr-iwltde-MuiTypography-root"
-                style={{}}
+                class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap MuiListItemText-primary BluiInfoListItem-title cssltr-fxnmsy-MuiTypography-root"
               >
                 1 Event
               </div>
             </div>
           </li>
           <li
-            className="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding BluiInfoListItem-root cssltr-w2v258-MuiListItem-root"
+            class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding BluiInfoListItem-root cssltr-gygx9h-MuiListItem-root"
           >
             <div
-              className="BluiInfoListItem-statusStripe MuiBox-root cssltr-flm5nj"
+              class="BluiInfoListItem-statusStripe MuiBox-root cssltr-flm5nj"
               data-testid="blui-status-stripe"
             />
             <div
-              className="MuiListItemAvatar-root cssltr-1ulznza-MuiListItemAvatar-root"
-              style={
-                {
-                  "minWidth": "unset",
-                }
-              }
+              class="MuiListItemAvatar-root cssltr-1ulznza-MuiListItemAvatar-root"
+              style="min-width: unset;"
             >
               <div
-                className="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault BluiInfoListItem-icon cssltr-1t134mf-MuiAvatar-root"
+                class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault BluiInfoListItem-icon cssltr-1bqii0e-MuiAvatar-root"
               >
                 <svg
-                  aria-hidden={true}
-                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium cssltr-4uxqju-MuiSvgIcon-root"
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium cssltr-4uxqju-MuiSvgIcon-root"
                   data-testid="CloudIcon"
                   focusable="false"
                   viewBox="0 0 24 24"
@@ -865,11 +767,10 @@ exports[`Component: ScoreCardExample ScoreCardExample renders examples correctly
               </div>
             </div>
             <div
-              className="MuiListItemText-root MuiListItemText-dense BluiInfoListItem-listItemText cssltr-xwie0g-MuiListItemText-root"
+              class="MuiListItemText-root MuiListItemText-dense BluiInfoListItem-listItemText cssltr-xwie0g-MuiListItemText-root"
             >
               <div
-                className="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap BluiInfoListItem-title cssltr-mz6b5d-MuiTypography-root"
-                style={{}}
+                class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap MuiListItemText-primary BluiInfoListItem-title cssltr-mz6b5d-MuiTypography-root"
               >
                 Online
               </div>
@@ -878,25 +779,23 @@ exports[`Component: ScoreCardExample ScoreCardExample renders examples correctly
         </ul>
       </div>
       <div
-        className="BluiScoreCard-badgeWrapper MuiBox-root cssltr-1dw2x3i"
+        class="BluiScoreCard-badgeWrapper MuiBox-root cssltr-1dw2x3i"
         data-testid="blui-badge-wrapper"
       >
         <div
-          className="BluiHeroBanner-root MuiBox-root cssltr-srjk1z"
-          classes={{}}
+          class="BluiHeroBanner-root MuiBox-root cssltr-srjk1z"
           data-testid="blui-hero-banner-root"
         >
           <div
-            className="BluiHero-root MuiBox-root cssltr-2a12sz"
-            classes={{}}
+            class="BluiHero-root MuiBox-root cssltr-58adgw"
             data-testid="blui-hero-root"
           >
             <div
-              className="BluiHero-icon MuiBox-root cssltr-ca2ftl"
+              class="BluiHero-icon MuiBox-root cssltr-ca2ftl"
             >
               <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit cssltr-8hoymy-MuiSvgIcon-root"
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit cssltr-8hoymy-MuiSvgIcon-root"
                 color="#39b620"
                 data-testid="SvgGradeAIcon"
                 focusable="false"
@@ -911,33 +810,30 @@ exports[`Component: ScoreCardExample ScoreCardExample renders examples correctly
               </svg>
             </div>
             <span
-              className="BluiHero-values cssltr-v1bge9"
+              class="BluiHero-values cssltr-v1bge9"
             >
               <span
-                className="BluiChannelValue-root cssltr-v74076"
+                class="BluiChannelValue-root cssltr-v74076"
                 color="inherit"
                 data-testid="blui-channel-value-root-test"
-                fontSize="normal"
+                font-size="normal"
               >
                 <h6
-                  className="MuiTypography-root MuiTypography-h6 BluiChannelValue-text BluiChannelValue-value cssltr-l646db-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-h6 BluiChannelValue-text BluiChannelValue-value cssltr-l646db-MuiTypography-root"
                   data-testid="blui-channel-value-value"
-                  style={{}}
                 >
                   98
                 </h6>
                 <h6
-                  className="MuiTypography-root MuiTypography-h6 BluiChannelValue-text BluiChannelValue-units cssltr-1ri615v-MuiTypography-root"
+                  class="MuiTypography-root MuiTypography-h6 BluiChannelValue-text BluiChannelValue-units cssltr-1ri615v-MuiTypography-root"
                   data-testid="blui-channel-value-units"
-                  style={{}}
                 >
                   /100
                 </h6>
               </span>
             </span>
             <p
-              className="MuiTypography-root MuiTypography-body1 BluiHero-label cssltr-1pn5hg5-MuiTypography-root"
-              style={{}}
+              class="MuiTypography-root MuiTypography-body1 BluiHero-label cssltr-1pn5hg5-MuiTypography-root"
             >
               Grade
             </p>
@@ -946,32 +842,30 @@ exports[`Component: ScoreCardExample ScoreCardExample renders examples correctly
       </div>
     </div>
     <hr
-      className="MuiDivider-root MuiDivider-fullWidth cssltr-ove2lz-MuiDivider-root"
+      class="MuiDivider-root MuiDivider-fullWidth cssltr-ove2lz-MuiDivider-root"
     />
     <ul
-      className="MuiList-root MuiList-padding cssltr-12kkqz5-MuiList-root"
+      class="MuiList-root MuiList-padding cssltr-1cuxg9i-MuiList-root"
     >
       <li
-        className="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding BluiInfoListItem-root cssltr-1fmyo93-MuiListItem-root"
-        onClick={[Function]}
+        class="MuiListItem-root MuiListItem-dense MuiListItem-gutters MuiListItem-padding BluiInfoListItem-root cssltr-1b0lx1z-MuiListItem-root"
       >
         <div
-          className="BluiInfoListItem-statusStripe MuiBox-root cssltr-flm5nj"
+          class="BluiInfoListItem-statusStripe MuiBox-root cssltr-flm5nj"
           data-testid="blui-status-stripe"
         />
         <div
-          className="MuiListItemText-root MuiListItemText-dense BluiInfoListItem-listItemText cssltr-xwie0g-MuiListItemText-root"
+          class="MuiListItemText-root MuiListItemText-dense BluiInfoListItem-listItemText cssltr-xwie0g-MuiListItemText-root"
         >
           <div
-            className="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap BluiInfoListItem-title cssltr-mz6b5d-MuiTypography-root"
-            style={{}}
+            class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap MuiListItemText-primary BluiInfoListItem-title cssltr-mz6b5d-MuiTypography-root"
           >
             View Location
           </div>
         </div>
         <svg
-          aria-hidden={true}
-          className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium BluiInfoListItem-chevron cssltr-1jm4sjb-MuiSvgIcon-root"
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium BluiInfoListItem-chevron cssltr-1jm4sjb-MuiSvgIcon-root"
           data-testid="ChevronRightIcon"
           focusable="false"
           role="button"
@@ -983,163 +877,145 @@ exports[`Component: ScoreCardExample ScoreCardExample renders examples correctly
         </svg>
       </li>
     </ul>
-  </div>,
-]
+  </div>
+</DocumentFragment>
 `;
 
 exports[`Component: SpacerExample SpacerExample renders examples correctly 1`] = `
-[
+<DocumentFragment>
   <p
-    className="MuiTypography-root MuiTypography-body1 cssltr-1o3p94-MuiTypography-root"
-    style={{}}
+    class="MuiTypography-root MuiTypography-body1 cssltr-1o3p94-MuiTypography-root"
   >
     w/ Flex Layout
-  </p>,
+  </p>
   <div
-    className="MuiBox-root cssltr-11uhf22"
+    class="MuiBox-root cssltr-11uhf22"
   >
     <p
-      className="MuiTypography-root MuiTypography-body2 cssltr-1ghgj5l-MuiTypography-root"
-      style={{}}
+      class="MuiTypography-root MuiTypography-body2 cssltr-lq80s5-MuiTypography-root"
     >
       Horizontal
     </p>
     <div
-      className="MuiBox-root cssltr-wi1sxz"
+      class="MuiBox-root cssltr-1el6jfh"
     >
       <div
-        className="BluiSpacer-root MuiBox-root cssltr-zrkb6b"
-        classes={{}}
+        class="BluiSpacer-root MuiBox-root cssltr-18cz78g"
         data-testid="blui-spacer-root"
       >
         1
       </div>
       <div
-        className="BluiSpacer-root MuiBox-root cssltr-4ikeoe"
-        classes={{}}
+        class="BluiSpacer-root MuiBox-root cssltr-4ikeoe"
         data-testid="blui-spacer-root"
       >
         2
       </div>
       <div
-        className="BluiSpacer-root MuiBox-root cssltr-ihz316"
-        classes={{}}
+        class="BluiSpacer-root MuiBox-root cssltr-ihz316"
         data-testid="blui-spacer-root"
       >
         3
       </div>
     </div>
-  </div>,
+  </div>
   <div
-    className="MuiBox-root cssltr-11uhf22"
+    class="MuiBox-root cssltr-11uhf22"
   >
     <p
-      className="MuiTypography-root MuiTypography-body2 cssltr-1ghgj5l-MuiTypography-root"
-      style={{}}
+      class="MuiTypography-root MuiTypography-body2 cssltr-lq80s5-MuiTypography-root"
     >
       Vertical
     </p>
     <div
-      className="MuiBox-root cssltr-nfxntg"
+      class="MuiBox-root cssltr-1129ild"
     >
       <div
-        className="BluiSpacer-root MuiBox-root cssltr-zrkb6b"
-        classes={{}}
+        class="BluiSpacer-root MuiBox-root cssltr-18cz78g"
         data-testid="blui-spacer-root"
       >
         1
       </div>
       <div
-        className="BluiSpacer-root MuiBox-root cssltr-4ikeoe"
-        classes={{}}
+        class="BluiSpacer-root MuiBox-root cssltr-4ikeoe"
         data-testid="blui-spacer-root"
       >
         2
       </div>
       <div
-        className="BluiSpacer-root MuiBox-root cssltr-ihz316"
-        classes={{}}
+        class="BluiSpacer-root MuiBox-root cssltr-ihz316"
         data-testid="blui-spacer-root"
       >
         3
       </div>
     </div>
-  </div>,
+  </div>
   <p
-    className="MuiTypography-root MuiTypography-body1 cssltr-kdt6po-MuiTypography-root"
-    style={{}}
+    class="MuiTypography-root MuiTypography-body1 cssltr-kdt6po-MuiTypography-root"
   >
     w/ Static Layout
-  </p>,
+  </p>
   <div
-    className="MuiBox-root cssltr-11uhf22"
+    class="MuiBox-root cssltr-11uhf22"
   >
     <p
-      className="MuiTypography-root MuiTypography-body2 cssltr-1ghgj5l-MuiTypography-root"
-      style={{}}
+      class="MuiTypography-root MuiTypography-body2 cssltr-lq80s5-MuiTypography-root"
     >
       Horizontal
     </p>
     <div
-      className="MuiBox-root cssltr-1em06jc"
+      class="MuiBox-root cssltr-16c5wvb"
     >
       <div
-        className="BluiSpacer-root MuiBox-root cssltr-1cb72ie"
-        classes={{}}
+        class="BluiSpacer-root MuiBox-root cssltr-wn4fdo"
         data-testid="blui-spacer-root"
       >
         1
       </div>
       <div
-        className="BluiSpacer-root MuiBox-root cssltr-p8ehs9"
-        classes={{}}
+        class="BluiSpacer-root MuiBox-root cssltr-p8ehs9"
         data-testid="blui-spacer-root"
       >
         2
       </div>
       <div
-        className="BluiSpacer-root MuiBox-root cssltr-eqp6ib"
-        classes={{}}
+        class="BluiSpacer-root MuiBox-root cssltr-eqp6ib"
         data-testid="blui-spacer-root"
       >
         3
       </div>
     </div>
-  </div>,
+  </div>
   <div
-    className="MuiBox-root cssltr-11uhf22"
+    class="MuiBox-root cssltr-11uhf22"
   >
     <p
-      className="MuiTypography-root MuiTypography-body2 cssltr-1ghgj5l-MuiTypography-root"
-      style={{}}
+      class="MuiTypography-root MuiTypography-body2 cssltr-lq80s5-MuiTypography-root"
     >
       Vertical
     </p>
     <div
-      className="MuiBox-root cssltr-wekmqg"
+      class="MuiBox-root cssltr-naktqw"
     >
       <div
-        className="BluiSpacer-root MuiBox-root cssltr-jg34ma"
-        classes={{}}
+        class="BluiSpacer-root MuiBox-root cssltr-1j5zevf"
         data-testid="blui-spacer-root"
       >
         1
       </div>
       <div
-        className="BluiSpacer-root MuiBox-root cssltr-vpradr"
-        classes={{}}
+        class="BluiSpacer-root MuiBox-root cssltr-vpradr"
         data-testid="blui-spacer-root"
       >
         2
       </div>
       <div
-        className="BluiSpacer-root MuiBox-root cssltr-zxma3v"
-        classes={{}}
+        class="BluiSpacer-root MuiBox-root cssltr-zxma3v"
         data-testid="blui-spacer-root"
       >
         3
       </div>
     </div>
-  </div>,
-]
+  </div>
+</DocumentFragment>
 `;
