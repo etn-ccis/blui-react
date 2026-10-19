@@ -20,6 +20,7 @@ import partsLight from '../images/parts1.png';
 import partsDark from '../images/parts2.png';
 import cabinetLight from '../images/cabinet1.png';
 import cabinetDark from '../images/cabinet2.png';
+import { cardFieldStyles, cardFieldStylesSnippet } from '../cardFieldStyles';
 
 const inputConfig: InputConfig = [
     {
@@ -142,7 +143,7 @@ const inputConfig: InputConfig = [
         type: 'number',
         description: 'Callout connector width in pixels',
         required: false,
-        initialValue: 2,
+        initialValue: 1,
         minValue: 1,
         maxValue: 12,
         valueStep: 1,
@@ -182,7 +183,7 @@ const inputConfig: InputConfig = [
         type: 'number',
         description: 'Marker icon size in pixels',
         required: false,
-        initialValue: 40,
+        initialValue: 24,
         minValue: 16,
         maxValue: 80,
         valueStep: 2,
@@ -210,7 +211,6 @@ const inputConfig: InputConfig = [
         type: 'color',
         description: 'Label chip background color',
         required: false,
-        initialValue: '#ffffff',
         category: 'LabelAnchorPoint Props',
     },
     {
@@ -218,7 +218,6 @@ const inputConfig: InputConfig = [
         type: 'color',
         description: 'Label chip text color',
         required: false,
-        initialValue: '#353c44',
         category: 'LabelAnchorPoint Props',
     },
     {
@@ -241,11 +240,19 @@ const inputConfig: InputConfig = [
         category: 'CardAnchorPoint Props',
     },
     {
+        id: 'cardFieldLabel',
+        type: 'string',
+        description: 'Card field label',
+        required: false,
+        initialValue: 'Health Status',
+        category: 'CardAnchorPoint Props',
+    },
+    {
         id: 'cardBody',
         type: 'string',
-        description: 'Card body content',
+        description: 'Card field value',
         required: false,
-        initialValue: 'Health: Good',
+        initialValue: 'Good',
         category: 'CardAnchorPoint Props',
     },
 ];
@@ -279,6 +286,7 @@ const ImageAnnotatorPreview: PreviewComponent = ({ data }) => {
         labelColor,
         cardWidth,
         cardTitle,
+        cardFieldLabel,
         cardBody,
         height,
         ...imageProps
@@ -299,11 +307,23 @@ const ImageAnnotatorPreview: PreviewComponent = ({ data }) => {
     const selectedIcon = icon === 'thermostat' ? <DeviceThermostatOutlinedIcon /> : <RoomIcon />;
     const annotation =
         annotationType === 'label' ? (
-            <LabelAnchorPoint {...anchorProps} label={label} labelBgColor={labelBgColor} labelColor={labelColor} />
+            <LabelAnchorPoint
+                {...anchorProps}
+                label={label}
+                labelBgColor={labelBgColor || undefined}
+                labelColor={labelColor || undefined}
+            />
         ) : annotationType === 'card' ? (
-            <CardAnchorPoint {...anchorProps} cardWidth={cardWidth}>
+            <CardAnchorPoint {...anchorProps} cardWidth={cardWidth} sx={cardFieldStyles}>
                 <Typography variant="subtitle2">{cardTitle}</Typography>
-                <Typography variant="body2">{cardBody}</Typography>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 1, width: '100%' }}>
+                    <Typography variant="body2" className="card-field-label">
+                        {cardFieldLabel}
+                    </Typography>
+                    <Typography variant="body2" className="card-field-value">
+                        {cardBody}
+                    </Typography>
+                </Box>
             </CardAnchorPoint>
         ) : (
             <MarkerAnchorPoint {...anchorProps} icon={selectedIcon} iconSize={iconSize} color={markerColor} />
@@ -326,19 +346,30 @@ const ImageAnnotatorPreview: PreviewComponent = ({ data }) => {
 };
 
 const generateSnippet: CodeSnippetFunction = (data) => {
-    const { annotationType, src, icon, markerColor, label, labelBgColor, labelColor, cardTitle, cardBody, ...props } =
-        data as Record<string, any>;
+    const {
+        annotationType,
+        src,
+        icon,
+        markerColor,
+        label,
+        labelBgColor,
+        labelColor,
+        cardTitle,
+        cardFieldLabel,
+        cardBody,
+        ...props
+    } = data as Record<string, any>;
     const imageName = src === 'parts' ? 'parts' : src === 'cabinet' ? 'cabinet' : 'entrance';
     const imageProps = `src={isDarkMode ? ${imageName}Dark : ${imageName}Light} alt={${JSON.stringify(props.alt)}} width={${props.width}}${props.height ? ` height={${props.height}}` : ''}`;
     const annotationProps = ` x={${props.x}} y={${props.y}}${props.callout ? ` callout direction="${props.direction}" connectorLength={${props.connectorLength}} connectorColor="${props.connectorColor}" connectorThickness={${props.connectorThickness}} autoFlip={${props.autoFlip}}` : ''} anchorDotColor="${props.anchorDotColor}"`;
     const annotation =
         annotationType === 'label'
-            ? `<LabelAnchorPoint${annotationProps} label={${JSON.stringify(label)}} labelBgColor="${labelBgColor}" labelColor="${labelColor}" />`
+            ? `<LabelAnchorPoint${annotationProps} label={${JSON.stringify(label)}}${labelBgColor ? ` labelBgColor="${labelBgColor}"` : ''}${labelColor ? ` labelColor="${labelColor}"` : ''} />`
             : annotationType === 'card'
-              ? `<CardAnchorPoint${annotationProps} cardWidth={${props.cardWidth}}>\n        <Typography variant="subtitle2">{${JSON.stringify(cardTitle)}}</Typography>\n        <Typography variant="body2">{${JSON.stringify(cardBody)}}</Typography>\n    </CardAnchorPoint>`
+              ? `<CardAnchorPoint${annotationProps} cardWidth={${props.cardWidth}} sx={cardFieldStyles}>\n        <Typography variant="subtitle2">{${JSON.stringify(cardTitle)}}</Typography>\n        <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 1, width: '100%' }}>\n            <Typography variant="body2" className="card-field-label">{${JSON.stringify(cardFieldLabel)}}</Typography>\n            <Typography variant="body2" className="card-field-value">{${JSON.stringify(cardBody)}}</Typography>\n        </Box>\n    </CardAnchorPoint>`
               : `<MarkerAnchorPoint${annotationProps} icon={<${icon === 'thermostat' ? 'DeviceThermostatOutlinedIcon' : 'RoomIcon'} />} iconSize={${props.iconSize}} color="${markerColor}" />`;
 
-    return `<ImageAnnotator ${imageProps}>\n    ${annotation}\n</ImageAnnotator>`
+    return `${annotationType === 'card' ? `import * as BLUIColors from '@brightlayer-ui/colors';\n\n${cardFieldStylesSnippet}\n\n` : ''}<ImageAnnotator ${imageProps}>\n    ${annotation}\n</ImageAnnotator>`
         .replace(/^\s*$(?:\r\n?|\n)/gm, '')
         .replace(/(?:^|)( {4}|\t)/gm, '    ');
 };

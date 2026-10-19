@@ -293,13 +293,23 @@ describe('CardAnchorPoint', () => {
             expect(computedStyle.boxShadow).toBeDefined();
         });
 
-        it('applies backdrop filter blur effect', () => {
+        it('layers progressively masked backdrop blurs from 32px at the top to 4px at the bottom', () => {
             renderWithTheme(<CardAnchorPoint x={50} y={50} />);
 
-            const cardRoot = screen.getByTestId('blui-card-root');
-            // backdropFilter is a CSS property that might not be available in test environment
-            // So we just verify the element has the expected CSS class instead
-            expect(cardRoot).toHaveClass('MuiCard-root');
+            const backdrop = screen.getByTestId('blui-card-backdrop');
+            expect(backdrop).toHaveAttribute('aria-hidden', 'true');
+            expect(backdrop).toHaveStyle({ position: 'absolute', pointerEvents: 'none', zIndex: '-1' });
+            expect(backdrop.children).toHaveLength(5);
+
+            const styles = Array.from(document.styleSheets)
+                .flatMap((sheet) => Array.from(sheet.cssRules, (rule) => rule.cssText))
+                .join('\n');
+
+            [4, 8, 16, 24, 32].forEach((blur) => {
+                expect(styles).toContain(`backdrop-filter: blur(${blur}px)`);
+            });
+            expect(styles).toContain('linear-gradient(to bottom, black 0%, transparent 25%)');
+            expect(styles).toContain('linear-gradient(to bottom, black 75%, transparent 100%)');
         });
     });
 

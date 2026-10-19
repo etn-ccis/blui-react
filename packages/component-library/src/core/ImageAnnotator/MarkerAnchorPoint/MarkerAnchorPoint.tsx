@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
-import { AnchorPoint, AnchorPointProps } from '../AnchorPoint';
+import { AnchorPoint, AnchorPointProps } from '../components';
 import { BLUIColors } from '@brightlayer-ui/colors';
 
 export type MarkerProps = AnchorPointProps & {
@@ -24,26 +24,37 @@ export type MarkerProps = AnchorPointProps & {
 
 const NEUTRAL_BACKGROUND_LIGHT = 'rgba(255, 255, 255, 0.72)';
 const NEUTRAL_BACKGROUND_DARK = 'rgba(14, 18, 24, 0.64)';
+const SUCCESS_BACKGROUND_LIGHT = BLUIColors.green[900];
+const SUCCESS_BACKGROUND_DARK = BLUIColors.green[300];
+const ERROR_BACKGROUND_LIGHT = BLUIColors.red[500];
+const ERROR_BACKGROUND_DARK = BLUIColors.red[300];
+const WARNING_BACKGROUND_LIGHT = BLUIColors.yellow[500];
+const WARNING_BACKGROUND_DARK = BLUIColors.yellow[800];
+const ORANGE_BACKGROUND_LIGHT = BLUIColors.orange[400];
+const ORANGE_BACKGROUND_DARK = BLUIColors.orange[200];
+const PURPLE_BACKGROUND_LIGHT = BLUIColors.purple[500];
+const PURPLE_BACKGROUND_DARK = BLUIColors.purple[200];
+
 const BORDER_COLOR_LIGHT = 'rgba(255, 255, 255, 0.50)';
 const BORDER_COLOR_DARK = 'rgba(0, 0, 0, 0.32)';
 
-const getBackgroundColor = (color?: MarkerProps['color'], theme?: any): string => {
+const getBackgroundColor = (color: MarkerProps['color'], theme: any, isDark = false): string => {
     switch (color) {
         case 'primary':
             return theme.vars?.palette?.primary?.main ?? theme.palette.primary.main;
         case 'success':
-            return theme.vars?.palette?.success?.main ?? theme.palette.success.main;
+            return isDark ? SUCCESS_BACKGROUND_DARK : SUCCESS_BACKGROUND_LIGHT;
         case 'error':
-            return theme.vars?.palette?.error?.main ?? theme.palette.error.main;
+            return isDark ? ERROR_BACKGROUND_DARK : ERROR_BACKGROUND_LIGHT;
         case 'warning':
-            return theme.vars?.palette?.warning?.main ?? theme.palette.warning.main;
+            return isDark ? WARNING_BACKGROUND_DARK : WARNING_BACKGROUND_LIGHT;
         case 'orange':
-            return BLUIColors.orange[500];
+            return isDark ? ORANGE_BACKGROUND_DARK : ORANGE_BACKGROUND_LIGHT;
         case 'purple':
-            return BLUIColors.purple[500];
+            return isDark ? PURPLE_BACKGROUND_DARK : PURPLE_BACKGROUND_LIGHT;
         case 'neutral':
         default:
-            return NEUTRAL_BACKGROUND_LIGHT;
+            return isDark ? NEUTRAL_BACKGROUND_DARK : NEUTRAL_BACKGROUND_LIGHT;
     }
 };
 
@@ -71,8 +82,9 @@ const Icon = styled(Box, {
     shouldForwardProp: (prop) => prop !== 'iconSize',
 })<Pick<MarkerProps, 'iconSize' | 'color'>>(({ theme, iconSize, color }) => ({
     display: 'flex',
-    width: iconSize ?? 40,
-    height: iconSize ?? 40,
+    width: 40,
+    height: 40,
+    padding: iconSize - 12,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: '80px',
@@ -83,17 +95,18 @@ const Icon = styled(Box, {
     '& .MuiSvgIcon-root': {
         fontSize: iconSize,
     },
-    // CSS-variables themes resolve styles once, so the dark neutral value must come from a color-scheme selector
-    ...(!color || color === 'neutral' ? theme.applyStyles('dark', { background: NEUTRAL_BACKGROUND_DARK }) : {}),
-    ...theme.applyStyles('dark', { borderColor: BORDER_COLOR_DARK }),
+    ...theme.applyStyles('dark', {
+        background: getBackgroundColor(color, theme, true),
+        borderColor: BORDER_COLOR_DARK,
+    }),
 }));
 
 const MarkerRender: React.ForwardRefRenderFunction<unknown, MarkerProps> = (props: MarkerProps, ref: any) => {
-    const { icon, iconSize, color, ...otherProps } = props;
+    const { icon, iconSize = 24, color, ...otherProps } = props;
 
     return (
         <AnchorPoint {...otherProps}>
-            <Icon ref={ref} data-testid="blui-marker-root" iconSize={iconSize} color={color} {...otherProps}>
+            <Icon ref={ref} data-testid="blui-marker-root" iconSize={iconSize} color={color}>
                 {icon}
             </Icon>
         </AnchorPoint>

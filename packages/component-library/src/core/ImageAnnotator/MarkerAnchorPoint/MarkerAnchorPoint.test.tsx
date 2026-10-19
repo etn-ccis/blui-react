@@ -78,9 +78,10 @@ describe('MarkerAnchorPoint', () => {
 
         const marker = screen.getByTestId('blui-marker-root');
         expect(marker).toHaveStyle({
-            width: '32px',
-            height: '32px',
+            width: '40px',
+            height: '40px',
         });
+        expect(screen.getByTestId('StarIcon')).toHaveStyle({ fontSize: '32px' });
     });
 
     it('applies border radius and border styles', () => {
@@ -128,6 +129,38 @@ describe('MarkerAnchorPoint', () => {
         expect(marker).toBeInTheDocument();
     });
 
+    it.each([
+        { color: undefined, background: 'rgba(14, 18, 24, 0.64)' },
+        { color: 'neutral' as const, background: 'rgba(14, 18, 24, 0.64)' },
+        { color: 'primary' as const, background: 'var(--mui-palette-primary-main)' },
+        { color: 'success' as const, background: BLUIColors.green[300] },
+        { color: 'error' as const, background: BLUIColors.red[300] },
+        { color: 'warning' as const, background: BLUIColors.yellow[800] },
+        { color: 'orange' as const, background: BLUIColors.orange[200] },
+        { color: 'purple' as const, background: BLUIColors.purple[200] },
+    ])('applies dark background and border styles for $color markers', ({ color, background }) => {
+        render(
+            <ThemeWrapper>
+                <MarkerAnchorPoint x={50} y={50} icon={<StarIcon />} color={color} />
+            </ThemeWrapper>
+        );
+
+        const marker = screen.getByTestId('blui-marker-root');
+        const markerClasses = marker.className.split(' ');
+        const darkRules = Array.from(document.styleSheets)
+            .flatMap((sheet) => Array.from(sheet.cssRules))
+            .filter(
+                (rule): rule is CSSStyleRule =>
+                    rule instanceof CSSStyleRule &&
+                    rule.selectorText.includes('.dark') &&
+                    markerClasses.some((className) => rule.selectorText.includes(`.${className}`))
+            );
+
+        expect(darkRules).toHaveLength(1);
+        expect(darkRules[0].style.getPropertyValue('border-color')).toBe('rgba(0, 0, 0, 0.32)');
+        expect(darkRules[0].style.getPropertyValue('background')).toBe(background);
+    });
+
     it('applies success color variant', () => {
         render(
             <ThemeWrapper>
@@ -168,7 +201,32 @@ describe('MarkerAnchorPoint', () => {
     });
 
     it.each([
-        { color: 'orange' as const, backgroundColor: BLUIColors.orange[500], iconColor: BLUIColors.black[900] },
+        {
+            color: 'neutral' as const,
+            backgroundColor: 'rgba(255, 255, 255, 0.72)',
+            iconColor: fallbackTheme.palette.text.primary,
+        },
+        {
+            color: 'primary' as const,
+            backgroundColor: fallbackTheme.palette.primary.main,
+            iconColor: fallbackTheme.palette.primary.contrastText,
+        },
+        {
+            color: 'success' as const,
+            backgroundColor: BLUIColors.green[900],
+            iconColor: fallbackTheme.palette.primary.contrastText,
+        },
+        {
+            color: 'error' as const,
+            backgroundColor: BLUIColors.red[500],
+            iconColor: fallbackTheme.palette.error.contrastText,
+        },
+        {
+            color: 'warning' as const,
+            backgroundColor: BLUIColors.yellow[500],
+            iconColor: fallbackTheme.palette.warning.contrastText,
+        },
+        { color: 'orange' as const, backgroundColor: BLUIColors.orange[400], iconColor: BLUIColors.black[900] },
         {
             color: 'purple' as const,
             backgroundColor: BLUIColors.purple[500],
@@ -251,15 +309,14 @@ describe('MarkerAnchorPoint', () => {
         });
     });
 
-    it('applies sx styles to the marker', () => {
+    it('applies sx styles to the anchor wrapper', () => {
         render(
             <ThemeWrapper>
                 <MarkerAnchorPoint x={50} y={50} icon={<StarIcon />} sx={{ opacity: 0.5 }} />
             </ThemeWrapper>
         );
 
-        const marker = screen.getByTestId('blui-marker-root');
-        expect(marker).toHaveStyle('opacity: 0.5');
+        expect(screen.getByTestId('blui-anchor-point-root')).toHaveStyle('opacity: 0.5');
     });
 
     it('renders marker with multiple color variants in sequence', () => {
@@ -346,9 +403,10 @@ describe('MarkerAnchorPoint', () => {
         );
 
         expect(screen.getByTestId('blui-marker-root')).toHaveStyle({
-            width: '28px',
-            height: '28px',
+            width: '40px',
+            height: '40px',
         });
+        expect(screen.getByTestId('StarIcon')).toHaveStyle({ fontSize: '28px' });
 
         expect(screen.getByTestId('blui-anchor-point-root')).toHaveStyle({
             left: '50%',
@@ -356,7 +414,7 @@ describe('MarkerAnchorPoint', () => {
         });
     });
 
-    it('handles edge case with zero dimensions', () => {
+    it('preserves the marker dimensions with a zero-size icon', () => {
         render(
             <ThemeWrapper>
                 <MarkerAnchorPoint x={0} y={0} icon={<StarIcon />} iconSize={0} />
@@ -365,12 +423,13 @@ describe('MarkerAnchorPoint', () => {
 
         const marker = screen.getByTestId('blui-marker-root');
         expect(marker).toHaveStyle({
-            width: '0px',
-            height: '0px',
+            width: '40px',
+            height: '40px',
         });
+        expect(screen.getByTestId('StarIcon')).toHaveStyle({ fontSize: '0px' });
     });
 
-    it('handles edge case with large dimensions', () => {
+    it('preserves the marker dimensions with a large icon', () => {
         render(
             <ThemeWrapper>
                 <MarkerAnchorPoint x={100} y={100} icon={<StarIcon />} iconSize={200} />
@@ -379,9 +438,10 @@ describe('MarkerAnchorPoint', () => {
 
         const marker = screen.getByTestId('blui-marker-root');
         expect(marker).toHaveStyle({
-            width: '200px',
-            height: '200px',
+            width: '40px',
+            height: '40px',
         });
+        expect(screen.getByTestId('StarIcon')).toHaveStyle({ fontSize: '200px' });
     });
 
     it('renders marker with callout in correct position', () => {
