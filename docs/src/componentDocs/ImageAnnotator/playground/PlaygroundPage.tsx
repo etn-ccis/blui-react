@@ -5,7 +5,15 @@ import Typography from '@mui/material/Typography';
 import { useColorScheme } from '@mui/material/styles';
 import RoomIcon from '@mui/icons-material/Room';
 import DeviceThermostatOutlinedIcon from '@mui/icons-material/DeviceThermostatOutlined';
-import { CodeSnippetFunction, InputConfig, Playground, PreviewComponent } from '@brightlayer-ui/react-doc-components';
+import {
+    CodeSnippetFunction,
+    ComponentData,
+    getPropsMapping,
+    getPropsToString,
+    InputConfig,
+    Playground,
+    PreviewComponent,
+} from '@brightlayer-ui/react-doc-components';
 import {
     CardAnchorPoint,
     ImageAnnotator,
@@ -13,7 +21,6 @@ import {
     LabelAnchorPoint,
     MarkerAnchorPoint,
 } from '@brightlayer-ui/react-components';
-import { removeEmptyProps } from '../../../shared';
 import entranceLight from '../images/entrance1.jpg';
 import entranceDark from '../images/entrance2.jpg';
 import partsLight from '../images/parts1.jpg';
@@ -54,7 +61,6 @@ const inputConfig: InputConfig = [
         type: 'string',
         description: 'Image alt text',
         required: false,
-        initialValue: 'Cleanroom entrance',
         category: 'ImageAnnotator Props',
     },
     {
@@ -62,7 +68,7 @@ const inputConfig: InputConfig = [
         type: 'number',
         description: 'Container width in pixels',
         required: false,
-        initialValue: 600,
+        defaultValue: '100%',
         minValue: 240,
         maxValue: 900,
         valueStep: 10,
@@ -73,7 +79,7 @@ const inputConfig: InputConfig = [
         type: 'number',
         description: 'Container height in pixels',
         required: false,
-        initialValue: 0,
+        defaultValue: 'auto',
         minValue: 0,
         maxValue: 700,
         valueStep: 10,
@@ -106,7 +112,7 @@ const inputConfig: InputConfig = [
         type: 'boolean',
         description: 'Connects the anchor to its content with a line',
         required: false,
-        initialValue: true,
+        initialValue: false,
         defaultValue: false,
         category: 'Shared AnchorPoint Props',
     },
@@ -116,6 +122,7 @@ const inputConfig: InputConfig = [
         description: 'Callout content direction',
         required: false,
         initialValue: 'right',
+        defaultValue: 'right',
         options: ['top', 'bottom', 'left', 'right'],
         category: 'Shared AnchorPoint Props',
     },
@@ -124,7 +131,8 @@ const inputConfig: InputConfig = [
         type: 'number',
         description: 'Callout connector length in pixels',
         required: false,
-        initialValue: 50,
+        initialValue: 120,
+        defaultValue: 120,
         minValue: 10,
         maxValue: 200,
         valueStep: 5,
@@ -143,10 +151,11 @@ const inputConfig: InputConfig = [
         type: 'number',
         description: 'Callout connector width in pixels',
         required: false,
-        initialValue: 1,
+        initialValue: 1.2,
+        defaultValue: 1.2,
         minValue: 1,
         maxValue: 12,
-        valueStep: 1,
+        valueStep: 0.1,
         category: 'Shared AnchorPoint Props',
     },
     {
@@ -160,10 +169,19 @@ const inputConfig: InputConfig = [
     },
     {
         id: 'anchorDotColor',
-        type: 'color',
+        type: 'select',
         description: 'Anchor dot color',
         required: false,
-        initialValue: '#ffffff',
+        initialValue: 'neutral',
+        defaultValue: 'neutral',
+        options: ['neutral', 'primary', 'custom'],
+        category: 'Shared AnchorPoint Props',
+    },
+    {
+        id: 'customAnchorDotColor',
+        type: 'color',
+        description: 'Custom anchor dot color (used when anchorDotColor is custom)',
+        required: false,
         category: 'Shared AnchorPoint Props',
     },
     {
@@ -184,6 +202,7 @@ const inputConfig: InputConfig = [
         description: 'Marker icon size in pixels',
         required: false,
         initialValue: 24,
+        defaultValue: 24,
         minValue: 16,
         maxValue: 80,
         valueStep: 2,
@@ -194,7 +213,8 @@ const inputConfig: InputConfig = [
         type: 'select',
         description: 'Marker color',
         required: false,
-        initialValue: 'primary',
+        initialValue: 'neutral',
+        defaultValue: 'neutral',
         options: ['neutral', 'primary', 'success', 'error', 'warning', 'orange', 'purple'],
         category: 'MarkerAnchorPoint Props',
     },
@@ -226,6 +246,7 @@ const inputConfig: InputConfig = [
         description: 'Card width in pixels',
         required: false,
         initialValue: 160,
+        defaultValue: 160,
         minValue: 80,
         maxValue: 400,
         valueStep: 10,
@@ -236,7 +257,6 @@ const inputConfig: InputConfig = [
         type: 'string',
         description: 'Card title content',
         required: false,
-        initialValue: 'Cabinet 1',
         category: 'CardAnchorPoint Props',
     },
     {
@@ -244,7 +264,6 @@ const inputConfig: InputConfig = [
         type: 'string',
         description: 'Card field label',
         required: false,
-        initialValue: 'Health Status',
         category: 'CardAnchorPoint Props',
     },
     {
@@ -252,7 +271,6 @@ const inputConfig: InputConfig = [
         type: 'string',
         description: 'Card field value',
         required: false,
-        initialValue: 'Good',
         category: 'CardAnchorPoint Props',
     },
 ];
@@ -261,6 +279,48 @@ const imageSources = {
     entrance: { light: entranceLight, dark: entranceDark },
     parts: { light: partsLight, dark: partsDark },
     cabinet: { light: cabinetLight, dark: cabinetDark },
+};
+
+type PlaygroundData = Pick<ImageAnnotatorProps, 'alt' | 'width' | 'height'> &
+    Pick<
+        React.ComponentProps<typeof MarkerAnchorPoint>,
+        | 'x'
+        | 'y'
+        | 'callout'
+        | 'direction'
+        | 'connectorLength'
+        | 'connectorColor'
+        | 'connectorThickness'
+        | 'autoFlip'
+        | 'anchorDotColor'
+        | 'iconSize'
+        | 'markerColor'
+    > &
+    Pick<React.ComponentProps<typeof LabelAnchorPoint>, 'label' | 'labelBgColor' | 'labelColor'> &
+    Pick<React.ComponentProps<typeof CardAnchorPoint>, 'cardWidth'> & {
+        annotationType?: string;
+        src?: string;
+        icon?: string;
+        cardTitle?: string;
+        cardFieldLabel?: string;
+        cardBody?: string;
+    };
+
+const getPlaygroundData = (data: ComponentData): ComponentData => {
+    const { customAnchorDotColor, ...props } = getPropsMapping(data, inputConfig);
+    if (props.anchorDotColor === 'custom') {
+        if (customAnchorDotColor) {
+            props.anchorDotColor = customAnchorDotColor;
+        } else {
+            delete props.anchorDotColor;
+        }
+    }
+    if (!props.callout) {
+        for (const key of ['direction', 'connectorLength', 'connectorColor', 'connectorThickness', 'autoFlip']) {
+            delete props[key];
+        }
+    }
+    return props;
 };
 
 const ImageAnnotatorPreview: PreviewComponent = ({ data }) => {
@@ -290,18 +350,10 @@ const ImageAnnotatorPreview: PreviewComponent = ({ data }) => {
         cardBody,
         height,
         ...imageProps
-    } = data as Record<string, any>;
-    const anchorProps = {
-        x,
-        y,
-        callout,
-        direction,
-        connectorLength,
-        connectorColor,
-        connectorThickness,
-        autoFlip,
-        anchorDotColor,
-    };
+    } = getPlaygroundData(data) as PlaygroundData;
+    const anchorProps = callout
+        ? { x, y, anchorDotColor, callout, direction, connectorLength, connectorColor, connectorThickness, autoFlip }
+        : { x, y, anchorDotColor };
     const selectedImageSet = imageSources[src as keyof typeof imageSources] ?? imageSources.entrance;
     const selectedImage = isDarkMode ? selectedImageSet.dark : selectedImageSet.light;
     const selectedIcon = icon === 'thermostat' ? <DeviceThermostatOutlinedIcon /> : <RoomIcon />;
@@ -314,31 +366,30 @@ const ImageAnnotatorPreview: PreviewComponent = ({ data }) => {
                 labelColor={labelColor || undefined}
             />
         ) : annotationType === 'card' ? (
-            <CardAnchorPoint {...anchorProps} cardWidth={cardWidth} sx={cardFieldStyles}>
-                <Typography variant="subtitle2">{cardTitle}</Typography>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 1, width: '100%' }}>
-                    <Typography variant="body2" className="card-field-label">
-                        {cardFieldLabel}
-                    </Typography>
-                    <Typography variant="body2" className="card-field-value">
-                        {cardBody}
-                    </Typography>
-                </Box>
+            <CardAnchorPoint
+                {...anchorProps}
+                cardWidth={cardWidth}
+                sx={cardTitle || cardFieldLabel || cardBody ? cardFieldStyles : undefined}
+            >
+                {cardTitle && <Typography variant="subtitle2">{cardTitle}</Typography>}
+                {(cardFieldLabel || cardBody) && (
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 1, width: '100%' }}>
+                        <Typography variant="body2" className="card-field-label">
+                            {cardFieldLabel}
+                        </Typography>
+                        <Typography variant="body2" className="card-field-value">
+                            {cardBody}
+                        </Typography>
+                    </Box>
+                )}
             </CardAnchorPoint>
         ) : (
             <MarkerAnchorPoint {...anchorProps} icon={selectedIcon} iconSize={iconSize} markerColor={markerColor} />
         );
 
-    const props = {
-        ...imageProps,
-        src: selectedImage,
-        width: imageProps.width,
-        ...(height ? { height } : {}),
-    } as ImageAnnotatorProps;
-
     return (
         <Stack alignItems="center" justifyContent="center" sx={{ width: '100%', height: '100%' }}>
-            <ImageAnnotator src={selectedImage} {...removeEmptyProps(props)}>
+            <ImageAnnotator src={selectedImage} {...imageProps} height={height}>
                 {annotation}
             </ImageAnnotator>
         </Stack>
@@ -346,30 +397,37 @@ const ImageAnnotatorPreview: PreviewComponent = ({ data }) => {
 };
 
 const generateSnippet: CodeSnippetFunction = (data) => {
-    const {
-        annotationType,
-        src,
-        icon,
-        markerColor,
-        label,
-        labelBgColor,
-        labelColor,
-        cardTitle,
-        cardFieldLabel,
-        cardBody,
-        ...props
-    } = data as Record<string, any>;
+    const normalizedData = getPlaygroundData(data);
+    const { annotationType, src, icon, label, labelBgColor, labelColor, cardTitle, cardFieldLabel, cardBody } =
+        normalizedData;
     const imageName = src === 'parts' ? 'parts' : src === 'cabinet' ? 'cabinet' : 'entrance';
-    const imageProps = `src={isDarkMode ? ${imageName}Dark : ${imageName}Light} alt={${JSON.stringify(props.alt)}} width={${props.width}}${props.height ? ` height={${props.height}}` : ''}`;
-    const annotationProps = ` x={${props.x}} y={${props.y}}${props.callout ? ` callout direction="${props.direction}" connectorLength={${props.connectorLength}} connectorColor="${props.connectorColor}" connectorThickness={${props.connectorThickness}} autoFlip={${props.autoFlip}}` : ''} anchorDotColor="${props.anchorDotColor}"`;
+    const formatProps = (keys: string[]): string => {
+        const formatted = getPropsToString(normalizedData, {
+            skip: Object.keys(normalizedData).filter((key) => !keys.includes(key)),
+        });
+        return formatted ? ` ${formatted}` : '';
+    };
+    const imageProps = `src={isDarkMode ? ${imageName}Dark : ${imageName}Light}${formatProps(['alt', 'width', 'height'])}`;
+    const annotationProps = formatProps([
+        'x',
+        'y',
+        'callout',
+        'direction',
+        'connectorLength',
+        'connectorColor',
+        'connectorThickness',
+        'autoFlip',
+        'anchorDotColor',
+    ]);
+    const hasCardContent = Boolean(cardTitle || cardFieldLabel || cardBody);
     const annotation =
         annotationType === 'label'
             ? `<LabelAnchorPoint${annotationProps} label={${JSON.stringify(label)}}${labelBgColor ? ` labelBgColor="${labelBgColor}"` : ''}${labelColor ? ` labelColor="${labelColor}"` : ''} />`
             : annotationType === 'card'
-              ? `<CardAnchorPoint${annotationProps} cardWidth={${props.cardWidth}} sx={cardFieldStyles}>\n        <Typography variant="subtitle2">{${JSON.stringify(cardTitle)}}</Typography>\n        <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 1, width: '100%' }}>\n            <Typography variant="body2" className="card-field-label">{${JSON.stringify(cardFieldLabel)}}</Typography>\n            <Typography variant="body2" className="card-field-value">{${JSON.stringify(cardBody)}}</Typography>\n        </Box>\n    </CardAnchorPoint>`
-              : `<MarkerAnchorPoint${annotationProps} icon={<${icon === 'thermostat' ? 'DeviceThermostatOutlinedIcon' : 'RoomIcon'} />} iconSize={${props.iconSize}} color="${markerColor}" />`;
+              ? `<CardAnchorPoint${annotationProps}${formatProps(['cardWidth'])}${hasCardContent ? ' sx={cardFieldStyles}' : ''}>\n${cardTitle ? `        <Typography variant="subtitle2">{${JSON.stringify(cardTitle)}}</Typography>\n` : ''}${cardFieldLabel || cardBody ? `        <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 1, width: '100%' }}>\n            <Typography variant="body2" className="card-field-label">{${JSON.stringify(cardFieldLabel || '')}}</Typography>\n            <Typography variant="body2" className="card-field-value">{${JSON.stringify(cardBody || '')}}</Typography>\n        </Box>\n` : ''}    </CardAnchorPoint>`
+              : `<MarkerAnchorPoint${annotationProps} icon={<${icon === 'thermostat' ? 'DeviceThermostatOutlinedIcon' : 'RoomIcon'} />}${formatProps(['iconSize', 'markerColor'])} />`;
 
-    return `${annotationType === 'card' ? `import * as BLUIColors from '@brightlayer-ui/colors';\n\n${cardFieldStylesSnippet}\n\n` : ''}<ImageAnnotator ${imageProps}>\n    ${annotation}\n</ImageAnnotator>`
+    return `${annotationType === 'card' && hasCardContent ? `import * as BLUIColors from '@brightlayer-ui/colors';\n\n${cardFieldStylesSnippet}\n\n` : ''}<ImageAnnotator ${imageProps}>\n    ${annotation}\n</ImageAnnotator>`
         .replace(/^\s*$(?:\r\n?|\n)/gm, '')
         .replace(/(?:^|)( {4}|\t)/gm, '    ');
 };

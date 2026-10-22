@@ -2,22 +2,21 @@ import React from 'react';
 import { describe, expect, it, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { Playground } from '@brightlayer-ui/react-doc-components';
+import { ImageAnnotator, MarkerAnchorPoint } from '@brightlayer-ui/react-components';
 import { createTheme } from '@mui/material/styles';
 import * as BLUIColors from '@brightlayer-ui/colors';
 import { cardFieldStyles } from '../cardFieldStyles';
 import { ImageAnnotatorPlaygroundComponent } from './PlaygroundPage';
 
-vi.mock('@brightlayer-ui/react-doc-components', () => ({
+vi.mock('@brightlayer-ui/react-doc-components', async () => ({
+    ...(await vi.importActual<typeof import('@brightlayer-ui/react-doc-components')>(
+        '@brightlayer-ui/react-doc-components/dist/esm/index.js'
+    )),
     Playground: vi.fn(() => null),
 }));
 
-vi.mock('../../../shared', async () => {
-    const { removeEmptyProps } = await import('../../../shared/utilities');
-    return { removeEmptyProps };
-});
-
 vi.mock('@brightlayer-ui/react-components', () => ({
-    ImageAnnotator: ({ children }: { children: React.ReactNode }): React.JSX.Element => <>{children}</>,
+    ImageAnnotator: vi.fn(({ children }: { children: React.ReactNode }): React.JSX.Element => <>{children}</>),
     LabelAnchorPoint: ({
         labelBgColor,
         labelColor,
@@ -25,7 +24,7 @@ vi.mock('@brightlayer-ui/react-components', () => ({
         labelBgColor?: string;
         labelColor?: string;
     }): React.JSX.Element => <span data-testid="label" data-background={labelBgColor} data-color={labelColor} />,
-    MarkerAnchorPoint: (): null => null,
+    MarkerAnchorPoint: vi.fn((): null => null),
     CardAnchorPoint: ({ children }: { children: React.ReactNode }): React.JSX.Element => <>{children}</>,
 }));
 
@@ -33,6 +32,168 @@ const getPlaygroundProps = (): React.ComponentProps<typeof Playground> => {
     render(<ImageAnnotatorPlaygroundComponent />);
     return vi.mocked(Playground).mock.calls.at(-1)![0];
 };
+
+describe('ImageAnnotator playground defaults', () => {
+    it.each(['marker', 'label', 'card'])('uses only required props initially for %s annotations', (annotationType) => {
+        const { inputConfig, previewComponent: Preview, codeSnippet } = getPlaygroundProps();
+        const data = {
+            ...Object.fromEntries(inputConfig.map((input) => [input.id, input.initialValue ?? ''])),
+            annotationType,
+        };
+
+        render(<Preview data={data} />);
+
+        const imageProps = vi.mocked(ImageAnnotator).mock.calls.at(-1)![0];
+        expect(Object.fromEntries(Object.entries(imageProps).filter(([, value]) => value !== undefined))).toEqual({
+            src: expect.any(String),
+            children: expect.any(Object),
+        });
+        if (!React.isValidElement<Record<string, unknown>>(imageProps.children)) {
+            throw new Error('Expected an annotation element');
+        }
+        expect(
+            Object.fromEntries(Object.entries(imageProps.children.props).filter(([, value]) => value !== undefined))
+        ).toEqual(
+            annotationType === 'marker'
+                ? { x: 33, y: 25, icon: expect.any(Object) }
+                : annotationType === 'label'
+                  ? { x: 33, y: 25, label: 'Cabinet #2' }
+                  : { x: 33, y: 25, children: [undefined, undefined] }
+        );
+        expect(codeSnippet(data)).toBe(
+            `<ImageAnnotator src={isDarkMode ? entranceDark : entranceLight}>\n    ${
+                annotationType === 'marker'
+                    ? '<MarkerAnchorPoint x={33} y={25} icon={<RoomIcon />} />'
+                    : annotationType === 'label'
+                      ? '<LabelAnchorPoint x={33} y={25} label={"Cabinet #2"} />'
+                      : '<CardAnchorPoint x={33} y={25}>\n    </CardAnchorPoint>'
+            }\n</ImageAnnotator>`
+        );
+    });
+
+    it('keeps connector defaults unset when callouts are enabled', () => {
+        const { inputConfig, previewComponent: Preview, codeSnippet } = getPlaygroundProps();
+        const data = {
+            ...Object.fromEntries(inputConfig.map((input) => [input.id, input.initialValue ?? ''])),
+            callout: true,
+        };
+
+        render(<Preview data={data} />);
+
+        const props = vi.mocked(MarkerAnchorPoint).mock.calls.at(-1)![0];
+        expect(props.callout).toBe(true);
+        for (const key of ['direction', 'connectorLength', 'connectorColor', 'connectorThickness', 'autoFlip']) {
+            expect(props[key as keyof typeof props]).toBeUndefined();
+            expect(codeSnippet(data)).not.toContain(`${key}=`);
+        }
+        expect(codeSnippet(data)).toContain(' callout');
+    });
+
+    it('includes customized props consistently and excludes callout settings when disabled', () => {
+        const { previewComponent: Preview, codeSnippet } = getPlaygroundProps();
+        const data = {
+            src: 'parts',
+            x: 0,
+            y: 100,
+            alt: 'Factory parts',
+            width: 500,
+            height: 300,
+            iconSize: 32,
+            markerColor: 'primary',
+            callout: true,
+            direction: 'left',
+            connectorLength: 80,
+            connectorColor: '#123456',
+            connectorThickness: 2,
+            autoFlip: false,
+        };
+
+        render(<Preview data={data} />);
+
+        expect(vi.mocked(ImageAnnotator).mock.calls.at(-1)![0]).toMatchObject({
+            alt: 'Factory parts',
+            width: 500,
+            height: 300,
+        });
+        expect(vi.mocked(MarkerAnchorPoint).mock.calls.at(-1)![0]).toMatchObject({
+            x: 0,
+            y: 100,
+            iconSize: 32,
+            markerColor: 'primary',
+            callout: true,
+            direction: 'left',
+            connectorLength: 80,
+            connectorColor: '#123456',
+            connectorThickness: 2,
+            autoFlip: false,
+        });
+        const snippet = codeSnippet(data);
+        expect(snippet).toContain('src={isDarkMode ? partsDark : partsLight}');
+        for (const prop of [
+            "alt={'Factory parts'}",
+            'width={500}',
+            'height={300}',
+            'iconSize={32}',
+            "markerColor={'primary'}",
+            "direction={'left'}",
+            'connectorLength={80}',
+            "connectorColor={'#123456'}",
+            'connectorThickness={2}',
+            'autoFlip={false}',
+        ]) {
+            expect(snippet).toContain(prop);
+        }
+        expect(snippet).not.toContain(' color=');
+
+        const disabledData = { ...data, callout: false };
+        render(<Preview data={disabledData} />);
+        const disabledProps = vi.mocked(MarkerAnchorPoint).mock.calls.at(-1)![0];
+        for (const key of ['direction', 'connectorLength', 'connectorColor', 'connectorThickness', 'autoFlip']) {
+            expect(disabledProps[key as keyof typeof disabledProps]).toBeUndefined();
+            expect(codeSnippet(disabledData)).not.toContain(`${key}=`);
+        }
+    });
+});
+
+describe('ImageAnnotator playground anchor dot colors', () => {
+    it('offers neutral, primary, and custom color options', () => {
+        const { inputConfig } = getPlaygroundProps();
+
+        expect(inputConfig.find((input) => input.id === 'anchorDotColor')).toMatchObject({
+            type: 'select',
+            initialValue: 'neutral',
+            options: ['neutral', 'primary', 'custom'],
+        });
+        expect(inputConfig.find((input) => input.id === 'customAnchorDotColor')).toMatchObject({
+            type: 'color',
+            required: false,
+        });
+    });
+
+    it.each([
+        ['neutral', '#ff0000', undefined],
+        ['primary', '#ff0000', 'primary'],
+        ['custom', '#ff0000', '#ff0000'],
+        ['custom', '', undefined],
+        ['custom', undefined, undefined],
+        [undefined, '#ff0000', undefined],
+    ])('resolves %s with custom value %s to %s', (anchorDotColor, customAnchorDotColor, expected) => {
+        const { previewComponent: Preview, codeSnippet } = getPlaygroundProps();
+        const data = { x: 33, y: 25, anchorDotColor, customAnchorDotColor };
+
+        render(<Preview data={data} />);
+
+        expect(vi.mocked(MarkerAnchorPoint).mock.calls.at(-1)![0].anchorDotColor).toBe(expected);
+        const snippet = codeSnippet(data);
+        if (expected) {
+            expect(snippet).toContain(`anchorDotColor={'${expected}'}`);
+        } else {
+            expect(snippet).not.toContain('anchorDotColor=');
+        }
+        expect(snippet).not.toContain('customAnchorDotColor');
+        expect(snippet).not.toContain('undefined');
+    });
+});
 
 describe('ImageAnnotator playground label colors', () => {
     it('leaves initial label colors unset so the component can follow the theme', () => {
