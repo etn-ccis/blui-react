@@ -76,13 +76,13 @@ export const ImageAnnotationExample: React.FC = () => {
             <Box sx={containerStyles}>
                 <Typography variant="h6">Anchor Points with Defaults</Typography>
                 <ImageAnnotator src={image} alt={imageAlt} sx={imageStyles}>
-                    <MarkerAnchorPoint x={5} y={5} icon={<DeviceThermostatOutlinedIcon />} color="neutral" />
-                    <MarkerAnchorPoint x={5} y={20} icon={<DeviceThermostatOutlinedIcon />} color="primary" />
-                    <MarkerAnchorPoint x={5} y={35} icon={<DeviceThermostatOutlinedIcon />} color="error" />
-                    <MarkerAnchorPoint x={5} y={50} icon={<DeviceThermostatOutlinedIcon />} color="success" />
-                    <MarkerAnchorPoint x={5} y={65} icon={<DeviceThermostatOutlinedIcon />} color="warning" />
-                    <MarkerAnchorPoint x={5} y={80} icon={<DeviceThermostatOutlinedIcon />} color="orange" />
-                    <MarkerAnchorPoint x={5} y={95} icon={<DeviceThermostatOutlinedIcon />} color="purple" />
+                    <MarkerAnchorPoint x={5} y={5} icon={<DeviceThermostatOutlinedIcon />} markerColor="neutral" />
+                    <MarkerAnchorPoint x={5} y={20} icon={<DeviceThermostatOutlinedIcon />} markerColor="primary" />
+                    <MarkerAnchorPoint x={5} y={35} icon={<DeviceThermostatOutlinedIcon />} markerColor="error" />
+                    <MarkerAnchorPoint x={5} y={50} icon={<DeviceThermostatOutlinedIcon />} markerColor="success" />
+                    <MarkerAnchorPoint x={5} y={65} icon={<DeviceThermostatOutlinedIcon />} markerColor="warning" />
+                    <MarkerAnchorPoint x={5} y={80} icon={<DeviceThermostatOutlinedIcon />} markerColor="orange" />
+                    <MarkerAnchorPoint x={5} y={95} icon={<DeviceThermostatOutlinedIcon />} markerColor="purple" />
 
                     <LabelAnchorPoint x={45} y={25} label="Vaccum cleaner #2" />
 
@@ -94,7 +94,7 @@ export const ImageAnnotationExample: React.FC = () => {
                         x={45}
                         y={30}
                         icon={<DeviceThermostatOutlinedIcon />}
-                        color="warning"
+                        markerColor="warning"
                         callout
                         direction="left"
                     />
@@ -102,7 +102,7 @@ export const ImageAnnotationExample: React.FC = () => {
                         x={45}
                         y={45}
                         icon={<Output />}
-                        color="error"
+                        markerColor="error"
                         callout
                         direction="bottom"
                         connectorLength={30}

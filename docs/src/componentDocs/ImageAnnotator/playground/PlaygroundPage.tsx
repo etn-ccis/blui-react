@@ -352,7 +352,17 @@ const ImageAnnotatorPreview: PreviewComponent = ({ data }) => {
         ...imageProps
     } = getPlaygroundData(data) as PlaygroundData;
     const anchorProps = callout
-        ? { x, y, anchorDotColor, callout, direction, connectorLength, connectorColor, connectorThickness, autoFlip }
+        ? {
+              x,
+              y,
+              anchorDotColor,
+              callout: true as const,
+              direction,
+              connectorLength,
+              connectorColor,
+              connectorThickness,
+              autoFlip,
+          }
         : { x, y, anchorDotColor };
     const selectedImageSet = imageSources[src as keyof typeof imageSources] ?? imageSources.entrance;
     const selectedImage = isDarkMode ? selectedImageSet.dark : selectedImageSet.light;

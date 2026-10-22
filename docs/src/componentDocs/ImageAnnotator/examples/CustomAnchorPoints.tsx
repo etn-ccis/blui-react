@@ -9,7 +9,7 @@ const codeSnippet = `import * as BLUIColors from '@brightlayer-ui/colors';
 ${cardFieldStylesSnippet}
 
 <ImageAnnotator src={isDarkMode ? cabinetDark : cabinetLight} alt="Switchgear cabinets" sx={{ width: 600 }}>
-	<MarkerAnchorPoint x={24} y={42} icon={<RoomIcon />} iconSize={32} color="orange" />
+	<MarkerAnchorPoint x={24} y={42} icon={<RoomIcon />} iconSize={32} markerColor="orange" />
 	<LabelAnchorPoint x={50} y={20} label="Cabinet 2" labelBgColor="#166b68" labelColor="#ffffff" />
 	<CardAnchorPoint
 		x={85}
