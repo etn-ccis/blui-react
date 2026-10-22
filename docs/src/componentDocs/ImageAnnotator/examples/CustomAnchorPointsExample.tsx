@@ -23,7 +23,7 @@ export const CustomAnchorPointsExample = (): React.JSX.Element => {
                     x={10}
                     y={42}
                     icon={<CabinTwoTone />}
-                    color="warning"
+                    markerColor="warning"
                     callout
                     direction="right"
                     connectorLength={40}
@@ -34,8 +34,6 @@ export const CustomAnchorPointsExample = (): React.JSX.Element => {
                     x={50}
                     y={20}
                     label="Cabinet 2"
-                    labelBgColor="#166b68"
-                    labelColor="#ffffff"
                     callout
                     anchorDotColor="#5090ef"
                     connectorColor="#2cc333"

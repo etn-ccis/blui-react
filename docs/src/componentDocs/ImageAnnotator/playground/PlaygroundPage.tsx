@@ -135,7 +135,7 @@ const inputConfig: InputConfig = [
         type: 'color',
         description: 'Callout connector color',
         required: false,
-        initialValue: '#ffffff',
+        initialValue: '',
         category: 'Shared AnchorPoint Props',
     },
     {
@@ -326,7 +326,7 @@ const ImageAnnotatorPreview: PreviewComponent = ({ data }) => {
                 </Box>
             </CardAnchorPoint>
         ) : (
-            <MarkerAnchorPoint {...anchorProps} icon={selectedIcon} iconSize={iconSize} color={markerColor} />
+            <MarkerAnchorPoint {...anchorProps} icon={selectedIcon} iconSize={iconSize} markerColor={markerColor} />
         );
 
     const props = {

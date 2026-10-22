@@ -19,7 +19,7 @@ export type MarkerProps = AnchorPointProps & {
     /**
      * Color of the marker icon container.
      */
-    color?: 'neutral' | 'primary' | 'success' | 'error' | 'warning' | 'orange' | 'purple';
+    markerColor?: 'neutral' | 'primary' | 'success' | 'error' | 'warning' | 'orange' | 'purple';
 };
 
 const NEUTRAL_BACKGROUND_LIGHT = 'rgba(255, 255, 255, 0.72)';
@@ -38,7 +38,7 @@ const PURPLE_BACKGROUND_DARK = BLUIColors.purple[200];
 const BORDER_COLOR_LIGHT = 'rgba(255, 255, 255, 0.50)';
 const BORDER_COLOR_DARK = 'rgba(0, 0, 0, 0.32)';
 
-const getBackgroundColor = (color: MarkerProps['color'], theme: any, isDark = false): string => {
+const getBackgroundColor = (color: MarkerProps['markerColor'], theme: any, isDark = false): string => {
     switch (color) {
         case 'primary':
             return theme.vars?.palette?.primary?.main ?? theme.palette.primary.main;
@@ -58,7 +58,7 @@ const getBackgroundColor = (color: MarkerProps['color'], theme: any, isDark = fa
     }
 };
 
-const getIconColor = (color?: MarkerProps['color'], theme?: any): string => {
+const getIconColor = (color?: MarkerProps['markerColor'], theme?: any): string => {
     switch (color) {
         case 'primary':
             return theme.vars?.palette?.primary?.contrastText ?? theme.palette.primary.contrastText;
@@ -80,7 +80,7 @@ const getIconColor = (color?: MarkerProps['color'], theme?: any): string => {
 
 const Icon = styled(Box, {
     shouldForwardProp: (prop) => prop !== 'iconSize',
-})<Pick<MarkerProps, 'iconSize' | 'color'>>(({ theme, iconSize, color }) => ({
+})<Pick<MarkerProps, 'iconSize' | 'markerColor'>>(({ theme, iconSize, markerColor }) => ({
     display: 'flex',
     width: 40,
     height: 40,
@@ -89,24 +89,24 @@ const Icon = styled(Box, {
     alignItems: 'center',
     borderRadius: '80px',
     border: `1px solid ${BORDER_COLOR_LIGHT}`,
-    background: getBackgroundColor(color, theme),
+    background: getBackgroundColor(markerColor, theme),
     boxShadow: theme.vars?.palette?.shadows?.level1 ?? theme.palette.shadows.level1,
-    color: getIconColor(color, theme),
+    color: getIconColor(markerColor, theme),
     '& .MuiSvgIcon-root': {
         fontSize: iconSize,
     },
     ...theme.applyStyles('dark', {
-        background: getBackgroundColor(color, theme, true),
+        background: getBackgroundColor(markerColor, theme, true),
         borderColor: BORDER_COLOR_DARK,
     }),
 }));
 
 const MarkerRender: React.ForwardRefRenderFunction<unknown, MarkerProps> = (props: MarkerProps, ref: any) => {
-    const { icon, iconSize = 24, color, ...otherProps } = props;
+    const { icon, iconSize = 24, markerColor, ...otherProps } = props;
 
     return (
         <AnchorPoint {...otherProps}>
-            <Icon ref={ref} data-testid="blui-marker-root" iconSize={iconSize} color={color}>
+            <Icon ref={ref} data-testid="blui-marker-root" iconSize={iconSize} markerColor={markerColor}>
                 {icon}
             </Icon>
         </AnchorPoint>
