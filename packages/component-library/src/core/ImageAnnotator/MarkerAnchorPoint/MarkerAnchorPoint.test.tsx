@@ -106,7 +106,7 @@ describe('MarkerAnchorPoint', () => {
         render(
             <ThemeWrapper>
                 <ThemeConsumer>
-                    {() => <MarkerAnchorPoint x={50} y={50} icon={<StarIcon />} color="neutral" />}
+                    {() => <MarkerAnchorPoint x={50} y={50} icon={<StarIcon />} markerColor="neutral" />}
                 </ThemeConsumer>
             </ThemeWrapper>
         );
@@ -120,7 +120,7 @@ describe('MarkerAnchorPoint', () => {
         render(
             <ThemeWrapper>
                 <ThemeConsumer>
-                    {() => <MarkerAnchorPoint x={50} y={50} icon={<CheckCircleIcon />} color="primary" />}
+                    {() => <MarkerAnchorPoint x={50} y={50} icon={<CheckCircleIcon />} markerColor="primary" />}
                 </ThemeConsumer>
             </ThemeWrapper>
         );
@@ -141,7 +141,7 @@ describe('MarkerAnchorPoint', () => {
     ])('applies dark background and border styles for $color markers', ({ color, background }) => {
         render(
             <ThemeWrapper>
-                <MarkerAnchorPoint x={50} y={50} icon={<StarIcon />} color={color} />
+                <MarkerAnchorPoint x={50} y={50} icon={<StarIcon />} markerColor={color} />
             </ThemeWrapper>
         );
 
@@ -165,7 +165,7 @@ describe('MarkerAnchorPoint', () => {
         render(
             <ThemeWrapper>
                 <ThemeConsumer>
-                    {() => <MarkerAnchorPoint x={50} y={50} icon={<CheckCircleIcon />} color="success" />}
+                    {() => <MarkerAnchorPoint x={50} y={50} icon={<CheckCircleIcon />} markerColor="success" />}
                 </ThemeConsumer>
             </ThemeWrapper>
         );
@@ -178,7 +178,7 @@ describe('MarkerAnchorPoint', () => {
         render(
             <ThemeWrapper>
                 <ThemeConsumer>
-                    {() => <MarkerAnchorPoint x={50} y={50} icon={<ErrorIcon />} color="error" />}
+                    {() => <MarkerAnchorPoint x={50} y={50} icon={<ErrorIcon />} markerColor="error" />}
                 </ThemeConsumer>
             </ThemeWrapper>
         );
@@ -191,7 +191,7 @@ describe('MarkerAnchorPoint', () => {
         render(
             <ThemeWrapper>
                 <ThemeConsumer>
-                    {() => <MarkerAnchorPoint x={50} y={50} icon={<WarningIcon />} color="warning" />}
+                    {() => <MarkerAnchorPoint x={50} y={50} icon={<WarningIcon />} markerColor="warning" />}
                 </ThemeConsumer>
             </ThemeWrapper>
         );
@@ -235,7 +235,7 @@ describe('MarkerAnchorPoint', () => {
     ])('applies the background and icon colors for $color markers', ({ color, backgroundColor, iconColor }) => {
         render(
             <FallbackThemeWrapper>
-                <MarkerAnchorPoint x={50} y={50} icon={<StarIcon />} color={color} />
+                <MarkerAnchorPoint x={50} y={50} icon={<StarIcon />} markerColor={color} />
             </FallbackThemeWrapper>
         );
 
@@ -250,7 +250,7 @@ describe('MarkerAnchorPoint', () => {
         (color) => {
             render(
                 <FallbackThemeWrapper>
-                    <MarkerAnchorPoint x={50} y={50} icon={<StarIcon />} color={color} />
+                    <MarkerAnchorPoint x={50} y={50} icon={<StarIcon />} markerColor={color} />
                 </FallbackThemeWrapper>
             );
 
@@ -322,7 +322,7 @@ describe('MarkerAnchorPoint', () => {
     it('renders marker with multiple color variants in sequence', () => {
         const { rerender } = render(
             <ThemeWrapper>
-                <MarkerAnchorPoint x={50} y={50} icon={<StarIcon />} color="primary" />
+                <MarkerAnchorPoint x={50} y={50} icon={<StarIcon />} markerColor="primary" />
             </ThemeWrapper>
         );
 
@@ -330,7 +330,7 @@ describe('MarkerAnchorPoint', () => {
 
         rerender(
             <ThemeWrapper>
-                <MarkerAnchorPoint x={50} y={50} icon={<StarIcon />} color="success" />
+                <MarkerAnchorPoint x={50} y={50} icon={<StarIcon />} markerColor="success" />
             </ThemeWrapper>
         );
 
@@ -338,7 +338,7 @@ describe('MarkerAnchorPoint', () => {
 
         rerender(
             <ThemeWrapper>
-                <MarkerAnchorPoint x={50} y={50} icon={<StarIcon />} color="error" />
+                <MarkerAnchorPoint x={50} y={50} icon={<StarIcon />} markerColor="error" />
             </ThemeWrapper>
         );
 
@@ -349,8 +349,8 @@ describe('MarkerAnchorPoint', () => {
         const { container } = render(
             <ThemeWrapper>
                 <>
-                    <MarkerAnchorPoint x={25} y={25} icon={<StarIcon />} color="primary" />
-                    <MarkerAnchorPoint x={75} y={75} icon={<CheckCircleIcon />} color="success" />
+                    <MarkerAnchorPoint x={25} y={25} icon={<StarIcon />} markerColor="primary" />
+                    <MarkerAnchorPoint x={75} y={75} icon={<CheckCircleIcon />} markerColor="success" />
                 </>
             </ThemeWrapper>
         );
@@ -395,7 +395,7 @@ describe('MarkerAnchorPoint', () => {
                     y={50}
                     icon={<StarIcon />}
                     iconSize={28}
-                    color="warning"
+                    markerColor="warning"
                     callout
                     direction="left"
                 />

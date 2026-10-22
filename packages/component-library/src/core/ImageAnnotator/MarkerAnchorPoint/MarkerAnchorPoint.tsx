@@ -79,7 +79,7 @@ const getIconColor = (color?: MarkerProps['markerColor'], theme?: any): string =
 };
 
 const Icon = styled(Box, {
-    shouldForwardProp: (prop) => prop !== 'iconSize',
+    shouldForwardProp: (prop) => prop !== 'iconSize' && prop !== 'markerColor',
 })<Pick<MarkerProps, 'iconSize' | 'markerColor'>>(({ theme, iconSize, markerColor }) => ({
     display: 'flex',
     width: 40,
