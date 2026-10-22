@@ -4,8 +4,8 @@ import Box from '@mui/material/Box';
 import { useColorScheme } from '@mui/material/styles';
 import { CardAnchorPoint, ImageAnnotator } from '@brightlayer-ui/react-components';
 import { ExampleShowcase } from '../../../shared';
-import cabinetLight from '../images/cabinet1.png';
-import cabinetDark from '../images/cabinet2.png';
+import cabinetLight from '../images/cabinet1.jpg';
+import cabinetDark from '../images/cabinet2.jpg';
 import { cardFieldStyles } from '../cardFieldStyles';
 
 const imageStyles = {

@@ -14,12 +14,12 @@ import {
     MarkerAnchorPoint,
 } from '@brightlayer-ui/react-components';
 import { removeEmptyProps } from '../../../shared';
-import entranceLight from '../images/entrance1.png';
-import entranceDark from '../images/entrance2.png';
-import partsLight from '../images/parts1.png';
-import partsDark from '../images/parts2.png';
-import cabinetLight from '../images/cabinet1.png';
-import cabinetDark from '../images/cabinet2.png';
+import entranceLight from '../images/entrance1.jpg';
+import entranceDark from '../images/entrance2.jpg';
+import partsLight from '../images/parts1.jpg';
+import partsDark from '../images/parts2.jpg';
+import cabinetLight from '../images/cabinet1.jpg';
+import cabinetDark from '../images/cabinet2.jpg';
 import { cardFieldStyles, cardFieldStylesSnippet } from '../cardFieldStyles';
 
 const inputConfig: InputConfig = [

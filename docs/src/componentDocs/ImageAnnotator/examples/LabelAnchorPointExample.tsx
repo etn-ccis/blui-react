@@ -2,8 +2,8 @@ import React from 'react';
 import { useColorScheme } from '@mui/material/styles';
 import { ImageAnnotator, LabelAnchorPoint } from '@brightlayer-ui/react-components';
 import { ExampleShowcase } from '../../../shared';
-import entranceLight from '../images/entrance1.png';
-import entranceDark from '../images/entrance2.png';
+import entranceLight from '../images/entrance1.jpg';
+import entranceDark from '../images/entrance2.jpg';
 
 const imageStyles = {
     width: 600,

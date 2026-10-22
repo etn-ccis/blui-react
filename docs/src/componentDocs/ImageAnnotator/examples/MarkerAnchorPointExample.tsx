@@ -5,8 +5,8 @@ import DeviceThermostatOutlinedIcon from '@mui/icons-material/DeviceThermostatOu
 import RoomIcon from '@mui/icons-material/Room';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import { ExampleShowcase } from '../../../shared';
-import partsLight from '../images/parts1.png';
-import partsDark from '../images/parts2.png';
+import partsLight from '../images/parts1.jpg';
+import partsDark from '../images/parts2.jpg';
 import { Map, PartyMode, SupervisorAccount, Vibration } from '@mui/icons-material';
 
 const imageStyles = {
