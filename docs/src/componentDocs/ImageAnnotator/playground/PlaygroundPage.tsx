@@ -259,7 +259,7 @@ const inputConfig: InputConfig = [
         category: 'CardAnchorPoint Props',
     },
     {
-        id: 'cardData.label',
+        id: 'cardDataLabel',
         type: 'string',
         description: 'Card data label',
         required: false,
@@ -267,7 +267,7 @@ const inputConfig: InputConfig = [
         category: 'CardAnchorPoint Props',
     },
     {
-        id: 'cardData.value',
+        id: 'cardDataValue',
         type: 'string',
         description: 'Card data value',
         required: false,
@@ -302,9 +302,9 @@ type PlaygroundData = Pick<ImageAnnotatorProps, 'alt' | 'width' | 'height'> &
         annotationType?: string;
         src?: string;
         icon?: string;
-        cardTitle?: string;
-        cardFieldLabel?: string;
-        cardBody?: string;
+        cardHeader?: string;
+        cardDataLabel?: string;
+        cardDataValue?: string;
     };
 
 const getPlaygroundData = (data: ComponentData): ComponentData => {
@@ -346,9 +346,9 @@ const ImageAnnotatorPreview: PreviewComponent = ({ data }) => {
         labelBgColor,
         labelColor,
         cardWidth,
-        cardTitle,
-        cardFieldLabel,
-        cardBody,
+        cardHeader,
+        cardDataLabel,
+        cardDataValue,
         height,
         ...imageProps
     } = getPlaygroundData(data) as PlaygroundData;
@@ -381,12 +381,12 @@ const ImageAnnotatorPreview: PreviewComponent = ({ data }) => {
                 {...anchorProps}
                 cardWidth={cardWidth}
                 cardContent={
-                    cardTitle || cardFieldLabel || cardBody
+                    cardHeader || cardDataLabel || cardDataValue
                         ? {
-                              cardHeader: cardTitle || '',
+                              cardHeader: cardHeader || '',
                               cardData:
-                                  cardFieldLabel || cardBody
-                                      ? [{ label: cardFieldLabel || '', value: cardBody || '' }]
+                                  cardDataLabel || cardDataValue
+                                      ? [{ label: cardDataLabel || '', value: cardDataValue || '' }]
                                       : [],
                           }
                         : undefined
@@ -407,7 +407,7 @@ const ImageAnnotatorPreview: PreviewComponent = ({ data }) => {
 
 const generateSnippet: CodeSnippetFunction = (data) => {
     const normalizedData = getPlaygroundData(data);
-    const { annotationType, src, icon, label, labelBgColor, labelColor, cardTitle, cardFieldLabel, cardBody } =
+    const { annotationType, src, icon, label, labelBgColor, labelColor, cardHeader, cardDataLabel, cardDataValue } =
         normalizedData;
     const imageName = src === 'parts' ? 'parts' : src === 'cabinet' ? 'cabinet' : 'entrance';
     const formatProps = (keys: string[]): string => {
@@ -428,12 +428,12 @@ const generateSnippet: CodeSnippetFunction = (data) => {
         'autoFlip',
         'anchorDotColor',
     ]);
-    const hasCardContent = Boolean(cardTitle || cardFieldLabel || cardBody);
+    const hasCardContent = Boolean(cardHeader || cardDataLabel || cardDataValue);
     const annotation =
         annotationType === 'label'
             ? `<LabelAnchorPoint${annotationProps} label={${JSON.stringify(label)}}${labelBgColor ? ` labelBgColor="${labelBgColor}"` : ''}${labelColor ? ` labelColor="${labelColor}"` : ''} />`
             : annotationType === 'card'
-              ? `<CardAnchorPoint${annotationProps}${formatProps(['cardWidth'])}${hasCardContent ? ` cardContent={{ cardHeader: ${JSON.stringify(cardTitle || '')}, cardData: ${cardFieldLabel || cardBody ? `[{ label: ${JSON.stringify(cardFieldLabel || '')}, value: ${JSON.stringify(cardBody || '')} }]` : '[]'} }}` : ''} />`
+              ? `<CardAnchorPoint${annotationProps}${formatProps(['cardWidth'])}${hasCardContent ? ` cardContent={{ cardHeader: ${JSON.stringify(cardHeader || '')}, cardData: ${cardDataLabel || cardDataValue ? `[{ label: ${JSON.stringify(cardDataLabel || '')}, value: ${JSON.stringify(cardDataValue || '')} }]` : '[]'} }}` : ''} />`
               : `<MarkerAnchorPoint${annotationProps} icon={<${icon === 'thermostat' ? 'DeviceThermostatOutlinedIcon' : 'RoomIcon'} />}${formatProps(['iconSize', 'markerColor'])} />`;
 
     return `<ImageAnnotator ${imageProps}>\n    ${annotation}\n</ImageAnnotator>`

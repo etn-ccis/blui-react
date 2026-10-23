@@ -5,6 +5,7 @@ import Divider from '@mui/material/Divider';
 import { styled } from '@mui/material/styles';
 import * as BLUIColors from '@brightlayer-ui/colors';
 import { AnchorPoint, AnchorPointProps } from '../components';
+import Color from 'color';
 
 const MIN_CARD_WIDTH = 80;
 const MAX_CARD_WIDTH = 400;
@@ -97,17 +98,8 @@ const StyledCard = styled(MuiCard, {
     width: cardWidth,
     position: 'relative',
     zIndex: 0,
-    background: 'rgba(255, 255, 255, 0.72)',
-    '&::after': {
-        content: '""',
-        position: 'absolute',
-        inset: 0,
-        borderRadius: 'inherit',
-        pointerEvents: 'none',
-        zIndex: -1,
-        background: 'rgba(255, 255, 255, 0.72)',
-        ...theme.applyStyles('dark', { background: 'rgba(14, 18, 24, 0.64)' }),
-    },
+    background: Color(BLUIColors.white[50]).alpha(0.72).string(),
+    backdropFilter: 'blur(2px)',
     border: '1px solid rgba(77, 92, 106, 0.12)',
     borderRadius: theme.spacing(1),
     boxShadow: '0 1px 12px 0 rgba(0, 0, 0, 0.12)',
