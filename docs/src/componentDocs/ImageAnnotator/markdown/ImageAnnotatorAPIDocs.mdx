@@ -82,12 +82,32 @@ The playground initially uses only required props and leaves optional props at t
 
 <Box>
 
-| Prop Name | Description                                                                   | Type        | Required | Default |
-| --------- | ----------------------------------------------------------------------------- | ----------- | -------- | ------- |
-| children  | React content rendered inside the card                                        | `ReactNode` | no       |         |
-| cardWidth | Card width in pixels, clamped between 80 and 400; height grows to fit content | `number`    | no       | `160`   |
+| Prop Name   | Description                                                                          | Type                           | Required | Default |
+| ----------- | ------------------------------------------------------------------------------------ | ------------------------------ | -------- | ------- |
+| children    | Content rendered when `cardContent` is undefined                                     | `ReactNode`                    | no       |         |
+| cardContent | Header and label/value rows, or custom React content; takes precedence over children | `CardContentData \| ReactNode` | no       |         |
+| cardWidth   | Card width in pixels, clamped between 80 and 400; height grows to fit content        | `number`                       | no       | `160`   |
 
 </Box>
+
+`CardContentData` contains `cardHeader: string` and `cardData: Array<{ label: string; value: string }>`.
+Object content uses built-in header and field styles. React nodes are rendered as provided.
+Card text inherits a layered white halo in light mode and a translucent black halo in dark mode.
+This applies to object content, React nodes, and children; override it with `sx={{ textShadow: 'none' }}` if needed.
+An explicit `null` or `false` `cardContent` renders no content rather than falling back to children.
+
+```tsx
+<CardAnchorPoint
+    x={20}
+    y={20}
+    cardContent={{
+        cardHeader: 'Cabinet 1',
+        cardData: [{ label: 'Health Status', value: 'Good' }],
+    }}
+/>
+
+<CardAnchorPoint x={60} y={20} cardContent={<Typography>Custom card content</Typography>} />
+```
 
 ### Style Overrides
 

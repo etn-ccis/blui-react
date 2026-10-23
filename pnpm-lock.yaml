@@ -1262,8 +1262,8 @@ importers:
   docs:
     dependencies:
       '@brightlayer-ui/colors':
-        specifier: ^3.2.0
-        version: 3.2.0
+        specifier: ^3.3.0
+        version: 3.3.0
       '@brightlayer-ui/icons':
         specifier: ^2.6.0
         version: 2.6.0
@@ -1852,8 +1852,8 @@ importers:
   packages/component-library:
     dependencies:
       '@brightlayer-ui/colors':
-        specifier: ^3.2.0
-        version: 3.2.0
+        specifier: ^3.3.0
+        version: 3.3.0
       '@emotion/css':
         specifier: ^11.13.5
         version: 11.13.5
@@ -15565,7 +15565,7 @@ snapshots:
 
   '@brightlayer-ui/react-themes@9.1.0(@mui/material@7.3.11(@emotion/react@11.14.0(@types/react@19.3.0)(react@19.3.0))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.3.0)(react@19.3.0))(@types/react@19.3.0)(react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))':
     dependencies:
-      '@brightlayer-ui/colors': 3.2.0
+      '@brightlayer-ui/colors': 3.3.0
       '@brightlayer-ui/types': 2.0.0
       '@fontsource/open-sans': 5.3.0
       '@mui/material': 7.3.11(@emotion/react@11.14.0(@types/react@19.3.0)(react@19.3.0))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.3.0)(react@19.3.0))(@types/react@19.3.0)(react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)

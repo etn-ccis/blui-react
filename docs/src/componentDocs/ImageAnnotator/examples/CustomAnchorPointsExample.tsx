@@ -6,7 +6,6 @@ import cabinetLight from '../images/cabinet1.jpg';
 import cabinetDark from '../images/cabinet2.jpg';
 import { Box, Divider, useColorScheme } from '@mui/material';
 import { CabinTwoTone } from '@mui/icons-material';
-import { cardFieldStyles } from '../cardFieldStyles';
 
 export const CustomAnchorPointsExample = (): React.JSX.Element => {
     const { mode, systemMode } = useColorScheme();
@@ -48,7 +47,6 @@ export const CustomAnchorPointsExample = (): React.JSX.Element => {
                     connectorLength={50}
                     connectorColor="#853799"
                     anchorDotColor="#059893"
-                    sx={cardFieldStyles}
                 >
                     <>
                         <Typography
@@ -67,12 +65,8 @@ export const CustomAnchorPointsExample = (): React.JSX.Element => {
                                 key={label}
                                 sx={{ display: 'flex', justifyContent: 'space-between', gap: 1, width: '100%' }}
                             >
-                                <Typography variant="body2" className="card-field-label">
-                                    {label}
-                                </Typography>
-                                <Typography variant="body2" className="card-field-value">
-                                    {value}
-                                </Typography>
+                                <Typography variant="body2">{label}</Typography>
+                                <Typography variant="body2">{value}</Typography>
                             </Box>
                         ))}
                     </>

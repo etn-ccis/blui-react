@@ -1,38 +1,29 @@
 import React, { forwardRef, ReactNode } from 'react';
 import MuiCard, { CardProps as MuiCardProps } from '@mui/material/Card';
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
 import { styled } from '@mui/material/styles';
+import * as BLUIColors from '@brightlayer-ui/colors';
 import { AnchorPoint, AnchorPointProps } from '../components';
 
 const MIN_CARD_WIDTH = 80;
 const MAX_CARD_WIDTH = 400;
-const blurSteps = [4, 8, 16, 24, 32];
 
-const FrostedBackdrop = styled('span')({
-    position: 'absolute',
-    inset: 0,
-    borderRadius: 'inherit',
-    overflow: 'hidden',
-    pointerEvents: 'none',
-    zIndex: -1,
-});
+export type CardContentData = {
+    cardHeader: string;
+    cardData: Array<{
+        label: string;
+        value: string;
+    }>;
+};
 
-const BlurLayer = styled('span', {
-    shouldForwardProp: (prop) => prop !== 'step',
-})<{ step: number }>(({ step }) => ({
-    position: 'absolute',
-    inset: 0,
-    backdropFilter: `blur(${blurSteps[step]}px)`,
-    WebkitBackdropFilter: `blur(${blurSteps[step]}px)`,
-    ...(step > 0 && {
-        maskImage: `linear-gradient(to bottom, black ${(4 - step) * 25}%, transparent ${(5 - step) * 25}%)`,
-        WebkitMaskImage: `linear-gradient(to bottom, black ${(4 - step) * 25}%, transparent ${(5 - step) * 25}%)`,
-    }),
-}));
+const isCardContentData = (content: CardProps['cardContent']): content is CardContentData =>
+    typeof content === 'object' && content !== null && 'cardHeader' in content && 'cardData' in content;
 
 export type CardProps = MuiCardProps &
     AnchorPointProps & {
         /**
-         * Any JSX rendered inside the card.
+         * Content rendered inside the card when cardContent is undefined.
          */
         children?: ReactNode;
 
@@ -41,7 +32,58 @@ export type CardProps = MuiCardProps &
          * @default 160
          */
         cardWidth?: number;
+
+        /**
+         * A header and label/value rows, or custom React content.
+         * Takes precedence over children when provided.
+         */
+        cardContent?: CardContentData | ReactNode;
     };
+
+const CardHeader = styled(Typography)({
+    width: '100%',
+    minWidth: 0,
+    overflowWrap: 'anywhere',
+});
+
+const CardDataRow = styled('div')(({ theme }) => ({
+    display: 'flex',
+    justifyContent: 'space-between',
+    gap: theme.spacing(1),
+    width: '100%',
+    marginTop: '4px',
+    marginBottom: '4px',
+}));
+
+const CardField = styled(Typography)(({ theme }) => ({
+    fontFamily: '"Open Sans", sans-serif',
+    fontWeight: 400,
+    fontSize: '14px',
+    lineHeight: 1,
+    letterSpacing: 0,
+    minWidth: 0,
+    overflowWrap: 'anywhere',
+    '&.card-field-label': {
+        color: BLUIColors.gray[500],
+        ...theme.applyStyles('dark', { color: BLUIColors.black[200] }),
+    },
+    '&.card-field-value': {
+        textAlign: 'right',
+        color: BLUIColors.black[500],
+        ...theme.applyStyles('dark', { color: BLUIColors.black[50] }),
+    },
+}));
+
+const CardDivider = styled(Divider)(({ theme }) => ({
+    width: '100%',
+    borderColor: 'rgba(77, 92, 106, 0.12)',
+    boxShadow: '0 0 20px #FFF, 0 0 12px #FFF, 0 0 8px #FFF, 0 0 6px #FFF',
+    ...theme.applyStyles('dark', {
+        borderColor: 'rgba(245, 250, 255, 0.10)',
+        boxShadow:
+            '0 0 20px rgba(0, 0, 0, 0.64), 0 0 12px rgba(0, 0, 0, 0.64), 0 0 8px rgba(0, 0, 0, 0.64), 0 0 6px rgba(0, 0, 0, 0.64)',
+    }),
+}));
 
 const StyledCard = styled(MuiCard, {
     shouldForwardProp: (prop) => prop !== 'cardWidth',
@@ -55,7 +97,7 @@ const StyledCard = styled(MuiCard, {
     width: cardWidth,
     position: 'relative',
     zIndex: 0,
-    background: 'transparent',
+    background: 'rgba(255, 255, 255, 0.72)',
     '&::after': {
         content: '""',
         position: 'absolute',
@@ -69,22 +111,41 @@ const StyledCard = styled(MuiCard, {
     border: '1px solid rgba(77, 92, 106, 0.12)',
     borderRadius: theme.spacing(1),
     boxShadow: '0 1px 12px 0 rgba(0, 0, 0, 0.12)',
+    textShadow: '0 0 20px #FFF, 0 0 12px #FFF, 0 0 8px #FFF, 0 0 6px #FFF',
+    ...theme.applyStyles('dark', {
+        background: 'rgba(14, 18, 24, 0.64)',
+        textShadow:
+            '0 0 20px rgba(0, 0, 0, 0.64), 0 0 12px rgba(0, 0, 0, 0.64), 0 0 8px rgba(0, 0, 0, 0.64), 0 0 6px rgba(0, 0, 0, 0.64)',
+    }),
 }));
 
 const CardRender: React.ForwardRefRenderFunction<unknown, CardProps> = (props: CardProps, ref: any) => {
-    const { children, cardWidth = 160, ...otherProps } = props;
+    const { children, cardContent, cardWidth = 160, ...otherProps } = props;
 
     const clampedWidth = Math.min(Math.max(cardWidth, MIN_CARD_WIDTH), MAX_CARD_WIDTH);
+    const content = cardContent === undefined ? children : cardContent;
 
     return (
         <AnchorPoint {...otherProps}>
             <StyledCard ref={ref} cardWidth={clampedWidth} data-testid="blui-card-root" {...otherProps}>
-                <FrostedBackdrop aria-hidden="true" data-testid="blui-card-backdrop">
-                    {blurSteps.map((blur, step) => (
-                        <BlurLayer key={blur} step={step} />
-                    ))}
-                </FrostedBackdrop>
-                {children}
+                {isCardContentData(content) ? (
+                    <>
+                        <CardHeader variant="subtitle2">{content.cardHeader}</CardHeader>
+                        <CardDivider />
+                        {content.cardData.map(({ label, value }, index) => (
+                            <CardDataRow key={index}>
+                                <CardField variant="body2" className="card-field-label">
+                                    {label}
+                                </CardField>
+                                <CardField variant="body2" className="card-field-value">
+                                    {value}
+                                </CardField>
+                            </CardDataRow>
+                        ))}
+                    </>
+                ) : (
+                    content
+                )}
             </StyledCard>
         </AnchorPoint>
     );

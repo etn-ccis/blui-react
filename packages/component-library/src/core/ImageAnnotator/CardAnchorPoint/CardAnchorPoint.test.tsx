@@ -1,5 +1,5 @@
 import React from 'react';
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { blueThemes as theme } from '@brightlayer-ui/react-themes';
@@ -68,6 +68,158 @@ describe('CardAnchorPoint', () => {
             expect(screen.getByRole('heading', { name: 'Header' })).toBeInTheDocument();
             expect(screen.getByText('Paragraph')).toBeInTheDocument();
             expect(screen.getByRole('button', { name: 'Action' })).toBeInTheDocument();
+        });
+    });
+
+    describe('Card Content', () => {
+        it('renders object content with a header and ordered label/value rows', () => {
+            renderWithTheme(
+                <CardAnchorPoint
+                    x={50}
+                    y={50}
+                    cardContent={{
+                        cardHeader: 'Cabinet 1',
+                        cardData: [
+                            { label: 'Health Status', value: 'Good' },
+                            { label: 'Load Rate', value: '56%' },
+                        ],
+                    }}
+                >
+                    Ignored children
+                </CardAnchorPoint>
+            );
+
+            const card = screen.getByTestId('blui-card-root');
+            const header = screen.getByText('Cabinet 1');
+            const divider = card.querySelector('.MuiDivider-root');
+            const firstDataRow = screen.getByText('Health Status').parentElement;
+
+            expect(card).toHaveTextContent('Cabinet 1Health StatusGoodLoad Rate56%');
+            expect(divider).toBeInTheDocument();
+            expect(header.nextElementSibling).toBe(divider);
+            expect(divider?.nextElementSibling).toBe(firstDataRow);
+            expect(screen.queryByText('Ignored children')).not.toBeInTheDocument();
+            expect(screen.getByText('Cabinet 1')).toHaveClass('MuiTypography-subtitle2');
+            expect(screen.getByText('Health Status')).toHaveClass('card-field-label');
+            expect(screen.getByText('Good')).toHaveClass('card-field-value');
+            expect(screen.getByText('Health Status').parentElement).toHaveStyle({
+                display: 'flex',
+                justifyContent: 'space-between',
+                width: '100%',
+            });
+            expect(screen.getByText('Good')).toHaveStyle({
+                textAlign: 'right',
+                fontSize: '14px',
+                fontWeight: '400',
+                overflowWrap: 'anywhere',
+            });
+            expect(card).not.toHaveAttribute('cardContent');
+            expect(screen.getByTestId('blui-anchor-point-root')).not.toHaveAttribute('cardContent');
+        });
+
+        it('renders object content with no data rows', () => {
+            renderWithTheme(
+                <CardAnchorPoint x={50} y={50} cardContent={{ cardHeader: 'Empty cabinet', cardData: [] }} />
+            );
+
+            expect(screen.getByTestId('blui-card-root')).toHaveTextContent('Empty cabinet');
+        });
+
+        it('renders repeated labels and empty field values', () => {
+            renderWithTheme(
+                <CardAnchorPoint
+                    x={50}
+                    y={50}
+                    cardContent={{
+                        cardHeader: '',
+                        cardData: [
+                            { label: 'Status', value: '' },
+                            { label: 'Status', value: 'Good' },
+                        ],
+                    }}
+                />
+            );
+
+            expect(screen.getAllByText('Status')).toHaveLength(2);
+            expect(screen.getByText('Good')).toBeInTheDocument();
+        });
+
+        it('renders interactive React content instead of children', () => {
+            const onClick = jest.fn();
+            renderWithTheme(
+                <CardAnchorPoint
+                    x={50}
+                    y={50}
+                    cardContent={
+                        <>
+                            <span>Custom header</span>
+                            <button onClick={onClick}>Action</button>
+                        </>
+                    }
+                >
+                    Ignored children
+                </CardAnchorPoint>
+            );
+
+            expect(screen.getByText('Custom header')).toBeInTheDocument();
+            fireEvent.click(screen.getByRole('button', { name: 'Action' }));
+            expect(onClick).toHaveBeenCalledTimes(1);
+            expect(screen.queryByText('Ignored children')).not.toBeInTheDocument();
+        });
+
+        it('renders arrays of React nodes', () => {
+            renderWithTheme(
+                <CardAnchorPoint
+                    x={50}
+                    y={50}
+                    cardContent={[<span key="first">First</span>, <span key="second">Second</span>]}
+                />
+            );
+
+            expect(screen.getByTestId('blui-card-root')).toHaveTextContent('FirstSecond');
+        });
+
+        it.each([
+            { content: 'Plain text', expected: 'Plain text' },
+            { content: 0, expected: '0' },
+            { content: '', expected: '' },
+            { content: null, expected: '' },
+            { content: false, expected: '' },
+        ])('renders $content without falling back to children', ({ content, expected }) => {
+            renderWithTheme(
+                <CardAnchorPoint x={50} y={50} cardContent={content}>
+                    Ignored children
+                </CardAnchorPoint>
+            );
+
+            expect(screen.getByTestId('blui-card-root').textContent).toBe(expected);
+        });
+
+        it('falls back to children when cardContent is undefined', () => {
+            renderWithTheme(
+                <CardAnchorPoint x={50} y={50} cardContent={undefined}>
+                    Fallback content
+                </CardAnchorPoint>
+            );
+
+            expect(screen.getByText('Fallback content')).toBeInTheDocument();
+        });
+
+        it('updates when switching between object and React content', () => {
+            const { rerender } = render(
+                <ThemeProvider theme={theme}>
+                    <CardAnchorPoint x={50} y={50} cardContent={{ cardHeader: 'Cabinet 1', cardData: [] }} />
+                </ThemeProvider>
+            );
+
+            rerender(
+                <ThemeProvider theme={theme}>
+                    <CardAnchorPoint x={50} y={50} cardContent={<span>Custom content</span>} />
+                </ThemeProvider>
+            );
+
+            expect(screen.queryByText('Cabinet 1')).not.toBeInTheDocument();
+            expect(screen.getByText('Custom content')).toBeInTheDocument();
         });
     });
 
@@ -223,6 +375,45 @@ describe('CardAnchorPoint', () => {
     });
 
     describe('Card Styling', () => {
+        it.each([
+            {
+                mode: 'light' as const,
+                shadow: '0 0 20px #FFF, 0 0 12px #FFF, 0 0 8px #FFF, 0 0 6px #FFF',
+            },
+            {
+                mode: 'dark' as const,
+                shadow: '0 0 20px rgba(0, 0, 0, 0.64), 0 0 12px rgba(0, 0, 0, 0.64), 0 0 8px rgba(0, 0, 0, 0.64), 0 0 6px rgba(0, 0, 0, 0.64)',
+            },
+        ])('applies an inheritable text shadow in $mode mode', ({ mode, shadow }) => {
+            render(
+                <ThemeProvider theme={createTheme({ palette: { mode } })}>
+                    <CardAnchorPoint
+                        x={50}
+                        y={50}
+                        cardContent={{
+                            cardHeader: 'Cabinet 1',
+                            cardData: [{ label: 'Status', value: 'Good' }],
+                        }}
+                    />
+                </ThemeProvider>
+            );
+
+            const computedShadow = window.getComputedStyle(screen.getByTestId('blui-card-root')).textShadow;
+            expect(computedShadow.replace(/,\s*/g, ',')).toBe(shadow.replace(/,\s*/g, ','));
+            expect(screen.getByText('Cabinet 1')).toBeInTheDocument();
+            expect(screen.getByText('Status')).toBeInTheDocument();
+            expect(screen.getByText('Good')).toBeInTheDocument();
+        });
+
+        it('allows overriding the text shadow for custom React content', () => {
+            renderWithTheme(
+                <CardAnchorPoint x={50} y={50} sx={{ textShadow: 'none' }} cardContent={<span>Custom content</span>} />
+            );
+
+            expect(screen.getByTestId('blui-card-root')).toHaveStyle({ textShadow: 'none' });
+            expect(screen.getByText('Custom content')).toBeInTheDocument();
+        });
+
         it('uses the theme background fallback when CSS variables are unavailable', () => {
             render(
                 <ThemeProvider theme={createTheme()}>
@@ -293,23 +484,12 @@ describe('CardAnchorPoint', () => {
             expect(computedStyle.boxShadow).toBeDefined();
         });
 
-        it('layers progressively masked backdrop blurs from 32px at the top to 4px at the bottom', () => {
+        it('uses a translucent card surface instead of legacy backdrop blur layers', () => {
             renderWithTheme(<CardAnchorPoint x={50} y={50} />);
 
-            const backdrop = screen.getByTestId('blui-card-backdrop');
-            expect(backdrop).toHaveAttribute('aria-hidden', 'true');
-            expect(backdrop).toHaveStyle({ position: 'absolute', pointerEvents: 'none', zIndex: '-1' });
-            expect(backdrop.children).toHaveLength(5);
-
-            const styles = Array.from(document.styleSheets)
-                .flatMap((sheet) => Array.from(sheet.cssRules, (rule) => rule.cssText))
-                .join('\n');
-
-            [4, 8, 16, 24, 32].forEach((blur) => {
-                expect(styles).toContain(`backdrop-filter: blur(${blur}px)`);
-            });
-            expect(styles).toContain('linear-gradient(to bottom, black 0%, transparent 25%)');
-            expect(styles).toContain('linear-gradient(to bottom, black 75%, transparent 100%)');
+            const card = screen.getByTestId('blui-card-root');
+            expect(card).toHaveStyle({ background: 'rgba(255, 255, 255, 0.72)' });
+            expect(screen.queryByTestId('blui-card-backdrop')).not.toBeInTheDocument();
         });
     });
 
