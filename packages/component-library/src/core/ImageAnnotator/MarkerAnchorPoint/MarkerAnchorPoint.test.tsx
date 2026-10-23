@@ -136,7 +136,7 @@ describe('MarkerAnchorPoint', () => {
         { color: 'success' as const, background: BLUIColors.green[300] },
         { color: 'error' as const, background: BLUIColors.red[300] },
         { color: 'warning' as const, background: BLUIColors.yellow[800] },
-        { color: 'orange' as const, background: BLUIColors.orange[200] },
+        { color: 'orange' as const, background: BLUIColors.orange[400] },
         { color: 'purple' as const, background: BLUIColors.purple[200] },
     ])('applies dark background and border styles for $color markers', ({ color, background }) => {
         render(
