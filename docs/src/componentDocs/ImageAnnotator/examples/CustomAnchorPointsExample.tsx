@@ -2,11 +2,10 @@ import React from 'react';
 import Typography from '@mui/material/Typography';
 import { CardAnchorPoint, ImageAnnotator, LabelAnchorPoint, MarkerAnchorPoint } from '@brightlayer-ui/react-components';
 import { ExampleShowcase } from '../../../shared';
-import cabinetLight from '../images/cabinet1.png';
-import cabinetDark from '../images/cabinet2.png';
+import cabinetLight from '../images/cabinet1.jpg';
+import cabinetDark from '../images/cabinet2.jpg';
 import { Box, Divider, useColorScheme } from '@mui/material';
 import { CabinTwoTone } from '@mui/icons-material';
-import { cardFieldStyles } from '../cardFieldStyles';
 
 export const CustomAnchorPointsExample = (): React.JSX.Element => {
     const { mode, systemMode } = useColorScheme();
@@ -23,7 +22,7 @@ export const CustomAnchorPointsExample = (): React.JSX.Element => {
                     x={10}
                     y={42}
                     icon={<CabinTwoTone />}
-                    color="warning"
+                    markerColor="warning"
                     callout
                     direction="right"
                     connectorLength={40}
@@ -34,8 +33,6 @@ export const CustomAnchorPointsExample = (): React.JSX.Element => {
                     x={50}
                     y={20}
                     label="Cabinet 2"
-                    labelBgColor="#166b68"
-                    labelColor="#ffffff"
                     callout
                     anchorDotColor="#5090ef"
                     connectorColor="#2cc333"
@@ -50,7 +47,6 @@ export const CustomAnchorPointsExample = (): React.JSX.Element => {
                     connectorLength={50}
                     connectorColor="#853799"
                     anchorDotColor="#059893"
-                    sx={cardFieldStyles}
                 >
                     <>
                         <Typography
@@ -69,12 +65,8 @@ export const CustomAnchorPointsExample = (): React.JSX.Element => {
                                 key={label}
                                 sx={{ display: 'flex', justifyContent: 'space-between', gap: 1, width: '100%' }}
                             >
-                                <Typography variant="body2" className="card-field-label">
-                                    {label}
-                                </Typography>
-                                <Typography variant="body2" className="card-field-value">
-                                    {value}
-                                </Typography>
+                                <Typography variant="body2">{label}</Typography>
+                                <Typography variant="body2">{value}</Typography>
                             </Box>
                         ))}
                     </>

@@ -5,8 +5,8 @@ import DeviceThermostatOutlinedIcon from '@mui/icons-material/DeviceThermostatOu
 import RoomIcon from '@mui/icons-material/Room';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import { ExampleShowcase } from '../../../shared';
-import partsLight from '../images/parts1.png';
-import partsDark from '../images/parts2.png';
+import partsLight from '../images/parts1.jpg';
+import partsDark from '../images/parts2.jpg';
 import { Map, PartyMode, SupervisorAccount, Vibration } from '@mui/icons-material';
 
 const imageStyles = {
@@ -21,24 +21,24 @@ export const MarkerAnchorPointExample = (): React.JSX.Element => {
     return (
         <ExampleShowcase>
             <ImageAnnotator src={isDarkMode ? partsDark : partsLight} alt="Factory floor parts" sx={imageStyles}>
-                <MarkerAnchorPoint x={42} y={14} icon={<CameraAltIcon />} color="orange" />
-                <MarkerAnchorPoint x={18} y={76} icon={<PartyMode />} color="neutral" />
-                <MarkerAnchorPoint x={43} y={78} icon={<DeviceThermostatOutlinedIcon />} color="success" />
+                <MarkerAnchorPoint x={42} y={14} icon={<CameraAltIcon />} markerColor="orange" />
+                <MarkerAnchorPoint x={18} y={76} icon={<PartyMode />} markerColor="neutral" />
+                <MarkerAnchorPoint x={43} y={78} icon={<DeviceThermostatOutlinedIcon />} markerColor="success" />
                 <MarkerAnchorPoint
                     x={8}
                     y={30}
                     icon={<RoomIcon />}
-                    color="primary"
+                    markerColor="primary"
                     callout
                     direction="bottom"
                     connectorLength={30}
                 />
-                <MarkerAnchorPoint x={88} y={24} icon={<Map />} color="warning" callout connectorLength={30} />
+                <MarkerAnchorPoint x={88} y={24} icon={<Map />} markerColor="warning" callout connectorLength={30} />
                 <MarkerAnchorPoint
                     x={35}
                     y={58}
                     icon={<Vibration />}
-                    color="purple"
+                    markerColor="purple"
                     callout
                     direction="top"
                     connectorLength={30}
@@ -47,7 +47,7 @@ export const MarkerAnchorPointExample = (): React.JSX.Element => {
                     x={71}
                     y={50}
                     icon={<SupervisorAccount />}
-                    color="error"
+                    markerColor="error"
                     callout
                     connectorLength={30}
                 />

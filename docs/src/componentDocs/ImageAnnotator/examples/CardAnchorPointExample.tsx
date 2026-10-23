@@ -1,12 +1,9 @@
 import React from 'react';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
 import { useColorScheme } from '@mui/material/styles';
 import { CardAnchorPoint, ImageAnnotator } from '@brightlayer-ui/react-components';
 import { ExampleShowcase } from '../../../shared';
-import cabinetLight from '../images/cabinet1.png';
-import cabinetDark from '../images/cabinet2.png';
-import { cardFieldStyles } from '../cardFieldStyles';
+import cabinetLight from '../images/cabinet1.jpg';
+import cabinetDark from '../images/cabinet2.jpg';
 
 const imageStyles = {
     width: 600,
@@ -20,17 +17,19 @@ export const CardAnchorPointExample = (): React.JSX.Element => {
     return (
         <ExampleShowcase>
             <ImageAnnotator src={isDarkMode ? cabinetDark : cabinetLight} alt="Switchgear cabinets" sx={imageStyles}>
-                <CardAnchorPoint x={20} y={20} cardWidth={160} sx={cardFieldStyles}>
-                    <Typography variant="subtitle2">Cabinet 1</Typography>
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 1, width: '100%' }}>
-                        <Typography variant="body2" className="card-field-label">
-                            Health Status
-                        </Typography>
-                        <Typography variant="body2" className="card-field-value">
-                            Good
-                        </Typography>
-                    </Box>
-                </CardAnchorPoint>
+                <CardAnchorPoint
+                    x={20}
+                    y={20}
+                    cardWidth={160}
+                    cardContent={{
+                        cardHeader: 'Switchgear Cabinet',
+                        cardData: [
+                            { label: 'Health Status', value: 'Good' },
+                            { label: 'Load Rate', value: '56%' },
+                            { label: 'Temp', value: '38 C' },
+                        ],
+                    }}
+                />
                 <CardAnchorPoint
                     x={90}
                     y={34}
@@ -38,18 +37,14 @@ export const CardAnchorPointExample = (): React.JSX.Element => {
                     callout
                     direction="left"
                     connectorLength={120}
-                    sx={cardFieldStyles}
-                >
-                    <Typography variant="subtitle2">Cabinet 4</Typography>
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 1, width: '100%' }}>
-                        <Typography variant="body2" className="card-field-label">
-                            Load Rate
-                        </Typography>
-                        <Typography variant="body2" className="card-field-value">
-                            56%
-                        </Typography>
-                    </Box>
-                </CardAnchorPoint>
+                    cardContent={{
+                        cardHeader: 'Switchgear Cabinet',
+                        cardData: [
+                            { label: 'Health Status', value: 'Good' },
+                            { label: 'Load Rate', value: '56%' },
+                        ],
+                    }}
+                />
                 <CardAnchorPoint
                     x={40}
                     y={70}
@@ -57,18 +52,11 @@ export const CardAnchorPointExample = (): React.JSX.Element => {
                     callout
                     direction="bottom"
                     connectorLength={30}
-                    sx={cardFieldStyles}
-                >
-                    <Typography variant="subtitle2">Cabinet 2</Typography>
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 1, width: '100%' }}>
-                        <Typography variant="body2" className="card-field-label">
-                            Load Rate
-                        </Typography>
-                        <Typography variant="body2" className="card-field-value">
-                            56%
-                        </Typography>
-                    </Box>
-                </CardAnchorPoint>
+                    cardContent={{
+                        cardHeader: 'Switchgear Cabinet',
+                        cardData: [{ label: 'Health Status', value: 'Good' }],
+                    }}
+                />
                 <CardAnchorPoint
                     x={73}
                     y={95}
@@ -76,18 +64,14 @@ export const CardAnchorPointExample = (): React.JSX.Element => {
                     callout
                     direction="top"
                     connectorLength={30}
-                    sx={cardFieldStyles}
-                >
-                    <Typography variant="subtitle2">Cabinet 1</Typography>
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 1, width: '100%' }}>
-                        <Typography variant="body2" className="card-field-label">
-                            Health Status
-                        </Typography>
-                        <Typography variant="body2" className="card-field-value">
-                            Good
-                        </Typography>
-                    </Box>
-                </CardAnchorPoint>
+                    cardContent={{
+                        cardHeader: 'Switchgear Cabinet',
+                        cardData: [
+                            { label: 'Health Status', value: 'Good' },
+                            { label: 'Temp', value: '38 C' },
+                        ],
+                    }}
+                />
             </ImageAnnotator>
         </ExampleShowcase>
     );
