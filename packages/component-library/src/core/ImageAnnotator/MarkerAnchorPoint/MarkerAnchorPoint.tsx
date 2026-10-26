@@ -31,7 +31,7 @@ const ERROR_BACKGROUND_DARK = BLUIColors.red[300];
 const WARNING_BACKGROUND_LIGHT = BLUIColors.yellow[500];
 const WARNING_BACKGROUND_DARK = BLUIColors.yellow[800];
 const ORANGE_BACKGROUND_LIGHT = BLUIColors.orange[400];
-const ORANGE_BACKGROUND_DARK = BLUIColors.orange[200];
+const ORANGE_BACKGROUND_DARK = BLUIColors.orange[400];
 const PURPLE_BACKGROUND_LIGHT = BLUIColors.purple[500];
 const PURPLE_BACKGROUND_DARK = BLUIColors.purple[200];
 
