@@ -119,7 +119,7 @@ const CardRender: React.ForwardRefRenderFunction<unknown, CardProps> = (props: C
 
     return (
         <AnchorPoint {...otherProps}>
-            <StyledCard ref={ref} cardWidth={clampedWidth} data-testid="blui-card-root" {...otherProps}>
+            <StyledCard ref={ref} cardWidth={clampedWidth} data-testid="blui-card-root">
                 {isCardContentData(content) ? (
                     <>
                         <CardHeader variant="subtitle2">{content.cardHeader}</CardHeader>
