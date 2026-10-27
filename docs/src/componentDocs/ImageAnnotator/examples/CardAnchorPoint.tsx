@@ -32,6 +32,33 @@ const codeSnippet = `<ImageAnnotator src={isDarkMode ? cabinetDark : cabinetLigh
             ],
         }}
     />
+    <CardAnchorPoint
+        x={40}
+        y={70}
+        cardWidth={160}
+        callout
+        direction="bottom"
+        connectorLength={30}
+        cardContent={{
+            cardHeader: 'Switchgear Cabinet',
+            cardData: [{ label: 'Health Status', value: 'Good' }],
+        }}
+    />
+    <CardAnchorPoint
+        x={73}
+        y={95}
+        cardWidth={160}
+        callout
+        direction="top"
+        connectorLength={30}
+        cardContent={{
+            cardHeader: 'Switchgear Cabinet',
+            cardData: [
+                { label: 'Health Status', value: 'Good' },
+                { label: 'Temp', value: '38 C' },
+            ],
+        }}
+    />
 </ImageAnnotator>`;
 
 export const CardAnchorPoint = (): React.JSX.Element => (

@@ -112,14 +112,43 @@ const StyledCard = styled(MuiCard, {
 }));
 
 const CardRender: React.ForwardRefRenderFunction<unknown, CardProps> = (props: CardProps, ref: any) => {
-    const { children, cardContent, cardWidth = 160, ...otherProps } = props;
+    const {
+        children,
+        cardContent,
+        cardWidth = 160,
+        x,
+        y,
+        classes,
+        sx,
+        callout,
+        direction,
+        connectorLength,
+        connectorColor,
+        connectorThickness,
+        autoFlip,
+        anchorDotColor,
+        ...cardProps
+    } = props;
 
     const clampedWidth = Math.min(Math.max(cardWidth, MIN_CARD_WIDTH), MAX_CARD_WIDTH);
     const content = cardContent === undefined ? children : cardContent;
+    const anchorPointProps = {
+        x,
+        y,
+        classes,
+        sx,
+        callout,
+        direction,
+        connectorLength,
+        connectorColor,
+        connectorThickness,
+        autoFlip,
+        anchorDotColor,
+    } as AnchorPointProps;
 
     return (
-        <AnchorPoint {...otherProps}>
-            <StyledCard ref={ref} cardWidth={clampedWidth} data-testid="blui-card-root">
+        <AnchorPoint {...anchorPointProps}>
+            <StyledCard ref={ref} cardWidth={clampedWidth} sx={sx} data-testid="blui-card-root" {...cardProps}>
                 {isCardContentData(content) ? (
                     <>
                         <CardHeader variant="subtitle2">{content.cardHeader}</CardHeader>

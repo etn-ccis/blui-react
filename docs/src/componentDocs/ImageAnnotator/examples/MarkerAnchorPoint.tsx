@@ -4,20 +4,35 @@ import { CodeBlock, CodeBlockActionButtonRow } from '../../../shared';
 import { MarkerAnchorPointExample } from './MarkerAnchorPointExample';
 
 const codeSnippet = `<ImageAnnotator src={isDarkMode ? partsDark : partsLight} alt="Factory floor parts" sx={imageStyles}>
-	<MarkerAnchorPoint x={8} y={35} icon={<RoomIcon />} markerColor="primary" />
-	<MarkerAnchorPoint x={42} y={14} icon={<DeviceThermostatOutlinedIcon />} markerColor="orange" />
-	<MarkerAnchorPoint x={18} y={76} icon={<DeviceThermostatOutlinedIcon />} markerColor="neutral" />
+	<MarkerAnchorPoint x={42} y={14} icon={<CameraAltIcon />} markerColor="orange" />
+	<MarkerAnchorPoint x={18} y={76} icon={<PartyMode />} markerColor="neutral" />
 	<MarkerAnchorPoint x={43} y={78} icon={<DeviceThermostatOutlinedIcon />} markerColor="success" />
-	<MarkerAnchorPoint x={88} y={24} icon={<DeviceThermostatOutlinedIcon />} markerColor="warning" />
-	<MarkerAnchorPoint x={88} y={78} icon={<DeviceThermostatOutlinedIcon />} markerColor="purple" />
+	<MarkerAnchorPoint
+		x={8}
+		y={30}
+		icon={<RoomIcon />}
+		markerColor="primary"
+		callout
+		direction="bottom"
+		connectorLength={30}
+	/>
+	<MarkerAnchorPoint x={88} y={24} icon={<Map />} markerColor="warning" callout connectorLength={30} />
+	<MarkerAnchorPoint
+		x={35}
+		y={58}
+		icon={<Vibration />}
+		markerColor="purple"
+		callout
+		direction="top"
+		connectorLength={30}
+	/>
 	<MarkerAnchorPoint
 		x={71}
 		y={50}
-		icon={<DeviceThermostatOutlinedIcon />}
+		icon={<SupervisorAccount />}
 		markerColor="error"
 		callout
 		connectorLength={30}
-		direction="right"
 	/>
 </ImageAnnotator>`;
 
