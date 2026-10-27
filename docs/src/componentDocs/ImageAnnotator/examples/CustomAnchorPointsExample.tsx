@@ -25,18 +25,18 @@ export const CustomAnchorPointsExample = (): React.JSX.Element => {
                     markerColor="warning"
                     callout
                     direction="right"
-                    connectorLength={40}
+                    connectorLength={60}
                     anchorDotColor="#d8442a"
-                    connectorColor="#d8442a"
+                    connectorColor={['yellow', 'red']}
                 />
                 <LabelAnchorPoint
                     x={50}
                     y={20}
-                    label="Cabinet 2"
+                    label="Cabinet #2"
                     callout
                     anchorDotColor="#5090ef"
-                    connectorColor="#2cc333"
-                    connectorLength={50}
+                    connectorColor={['#2cc333', '#5090ef']}
+                    connectorLength={70}
                 />
                 <CardAnchorPoint
                     x={80}
@@ -44,8 +44,9 @@ export const CustomAnchorPointsExample = (): React.JSX.Element => {
                     cardWidth={180}
                     callout
                     direction="left"
-                    connectorLength={50}
-                    connectorColor="#853799"
+                    connectorLength={90}
+                    connectorColor="#e09bf1"
+                    connectorThickness={1}
                     anchorDotColor="#059893"
                 >
                     <>
