@@ -1,0 +1,18 @@
+import Box from '@mui/material/Box';
+
+# Two Tone Icon
+
+`TwoToneIcon` applies a semantic two-color palette to an MUI two-tone icon.
+
+### Two Tone Icon API
+
+<Box>
+
+| Prop Name | Description | Type | Required | Default |
+| :-------- | :---------- | :--- | :------- | :------ |
+| icon | The MUI two-tone icon component to render. | `React.ElementType<SvgIconProps>` | yes | |
+| status | Semantic color scheme applied to the icon. Colors automatically adapt to the active light or dark theme. | `'error' \| 'orange' \| 'warning' \| 'success' \| 'primary' \| 'purple' \| 'neutral'` | no | `'neutral'` |
+
+</Box>
+
+All MUI [`SvgIcon`](https://mui.com/material-ui/api/svg-icon/) props are supported. Use `status` to apply the component's semantic two-tone color palette.

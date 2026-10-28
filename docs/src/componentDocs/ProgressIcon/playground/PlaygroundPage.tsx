@@ -9,7 +9,7 @@ import {
     Playground,
 } from '@brightlayer-ui/react-doc-components';
 import Stack from '@mui/material/Stack';
-import { Signal, Battery, Heart, Pie, Ups } from '@brightlayer-ui/react-progress-icons';
+import { Signal, Battery, BatteryLarge, Heart, Pie, Ups } from '@brightlayer-ui/react-progress-icons';
 import { removeEmptyProps } from '../../../shared';
 
 const inputConfig: InputConfig = [
@@ -20,7 +20,7 @@ const inputConfig: InputConfig = [
         typeLabel: 'string',
         description: 'Select the type of progress icon',
         initialValue: 'Signal',
-        options: ['Signal', 'Battery', 'Heart', 'Pie', 'Ups'],
+        options: ['Signal', 'Battery', 'BatteryLarge', 'Heart', 'Pie', 'Ups'],
         required: true,
         category: 'Icon Type',
     },
@@ -202,6 +202,9 @@ const ProgressIconPreview: PreviewComponent = ({ data }) => {
             if (charging !== undefined) {
                 iconSpecificProps.charging = charging;
             }
+            break;
+        case 'BatteryLarge':
+            IconComponent = BatteryLarge;
             break;
         case 'Heart':
             IconComponent = Heart;

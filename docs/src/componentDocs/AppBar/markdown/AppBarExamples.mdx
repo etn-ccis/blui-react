@@ -1,4 +1,4 @@
-import { AppBar, CollapsedAppBar, ExpandedAppBar, AppBarWithAdditionalContent } from '../examples';
+import { AppBar, AppBarOverlay, CollapsedAppBar, ExpandedAppBar, AppBarWithAdditionalContent } from '../examples';
 
 ## Collapsible App Bar
 
@@ -17,9 +17,14 @@ Setting the variant to `'collapsed'` will lock the App Bar at its collapsed size
 Setting the variant to `'expanded'` will lock the App Bar at its expanded size.
 
 <ExpandedAppBar />
-
 ## Adding Additional Content
 
 You can organize the contents of your App Bar by adding a [Toolbar](https://mui.com/material-ui/api/toolbar/) component, just as you would with a MUI App Bar.
 
 <AppBarWithAdditionalContent />
+
+## Overlay App Bar
+
+Use `overlay` with `color="transparent"` to render the translucent gradient and progressive blur over the content behind the App Bar.
+
+<AppBarOverlay />

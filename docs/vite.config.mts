@@ -3,6 +3,7 @@
 /// <reference types='vitest' />
 /// <reference types="vite/client" />
 import { defineConfig } from 'vite';
+import { fileURLToPath, URL } from 'node:url';
 import react from '@vitejs/plugin-react';
 import viteTsconfigPaths from 'vite-tsconfig-paths';
 import mdx from '@mdx-js/rollup';
@@ -10,6 +11,11 @@ import remarkGfm from 'remark-gfm';
 
 export default defineConfig({
     base: process.env.VITE_PUBLIC_URL || '/',
+    resolve: {
+        alias: {
+            '@mui/material/styles': fileURLToPath(new URL('./node_modules/@mui/material/esm/styles/index.js', import.meta.url)),
+        },
+    },
     plugins: [
         react(),
         viteTsconfigPaths(),
