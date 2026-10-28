@@ -2,6 +2,10 @@
 
 ## v8.0.6 (Unreleased)
 
+### Added
+
+- Image Annotator, MarkerAnchorPoint, LabelAnchorPoint and CardAnchorPoint components.
+
 ### Fixed 
 
 - drawer sideBorder not working in playground. ([#301](https://github.com/etn-ccis/blui-react/issues/301))
