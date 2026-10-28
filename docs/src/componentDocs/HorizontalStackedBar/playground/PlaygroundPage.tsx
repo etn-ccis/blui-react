@@ -148,7 +148,8 @@ const buildData = (data: HorizontalStackedBarPlaygroundData): HorizontalStackedB
         const label = data[`${item.key}Label` as keyof HorizontalStackedBarPlaygroundData] as string;
         const count = Number(data[`${item.key}Count` as keyof HorizontalStackedBarPlaygroundData]) || 0;
         const variant = data[`${item.key}Variant` as keyof HorizontalStackedBarPlaygroundData] as
-            HorizontalStackedBarItem['variant'] | 'undefined';
+            | HorizontalStackedBarItem['variant']
+            | 'undefined';
         const backgroundColor = data[
             `${item.key}BackgroundColor` as keyof HorizontalStackedBarPlaygroundData
         ] as string;
@@ -204,7 +205,8 @@ const generateSnippet: CodeSnippetFunction = (rawData) => {
         const label = data[`${item.key}Label` as keyof HorizontalStackedBarPlaygroundData] as string;
         const count = Number(data[`${item.key}Count` as keyof HorizontalStackedBarPlaygroundData]) || 0;
         const variant = data[`${item.key}Variant` as keyof HorizontalStackedBarPlaygroundData] as
-            HorizontalStackedBarItem['variant'] | 'undefined';
+            | HorizontalStackedBarItem['variant']
+            | 'undefined';
         const backgroundColor = data[
             `${item.key}BackgroundColor` as keyof HorizontalStackedBarPlaygroundData
         ] as string;
