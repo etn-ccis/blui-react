@@ -1,0 +1,50 @@
+import { TwoToneIconExample } from '../examples/TwoToneIconExample';
+import { CodeBlock, CodeBlockActionButtonRow } from '../../../shared';
+
+## Two Tone Icon
+
+`TwoToneIcon` applies a semantic two-color palette to a two-tone icon. Pass an icon to `icon` and choose its color with `status`. It is available from `@brightlayer-ui/icons-mui`.
+
+### Icon Colors
+
+Use `status` to communicate meaning:
+
+- **Primary:** Default actions and navigation.
+- **Error:** Errors, failures, and destructive actions.
+- **Warning:** Cautionary messages and attention-required states.
+- **Success:** Confirmations and positive states.
+- **Orange:** High-priority or maintenance states.
+- **Purple:** Specialized or branded features.
+- **Neutral:** Inactive, disabled, or low-emphasis icons.
+
+The example below shows all available status colors.
+
+<TwoToneIconExample />
+
+<CodeBlock
+	language={'jsx'}
+	code={`import NotificationsTwoTone from '@mui/icons-material/NotificationsTwoTone';
+import { TwoToneIcon } from '@brightlayer-ui/icons-mui';
+
+<TwoToneIcon icon={NotificationsTwoTone} status="primary" sx={{ fontSize: 48 }} />
+<TwoToneIcon icon={NotificationsTwoTone} status="error" sx={{ fontSize: 48 }} />
+<TwoToneIcon icon={NotificationsTwoTone} status="warning" sx={{ fontSize: 48 }} />
+<TwoToneIcon icon={NotificationsTwoTone} status="success" sx={{ fontSize: 48 }} />
+<TwoToneIcon icon={NotificationsTwoTone} status="orange" sx={{ fontSize: 48 }} />
+<TwoToneIcon icon={NotificationsTwoTone} status="purple" sx={{ fontSize: 48 }} />
+<TwoToneIcon icon={NotificationsTwoTone} status="neutral" sx={{ fontSize: 48 }} />`}
+/>
+
+<CodeBlockActionButtonRow
+	copyText={`import NotificationsTwoTone from '@mui/icons-material/NotificationsTwoTone';
+import { TwoToneIcon } from '@brightlayer-ui/icons-mui';
+
+<TwoToneIcon icon={NotificationsTwoTone} status="primary" sx={{ fontSize: 48 }} />
+<TwoToneIcon icon={NotificationsTwoTone} status="error" sx={{ fontSize: 48 }} />
+<TwoToneIcon icon={NotificationsTwoTone} status="warning" sx={{ fontSize: 48 }} />
+<TwoToneIcon icon={NotificationsTwoTone} status="success" sx={{ fontSize: 48 }} />
+<TwoToneIcon icon={NotificationsTwoTone} status="orange" sx={{ fontSize: 48 }} />
+<TwoToneIcon icon={NotificationsTwoTone} status="purple" sx={{ fontSize: 48 }} />
+<TwoToneIcon icon={NotificationsTwoTone} status="neutral" sx={{ fontSize: 48 }} />`}
+	url="componentDocs/TwoToneIcon/examples/TwoToneIconExample.tsx"
+/>

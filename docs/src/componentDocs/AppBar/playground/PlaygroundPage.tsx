@@ -95,6 +95,15 @@ const inputConfig: InputConfig = [
         options: ['collapsed', 'expanded', 'snap'],
         category: 'Optional Props',
     },
+    {
+        id: 'overlay',
+        type: 'boolean',
+        description: 'Enables the translucent gradient and blur overlay',
+        required: false,
+        initialValue: false,
+        defaultValue: false,
+        category: 'Optional Props',
+    },
 
     // Other Configuration
     // NONE
@@ -115,19 +124,19 @@ const AppBarPreview: PreviewComponent = ({ data }) => {
                     position: 'relative',
                 }}
             >
-                <AppBar
-                    {...removeEmptyProps(rest)}
-                    backgroundImage={backgroundImage ? getImage(backgroundImage) : undefined}
-                    scrollContainerId={SCROLL_CONTAINER_ID}
-                >
-                    <Toolbar>
-                        <Typography variant="h6">Title</Typography>
-                    </Toolbar>
-                </AppBar>
                 <Box
                     id={SCROLL_CONTAINER_ID}
                     sx={{ height: 400, overflow: 'scroll', backgroundColor: 'background.paper' }}
                 >
+                    <AppBar
+                        {...removeEmptyProps(rest)}
+                        backgroundImage={backgroundImage ? getImage(backgroundImage) : undefined}
+                        scrollContainerId={SCROLL_CONTAINER_ID}
+                    >
+                        <Toolbar>
+                            <Typography variant="h6">Title</Typography>
+                        </Toolbar>
+                    </AppBar>
                     {getBodyFiller()}
                 </Box>
             </Box>
