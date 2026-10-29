@@ -11,12 +11,12 @@
     "lint:fix": "eslint \"**/*.ts\" \"**/*.tsx\" --fix",
     "prepare": "husky",
     "build:components": "cd packages/component-library && pnpm run build",
-    "start:showcase":"pnpm install && pnpm build:components && cd apps/showcase && pnpm install && pnpm start",
+    "start:showcase": "pnpm install && pnpm build:components && cd apps/showcase && pnpm install && pnpm start",
     "build:theme": "pnpm --filter @brightlayer-ui/react-themes build",
-    "start:ThemeShowcase":"pnpm install && pnpm --filter @brightlayer-ui/react-themes build && pnpm --filter react-showcase-demo start",
+    "start:ThemeShowcase": "pnpm install && pnpm --filter @brightlayer-ui/react-themes build && pnpm --filter react-showcase-demo start",
     "build:workflow": "pnpm --filter @brightlayer-ui/react-auth-workflow build",
-    "start:workflow:example":"pnpm install && pnpm --filter @brightlayer-ui/react-auth-workflow build && pnpm --filter example start",
-    "start:workflow:example-vite":"pnpm install && pnpm --filter @brightlayer-ui/react-auth-workflow build && pnpm --filter vite-example start",
+    "start:workflow:example": "pnpm install && pnpm --filter @brightlayer-ui/react-auth-workflow build && pnpm --filter example start",
+    "start:workflow:example-vite": "pnpm install && pnpm --filter @brightlayer-ui/react-auth-workflow build && pnpm --filter vite-example start",
     "start:docs": "pnpm install && cd docs && pnpm install && pnpm start",
     "start:storybook": "pnpm install && pnpm build:theme && pnpm build:components && cd apps/storybook && pnpm install && pnpm start"
   },
@@ -31,17 +31,17 @@
     "eslint-config-prettier": "^10.1.3",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-storybook": "^9.0.12",
     "husky": "^9.1.7",
     "i18next-browser-languagedetector": "^8.1.0",
     "pnpm": "^10.34.4",
     "prettier": "^3.5.3",
     "react": "^19.1.0",
     "react-router": "^7.15.0",
-    "typescript-eslint": "^8.32.0",
-    "eslint-plugin-storybook": "^9.0.12"
+    "typescript-eslint": "^8.32.0"
   },
   "prettier": "@brightlayer-ui/prettier-config",
-   "pnpm": {
+  "pnpm": {
     "overrides": {
       "sharp": "^0.35.4",
       "autoprefixer": "10.4.5",
@@ -58,9 +58,7 @@
       "form-data@>=3.0.0 <3.0.5": "^3.0.5",
       "form-data@>=4.0.0 <4.0.6": "^4.0.6",
       "hono": "^4.12.25",
-      "undici": "^8.10.2",
-      "vite@<=6.4.2": "^6.4.3",
-      "vite@>=7.0.0 <=7.3.4": "^7.3.5",
+      "undici": "^8.12.2",
       "vitest": "^4.1.11",
       "shell-quote": "^1.11.0",
       "basic-ftp": "^6.2.2",
@@ -80,7 +78,6 @@
       "brace-expansion@>=2.0.0 <5.0.12": "^5.0.12",
       "minimatch@>=5.0.0 <9.0.0": "^10.2.6",
       "minimatch@>=9.0.0": "^10.2.6",
-      "dompurify": "^3.4.15",
       "http-proxy-middleware": "^2.0.10",
       "morgan": "^1.11.0",
       "@opentelemetry/core": "^2.8.0",
@@ -92,7 +89,12 @@
       "nanoid": "^3.3.18",
       "esbuild": "^0.28.2",
       "esbuild-wasm": "^0.28.2",
-      "firebase-tools": "^15.32.1"
+      "follow-redirects@>=1.16.0 <1.16.1": "^1.16.1",
+      "launch-editor@<=2.14.1": "^2.14.2",
+      "dompurify@>=3.4.4 <=3.4.16": "^3.4.17",
+      "zod@<4.6.6": "^4.6.6",
+      "body-parser@<1.20.9": "^1.20.9",
+      "body-parser@>=2.0.0 <2.4.0": "^2.4.0"
     }
   }
 }
