@@ -123,6 +123,14 @@ jobs:
         id: enforce_vulns
         if: steps.check_changes.outputs.changes == 'true'
         run: |
+          ENFORCE_STRICT="false"
+            if [ "${{ github.event_name }}" = "push" ]; then
+              case "${{ github.ref }}" in
+                refs/heads/main|refs/heads/master)
+                  ENFORCE_STRICT="true"
+                  ;;
+              esac
+            fi
           SARIF_FILE="${{ github.workspace }}/${{ matrix.app }}/blackduck-sarif.json"
 
           if [ -f "$SARIF_FILE" ]; then
