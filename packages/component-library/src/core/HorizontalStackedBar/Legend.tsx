@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import { Box, BoxProps, Typography, unstable_composeClasses as composeClasses } from '@mui/material';
-import { styled, useTheme } from '@mui/material/styles';
+import { styled, useColorScheme, useTheme } from '@mui/material/styles';
 import { getLegendUtilityClass, LegendClasses, LegendClassKey } from './LegendClasses';
 import { cx } from '@emotion/css';
 import {
@@ -147,12 +147,15 @@ const Icon = styled(Box, {
 const LegendRender: React.ForwardRefRenderFunction<unknown, LegendProps> = (props: LegendProps, ref: any) => {
     const generatedClasses = useUtilityClasses(props);
     const theme = useTheme();
+    const { mode, systemMode } = useColorScheme();
+    const resolvedMode = mode === 'system' ? systemMode : mode;
+    const isDarkMode = resolvedMode ? resolvedMode === 'dark' : theme.palette.mode === 'dark';
     const variantColors: Record<string, string> = {
-        failed: BLUIColors.red[500],
-        canceled: BLUIColors.gold[400],
-        success: BLUIColors.green[700],
+        failed: isDarkMode ? BLUIColors.red[300] : BLUIColors.red[500],
+        canceled: isDarkMode ? BLUIColors.yellow[300] : BLUIColors.gold[400],
+        success: isDarkMode ? BLUIColors.green[300] : BLUIColors.green[700],
         pending: BLUIColors.gray[500],
-        info: BLUIColors.lightBlue[700],
+        info: isDarkMode ? BLUIColors.blue[200] : BLUIColors.lightBlue[700],
     };
 
     const variantIconColors: Record<string, string> = {
@@ -161,7 +164,10 @@ const LegendRender: React.ForwardRefRenderFunction<unknown, LegendProps> = (prop
     };
 
     const selectedVariantIconColors: Record<string, string> = {
-        canceled: BLUIColors.gray[900],
+        failed: BLUIColors.black[900],
+        canceled: BLUIColors.black[900],
+        success: BLUIColors.black[900],
+        info: BLUIColors.black[900],
     };
 
     const {
@@ -193,7 +199,7 @@ const LegendRender: React.ForwardRefRenderFunction<unknown, LegendProps> = (prop
         iconColor ?? (variant ? (variantIconColors[variant] ?? finalBackgroundColor) : finalBackgroundColor);
     // Icon color when selected: explicit override first, then contrast-safe color
     const resolvedIconColorSelected =
-        iconColor ?? (variant ? selectedVariantIconColors[variant] : undefined) ?? contrastTextColor;
+        iconColor ?? (isDarkMode && variant ? selectedVariantIconColors[variant] : undefined) ?? contrastTextColor;
 
     // Use provided icon or fall back to variant's default icon
     const variantIcon = variant ? (count === 0 ? VARIANT_OUTLINE_ICONS[variant] : VARIANT_ICONS[variant]) : undefined;

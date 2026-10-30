@@ -16,7 +16,7 @@ import drawerRailItemClasses, {
     getDrawerRailItemUtilityClass,
 } from './DrawerRailItemClasses';
 import { unstable_composeClasses as composeClasses } from '@mui/material';
-import { styled, SxProps, Theme, useColorScheme } from '@mui/material/styles';
+import { styled, SxProps, Theme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 
 const useUtilityClasses = (ownerState: DrawerRailItemProps): Record<DrawerRailItemClassKey, string> => {
@@ -112,14 +112,7 @@ const Root = styled(ButtonBase, {
     itemActive,
     theme,
 }) => {
-    const colorScheme = useColorScheme();
-
-    const lightenedPrimary = color(
-        colorScheme.mode === 'dark' ? theme.palette.primary.dark : theme.palette.primary.main
-    )
-        .lighten(0.83)
-        .desaturate(0.39)
-        .string();
+    const lightenedPrimary = color(theme.palette.primary.main).lighten(0.83).desaturate(0.39).string();
     return {
         width: RAIL_WIDTH,
         minHeight: RAIL_WIDTH,
@@ -165,18 +158,8 @@ const Root = styled(ButtonBase, {
 const ActiveItem = styled(Box, {
     shouldForwardProp: (prop) => prop !== 'activeItemBackgroundColor',
 })<Pick<DrawerRailItemProps, 'activeItemBackgroundColor'>>(({ activeItemBackgroundColor, theme }) => {
-    const colorScheme = useColorScheme();
-
-    const fivePercentOpacityPrimary = color(
-        colorScheme.mode === 'dark' ? theme.palette.primary.dark : theme.palette.primary.main
-    )
-        .fade(0.95)
-        .string();
-    const twentyPercentOpacityPrimary = color(
-        colorScheme.mode === 'dark' ? theme.palette.primary.dark : theme.palette.primary.main
-    )
-        .fade(0.8)
-        .string();
+    const fivePercentOpacityPrimary = color(theme.palette.primary.main).fade(0.95).string();
+    const twentyPercentOpacityPrimary = color(theme.palette.primary.main).fade(0.8).string();
 
     return {
         position: 'absolute',
