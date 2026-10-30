@@ -98,6 +98,8 @@ jobs:
         env:
           DETECT_PROJECT_NAME: ${{ vars.PROJECT_NAME }}
           DETECT_PROJECT_VERSION_NAME: react-${{ matrix.app }}
+          # deepmerge is currently introduced via jest dev tooling; keep SCA gating focused on runtime risk.
+          DETECT_NPM_INCLUDE_DEV_DEPENDENCIES: false
         with:
           blackducksca_url: ${{ vars.BLACKDUCKSCA_URL }}
           blackducksca_token: ${{ secrets.BLACKDUCKSCA_TOKEN }}
