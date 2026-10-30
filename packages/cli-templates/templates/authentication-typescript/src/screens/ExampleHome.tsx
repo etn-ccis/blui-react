@@ -71,7 +71,7 @@ export const ExampleHome: React.FC<React.PropsWithChildren> = () => {
         app.onUserNotAuthenticated();
         app.setIsAuthenticated(false);
 
-        navigate('/login');
+        void navigate('/login');
     };
 
     const changeAppLanguage = (event: SelectChangeEvent): void => {

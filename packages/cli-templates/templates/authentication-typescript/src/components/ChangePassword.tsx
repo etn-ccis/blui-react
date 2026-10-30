@@ -11,7 +11,7 @@ export const ChangePassword = (): React.JSX.Element => {
         app.setShowChangePasswordDialog(false);
         LocalStorage.clearAuthCredentials();
         app.onUserNotAuthenticated();
-        navigate('/login');
+        void navigate('/login');
     };
 
     return (
