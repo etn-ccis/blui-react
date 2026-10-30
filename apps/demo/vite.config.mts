@@ -20,6 +20,11 @@ export default defineConfig({
         host: 'localhost',
         open: true,
     },
+    optimizeDeps: {
+        esbuildOptions: {
+            target: 'es2020',
+        },
+    },
     preview: {
         port: 4300,
         host: 'localhost',
@@ -39,6 +44,7 @@ export default defineConfig({
     },
     root: __dirname,
     build: {
+        target: 'es2020',
         emptyOutDir: true,
         reportCompressedSize: true,
         commonjsOptions: {

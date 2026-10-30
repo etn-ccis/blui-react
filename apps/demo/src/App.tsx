@@ -25,7 +25,7 @@ const BluiSVGStyled = styled(BluiSVG)({
     animation: '2500ms spin linear infinite',
 });
 
-export const App = (): JSX.Element => {
+export const App = (): React.JSX.Element => {
     // const theme = useTheme();
     const sm = useMediaQuery(theme.breakpoints.down('sm'));
 
