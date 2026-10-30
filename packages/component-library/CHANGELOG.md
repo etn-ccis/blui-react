@@ -1,6 +1,6 @@
 # Changelog
 
-## v8.0.6 (Unreleased)
+## v8.0.6 (Oct 30, 2026)
 
 ### Added
 
