@@ -29,7 +29,6 @@
         "@emotion/styled": "^11.6.0",
         "@mui/base": "^5.0.0-beta.59",
         "@mui/codemod": "^7.1.1",
-        "@mui/docs": "^7.1.1",
         "@mui/envinfo": "^2.0.28",
         "@mui/icons-material": "^7.1.1",
         "@mui/lab": "^6.0.0-beta.14",
@@ -105,7 +104,7 @@
         "source-map-explorer": "^2.5.0",
         "ts-jest": "^29.4.9",
         "ts-node": "^10.9.2",
-        "vite": "^4.5.14"
+        "vite": "^6.4.4"
     },
     "prettier": "@brightlayer-ui/prettier-config"
 }
