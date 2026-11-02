@@ -363,9 +363,9 @@ export const DataTable = (<TData extends DataTableData>(props: DataTableProps<TD
                                   onClick={(): void => actionTable.setEditingRow(row)}
                                   sx={(t: any): any => ({
                                       '&:hover': {
-                                          backgroundColor: (t.vars as any)?.palette?.primary?.darkChannel
-                                              ? `rgba(${(t.vars as any).palette.primary.darkChannel} / 0.2)`
-                                              : alpha(t.palette.primary.dark, 0.2),
+                                          backgroundColor: (t.vars as any)?.palette?.primary?.mainChannel
+                                              ? `rgba(${(t.vars as any).palette.primary.mainChannel} / 0.2)`
+                                              : alpha(t.palette.primary.main, 0.2),
                                           color: t.vars?.palette?.primary?.main ?? t.palette.primary.main,
                                       },
                                   })}
@@ -383,9 +383,9 @@ export const DataTable = (<TData extends DataTableData>(props: DataTableProps<TD
                                   }}
                                   sx={(t: any): any => ({
                                       '&:hover': {
-                                          backgroundColor: (t.vars as any)?.palette?.primary?.darkChannel
-                                              ? `rgba(${(t.vars as any).palette.primary.darkChannel} / 0.2)`
-                                              : alpha(t.palette.primary.dark, 0.2),
+                                          backgroundColor: (t.vars as any)?.palette?.primary?.mainChannel
+                                              ? `rgba(${(t.vars as any).palette.primary.mainChannel} / 0.2)`
+                                              : alpha(t.palette.primary.main, 0.2),
                                           color: t.vars?.palette?.primary?.main ?? t.palette.primary.main,
                                       },
                                   })}
@@ -401,9 +401,9 @@ export const DataTable = (<TData extends DataTableData>(props: DataTableProps<TD
                                   onClick={(): void => handleDeleteRow(row)}
                                   sx={(t: any): any => ({
                                       '&:hover': {
-                                          backgroundColor: (t.vars as any)?.palette?.error?.darkChannel
-                                              ? `rgba(${(t.vars as any).palette.error.darkChannel} / 0.2)`
-                                              : alpha(t.palette.error.dark, 0.2),
+                                          backgroundColor: (t.vars as any)?.palette?.error?.mainChannel
+                                              ? `rgba(${(t.vars as any).palette.error.mainChannel} / 0.2)`
+                                              : alpha(t.palette.error.main, 0.2),
                                           color: t.vars?.palette?.error?.main ?? t.palette.error.main,
                                       },
                                   })}

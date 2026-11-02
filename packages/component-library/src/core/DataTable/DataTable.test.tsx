@@ -973,8 +973,8 @@ describe('DataTable', () => {
         expect(screen.getByText('Name')).toBeInTheDocument();
     });
 
-    // With non-CSS-vars theme, t.vars?.palette?.primary?.darkChannel is undefined (falsy),
-    // which drives the `alpha(t.palette.primary.dark)` else-branches and the
+    // With non-CSS-vars theme, t.vars?.palette?.primary?.mainChannel is undefined (falsy),
+    // which drives the `alpha(t.palette.primary.main)` else-branches and the
     // `?? t.palette.primary/error.main` fallbacks in the row-action IconButton hover sx callbacks.
     it('renders row action buttons with non-CSS-vars theme (covers hover sx fallback branches)', () => {
         render(

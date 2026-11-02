@@ -24,28 +24,63 @@ const useUtilityClasses = (ownerState: AppBarProps): Record<AppBarClassKey, stri
 };
 
 const Root = styled(MuiAppBar, {
-    shouldForwardProp: (prop) => !['backgroundImage', 'animationDuration'].includes(prop.toString()),
-})<Pick<AppBarProps, 'animationDuration' | 'backgroundImage'>>(({ animationDuration, backgroundImage, theme }) => ({
-    overflow: 'hidden',
-    transition: theme.transitions.create(['height'], {
-        duration: animationDuration || theme.transitions.duration.standard,
-        easing: theme.transitions.easing.easeInOut,
-    }),
-    [`& .${appBarClasses.background}`]: {
-        position: 'absolute',
-        zIndex: -1,
-        width: '100%',
-        backgroundSize: 'cover',
-        height: '100%',
-        opacity: 0.3,
-        backgroundPosition: 'center bottom',
-        backgroundImage: `url(${backgroundImage})`,
-        transition: theme.transitions.create(['all'], {
+    shouldForwardProp: (prop) =>
+        !['backgroundImage', 'animationDuration', 'applyOverlayStyles'].includes(prop.toString()),
+})<Pick<AppBarProps, 'animationDuration' | 'backgroundImage'> & { applyOverlayStyles?: boolean }>(
+    ({ animationDuration, backgroundImage, applyOverlayStyles, theme }) => ({
+        overflow: 'hidden',
+        transition: theme.transitions.create(['height'], {
             duration: animationDuration || theme.transitions.duration.standard,
             easing: theme.transitions.easing.easeInOut,
         }),
-    },
-}));
+        ...(applyOverlayStyles && {
+            backgroundColor: 'transparent',
+            backgroundImage: 'none',
+            boxShadow: 'none',
+            overflow: 'visible',
+            // Scrim extends 24px below the app bar per Figma (80px shadow over a 56px bar)
+            '&::before, &::after': {
+                content: '""',
+                position: 'absolute',
+                left: 0,
+                right: 0,
+                top: 0,
+                height: 'calc(100% + 24px)',
+                zIndex: -1,
+                pointerEvents: 'none',
+            },
+            '&::before': {
+                background:
+                    'linear-gradient(180deg, rgba(255, 255, 255, 0.80) 20%, rgba(255, 255, 255, 0.64) 56%, rgba(255, 255, 255, 0.00) 100%)',
+                ...theme.applyStyles('dark', {
+                    background:
+                        'linear-gradient(180deg, rgba(0, 0, 0, 0.80) 20%, rgba(0, 0, 0, 0.64) 56%, rgba(0, 0, 0, 0.00) 100%)',
+                }),
+            },
+            // Progressive blur: strongest under the bar, fading to none at the bottom edge
+            '&::after': {
+                backdropFilter: 'blur(8px)',
+                WebkitBackdropFilter: 'blur(8px)',
+                maskImage: 'linear-gradient(180deg, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 100%)',
+                WebkitMaskImage: 'linear-gradient(180deg, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 100%)',
+            },
+        }),
+        [`& .${appBarClasses.background}`]: {
+            position: 'absolute',
+            zIndex: -1,
+            width: '100%',
+            backgroundSize: 'cover',
+            height: '100%',
+            opacity: 0.3,
+            backgroundPosition: 'center bottom',
+            backgroundImage: `url(${backgroundImage})`,
+            transition: theme.transitions.create(['all'], {
+                duration: animationDuration || theme.transitions.duration.standard,
+                easing: theme.transitions.easing.easeInOut,
+            }),
+        },
+    })
+);
 
 export type AppBarProps = Omit<MuiAppBarProps, 'variant'> & {
     /**
@@ -102,6 +137,14 @@ export type AppBarProps = Omit<MuiAppBarProps, 'variant'> & {
     variant?: 'expanded' | 'collapsed' | 'snap';
 
     /**
+     * When true renders a translucent gradient scrim with a progressive blur over the page content.
+     * This is purely a visual modifier and can be combined with any `variant` sizing behavior.
+     *
+     * Default: false
+     */
+    overlay?: boolean;
+
+    /**
      * How far to scroll before collapsing the app bar
      *
      * Default: 136
@@ -109,7 +152,7 @@ export type AppBarProps = Omit<MuiAppBarProps, 'variant'> & {
     scrollThreshold?: number;
 
     /**
-     * An element ID for the scrollable container that controls the app bar height
+     * An element ID for the scrollable container that controls the app bar height.
      *
      * Default: window
      */
@@ -137,6 +180,7 @@ const AppBarRender: React.ForwardRefRenderFunction<unknown, AppBarProps> = (prop
     const {
         style = {},
         variant = 'snap',
+        overlay = false,
         animationDuration: durationProp,
         expandedHeight = 200,
         backgroundImage,
@@ -148,11 +192,20 @@ const AppBarRender: React.ForwardRefRenderFunction<unknown, AppBarProps> = (prop
         scrollContainerId,
         ...muiAppBarProps
     } = props;
+
+    const setRefs = useCallback(
+        (node: HTMLElement | null) => {
+            if (typeof ref === 'function') ref(node);
+            else if (ref) ref.current = node;
+        },
+        [ref]
+    );
     const scrollElement = scrollContainerId ? document.getElementById(scrollContainerId) : null;
     const scrollTop = scrollElement ? scrollElement.scrollTop : window.scrollY;
 
     const generatedClasses = useUtilityClasses(props);
     const animationDuration = durationProp || theme.transitions.duration.standard;
+    const applyOverlayStyles = overlay;
 
     const [offset, setOffset] = useState(0);
     const previousOffset = usePrevious(offset);
@@ -290,7 +343,7 @@ const AppBarRender: React.ForwardRefRenderFunction<unknown, AppBarProps> = (prop
 
     return (
         <Root
-            ref={ref}
+            ref={setRefs}
             {...muiAppBarProps}
             data-testid={'blui-appbar-root'}
             className={cx(
@@ -303,11 +356,14 @@ const AppBarRender: React.ForwardRefRenderFunction<unknown, AppBarProps> = (prop
             )}
             style={Object.assign({}, style, {
                 height: height,
-                overflow: 'hidden',
+                overflow: applyOverlayStyles ? 'visible' : 'hidden',
             })}
+            // Overlay is a transparent scrim, so force MUI's transparent color to keep the toolbar content readable
+            color={overlay ? 'transparent' : muiAppBarProps.color}
             position={'sticky'}
             backgroundImage={backgroundImage}
             animationDuration={durationProp}
+            applyOverlayStyles={applyOverlayStyles}
         >
             {getBackgroundImage()}
             {props.children}

@@ -104,7 +104,13 @@ const Root = styled(MUIDrawer, {
     [`& .${drawerClasses.paper}`]: {
         overflow: 'hidden',
         position: 'inherit',
-        borderWidth: sideBorder ? 1 : 0,
+        borderWidth: 0,
+    },
+    [`& .${drawerClasses.content}`]: {
+        boxShadow: sideBorder ? 'none' : (theme.vars || theme).palette.shadows.level2,
+    },
+    [`& .${drawerClasses.content} > div > .BluiDrawerBody-root`]: {
+        borderRight: sideBorder ? `1px solid ${(theme.vars || theme).palette.divider}` : 0,
     },
 }));
 

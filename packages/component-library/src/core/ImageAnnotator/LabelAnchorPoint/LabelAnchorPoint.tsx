@@ -1,0 +1,84 @@
+import React, { forwardRef } from 'react';
+import Typography, { TypographyProps } from '@mui/material/Typography';
+import { styled } from '@mui/material/styles';
+import { AnchorPoint, AnchorPointProps } from '../components';
+
+export type LabelProps = AnchorPointProps &
+    TypographyProps & {
+        /**
+         * Text string shown inside the chip.
+         */
+        label: string;
+
+        /**
+         * Background colour of the chip.
+         * @default rgba (255, 255, 255, 0.72)
+         */
+        labelBgColor?: string;
+
+        /**
+         * Text colour inside the chip.
+         * @default #353c44
+         */
+        labelColor?: string;
+    };
+
+const StyledLabel = styled(Typography, {
+    shouldForwardProp: (prop) => !['labelBgColor', 'labelColor'].includes(prop.toString()),
+})<Pick<LabelProps, 'labelBgColor' | 'labelColor'>>(({ labelBgColor, labelColor, theme }) => ({
+    display: 'inline-flex',
+    padding: '2px 8px',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    background: labelBgColor ?? 'rgba(255, 255, 255, 0.72)',
+    border: '1px solid rgba(77, 92, 106, 0.12)',
+    textShadow: '0 0 20px #FFF, 0 0 12px #FFF, 0 0 8px #FFF, 0 0 6px #FFF',
+    ...theme.applyStyles('dark', {
+        background: labelBgColor ?? 'rgba(14, 18, 24, 0.64)',
+        border: '1px solid rgba(245, 250, 255, 0.10)',
+        textShadow:
+            '0 0 20px rgba(0, 0, 0, 0.64), 0 0 12px rgba(0, 0, 0, 0.64), 0 0 8px rgba(0, 0, 0, 0.64), 0 0 6px rgba(0, 0, 0, 0.64)',
+    }),
+    color: labelColor ?? theme.vars?.palette?.text?.primary ?? theme.palette.text.primary,
+    borderRadius: '4px',
+    backdropFilter: 'blur(2px)',
+    fontFamily: '"Open Sans", sans-serif',
+    fontSize: '14px',
+    fontStyle: 'normal',
+    fontWeight: 400,
+    lineHeight: 'normal',
+    width: 'max-content',
+    maxWidth: '180px',
+    minWidth: 0,
+    flexShrink: 0,
+    height: 'auto',
+    boxSizing: 'border-box',
+    whiteSpace: 'normal',
+    overflowWrap: 'anywhere',
+    overflow: 'auto',
+    boxShadow: '0 1px 12px 0 rgba(0, 0, 0, 0.12)',
+}));
+
+const LabelRender: React.ForwardRefRenderFunction<unknown, LabelProps> = (props: LabelProps, ref: any) => {
+    const { label, labelBgColor, labelColor, sx, ...otherProps } = props;
+
+    return (
+        <AnchorPoint
+            {...(otherProps as AnchorPointProps)}
+            sx={[...(!otherProps.callout ? [{ width: 'max-content' }] : []), ...(Array.isArray(sx) ? sx : [sx])]}
+        >
+            <StyledLabel ref={ref} labelBgColor={labelBgColor} labelColor={labelColor} data-testid="blui-label-root">
+                {label}
+            </StyledLabel>
+        </AnchorPoint>
+    );
+};
+
+/**
+ * [Label](https://brightlayer-ui-components.github.io/react/components/label) component
+ *
+ * Renders an always-visible text chip at an anchor coordinate.
+ */
+export const LabelAnchorPoint = forwardRef(LabelRender);
+
+LabelAnchorPoint.displayName = 'LabelAnchorPoint';

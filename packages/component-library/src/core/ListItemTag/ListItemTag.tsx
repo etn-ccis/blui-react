@@ -1,5 +1,5 @@
 import Typography, { TypographyProps } from '@mui/material/Typography';
-import { styled, useColorScheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import React, { forwardRef } from 'react';
 import { unstable_composeClasses as composeClasses } from '@mui/material';
 import listItemTagClasses, { ListItemTagClassKey, getListItemTagUtilityClass } from './ListItemTagClasses';
@@ -46,7 +46,17 @@ const Root = styled(Typography, {
     onClick,
     theme,
 }) => {
-    const colorScheme = useColorScheme();
+    const primaryMain = (theme.vars || theme).palette.primary.main;
+    const primaryContrastText = (theme.vars || theme).palette.primary.contrastText;
+    const errorMain = (theme.vars || theme).palette.error.main;
+    const errorContrastText = (theme.vars || theme).palette.error.contrastText;
+    const resolvedFontColor =
+        fontColor ||
+        (!backgroundColor || backgroundColor === primaryMain || backgroundColor === errorMain
+            ? backgroundColor === errorMain
+                ? errorContrastText
+                : primaryContrastText
+            : theme.palette.getContrastText(convertColorNameToHex(backgroundColor) || backgroundColor));
 
     return `
             border-radius: 0.125rem;
@@ -59,18 +69,9 @@ const Root = styled(Typography, {
             display: inline-block;
             cursor: ${onClick ? 'pointer' : 'inherit'};
             background-color:
-                ${
-                    backgroundColor ||
-                    (colorScheme.mode === 'dark' ? theme.palette.primary.dark : theme.palette.primary.main)
-                };
+                ${backgroundColor || primaryMain};
             color:
-                ${
-                    fontColor ||
-                    theme.palette.getContrastText(
-                        convertColorNameToHex(backgroundColor) ||
-                            (colorScheme.mode === 'dark' ? theme.palette.primary.dark : theme.palette.primary.main)
-                    )
-                };
+                ${resolvedFontColor};
             &.${listItemTagClasses.noVariant} {
                 font-weight: 700; // bold
                 letter-spacing: 1px;

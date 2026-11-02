@@ -126,14 +126,49 @@ describe('Drawer', () => {
         expect(container.querySelector('.BluiDrawer-content')).toBeTruthy();
     });
 
-    it('should handle sideBorder prop', () => {
-        const { container } = render(
+    it('replaces the drawer shadow with a side border when sideBorder is enabled', () => {
+        const { container, rerender } = render(
             <ThemeProvider theme={theme}>
-                <Drawer open={true} sideBorder={true} />
+                <Drawer open={true} sideBorder={false}>
+                    <DrawerHeader title="Navigation" />
+                    <DrawerBody />
+                </Drawer>
             </ThemeProvider>
         );
-        expect(container.querySelector('.BluiDrawer-content')).toBeTruthy();
-        expect(container.querySelector('.BluiDrawer-sideBorder')).toBeTruthy();
+        expect(container.querySelector('.BluiDrawer-sideBorder')).toBeNull();
+
+        rerender(
+            <ThemeProvider theme={theme}>
+                <Drawer open={true} sideBorder={true}>
+                    <DrawerHeader title="Navigation" />
+                    <DrawerBody />
+                </Drawer>
+            </ThemeProvider>
+        );
+        const paper = container.querySelector('.BluiDrawer-paper');
+        expect(paper).toHaveClass('BluiDrawer-sideBorder');
+        const header = container.querySelector('.BluiDrawerHeader-root');
+        const body = container.querySelector('.BluiDrawerBody-root');
+        expect(header).toBeTruthy();
+        expect(body).toBeTruthy();
+        const styles = Array.from(document.styleSheets)
+            .flatMap((sheet) => Array.from(sheet.cssRules))
+            .map((rule) => rule.cssText)
+            .join('')
+            .replace(/\s+/g, '');
+        expect(styles).toContain('.BluiDrawer-content>div>.BluiDrawerBody-root{border-right:1pxsolid');
+        expect(styles).toContain('.BluiDrawer-content{box-shadow:none;}');
+        expect(styles).toContain('.BluiDrawer-content{box-shadow:var(--mui-palette-shadows-level2);}');
+
+        rerender(
+            <ThemeProvider theme={theme}>
+                <Drawer open={true} sideBorder={false}>
+                    <DrawerHeader title="Navigation" />
+                    <DrawerBody />
+                </Drawer>
+            </ThemeProvider>
+        );
+        expect(container.querySelector('.BluiDrawer-sideBorder')).toBeNull();
     });
 
     it('should handle onItemSelect callback', () => {
