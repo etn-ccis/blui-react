@@ -2,7 +2,14 @@ import React, { useCallback } from 'react';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useNavigate, useLocation } from 'react-router';
-import { Drawer, DrawerBody, DrawerHeader, DrawerNavGroup, NavItem } from '@brightlayer-ui/react-components';
+import {
+    Drawer,
+    DrawerBody,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerNavGroup,
+    NavItem,
+} from '@brightlayer-ui/react-components';
 import { externalLinkDefinitions, pageDefinitions, RouteConfig } from '../__configuration__/navigationMenu/navigation';
 import Chip from '@mui/material/Chip';
 import Typography from '@mui/material/Typography';
@@ -13,6 +20,7 @@ import { Theme } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { RootState } from '../redux/store';
 import { closeDrawer, toggleDrawer } from '../redux/appState';
+import { VersionMenu } from './VersionMenu';
 
 import cubesImage from '../assets/cubes_tile.png';
 const linearGradientOverlayImage = `linear-gradient(to right, rgba(0, 123, 193, 1) 22.4%, rgba(0, 123, 193, 0.2) 100%), url(${cubesImage})`;
@@ -187,6 +195,11 @@ export const NavigationDrawer: React.FC = () => {
                     sx={styles.navGroupTopDivider}
                 />
             </DrawerBody>
+            <DrawerFooter
+                sx={{ borderTop: (footerTheme: Theme): string => `1px solid ${footerTheme.vars.palette.divider}` }}
+            >
+                <VersionMenu />
+            </DrawerFooter>
         </Drawer>
     );
 };
