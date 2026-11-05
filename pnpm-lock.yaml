@@ -915,7 +915,7 @@ importers:
         version: 6.11.0(@okta/okta-auth-js@7.14.2)(react-dom@19.2.4(react@19.2.4))(react-router-dom@7.14.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)
       '@pmmmwh/react-refresh-webpack-plugin':
         specifier: ^0.5.3
-        version: 0.5.17(react-refresh@0.11.0)(type-fest@4.41.0)(webpack-dev-server@5.2.1(tslib@2.8.1)(webpack@5.105.4))(webpack@5.105.4)
+        version: 0.5.17(react-refresh@0.11.0)(type-fest@4.41.0)(webpack-dev-server@5.2.1(webpack@5.105.4))(webpack@5.105.4)
       '@svgr/webpack':
         specifier: ^5.5.0
         version: 5.5.0
@@ -999,7 +999,7 @@ importers:
         version: 27.5.1
       jest-watch-typeahead:
         specifier: ^1.0.0
-        version: 1.1.0(jest@27.5.1(ts-node@10.9.2(@types/node@22.13.0)(typescript@5.9.3)))
+        version: 1.1.0(jest@27.5.1)
       mini-css-extract-plugin:
         specifier: ^2.4.5
         version: 2.10.2(webpack@5.105.4)
@@ -1261,8 +1261,8 @@ importers:
         specifier: ^2.6.0
         version: 2.7.0
       '@brightlayer-ui/icons-mui':
-        specifier: 4.4.0-alpha.1
-        version: 4.4.0-alpha.1(@mui/icons-material@7.3.10(@mui/material@7.3.10(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react@19.2.14)(react@19.2.4))(@mui/material@7.3.10(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))
+        specifier: 4.4.0
+        version: 4.4.0(@mui/icons-material@7.3.10(@mui/material@7.3.10(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react@19.2.14)(react@19.2.4))(@mui/material@7.3.10(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))
       '@brightlayer-ui/icons-svg':
         specifier: ^1.18.0
         version: 1.19.0
@@ -3002,8 +3002,8 @@ packages:
       '@mui/icons-material': ^7.1.1
       '@mui/material': ^7.1.1
 
-  '@brightlayer-ui/icons-mui@4.4.0-alpha.1':
-    resolution: {integrity: sha512-pgltF26ESYchAMeHJH3giUSbW86x/88ooimqdgkoohcx/JefkZscbv1qXp1yjENbzKiRagZKLPxCtK9uRqDpRQ==}
+  '@brightlayer-ui/icons-mui@4.4.0':
+    resolution: {integrity: sha512-SJfWTpuXinGvftPiNpGF/gYCrMIR9A4F29+hG8P9HUyt3Tykt8teP4+n5NQhS8/zwtZt/GkCb9W5+04EjchO7g==}
     peerDependencies:
       '@mui/icons-material': ^7.1.1
       '@mui/material': ^7.1.1
@@ -16198,7 +16198,7 @@ snapshots:
       '@mui/icons-material': 7.3.10(@mui/material@7.3.10(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react@19.2.14)(react@19.2.4)
       '@mui/material': 7.3.10(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
 
-  '@brightlayer-ui/icons-mui@4.4.0-alpha.1(@mui/icons-material@7.3.10(@mui/material@7.3.10(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react@19.2.14)(react@19.2.4))(@mui/material@7.3.10(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))':
+  '@brightlayer-ui/icons-mui@4.4.0(@mui/icons-material@7.3.10(@mui/material@7.3.10(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react@19.2.14)(react@19.2.4))(@mui/material@7.3.10(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))':
     dependencies:
       '@mui/icons-material': 7.3.10(@mui/material@7.3.10(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react@19.2.14)(react@19.2.4)
       '@mui/material': 7.3.10(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -18846,7 +18846,7 @@ snapshots:
 
   '@pkgr/core@0.2.9': {}
 
-  '@pmmmwh/react-refresh-webpack-plugin@0.5.17(react-refresh@0.11.0)(type-fest@4.41.0)(webpack-dev-server@5.2.1(tslib@2.8.1)(webpack@5.105.4))(webpack@5.105.4)':
+  '@pmmmwh/react-refresh-webpack-plugin@0.5.17(react-refresh@0.11.0)(type-fest@4.41.0)(webpack-dev-server@5.2.1(webpack@5.105.4))(webpack@5.105.4)':
     dependencies:
       ansi-html: 0.0.9
       core-js-pure: 3.49.0
@@ -22887,7 +22887,7 @@ snapshots:
       eslint: 8.57.1
       eslint-plugin-flowtype: 8.0.3(@babel/plugin-syntax-flow@7.28.6(@babel/core@7.29.0))(@babel/plugin-transform-react-jsx@7.28.6(@babel/core@7.29.0))(eslint@8.57.1)
       eslint-plugin-import: 2.32.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)
-      eslint-plugin-jest: 25.7.0(@typescript-eslint/eslint-plugin@5.62.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(jest@27.5.1(ts-node@10.9.2(@types/node@22.13.0)(typescript@5.9.3)))(typescript@5.9.3)
+      eslint-plugin-jest: 25.7.0(@typescript-eslint/eslint-plugin@5.62.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(jest@27.5.1)(typescript@5.9.3)
       eslint-plugin-jsx-a11y: 6.10.2(eslint@8.57.1)
       eslint-plugin-react: 7.37.5(eslint@8.57.1)
       eslint-plugin-react-hooks: 4.6.2(eslint@8.57.1)
@@ -23038,7 +23038,7 @@ snapshots:
       eslint: 9.33.0(jiti@1.21.7)
       requireindex: 1.2.0
 
-  eslint-plugin-jest@25.7.0(@typescript-eslint/eslint-plugin@5.62.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(jest@27.5.1(ts-node@10.9.2(@types/node@22.13.0)(typescript@5.9.3)))(typescript@5.9.3):
+  eslint-plugin-jest@25.7.0(@typescript-eslint/eslint-plugin@5.62.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(jest@27.5.1)(typescript@5.9.3):
     dependencies:
       '@typescript-eslint/experimental-utils': 5.62.0(eslint@8.57.1)(typescript@5.9.3)
       eslint: 8.57.1
@@ -25983,7 +25983,7 @@ snapshots:
       leven: 3.1.0
       pretty-format: 30.3.0
 
-  jest-watch-typeahead@1.1.0(jest@27.5.1(ts-node@10.9.2(@types/node@22.13.0)(typescript@5.9.3))):
+  jest-watch-typeahead@1.1.0(jest@27.5.1):
     dependencies:
       ansi-escapes: 4.3.2
       chalk: 4.1.2
@@ -28860,7 +28860,7 @@ snapshots:
   react-scripts@5.0.1(eslint@8.57.1)(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3)(yaml@2.8.3):
     dependencies:
       '@babel/core': 7.29.0
-      '@pmmmwh/react-refresh-webpack-plugin': 0.5.17(react-refresh@0.11.0)(type-fest@4.41.0)(webpack-dev-server@5.2.1(tslib@2.8.1)(webpack@5.105.4))(webpack@5.105.4)
+      '@pmmmwh/react-refresh-webpack-plugin': 0.5.17(react-refresh@0.11.0)(type-fest@4.41.0)(webpack-dev-server@5.2.1(webpack@5.105.4))(webpack@5.105.4)
       '@svgr/webpack': 5.5.0
       babel-jest: 27.5.1(@babel/core@7.29.0)
       babel-loader: 8.4.1(@babel/core@7.29.0)(webpack@5.105.4)
@@ -28883,7 +28883,7 @@ snapshots:
       identity-obj-proxy: 3.0.0
       jest: 27.5.1(ts-node@10.9.2(@types/node@22.13.0)(typescript@5.9.3))
       jest-resolve: 27.5.1
-      jest-watch-typeahead: 1.1.0(jest@27.5.1(ts-node@10.9.2(@types/node@22.13.0)(typescript@5.9.3)))
+      jest-watch-typeahead: 1.1.0(jest@27.5.1)
       mini-css-extract-plugin: 2.10.2(webpack@5.105.4)
       postcss: 8.5.9
       postcss-flexbugs-fixes: 5.0.2(postcss@8.5.9)

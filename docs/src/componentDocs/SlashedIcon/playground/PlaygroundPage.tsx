@@ -57,6 +57,19 @@ const inputConfig: InputConfig = [
         category: 'Optional Props',
     },
     {
+        id: 'slashLength',
+        type: 'number',
+        typeLabel: 'number',
+        description: 'Scale factor for the slash length',
+        initialValue: 1,
+        minValue: 0,
+        maxValue: 1,
+        valueStep: 0.1,
+        defaultValue: 1,
+        required: false,
+        category: 'Optional Props',
+    },
+    {
         id: 'alt',
         type: 'string',
         typeLabel: 'string',
@@ -72,15 +85,22 @@ type SlashedIconData = {
     iconSrc: string;
     size?: number;
     slashColor?: string;
+    slashLength?: number;
     alt?: string;
 };
 
 const SlashedIconPreview: PreviewComponent = ({ data }) => {
-    const { iconSrc, size, slashColor, alt } = data as unknown as SlashedIconData;
+    const { iconSrc, size, slashColor, slashLength, alt } = data as unknown as SlashedIconData;
 
     return (
         <Stack alignItems={'center'} justifyContent={'center'} sx={{ width: '100%', height: '100%' }}>
-            <SlashedSvgIcon iconSrc={icons[iconSrc]} size={size} slashColor={slashColor || undefined} alt={alt} />
+            <SlashedSvgIcon
+                iconSrc={icons[iconSrc]}
+                size={size}
+                slashColor={slashColor || undefined}
+                slashLength={slashLength}
+                alt={alt}
+            />
         </Stack>
     );
 };
