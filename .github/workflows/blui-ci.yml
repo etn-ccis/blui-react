@@ -66,7 +66,7 @@ jobs:
                   name: pr-summary-security
                   path: ${{ runner.temp }}/pr-security.json
                   if-no-files-found: ignore
-                  retention-days: 7
+                  retention-days: 30
 
     unit_tests_workflow:
         name: Workflow Unit Tests
@@ -121,7 +121,7 @@ jobs:
               with:
                   name: pr-summary-coverage-workflow
                   path: ${{ runner.temp }}/pr-coverage.json
-                  retention-days: 7
+                  retention-days: 30
 
     build_login_workflow:
         name: Build Workflow
@@ -351,7 +351,7 @@ jobs:
               with:
                   name: pr-summary-coverage-components
                   path: ${{ runner.temp }}/pr-coverage.json
-                  retention-days: 7
+                  retention-days: 30
 
     build_component_library:
         name: Build Component Library
@@ -704,7 +704,7 @@ jobs:
               with:
                   name: pr-summary-chromatic
                   path: ${{ runner.temp }}/pr-chromatic.json
-                  retention-days: 7
+                  retention-days: 30
 
     Build-Dev-Docs:
         runs-on: ubuntu-latest
@@ -865,7 +865,8 @@ jobs:
                   projectId: blui-react-showcase-4d420
                   entryPoint: apps/showcase
                   channelId: pr-${{ github.event.pull_request.number }}
-                  expires: 7d
+                  expires: 30d
+                  disableComment: true
 
             - name: Prepare PR showcase link
               if: ${{ github.event_name == 'pull_request' }}
@@ -881,4 +882,4 @@ jobs:
               with:
                   name: pr-summary-showcase
                   path: ${{ runner.temp }}/pr-showcase.json
-                  retention-days: 7
+                  retention-days: 30

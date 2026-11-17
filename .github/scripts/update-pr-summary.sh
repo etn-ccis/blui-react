@@ -12,6 +12,7 @@ pr=$(gh api "repos/$GITHUB_REPOSITORY/pulls/$pr_number")
 head_sha=$(jq -r '.head.sha' <<< "$pr")
 head_repo=$(jq -r '.head.repo.full_name // ""' <<< "$pr")
 head_branch=$(jq -r '.head.ref' <<< "$pr")
+base_branch=$(jq -r '.base.ref // ""' <<< "$pr")
 [[ $(jq -r '.state' <<< "$pr") == open ]] || exit 0
 [[ "$head_sha" =~ ^[a-f0-9]{40}$ && "$head_repo" =~ ^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$ ]] || exit 1
 [[ -z "$expected_sha" || "$head_sha" == "$expected_sha" ]] || exit 0
@@ -83,10 +84,10 @@ if [[ "$head_repo" == "$GITHUB_REPOSITORY" ]]; then
     fi
 fi
 
-jq -n --argjson jira "$jira" --argjson figma "$figma" --argjson security "$security" --argjson blackduck "$blackduck" --argjson docs_packages "$docs_packages" --arg showcase "$showcase" --arg chromatic "$chromatic" --arg coverage "$coverage" --arg blackduck_url "$blackduck_url" --arg blackduck_run_url "$blackduck_run_url" '{jira: $jira, figma: $figma, security: $security, blackduck: $blackduck, docs_packages: $docs_packages, showcase_url: $showcase, chromatic_url: $chromatic, coverage_url: $coverage, blackduck_url: $blackduck_url, blackduck_run_url: $blackduck_run_url}' > "$work_dir/data.json"
+jq -n --arg base_branch "$base_branch" --argjson jira "$jira" --argjson figma "$figma" --argjson security "$security" --argjson blackduck "$blackduck" --argjson docs_packages "$docs_packages" --arg showcase "$showcase" --arg chromatic "$chromatic" --arg coverage "$coverage" --arg blackduck_url "$blackduck_url" --arg blackduck_run_url "$blackduck_run_url" '{base_branch: $base_branch, jira: $jira, figma: $figma, security: $security, blackduck: $blackduck, docs_packages: $docs_packages, showcase_url: $showcase, chromatic_url: $chromatic, coverage_url: $coverage, blackduck_url: $blackduck_url, blackduck_run_url: $blackduck_run_url}' > "$work_dir/data.json"
 
 latest=$(gh api "repos/$GITHUB_REPOSITORY/pulls/$pr_number")
-[[ $(jq -r '.head.sha' <<< "$latest") == "$head_sha" && $(jq -r '.state' <<< "$latest") == open ]] || exit 0
+[[ $(jq -r '.head.sha' <<< "$latest") == "$head_sha" && $(jq -r '.base.ref // ""' <<< "$latest") == "$base_branch" && $(jq -r '.state' <<< "$latest") == open ]] || exit 0
 jq -jr '.body // ""' <<< "$latest" > "$work_dir/body.md"
 bash "$script_dir/render-pr-summary.sh" "$work_dir/data.json" "$work_dir/body.md" > "$work_dir/updated.md"
 if ! cmp -s "$work_dir/body.md" "$work_dir/updated.md"; then

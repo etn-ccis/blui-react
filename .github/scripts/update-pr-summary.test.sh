@@ -8,7 +8,7 @@ mkdir "$fixture/bin"
 export FIXTURE="$fixture" GITHUB_REPOSITORY='example/blui-react' GITHUB_SERVER_URL='https://github.com'
 export BLACKDUCKSCA_URL='https://blackduck.example.com'
 sha=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-jq -n --arg sha "$sha" '{state:"open",title:"APP-456 Add component",body:"Author description APP-222",head:{sha:$sha,ref:"feature/APP-123",repo:{full_name:"example/blui-react"}}}' > "$fixture/pr.json"
+jq -n --arg sha "$sha" '{state:"open",title:"APP-456 Add component",body:"Author description APP-222",base:{ref:"dev"},head:{sha:$sha,ref:"feature/APP-123",repo:{full_name:"example/blui-react"}}}' > "$fixture/pr.json"
 printf '%s\n' '[[{"filename":"packages/component-library/src/core/AppBar/AppBar.tsx"},{"filename":"packages/component-library/src/core/NewComponent/NewComponent.tsx"}]]' > "$fixture/files.json"
 jq -n --arg sha "$sha" '{workflow_runs:[{id:11,name:"Build",head_sha:$sha,head_branch:"feature/APP-123",head_repository:{full_name:"example/blui-react"},status:"completed"},{id:22,name:"CI-BlackDuck-SCA-Basic",head_sha:$sha,head_branch:"feature/APP-123",head_repository:{full_name:"example/blui-react"},status:"completed"},{id:33,name:"Docs Package Check",head_sha:$sha,head_branch:"feature/APP-123",head_repository:{full_name:"example/blui-react"},status:"completed"}]}' > "$fixture/runs.json"
 printf '%s\n' '{"artifacts":[{"id":101,"name":"pr-summary-security","expired":false,"size_in_bytes":100},{"id":102,"name":"pr-summary-showcase","expired":false,"size_in_bytes":100},{"id":103,"name":"pr-summary-chromatic","expired":false,"size_in_bytes":100},{"id":105,"name":"pr-summary-coverage-components","expired":false,"size_in_bytes":100}]}' > "$fixture/build-artifacts.json"
@@ -66,6 +66,7 @@ export PATH="$fixture/bin:$PATH"
 
 bash "$script_dir/update-pr-summary.sh" 31 "$sha"
 grep -q 'Author description' "$fixture/body.md"
+grep -q '| Docs | \[Dev documentation\](https://brightlayer-ui-components.github.io/react-dev/) |' "$fixture/body.md"
 grep -q '| Jira | \[APP-123\](https://eaton-corp.atlassian.net/browse/APP-123) |' "$fixture/body.md"
 if grep -q '^| Jira |.*\[APP-222\]\|^| Jira |.*\[APP-456\]' "$fixture/body.md"; then
     echo 'Expected Jira keys to come only from the branch' >&2; exit 1
@@ -77,7 +78,7 @@ grep -q '\[Preview\](https://preview.web.app/)' "$fixture/body.md"
 grep -q '\[Visual review\](https://www.chromatic.com/' "$fixture/body.md"
 grep -q '\[Codecov PR report\](https://app.codecov.io/gh/example/blui-react/pull/31)' "$fixture/body.md"
 grep -q 'packages/component-library: Critical 1, High 4' "$fixture/body.md"
-grep -q '| Docs package versions | Warning: 1 problem(s): @brightlayer-ui/colors: 3.3.0 -> 3.4.0.*\[Workflow run\](https://github.com/example/blui-react/actions/runs/33)' "$fixture/body.md"
+grep -q '| Docs package versions | Warning: 1 problem(s): @brightlayer-ui/colors: Local (installed): 3.3.0, Remote (npm latest): 3.4.0.*\[Workflow run\](https://github.com/example/blui-react/actions/runs/33)' "$fixture/body.md"
 grep -q '\[Workflow run\](https://github.com/example/blui-react/actions/runs/22)' "$fixture/body.md"
 bash "$script_dir/update-pr-summary.sh" 31 "$sha"
 [[ $(wc -l < "$fixture/patches") -eq 1 ]]
@@ -124,3 +125,11 @@ jq '.head.ref = "feature/no-issue"' "$fixture/pr.json" > "$fixture/pr-next.json"
 mv "$fixture/pr-next.json" "$fixture/pr.json"
 bash "$script_dir/update-pr-summary.sh" 31 "$sha"
 grep -q '| Jira | Not provided |' "$fixture/body.md"
+jq '.base.ref = "master"' "$fixture/pr.json" > "$fixture/pr-next.json"
+mv "$fixture/pr-next.json" "$fixture/pr.json"
+bash "$script_dir/update-pr-summary.sh" 31 "$sha"
+grep -q '| Docs | \[Production documentation\](https://brightlayer-ui-components.github.io/react/) |' "$fixture/body.md"
+jq '.base.ref = "other"' "$fixture/pr.json" > "$fixture/pr-next.json"
+mv "$fixture/pr-next.json" "$fixture/pr.json"
+bash "$script_dir/update-pr-summary.sh" 31 "$sha"
+grep -q '| Docs | Unavailable |' "$fixture/body.md"

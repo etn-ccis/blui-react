@@ -23,9 +23,9 @@ jq -nj --slurpfile data "$data_file" --rawfile body "$body_file" '
       elif $data.problems == 0 then "Unavailable"
       else
             ([($data.details | if type == "array" then . else [] end)[] | select(type == "object") | select(.name | type == "string" and test("^@brightlayer-ui/[A-Za-z0-9._-]+$")) |
-          if .reason == "outdated" then "\(.name): \(.installed | version) -> \(.latest | version)"
-          elif .reason == "registry-unavailable" then "\(.name): latest version unavailable"
-          elif .reason == "installed-unavailable" then "\(.name): installed version unavailable"
+          if .reason == "outdated" then "\(.name): Local (installed): \(.installed | version), Remote (npm latest): \(.latest | version)"
+          elif .reason == "registry-unavailable" then "\(.name): Local (installed): \(.installed | version), Remote (npm latest): unavailable"
+          elif .reason == "installed-unavailable" then "\(.name): Local (installed): unavailable, Remote (npm latest): not checked"
           else empty end] | unique) as $details |
         "Warning: \($data.problems) problem(s)" + (if ($details | length) > 0 then ": " + ($details | join("; ")) else "" end)
       end;
@@ -35,7 +35,7 @@ jq -nj --slurpfile data "$data_file" --rawfile body "$body_file" '
     ([$start, "## Review Links", "", "| Item | Result |", "| --- | --- |",
     "| Jira | \($summary | jira) |",
     "| Showcase | \(hosted_link("Preview"; $summary.showcase_url; "^https://[A-Za-z0-9-]+\\.(web\\.app|firebaseapp\\.com)(/|$)")) |",
-      "| Docs | [Dev documentation](https://brightlayer-ui-dev.github.io/get-started/web) |",
+      "| Docs | \(if $summary.base_branch == "dev" then "[Dev documentation](https://brightlayer-ui-components.github.io/react-dev/)" elif $summary.base_branch == "master" then "[Production documentation](https://brightlayer-ui-components.github.io/react/)" else "Unavailable" end) |",
       "| Docs package versions | \($summary | docs_packages) \(if ($summary.docs_packages.run_url | safe_url) then "([Workflow run](\($summary.docs_packages.run_url)))" else "" end) |",
     "| Security (pnpm audit) | Critical: \($summary.security.critical | count), High: \($summary.security.high | count) \(if ($summary.security.url | safe_url) then "([audit run](\($summary.security.url)))" else "" end) |",
     "| Chromatic | \(hosted_link("Visual review"; $summary.chromatic_url; "^https://(www\\.)?chromatic\\.com/")) |",
