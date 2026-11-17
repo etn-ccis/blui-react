@@ -61,6 +61,16 @@ Do not add a historical entry until its snapshot has been deployed successfully.
 
 The snapshot workflow builds the workspace component package before building the docs, so no tarball installation is required. It also publishes `version-history.json` to the stable docs root. Refreshed snapshots fetch that file at runtime and therefore receive future dropdown updates automatically.
 
+## Package Check
+
+The snapshot workflow checks packages listed in `release/package-catalog.txt` when they are direct dependencies in `package.json`. Maintain the catalog as packages are added or removed. After the frozen-lockfile install, the check compares each installed version with the registry's `latest` dist-tag. For workspace dependencies, the installed version is the local package's manifest version.
+
+Dev and production releases report mismatches and registry errors as warnings without blocking deployment. Set the GitHub Actions repository or environment variable `DOCS_PACKAGE_GATE` to `off` to skip the release check. Prerelease versions normally differ from `latest` and will therefore produce a warning unless that tag points to the prerelease.
+
+Pull requests run the package check in warning mode. The managed PR description includes any version mismatches and a link to the check run, rather than a separate comment. The PR summary workflow must exist on the repository's default branch before it can receive `workflow_run` events. Installation or workflow infrastructure failures can still fail the check.
+
+This check verifies versions, not package contents. Workspace dependencies still build from local source, so a matching published version does not prove that the local source matches the published package.
+
 ## Retention
 
 The snapshot workflow keeps the three highest `vN` folders in each hosting repository. When a fourth snapshot is published, the oldest snapshot folder is removed. Remove its corresponding entry from `version-history.json` when this happens.
