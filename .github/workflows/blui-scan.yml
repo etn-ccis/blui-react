@@ -221,4 +221,4 @@ jobs:
           name: pr-summary-blackduck-${{ strategy.job-index }}
           path: ${{ runner.temp }}/pr-blackduck.json
           if-no-files-found: ignore
-          retention-days: 7
+          retention-days: 30

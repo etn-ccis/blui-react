@@ -29,7 +29,5 @@ jobs:
             - name: Update PR description
               env:
                   GH_TOKEN: ${{ github.token }}
-                  JIRA_EMAIL: ${{ vars.JIRA_EMAIL }}
-                  JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
                   BLACKDUCKSCA_URL: ${{ vars.BLACKDUCKSCA_URL }}
               run: bash .github/scripts/dispatch-pr-summary.sh
