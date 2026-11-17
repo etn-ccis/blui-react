@@ -16,30 +16,7 @@ head_branch=$(jq -r '.head.ref' <<< "$pr")
 [[ "$head_sha" =~ ^[a-f0-9]{40}$ && "$head_repo" =~ ^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$ ]] || exit 1
 [[ -z "$expected_sha" || "$head_sha" == "$expected_sha" ]] || exit 0
 
-jira=$(jq -c '[((.title // "") + " " + (.head.ref // "") + " " + ((.body // "") | sub("(?s)<!-- blui-pr-summary:start -->.*?<!-- blui-pr-summary:end -->"; "")) | ascii_upcase | scan("[A-Z][A-Z0-9]+-[0-9]+"))] | unique | .[:10]' <<< "$pr")
-epic_unavailable=false
-if [[ "$jira" != '[]' ]]; then
-    if [[ "$head_repo" != "$GITHUB_REPOSITORY" || -z "${JIRA_EMAIL:-}" || -z "${JIRA_API_TOKEN:-}" ]]; then
-        epic_unavailable=true
-    else
-        while IFS= read -r issue; do
-            for depth in 1 2 3; do
-                if response=$(curl -fsS --max-time 10 --user "$JIRA_EMAIL:$JIRA_API_TOKEN" "https://eaton-corp.atlassian.net/rest/api/3/issue/$issue?fields=parent" 2>/dev/null); then
-                    if ! parent=$(jq -er '.fields | objects | .parent.key // "" | strings | select(. == "" or test("^[A-Z][A-Z0-9]+-[0-9]+$"))' <<< "$response"); then
-                        epic_unavailable=true
-                        break
-                    fi
-                    [[ -n "$parent" ]] || break
-                    jira=$(jq -c --arg parent "$parent" '. + [$parent] | unique' <<< "$jira")
-                    issue=$parent
-                else
-                    epic_unavailable=true
-                    break
-                fi
-            done
-        done < <(jq -r '.[]' <<< "$jira")
-    fi
-fi
+jira=$(jq -cn --arg branch "$head_branch" '[$branch | ascii_upcase | scan("[A-Z][A-Z0-9]+-[0-9]+")] | unique | .[:10]')
 
 files=$(gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/pulls/$pr_number/files?per_page=100")
 components=$(jq -r '[.[][] | .filename | capture("^packages/component-library/(?:src/core/(?<core>[A-Za-z0-9_.-]+)/|figma-connect/(?<mapping>[A-Za-z0-9_.-]+)\\.figma\\.tsx$)")? | .core // .mapping // empty] | unique | .[]' <<< "$files")
@@ -106,7 +83,7 @@ if [[ "$head_repo" == "$GITHUB_REPOSITORY" ]]; then
     fi
 fi
 
-jq -n --argjson jira "$jira" --argjson epic_unavailable "$epic_unavailable" --argjson figma "$figma" --argjson security "$security" --argjson blackduck "$blackduck" --argjson docs_packages "$docs_packages" --arg showcase "$showcase" --arg chromatic "$chromatic" --arg coverage "$coverage" --arg blackduck_url "$blackduck_url" --arg blackduck_run_url "$blackduck_run_url" '{jira: $jira, epic_unavailable: $epic_unavailable, figma: $figma, security: $security, blackduck: $blackduck, docs_packages: $docs_packages, showcase_url: $showcase, chromatic_url: $chromatic, coverage_url: $coverage, blackduck_url: $blackduck_url, blackduck_run_url: $blackduck_run_url}' > "$work_dir/data.json"
+jq -n --argjson jira "$jira" --argjson figma "$figma" --argjson security "$security" --argjson blackduck "$blackduck" --argjson docs_packages "$docs_packages" --arg showcase "$showcase" --arg chromatic "$chromatic" --arg coverage "$coverage" --arg blackduck_url "$blackduck_url" --arg blackduck_run_url "$blackduck_run_url" '{jira: $jira, figma: $figma, security: $security, blackduck: $blackduck, docs_packages: $docs_packages, showcase_url: $showcase, chromatic_url: $chromatic, coverage_url: $coverage, blackduck_url: $blackduck_url, blackduck_run_url: $blackduck_run_url}' > "$work_dir/data.json"
 
 latest=$(gh api "repos/$GITHUB_REPOSITORY/pulls/$pr_number")
 [[ $(jq -r '.head.sha' <<< "$latest") == "$head_sha" && $(jq -r '.state' <<< "$latest") == open ]] || exit 0

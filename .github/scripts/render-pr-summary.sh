@@ -33,7 +33,7 @@ jq -nj --slurpfile data "$data_file" --rawfile body "$body_file" '
     "<!-- blui-pr-summary:start -->" as $start |
     "<!-- blui-pr-summary:end -->" as $end |
     ([$start, "## Review Links", "", "| Item | Result |", "| --- | --- |",
-    "| Jira | \($summary | jira)\(if $summary.epic_unavailable == true then " (epic lookup unavailable)" else "" end) |",
+    "| Jira | \($summary | jira) |",
     "| Showcase | \(hosted_link("Preview"; $summary.showcase_url; "^https://[A-Za-z0-9-]+\\.(web\\.app|firebaseapp\\.com)(/|$)")) |",
       "| Docs | [Dev documentation](https://brightlayer-ui-dev.github.io/get-started/web) |",
       "| Docs package versions | \($summary | docs_packages) \(if ($summary.docs_packages.run_url | safe_url) then "([Workflow run](\($summary.docs_packages.run_url)))" else "" end) |",
