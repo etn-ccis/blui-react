@@ -104,18 +104,15 @@ jobs:
           blackducksca_url: ${{ vars.BLACKDUCKSCA_URL }}
           blackducksca_token: ${{ secrets.BLACKDUCKSCA_TOKEN }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          # Keep scan step non-gating so custom enforcement/comment steps always run.
           # Final pass/fail is controlled by the Enforce High/Critical vulnerabilities step.
           # Full scan mode
           blackducksca_scan_full: true
-          # Keep analysis synchronous so policy gates and PR comments are available in this run
           blackducksca_waitForScan: true
           # Generate SARIF report for GitHub Security tab
           blackducksca_reports_sarif_create: true
           blackducksca_reports_sarif_file_path: '${{ github.workspace }}/${{ matrix.app }}/blackduck-sarif.json'
           blackducksca_reports_sarif_severities: 'CRITICAL,HIGH,MEDIUM'
-          # Enable PR comments with vulnerability details
-          blackducksca_prComment_enabled: true
+          blackducksca_prComment_enabled: false
           # Create fix PRs for vulnerabilities (optional)
           blackducksca_fixpr_enabled: false
 
@@ -203,49 +200,25 @@ jobs:
 
           echo "No High/Critical vulnerabilities found by Black Duck API."
 
-      - name: Comment on PR with vulnerability results
-        if: always() && github.event_name == 'pull_request' && steps.check_changes.outputs.changes == 'true' && (steps.enforce_vulns.outputs.critical_count != '0' || steps.enforce_vulns.outputs.high_count != '0')
-        uses: actions/github-script@v7
+      - name: Prepare PR Black Duck summary
+        if: always() && github.event_name == 'pull_request' && steps.check_changes.outputs.changes == 'true'
+        env:
+          APP: ${{ matrix.app }}
+          CRITICAL: ${{ steps.enforce_vulns.outputs.critical_count }}
+          HIGH: ${{ steps.enforce_vulns.outputs.high_count }}
+          BLACKDUCK_URL: ${{ vars.BLACKDUCKSCA_URL }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: >-
+          jq -n --arg app "$APP" --arg critical "$CRITICAL" --arg high "$HIGH" --arg url "$BLACKDUCK_URL" --arg pr "$PR_NUMBER" --arg sha "$PR_HEAD_SHA"
+          '{app: $app, critical: (if $critical | test("^[0-9]+$") then $critical | tonumber else null end), high: (if $high | test("^[0-9]+$") then $high | tonumber else null end), url: $url, pr: $pr, head_sha: $sha}'
+          > "$RUNNER_TEMP/pr-blackduck.json"
+
+      - name: Upload PR Black Duck summary
+        if: always() && github.event_name == 'pull_request' && steps.check_changes.outputs.changes == 'true'
+        uses: actions/upload-artifact@v4
         with:
-          script: |
-            const critical = parseInt('${{ steps.enforce_vulns.outputs.critical_count }}') || 0;
-            const high = parseInt('${{ steps.enforce_vulns.outputs.high_count }}') || 0;
-            const app = '${{ matrix.app }}';
-
-            const body = [
-              `## ⚠️ Black Duck SCA — \`${app}\` — High/Critical Findings`,
-              '',
-              '| Severity | Components |',
-              '|----------|-----------|',
-              `| 🔴 Critical | ${critical} |`,
-              `| 🟠 High | ${high} |`,
-              '',
-              '> **Action recommended:** resolve the High/Critical vulnerabilities above before merge.',
-            ].join('\n');
-
-            // Find and update existing comment or create new one
-            const marker = `<!-- bd-sca-${app} -->`;
-            const comments = await github.paginate(github.rest.issues.listComments, {
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-              per_page: 100,
-            });
-            const existing = comments.find(c => c.body && c.body.includes(marker));
-
-            const fullBody = `${marker}\n${body}`;
-            if (existing) {
-              await github.rest.issues.updateComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                comment_id: existing.id,
-                body: fullBody,
-              });
-            } else {
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: context.issue.number,
-                body: fullBody,
-              });
-            }
+          name: pr-summary-blackduck-${{ strategy.job-index }}
+          path: ${{ runner.temp }}/pr-blackduck.json
+          if-no-files-found: ignore
+          retention-days: 7

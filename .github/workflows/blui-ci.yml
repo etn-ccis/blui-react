@@ -55,7 +55,18 @@ jobs:
             - name: Install dependencies
               run: pnpm install
             - name: Audit for high/critical vulnerabilities
-              run: pnpm audit --audit-level high --ignore-registry-errors
+              env:
+                  PR_NUMBER: ${{ github.event.pull_request.number }}
+                  PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+              run: bash .github/scripts/capture-security.sh "$RUNNER_TEMP/pr-security.json"
+            - name: Upload PR audit summary
+              if: ${{ always() && github.event_name == 'pull_request' }}
+              uses: actions/upload-artifact@v4
+              with:
+                  name: pr-summary-security
+                  path: ${{ runner.temp }}/pr-security.json
+                  if-no-files-found: ignore
+                  retention-days: 7
 
     unit_tests_workflow:
         name: Workflow Unit Tests
@@ -85,7 +96,9 @@ jobs:
               run: pnpm coverage
               working-directory: packages/login-workflow
             - name: Upload to Codecov
+              id: codecov
               uses: codecov/codecov-action@v4
+              continue-on-error: true
               with:
                   token: ${{ secrets.CODECOV_TOKEN }}
                   directory: packages/login-workflow/coverage/
@@ -93,6 +106,22 @@ jobs:
                   flags: unittests
                   name: codecov-report
                   verbose: true
+                  fail_ci_if_error: true
+
+            - name: Prepare workflow coverage result
+              if: ${{ github.event_name == 'pull_request' && steps.codecov.outcome == 'success' }}
+              env:
+                  PR_NUMBER: ${{ github.event.pull_request.number }}
+                  PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+              run: jq -n --arg pr "$PR_NUMBER" --arg sha "$PR_HEAD_SHA" '{available:true,pr:$pr,head_sha:$sha}' > "$RUNNER_TEMP/pr-coverage.json"
+
+            - name: Upload workflow coverage result
+              if: ${{ github.event_name == 'pull_request' && steps.codecov.outcome == 'success' }}
+              uses: actions/upload-artifact@v4
+              with:
+                  name: pr-summary-coverage-workflow
+                  path: ${{ runner.temp }}/pr-coverage.json
+                  retention-days: 7
 
     build_login_workflow:
         name: Build Workflow
@@ -297,7 +326,9 @@ jobs:
               run: pnpm coverage
               working-directory: packages/component-library
             - name: Upload to Codecov
+              id: codecov
               uses: codecov/codecov-action@v4
+              continue-on-error: true
               with:
                   token: ${{ secrets.CODECOV_TOKEN }}
                   directory: packages/component-library/coverage/
@@ -305,6 +336,22 @@ jobs:
                   flags: unittests
                   name: codecov-report
                   verbose: true
+                  fail_ci_if_error: true
+
+            - name: Prepare component coverage result
+              if: ${{ github.event_name == 'pull_request' && steps.codecov.outcome == 'success' }}
+              env:
+                  PR_NUMBER: ${{ github.event.pull_request.number }}
+                  PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+              run: jq -n --arg pr "$PR_NUMBER" --arg sha "$PR_HEAD_SHA" '{available:true,pr:$pr,head_sha:$sha}' > "$RUNNER_TEMP/pr-coverage.json"
+
+            - name: Upload component coverage result
+              if: ${{ github.event_name == 'pull_request' && steps.codecov.outcome == 'success' }}
+              uses: actions/upload-artifact@v4
+              with:
+                  name: pr-summary-coverage-components
+                  path: ${{ runner.temp }}/pr-coverage.json
+                  retention-days: 7
 
     build_component_library:
         name: Build Component Library
@@ -635,12 +682,29 @@ jobs:
               run: pnpm install
 
             - name: Publish to Chromatic
+              id: chromatic
               uses: chromaui/action@latest
               with:
                   projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
                   workingDir: apps/storybook
                   exitZeroOnChanges: true
                   exitOnceUploaded: true
+
+            - name: Prepare PR Chromatic link
+              if: ${{ github.event_name == 'pull_request' }}
+              env:
+                  BUILD_URL: ${{ steps.chromatic.outputs.buildUrl }}
+                  PR_NUMBER: ${{ github.event.pull_request.number }}
+                  PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+              run: jq -n --arg url "$BUILD_URL" --arg pr "$PR_NUMBER" --arg sha "$PR_HEAD_SHA" '{url:$url,pr:$pr,head_sha:$sha}' > "$RUNNER_TEMP/pr-chromatic.json"
+
+            - name: Upload PR Chromatic link
+              if: ${{ github.event_name == 'pull_request' }}
+              uses: actions/upload-artifact@v4
+              with:
+                  name: pr-summary-chromatic
+                  path: ${{ runner.temp }}/pr-chromatic.json
+                  retention-days: 7
 
     Build-Dev-Docs:
         runs-on: ubuntu-latest
@@ -792,6 +856,7 @@ jobs:
                   entryPoint: apps/showcase
                   channelId: live
             - name: Deploy to Firebase Hosting (PR preview)
+              id: preview
               if: ${{ github.event_name == 'pull_request' }}
               uses: FirebaseExtended/action-hosting-deploy@v0
               with:
@@ -801,3 +866,19 @@ jobs:
                   entryPoint: apps/showcase
                   channelId: pr-${{ github.event.pull_request.number }}
                   expires: 7d
+
+            - name: Prepare PR showcase link
+              if: ${{ github.event_name == 'pull_request' }}
+              env:
+                  PREVIEW_URL: ${{ steps.preview.outputs.details_url }}
+                  PR_NUMBER: ${{ github.event.pull_request.number }}
+                  PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+              run: jq -n --arg url "$PREVIEW_URL" --arg pr "$PR_NUMBER" --arg sha "$PR_HEAD_SHA" '{url:$url,pr:$pr,head_sha:$sha}' > "$RUNNER_TEMP/pr-showcase.json"
+
+            - name: Upload PR showcase link
+              if: ${{ github.event_name == 'pull_request' }}
+              uses: actions/upload-artifact@v4
+              with:
+                  name: pr-summary-showcase
+                  path: ${{ runner.temp }}/pr-showcase.json
+                  retention-days: 7

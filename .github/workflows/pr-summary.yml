@@ -1,0 +1,35 @@
+name: Update PR Summary
+
+on:
+    pull_request_target:
+        types: [opened, reopened, synchronize, edited]
+    workflow_run:
+        workflows: ['Build', 'CI-BlackDuck-SCA-Basic', 'Docs Package Check']
+        types: [completed]
+
+permissions:
+    actions: read
+    contents: read
+    pull-requests: write
+
+concurrency:
+    group: pr-summary-${{ github.event.pull_request.head.ref || github.event.workflow_run.head_branch || github.run_id }}
+    cancel-in-progress: false
+
+jobs:
+    update:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout trusted automation
+              uses: actions/checkout@v5
+              with:
+                  ref: ${{ github.event.repository.default_branch }}
+                  persist-credentials: false
+
+            - name: Update PR description
+              env:
+                  GH_TOKEN: ${{ github.token }}
+                  JIRA_EMAIL: ${{ vars.JIRA_EMAIL }}
+                  JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+                  BLACKDUCKSCA_URL: ${{ vars.BLACKDUCKSCA_URL }}
+              run: bash .github/scripts/dispatch-pr-summary.sh

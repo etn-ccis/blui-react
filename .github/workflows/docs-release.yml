@@ -18,9 +18,11 @@ permissions:
 jobs:
     build_and_deploy:
         runs-on: ubuntu-latest
+        environment: ${{ inputs.environment }}
 
         env:
             DEV_DEPLOY_TOKEN: ${{ secrets.DEV_DEPLOY_TOKEN }}
+            DOCS_PACKAGE_GATE: ${{ vars.DOCS_PACKAGE_GATE == 'off' && 'off' || 'warn' }}
             HOSTING_REPO: ${{ github.event.inputs.environment == 'prod' && 'brightlayer-ui-components/react' || 'brightlayer-ui-components/react-dev' }}
             PUBLIC_URL: ${{ github.event.inputs.environment == 'prod' && '/react' || '/react-dev' }}
             VITE_REACT_APP_BRANCH: ${{ github.event.inputs.environment == 'prod' && 'master' || 'dev' }}
@@ -47,6 +49,9 @@ jobs:
             - name: Install docs dependencies
               run: pnpm install --frozen-lockfile
               working-directory: docs
+
+            - name: Check published package versions
+              run: bash docs/release/check-packages.sh "$DOCS_PACKAGE_GATE" docs docs/release/package-catalog.txt
 
             - name: Read docs version
               id: docs-version
