@@ -961,6 +961,33 @@ describe('DataTable', () => {
         });
     });
 
+    it('renders injected rich select options when a select cell is opened', async () => {
+        type SelectRow = { id: string; point: string };
+        const selectColumns: Array<DataTableColumnDef<SelectRow>> = [
+            {
+                accessorKey: 'point',
+                header: 'Data point',
+                cellType: 'select',
+                editSelectOptions: [{ value: 'supply', label: '703.ESFHi', description: 'High supply temperature' }],
+                renderSelectOption: ({ option }): React.ReactElement => (
+                    <span>
+                        {option.label} — {option.description}
+                    </span>
+                ),
+            },
+        ];
+        render(
+            <ThemeProvider theme={theme}>
+                <DataTable columns={selectColumns} data={[{ id: '1', point: 'supply' }]} getRowId={(row) => row.id} />
+            </ThemeProvider>
+        );
+
+        fireEvent.click(screen.getByText('supply'));
+        await waitFor(() => {
+            expect(screen.getByText('703.ESFHi — High supply temperature')).toBeInTheDocument();
+        });
+    });
+
     // Renders with a non-CSS-vars theme so t.vars is undefined, driving all the
     // `?? t.palette.*` fallback branches in muiTablePaperProps, muiBottomToolbarProps,
     // muiTableBodyRowProps and the mrt-row-actions head/body cell sx callbacks.

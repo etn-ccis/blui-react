@@ -466,6 +466,61 @@ describe('SimpleSelectInput', () => {
         expect(screen.getByDisplayValue('Option A')).toBeInTheDocument();
     });
 
+    it('renders an option description in the dropdown by default', () => {
+        render(
+            <ThemeProvider theme={theme}>
+                <SimpleSelectInput
+                    value="a"
+                    onChange={jest.fn()}
+                    onBlur={jest.fn()}
+                    options={[{ value: 'a', label: 'Option A', description: 'Additional details' }]}
+                />
+            </ThemeProvider>
+        );
+
+        fireEvent.click(screen.getByRole('combobox'));
+        expect(screen.getByText('Additional details')).toBeInTheDocument();
+        fireEvent.change(screen.getByRole('textbox', { name: 'Search options' }), {
+            target: { value: 'Additional details' },
+        });
+        expect(screen.getByRole('option')).toHaveTextContent('Option A');
+        expect(screen.queryByText('Option B')).not.toBeInTheDocument();
+    });
+
+    it('shows a dedicated search field in the dropdown popup', () => {
+        render(
+            <ThemeProvider theme={theme}>
+                <SimpleSelectInput value="a" onChange={jest.fn()} onBlur={jest.fn()} options={selectOptions} />
+            </ThemeProvider>
+        );
+
+        expect(screen.getByRole('textbox', { name: 'Search options' })).toBeInTheDocument();
+        expect(screen.getByRole('combobox')).toHaveValue('Option A');
+    });
+
+    it('uses the injected option renderer and provides selection/search context', () => {
+        const renderOption = jest.fn(({ option, selected, inputValue }) => (
+            <span>{`${option.label} ${selected ? 'selected' : 'not selected'} ${inputValue}`}</span>
+        ));
+        render(
+            <ThemeProvider theme={theme}>
+                <SimpleSelectInput
+                    value="a"
+                    onChange={jest.fn()}
+                    onBlur={jest.fn()}
+                    options={selectOptions}
+                    renderOption={renderOption}
+                />
+            </ThemeProvider>
+        );
+
+        fireEvent.click(screen.getByRole('combobox'));
+        expect(screen.getByText(/Option A selected/)).toBeInTheDocument();
+        expect(renderOption).toHaveBeenCalledWith(
+            expect.objectContaining({ option: selectOptions[0], selected: true, inputValue: '' })
+        );
+    });
+
     it('renders with no selection when value does not match any option', () => {
         render(
             <ThemeProvider theme={theme}>

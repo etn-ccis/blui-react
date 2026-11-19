@@ -463,6 +463,8 @@ export const DataTable = (<TData extends DataTableData>(props: DataTableProps<TD
                 // Clear editing cell when focus moves outside the table container
                 // so the blue outline doesn't persist after clicking away.
                 if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+                    const relatedTarget = e.relatedTarget as HTMLElement | null;
+                    if (relatedTarget?.closest('[data-select-search-paper="true"]')) return;
                     tableRef.current?.setEditingCell(null);
                 }
             }}

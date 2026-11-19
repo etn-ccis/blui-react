@@ -7,6 +7,7 @@ import {
     type MRT_TableOptions,
 } from 'material-react-table';
 import { type SxProps, type Theme } from '@mui/material';
+import { type ReactNode } from 'react';
 
 export type DataTableData = Record<string, any>;
 
@@ -14,6 +15,28 @@ export type DataTableData = Record<string, any>;
  * Parameters passed to per-cell callbacks such as `cellStyle`.
  */
 export type CellStyleParams<TData extends DataTableData> = {
+    cell: MRT_Cell<TData>;
+    row: MRT_Row<TData>;
+    column: MRT_Column<TData>;
+    table: MRT_TableInstance<TData>;
+};
+
+/**
+ * A normalized select option passed to `renderSelectOption`.
+ * String options are converted to `{ value: option, label: option }`.
+ */
+export type DataTableSelectOption = {
+    value: any;
+    label: string;
+    description?: ReactNode;
+    [key: string]: any;
+};
+
+/** Context supplied to a column's custom select-option renderer. */
+export type SelectOptionRenderParams<TData extends DataTableData> = {
+    option: DataTableSelectOption;
+    selected: boolean;
+    inputValue: string;
     cell: MRT_Cell<TData>;
     row: MRT_Row<TData>;
     column: MRT_Column<TData>;
@@ -53,7 +76,12 @@ export type CellStyleParams<TData extends DataTableData> = {
  * }
  * ```
  */
-export type DataTableColumnDef<TData extends DataTableData> = MRT_ColumnDef<TData> & {
+export type DataTableColumnDef<TData extends DataTableData> = Omit<MRT_ColumnDef<TData>, 'editSelectOptions'> & {
+    /** Select values, optionally including a secondary description for rich dropdown rendering. */
+    editSelectOptions?:
+        | Array<string | DataTableSelectOption>
+        | ((params: CellStyleParams<TData>) => Array<string | DataTableSelectOption>);
+
     /**
      * Apply conditional MUI `sx` styles to individual cells based on cell value
      * or row data. Merged on top of any styles provided via `muiTableBodyCellProps`.
@@ -112,6 +140,22 @@ export type DataTableColumnDef<TData extends DataTableData> = MRT_ColumnDef<TDat
      * @default false
      */
     required?: boolean;
+
+    /**
+     * Render custom content for each option in a `cellType: 'select'` dropdown.
+     * The default renderer displays `label` and, when provided, `description`.
+     *
+     * @example
+     * ```tsx
+     * renderSelectOption: ({ option, selected }) => (
+     *   <Box sx={{ fontWeight: selected ? 700 : 400 }}>
+     *     <div>{option.label}</div>
+     *     <div>{option.description}</div>
+     *   </Box>
+     * )
+     * ```
+     */
+    renderSelectOption?: (params: SelectOptionRenderParams<TData>) => ReactNode;
 };
 
 export type DataTableProps<TData extends DataTableData> = {

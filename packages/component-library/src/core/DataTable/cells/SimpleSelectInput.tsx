@@ -1,11 +1,55 @@
-import React, { useRef, useEffect } from 'react';
-import { Autocomplete, TextField } from '@mui/material';
+import React, { createContext, useContext, useMemo, useState } from 'react';
+import { Autocomplete, Box, InputAdornment, Paper, TextField } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
+import { DataTableSelectOption } from '../types';
+
+type SelectSearchContextValue = {
+    searchValue: string;
+    onSearchChange: (value: string) => void;
+};
+
+const SelectSearchContext = createContext<SelectSearchContextValue | null>(null);
+
+const SelectSearchPaper = (props: React.ComponentProps<typeof Paper>): React.ReactElement => {
+    const searchContext = useContext(SelectSearchContext);
+
+    return (
+        <Paper {...props} data-select-search-paper="true">
+            <Box sx={{ p: 1, pb: 0.5 }}>
+                <TextField
+                    autoFocus
+                    fullWidth
+                    size="small"
+                    placeholder="Search options..."
+                    value={searchContext?.searchValue ?? ''}
+                    onChange={(event): void => searchContext?.onSearchChange(event.target.value)}
+                    slotProps={{
+                        input: {
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <SearchIcon fontSize="small" />
+                                </InputAdornment>
+                            ),
+                        },
+                    }}
+                    inputProps={{ 'aria-label': 'Search options' }}
+                />
+            </Box>
+            {props.children}
+        </Paper>
+    );
+};
 
 type SimpleSelectInputProps = {
     value: any;
     onChange: (value: any) => void;
     onBlur: () => void;
-    options: Array<{ value: any; label: string }>;
+    options: DataTableSelectOption[];
+    renderOption?: (params: {
+        option: DataTableSelectOption;
+        selected: boolean;
+        inputValue: string;
+    }) => React.ReactNode;
     hasError?: boolean;
     disabled?: boolean;
 };
@@ -19,33 +63,72 @@ export const SimpleSelectInput = ({
     onChange,
     onBlur,
     options,
+    renderOption,
     hasError = false,
     disabled = false,
 }: SimpleSelectInputProps): React.ReactElement => {
-    const inputRef = useRef<HTMLInputElement>(null);
+    const [searchValue, setSearchValue] = useState('');
+    const [open, setOpen] = useState(true);
 
-    // Auto-focus on mount
-    useEffect(() => {
-        if (inputRef.current) {
-            inputRef.current.focus();
-        }
-    }, []);
+    const filteredOptions = useMemo(() => {
+        const query = searchValue.trim().toLocaleLowerCase();
+        if (!query) return options;
+        return options.filter((option) => {
+            const searchableText = `${option.label} ${typeof option.description === 'string' ? option.description : ''}`;
+            return searchableText.toLocaleLowerCase().includes(query);
+        });
+    }, [options, searchValue]);
 
-    const handleChange = (_event: any, newValue: { value: any; label: string } | null): void => {
+    const handleChange = (_event: any, newValue: DataTableSelectOption | null): void => {
         onChange(newValue?.value ?? '');
+        setSearchValue('');
+        setOpen(false);
     };
 
     const selectedOption = options.find((opt) => opt.value === value) || null;
 
-    return (
+    const autocomplete = (
         <Autocomplete
             value={selectedOption}
             onChange={handleChange}
             onBlur={onBlur}
+            open={open}
+            onOpen={(): void => setOpen(true)}
+            onClose={(event, reason): void => {
+                const relatedTarget = (event as React.FocusEvent).relatedTarget;
+                if (
+                    reason === 'blur' &&
+                    relatedTarget instanceof HTMLElement &&
+                    relatedTarget.closest('[data-select-search-paper="true"]')
+                ) {
+                    return;
+                }
+                setOpen(false);
+            }}
             disabled={disabled}
-            options={options}
+            options={filteredOptions}
             getOptionLabel={(option) => option.label}
             isOptionEqualToValue={(option, val) => option.value === val.value}
+            PaperComponent={SelectSearchPaper}
+            renderOption={(props, option, state): React.ReactElement => {
+                const { key, ...optionProps } = props;
+                return (
+                    <li key={key} {...optionProps}>
+                        {renderOption ? (
+                            renderOption({ option, selected: state.selected, inputValue: searchValue })
+                        ) : option.description !== undefined ? (
+                            <Box sx={{ display: 'flex', flexDirection: 'column', minWidth: 0, py: 0.5 }}>
+                                <Box>{option.label}</Box>
+                                <Box sx={{ color: 'text.secondary', fontSize: '0.875em', whiteSpace: 'normal' }}>
+                                    {option.description}
+                                </Box>
+                            </Box>
+                        ) : (
+                            option.label
+                        )}
+                    </li>
+                );
+            }}
             autoHighlight
             openOnFocus
             fullWidth
@@ -60,10 +143,9 @@ export const SimpleSelectInput = ({
             renderInput={(params) => (
                 <TextField
                     {...params}
-                    inputRef={inputRef}
                     variant="standard"
-                    autoFocus
                     error={hasError}
+                    inputProps={{ ...params.inputProps, readOnly: true }}
                     sx={{
                         '& .MuiInput-root': {
                             '&:before': { display: 'none' },
@@ -95,5 +177,11 @@ export const SimpleSelectInput = ({
                 />
             )}
         />
+    );
+
+    return (
+        <SelectSearchContext.Provider value={{ searchValue, onSearchChange: setSearchValue }}>
+            {autocomplete}
+        </SelectSearchContext.Provider>
     );
 };

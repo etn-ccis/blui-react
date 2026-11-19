@@ -6,7 +6,7 @@ import {
     ExternalToolbarDataTable,
 } from '../examples';
 
-## Data Table 
+## Data Table
 
 The `<DataTable>` component provides inline cell editing with built-in validation, CRUD operations, and an unsaved-change indicator (blue dot) per cell.
 
@@ -24,11 +24,9 @@ Use `editDisplayMode="row"` when you want full-row editing controls instead of s
 
 <RowEditingDataTable />
 
-
-
 ## Custom Cells and Cell Styling
 
-Use `Cell` to render any React element in a cell (e.g. a progress bar). Use `cellStyle` for conditional per-row MUI `sx` styles. Use `editVariant="select"` with `editSelectOptions` for dropdown editing.
+Use `Cell` to render any React element in a cell (e.g. a progress bar) and `cellStyle` for conditional per-row MUI `sx` styles. For DataTable's custom cell dropdown, use `cellType="select"` with `editSelectOptions`; MRT's standard row or modal editing uses `editVariant="select"` with `editSelectOptions`. Select dropdowns include a search field, and options can display a label with a description.
 
 <CustomCellsDataTable />
 
@@ -39,6 +37,7 @@ Use `enableUndoRedo` together with `onStateChange` to receive a `DataTableState`
 When `save` or `reset` is triggered from an external toolbar, `DataTable` first closes any actively edited cell so the latest in-progress value is committed before the action runs.
 
 Notes shown in this example:
+
 - `canSave` may be `false` even when there are pending changes if validation fails on any pending row.
 - A newly added empty row does not make `canSave` true until at least one field is changed.
 - `Ctrl/Cmd+Z`, `Ctrl/Cmd+Shift+Z`, and `Ctrl/Cmd+Y` keyboard shortcuts are active when `enableUndoRedo` is enabled.

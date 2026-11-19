@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Box } from '@mui/material';
+import { Box, ListItem, ListItemText } from '@mui/material';
+import CheckIcon from '@mui/icons-material/Check';
 import { DataTable, type DataTableColumnDef } from '@brightlayer-ui/react-components';
 import { ExampleShowcase } from '../../../shared';
 
@@ -18,7 +19,11 @@ const initialData: Circuit[] = [
     { id: '3', panel: 'P-03', label: 'Emergency', zone: 'Zone C', load: 15, active: false },
 ];
 
-const zoneOptions = ['Zone A', 'Zone B', 'Zone C'];
+const zoneOptions = [
+    { value: 'Zone A', label: 'Zone A', description: 'Primary operating area' },
+    { value: 'Zone B', label: 'Zone B', description: 'Secondary operating area' },
+    { value: 'Zone C', label: 'Zone C', description: 'Emergency equipment area' },
+];
 
 const zoneColor: Record<string, string> = {
     'Zone A': 'success.main',
@@ -34,6 +39,16 @@ const columns: Array<DataTableColumnDef<Circuit>> = [
         header: 'Zone',
         cellType: 'select',
         editSelectOptions: zoneOptions,
+        renderSelectOption: ({ option, selected }): React.ReactElement => (
+            <ListItem
+                component="div"
+                dense
+                secondaryAction={selected ? <CheckIcon color="primary" fontSize="small" /> : undefined}
+                sx={{ py: 0.5, pr: selected ? 5 : 1.5 }}
+            >
+                <ListItemText primary={option.label} secondary={option.description} />
+            </ListItem>
+        ),
         cellStyle: ({ cell }): Record<string, unknown> => ({
             color: zoneColor[cell.getValue<string>()] ?? 'text.primary',
             fontWeight: 'bold',
