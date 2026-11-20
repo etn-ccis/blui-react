@@ -8,7 +8,21 @@ const codeSnippet = `// cellType: 'select' with cellStyle for conditional text c
     accessorKey: 'zone',
     header: 'Zone',
     cellType: 'select',
-    editSelectOptions: ['Zone A', 'Zone B', 'Zone C'],
+    editSelectOptions: [
+        { value: 'Zone A', label: 'Zone A', description: 'Primary operating area' },
+        { value: 'Zone B', label: 'Zone B', description: 'Secondary operating area' },
+        { value: 'Zone C', label: 'Zone C', description: 'Emergency equipment area' },
+    ],
+    renderSelectOption: ({ option, selected }) => (
+        <ListItem
+            component="div"
+            dense
+            secondaryAction={selected ? <CheckIcon color="primary" fontSize="small" /> : undefined}
+            sx={{ py: 0.5, pr: selected ? 5 : 1.5 }}
+        >
+            <ListItemText primary={option.label} secondary={option.description} />
+        </ListItem>
+    ),
     cellStyle: ({ cell }) => ({
         color: zoneColor[cell.getValue<string>()],
         fontWeight: 'bold',
@@ -40,7 +54,7 @@ const codeSnippet = `// cellType: 'select' with cellStyle for conditional text c
 export const CustomCellsDataTable = (): React.JSX.Element => (
     <Box>
         <CustomCellsDataTableExample />
-        <CodeBlock code={codeSnippet} language="jsx" dataLine={'3-14,17-33,36'} />
+        <CodeBlock code={codeSnippet} language="jsx" dataLine={'3-25,28-44,47'} />
         <CodeBlockActionButtonRow
             copyText={codeSnippet}
             url="componentDocs/DataTable/examples/CustomCellsDataTableExample.tsx"

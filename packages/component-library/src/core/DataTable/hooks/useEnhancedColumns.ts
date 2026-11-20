@@ -236,6 +236,18 @@ export const useEnhancedColumns = <TData extends DataTableData>({
                                 handleSaveCell(cell, localValue);
                             },
                             options,
+                            renderOption: column.renderSelectOption
+                                ? ({ option, selected, inputValue }: any): React.ReactNode =>
+                                      column.renderSelectOption!({
+                                          option,
+                                          selected,
+                                          inputValue,
+                                          cell,
+                                          row,
+                                          column: col,
+                                          table: innerTable,
+                                      })
+                                : undefined,
                             hasError,
                         })
                     );
