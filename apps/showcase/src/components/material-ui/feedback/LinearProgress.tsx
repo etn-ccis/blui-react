@@ -26,12 +26,12 @@ const linearProgressStyles = {
     width: '100%',
 };
 
-const LinearProgressWithLabel = (props: LinearProgressProps & { value: number }): JSX.Element => (
-    <Box display="flex" alignItems="center">
-        <Box width="100%" mr={1}>
+const LinearProgressWithLabel = (props: LinearProgressProps & { value: number }): React.JSX.Element => (
+    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+        <Box sx={{ width: '100%', mr: 1 }}>
             <LinearProgress variant="determinate" {...props} />
         </Box>
-        <Box minWidth={35}>
+        <Box sx={{ minWidth: 35 }}>
             <Typography variant="body2" color="textSecondary">{`${Math.round(props.value)}%`}</Typography>
         </Box>
     </Box>
@@ -55,14 +55,15 @@ export const LinearProgressExample: React.FC = () => {
 
     React.useEffect(() => {
         progressRef.current = (): any => {
-            if (bufferProgress > 100) {
+            if (bufferProgress >= 100) {
                 setBufferProgress(0);
                 setBuffer(10);
             } else {
                 const diff = Math.random() * 10;
                 const diff2 = Math.random() * 10;
-                setBufferProgress(bufferProgress + diff);
-                setBuffer(bufferProgress + diff + diff2);
+                const nextProgress = Math.min(bufferProgress + diff, 100);
+                setBufferProgress(nextProgress);
+                setBuffer(Math.min(nextProgress + diff2, 100));
             }
         };
     });

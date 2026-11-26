@@ -23,10 +23,9 @@ export type DrawerBodyProps = BoxProps &
         classes?: DrawerBodyClasses;
     };
 
-const Root = styled(
-    Box,
-    {}
-)<Pick<DrawerBodyProps, 'backgroundColor'>>(({ backgroundColor }) => ({
+const Root = styled(Box, { shouldForwardProp: (prop) => prop !== 'backgroundColor' })<
+    Pick<DrawerBodyProps, 'backgroundColor'>
+>(({ backgroundColor }) => ({
     display: 'flex',
     flex: '1 1 0px',
     flexDirection: 'column',

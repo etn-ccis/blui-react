@@ -9,10 +9,10 @@ import {
     CheckCircle,
     PlayCircle,
     Pending,
-    ErrorOutline,
+    ErrorOutlineOutlined,
     CancelOutlined,
-    CheckCircleOutline,
-    PlayCircleOutline,
+    CheckCircleOutlineOutlined,
+    PlayCircleOutlineOutlined,
     PendingOutlined,
 } from '@mui/icons-material';
 import { BLUIColors } from '@brightlayer-ui/colors';
@@ -26,10 +26,10 @@ const VARIANT_ICONS: Record<string, React.JSX.Element> = {
 };
 
 const VARIANT_OUTLINE_ICONS: Record<string, React.JSX.Element> = {
-    failed: <ErrorOutline fontSize="medium" color="disabled" />,
+    failed: <ErrorOutlineOutlined fontSize="medium" color="disabled" />,
     canceled: <CancelOutlined fontSize="medium" color="disabled" />,
-    success: <CheckCircleOutline fontSize="medium" color="disabled" />,
-    info: <PlayCircleOutline fontSize="medium" color="disabled" />,
+    success: <CheckCircleOutlineOutlined fontSize="medium" color="disabled" />,
+    info: <PlayCircleOutlineOutlined fontSize="medium" color="disabled" />,
     pending: <PendingOutlined fontSize="medium" color="disabled" />,
 };
 

@@ -4,26 +4,18 @@ export default {
     styleOverrides: {
         root: ({ theme }) => ({
             backgroundColor: theme.vars.palette.background.paper,
-            ...theme.applyStyles('dark', {
-                backgroundColor: theme.vars.palette.background.paper,
-            }),
-        }),
-        groupedHorizontal: ({ theme }) => ({
-            '&:not(:first-child)': {
+            '&.MuiToggleButtonGroup-horizontal > .MuiToggleButtonGroup-grouped:not(:first-child)': {
                 marginLeft: 0,
             },
-            ...theme.applyStyles('dark', {
-                '&:not(:first-child)': {
-                    marginLeft: 0,
-                },
-            }),
-        }),
-        groupedVertical: ({ theme }) => ({
-            '&:not(:first-child)': {
+            '&.MuiToggleButtonGroup-vertical > .MuiToggleButtonGroup-grouped:not(:first-child)': {
                 marginTop: 0,
             },
             ...theme.applyStyles('dark', {
-                '&:not(:first-child)': {
+                backgroundColor: theme.vars.palette.background.paper,
+                '&.MuiToggleButtonGroup-horizontal > .MuiToggleButtonGroup-grouped:not(:first-child)': {
+                    marginLeft: 0,
+                },
+                '&.MuiToggleButtonGroup-vertical > .MuiToggleButtonGroup-grouped:not(:first-child)': {
                     marginTop: 0,
                 },
             }),

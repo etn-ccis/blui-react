@@ -13,7 +13,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Slide from '@mui/material/Slide';
 import AppBar from '@mui/material/AppBar';
 import IconButton from '@mui/material/IconButton';
-import { TransitionProps } from '@mui/material/transitions/transition';
+import type { TransitionProps } from '@mui/material/transitions';
 import Close from '@mui/icons-material/Close';
 import Box from '@mui/material/Box';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -80,7 +80,7 @@ export const DialogExample: React.FC = () => {
             <Button variant="outlined" color="primary" onClick={handleFullDialogClickOpen} sx={buttonStyles}>
                 Open Full Screen Dialog
             </Button>
-            <Dialog fullScreen open={fullDialogOpen} onClose={handleFullDialogClose} TransitionComponent={Transition}>
+            <Dialog fullScreen open={fullDialogOpen} onClose={handleFullDialogClose} slots={{ transition: Transition }}>
                 <AppBar
                     sx={{
                         position: 'relative',

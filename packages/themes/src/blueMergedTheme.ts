@@ -1,5 +1,6 @@
 import { createTheme } from '@mui/material';
 import type {} from '@mui/material/themeCssVarsAugmentation';
+import type {} from '@mui/x-date-pickers/themeAugmentation';
 import { typography, createSimpleLightPalette as createSimplePalette, createSimpleDarkPalette } from './shared';
 import * as BLUIColors from '@brightlayer-ui/colors';
 import Color from 'color';
@@ -41,6 +42,7 @@ import MuiInputBase from './componentStylesOverrides/MuiInputBase';
 import MuiInput from './componentStylesOverrides/MuiInput';
 import MuiFilledInput from './componentStylesOverrides/MuiFilledInput';
 import MuiOutlinedInput from './componentStylesOverrides/MuiOutlinedInput';
+import MuiPickersOutlinedInput from './componentStylesOverrides/MuiPickersOutlinedInput';
 import MuiFormLabel from './componentStylesOverrides/MuiFormLabel';
 import MuiFormHelperText from './componentStylesOverrides/MuiFormHelperText';
 import MuiToggleButtonGroup from './componentStylesOverrides/MuiToggleButtonGroup';
@@ -223,6 +225,7 @@ export const blueThemes = createTheme({
         MuiInput: MuiInput,
         MuiFilledInput: MuiFilledInput,
         MuiOutlinedInput: MuiOutlinedInput,
+        MuiPickersOutlinedInput: MuiPickersOutlinedInput,
         MuiFormLabel: MuiFormLabel,
         MuiFormHelperText: MuiFormHelperText,
         MuiToggleButtonGroup: MuiToggleButtonGroup,

@@ -25,7 +25,7 @@ const TabPanel = (props: TabPanelProps): JSX.Element => {
     return (
         <Box role="tabpanel" hidden={value !== index} id={`simple-tabpanel-${index}`} {...other}>
             {value === index && (
-                <Box p={3}>
+                <Box sx={{ p: 3 }}>
                     <Typography>{children}</Typography>
                 </Box>
             )}

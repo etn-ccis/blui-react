@@ -7,19 +7,19 @@ export default {
             backgroundColor: BLUIColors.black[900],
             color: BLUIColors.black[50],
             boxShadow: theme.vars.palette.shadows.level2,
-            '& .MuiButton-textPrimary': {
+            '& .MuiButton-text.MuiButton-colorPrimary': {
                 color: BLUIColors.blue[200],
             },
-            '& .MuiButton-textSecondary': {
+            '& .MuiButton-text.MuiButton-colorSecondary': {
                 color: BLUIColors.lightBlue[200],
             },
             ...theme.applyStyles('dark', {
                 color: BLUIColors.black[500],
                 backgroundColor: BLUIColors.black[50],
-                '& .MuiButton-textPrimary': {
+                '& .MuiButton-text.MuiButton-colorPrimary': {
                     color: theme.vars.palette.primary.main,
                 },
-                '& .MuiButton-textSecondary': {
+                '& .MuiButton-text.MuiButton-colorSecondary': {
                     color: theme.vars.palette.secondary.main,
                 },
             }),

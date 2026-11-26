@@ -31,10 +31,10 @@ const cardContent = (
             ['Temp', '38 ℃'],
         ].map(([label, value]) => (
             <Box key={label} sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-                <Typography variant="body2" color="#646b74" noWrap>
+                <Typography variant="body2" sx={{ color: '#646b74' }} noWrap>
                     {label}
                 </Typography>
-                <Typography variant="body2" color="#353c44" noWrap>
+                <Typography variant="body2" sx={{ color: '#353c44' }} noWrap>
                     {value}
                 </Typography>
             </Box>
@@ -54,10 +54,10 @@ const coloredCardContent = (
             ['Temp', '38 ℃'],
         ].map(([label, value]) => (
             <Box key={label} sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-                <Typography variant="body2" color="#042755" noWrap>
+                <Typography variant="body2" sx={{ color: '#042755' }} noWrap>
                     {label}
                 </Typography>
-                <Typography variant="body2" color="#051f3e" noWrap>
+                <Typography variant="body2" sx={{ color: '#051f3e' }} noWrap>
                     {value}
                 </Typography>
             </Box>

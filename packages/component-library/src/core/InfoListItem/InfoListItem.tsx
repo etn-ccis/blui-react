@@ -285,19 +285,24 @@ const InfoListItemRender: React.ForwardRefRenderFunction<unknown, InfoListItemPr
                         </>
                     ) : undefined
                 }
-                primaryTypographyProps={{
-                    noWrap: !wrapTitle,
-                    variant: 'body1',
-                    fontWeight: 600,
-                    lineHeight: 1.25,
-                    display: 'block',
-                    color: fontColor || 'inherit',
-                    className: generatedClasses.title,
-                    component: 'div',
-                }}
-                secondaryTypographyProps={{
-                    variant: 'subtitle2',
-                    color: 'textPrimary',
+                slotProps={{
+                    primary: {
+                        noWrap: !wrapTitle,
+                        variant: 'body1',
+                        className: generatedClasses.title,
+                        component: 'div',
+                        sx: {
+                            fontWeight: 600,
+                            lineHeight: 1.25,
+                            display: 'block',
+                            color: fontColor || 'inherit',
+                        },
+                    },
+                    secondary: {
+                        variant: 'subtitle2',
+                        color: 'textPrimary',
+                        component: 'div',
+                    },
                 }}
             />
             {getRightComponent()}
