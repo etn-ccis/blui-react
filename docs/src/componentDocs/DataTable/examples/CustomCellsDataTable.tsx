@@ -18,6 +18,7 @@ const codeSnippet = `// cellType: 'select' with cellStyle for conditional text c
             component="div"
             dense
             secondaryAction={selected ? <CheckIcon color="primary" fontSize="small" /> : undefined}
+            sx={{ py: 0.5, pr: selected ? 5 : 1.5 }}
         >
             <ListItemText primary={option.label} secondary={option.description} />
         </ListItem>
