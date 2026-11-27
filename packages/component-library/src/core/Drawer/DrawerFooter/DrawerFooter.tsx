@@ -41,10 +41,9 @@ export type DrawerFooterProps = BoxProps & {
     sx?: SxProps<Theme>;
 };
 
-const Root = styled(
-    Box,
-    {}
-)<Pick<DrawerFooterProps, 'backgroundColor'>>(({ backgroundColor }) => ({
+const Root = styled(Box, { shouldForwardProp: (prop) => prop !== 'backgroundColor' })<
+    Pick<DrawerFooterProps, 'backgroundColor'>
+>(({ backgroundColor }) => ({
     width: '100%',
     backgroundColor: backgroundColor,
     [`&.${drawerFooterClasses.hidden}`]: {

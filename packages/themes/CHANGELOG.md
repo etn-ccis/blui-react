@@ -1,5 +1,12 @@
 # Changelog
 
+# v10.0.0-alpha.0 (Unreleased)
+
+### Changed
+
+- Upgraded the theme package to support Material UI v9.
+- Updated component style overrides to use MUI v9-compatible slots and selectors.
+
 # v9.1.1 (October 16, 2026)
 
 ### Changed

@@ -108,8 +108,8 @@ export const DividerExample: React.FC = () => {
                 <Box sx={DividerContainerStyles}>
                     <Grid
                         container
-                        alignItems="center"
                         sx={{
+                            alignItems: 'center',
                             width: 'fit-content',
                             border: `1px solid ${(theme.vars || theme).palette.divider}`,
                             borderRadius: `${(theme.vars || theme).shape.borderRadius}px`,

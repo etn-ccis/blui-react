@@ -49,12 +49,17 @@ export default {
             '&.Mui-disabled': {
                 backgroundColor: theme.vars.palette.primary.main,
             },
-        }),
-        thumbColorSecondary: ({ theme }) => ({
-            backgroundColor: theme.vars.palette.secondary.main,
-            ...theme.applyStyles('dark', {
-                backgroundColor: theme.vars.palette.secondary.main,
-            }),
+            variants: [
+                {
+                    props: { color: 'secondary' },
+                    style: {
+                        backgroundColor: theme.vars.palette.secondary.main,
+                        ...theme.applyStyles('dark', {
+                            backgroundColor: theme.vars.palette.secondary.main,
+                        }),
+                    },
+                },
+            ],
         }),
         mark: ({ theme }) => ({
             backgroundColor: BLUIColors.blue[200],

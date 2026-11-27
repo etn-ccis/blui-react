@@ -9,10 +9,5 @@ export default {
                 backgroundColor: BLUIColors.darkBlack[300],
             }),
         }),
-        paperAnchorBottom: ({ theme }) => ({
-            ...theme.applyStyles('dark', {
-                backgroundColor: BLUIColors.darkBlack[300],
-            }),
-        }),
     },
 } as Components<Omit<Theme, 'components' | 'palette'> & CssVarsTheme>['MuiDrawer'];

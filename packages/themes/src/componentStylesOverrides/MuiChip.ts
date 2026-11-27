@@ -17,13 +17,25 @@ export default {
                 color: BLUIColors.white[50],
                 marginRight: -4,
             },
-            '& .MuiChip-avatarColorPrimary': {
+            '&:where(.MuiChip-colorPrimary) > .MuiChip-avatar': {
                 backgroundColor: theme.vars.palette.primary.light,
                 color: theme.vars.palette.primary.main,
             },
-            '& .MuiChip-avatarColorSecondary': {
+            '&:where(.MuiChip-colorSecondary) > .MuiChip-avatar': {
                 backgroundColor: theme.vars.palette.primary.light,
                 color: theme.vars.palette.primary.main,
+            },
+            '&.MuiChip-colorPrimary > .MuiChip-deleteIcon': {
+                color: BLUIColors.blue[100],
+                '&:hover': {
+                    color: WhiteText,
+                },
+            },
+            '&.MuiChip-colorSecondary > .MuiChip-deleteIcon': {
+                color: BLUIColors.lightBlue[100],
+                '&:hover': {
+                    color: WhiteText,
+                },
             },
             '&.Mui-disabled': {
                 opacity: 1,
@@ -51,13 +63,28 @@ export default {
                     color: theme.vars.palette.text.primary,
                     marginRight: -4,
                 },
-                '& .MuiChip-avatarColorPrimary': {
+                '&:where(.MuiChip-colorPrimary) > .MuiChip-avatar': {
                     backgroundColor: theme.vars.palette.primary.light,
                     color: BLUIColors.blue[900],
                 },
-                '& .MuiChip-avatarColorSecondary': {
+                '&:where(.MuiChip-colorSecondary) > .MuiChip-avatar': {
                     backgroundColor: theme.vars.palette.primary.light,
                     color: theme.vars.palette.primary.dark,
+                },
+                '&:where(.MuiChip-colorPrimary) > .MuiChip-icon': {
+                    color: BLUIColors.blue[900],
+                },
+                '&.MuiChip-colorPrimary > .MuiChip-deleteIcon': {
+                    color: BLUIColors.blue[900],
+                    '&:hover': {
+                        color: BLUIColors.blue[900],
+                    },
+                },
+                '&.MuiChip-colorSecondary > .MuiChip-deleteIcon': {
+                    color: BLUIColors.lightBlue[100],
+                    '&:hover': {
+                        color: WhiteText,
+                    },
                 },
                 '&.Mui-disabled': {
                     color: theme.vars.palette.action.disabled,
@@ -76,53 +103,59 @@ export default {
                     },
                 },
             }),
-        }),
-        clickable: ({ theme }) => ({
-            '&:hover': {
-                backgroundColor: theme.vars.palette.action.hover,
-            },
-            '&:active': {
-                backgroundColor: Color(BLUIColors.pressed).alpha(0.16).string(),
-            },
-            '&.MuiChip-clickableColorPrimary': {
-                '&:hover': {
-                    backgroundColor: BLUIColors.onPrimaryHover,
-                },
-                '&:active': {
-                    backgroundColor: BLUIColors.onPrimaryPressed,
-                },
-            },
-            '&.MuiChip-clickableColorSecondary': {
-                '&:hover': {
-                    backgroundColor: BLUIColors.lightBlue[300],
-                },
-            },
-            ...theme.applyStyles('dark', {
+            // The former clickable override was conditional without adding selector specificity.
+            '&:where(.MuiChip-clickable)': {
                 '&:hover': {
                     backgroundColor: theme.vars.palette.action.hover,
                 },
                 '&:active': {
-                    backgroundColor: Color(BLUIColors.pressedDark).alpha(0.16).string(),
+                    backgroundColor: Color(BLUIColors.pressed).alpha(0.16).string(),
                 },
-                '&.MuiChip-clickableColorPrimary': {
+                '&.MuiChip-colorPrimary': {
                     '&:hover': {
-                        backgroundColor: BLUIColors.onPrimaryHoverDark,
+                        backgroundColor: BLUIColors.onPrimaryHover,
                     },
                     '&:active': {
-                        backgroundColor: BLUIColors.onPrimaryPressedDark,
+                        backgroundColor: BLUIColors.onPrimaryPressed,
                     },
                 },
-                '&.MuiChip-clickableColorSecondary': {
+                '&.MuiChip-colorSecondary': {
                     '&:hover': {
                         backgroundColor: BLUIColors.lightBlue[300],
                     },
+                },
+                ...theme.applyStyles('dark', {
+                    '&:hover': {
+                        backgroundColor: theme.vars.palette.action.hover,
+                    },
+                    '&:active': {
+                        backgroundColor: Color(BLUIColors.pressedDark).alpha(0.16).string(),
+                    },
+                    '&.MuiChip-colorPrimary': {
+                        '&:hover': {
+                            backgroundColor: BLUIColors.onPrimaryHoverDark,
+                        },
+                        '&:active': {
+                            backgroundColor: BLUIColors.onPrimaryPressedDark,
+                        },
+                    },
+                    '&.MuiChip-colorSecondary': {
+                        '&:hover': {
+                            backgroundColor: BLUIColors.lightBlue[300],
+                        },
+                    },
+                }),
+            },
+            ...theme.applyStyles('light', {
+                '&:where(.MuiChip-colorPrimary, .MuiChip-colorSecondary) > .MuiChip-icon': {
+                    color: 'inherit',
                 },
             }),
         }),
         colorPrimary: ({ theme }) => ({
             backgroundColor: theme.vars.palette.primary.main,
             color: WhiteText,
-            '&:not(.MuiChip-outlinedPrimary).Mui-disabled': {
+            '&:not(:where(.MuiChip-outlined).MuiChip-colorPrimary).Mui-disabled': {
                 backgroundColor: theme.vars.palette.action.disabledBackground,
                 color: theme.vars.palette.action.disabled,
                 '& .MuiChip-deleteIcon': {
@@ -132,7 +165,7 @@ export default {
             ...theme.applyStyles('dark', {
                 color: BLUIColors.blue[900],
                 backgroundColor: theme.vars.palette.primary.main,
-                '&:not(.MuiChip-outlinedPrimary).Mui-disabled': {
+                '&:not(:where(.MuiChip-outlined).MuiChip-colorPrimary).Mui-disabled': {
                     backgroundColor: theme.vars.palette.action.disabledBackground,
                     color: theme.vars.palette.action.disabled,
                     '& .MuiChip-deleteIcon': {
@@ -144,7 +177,7 @@ export default {
         colorSecondary: ({ theme }) => ({
             backgroundColor: theme.vars.palette.secondary.main,
             color: WhiteText,
-            '&:not(.MuiChip-outlinedSecondary).Mui-disabled': {
+            '&:not(:where(.MuiChip-outlined).MuiChip-colorSecondary).Mui-disabled': {
                 backgroundColor: theme.vars.palette.action.disabledBackground,
                 color: theme.vars.palette.action.disabled,
                 '& .MuiChip-deleteIcon': {
@@ -154,7 +187,7 @@ export default {
             ...theme.applyStyles('dark', {
                 color: WhiteText,
                 backgroundColor: theme.vars.palette.secondary.dark,
-                '&:not(.MuiChip-outlinedSecondary).Mui-disabled': {
+                '&:not(:where(.MuiChip-outlined).MuiChip-colorSecondary).Mui-disabled': {
                     backgroundColor: theme.vars.palette.action.disabledBackground,
                     color: theme.vars.palette.action.disabled,
                     '& .MuiChip-deleteIcon': {
@@ -172,18 +205,6 @@ export default {
             '&:hover': {
                 color: theme.vars.palette.text.primary,
             },
-            '&.MuiChip-deleteIconColorPrimary': {
-                color: BLUIColors.blue[100],
-                '&:hover': {
-                    color: WhiteText,
-                },
-            },
-            '&.MuiChip-deleteIconColorSecondary': {
-                color: BLUIColors.lightBlue[100],
-                '&:hover': {
-                    color: WhiteText,
-                },
-            },
             ...theme.applyStyles('dark', {
                 fontSize: '1.125rem',
                 height: '1.125rem',
@@ -193,31 +214,6 @@ export default {
                 '&:hover': {
                     color: theme.vars.palette.text.primary,
                 },
-                '&.MuiChip-deleteIconColorPrimary': {
-                    color: BLUIColors.blue[900],
-                    '&:hover': {
-                        color: BLUIColors.blue[900],
-                    },
-                },
-                '&.MuiChip-deleteIconColorSecondary': {
-                    color: BLUIColors.lightBlue[100],
-                    '&:hover': {
-                        color: WhiteText,
-                    },
-                },
-            }),
-        }),
-        iconColorPrimary: ({ theme }) => ({
-            ...theme.applyStyles('light', {
-                color: 'inherit',
-            }),
-            ...theme.applyStyles('dark', {
-                color: BLUIColors.blue[900],
-            }),
-        }),
-        iconColorSecondary: ({ theme }) => ({
-            ...theme.applyStyles('light', {
-                color: 'inherit',
             }),
         }),
         outlined: ({ theme }) => ({
@@ -233,11 +229,11 @@ export default {
                 backgroundColor: BLUIColors.gray[500],
                 marginRight: -4,
             },
-            '& .MuiChip-avatarColorPrimary': {
+            '&:where(.MuiChip-colorPrimary) > .MuiChip-avatar': {
                 backgroundColor: BLUIColors.blue[100],
                 color: theme.vars.palette.primary.main,
             },
-            '& .MuiChip-avatarColorSecondary': {
+            '&:where(.MuiChip-colorSecondary) > .MuiChip-avatar': {
                 backgroundColor: BLUIColors.blue[100],
                 color: theme.vars.palette.primary.main,
             },
@@ -248,7 +244,7 @@ export default {
             '& .MuiChip-deleteIcon': {
                 margin: `0px ${Spacing}px 0px -4px`,
             },
-            '&.Mui-disabled:not(.MuiChip-outlinedPrimary):not(.MuiChip-outlinedSecondary)': {
+            '&.Mui-disabled:not(.MuiChip-colorPrimary):not(.MuiChip-colorSecondary)': {
                 backgroundColor: theme.vars.palette.action.disabledBackground,
                 color: theme.vars.palette.action.disabled,
                 borderColor: theme.vars.palette.action.disabled,
@@ -256,7 +252,7 @@ export default {
             '&.Mui-disabled .MuiChip-deleteIcon': {
                 color: 'inherit',
             },
-            '&.MuiChip-outlinedPrimary': {
+            '&.MuiChip-colorPrimary': {
                 backgroundColor: `rgba(${theme.vars.palette.primary.main} / 0.05)`,
                 border: `1px solid ${theme.vars.palette.primary.main}`,
                 color: theme.vars.palette.primary.main,
@@ -270,18 +266,18 @@ export default {
                     '& .MuiChip-icon': {
                         color: 'inherit',
                     },
-                    '& .MuiChip-deleteIconOutlinedColorPrimary': {
+                    '& > .MuiChip-deleteIcon': {
                         color: 'inherit',
                     },
                 },
-                '& .MuiChip-deleteIconOutlinedColorPrimary': {
+                '& > .MuiChip-deleteIcon': {
                     color: theme.vars.palette.primary.main,
                     '&:hover': {
                         color: theme.vars.palette.primary.main,
                     },
                 },
             },
-            '&.MuiChip-outlinedSecondary': {
+            '&.MuiChip-colorSecondary': {
                 backgroundColor: `rgba(${theme.vars.palette.secondary.main} / 0.05)`,
                 border: `1px solid ${theme.vars.palette.secondary.main}`,
                 color: theme.vars.palette.secondary.main,
@@ -293,7 +289,7 @@ export default {
                     color: theme.vars.palette.action.disabled,
                     borderColor: theme.vars.palette.action.disabled,
                 },
-                '& .MuiChip-deleteIconOutlinedColorSecondary': {
+                '& > .MuiChip-deleteIcon': {
                     '&:hover': {
                         color: theme.vars.palette.secondary.main,
                     },
@@ -313,11 +309,11 @@ export default {
                     color: theme.vars.palette.text.primary,
                     marginRight: -4,
                 },
-                '& .MuiChip-avatarColorPrimary': {
+                '&:where(.MuiChip-colorPrimary) > .MuiChip-avatar': {
                     backgroundColor: BLUIColors.blue[100],
                     color: BLUIColors.blue[900],
                 },
-                '& .MuiChip-avatarColorSecondary': {
+                '&:where(.MuiChip-colorSecondary) > .MuiChip-avatar': {
                     backgroundColor: BLUIColors.blue[100],
                     color: theme.vars.palette.primary.dark,
                 },
@@ -335,14 +331,14 @@ export default {
                     borderColor: theme.vars.palette.action.disabled,
                     backgroundColor: 'transparent',
                     color: theme.vars.palette.action.disabled,
-                    '&:not(.MuiChip-outlinedPrimary):not(.MuiChip-outlinedSecondary)': {
+                    '&:not(.MuiChip-colorPrimary):not(.MuiChip-colorSecondary)': {
                         backgroundColor: theme.vars.palette.action.disabledBackground,
                     },
-                    '& .MuiChip-deleteIconOutlinedColorPrimary': {
+                    '&:where(.MuiChip-colorPrimary) > .MuiChip-deleteIcon': {
                         color: 'inherit',
                     },
                 },
-                '&.MuiChip-outlinedPrimary': {
+                '&.MuiChip-colorPrimary': {
                     backgroundColor: Color(BLUIColors.blue[400]).alpha(0.2).string(),
                     border: `1px solid ${theme.vars.palette.primary.main}`,
 
@@ -353,7 +349,7 @@ export default {
                     '& .MuiChip-icon': {
                         color: BLUIColors.blue[200],
                     },
-                    '& .MuiChip-deleteIconOutlinedColorPrimary': {
+                    '& > .MuiChip-deleteIcon': {
                         color: BLUIColors.blue[200],
                         '&:hover': {
                             color: BLUIColors.blue[200],
@@ -366,19 +362,19 @@ export default {
                         '& .MuiChip-icon': {
                             color: 'inherit',
                         },
-                        '& .MuiChip-deleteIconOutlinedColorPrimary': {
+                        '& > .MuiChip-deleteIcon': {
                             color: 'inherit',
                         },
                     },
                 },
-                '&.MuiChip-outlinedSecondary': {
+                '&.MuiChip-colorSecondary': {
                     backgroundColor: Color(BLUIColors.blue[300]).alpha(0.25).string(),
                     border: `1px solid ${theme.vars.palette.secondary.main}`,
                     color: theme.vars.palette.secondary.main,
                     '&.MuiChip-clickable:hover': {
                         backgroundColor: theme.vars.palette.action.hover,
                     },
-                    '& .MuiChip-deleteIconOutlinedColorSecondary': {
+                    '& > .MuiChip-deleteIcon': {
                         color: BLUIColors.lightBlue[400],
                         '&:hover': {
                             color: theme.vars.palette.secondary.main,
@@ -388,7 +384,7 @@ export default {
                         backgroundColor: 'transparent',
                         color: theme.vars.palette.action.disabled,
                         borderColor: theme.vars.palette.action.disabled,
-                        '& .MuiChip-deleteIconOutlinedColorSecondary': {
+                        '& > .MuiChip-deleteIcon': {
                             color: 'inherit',
                         },
                     },

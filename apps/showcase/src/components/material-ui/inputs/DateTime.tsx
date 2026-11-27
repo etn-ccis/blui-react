@@ -1,5 +1,5 @@
 import React from 'react';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV2';
 import { LocalizationProvider, DatePicker, MobileDatePicker, MobileTimePicker } from '@mui/x-date-pickers';
 import Box from '@mui/material/Box';
 

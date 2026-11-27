@@ -85,7 +85,7 @@ describe('Legend', () => {
 
     it('renders outline ErrorOutline icon for variant="failed" with count === 0', () => {
         renderWithTheme(<Legend label="Failed" count={0} variant="failed" />);
-        expect(screen.getByTestId('ErrorOutlineIcon')).toBeInTheDocument();
+        expect(screen.getByTestId('ErrorOutlineOutlinedIcon')).toBeInTheDocument();
     });
 
     it('renders outline CancelOutlined icon for variant="canceled" with count === 0', () => {
@@ -95,12 +95,12 @@ describe('Legend', () => {
 
     it('renders outline CheckCircleOutline icon for variant="success" with count === 0', () => {
         renderWithTheme(<Legend label="Success" count={0} variant="success" />);
-        expect(screen.getByTestId('CheckCircleOutlineIcon')).toBeInTheDocument();
+        expect(screen.getByTestId('CheckCircleOutlineOutlinedIcon')).toBeInTheDocument();
     });
 
     it('renders outline PlayCircleOutline icon for variant="info" with count === 0', () => {
         renderWithTheme(<Legend label="Info" count={0} variant="info" />);
-        expect(screen.getByTestId('PlayCircleOutlineIcon')).toBeInTheDocument();
+        expect(screen.getByTestId('PlayCircleOutlineOutlinedIcon')).toBeInTheDocument();
     });
 
     it('renders outline PendingOutlined icon for variant="pending" with count === 0', () => {
@@ -179,7 +179,7 @@ describe('Legend', () => {
 
     it('falls back to variant outline icon when count === 0 and neither disabledIcon nor icon given', () => {
         renderWithTheme(<Legend label="X" count={0} variant="failed" />);
-        expect(screen.getByTestId('ErrorOutlineIcon')).toBeInTheDocument();
+        expect(screen.getByTestId('ErrorOutlineOutlinedIcon')).toBeInTheDocument();
     });
 
     it('renders no icon when count === 0 and no icon props or variant provided', () => {
